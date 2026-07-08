@@ -24,7 +24,8 @@ namespace SDKTemplate
             new Scenario() { Title="PointerPoint Properties", ClassType=typeof(Scenario2)},
             new Scenario() { Title="Device Capabilities", ClassType=typeof(Scenario3)},
             new Scenario() { Title="XAML Manipulations", ClassType=typeof(Scenario4)},
-            new Scenario() { Title="Gesture Recognizer", ClassType=typeof(Scenario5)}
+            new Scenario() { Title="Gesture Recognizer", ClassType=typeof(Scenario5)},
+            new Scenario() { Title="Pointer Tracking", ClassType=typeof(Scenario6)}
         };
     }
 
