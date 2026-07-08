@@ -7,23 +7,14 @@ namespace SDKTemplate
     {
         public const string FEATURE_NAME = "AudioCategory C# sample";
 
-        // The code for each scenario lives under Scenarios\AudioCategory\.
-        // Each scenario plays an audio stream tagged with a different audio category so the
-        // system mixer treats it appropriately (ducking, muting, routing).
+        // The sample is a single page under Scenarios\AudioCategory\. The user picks an audio category
+        // from a dropdown, plays a file, and can launch a second instance to observe how two categories
+        // interact (ducking, muting, routing) in the system mixer.
         List<FeatureGroup> featureGroups = new List<FeatureGroup>
         {
             new FeatureGroup("Audio Category", new()
             {
-                new Scenario { Title = "Movie", ClassType = typeof(Scenario1) },
-                new Scenario { Title = "Media", ClassType = typeof(Scenario2) },
-                new Scenario { Title = "Game Chat", ClassType = typeof(Scenario3) },
-                new Scenario { Title = "Speech", ClassType = typeof(Scenario4) },
-                new Scenario { Title = "Communications", ClassType = typeof(Scenario5) },
-                new Scenario { Title = "Alerts", ClassType = typeof(Scenario6) },
-                new Scenario { Title = "Sound Effects", ClassType = typeof(Scenario7) },
-                new Scenario { Title = "Game Effects", ClassType = typeof(Scenario8) },
-                new Scenario { Title = "Game Media", ClassType = typeof(Scenario9) },
-                new Scenario { Title = "Other", ClassType = typeof(Scenario10) },
+                new Scenario { Title = "Audio categories", ClassType = typeof(Scenario1) },
             }),
         };
     }
