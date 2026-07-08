@@ -21,10 +21,10 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 70 |
+| Ported to WinUI 3 (this repo) | 71 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
 | Portable, not doc-referenced (candidates for a later pass) | 54 |
-| Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
+| Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 122 |
 | **Total analyzed** | **266** |
 
 Ported samples are a mix of standalone projects and multi-feature samples that consolidate several related UWP samples into one project (for example, **Camera** and **Sensors**).
@@ -96,6 +96,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [SimpleOrientationSensor](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SimpleOrientationSensor) | [Sensors](https://github.com/niels9001/winui-samples/tree/main/Samples/Sensors) (consolidated) |  |
 | [TextSegmentation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TextSegmentation) | [Globalization](https://github.com/niels9001/winui-samples/tree/main/Samples/Globalization) (consolidated) |  |
 | [TextSuggestion](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TextSuggestion) | [Globalization](https://github.com/niels9001/winui-samples/tree/main/Samples/Globalization) (consolidated) |  |
+| [TouchKeyboard](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TouchKeyboard) | [TouchKeyboard](https://github.com/niels9001/winui-samples/tree/main/Samples/TouchKeyboard) | 3 scenarios (auto-display on focus with a custom TextBox-derived control; listen for Showing/Hiding events; TryShow/TryHide methods). Ported from the WindowsAppSDK-Samples migration (PR #649) onto the SDKTemplate shell. |
 | [TouchKeyboardTextInput](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TouchKeyboardTextInput) | [TouchKeyboardTextInput](https://github.com/niels9001/winui-samples/tree/main/Samples/TouchKeyboardTextInput) | 2 scenarios (spell check / text suggestions; InputScope scoped views). Fully declarative XAML, no InputPane API. Legacy text styles replaced with built-in styles. |
 | [Unicode](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Unicode) | [Globalization](https://github.com/niels9001/winui-samples/tree/main/Samples/Globalization) (consolidated) |  |
 | [UserInfo](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/UserInfo) | [SecurityIdentity](https://github.com/niels9001/winui-samples/tree/main/Samples/SecurityIdentity) (consolidated) |  |
@@ -199,10 +200,10 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 
 ## Out of scope
 
-123 UWP samples were reviewed and left out of this port. Most are already covered by the [WinUI 3 Gallery](https://github.com/microsoft/WinUI-Gallery) or the [Windows App SDK samples](https://github.com/microsoft/WindowsAppSDK-Samples), are C++/DirectX only, or target platforms that do not apply to WinUI 3 desktop apps (HoloLens, WinJS).
+122 UWP samples were reviewed and left out of this port. Most are already covered by the [WinUI 3 Gallery](https://github.com/microsoft/WinUI-Gallery) or the [Windows App SDK samples](https://github.com/microsoft/WindowsAppSDK-Samples), are C++/DirectX only, or target platforms that do not apply to WinUI 3 desktop apps (HoloLens, WinJS).
 
 <details>
-<summary>Show all 123 out-of-scope samples</summary>
+<summary>Show all 122 out-of-scope samples</summary>
 
 | UWP sample | Reason not ported |
 | --- | --- |
@@ -300,7 +301,6 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [SpatialSound](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SpatialSound) | C++ / DirectX sample; there is no C#/WinUI 3 version to port. |
 | [SplashScreen](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SplashScreen) | Would need a full rewrite for WinUI 3 desktop (CoreWindow / multi-view / app-contract dependencies) rather than a straight port. |
 | [TitleBar](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TitleBar) | Already demonstrated in the WinUI 3 Gallery (AppWindowTitleBarPage). |
-| [TouchKeyboard](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TouchKeyboard) | Touch keyboard control through InputPane (CoreWindow-bound); no direct WinUI 3 desktop equivalent. |
 | [UserSelection](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/UserSelection) | WinJS / HTML (JavaScript) sample; there is no C#/WinUI 3 version to port. |
 | [VideoPlayback](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/VideoPlayback) | Already demonstrated in the WinUI 3 Gallery (MediaPlayerElementPage). |
 | [VoIP](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/VoIP) | HoloLens / Windows Mixed Reality sample; does not apply to WinUI 3 desktop apps. |
