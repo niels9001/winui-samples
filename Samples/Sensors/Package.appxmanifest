@@ -11,11 +11,11 @@
   IgnorableNamespaces="uap rescap systemai com desktop">
 
   <Identity
-    Name="2C0F8F1E-91B5-4CE1-A831-2E20E132491A"
+    Name="A81C5A72-F41A-47BC-BE74-8DF357FB93DF"
     Publisher="CN=AppPublisher"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="2C0F8F1E-91B5-4CE1-A831-2E20E132491A" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="A81C5A72-F41A-47BC-BE74-8DF357FB93DF" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Sensors C# sample</DisplayName>

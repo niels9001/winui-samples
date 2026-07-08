@@ -11,11 +11,11 @@
   IgnorableNamespaces="uap rescap systemai com desktop">
 
   <Identity
-    Name="6C14222E-4FAA-49DD-87F9-008D058A49B3"
+    Name="E6BE7193-E81A-4CAD-874A-7C2D541E49D9"
     Publisher="CN=AppPublisher"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="6C14222E-4FAA-49DD-87F9-008D058A49B3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="E6BE7193-E81A-4CAD-874A-7C2D541E49D9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>ms-resource:displayNameCS</DisplayName>

@@ -11,11 +11,11 @@
   IgnorableNamespaces="uap rescap systemai com desktop">
 
   <Identity
-    Name="6C14222E-4FAA-49DD-87F9-008D058A49B3"
+    Name="7E98A559-D347-45B8-9A7D-172BDA9514AF"
     Publisher="CN=AppPublisher"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="6C14222E-4FAA-49DD-87F9-008D058A49B3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="7E98A559-D347-45B8-9A7D-172BDA9514AF" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>BasicInput</DisplayName>
