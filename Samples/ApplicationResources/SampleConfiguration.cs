@@ -1,0 +1,44 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+using System;
+using System.Collections.Generic;
+
+namespace SDKTemplate
+{
+    public partial class MainPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        public const string FEATURE_NAME = "Application Resources C# sample";
+
+        List<Scenario> scenarios = new List<Scenario>
+        {
+            new Scenario() { Title = "String Resources In XAML", ClassType = typeof(Scenario1) },
+            new Scenario() { Title = "File Resources In XAML", ClassType = typeof(Scenario2) },
+            new Scenario() { Title = "String Resources In Code", ClassType = typeof(Scenario3) },
+            new Scenario() { Title = "Resources in the AppX manifest", ClassType = typeof(Scenario4) },
+            new Scenario() { Title = "Additional Resource Files", ClassType = typeof(Scenario5) },
+            new Scenario() { Title = "Class Library Resources", ClassType = typeof(Scenario6) },
+            new Scenario() { Title = "Runtime Changes/Events", ClassType = typeof(Scenario7) },
+            new Scenario() { Title = "Application Languages", ClassType = typeof(Scenario8) },
+            new Scenario() { Title = "Override Languages", ClassType = typeof(Scenario9) },
+            new Scenario() { Title = "Multi-dimensional fallback", ClassType = typeof(Scenario10) },
+            new Scenario() { Title = "Working with webservices", ClassType = typeof(Scenario11) },
+            new Scenario() { Title = "Retrieving resources in non-UI threads", ClassType = typeof(Scenario12) },
+            new Scenario() { Title = "File resources in code", ClassType = typeof(Scenario13) },
+        };
+    }
+
+    public class Scenario
+    {
+        public string Title { get; set; }
+        public Type ClassType { get; set; }
+    }
+}
