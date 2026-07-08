@@ -21,10 +21,10 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 71 |
+| Ported to WinUI 3 (this repo) | 70 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
 | Portable, not doc-referenced (candidates for a later pass) | 54 |
-| Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 122 |
+| Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
 | **Total analyzed** | **266** |
 
 Ported samples are a mix of standalone projects and multi-feature samples that consolidate several related UWP samples into one project (for example, **Camera** and **Sensors**).
@@ -37,7 +37,6 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [ActivitySensor](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ActivitySensor) | [Sensors](https://github.com/niels9001/winui-samples/tree/main/Samples/Sensors) (consolidated) | BackgroundActivity scenario deferred to Pending |
 | [Altimeter](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Altimeter) | [Sensors](https://github.com/niels9001/winui-samples/tree/main/Samples/Sensors) (consolidated) |  |
 | [ApplicationData](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ApplicationData) | [ApplicationData](https://github.com/niels9001/winui-samples/tree/main/Samples/ApplicationData) |  |
-| [ApplicationResources](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ApplicationResources) | [ApplicationResources](https://github.com/niels9001/winui-samples/tree/main/Samples/ApplicationResources) |  |
 | [AudioCategory](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AudioCategory) | [AudioCategory](https://github.com/niels9001/winui-samples/tree/main/Samples/AudioCategory) | 10 scenarios (Movie, Media, Game Chat, Speech, Communications, Alerts, Sound Effects, Game Effects, Game Media, Other); each tags a stream with a MediaPlayerAudioCategory. Shared PlaybackControl. |
 | [AudioCreation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AudioCreation) | [AudioCreation](https://github.com/niels9001/winui-samples/tree/main/Samples/AudioCreation) | 5 of 6 scenarios (File Playback, Device Capture, FrameInput, Submix, Inbox Effects) via Windows.Media.Audio AudioGraph. musicLibrary + microphone capabilities. Scenario6 (Custom Effects) dropped; see Pending. |
 | [BackgroundMediaPlayback](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BackgroundMediaPlayback) | [BackgroundMediaPlayback](https://github.com/niels9001/winui-samples/tree/main/Samples/BackgroundMediaPlayback) | Settings page removed |
@@ -213,6 +212,7 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [Advertising](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Advertising) | Built on a deprecated or removed Windows platform feature; no WinUI 3 equivalent. |
 | [AllJoyn](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AllJoyn) | Built on a deprecated or removed Windows platform feature; no WinUI 3 equivalent. |
 | [AnimationLibrary](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AnimationLibrary) | WinJS / HTML (JavaScript) sample; there is no C#/WinUI 3 version to port. |
+| [ApplicationResources](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ApplicationResources) | Already demonstrated in the Windows App SDK samples (WindowsAppSDK-Samples/Samples/ResourceManagement) with the same MRT Core ResourceLoader / ResourceManager APIs. |
 | [AppServices](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AppServices) | Already demonstrated in the Windows App SDK samples (WindowsAppSDK-Samples/Samples/AppLifecycle). |
 | [AppWindow](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AppWindow) | Already demonstrated in the WinUI 3 Gallery (AppWindowPage). |
 | [AssociationLaunching](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AssociationLaunching) | Already demonstrated in the Windows App SDK samples (WindowsAppSDK-Samples/Samples/AppLifecycle/Activation). |
