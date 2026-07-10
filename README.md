@@ -21,9 +21,9 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 70 |
+| Ported to WinUI 3 (this repo) | 71 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
-| Portable, not doc-referenced (candidates for a later pass) | 54 |
+| Portable, not doc-referenced (candidates for a later pass) | 53 |
 | Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
 | **Total analyzed** | **266** |
 
@@ -103,6 +103,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [XamlDataVirtualization](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDataVirtualization) | [XamlDataVirtualization](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDataVirtualization) | 2 scenarios. Custom IList+IItemsRangeInfo source over Pictures library. picturesLibrary capability. |
 | [XamlDeferLoadStrategy](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDeferLoadStrategy) | [XamlDeferLoadStrategy](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDeferLoadStrategy) | 3 scenarios. Custom TitledImage control + Themes/Generic.xaml. AdaptivePage VisibleBoundsChanged→SizeChanged. Demo images repointed to scaffold logos. |
 | [XamlFocusVisuals](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals) | [XamlFocusVisuals](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlFocusVisuals) |  |
+| [XamlMasterDetail](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlMasterDetail) | [XamlMasterDetail](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlMasterDetail) | 1 scenario (adaptive list/details). Rebuilt as a single in-page adaptive layout on the SDKTemplate shell: wide = ListView(320) + detail(*) side by side; narrow (page width < 720) = list or detail full-width with an in-page back button. Dropped the separate DetailPage, SystemNavigationManager.GetForCurrentView, and Window.Current (no WinUI 3 desktop equivalent). |
 
 ## ⏸️ In scope, not yet ported
 
@@ -188,9 +189,8 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [WebSocket](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WebSocket) | Uses Windows.Networking.Sockets.MessageWebSocket, which still works in WinUI 3. |
 | [WiFiDirect](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WiFiDirect) | Uses Windows.Devices.WiFiDirect.WiFiDirectDevice, which still works in WinUI 3. |
 | [WiFiDirectServices](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WiFiDirectServices) | Uses Windows.Devices.WiFiDirect.Services.WiFiDirectServiceAdvertiser, which still works in WinUI 3. |
-| [XamlBottomUpList](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlBottomUpList) | Uses Windows.UI.Xaml.Controls.ListView, which still works in WinUI 3. |
+| [XamlBottomUpList](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlBottomUpList) | Not ported: the inverted-list / bottom-up ListView pattern (ItemsStackPanel `ItemsUpdatingScrollMode`) is already covered by the WinUI Gallery, so a standalone sample would be redundant. |
 | [XamlGamepadNavigation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlGamepadNavigation) | Uses XYFocusDown, which still works in WinUI 3. |
-| [XamlMasterDetail](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlMasterDetail) | Uses Windows.UI.Xaml.VisualStateManager, which still works in WinUI 3. |
 | [XamlTransform3DAnimations](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlTransform3DAnimations) | Uses Windows.UI.Xaml.Media.Media3D.Transform3D, which still works in WinUI 3. |
 | [XmlDocument](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XmlDocument) | Uses Windows.Data.Xml.Dom.XmlDocument, which still works in WinUI 3. |
 | [XmlLite](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XmlLite) | Uses IXmlReader, which still works in WinUI 3. |
