@@ -5,16 +5,15 @@ namespace SDKTemplate
 {
     public partial class MainPage : Microsoft.UI.Xaml.Controls.Page
     {
-        public const string FEATURE_NAME = "TouchKeyboard";
+        public const string FEATURE_NAME = "TouchKeyboardTextInput";
 
-        // The code for each scenario lives under Scenarios\TouchKeyboard\.
+        // The code for each scenario lives under Scenarios\TouchKeyboardTextInput\.
         List<FeatureGroup> featureGroups = new List<FeatureGroup>
         {
-            new FeatureGroup("TouchKeyboard", new()
+            new FeatureGroup("TouchKeyboardTextInput", new()
             {
-                new Scenario { Title = "Display touch keyboard automatically", ClassType = typeof(Scenario1_Launch) },
-                new Scenario { Title = "Listen for Show/Hide events", ClassType = typeof(Scenario2_ShowHideEvents) },
-                new Scenario { Title = "Programmatically Show/Hide", ClassType = typeof(Scenario3_ShowHideMethods) },
+                new Scenario { Title = "Spelling and Text Suggestions", ClassType = typeof(Scenario1_SpellingTextSuggestions) },
+                new Scenario { Title = "Scoped Views", ClassType = typeof(Scenario2_ScopedViews) },
             }),
         };
     }
