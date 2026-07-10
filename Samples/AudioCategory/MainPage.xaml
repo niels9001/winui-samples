@@ -19,28 +19,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <NavigationView
-        x:Name="NavView"
-        PaneDisplayMode="Left"
-        IsSettingsVisible="False"
-        IsBackButtonVisible="Collapsed"
-        IsPaneToggleButtonVisible="True"
-        SelectionChanged="NavView_SelectionChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Frame x:Name="ScenarioFrame" Grid.Row="0" />
 
-            <Frame x:Name="ScenarioFrame" Grid.Row="0" />
-
-            <InfoBar
-                x:Name="StatusInfoBar"
-                Grid.Row="1"
-                Margin="12,0,12,12"
-                IsOpen="False"
-                IsClosable="True" />
-        </Grid>
-    </NavigationView>
+        <InfoBar
+            x:Name="StatusInfoBar"
+            Grid.Row="1"
+            Margin="12,0,12,12"
+            IsOpen="False"
+            IsClosable="True" />
+    </Grid>
 </Page>

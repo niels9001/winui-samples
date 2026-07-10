@@ -16,8 +16,8 @@ using Microsoft.UI.Xaml.Navigation;
 namespace SDKTemplate
 {
     /// <summary>
-    /// The shell page. Hosts a NavigationView whose menu items are the sample's scenarios,
-    /// a Frame for the active scenario, and an InfoBar used for status/error messages.
+    /// The shell page. For a single-scenario sample it hosts the scenario page directly
+    /// (no NavigationView), plus an InfoBar used for status/error messages.
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -33,31 +33,8 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Populate the navigation menu from the scenario list (SampleConfiguration.cs).
-            int i = 1;
-            foreach (Scenario s in scenarios)
-            {
-                NavView.MenuItems.Add(new NavigationViewItem
-                {
-                    Content = $"{i++}) {s.Title}",
-                    Tag = s.ClassType
-                });
-            }
-
-            if (NavView.MenuItems.Count > 0)
-            {
-                NavView.SelectedItem = NavView.MenuItems[0];
-            }
-        }
-
-        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            NotifyUser(string.Empty, NotifyType.StatusMessage);
-
-            if (args.SelectedItem is NavigationViewItem item && item.Tag is Type scenarioType)
-            {
-                ScenarioFrame.Navigate(scenarioType);
-            }
+            // Single-scenario sample: show the one scenario directly, with no navigation chrome.
+            ScenarioFrame.Navigate(scenarios[0].ClassType);
         }
 
         /// <summary>
