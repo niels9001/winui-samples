@@ -21,9 +21,9 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 71 |
+| Ported to WinUI 3 (this repo) | 72 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
-| Portable, not doc-referenced (candidates for a later pass) | 53 |
+| Portable, not doc-referenced (candidates for a later pass) | 52 |
 | Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
 | **Total analyzed** | **266** |
 
@@ -62,6 +62,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [CustomUsbDeviceAccess](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CustomUsbDeviceAccess) | [CustomUsbDeviceAccess](https://github.com/niels9001/winui-samples/tree/main/Samples/CustomUsbDeviceAccess) | 6 scenarios. Dropped Scenario7_SyncDevice (background task). Shared types in UsbSampleTypes.cs. usb capability (3 filters). Needs OSR FX2 / SuperMUTT to fully verify. |
 | [DatagramSocket](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DatagramSocket) | [DatagramSocket](https://github.com/niels9001/winui-samples/tree/main/Samples/DatagramSocket) | 5 scenarios. CoreApplication.Properties shared state; networking APIs unchanged. internetClientServer + privateNetworkClientServer. Builds + launches. |
 | [DataReaderWriter](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DataReaderWriter) | [DataReaderWriter](https://github.com/niels9001/winui-samples/tree/main/Samples/DataReaderWriter) | 2 scenarios. Pure DataReader/DataWriter; ReadBytes demo image repointed to Square150x150Logo. Builds + launches. |
+| [DateTimeFormatting](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DateTimeFormatting) | [Globalization](https://github.com/niels9001/winui-samples/tree/main/Samples/Globalization) (consolidated) | 6 scenarios (long/short formats, string template, parameterized template, override global context, Unicode extensions, time zones) via Windows.Globalization.DateTimeFormatting.DateTimeFormatter. Added as a "Date and time formatting" feature group. |
 | [DeviceEnumerationAndPairing](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DeviceEnumerationAndPairing) | [DeviceEnumerationAndPairing](https://github.com/niels9001/winui-samples/tree/main/Samples/DeviceEnumerationAndPairing) | 8 scenarios; Scenario3 (background-task watcher) deferred to Pending; DevicePicker uses HWND interop |
 | [Geolocation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geolocation) | [Geolocation](https://github.com/niels9001/winui-samples/tree/main/Samples/Geolocation) | 5 foreground scenarios. 3 background-task scenarios dropped pending background-activation design. location capability. Needs consent + movement to verify. |
 | [Geotag](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geotag) | [Geotag](https://github.com/niels9001/winui-samples/tree/main/Samples/Geotag) | 1 scenario (geotag JPEG/MP4 via GeotagHelper). FileOpenPicker HWND-initialized; location capability. Needs a media file + consent. |
@@ -153,7 +154,6 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [ClientDeviceInformation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ClientDeviceInformation) | Uses Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation, which still works in WinUI 3. |
 | [ContactCards](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContactCards) | Uses Windows.ApplicationModel.Contacts.ContactManager, which still works in WinUI 3. |
 | [ContactPicker](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContactPicker) | Uses Windows.ApplicationModel.Contacts.ContactPicker, which still works in WinUI 3. |
-| [DateTimeFormatting](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DateTimeFormatting) | Uses Windows.Globalization.DateTimeFormatting.DateTimeFormatter, which still works in WinUI 3. |
 | [ExtendedExecution](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ExtendedExecution) | Uses Windows.ApplicationModel.ExtendedExecution.ExtendedExecutionSession, which still works in WinUI 3. |
 | [FileAccess](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/FileAccess) | Uses Windows.Storage.StorageFile, which still works in WinUI 3. |
 | [GlobalizationPreferences](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/GlobalizationPreferences) | Uses Windows.System.UserProfile.GlobalizationPreferences, which still works in WinUI 3. |

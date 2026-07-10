@@ -24,14 +24,22 @@ namespace SDKTemplate
         List<FeatureGroup> featureGroups = new List<FeatureGroup>
         {
             new FeatureGroup("Number formatting", new()
-            {
-                new Scenario { Title = "Percent and permille formatting", ClassType = typeof(Scenario1_PercentPermilleFormatting) },
+            {                new Scenario { Title = "Percent and permille formatting", ClassType = typeof(Scenario1_PercentPermilleFormatting) },
                 new Scenario { Title = "Decimal formatting", ClassType = typeof(Scenario2_DecimalFormatting) },
                 new Scenario { Title = "Currency formatting", ClassType = typeof(Scenario3_CurrencyFormatting) },
                 new Scenario { Title = "Number parsing", ClassType = typeof(Scenario4_NumberParsing) },
                 new Scenario { Title = "Rounding and padding", ClassType = typeof(Scenario5_RoundingAndPadding) },
                 new Scenario { Title = "Numeral system translation", ClassType = typeof(Scenario6_NumeralSystemTranslation) },
                 new Scenario { Title = "Formatting/translation using Unicode extensions", ClassType = typeof(Scenario7_UsingUnicodeExtensions) },
+            }),
+            new FeatureGroup("Date and time formatting", new()
+            {
+                new Scenario { Title = "Long and short formats", ClassType = typeof(Scenario1_LongAndShortFormats) },
+                new Scenario { Title = "Format via string template", ClassType = typeof(Scenario2_StringTemplate) },
+                new Scenario { Title = "Format via parameterized template", ClassType = typeof(Scenario3_ParameterizedTemplate) },
+                new Scenario { Title = "Override the user's global context", ClassType = typeof(Scenario4_Override) },
+                new Scenario { Title = "Unicode extensions", ClassType = typeof(Scenario5_UnicodeExtensions) },
+                new Scenario { Title = "Time zones", ClassType = typeof(Scenario6_TimeZone) },
             }),
             new FeatureGroup("Unicode tokenization", new()
             {
