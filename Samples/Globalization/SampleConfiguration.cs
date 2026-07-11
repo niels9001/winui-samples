@@ -32,15 +32,6 @@ namespace SDKTemplate
                 new Scenario { Title = "Numeral system translation", ClassType = typeof(Scenario6_NumeralSystemTranslation) },
                 new Scenario { Title = "Formatting/translation using Unicode extensions", ClassType = typeof(Scenario7_UsingUnicodeExtensions) },
             }),
-            new FeatureGroup("Date and time formatting", new()
-            {
-                new Scenario { Title = "Long and short formats", ClassType = typeof(Scenario1_LongAndShortFormats) },
-                new Scenario { Title = "Format via string template", ClassType = typeof(Scenario2_StringTemplate) },
-                new Scenario { Title = "Format via parameterized template", ClassType = typeof(Scenario3_ParameterizedTemplate) },
-                new Scenario { Title = "Override the user's global context", ClassType = typeof(Scenario4_Override) },
-                new Scenario { Title = "Unicode extensions", ClassType = typeof(Scenario5_UnicodeExtensions) },
-                new Scenario { Title = "Time zones", ClassType = typeof(Scenario6_TimeZone) },
-            }),
             new FeatureGroup("Unicode tokenization", new()
             {
                 new Scenario { Title = "Tokenize lexical identifiers within a string", ClassType = typeof(Scenario1_FindId) },
