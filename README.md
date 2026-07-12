@@ -21,7 +21,7 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 73 |
+| Ported to WinUI 3 (this repo) | 74 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
 | Portable, not doc-referenced (candidates for a later pass) | 51 |
 | Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
@@ -65,6 +65,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [DataReaderWriter](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DataReaderWriter) | [DataReaderWriter](https://github.com/niels9001/winui-samples/tree/main/Samples/DataReaderWriter) | 2 scenarios. Pure DataReader/DataWriter; ReadBytes demo image repointed to Square150x150Logo. Builds + launches. |
 | [DateTimeFormatting](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DateTimeFormatting) | [DatesAndTimes](https://github.com/niels9001/winui-samples/tree/main/Samples/DatesAndTimes) (consolidated) | 6 scenarios (long/short formats, string template, parameterized template, override global context, Unicode extensions, time zones) via Windows.Globalization.DateTimeFormatting.DateTimeFormatter. Combined with Calendar under a "Date and time formatting" feature group. |
 | [DeviceEnumerationAndPairing](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DeviceEnumerationAndPairing) | [DeviceEnumerationAndPairing](https://github.com/niels9001/winui-samples/tree/main/Samples/DeviceEnumerationAndPairing) | 8 scenarios; Scenario3 (background-task watcher) deferred to Pending; DevicePicker uses HWND interop |
+| [FileAccess](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/FileAccess) | [FileAccess](https://github.com/niels9001/winui-samples/tree/main/Samples/FileAccess) | 11 scenarios (create, get parent, text, bytes, stream, properties, FutureAccessList/MRU, copy, compare, delete, try-get) on a sample.dat in the Pictures library. Scenario 9 (compare) uses the Windows App SDK Microsoft.Windows.Storage.Pickers.FileOpenPicker (constructed with AppWindowId, no HWND interop) instead of the legacy Windows.Storage.Pickers picker. picturesLibrary capability. |
 | [Geolocation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geolocation) | [Geolocation](https://github.com/niels9001/winui-samples/tree/main/Samples/Geolocation) | 5 foreground scenarios. 3 background-task scenarios dropped pending background-activation design. location capability. Needs consent + movement to verify. |
 | [Geotag](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geotag) | [Geotag](https://github.com/niels9001/winui-samples/tree/main/Samples/Geotag) | 1 scenario (geotag JPEG/MP4 via GeotagHelper). FileOpenPicker HWND-initialized; location capability. Needs a media file + consent. |
 | [Gyrometer](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Gyrometer) | [Sensors](https://github.com/niels9001/winui-samples/tree/main/Samples/Sensors) (consolidated) |  |
@@ -139,7 +140,7 @@ Samples we intend to cover but that are blocked by a WinUI 3 desktop API gap or 
 The underlying WinRT APIs for these samples still work in WinUI 3, but they are not referenced by the Learn docs this pass targets. Some also cover areas that are less relevant on Windows 11. They are candidates for a future migration pass.
 
 <details>
-<summary>Show all 54 candidate samples</summary>
+<summary>Show all 53 candidate samples</summary>
 
 | UWP sample | Notes |
 | --- | --- |
@@ -152,10 +153,9 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [Capabilities](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Capabilities) | Uses Windows.Security.Authorization.AppCapabilityAccess.AppCapability, which still works in WinUI 3. |
 | [CashDrawer](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CashDrawer) | Uses Windows.Devices.PointOfService.CashDrawer, which still works in WinUI 3. |
 | [ClientDeviceInformation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ClientDeviceInformation) | Uses Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation, which still works in WinUI 3. |
-| [ContactCards](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContactCards) | Uses Windows.ApplicationModel.Contacts.ContactManager, which still works in WinUI 3. |
+| [ContactCards](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContactCards) | Intentionally left out of this pass. Uses Windows.ApplicationModel.Contacts.ContactManager (still works in WinUI 3), but ContactManager.ShowContactCard / ShowFullContactCard require HWND interop and the payoff is low for this pass. |
 | [ContactPicker](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContactPicker) | Uses Windows.ApplicationModel.Contacts.ContactPicker, which still works in WinUI 3. |
 | [ExtendedExecution](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ExtendedExecution) | Uses Windows.ApplicationModel.ExtendedExecution.ExtendedExecutionSession, which still works in WinUI 3. |
-| [FileAccess](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/FileAccess) | Uses Windows.Storage.StorageFile, which still works in WinUI 3. |
 | [GlobalizationPreferences](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/GlobalizationPreferences) | Uses Windows.System.UserProfile.GlobalizationPreferences, which still works in WinUI 3. |
 | [HttpClient](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/HttpClient) | Uses Windows.Web.Http.HttpClient, which still works in WinUI 3. |
 | [JapanesePhoneticAnalysis](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/JapanesePhoneticAnalysis) | Uses Windows.Globalization.JapanesePhoneticAnalyzer, which still works in WinUI 3. |
