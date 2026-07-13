@@ -21,7 +21,7 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 74 |
+| Ported to WinUI 3 (this repo) | 75 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
 | Portable, not doc-referenced (candidates for a later pass) | 51 |
 | Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
@@ -107,6 +107,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [XamlDeferLoadStrategy](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDeferLoadStrategy) | [XamlDeferLoadStrategy](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDeferLoadStrategy) | 3 scenarios. Custom TitledImage control + Themes/Generic.xaml. AdaptivePage VisibleBoundsChanged→SizeChanged. Demo images repointed to scaffold logos. |
 | [XamlFocusVisuals](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals) | [XamlFocusVisuals](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlFocusVisuals) |  |
 | [XamlMasterDetail](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlMasterDetail) | [XamlMasterDetail](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlMasterDetail) | 1 scenario (adaptive list/details). Rebuilt as a single in-page adaptive layout on the SDKTemplate shell: wide = ListView(320) + detail(*) side by side; narrow (page width < 720) = list or detail full-width with an in-page back button. Dropped the separate DetailPage, SystemNavigationManager.GetForCurrentView, and Window.Current (no WinUI 3 desktop equivalent). |
+| [XamlStateTriggers](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers) | [XamlStateTriggers](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlStateTriggers) | 1 scenario. Built-in AdaptiveTrigger plus custom StateTriggerBase triggers (InputTypeTrigger, ControlSizeTrigger) and an inline StateTrigger bound to a view model property. WrapGrid→ItemsWrapGrid; PointerDeviceType from Microsoft.UI.Input. Dropped the Xbox-only DeviceFamilyTrigger scenario (not targeting Xbox). |
 
 ## ⏸️ In scope, not yet ported
 
@@ -140,7 +141,7 @@ Samples we intend to cover but that are blocked by a WinUI 3 desktop API gap or 
 The underlying WinRT APIs for these samples still work in WinUI 3, but they are not referenced by the Learn docs this pass targets. Some also cover areas that are less relevant on Windows 11. They are candidates for a future migration pass.
 
 <details>
-<summary>Show all 53 candidate samples</summary>
+<summary>Show all 52 candidate samples</summary>
 
 | UWP sample | Notes |
 | --- | --- |
@@ -323,7 +324,6 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [XamlPivot](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlPivot) | Already demonstrated in the WinUI 3 Gallery (PivotPage). |
 | [XamlPullToRefresh](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlPullToRefresh) | Superseded; the control or API now ships in WinUI 3 and is shown in the WinUI 3 Gallery (PullToRefreshPage). |
 | [XamlResponsiveTechniques](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlResponsiveTechniques) | Already shipped in the WinUI 3 Gallery. |
-| [XamlStateTriggers](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers) | Already shipped in the WinUI 3 Gallery. |
 | [XamlTailoredMultipleViews](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlTailoredMultipleViews) | Already demonstrated in the WinUI 3 Gallery (SplitViewPage, PivotPage). |
 | [XamlTransform3DParallax](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlTransform3DParallax) | Superseded; the control or API now ships in WinUI 3 and is shown in the WinUI 3 Gallery (ParallaxViewPage). |
 | [XamlTreeView](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlTreeView) | Superseded; the control or API now ships in WinUI 3 and is shown in the WinUI 3 Gallery (TreeViewPage). |
