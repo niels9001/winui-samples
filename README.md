@@ -21,7 +21,7 @@ The original UWP repo was reviewed sample by sample. Of **266** UWP samples anal
 
 | Category | Count |
 | --- | ---: |
-| Ported to WinUI 3 (this repo) | 75 |
+| Ported to WinUI 3 (this repo) | 76 |
 | In scope, not yet ported (pending design / blocked by API gaps) | 20 |
 | Portable, not doc-referenced (candidates for a later pass) | 51 |
 | Out of scope (WinUI Gallery, Windows App SDK, superseded, C++/DirectX, or platform-specific) | 123 |
@@ -105,6 +105,7 @@ Ported samples are a mix of standalone projects and multi-feature samples that c
 | [WiFiScan](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WiFiScan) | [WiFiScan](https://github.com/niels9001/winui-samples/tree/main/Samples/WiFiScan) | 4 scenarios. Signal-bar assets copied; AvailableNetworksChanged marshals via App.MainDispatcherQueue. wiFiControl capability. Needs a Wi-Fi adapter. |
 | [XamlDataVirtualization](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDataVirtualization) | [XamlDataVirtualization](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDataVirtualization) | 2 scenarios. Custom IList+IItemsRangeInfo source over Pictures library. picturesLibrary capability. |
 | [XamlDeferLoadStrategy](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDeferLoadStrategy) | [XamlDeferLoadStrategy](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDeferLoadStrategy) | 3 scenarios. Custom TitledImage control + Themes/Generic.xaml. AdaptivePage VisibleBoundsChanged→SizeChanged. Demo images repointed to scaffold logos. |
+| [XamlDragAndDrop](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDragAndDrop) | [XamlDragAndDrop](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlDragAndDrop) | 3 scenarios (ListView drag/drop + reorder + trash; drag UI customization on source and target; StartDragAsync timed game). Windows.ApplicationModel.DataTransfer ports directly. dropcursor.png + Symbols.txt packaged as Content. |
 | [XamlFocusVisuals](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals) | [XamlFocusVisuals](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlFocusVisuals) |  |
 | [XamlMasterDetail](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlMasterDetail) | [XamlMasterDetail](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlMasterDetail) | 1 scenario (adaptive list/details). Rebuilt as a single in-page adaptive layout on the SDKTemplate shell: wide = ListView(320) + detail(*) side by side; narrow (page width < 720) = list or detail full-width with an in-page back button. Dropped the separate DetailPage, SystemNavigationManager.GetForCurrentView, and Window.Current (no WinUI 3 desktop equivalent). |
 | [XamlStateTriggers](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers) | [XamlStateTriggers](https://github.com/niels9001/winui-samples/tree/main/Samples/XamlStateTriggers) | 1 scenario. Built-in AdaptiveTrigger plus custom StateTriggerBase triggers (InputTypeTrigger, ControlSizeTrigger) and an inline StateTrigger bound to a view model property. WrapGrid→ItemsWrapGrid; PointerDeviceType from Microsoft.UI.Input. Dropped the Xbox-only DeviceFamilyTrigger scenario (not targeting Xbox). |
@@ -141,7 +142,7 @@ Samples we intend to cover but that are blocked by a WinUI 3 desktop API gap or 
 The underlying WinRT APIs for these samples still work in WinUI 3, but they are not referenced by the Learn docs this pass targets. Some also cover areas that are less relevant on Windows 11. They are candidates for a future migration pass.
 
 <details>
-<summary>Show all 52 candidate samples</summary>
+<summary>Show all 51 candidate samples</summary>
 
 | UWP sample | Notes |
 | --- | --- |
@@ -318,7 +319,6 @@ The underlying WinRT APIs for these samples still work in WinUI 3, but they are 
 | [XamlCommanding](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlCommanding) | Already demonstrated in the WinUI 3 Gallery (CommandBarPage). |
 | [XamlContextMenu](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlContextMenu) | Already demonstrated in the WinUI 3 Gallery (MenuFlyoutPage). |
 | [XamlCustomMediaTransportControls](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlCustomMediaTransportControls) | Already demonstrated in the WinUI 3 Gallery (MediaPlayerElementPage). |
-| [XamlDragAndDrop](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDragAndDrop) | Already shipped in the WinUI 3 Gallery. |
 | [XamlListView](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlListView) | Already shipped in the WinUI 3 Gallery. |
 | [XamlNavigation](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlNavigation) | Superseded; the control or API now ships in WinUI 3 and is shown in the WinUI 3 Gallery (NavigationViewPage). |
 | [XamlPivot](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlPivot) | Already demonstrated in the WinUI 3 Gallery (PivotPage). |
