@@ -171,6 +171,9 @@ function FilterPanel({
   onClear,
 }: FilterPanelProps) {
   const count = selectedFilterCount(state);
+  const [expandedFacets, setExpandedFacets] = useState<
+    Set<ExplorerFacetKey>
+  >(new Set());
 
   return (
     <div className="explorer-filter-content">
@@ -191,32 +194,102 @@ function FilterPanel({
           return null;
         }
 
+        const optionLimit =
+          key === "primaryCategory" || key === "secondaryCategory" ? 12 : 8;
+        const orderedOptions = [...options[key]].sort((left, right) => {
+          const leftSelected = state.facets[key].includes(left.value);
+          const rightSelected = state.facets[key].includes(right.value);
+          if (leftSelected !== rightSelected) {
+            return leftSelected ? -1 : 1;
+          }
+
+          const countDifference =
+            (counts[key].get(right.value) ?? 0) -
+            (counts[key].get(left.value) ?? 0);
+          return (
+            countDifference ||
+            left.label.localeCompare(right.label, "en-US", {
+              sensitivity: "base",
+            })
+          );
+        });
+        const expanded = expandedFacets.has(key);
+        const initiallyVisible = orderedOptions.slice(0, optionLimit);
+        const selectedOutsideLimit = orderedOptions.filter(
+          (option, index) =>
+            index >= optionLimit &&
+            state.facets[key].includes(option.value),
+        );
+        const visibleOptions = expanded
+          ? orderedOptions
+          : [...initiallyVisible, ...selectedOutsideLimit];
+
         return (
-          <fieldset className="explorer-facet" key={key}>
-            <legend>{facetTitles[key]}</legend>
-            <div className="explorer-facet-options">
-              {options[key].map((option) => {
-                const checked = state.facets[key].includes(option.value);
-                const optionCount = counts[key].get(option.value) ?? 0;
-                return (
-                  <Checkbox
-                    checked={checked}
-                    disabled={!checked && optionCount === 0}
-                    key={option.value}
-                    label={
-                      <span className="explorer-checkbox-label">
-                        <span>{option.label}</span>
-                        <span aria-hidden="true">{optionCount}</span>
-                      </span>
-                    }
-                    onChange={(_, data) =>
-                      onToggle(key, option.value, data.checked === true)
-                    }
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
+          <details
+            className="explorer-facet"
+            open={
+              key === "primaryCategory" || state.facets[key].length > 0
+                ? true
+                : undefined
+            }
+            key={key}
+          >
+            <summary>
+              <span>{facetTitles[key]}</span>
+              <span>
+                {state.facets[key].length > 0
+                  ? `${state.facets[key].length} selected`
+                  : options[key].length}
+              </span>
+            </summary>
+            <fieldset>
+              <legend className="visually-hidden">{facetTitles[key]}</legend>
+              <div className="explorer-facet-options">
+                {visibleOptions.map((option) => {
+                  const checked = state.facets[key].includes(option.value);
+                  const optionCount = counts[key].get(option.value) ?? 0;
+                  return (
+                    <Checkbox
+                      checked={checked}
+                      disabled={!checked && optionCount === 0}
+                      key={option.value}
+                      label={
+                        <span className="explorer-checkbox-label">
+                          <span>{option.label}</span>
+                          <span aria-hidden="true">{optionCount}</span>
+                        </span>
+                      }
+                      onChange={(_, data) =>
+                        onToggle(key, option.value, data.checked === true)
+                      }
+                    />
+                  );
+                })}
+              </div>
+              {orderedOptions.length > optionLimit && (
+                <Button
+                  appearance="subtle"
+                  className="explorer-facet-more"
+                  onClick={() =>
+                    setExpandedFacets((current) => {
+                      const next = new Set(current);
+                      if (next.has(key)) {
+                        next.delete(key);
+                      } else {
+                        next.add(key);
+                      }
+                      return next;
+                    })
+                  }
+                  size="small"
+                >
+                  {expanded
+                    ? "Show fewer"
+                    : `Show all ${orderedOptions.length}`}
+                </Button>
+              )}
+            </fieldset>
+          </details>
         );
       })}
     </div>

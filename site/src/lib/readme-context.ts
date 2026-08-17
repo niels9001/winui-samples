@@ -1,8 +1,14 @@
-import { readFile, stat } from "node:fs/promises";
+import {
+  lstat,
+  readFile,
+  realpath,
+  stat,
+} from "node:fs/promises";
 import path from "node:path";
 
 import type { CatalogSample } from "./catalog";
 import {
+  isPathInside,
   repositoryRoot,
   sampleDirectory,
 } from "./repository-files";
@@ -19,7 +25,7 @@ function cleanMarkdownText(value: string): string {
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/`([^`]+)`/g, "$1")
-    .replace(/[*_~]/g, "")
+    .replace(/[*~]/g, "")
     .replace(/^\s*(?:[-*+]|\d+\.)\s+/gm, "")
     .replace(/^\s*>\s?/gm, "")
     .replace(/\r/g, "")
@@ -59,10 +65,11 @@ export async function readSampleReadmeContext(
   sample: CatalogSample,
   root = repositoryRoot,
 ): Promise<ReadmeContext> {
-  const readmePath = path.join(sampleDirectory(sample, root), "README.md");
-  let file: Awaited<ReturnType<typeof stat>>;
+  const directory = sampleDirectory(sample, root);
+  const readmePath = path.join(directory, "README.md");
+  let entry: Awaited<ReturnType<typeof lstat>>;
   try {
-    file = await stat(readmePath);
+    entry = await lstat(readmePath);
   } catch (error) {
     if (
       typeof error === "object" &&
@@ -74,11 +81,24 @@ export async function readSampleReadmeContext(
     }
     throw error;
   }
+  if (!entry.isFile() || entry.isSymbolicLink()) {
+    return {};
+  }
+
+  const [realDirectory, realReadme] = await Promise.all([
+    realpath(directory),
+    realpath(readmePath),
+  ]);
+  if (!isPathInside(realDirectory, realReadme)) {
+    return {};
+  }
+
+  const file = await stat(realReadme);
   if (!file.isFile() || file.size > readmeSizeLimit) {
     return {};
   }
 
-  const markdown = await readFile(readmePath, "utf8");
+  const markdown = await readFile(realReadme, "utf8");
   return {
     migrationNotes: extractReadmeSection(markdown, "Migration notes"),
     limitations: extractReadmeSection(

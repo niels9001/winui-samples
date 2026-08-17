@@ -45,10 +45,9 @@ const readme = await readSampleReadmeContext(sample);
 const related = getRelatedSamples(sample, catalog);
 const featuredFiles = describeFeaturedFiles(sample);
 const firstFeaturedFile = featuredFiles[0];
-if (!firstFeaturedFile) {
-  throw new Error(`Sample ${sample.id} has no featured files.`);
-}
-const featuredPreview = await readFeaturedFile(sample, firstFeaturedFile);
+const featuredPreview = firstFeaturedFile
+  ? await readFeaturedFile(sample, firstFeaturedFile)
+  : undefined;
 const repositoryUrl = repositoryTreeUrl(sample.project.repositoryPath);
 const readmeUrl = repositoryReadmeUrl(sample.project.repositoryPath);
 const cloneCommand = `git clone ${repositoryCloneUrl}`;
@@ -143,7 +142,7 @@ const captureModes = [
   </section>
 
   <div class="site-container detail-layout">
-    <main class="stack detail-main" aria-label="Sample details">
+    <div class="stack detail-main" aria-label="Sample details">
       <CoverageNotice coverage={catalog.coverage} />
 
       <section
@@ -244,11 +243,24 @@ const captureModes = [
             this page.
           </p>
         </div>
-        <CodeBrowser
-          activeFile={featuredPreview}
-          files={featuredFiles}
-          sample={sample}
-        />
+        {
+          featuredPreview ? (
+            <CodeBrowser
+              activeFile={featuredPreview}
+              files={featuredFiles}
+              sample={sample}
+            />
+          ) : (
+            <div class="surface code-empty">
+              <h3>No curated files are published yet</h3>
+              <p>
+                Browse the complete project while featured-file metadata is
+                prepared.
+              </p>
+              <a href={repositoryUrl}>View full source on GitHub</a>
+            </div>
+          )
+        }
       </section>
 
       <section
@@ -326,7 +338,7 @@ const captureModes = [
       </section>
 
       <RelatedSamples categories={catalog.categories} related={related} />
-    </main>
+    </div>
 
     <aside class="sample-facts surface" aria-labelledby="facts-title">
       <div class="stack facts-content">
@@ -645,6 +657,22 @@ const captureModes = [
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--site-space-4);
+  }
+
+  .code-empty {
+    display: grid;
+    justify-items: start;
+    gap: var(--site-space-2);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .code-empty h3 {
+    font-size: 1.1rem;
+  }
+
+  .code-empty p {
+    color: var(--site-color-text-secondary);
   }
 
   .api-card {

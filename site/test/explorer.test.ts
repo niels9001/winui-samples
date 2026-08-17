@@ -189,6 +189,28 @@ test("sorts by intent title and technical project name without recency", () => {
   );
 });
 
+test("merges case-only freeform facets while preserving an authored label", () => {
+  const first = makeSample("bluetooth-a", "Connecting Bluetooth devices", {
+    tags: ["Bluetooth"],
+  });
+  const second = makeSample("bluetooth-b", "Pairing bluetooth hardware", {
+    tags: ["bluetooth"],
+  });
+  const index = createExplorerIndex([first, second], testCategories);
+  const options = getFacetOptions(index, testCategories);
+
+  assert.deepEqual(options.tag, [
+    { value: "bluetooth", label: "Bluetooth" },
+  ]);
+
+  const state = createDefaultExplorerState();
+  state.facets.tag = ["bluetooth"];
+  assert.deepEqual(
+    filterAndSortSamples(index, state).map((entry) => entry.sample.id),
+    ["bluetooth-a", "bluetooth-b"],
+  );
+});
+
 test("handles empty and one-record partial catalogs", () => {
   const emptyIndex = createExplorerIndex([], testCategories);
   assert.deepEqual(

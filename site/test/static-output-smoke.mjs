@@ -126,7 +126,11 @@ for (const sample of catalog.samples) {
 
     const codeHtml = await readFile(codePath, "utf8");
     assert.match(codeHtml, /Featured implementation/);
-    assert.match(codeHtml, /class="line"/);
+    assert.match(
+      codeHtml,
+      /class="line"|Preview unavailable/,
+      `Code route did not render source or a clear fallback for ${sample.id}/${file.path}`,
+    );
     assert.match(
       codeHtml,
       /github\.com\/niels9001\/winui-samples\/blob\/main\//,
@@ -142,7 +146,18 @@ assert.ok(
 
 for (const htmlPath of htmlFiles) {
   const html = await readFile(htmlPath, "utf8");
+  const htmlSize = (await stat(htmlPath)).size;
+  const htmlLimit = htmlPath === browsePath ? 2 * 1024 * 1024 : 1024 * 1024;
+  assert.ok(
+    htmlSize <= htmlLimit,
+    `${path.relative(distRoot, htmlPath)} is ${(htmlSize / 1024).toFixed(1)} KiB`,
+  );
   assert.match(html, /<main\b[^>]*\bid="main-content"/, htmlPath);
+  assert.equal(
+    (html.match(/<main\b/g) ?? []).length,
+    1,
+    `Expected one main landmark in ${path.relative(distRoot, htmlPath)}`,
+  );
   assert.doesNotMatch(html, /(?:src|href)=["']["']/, htmlPath);
 
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {

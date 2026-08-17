@@ -18,13 +18,15 @@ import {
 export const featuredFileSizeLimit = 128 * 1024;
 
 export const safeFeaturedFileExtensions = new Map([
+  [".appcontent-ms", { language: "xml", label: "App content XML" }],
   [".appxmanifest", { language: "xml", label: "App package manifest" }],
   [".c", { language: "c", label: "C" }],
   [".cpp", { language: "cpp", label: "C++" }],
   [".cs", { language: "csharp", label: "C#" }],
   [".csproj", { language: "xml", label: "MSBuild project" }],
   [".h", { language: "cpp", label: "C/C++ header" }],
-  [".idl", { language: "idl", label: "IDL" }],
+  [".idl", { language: "cpp", label: "IDL" }],
+  [".ino", { language: "cpp", label: "Arduino sketch" }],
   [".json", { language: "json", label: "JSON" }],
   [".manifest", { language: "xml", label: "Manifest" }],
   [".md", { language: "markdown", label: "Markdown" }],
@@ -54,11 +56,17 @@ const deniedDirectoryNames = new Set([
   "obj",
   "packages",
   "release",
+  "x64",
+  "x86",
+  "arm",
+  "arm64",
 ]);
 
 const deniedFilePatterns = [
   /^\.env(?:\.|$)/i,
   /(?:^|[._-])credentials?(?:[._-]|$)/i,
+  /(?:^|[._-])passwords?(?:[._-]|$)/i,
+  /(?:^|[._-])private[._-]?keys?(?:[._-]|$)/i,
   /(?:^|[._-])secrets?(?:[._-]|$)/i,
   /\.g(?:\.i)?\.cs$/i,
   /\.generated\.[^.]+$/i,
@@ -152,7 +160,12 @@ export function validateFeaturedFilePath(
   }
 
   const filename = segments.at(-1) ?? "";
-  if (deniedFilePatterns.some((pattern) => pattern.test(filename))) {
+  if (
+    segments.some((segment) => segment.startsWith(".")) ||
+    segments.some((segment) =>
+      deniedFilePatterns.some((pattern) => pattern.test(segment)),
+    )
+  ) {
     return {
       valid: false,
       reason: "Generated or potentially sensitive files cannot be featured.",

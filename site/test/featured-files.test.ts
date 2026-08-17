@@ -9,10 +9,13 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 
+import { codeToHtml } from "shiki";
+
 import {
   describeFeaturedFiles,
   featuredFileSizeLimit,
   readFeaturedFile,
+  safeFeaturedFileExtensions,
   validateFeaturedFilePath,
 } from "../src/lib/featured-files";
 import { makeSample } from "./fixtures";
@@ -20,11 +23,39 @@ import { makeSample } from "./fixtures";
 test("allows documented text types and rejects unsafe paths", () => {
   assert.equal(validateFeaturedFilePath("MainPage.xaml.cs").valid, true);
   assert.equal(validateFeaturedFilePath("Package.appxmanifest").valid, true);
+  assert.equal(
+    validateFeaturedFilePath("content/item.appcontent-ms").valid,
+    true,
+  );
+  assert.equal(
+    validateFeaturedFilePath("sketch/SerialCommand.ino").valid,
+    true,
+  );
   assert.equal(validateFeaturedFilePath("../outside.cs").valid, false);
   assert.equal(validateFeaturedFilePath("Scenarios\\Main.cs").valid, false);
   assert.equal(validateFeaturedFilePath("obj/Generated.cs").valid, false);
   assert.equal(validateFeaturedFilePath("config/secrets.json").valid, false);
+  assert.equal(validateFeaturedFilePath("secrets/config.json").valid, false);
+  assert.equal(validateFeaturedFilePath(".private/config.json").valid, false);
+  assert.equal(validateFeaturedFilePath("x64/Generated.cs").valid, false);
   assert.equal(validateFeaturedFilePath("Assets/logo.png").valid, false);
+});
+
+test("maps every allowed extension to a bundled Shiki grammar", async () => {
+  const languages = new Set(
+    [...safeFeaturedFileExtensions.values()].map(
+      (extension) => extension.language,
+    ),
+  );
+
+  for (const language of languages) {
+    await assert.doesNotReject(() =>
+      codeToHtml("sample", {
+        lang: language,
+        theme: "github-light",
+      }),
+    );
+  }
 });
 
 test("creates stable code routes and exact main-branch GitHub links", () => {

@@ -13,13 +13,14 @@ pnpm install --frozen-lockfile
 pnpm site:test
 pnpm site:check
 pnpm site:build
+pnpm site:smoke
 ```
 
 Each root `site:*` command validates the complete metadata inventory and
 regenerates `site/src/generated/sample-catalog.json` before invoking the site
 workspace.
-`pnpm site:verify` runs the catalog tests, site contract tests, type checks, and
-static build in deployment order.
+`pnpm site:verify` runs the catalog tests, site contract tests, type checks,
+static build, and generated-output smoke checks in deployment order.
 
 For local development:
 
@@ -47,20 +48,41 @@ local previews and future inventory transitions. Production verification and
 deployment now require complete metadata because all 71 catalog records have
 landed.
 
-## Foundation boundaries
+## Explorer architecture
 
 - `AppShell.astro` owns document metadata, accessible skip navigation, primary
   navigation, responsive chrome, theme initialization, and the footer.
 - `tokens.css` and `global.css` own shared Fluent-aligned color, type, spacing,
   focus, surface, and layout primitives.
-- `ThemeSwitcher.tsx` is the only required client island. Everything else is
-  static HTML, including Fluent System Icons rendered through React.
+- `ThemeSwitcher.tsx` and `SampleExplorer.tsx` are focused client islands. The
+  explorer owns fast in-memory search, faceted counts, URL state, sorting, and
+  the responsive Fluent v9 filter drawer; sample detail and code routes remain
+  prerendered HTML.
 - `SampleCard.astro`, `CoverageNotice.astro`, and `EmptyCatalogState.astro`
   define reusable catalog states.
 - `GetStarted.astro` consumes a small verified-link model and uses Shiki only at
   build time for the quick-start command.
+- `related-samples.ts` applies explicit relationships first, then deterministic
+  weighted category, tag, and API matching.
+- Hero media resolves `media/hero.webp` before `media/hero.png`. When neither is
+  present, category-derived artwork is rendered without an image request.
 
-Later layers can replace the landing-page art direction and add filtering,
-full code browsing, related samples, screenshots, and a Three.js experience.
-They should preserve the data boundary, base-path helper, shell semantics,
-theme contract, and intent-first title hierarchy established here.
+## Featured-file safety boundary
+
+Every authored `featuredFiles` entry gets a dedicated static code route. Detail
+HTML embeds only the first file, so a sample does not inline its full curated
+source set. Build-time reads require a case-valid path that remains inside the
+sample folder after real-path resolution, reject symbolic links, generated
+artifact folders, sensitive filename patterns, binary content, invalid UTF-8,
+and files above 128 KiB.
+
+The text-extension allowlist is `.appcontent-ms`, `.appxmanifest`, `.c`, `.cpp`,
+`.cs`, `.csproj`, `.h`, `.idl`, `.ino`, `.json`, `.manifest`, `.md`, `.props`,
+`.ps1`, `.resw`, `.targets`, `.txt`, `.xaml`, `.xml`, `.yaml`, and `.yml`.
+Unsupported authored files keep their exact GitHub link and render a clear
+preview-unavailable state; they are never copied into the site output.
+
+Later layers can replace the landing-page art direction, add the Three.js
+experience, and publish captured media. They should preserve the data boundary,
+base-path helper, explorer URL contract, shell semantics, and intent-first title
+hierarchy established here.
