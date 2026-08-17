@@ -1,0 +1,213 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: http-client
+project:
+  folder: HttpClient
+  name: HttpClient
+title: Calling HTTP services and handling responses
+summary: Send HTTP requests, stream content, manage caching and cookies, compose filters, and inspect server certificates.
+aliases:
+  - HttpClient
+  - Windows.Web.Http
+  - HttpBaseProtocolFilter
+  - IHttpFilter
+  - HttpCookieManager
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary: []
+tags:
+  - HTTP
+  - REST
+  - streaming
+  - cookies
+  - certificates
+originalSamples:
+  - name: HttpClient
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/HttpClient
+scenarios:
+  - id: get-text-cache
+    title: GET text with cache control
+    apis:
+      - Windows.Web.Http.HttpClient
+      - Windows.Web.Http.Filters.HttpBaseProtocolFilter.CacheControl
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: get-stream
+    title: GET stream
+    apis:
+      - Windows.Web.Http.HttpClient.TrySendRequestAsync
+      - Windows.Web.Http.HttpResponseMessage.Content
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: get-xml-list
+    title: GET XML list
+    apis:
+      - Windows.Web.Http.HttpClient.TryGetAsync
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: post-text
+    title: POST text
+    apis:
+      - Windows.Web.Http.HttpStringContent
+      - Windows.Web.Http.HttpClient.TryPostAsync
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: post-stream
+    title: POST stream
+    apis:
+      - Windows.Web.Http.HttpStreamContent
+      - Windows.Web.Http.HttpClient.TrySendRequestAsync
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: post-multipart
+    title: POST multipart form
+    apis:
+      - Windows.Web.Http.HttpMultipartFormDataContent
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: post-stream-progress
+    title: POST stream with progress
+    apis:
+      - Windows.Web.Http.HttpClient.TryPostAsync
+      - Windows.Web.Http.HttpProgress
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+  - id: post-custom-content
+    title: POST custom content
+    apis:
+      - Windows.Web.Http.IHttpContent
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+      - HttpJsonContent.cs
+  - id: get-cookies
+    title: Get cookies
+    apis:
+      - Windows.Web.Http.HttpCookieManager.GetCookies
+    sourceFiles:
+      - Scenarios/CookieManagerPage.xaml.cs
+  - id: set-cookie
+    title: Set cookie
+    apis:
+      - Windows.Web.Http.HttpCookieManager.SetCookie
+    sourceFiles:
+      - Scenarios/CookieManagerPage.xaml.cs
+  - id: delete-cookie
+    title: Delete cookie
+    apis:
+      - Windows.Web.Http.HttpCookieManager.DeleteCookie
+    sourceFiles:
+      - Scenarios/CookieManagerPage.xaml.cs
+  - id: disable-cookies
+    title: Disable cookies
+    apis:
+      - Windows.Web.Http.Filters.HttpBaseProtocolFilter.CookieUsageBehavior
+    sourceFiles:
+      - Scenarios/CookieBehaviorPage.xaml.cs
+  - id: retry-filter
+    title: Retry filter
+    apis:
+      - Windows.Web.Http.Filters.IHttpFilter
+      - Windows.Web.Http.Headers.HttpDateOrDeltaHeaderValue
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+      - HttpRetryFilter.cs
+  - id: metered-connection-filter
+    title: Metered connection filter
+    apis:
+      - Windows.Web.Http.Filters.IHttpFilter
+      - Windows.Networking.Connectivity.ConnectionCost
+    sourceFiles:
+      - Scenarios/RequestScenarioPage.xaml.cs
+      - HttpMeteredConnectionFilter.cs
+  - id: server-certificate-validation
+    title: Server certificate validation
+    apis:
+      - Windows.Web.Http.Filters.HttpBaseProtocolFilter.ServerCustomValidationRequested
+      - Windows.Security.Cryptography.Certificates.Certificate
+    sourceFiles:
+      - Scenarios/CertificateValidationPage.xaml.cs
+apis:
+  - name: Windows.Web.Http.HttpClient
+    description: Sends asynchronous HTTP requests and exposes response, streaming, and progress operations.
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.httpclient
+  - name: Windows.Web.Http.Filters.HttpBaseProtocolFilter
+    description: Configures caching, cookies, certificate validation, and protocol behavior.
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.filters.httpbaseprotocolfilter
+  - name: Windows.Web.Http.Filters.IHttpFilter
+    description: Defines composable request filters used for retry, plug-in, and metered-connection policies.
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.filters.ihttpfilter
+  - name: Windows.Web.Http.HttpCookieManager
+    description: Reads, inserts, replaces, and deletes cookies associated with HTTP requests.
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.httpcookiemanager
+  - name: Windows.Networking.Connectivity.ConnectionCost
+    description: Reports network cost information used by the metered-connection filter.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.connectioncost
+  - name: Windows.Security.Cryptography.Certificates.Certificate
+    description: Exposes certificate subject, issuer, and hash data to custom validation logic.
+    url: https://learn.microsoft.com/uwp/api/windows.security.cryptography.certificates.certificate
+documentation:
+  - title: Windows.Web.Http namespace
+    url: https://learn.microsoft.com/uwp/api/windows.web.http
+    kind: api-reference
+  - title: HttpClient class
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.httpclient
+    kind: api-reference
+  - title: HttpBaseProtocolFilter class
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.filters.httpbaseprotocolfilter
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.18362.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Allows certificate validation requests to reach external HTTPS endpoints.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Allows the sample to communicate with its in-process loopback HTTP server.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged desktop process to host the local HTTP test server.
+  hardware: []
+  accountServices:
+    - Access to https://www.microsoft.com/ and https://self-signed.badssl.com/ is required only for the server certificate validation scenario.
+  architectureNotes: Most scenarios use an HTTP-only loopback server started in-process on an OS-assigned port; certificate validation requires external network access, and no code is architecture-specific.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: HTTP scenario catalog
+    description: Maps fifteen HTTP scenarios to request, cookie, and certificate pages.
+  - path: Scenarios/RequestScenarioPage.xaml.cs
+    label: Send HTTP requests
+    description: Builds GET and POST requests, configures content and filters, and reports transfer progress.
+  - path: SampleHttpServer.cs
+    label: Loopback test server
+    description: Hosts deterministic HTTP responses for text, streams, XML, cookies, retries, and chunked transfers.
+  - path: HttpRetryFilter.cs
+    label: Retry requests
+    description: Implements an IHttpFilter that retries service-unavailable responses according to Retry-After.
+  - path: HttpMeteredConnectionFilter.cs
+    label: Respect network cost
+    description: Applies request priorities to the active connection cost before forwarding requests.
+  - path: Scenarios/CookieManagerPage.xaml.cs
+    label: Manage cookies
+    description: Inspects, sets, replaces, and deletes cookies through HttpCookieManager.
+  - path: Scenarios/CertificateValidationPage.xaml.cs
+    label: Validate certificates
+    description: Compares default OS validation with custom and selectively ignored certificate errors.
+relatedSamples:
+  - datagram-socket
+screenshots:
+  - id: get-text-cache
+    alt: The HTTP client app showing a local GET request with cache controls, Start and Cancel actions, and a response output area.
+    scenario: get-text-cache
+    capture:
+      mode: automatic
+      readinessSelector: text=GET text with cache control
+      actions:
+        - type: click
+          selector: text=Start
+      notes: Capture after the in-process loopback server returns the deterministic text response.

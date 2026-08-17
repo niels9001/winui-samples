@@ -1,0 +1,100 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: json
+project:
+  folder: Json
+  name: Json
+title: Parsing and editing JSON data
+summary: Parse JSON values into editable objects and arrays, handle parse errors, and serialize the edited model back to JSON.
+aliases:
+  - Json
+  - JSON
+  - JsonObject
+  - Windows.Data.Json
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary: []
+tags:
+  - JSON
+  - parsing
+  - serialization
+  - objects
+  - arrays
+originalSamples:
+  - name: Json
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Json
+scenarios:
+  - id: parse-stringify-json
+    title: Parse and stringify JSON
+    summary: Parse a JSON user record, edit scalar and array values, and serialize the model.
+    apis:
+      - Windows.Data.Json.JsonObject.Parse
+      - Windows.Data.Json.JsonArray
+      - Windows.Data.Json.JsonValue
+      - Windows.Data.Json.JsonError.GetJsonStatus
+    sourceFiles:
+      - MainPage.xaml.cs
+      - JsonUser.cs
+      - School.cs
+apis:
+  - name: Windows.Data.Json.JsonObject
+    description: Parses object text, retrieves named values, builds object trees, and serializes them.
+    url: https://learn.microsoft.com/uwp/api/windows.data.json.jsonobject
+  - name: Windows.Data.Json.JsonArray
+    description: Represents the editable education array and accepts serialized school objects.
+    url: https://learn.microsoft.com/uwp/api/windows.data.json.jsonarray
+  - name: Windows.Data.Json.JsonValue
+    description: Reads value types and creates string, number, Boolean, and null JSON values.
+    url: https://learn.microsoft.com/uwp/api/windows.data.json.jsonvalue
+  - name: Windows.Data.Json.JsonError
+    description: Converts parse exception HRESULT values into JSON-specific error status.
+    url: https://learn.microsoft.com/uwp/api/windows.data.json.jsonerror
+documentation:
+  - title: Windows.Data.Json namespace
+    url: https://learn.microsoft.com/uwp/api/windows.data.json
+    kind: api-reference
+  - title: JsonObject class
+    url: https://learn.microsoft.com/uwp/api/windows.data.json.jsonobject
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The sample operates entirely on in-memory text and has no architecture-specific or external-service requirements.
+featuredFiles:
+  - path: MainPage.xaml
+    label: JSON editor interface
+    description: Provides the raw JSON input, editable scalar fields, and education array controls.
+  - path: MainPage.xaml.cs
+    label: Parse workflow
+    description: Connects parse and stringify actions and reports JsonError details through the InfoBar.
+  - path: JsonUser.cs
+    label: User JSON model
+    description: Parses scalar and array properties and rebuilds the complete JsonObject.
+  - path: School.cs
+    label: Nested school model
+    description: Reads and writes nested school objects within the education array.
+  - path: Package.appxmanifest
+    label: Package requirements
+    description: Declares the full-trust capability for the packaged desktop app.
+relatedSamples: []
+screenshots:
+  - id: parsed-json
+    alt: The JSON editor showing source text, parsed user fields, and editable school entries in the education array.
+    scenario: parse-stringify-json
+    capture:
+      mode: automatic
+      readinessSelector: text=Parse and stringify JSON
+      actions:
+        - type: click
+          selector: text=Parse
+      notes: Capture after the fixed JSON input populates the editable object fields and education list.

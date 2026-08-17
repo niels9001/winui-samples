@@ -21,6 +21,12 @@ JSON. It demonstrates JSON objects, arrays, strings, numbers, booleans, and null
 - [Windows.Data.Json namespace](https://learn.microsoft.com/uwp/api/windows.data.json)
 - [JsonObject class](https://learn.microsoft.com/uwp/api/windows.data.json.jsonobject)
 
+## Requirements
+
+The sample requires Windows 10 version 1809 (10.0.17763.0) or later and declares
+`runFullTrust`. It operates entirely on in-memory JSON text and does not require files,
+network access, hardware, or account services.
+
 ## Build & run
 
 ```powershell
@@ -33,3 +39,7 @@ dotnet run -c Debug -p:Platform=x64
 The sample navigates directly to its only scenario instead of showing a one-item navigation
 menu. The Windows Runtime JSON APIs work unchanged in a packaged WinUI 3 app. For new
 .NET-only code, `System.Text.Json` is also a common alternative.
+
+## Known differences / limitations
+
+None. The direct single-page experience contains the original parse and stringify workflow.
