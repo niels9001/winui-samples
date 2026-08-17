@@ -1,4 +1,4 @@
-# Line display
+# LineDisplay
 
 Ported to WinUI 3 / Windows App SDK from the UWP
 [LineDisplay](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LineDisplay)
@@ -6,8 +6,9 @@ sample.
 
 ## What it shows
 
-This sample discovers and claims a point-of-service line display, then demonstrates text,
-windows, device attributes, custom glyphs, cursor configuration, and marquee scrolling.
+This sample provides seven scenarios that discover and claim a point-of-service line
+display, then demonstrate text, windows, device attributes, custom glyphs, cursor
+configuration, and marquee scrolling.
 
 ## APIs featured
 
@@ -37,4 +38,5 @@ NavigationView shell, and watcher/device lifetimes are cleaned up when navigatin
 
 The package retains the `pointOfService` device capability. A compatible line display is
 required to exercise operations beyond hardware discovery; without one, the selection page
-reports that no devices were found.
+reports that no devices were found. This documentation update does not claim validation on
+line-display hardware.

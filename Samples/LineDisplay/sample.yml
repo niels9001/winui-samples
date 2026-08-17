@@ -1,0 +1,166 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: line-display
+project:
+  folder: LineDisplay
+  name: LineDisplay
+title: Presenting checkout information on line displays
+summary: Discover and claim a point-of-service line display, then control text, windows, attributes, glyphs, cursors, and marquee scrolling.
+aliases:
+  - LineDisplay
+  - Line display
+  - Windows.Devices.PointOfService.LineDisplay
+  - ClaimedLineDisplay
+  - POS customer display
+icon: CartRegular
+categories:
+  primary: retail-and-industry
+  secondary:
+    - devices-and-sensors
+tags:
+  - point of service
+  - POS
+  - customer display
+  - text display
+  - custom glyphs
+  - marquee
+originalSamples:
+  - name: LineDisplay
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LineDisplay
+scenarios:
+  - id: select-display
+    title: Selecting a line display
+    summary: Watch for compatible displays, select a device, claim it, and clear its current contents.
+    apis:
+      - Windows.Devices.PointOfService.LineDisplay.GetDeviceSelector
+      - Windows.Devices.Enumeration.DeviceWatcher
+      - Windows.Devices.PointOfService.ClaimedLineDisplay.FromIdAsync
+    sourceFiles:
+      - Scenarios/Scenario1_SelectDisplay.xaml
+      - Scenarios/Scenario1_SelectDisplay.xaml.cs
+  - id: display-text
+    title: Displaying text
+    summary: Write centered or blinking text to the selected display when its capabilities support those attributes.
+    apis:
+      - Windows.Devices.PointOfService.LineDisplayWindow.TryDisplayTextAsync
+      - Windows.Devices.PointOfService.LineDisplayTextAttribute
+    sourceFiles:
+      - Scenarios/Scenario2_DisplayText.xaml
+      - Scenarios/Scenario2_DisplayText.xaml.cs
+  - id: display-windows
+    title: Using windows to control layout
+    summary: Create, select, refresh, write to, and destroy logical windows within the display viewport.
+    apis:
+      - Windows.Devices.PointOfService.ClaimedLineDisplay.TryCreateWindowAsync
+      - Windows.Devices.PointOfService.LineDisplayWindow
+    sourceFiles:
+      - Scenarios/Scenario3_UsingWindows.xaml
+      - Scenarios/Scenario3_UsingWindows.xaml.cs
+  - id: display-attributes
+    title: Updating line display attributes
+    summary: Change blink rate, brightness, screen size, and character-set mapping when the display supports them.
+    apis:
+      - Windows.Devices.PointOfService.ClaimedLineDisplay.GetAttributes
+      - Windows.Devices.PointOfService.ClaimedLineDisplay.TryUpdateAttributesAsync
+      - Windows.Devices.PointOfService.LineDisplayAttributes
+    sourceFiles:
+      - Scenarios/Scenario4_UpdatingLineDisplayAttributes.xaml
+      - Scenarios/Scenario4_UpdatingLineDisplayAttributes.xaml.cs
+  - id: custom-glyphs
+    title: Defining custom glyphs
+    summary: Select a supported character code, define a custom glyph bitmap, and restore the device glyph set.
+    apis:
+      - Windows.Devices.PointOfService.ClaimedLineDisplay.CustomGlyphs
+      - Windows.Devices.PointOfService.LineDisplayCustomGlyphs.TryRedefineAsync
+    sourceFiles:
+      - Scenarios/Scenario5_DefiningCustomGlyphs.xaml
+      - Scenarios/Scenario5_DefiningCustomGlyphs.xaml.cs
+  - id: display-cursor
+    title: Modifying the display cursor
+    summary: Configure cursor type, blinking, auto-advance, and position before writing text.
+    apis:
+      - Windows.Devices.PointOfService.LineDisplayCursor
+      - Windows.Devices.PointOfService.LineDisplayCursorAttributes
+    sourceFiles:
+      - Scenarios/Scenario6_ManipulatingCursorAttributes.xaml
+      - Scenarios/Scenario6_ManipulatingCursorAttributes.xaml.cs
+  - id: marquee
+    title: Scrolling content using marquee
+    summary: Configure marquee format, direction, repeat delay, and scroll interval, then start or stop scrolling.
+    apis:
+      - Windows.Devices.PointOfService.LineDisplayMarquee
+      - Windows.Devices.PointOfService.LineDisplayMarqueeFormat
+    sourceFiles:
+      - Scenarios/Scenario7_ScrollingContentUsingMarquee.xaml
+      - Scenarios/Scenario7_ScrollingContentUsingMarquee.xaml.cs
+apis:
+  - name: Windows.Devices.PointOfService.LineDisplay
+    description: Supplies the selector used to discover compatible point-of-service line displays.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.linedisplay
+  - name: Windows.Devices.PointOfService.ClaimedLineDisplay
+    description: Claims a selected display and exposes device attributes, windows, glyphs, and cursor controls.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedlinedisplay
+  - name: Windows.Devices.PointOfService.LineDisplayWindow
+    description: Represents the default or custom viewport used to write and scroll text.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.linedisplaywindow
+  - name: Windows.Devices.PointOfService.LineDisplayMarquee
+    description: Configures and controls scrolling content inside a line-display window.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.linedisplaymarquee
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Reports line displays as devices are added, updated, removed, and fully enumerated.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+documentation:
+  - title: Windows.Devices.PointOfService namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice
+    kind: api-reference
+  - title: LineDisplay class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.linedisplay
+    kind: api-reference
+  - title: ClaimedLineDisplay class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedlinedisplay
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: pointOfService
+      kind: device
+      description: Allows the app to discover, claim, and communicate with point-of-service display hardware.
+  hardware:
+    - A compatible point-of-service line display connected by a supported transport
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and uses the same point-of-service APIs on every architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Line-display scenarios
+    description: Registers all seven workflows and shares the selected device identifier between them.
+  - path: Scenarios/Scenario1_SelectDisplay.xaml.cs
+    label: Display discovery
+    description: Watches for line displays and establishes the claimed device used by later scenarios.
+  - path: Scenarios/Scenario2_DisplayText.xaml.cs
+    label: Text output
+    description: Checks display capabilities and writes centered or blinking text.
+  - path: Scenarios/Scenario3_UsingWindows.xaml.cs
+    label: Display windows
+    description: Creates and manages logical windows within the selected display's viewport.
+  - path: Scenarios/Scenario5_DefiningCustomGlyphs.xaml.cs
+    label: Custom glyphs
+    description: Defines and resets device-specific character glyphs.
+  - path: Scenarios/Scenario7_ScrollingContentUsingMarquee.xaml.cs
+    label: Marquee scrolling
+    description: Configures marquee timing, direction, format, and playback.
+relatedSamples: []
+screenshots:
+  - id: selected-line-display
+    alt: The LineDisplay app showing an available point-of-service display selected for the remaining scenarios.
+    scenario: select-display
+    capture:
+      mode: manual
+      readinessSelector: text=Selecting a line display
+      notes: Connect compatible hardware, wait for discovery, select a device from the list, and choose Select before capture.

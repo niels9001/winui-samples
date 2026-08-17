@@ -1,4 +1,4 @@
-# Media import
+# MediaImport
 
 Ported to WinUI 3 / Windows App SDK from the UWP
 [MediaImport](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MediaImport)
@@ -6,9 +6,10 @@ sample.
 
 ## What it shows
 
-This sample discovers PTP, MTP, and removable-media sources, finds importable photos and
-videos, selects and imports items, and optionally deletes successfully imported items from
-the source. It also supports cancellation and pending-operation recovery.
+This sample provides one end-to-end workflow that discovers PTP, MTP, and removable-media
+sources, finds importable photos and videos, imports selected items, and optionally deletes
+successfully imported items from the source. It also demonstrates cancellation and recovery
+of pending operations after a fresh launch.
 
 ## APIs featured
 
@@ -46,3 +47,4 @@ sample an image-file handler.
 
 A compatible camera, phone, or removable-media source is required to exercise finding,
 importing, and deleting items. Without one, source discovery completes with an empty list.
+The documentation does not claim hardware-dependent import operations were validated.
