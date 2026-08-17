@@ -1,0 +1,32 @@
+<Page
+    x:Class="SDKTemplate.Scenarios.ClosePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="760"
+            Margin="28"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="Close socket and listener" />
+            <TextBlock
+                MaxWidth="680"
+                Text="Detach and dispose the DataWriter, close the client and accepted sockets, and stop the StreamSocketListener. Closing explicitly completes the TCP workflow cleanly."
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                x:Name="SocketStateTextBlock"
+                FontWeight="SemiBold"
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="CloseButton"
+                AutomationProperties.AutomationId="CloseSocketsButton"
+                Click="CloseButton_Click"
+                Content="Close sockets and listener"
+                Style="{StaticResource AccentButtonStyle}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>
