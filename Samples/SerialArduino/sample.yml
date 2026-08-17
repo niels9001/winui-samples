@@ -1,0 +1,125 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: serial-arduino
+project:
+  folder: SerialArduino
+  name: SerialArduino
+title: Controlling Arduino hardware over a serial connection
+summary: Discover and connect to a supported Arduino Uno, control four LEDs, and read a one-wire temperature sensor through a serial protocol.
+aliases:
+  - SerialArduino
+  - Serial Arduino
+  - Arduino Uno
+  - SerialDevice
+  - serialcommunication
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - retail-and-industry
+tags:
+  - Arduino
+  - serial
+  - device enumeration
+  - LEDs
+  - temperature sensor
+  - firmware
+originalSamples:
+  - name: SerialArduino
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SerialArduino
+scenarios:
+  - id: connect-disconnect
+    title: Discover and connect to an Arduino
+    summary: Watch for the supported Arduino Uno USB identifier, list matching devices, and manage an explicit serial connection.
+    apis:
+      - Windows.Devices.SerialCommunication.SerialDevice.GetDeviceSelectorFromUsbVidPid
+      - Windows.Devices.Enumeration.DeviceInformation.CreateWatcher
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - Scenarios/Scenario1_ConnectDisconnect.xaml
+      - Scenarios/Scenario1_ConnectDisconnect.xaml.cs
+      - SerialArduinoService.cs
+  - id: led-temperature
+    title: Control LEDs and read temperature
+    summary: Send commands for LEDs on pins 3 through 6 and parse a temperature response from the connected one-wire sensor.
+    apis:
+      - Windows.Devices.SerialCommunication.SerialDevice
+      - Windows.Storage.Streams.DataWriter
+      - Windows.Storage.Streams.DataReader
+    sourceFiles:
+      - Scenarios/Scenario2_LEDTemperature.xaml
+      - Scenarios/Scenario2_LEDTemperature.xaml.cs
+      - SerialArduinoService.cs
+apis:
+  - name: Windows.Devices.SerialCommunication.SerialDevice
+    description: Opens the selected serial port and exposes the input and output streams used by the Arduino protocol.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.serialcommunication.serialdevice
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Tracks matching Arduino devices as they are added, removed, or finish initial enumeration.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes ASCII LED and temperature commands to the serial output stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+  - name: Windows.Storage.Streams.DataReader
+    description: Reads and parses the fixed-length temperature response from the serial input stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+  - name: Microsoft.UI.Dispatching.DispatcherQueue
+    description: Marshals device-watcher and service state changes to the WinUI thread.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.dispatching.dispatcherqueue
+documentation:
+  - title: SerialDevice API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.serialcommunication.serialdevice
+    kind: api-reference
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+  - title: Map UWP features to the Windows App SDK
+    url: https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/feature-mapping-table
+    kind: migration
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: serialcommunication
+      kind: device
+      description: Grants serial-port access only to the declared Arduino Uno USB VID 2341 and PID 0043.
+  hardware:
+    - An Arduino Uno exposed as USB VID 2341 and PID 0043 with the included SerialCommand firmware and a data-capable USB cable.
+    - A DS18S20 or DS18B20 one-wire temperature sensor on pin 2 with a 4.7 kOhm pull-up resistor for temperature reads.
+    - Four LEDs on pins 3 through 6, each wired to ground through a 220 ohm resistor, for the LED controls.
+  accountServices:
+    - The Arduino firmware requires the SerialCommand, DallasTemperature, and OneWire libraries before the included sketch can be uploaded.
+  architectureNotes: The project targets x86, x64, and ARM64; the USB identifier, serial protocol, firmware, and wiring are the same on each architecture.
+featuredFiles:
+  - path: SerialArduinoService.cs
+    label: Serial device service
+    description: Owns discovery, connection lifetime, serialized I/O, timeouts, cancellation, removal handling, and UI-thread events.
+  - path: Scenarios/Scenario1_ConnectDisconnect.xaml.cs
+    label: Device connection workflow
+    description: Binds watcher state and matching devices to explicit connect and disconnect actions.
+  - path: Scenarios/Scenario2_LEDTemperature.xaml.cs
+    label: Hardware command workflow
+    description: Sends LED commands, parses temperature responses, and restores UI state after errors.
+  - path: Constants.cs
+    label: Device and protocol constants
+    description: Defines the supported USB VID and PID, serial commands, pins, timeouts, and temperature response limits.
+  - path: sketch/SerialCommand.ino
+    label: Arduino firmware
+    description: Implements the LED and temperature commands expected by the desktop application.
+  - path: sketch/SerialCommand.fzz
+    label: Wiring diagram
+    description: Provides the Fritzing source for the required Arduino, LEDs, resistors, and temperature sensor wiring.
+screenshots:
+  - id: device-discovery
+    alt: The Serial Arduino app showing the matching-device list and connect controls after USB device discovery.
+    scenario: connect-disconnect
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=ArduinoDevicesListView
+      notes: Capture with the documented Arduino Uno and firmware connected; without hardware, the empty-device state is expected and no successful connection is claimed.

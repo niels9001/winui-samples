@@ -1,0 +1,120 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: ocr
+project:
+  folder: OCR
+  name: OCR
+title: Extracting text from images and camera frames
+summary: Recognize text in image files or live camera frames and visualize recognized words with bounding overlays.
+aliases:
+  - OCR
+  - Optical character recognition
+  - OcrEngine
+  - Windows.Media.Ocr
+  - Camera OCR
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - media
+tags:
+  - OCR
+  - text recognition
+  - image processing
+  - camera
+  - language packs
+originalSamples:
+  - name: OCR
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/OCR
+scenarios:
+  - id: image-file
+    title: Extract text from an image file
+    summary: Load an image, choose an installed OCR language, recognize its text, and draw bounding overlays around words.
+    apis:
+      - Windows.Media.Ocr.OcrEngine
+      - Windows.Graphics.Imaging.SoftwareBitmap
+      - Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/OCR/OcrFileImage.xaml
+      - Scenarios/OCR/OcrFileImage.xaml.cs
+      - Scenarios/OCR/WordOverlay.cs
+  - id: camera-capture
+    title: Extract text from a camera capture
+    summary: Preview a color camera source, capture a frame, and recognize English text in the resulting software bitmap.
+    apis:
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Media.Capture.Frames.MediaFrameSource
+      - Windows.Media.Ocr.OcrEngine
+    sourceFiles:
+      - Scenarios/OCR/OcrCapturedImage.xaml
+      - Scenarios/OCR/OcrCapturedImage.xaml.cs
+      - Scenarios/OCR/WordOverlay.cs
+apis:
+  - name: Windows.Media.Ocr.OcrEngine
+    description: Creates a recognizer for an installed language and extracts text, lines, words, and bounding regions from a bitmap.
+    url: https://learn.microsoft.com/uwp/api/windows.media.ocr.ocrengine
+  - name: Windows.Graphics.Imaging.SoftwareBitmap
+    description: Supplies decoded image pixels or a captured video frame to the OCR engine.
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.softwarebitmap
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Lets the file scenario choose an image after the picker is associated with the WinUI window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+  - name: Windows.Media.Capture.MediaCapture
+    description: Initializes the camera and exposes color frame sources for preview and capture.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapture
+  - name: Windows.Media.Capture.Frames.MediaFrameSource
+    description: Provides the selected color frame source used by the MediaPlayerElement preview.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.frames.mediaframesource
+documentation:
+  - title: OcrEngine API reference
+    url: https://learn.microsoft.com/uwp/api/windows.media.ocr.ocrengine
+    kind: api-reference
+  - title: MediaCapture API reference
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapture
+    kind: api-reference
+  - title: Map UWP features to the Windows App SDK
+    url: https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/feature-mapping-table
+    kind: migration
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: webcam
+      kind: device
+      description: Allows the camera-capture scenario to initialize and read frames from a connected webcam.
+  hardware:
+    - A webcam is required for the camera-capture scenario; file-based OCR works without one.
+    - Camera initialization leaves MediaCapture in its default audio-and-video mode even though the package declares webcam but not microphone access.
+  accountServices:
+    - At least one compatible Windows OCR language pack must be installed; camera capture specifically requests English recognition.
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific OCR implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: OCR scenario catalog
+    description: Registers the image-file and camera-capture workflows in the navigation shell.
+  - path: Scenarios/OCR/OcrFileImage.xaml.cs
+    label: Recognize a selected image
+    description: Decodes a picked image, selects an OCR language, and presents recognized text and overlays.
+  - path: Scenarios/OCR/OcrCapturedImage.xaml.cs
+    label: Recognize a camera frame
+    description: Initializes MediaCapture, previews a MediaFrameSource, captures a frame, and runs OCR.
+  - path: Scenarios/OCR/WordOverlay.cs
+    label: Draw recognition overlays
+    description: Positions visual boxes over recognized words while accounting for image scaling.
+  - path: Package.appxmanifest
+    label: Camera capability
+    description: Declares full-trust execution and webcam access for the packaged application.
+screenshots:
+  - id: image-recognition
+    alt: The OCR app displaying a selected image with recognized text and colored bounding boxes around individual words.
+    scenario: image-file
+    capture:
+      mode: manual
+      readinessSelector: Name=LoadButton
+      notes: Select a readable local image, run extraction, and capture the stable result; the picker prevents unattended capture.

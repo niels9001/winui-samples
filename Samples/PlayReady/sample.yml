@@ -1,0 +1,150 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: playready
+project:
+  folder: PlayReady
+  name: PlayReady
+title: Acquiring and managing PlayReady licenses
+summary: Handle reactive and proactive license requests, choose hardware or software DRM, and report secure playback stops for protected media.
+aliases:
+  - PlayReady
+  - PlayReady DRM
+  - MediaProtectionManager
+  - License acquisition
+  - Secure Stop
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - security-and-identity
+    - networking
+tags:
+  - PlayReady
+  - DRM
+  - protected media
+  - licenses
+  - DASH
+  - secure stop
+originalSamples:
+  - name: PlayReady
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PlayReady
+scenarios:
+  - id: reactive-license
+    title: Request a license reactively
+    summary: Start protected playback and handle individualization or license acquisition when MediaProtectionManager raises a service request.
+    apis:
+      - Windows.Media.Protection.MediaProtectionManager.ServiceRequested
+      - Windows.Media.Protection.PlayReady.PlayReadyLicenseAcquisitionServiceRequest
+      - Windows.Media.Protection.PlayReady.PlayReadyIndividualizationServiceRequest
+    sourceFiles:
+      - Scenarios/PlayReady/Scenario1_ReactiveRequest.xaml
+      - Scenarios/PlayReady/Scenario1_ReactiveRequest.xaml.cs
+      - ViewModels/ReactiveViewModel.cs
+  - id: proactive-license
+    title: Request a license proactively
+    summary: Build a PlayReady content header and acquire a license before playback begins.
+    apis:
+      - Windows.Media.Protection.PlayReady.PlayReadyContentHeader
+      - Windows.Media.Protection.PlayReady.PlayReadyLicenseAcquisitionServiceRequest
+    sourceFiles:
+      - Scenarios/PlayReady/Scenario2_ProactiveRequest.xaml
+      - Scenarios/PlayReady/Scenario2_ProactiveRequest.xaml.cs
+      - ViewModels/ProactiveViewModel.cs
+  - id: hardware-software-drm
+    title: Choose hardware or software DRM
+    summary: Inspect PlayReady hardware support and persist the requested hardware or software protection mode.
+    apis:
+      - Windows.Media.Protection.PlayReady.PlayReadyStatics.CheckSupportedHardware
+      - Windows.Media.Protection.PlayReady.PlayReadyHardwareDRMFeatures
+      - Windows.Storage.ApplicationData.LocalSettings
+    sourceFiles:
+      - Scenarios/PlayReady/Scenario3_HardwareDRM.xaml
+      - Scenarios/PlayReady/Scenario3_HardwareDRM.xaml.cs
+      - ViewModels/HardwareDRMViewModel.cs
+  - id: secure-stop
+    title: Report a secure playback stop
+    summary: Configure a license session, collect secure-stop data, and send the stop challenge to the sample service.
+    apis:
+      - Windows.Media.Protection.PlayReady.PlayReadyLicenseSession
+      - Windows.Media.Protection.PlayReady.PlayReadySecureStopServiceRequest
+    sourceFiles:
+      - Scenarios/PlayReady/Scenario4_SecureStop.xaml
+      - Scenarios/PlayReady/Scenario4_SecureStop.xaml.cs
+      - ViewModels/SecureStopViewModel.cs
+apis:
+  - name: Windows.Media.Protection.MediaProtectionManager
+    description: Connects protected playback to the app's PlayReady service-request handling.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.mediaprotectionmanager
+  - name: Windows.Media.Protection.PlayReady.PlayReadyLicenseAcquisitionServiceRequest
+    description: Carries reactive or proactive license challenges to a PlayReady license service.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadylicenseacquisitionservicerequest
+  - name: Windows.Media.Protection.PlayReady.PlayReadyIndividualizationServiceRequest
+    description: Individualizes the local PlayReady client when a license request requires it.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadyindividualizationservicerequest
+  - name: Windows.Media.Protection.PlayReady.PlayReadyStatics
+    description: Reports PlayReady version and hardware DRM feature support for the current system.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadystatics
+  - name: Windows.Media.Protection.PlayReady.PlayReadyLicenseSession
+    description: Configures protected media playback and provides the session used by secure-stop processing.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadylicensesession
+  - name: Windows.Media.Protection.PlayReady.PlayReadySecureStopServiceRequest
+    description: Retrieves and processes secure-stop challenges for licenses that require playback reporting.
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadysecurestopservicerequest
+documentation:
+  - title: PlayReady documentation
+    url: https://learn.microsoft.com/playready/overview/overview
+    kind: concept
+  - title: MediaProtectionManager API reference
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.mediaprotectionmanager
+    kind: api-reference
+  - title: PlayReadyStatics API reference
+    url: https://learn.microsoft.com/uwp/api/windows.media.protection.playready.playreadystatics
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: internetClient
+      kind: general
+      description: Allows protected content retrieval and PlayReady license and secure-stop service requests.
+    - name: 6a7e5907-885c-4bcb-b40a-073c067bd3d5
+      kind: device
+      description: Declares the PlayReady device interface required by the packaged sample.
+  hardware:
+    - A Windows media stack with PlayReady support is required; hardware DRM scenarios additionally depend on hardware protection support.
+  accountServices:
+    - The hard-coded external HTTP media and PlayReady test services must be reachable, and their current availability is not guaranteed.
+  architectureNotes: The project targets x86, x64, and ARM64; PlayReady and hardware DRM support still vary by device and media stack.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: PlayReady scenario catalog
+    description: Registers the four scenarios and stores the protected sample media URL used by the view models.
+  - path: Shared/PlayReadyHelpers.cs
+    label: PlayReady request handling
+    description: Initializes media protection and processes individualization and license acquisition requests.
+  - path: ViewModels/ReactiveViewModel.cs
+    label: Reactive acquisition
+    description: Coordinates protected playback with service requests raised by MediaProtectionManager.
+  - path: ViewModels/ProactiveViewModel.cs
+    label: Proactive acquisition
+    description: Builds a content header and completes a license request before playback.
+  - path: ViewModels/HardwareDRMViewModel.cs
+    label: Hardware DRM selection
+    description: Reports supported hardware features and stores the requested DRM mode.
+  - path: ViewModels/SecureStopViewModel.cs
+    label: Secure-stop reporting
+    description: Configures the license session and posts secure-stop data to the sample service.
+screenshots:
+  - id: reactive-license
+    alt: The PlayReady app showing protected media controls and PlayReady status for a reactive license request.
+    scenario: reactive-license
+    capture:
+      mode: manual
+      readinessSelector: Name=mediaElement
+      notes: External HTTP test content and license services are required; capture only if they are reachable and the protected playback state is stable.
