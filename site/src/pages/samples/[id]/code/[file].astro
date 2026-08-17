@@ -1,0 +1,128 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import AppShell from "../../../../components/AppShell.astro";
+import CodeBrowser from "../../../../components/CodeBrowser.astro";
+import type { CatalogSample } from "../../../../lib/catalog";
+import { catalog } from "../../../../lib/catalog-data";
+import {
+  describeFeaturedFiles,
+  readFeaturedFile,
+} from "../../../../lib/featured-files";
+import type { FeaturedFileDescriptor } from "../../../../lib/featured-files";
+import {
+  repositoryTreeUrl,
+  sampleDetailPath,
+  sitePath,
+} from "../../../../lib/urls";
+
+interface Props {
+  sample: CatalogSample;
+  file: FeaturedFileDescriptor;
+}
+
+export const getStaticPaths = (() =>
+  catalog.samples.flatMap((sample) =>
+    describeFeaturedFiles(sample).map((file) => ({
+      params: {
+        id: sample.id,
+        file: file.key,
+      },
+      props: { sample, file },
+    })),
+  )) satisfies GetStaticPaths;
+
+const { sample, file } = Astro.props;
+const files = describeFeaturedFiles(sample);
+const activeFile = await readFeaturedFile(sample, file);
+---
+
+<AppShell
+  title={`${file.label} | ${sample.title}`}
+  description={`Read ${file.path}, a curated source file from the ${sample.project.name} WinUI sample.`}
+  activeNav="samples"
+>
+  <section class="code-page-header">
+    <div class="site-container stack">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li><a href={sitePath("/")}>Home</a></li>
+          <li><a href={sitePath("/samples/")}>Samples</a></li>
+          <li>
+            <a href={sitePath(sampleDetailPath(sample.id))}>
+              {sample.project.name}
+            </a>
+          </li>
+          <li aria-current="page">{file.label}</li>
+        </ol>
+      </nav>
+      <div class="stack code-page-heading">
+        <p class="eyebrow">Featured implementation</p>
+        <h1>{file.label}</h1>
+        <p>
+          <code>{file.path}</code> from <strong>{sample.project.name}</strong>
+        </p>
+      </div>
+      <div class="cluster">
+        <a
+          class="button-link button-link--secondary"
+          href={sitePath(sampleDetailPath(sample.id))}
+        >
+          Back to sample overview
+        </a>
+        <a
+          class="button-link button-link--secondary"
+          href={repositoryTreeUrl(sample.project.repositoryPath)}
+        >
+          View full source on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="site-container">
+      <CodeBrowser
+        activeFile={activeFile}
+        currentRoute
+        files={files}
+        sample={sample}
+      />
+    </div>
+  </section>
+</AppShell>
+
+<style>
+  .code-page-header {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+    border-bottom: 1px solid var(--site-color-border-subtle);
+    background: var(--site-color-canvas-subtle);
+  }
+
+  .code-page-heading {
+    --stack-space: var(--site-space-2);
+  }
+
+  .code-page-heading h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .code-page-heading > p:last-child {
+    color: var(--site-color-text-secondary);
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-2);
+    padding: 0;
+    color: var(--site-color-text-muted);
+    font-size: 0.82rem;
+    list-style: none;
+  }
+
+  .breadcrumb li:not(:last-child)::after {
+    margin-left: var(--site-space-2);
+    content: "/";
+  }
+</style>

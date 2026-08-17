@@ -2,11 +2,27 @@
 import type { GetStaticPaths } from "astro";
 
 import AppShell from "../../components/AppShell.astro";
+import CodeBrowser from "../../components/CodeBrowser.astro";
 import CoverageNotice from "../../components/CoverageNotice.astro";
+import RelatedSamples from "../../components/RelatedSamples.astro";
+import SampleMedia from "../../components/SampleMedia.astro";
 import type { CatalogSample } from "../../lib/catalog";
 import { categoryById } from "../../lib/catalog";
 import { catalog } from "../../lib/catalog-data";
-import { sitePath } from "../../lib/urls";
+import {
+  describeFeaturedFiles,
+  readFeaturedFile,
+} from "../../lib/featured-files";
+import { readSampleReadmeContext } from "../../lib/readme-context";
+import { getRelatedSamples } from "../../lib/related-samples";
+import { resolveHeroMedia } from "../../lib/sample-media";
+import {
+  repositoryBlobUrl,
+  repositoryCloneUrl,
+  repositoryReadmeUrl,
+  repositoryTreeUrl,
+  sitePath,
+} from "../../lib/urls";
 
 interface Props {
   sample: CatalogSample;
@@ -21,7 +37,27 @@ export const getStaticPaths = (() =>
 const { sample } = Astro.props;
 const categories = categoryById(catalog);
 const primaryCategory = categories.get(sample.categories.primary);
-const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sample.project.repositoryPath}`;
+const secondaryCategories = sample.categories.secondary
+  .map((category) => categories.get(category))
+  .filter((category) => category !== undefined);
+const hero = await resolveHeroMedia(sample);
+const readme = await readSampleReadmeContext(sample);
+const related = getRelatedSamples(sample, catalog);
+const featuredFiles = describeFeaturedFiles(sample);
+const firstFeaturedFile = featuredFiles[0];
+if (!firstFeaturedFile) {
+  throw new Error(`Sample ${sample.id} has no featured files.`);
+}
+const featuredPreview = await readFeaturedFile(sample, firstFeaturedFile);
+const repositoryUrl = repositoryTreeUrl(sample.project.repositoryPath);
+const readmeUrl = repositoryReadmeUrl(sample.project.repositoryPath);
+const cloneCommand = `git clone ${repositoryCloneUrl}`;
+const projectPath = `${sample.project.repositoryPath}/${sample.project.name}.csproj`
+  .replaceAll("/", "\\");
+const buildCommand = `dotnet build .\\${projectPath} -c Debug -p:Platform=x64`;
+const captureModes = [
+  ...new Set(sample.screenshots.map((screenshot) => screenshot.capture.mode)),
+];
 ---
 
 <AppShell
@@ -29,58 +65,131 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
   description={sample.summary}
   activeNav="samples"
 >
-  <section class="detail-header">
-    <div class="site-container stack detail-heading">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb">
-          <li><a href={sitePath("/")}>Home</a></li>
-          <li><a href={sitePath("/samples/")}>Samples</a></li>
-          <li aria-current="page">{sample.project.name}</li>
-        </ol>
-      </nav>
-      <div class="cluster detail-meta">
-        {primaryCategory && <span class="badge">{primaryCategory.label}</span>}
-        <span>{sample.scenarios.length} scenarios</span>
+  <section class="detail-hero">
+    <div class="site-container detail-hero-grid">
+      <div class="stack detail-heading">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb">
+            <li><a href={sitePath("/")}>Home</a></li>
+            <li><a href={sitePath("/samples/")}>Samples</a></li>
+            <li aria-current="page">{sample.project.name}</li>
+          </ol>
+        </nav>
+        <div class="cluster detail-meta">
+          {
+            primaryCategory && (
+              <span class="hero-badge">{primaryCategory.label}</span>
+            )
+          }
+          <span>
+            {sample.scenarios.length} {
+              sample.scenarios.length === 1 ? "scenario" : "scenarios"
+            }
+          </span>
+          {
+            captureModes.length > 0 && (
+              <span>
+                {captureModes.join(" + ")} screenshot recipe
+              </span>
+            )
+          }
+        </div>
+        <h1>{sample.title}</h1>
+        <p class="technical-name detail-project">
+          Technical project: {sample.project.name}
+        </p>
+        <p class="detail-summary">{sample.summary}</p>
+        <div class="cluster hero-topics" aria-label="Sample topics">
+          {sample.tags.slice(0, 5).map((tag) => <span>{tag}</span>)}
+        </div>
+        <div class="cluster hero-actions">
+          <a class="button-link" href={repositoryUrl}>
+            View source on GitHub
+          </a>
+          <a class="button-link button-link--secondary" href={readmeUrl}>
+            Read the README
+          </a>
+          <button
+            class="button-link button-link--secondary"
+            data-copy-control
+            data-copy-idle-label="Copy clone command"
+            data-copy-text={cloneCommand}
+            type="button"
+          >
+            <span data-copy-feedback aria-live="polite">
+              Copy clone command
+            </span>
+          </button>
+          <button
+            class="button-link button-link--secondary"
+            data-copy-control
+            data-copy-idle-label="Copy build command"
+            data-copy-text={buildCommand}
+            type="button"
+          >
+            <span data-copy-feedback aria-live="polite">
+              Copy build command
+            </span>
+          </button>
+        </div>
       </div>
-      <h1>{sample.title}</h1>
-      <p class="technical-name">Project: {sample.project.name}</p>
-      <p class="detail-summary">{sample.summary}</p>
-      <div class="cluster">
-        <a class="button-link" href={repositoryUrl}>View source on GitHub</a>
-        {
-          sample.documentation[0] && (
-            <a
-              class="button-link button-link--secondary"
-              href={sample.documentation[0].url}
-            >
-              Read the primary documentation
-            </a>
-          )
-        }
-      </div>
+      <SampleMedia
+        category={primaryCategory}
+        eager
+        hero={hero}
+        sample={sample}
+      />
     </div>
   </section>
 
   <div class="site-container detail-layout">
-    <div class="stack detail-main" aria-label="Sample overview">
+    <main class="stack detail-main" aria-label="Sample details">
       <CoverageNotice coverage={catalog.coverage} />
-      <section class="stack detail-section" aria-labelledby="scenarios-title">
+
+      <section
+        class="stack detail-section"
+        id="scenarios"
+        aria-labelledby="scenarios-title"
+      >
         <div class="stack section-copy">
           <p class="eyebrow">What it demonstrates</p>
           <h2 id="scenarios-title">Scenarios</h2>
           <p class="secondary-text">
-            This foundation exposes the authored scenario contract. Rich code
-            browsing and guided walkthroughs will build on it later.
+            Each scenario comes from authored sample metadata, including the
+            APIs and source files that implement it.
           </p>
         </div>
-        <ol class="scenario-list">
+        <ol class="scenario-grid">
           {
-            sample.scenarios.map((scenario) => (
-              <li>
-                <span>{scenario.title}</span>
-                {scenario.sourceFiles?.[0] && (
-                  <code>{scenario.sourceFiles[0]}</code>
-                )}
+            sample.scenarios.map((scenario, index) => (
+              <li class="surface scenario-card">
+                <span class="scenario-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div class="stack scenario-content">
+                  <h3>{scenario.title}</h3>
+                  {scenario.summary && <p>{scenario.summary}</p>}
+                  {scenario.apis && scenario.apis.length > 0 && (
+                    <div class="cluster scenario-apis" aria-label="APIs">
+                      {scenario.apis.map((api) => <code>{api}</code>)}
+                    </div>
+                  )}
+                  {scenario.sourceFiles && scenario.sourceFiles.length > 0 && (
+                    <div class="stack scenario-files">
+                      <span>Source files</span>
+                      {scenario.sourceFiles.map((file) => (
+                        <a
+                          href={repositoryBlobUrl(
+                            sample.project.repositoryPath,
+                            file,
+                          )}
+                        >
+                          {file} <span aria-hidden="true">↗</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </li>
             ))
           }
@@ -89,109 +198,290 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
 
       <section
         class="stack detail-section"
-        aria-labelledby="package-prerequisites-title"
+        id="apis"
+        aria-labelledby="apis-title"
       >
         <div class="stack section-copy">
-          <p class="eyebrow">Package and environment</p>
-          <h2 id="package-prerequisites-title">
-            Declarations and prerequisites
-          </h2>
+          <p class="eyebrow">Reference</p>
+          <h2 id="apis-title">Featured APIs</h2>
           <p class="secondary-text">
-            Manifest declarations are reported separately from hardware and
-            service prerequisites so incidental capabilities do not imply a
-            feature requirement.
+            Documentation links are taken from validated metadata. Missing
+            links remain explicit rather than being guessed.
           </p>
         </div>
-        <div class="prerequisite-grid">
-          <article class="surface prerequisite-card stack">
-            <h3>Declared package capabilities</h3>
-            {
-              sample.requirements.capabilities.length > 0 ? (
-                <ul class="capability-list">
-                  {sample.requirements.capabilities.map((capability) => (
-                    <li>
-                      <code>{capability.name}</code>
-                      <p>{capability.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p class="secondary-text">
-                  No package capabilities are declared.
-                </p>
-              )
-            }
+        <div class="api-grid">
+          {
+            sample.apis.map((api) => (
+              <article class="surface stack api-card">
+                <code>{api.name}</code>
+                {api.description && <p>{api.description}</p>}
+                {api.url ? (
+                  <a href={api.url}>
+                    Open documentation <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span class="api-link-missing">
+                    Documentation link not authored
+                  </span>
+                )}
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section
+        class="stack detail-section"
+        id="code"
+        aria-labelledby="code-section-title"
+      >
+        <div class="stack section-copy">
+          <p class="eyebrow">Implementation</p>
+          <h2 id="code-section-title">Browse featured code</h2>
+          <p class="secondary-text">
+            The overview loads one curated file. Choose another file to open
+            its dedicated static route without shipping every source file in
+            this page.
+          </p>
+        </div>
+        <CodeBrowser
+          activeFile={featuredPreview}
+          files={featuredFiles}
+          sample={sample}
+        />
+      </section>
+
+      <section
+        class="stack detail-section"
+        id="migration"
+        aria-labelledby="migration-title"
+      >
+        <div class="stack section-copy">
+          <p class="eyebrow">Porting context</p>
+          <h2 id="migration-title">Migration and limitations</h2>
+          <p class="secondary-text">
+            This context is read from the sample README at build time and
+            rendered as text.
+          </p>
+        </div>
+        <div class="migration-grid">
+          <article class="surface stack migration-card">
+            <h3>Migration notes</h3>
+            <p class:list={{ "context-missing": !readme.migrationNotes }}>
+              {
+                readme.migrationNotes ??
+                  "No dedicated migration-notes section is published in the README."
+              }
+            </p>
           </article>
-          <article class="surface prerequisite-card stack">
-            <h3>Hardware and account/service prerequisites</h3>
-            {
-              sample.requirements.hardware.length === 0 &&
-              sample.requirements.accountServices.length === 0 ? (
-                <p class="secondary-text">
-                  No additional hardware or account/service prerequisites.
-                </p>
-              ) : (
-                <dl class="prerequisite-list">
-                  {sample.requirements.hardware.length > 0 && (
-                    <div>
-                      <dt>Hardware</dt>
-                      <dd>{sample.requirements.hardware.join(", ")}</dd>
-                    </div>
-                  )}
-                  {sample.requirements.accountServices.length > 0 && (
-                    <div>
-                      <dt>Accounts and services</dt>
-                      <dd>{sample.requirements.accountServices.join(", ")}</dd>
-                    </div>
-                  )}
-                </dl>
-              )
-            }
+          <article class="surface stack migration-card">
+            <h3>Known differences and limitations</h3>
+            <p class:list={{ "context-missing": !readme.limitations }}>
+              {
+                readme.limitations ??
+                  "No dedicated limitations section is published in the README."
+              }
+            </p>
           </article>
         </div>
       </section>
-    </div>
 
-    <aside class="sample-facts surface stack" aria-labelledby="facts-title">
-      <h2 id="facts-title">Sample facts</h2>
-      <dl>
-        <div>
-          <dt>Minimum Windows version</dt>
-          <dd>{sample.requirements.minimumWindowsVersion}</dd>
+      <section
+        class="stack detail-section"
+        id="resources"
+        aria-labelledby="resources-title"
+      >
+        <div class="stack section-copy">
+          <p class="eyebrow">Learn more</p>
+          <h2 id="resources-title">Documentation and origins</h2>
         </div>
-        <div>
-          <dt>Architectures</dt>
-          <dd>{sample.requirements.supportedArchitectures.join(", ")}</dd>
+        <div class="resource-grid">
+          <article class="surface stack resource-card">
+            <h3>Documentation</h3>
+            <ul>
+              {
+                sample.documentation.map((document) => (
+                  <li>
+                    <a href={document.url}>{document.title}</a>
+                    <span>{document.kind.replaceAll("-", " ")}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </article>
+          <article class="surface stack resource-card">
+            <h3>Original source samples</h3>
+            <ul>
+              {
+                sample.originalSamples.map((original) => (
+                  <li>
+                    <a href={original.url}>{original.name}</a>
+                    <span>Original Windows sample</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </article>
         </div>
-        <div>
-          <dt>Featured files</dt>
-          <dd>{sample.featuredFiles.length}</dd>
-        </div>
-      </dl>
-      <div class="stack tags">
-        <h3>Topics</h3>
-        <div class="cluster">
-          {sample.tags.map((tag) => <span class="badge">{tag}</span>)}
-        </div>
+      </section>
+
+      <RelatedSamples categories={catalog.categories} related={related} />
+    </main>
+
+    <aside class="sample-facts surface" aria-labelledby="facts-title">
+      <div class="stack facts-content">
+        <h2 id="facts-title">Sample facts</h2>
+        <nav class="section-navigation" aria-label="On this page">
+          <a href="#scenarios">Scenarios</a>
+          <a href="#apis">APIs</a>
+          <a href="#code">Code</a>
+          <a href="#migration">Migration</a>
+          <a href="#resources">Resources</a>
+        </nav>
+
+        <section class="stack fact-group">
+          <h3>Categories</h3>
+          <dl>
+            <div>
+              <dt>Primary</dt>
+              <dd>{primaryCategory?.label ?? sample.categories.primary}</dd>
+            </div>
+            {
+              secondaryCategories.length > 0 && (
+                <div>
+                  <dt>Secondary</dt>
+                  <dd>
+                    {secondaryCategories
+                      .map((category) => category.label)
+                      .join(", ")}
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+        </section>
+
+        <section class="stack fact-group">
+          <h3>Topics</h3>
+          <div class="cluster facts-tags">
+            {sample.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </section>
+
+        <section class="stack fact-group">
+          <h3>Declared package capabilities</h3>
+          {
+            sample.requirements.capabilities.length > 0 ? (
+              <ul class="fact-list capability-list">
+                {sample.requirements.capabilities.map((capability) => (
+                  <li>
+                    <code>{capability.name}</code>
+                    <span>{capability.kind}</span>
+                    <p>{capability.description}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="fact-empty">
+                No additional package capabilities are declared.
+              </p>
+            )
+          }
+        </section>
+
+        <section class="stack fact-group">
+          <h3>Actual prerequisites</h3>
+          <dl>
+            <div>
+              <dt>Hardware</dt>
+              <dd>
+                {
+                  sample.requirements.hardware.length > 0
+                    ? sample.requirements.hardware.join(", ")
+                    : "No additional hardware declared"
+                }
+              </dd>
+            </div>
+            <div>
+              <dt>Accounts and services</dt>
+              <dd>
+                {
+                  sample.requirements.accountServices.length > 0
+                    ? sample.requirements.accountServices.join(", ")
+                    : "No account or service prerequisite declared"
+                }
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="stack fact-group">
+          <h3>Platform</h3>
+          <dl>
+            <div>
+              <dt>Minimum Windows version</dt>
+              <dd>{sample.requirements.minimumWindowsVersion}</dd>
+            </div>
+            <div>
+              <dt>Architectures</dt>
+              <dd>
+                {sample.requirements.supportedArchitectures.join(", ")}
+              </dd>
+            </div>
+          </dl>
+          <p class="architecture-notes">
+            {sample.requirements.architectureNotes}
+          </p>
+        </section>
+
+        <section class="stack fact-group">
+          <h3>Links</h3>
+          <ul class="fact-links">
+            <li><a href={repositoryUrl}>Source folder</a></li>
+            <li><a href={readmeUrl}>Sample README</a></li>
+            <li>
+              <a href={repositoryBlobUrl(
+                sample.project.repositoryPath,
+                `${sample.project.name}.csproj`,
+              )}>
+                Project file
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
     </aside>
   </div>
 </AppShell>
 
 <style>
-  .detail-header {
+  .detail-hero {
     padding-block: clamp(3rem, 7vw, 6rem);
     border-bottom: 1px solid var(--site-color-border-subtle);
-    background: var(--site-color-canvas-subtle);
+    background:
+      radial-gradient(circle at 85% 10%, var(--site-color-brand-subtle), transparent 30rem),
+      var(--site-color-canvas-subtle);
+  }
+
+  .detail-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
   }
 
   .detail-heading {
     --stack-space: var(--site-space-4);
-    max-width: 60rem;
+    min-width: 0;
   }
 
   .detail-heading h1 {
-    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+  }
+
+  .detail-project {
+    font-size: 0.9rem;
   }
 
   .detail-summary {
@@ -202,7 +492,43 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
 
   .detail-meta {
     color: var(--site-color-text-muted);
-    font-size: 0.86rem;
+    font-size: 0.82rem;
+  }
+
+  .hero-badge {
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-weight: 650;
+  }
+
+  .hero-topics {
+    --cluster-space: var(--site-space-2);
+  }
+
+  .hero-topics span {
+    color: var(--site-color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  .hero-topics span:not(:last-child)::after {
+    margin-left: var(--site-space-2);
+    content: "·";
+  }
+
+  .hero-actions button {
+    cursor: pointer;
+  }
+
+  .hero-actions [data-copy-state="success"] {
+    border-color: #107c10;
+    color: #107c10;
+  }
+
+  .hero-actions [data-copy-state="error"] {
+    border-color: #c50f1f;
+    color: #c50f1f;
   }
 
   .breadcrumb {
@@ -211,7 +537,7 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
     gap: var(--site-space-2);
     padding: 0;
     color: var(--site-color-text-muted);
-    font-size: 0.86rem;
+    font-size: 0.82rem;
     list-style: none;
   }
 
@@ -222,18 +548,19 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
 
   .detail-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem);
     gap: var(--site-space-7);
     padding-block: var(--site-space-7);
   }
 
   .detail-main {
-    --stack-space: var(--site-space-7);
+    --stack-space: var(--site-space-8);
     min-width: 0;
   }
 
   .detail-section {
     --stack-space: var(--site-space-5);
+    scroll-margin-top: 6rem;
   }
 
   .section-copy {
@@ -241,156 +568,347 @@ const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sa
     max-width: var(--site-reading-width);
   }
 
-  .scenario-list {
+  .scenario-grid {
     display: grid;
-    gap: var(--site-space-2);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
     padding: 0;
     list-style: none;
   }
 
-  .scenario-list li {
+  .scenario-card {
     display: grid;
-    grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1fr);
-    gap: var(--site-space-4);
-    align-items: baseline;
-    padding: var(--site-space-3) var(--site-space-4);
-    border-bottom: 1px solid var(--site-color-border-subtle);
+    min-width: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--site-space-3);
+    padding: var(--site-space-4);
+    box-shadow: none;
   }
 
-  .scenario-list span {
-    font-weight: 650;
+  .scenario-number {
+    color: var(--site-color-brand);
+    font-family: ui-monospace, "Cascadia Code", monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
   }
 
-  .scenario-list code {
+  .scenario-content {
+    --stack-space: var(--site-space-3);
+    min-width: 0;
+  }
+
+  .scenario-content h3 {
+    font-size: 1.05rem;
+  }
+
+  .scenario-content > p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.88rem;
+  }
+
+  .scenario-apis {
+    --cluster-space: var(--site-space-1);
+  }
+
+  .scenario-apis code {
+    max-width: 100%;
     overflow: hidden;
-    color: var(--site-color-text-muted);
-    font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
-    font-size: 0.8rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--site-radius-small);
+    background: var(--site-color-canvas-subtle);
+    color: var(--site-color-text-secondary);
+    font-size: 0.7rem;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .prerequisite-grid {
+  .scenario-files {
+    --stack-space: var(--site-space-1);
+  }
+
+  .scenario-files > span {
+    color: var(--site-color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+    text-transform: uppercase;
+  }
+
+  .scenario-files a {
+    overflow: hidden;
+    font-family: ui-monospace, "Cascadia Code", monospace;
+    font-size: 0.72rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .api-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--site-space-4);
   }
 
-  .prerequisite-card {
-    --stack-space: var(--site-space-4);
+  .api-card {
+    --stack-space: var(--site-space-3);
+    align-items: start;
+    padding: var(--site-space-4);
+    box-shadow: none;
+  }
+
+  .api-card > code {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: var(--site-color-text);
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+
+  .api-card p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.88rem;
+  }
+
+  .api-card a,
+  .api-link-missing {
+    margin-top: auto;
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+
+  .api-link-missing {
+    color: var(--site-color-text-muted);
+  }
+
+  .migration-grid,
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .migration-card,
+  .resource-card {
+    --stack-space: var(--site-space-3);
     padding: var(--site-space-5);
     box-shadow: none;
   }
 
-  .prerequisite-card h3 {
-    font-size: 1rem;
+  .migration-card h3,
+  .resource-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .migration-card p {
+    color: var(--site-color-text-secondary);
+    white-space: pre-line;
+  }
+
+  .migration-card .context-missing {
+    color: var(--site-color-text-muted);
+    font-style: italic;
+  }
+
+  .resource-card ul {
+    display: grid;
+    gap: var(--site-space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .resource-card li {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .resource-card li span {
+    color: var(--site-color-text-muted);
+    font-size: 0.75rem;
+    text-transform: capitalize;
+  }
+
+  .sample-facts {
+    position: sticky;
+    top: 6rem;
+    max-height: calc(100vh - 7rem);
+    overflow: auto;
+    box-shadow: none;
+  }
+
+  .facts-content {
+    --stack-space: 0;
+  }
+
+  .facts-content > h2 {
+    padding: var(--site-space-5);
+    font-size: 1.35rem;
+  }
+
+  .section-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-1);
+    padding: 0 var(--site-space-5) var(--site-space-5);
+  }
+
+  .section-navigation a {
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--site-radius-small);
+    color: var(--site-color-text-secondary);
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .section-navigation a:hover {
+    background: var(--site-color-surface-hover);
+    color: var(--site-color-text);
+  }
+
+  .fact-group {
+    --stack-space: var(--site-space-3);
+    padding: var(--site-space-4) var(--site-space-5);
+    border-top: 1px solid var(--site-color-border-subtle);
+  }
+
+  .fact-group h3 {
+    font-size: 0.88rem;
     letter-spacing: 0;
   }
 
-  .capability-list {
+  .fact-group dl {
     display: grid;
-    gap: var(--site-space-4);
+    gap: var(--site-space-3);
+  }
+
+  .fact-group dl div {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .fact-group dt {
+    color: var(--site-color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .fact-group dd {
+    margin: 0;
+    font-size: 0.86rem;
+  }
+
+  .facts-tags {
+    --cluster-space: var(--site-space-1);
+  }
+
+  .facts-tags span {
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    background: var(--site-color-canvas-subtle);
+    color: var(--site-color-text-secondary);
+    font-size: 0.72rem;
+  }
+
+  .fact-list,
+  .fact-links {
+    display: grid;
+    gap: var(--site-space-3);
     padding: 0;
     list-style: none;
   }
 
   .capability-list li {
     display: grid;
-    gap: var(--site-space-1);
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--site-space-1) var(--site-space-2);
   }
 
   .capability-list code {
-    width: fit-content;
-    color: var(--site-color-text);
-    font-size: 0.86rem;
+    overflow-wrap: anywhere;
+    font-size: 0.78rem;
     font-weight: 650;
+  }
+
+  .capability-list li > span {
+    color: var(--site-color-text-muted);
+    font-size: 0.68rem;
+    text-transform: uppercase;
   }
 
   .capability-list p {
+    grid-column: 1 / -1;
     color: var(--site-color-text-secondary);
-    font-size: 0.88rem;
+    font-size: 0.76rem;
   }
 
-  .prerequisite-list {
-    display: grid;
-    gap: var(--site-space-4);
+  .fact-empty,
+  .architecture-notes {
+    color: var(--site-color-text-secondary);
+    font-size: 0.8rem;
   }
 
-  .prerequisite-list div {
-    display: grid;
-    gap: var(--site-space-1);
+  .fact-links {
+    gap: var(--site-space-2);
+    font-size: 0.82rem;
   }
 
-  .prerequisite-list dt {
-    color: var(--site-color-text-muted);
-    font-size: 0.78rem;
-    font-weight: 650;
-  }
+  @media (max-width: 64rem) {
+    .detail-hero-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+    }
 
-  .prerequisite-list dd {
-    margin: 0;
-  }
-
-  .sample-facts {
-    --stack-space: var(--site-space-5);
-    position: sticky;
-    top: 7rem;
-    height: fit-content;
-    padding: var(--site-space-5);
-    box-shadow: none;
-  }
-
-  .sample-facts h2 {
-    font-size: 1.35rem;
-  }
-
-  .sample-facts dl {
-    display: grid;
-    gap: var(--site-space-4);
-  }
-
-  .sample-facts dl div {
-    display: grid;
-    gap: var(--site-space-1);
-  }
-
-  .sample-facts dt {
-    color: var(--site-color-text-muted);
-    font-size: 0.78rem;
-    font-weight: 650;
-  }
-
-  .sample-facts dd {
-    margin: 0;
-  }
-
-  .tags {
-    --stack-space: var(--site-space-2);
-  }
-
-  .tags h3 {
-    font-size: 0.9rem;
-    letter-spacing: 0;
-  }
-
-  @media (max-width: 52rem) {
     .detail-layout {
       grid-template-columns: 1fr;
     }
 
     .sample-facts {
       position: static;
+      max-height: none;
       grid-row: 1;
+    }
+
+    .facts-content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .facts-content > h2,
+    .section-navigation {
+      grid-column: 1 / -1;
+    }
+
+    .fact-group {
+      border-top: 1px solid var(--site-color-border-subtle);
     }
   }
 
-  @media (max-width: 38rem) {
-    .prerequisite-grid {
+  @media (max-width: 48rem) {
+    .detail-hero-grid {
       grid-template-columns: 1fr;
     }
 
-    .scenario-list li {
+    .scenario-grid,
+    .api-grid,
+    .migration-grid,
+    .resource-grid {
       grid-template-columns: 1fr;
-      gap: var(--site-space-1);
+    }
+
+    .facts-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .hero-actions > * {
+      width: 100%;
+    }
+
+    .section-navigation {
+      grid-template-columns: 1fr;
     }
   }
 </style>

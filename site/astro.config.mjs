@@ -9,10 +9,13 @@ const fluentIconModules = [
   "cart",
   "code",
   "desktop",
+  "dismiss",
   "document",
+  "filter",
   "globe",
   "location",
   "people-community",
+  "search",
   "shield",
   "toolbox",
   "video",
@@ -25,7 +28,6 @@ const fluentIconAliases = fluentIconModules.map((icon) => ({
   find: new RegExp(`^@fluentui/react-icons/svg/${icon}$`),
   replacement: require.resolve(`@fluentui/react-icons/svg/${icon}`),
 }));
-
 export default defineConfig({
   site: "https://niels9001.github.io",
   base: "/winui-samples",

@@ -1,12 +1,22 @@
 ---
 import AppShell from "../../components/AppShell.astro";
 import CoverageNotice from "../../components/CoverageNotice.astro";
-import EmptyCatalogState from "../../components/EmptyCatalogState.astro";
-import SampleCard from "../../components/SampleCard.astro";
-import { categoryById } from "../../lib/catalog";
+import { SampleExplorer } from "../../components/SampleExplorer";
+import type { ExplorerSamplePresentation } from "../../components/SampleExplorer";
 import { catalog } from "../../lib/catalog-data";
+import { resolveHeroMedia } from "../../lib/sample-media";
+import { sitePath } from "../../lib/urls";
 
-const categories = categoryById(catalog);
+const samples: ExplorerSamplePresentation[] = await Promise.all(
+  catalog.samples.map(async (sample) => {
+    const hero = await resolveHeroMedia(sample);
+    return {
+      sample,
+      heroUrl: hero ? sitePath(hero.routePath) : undefined,
+      heroAlt: sample.screenshots[0]?.alt,
+    };
+  }),
+);
 ---
 
 <AppShell
@@ -19,8 +29,9 @@ const categories = categoryById(catalog);
       <p class="eyebrow">Browse samples</p>
       <h1>Find the Windows experience you want to build</h1>
       <p>
-        Intent-led titles make the outcome clear. The original project name
-        remains visible for source navigation and migration history.
+        Search by the outcome, API, scenario, project, or topic. Filter on
+        authored categories and real package or environment requirements
+        without turning manifest declarations into feature claims.
       </p>
     </div>
   </section>
@@ -28,28 +39,27 @@ const categories = categoryById(catalog);
   <section class="section" aria-labelledby="catalog-title">
     <div class="site-container stack catalog-layout">
       <CoverageNotice coverage={catalog.coverage} />
-      <div class="catalog-heading cluster">
-        <h2 id="catalog-title">Published samples</h2>
-        <span class="badge">
-          {catalog.samples.length} {catalog.samples.length === 1 ? "sample" : "samples"}
-        </span>
-      </div>
-      {
-        catalog.samples.length > 0 ? (
-          <div class="responsive-grid" role="list">
-            {catalog.samples.map((sample) => (
-              <div role="listitem">
-                <SampleCard
-                  sample={sample}
-                  category={categories.get(sample.categories.primary)}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <EmptyCatalogState />
-        )
-      }
+      <h2 class="visually-hidden" id="catalog-title">Published samples</h2>
+      <p class="visually-hidden" aria-live="polite" aria-atomic="true">
+        The interactive sample explorer is loading.
+      </p>
+      <p class="visually-hidden">
+        Available facets include primary and secondary categories, topics,
+        Declared package capabilities, actual prerequisites, architectures,
+        and screenshot capture readiness.
+      </p>
+      <SampleExplorer
+        basePath={import.meta.env.BASE_URL}
+        categories={catalog.categories}
+        client:only="react"
+        samples={samples}
+      />
+      <noscript>
+        <p class="noscript-notice">
+          Enable JavaScript to search and filter the catalog. Every published
+          sample remains available from its direct URL.
+        </p>
+      </noscript>
     </div>
   </section>
 </AppShell>
@@ -81,8 +91,11 @@ const categories = categoryById(catalog);
     --stack-space: var(--site-space-6);
   }
 
-  .catalog-heading {
-    --cluster-space: var(--site-space-3);
-    justify-content: space-between;
+  .noscript-notice {
+    padding: var(--site-space-4);
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: var(--site-radius-medium);
+    color: var(--site-color-text-secondary);
   }
+
 </style>

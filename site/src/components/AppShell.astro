@@ -104,6 +104,71 @@ const navigation = [
         </a>
       </div>
     </footer>
+    <script>
+      const resetTimers = new WeakMap<HTMLButtonElement, number>();
+
+      async function writeClipboard(text: string): Promise<void> {
+        if (!navigator.clipboard?.writeText) {
+          throw new Error("The browser did not expose clipboard access.");
+        }
+        await navigator.clipboard.writeText(text);
+      }
+
+      document.addEventListener("click", async (event) => {
+        const target =
+          event.target instanceof Element
+            ? event.target.closest<HTMLButtonElement>("[data-copy-control]")
+            : null;
+        if (!target) {
+          return;
+        }
+
+        const directText = target.dataset.copyText;
+        const sourceSelector = target.dataset.copyTarget;
+        const source = sourceSelector
+          ? document.querySelector(sourceSelector)
+          : null;
+        const text = directText ?? source?.textContent;
+        const feedback = target.querySelector<HTMLElement>(
+          "[data-copy-feedback]",
+        );
+        if (text === undefined || text === null) {
+          if (feedback) {
+            feedback.textContent = "Unavailable";
+          }
+          target.dataset.copyState = "error";
+          return;
+        }
+
+        try {
+          await writeClipboard(text);
+          if (feedback) {
+            feedback.textContent = "Copied";
+          }
+          target.dataset.copyState = "success";
+        } catch {
+          if (feedback) {
+            feedback.textContent = "Copy failed";
+          }
+          target.dataset.copyState = "error";
+        }
+
+        const previousTimer = resetTimers.get(target);
+        if (previousTimer !== undefined) {
+          window.clearTimeout(previousTimer);
+        }
+        resetTimers.set(
+          target,
+          window.setTimeout(() => {
+            if (feedback) {
+              feedback.textContent =
+                target.dataset.copyIdleLabel ?? "Copy";
+            }
+            delete target.dataset.copyState;
+          }, 2200),
+        );
+      });
+    </script>
   </body>
 </html>
 

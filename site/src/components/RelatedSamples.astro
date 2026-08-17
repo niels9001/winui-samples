@@ -1,0 +1,185 @@
+---
+import type { CatalogCategory } from "../lib/catalog";
+import type { RelatedSampleResult } from "../lib/related-samples";
+import { resolveHeroMedia } from "../lib/sample-media";
+import {
+  sampleDetailPath,
+  sitePath,
+} from "../lib/urls";
+import SampleMedia from "./SampleMedia.astro";
+
+interface Props {
+  related: RelatedSampleResult[];
+  categories: CatalogCategory[];
+}
+
+const { related, categories } = Astro.props;
+const categoryById = new Map(
+  categories.map((category) => [category.id, category]),
+);
+const cards = await Promise.all(
+  related.map(async (result) => ({
+    ...result,
+    hero: await resolveHeroMedia(result.sample),
+  })),
+);
+---
+
+<section class="stack related-section" aria-labelledby="related-title">
+  <div class="stack section-heading">
+    <p class="eyebrow">Keep exploring</p>
+    <h2 id="related-title">Related samples</h2>
+    <p class="secondary-text">
+      Curated relationships appear first, followed by stable matches across
+      categories, topics, and APIs.
+    </p>
+  </div>
+
+  {
+    cards.length > 0 ? (
+      <div class="related-grid" role="list">
+        {cards.map((result) => (
+          <article class="related-card surface" role="listitem">
+            <a
+              class="related-media-link"
+              href={sitePath(sampleDetailPath(result.sample.id))}
+              tabindex="-1"
+            >
+              <SampleMedia
+                category={categoryById.get(
+                  result.sample.categories.primary,
+                )}
+                hero={result.hero}
+                sample={result.sample}
+              />
+            </a>
+            <div class="stack related-content">
+              <div class="cluster related-topics" aria-label="Why this is related">
+                {result.sharedTopics.map((topic) => (
+                  <span>{topic}</span>
+                ))}
+              </div>
+              <h3>
+                <a href={sitePath(sampleDetailPath(result.sample.id))}>
+                  {result.sample.title}
+                </a>
+              </h3>
+              <p class="technical-name">
+                Project: {result.sample.project.name}
+              </p>
+              <p>{result.sample.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="related-empty surface">
+        <h3>No related samples are published yet</h3>
+        <p>
+          This catalog is designed for incremental rollout. Related samples
+          will appear automatically as compatible metadata lands.
+        </p>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .related-section {
+    --stack-space: var(--site-space-5);
+  }
+
+  .section-heading {
+    --stack-space: var(--site-space-3);
+    max-width: var(--site-reading-width);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .related-card {
+    position: relative;
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  .related-card :global(.detail-visual) {
+    border: 0;
+    border-bottom: 1px solid var(--site-color-border-subtle);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .related-media-link {
+    display: block;
+  }
+
+  .related-content {
+    --stack-space: var(--site-space-2);
+    padding: var(--site-space-4);
+  }
+
+  .related-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .related-content h3 a {
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  .related-content h3 a::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+
+  .related-content > p:last-child,
+  .related-topics,
+  .related-content h3,
+  .technical-name {
+    position: relative;
+  }
+
+  .related-content > p:last-child {
+    color: var(--site-color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .related-topics {
+    --cluster-space: var(--site-space-1);
+  }
+
+  .related-topics span {
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-size: 0.72rem;
+    font-weight: 650;
+  }
+
+  .related-empty {
+    display: grid;
+    gap: var(--site-space-2);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .related-empty h3 {
+    font-size: 1.1rem;
+  }
+
+  .related-empty p {
+    color: var(--site-color-text-secondary);
+  }
+
+  @media (max-width: 44rem) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
