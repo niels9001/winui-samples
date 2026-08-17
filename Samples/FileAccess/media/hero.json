@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "file-access",
+  "screenshotId": "create-file",
+  "scenario": "create-file",
+  "alt": "The File Access app showing the Creating a file scenario beside its file operation navigation.",
+  "sourceMetadata": "Samples/FileAccess/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "144bcaa016ce6be0e94aa7eec454e6418911f15299fc127ab367d237c3cc2eab"
+  }
+}

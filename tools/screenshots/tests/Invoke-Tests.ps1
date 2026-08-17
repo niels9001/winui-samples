@@ -48,6 +48,33 @@ function Assert-Equal {
     }
 }
 
+function Assert-Throws {
+    param(
+        [Parameter(Mandatory)]
+        [scriptblock] $Body,
+
+        [Parameter(Mandatory)]
+        [string] $MessagePattern,
+
+        [Parameter(Mandatory)]
+        [string] $Message
+    )
+
+    $caught = $null
+    try {
+        & $Body
+    }
+    catch {
+        $caught = $_
+    }
+    if ($null -eq $caught) {
+        throw "$Message Expected an exception."
+    }
+    if ($caught.Exception.Message -notmatch $MessagePattern) {
+        throw "$Message Unexpected exception: $($caught.Exception.Message)"
+    }
+}
+
 function Test-Case {
     param(
         [Parameter(Mandatory)]
@@ -207,6 +234,168 @@ try {
         $process.WaitForExit()
         Assert-Equal 2 $process.ExitCode 'Invalid HWND should be an argument error.'
         Assert-True ($stderr -match 'must not be zero') 'Invalid HWND diagnostic should be explicit.'
+    }
+
+    Test-Case 'generates deterministic collision-safe capture identities' {
+        $identity = & (Get-Module ScreenshotHarness) {
+            New-CapturePackageIdentity `
+                -SampleId 'file-access' `
+                -ScreenshotId 'create-file' `
+                -RunId 'test-run'
+        }
+        $sameIdentity = & (Get-Module ScreenshotHarness) {
+            New-CapturePackageIdentity `
+                -SampleId 'file-access' `
+                -ScreenshotId 'create-file' `
+                -RunId 'test-run'
+        }
+        $otherIdentity = & (Get-Module ScreenshotHarness) {
+            New-CapturePackageIdentity `
+                -SampleId 'file-access' `
+                -ScreenshotId 'other-shot' `
+                -RunId 'test-run'
+        }
+
+        Assert-Equal $identity $sameIdentity 'The same authored capture and run should produce the same identity.'
+        Assert-True ($identity -match '^WinUISamples\.Capture\.[0-9a-f]{24}$') 'Capture identity should contain only package-safe deterministic data.'
+        Assert-True ($identity.Length -le 50) 'Capture identity should fit the package identity length limit.'
+        Assert-True ($identity -ne $otherIdentity) 'Different authored captures should not share an identity.'
+        Assert-Throws -MessagePattern 'already registered' -Message 'Identity collisions must be rejected.' -Body {
+            & (Get-Module ScreenshotHarness) {
+                param($UnavailableIdentity)
+                New-CapturePackageIdentity `
+                    -SampleId 'file-access' `
+                    -ScreenshotId 'create-file' `
+                    -RunId 'test-run' `
+                    -UnavailableIdentityNames @($UnavailableIdentity)
+            } $identity
+        }
+    }
+
+    Test-Case 'stages and transforms only an owned package manifest' {
+        $fixtureRoot = Join-Path $temporaryRoot 'identity-staging'
+        $sourceRoot = Join-Path $fixtureRoot 'source'
+        $ownedRoot = Join-Path $fixtureRoot 'run-work'
+        $stagingRoot = Join-Path $ownedRoot 'staged'
+        [System.IO.Directory]::CreateDirectory($sourceRoot) | Out-Null
+        [System.IO.Directory]::CreateDirectory($ownedRoot) | Out-Null
+
+        $sourceManifest = Join-Path $sourceRoot 'AppxManifest.xml'
+        $sourcePayload = Join-Path $sourceRoot 'Sample.exe'
+        $sourcePri = Join-Path $sourceRoot 'resources.pri'
+        $recipePath = Join-Path $sourceRoot 'Sample.build.appxrecipe'
+        $phoneProductId = '01234567-89AB-CDEF-0123-456789ABCDEF'
+        [System.IO.File]::WriteAllText(
+            $sourceManifest,
+            "<?xml version=`"1.0`" encoding=`"utf-8`"?><Package xmlns=`"http://schemas.microsoft.com/appx/manifest/foundation/windows10`" xmlns:mp=`"http://schemas.microsoft.com/appx/2014/phone/manifest`"><Identity Name=`"Original.Package`" Publisher=`"CN=Test`" Version=`"1.0.0.0`" ProcessorArchitecture=`"x64`" /><mp:PhoneIdentity PhoneProductId=`"$phoneProductId`" PhonePublisherId=`"00000000-0000-0000-0000-000000000000`" /></Package>")
+        [System.IO.File]::WriteAllText($sourcePayload, 'payload')
+        [System.IO.File]::WriteAllText($sourcePri, 'source-pri')
+        [System.IO.File]::WriteAllText(
+            $recipePath,
+            "<?xml version=`"1.0`" encoding=`"utf-8`"?><Project xmlns=`"http://schemas.microsoft.com/developer/msbuild/2003`"><ItemGroup><AppXManifest Include=`"$sourceManifest`"><PackagePath>AppxManifest.xml</PackagePath></AppXManifest><AppxPackagedFile Include=`"$sourcePayload`"><PackagePath>Sample.exe</PackagePath></AppxPackagedFile><AppxPackagedFile Include=`"$sourcePri`"><PackagePath>resources.pri</PackagePath></AppxPackagedFile></ItemGroup></Project>")
+
+        $manifestHashBefore = (Get-FileHash -LiteralPath $sourceManifest -Algorithm SHA256).Hash
+        $priHashBefore = (Get-FileHash -LiteralPath $sourcePri -Algorithm SHA256).Hash
+        $layout = & (Get-Module ScreenshotHarness) {
+            param($RecipePath, $StagingRoot, $OwnedRoot)
+            Copy-PackageRecipeLayout `
+                -RecipePath $RecipePath `
+                -StagingRoot $StagingRoot `
+                -OwnedRoot $OwnedRoot
+        } $recipePath $stagingRoot $ownedRoot
+        & (Get-Module ScreenshotHarness) {
+            param($ManifestPath, $OwnedRoot)
+            Set-StagedPackageIdentity `
+                -ManifestPath $ManifestPath `
+                -OwnedRoot $OwnedRoot `
+                -ExpectedSourceIdentityName 'Original.Package' `
+                -CaptureIdentityName 'WinUISamples.Capture.0123456789abcdef01234567'
+        } $layout.StagedManifestPath $ownedRoot | Out-Null
+
+        Assert-Equal $manifestHashBefore (Get-FileHash -LiteralPath $sourceManifest -Algorithm SHA256).Hash 'Source manifest must remain immutable.'
+        Assert-Equal $priHashBefore (Get-FileHash -LiteralPath $sourcePri -Algorithm SHA256).Hash 'Source PRI must remain immutable.'
+        Assert-True (Test-Path -LiteralPath (Join-Path $stagingRoot 'Sample.exe')) 'Recipe payload should be copied into staging.'
+        Assert-True (-not (Test-Path -LiteralPath (Join-Path $stagingRoot 'resources.pri'))) 'Identity-bound source PRI should not be copied.'
+
+        [xml] $sourceXml = Get-Content -LiteralPath $sourceManifest -Raw
+        [xml] $stagedXml = Get-Content -LiteralPath $layout.StagedManifestPath -Raw
+        $sourceIdentity = $sourceXml.SelectSingleNode("/*[local-name()='Package']/*[local-name()='Identity']")
+        $stagedIdentity = $stagedXml.SelectSingleNode("/*[local-name()='Package']/*[local-name()='Identity']")
+        $stagedPhoneIdentity = $stagedXml.SelectSingleNode("/*[local-name()='Package']/*[local-name()='PhoneIdentity']")
+        Assert-Equal 'Original.Package' $sourceIdentity.GetAttribute('Name') 'Source identity should remain unchanged.'
+        Assert-Equal 'WinUISamples.Capture.0123456789abcdef01234567' $stagedIdentity.GetAttribute('Name') 'Only staged package identity should change.'
+        Assert-Equal $phoneProductId $stagedPhoneIdentity.GetAttribute('PhoneProductId') 'Unrelated staged identity fields should remain unchanged.'
+
+        $escapeStagingRoot = Join-Path $ownedRoot 'escape-staged'
+        $escapeRecipePath = Join-Path $sourceRoot 'Escape.build.appxrecipe'
+        [System.IO.File]::WriteAllText(
+            $escapeRecipePath,
+            "<?xml version=`"1.0`" encoding=`"utf-8`"?><Project xmlns=`"http://schemas.microsoft.com/developer/msbuild/2003`"><ItemGroup><AppXManifest Include=`"$sourceManifest`"><PackagePath>AppxManifest.xml</PackagePath></AppXManifest><AppxPackagedFile Include=`"$sourcePayload`"><PackagePath>..\escaped.exe</PackagePath></AppxPackagedFile><AppxPackagedFile Include=`"$sourcePri`"><PackagePath>resources.pri</PackagePath></AppxPackagedFile></ItemGroup></Project>")
+        Assert-Throws -MessagePattern 'escapes staging root' -Message 'Traversal outside staging must be rejected.' -Body {
+            & (Get-Module ScreenshotHarness) {
+                param($RecipePath, $StagingRoot, $OwnedRoot)
+                Copy-PackageRecipeLayout `
+                    -RecipePath $RecipePath `
+                    -StagingRoot $StagingRoot `
+                    -OwnedRoot $OwnedRoot
+            } $escapeRecipePath $escapeStagingRoot $ownedRoot
+        }
+        Assert-True (-not (Test-Path -LiteralPath (Join-Path $ownedRoot 'escaped.exe'))) 'Traversal target must not be created.'
+    }
+
+    Test-Case 'selects only exact owned development packages for cleanup' {
+        $ownedRoot = Join-Path $temporaryRoot 'cleanup-owned'
+        $ownedPackagePath = Join-Path $ownedRoot 'appx'
+        $externalPath = Join-Path $temporaryRoot 'external-registration'
+        $identity = 'WinUISamples.Capture.0123456789abcdef01234567'
+        $packages = @(
+            [pscustomobject]@{
+                Name = $identity
+                PackageFullName = "$identity`_owned"
+                InstallLocation = $ownedPackagePath
+                IsDevelopmentMode = $true
+            },
+            [pscustomobject]@{
+                Name = $identity
+                PackageFullName = "$identity`_external"
+                InstallLocation = $externalPath
+                IsDevelopmentMode = $true
+            },
+            [pscustomobject]@{
+                Name = $identity
+                PackageFullName = "$identity`_installed"
+                InstallLocation = $ownedPackagePath
+                IsDevelopmentMode = $false
+            },
+            [pscustomobject]@{
+                Name = 'Original.Package'
+                PackageFullName = 'Original.Package_external'
+                InstallLocation = $ownedPackagePath
+                IsDevelopmentMode = $true
+            }
+        )
+
+        $selected = @(& (Get-Module ScreenshotHarness) {
+            param($Packages, $Identity, $OwnedRoot)
+            Select-OwnedHarnessPackages `
+                -Packages $Packages `
+                -PackageIdentityName $Identity `
+                -OwnedRoot $OwnedRoot
+        } $packages $identity $ownedRoot)
+        Assert-Equal 1 $selected.Count 'Cleanup should select one exact owned development package.'
+        Assert-Equal "$identity`_owned" $selected[0].PackageFullName 'Cleanup should select only the run-owned registration.'
+
+        $observedProcessIds = [System.Collections.Generic.HashSet[int]]::new()
+        & (Get-Module ScreenshotHarness) {
+            param($ObservedProcessIds, $PackageOutputPath)
+            Add-ValidatedLaunchedProcessIds `
+                -Identity ([pscustomobject]@{ ExpectedProcessName = 'NoSuchCaptureProcess' }) `
+                -BuildOutput ([pscustomobject]@{ TargetName = 'NoSuchCaptureProcess' }) `
+                -PackageOutputPath $PackageOutputPath `
+                -PreexistingProcessIds @() `
+                -ObservedProcessIds $ObservedProcessIds
+        } $observedProcessIds $ownedPackagePath
+        Assert-Equal 0 $observedProcessIds.Count 'An empty tracked PID set should remain valid during cleanup.'
     }
 
     Test-Case 'writes machine-readable report and accessible contact sheet' {

@@ -11,6 +11,7 @@ review artifacts.
   `-AllowNon100PercentScaling` is explicitly used for diagnostics.
 - .NET SDK 10, Node.js 22+, and repository dependencies installed with
   `pnpm install --frozen-lockfile`.
+- Windows SDK 10 with the x64 `makepri.exe` tool.
 - A WinApp CLI build whose `winapp ui` surface provides `list-windows`,
   `wait-for`, `invoke`, `click`, and `screenshot --capture-screen`.
 - At least 5 GB free on the output drive.
@@ -39,10 +40,9 @@ pwsh ./tools/screenshots/Invoke-SampleScreenshots.ps1 `
 ```
 
 Existing final images are never replaced unless `-Overwrite` is supplied. A
-pre-existing process or registered package with the sample identity also stops
-the capture: the harness will not close, replace, or unregister resources it did
-not create. Use a clean capture account or unregister a development package
-yourself before starting the harness.
+pre-existing process with the sample executable name stops capture because its
+window would be ambiguous. A registration with the source package identity is
+safe and may remain installed; the harness never replaces or unregisters it.
 
 ## Output contract
 
@@ -64,7 +64,8 @@ run also creates:
   run.log
   contact-sheet.html
   results/<Project>/*
-  work/<Project>/<screenshot-id>/*
+  work/<Project>/<screenshot-id>/staged/*
+  work/<Project>/<screenshot-id>/appx/*
 ```
 
 `run.json` records environment checks, commands, skips, failures, hashes, and
@@ -78,14 +79,44 @@ No optional image encoder is invoked. A repository-pinned deterministic Windows
 optimizer is not currently available, so PNG optimization and web derivatives
 are intentionally left to the site pipeline.
 
+## Temporary package identity isolation
+
+Each automatic capture gets a deterministic per-run name of the form
+`WinUISamples.Capture.<24 lowercase hex characters>`. The hash uses only the
+sample ID, screenshot ID, and run ID; it contains no user name, machine path, or
+secret. Any registration collision is rejected rather than reused.
+
+The harness reads the generated `.build.appxrecipe` and copies its files into the
+capture's `staged` work directory, excluding the identity-bound `resources.pri`.
+It changes only `Identity/@Name` in the staged manifest, then uses the generated
+MSBuild PRI configuration and XBF intermediates to create a matching staged PRI.
+Source manifests, source build outputs, and committed sample files are read-only
+and hash-checked for immutability. WinApp CLI launches a second loose layout in
+the capture's `appx` directory.
+
+Cleanup targets only path-validated process IDs observed under that run's `appx`
+directory and development packages with the exact temporary identity whose
+registered path is inside the same run work directory. An external registration
+is never removed, including one that races with the temporary identity.
+
+This identity isolation is separate from
+[microsoft/WinAppCLI#760](https://github.com/microsoft/WinAppCLI/issues/760),
+which tracks first-class deterministic window bounds. The typed bounds helper
+remains necessary until #760 ships; identity staging remains necessary while
+WinApp CLI registration uses the manifest's source identity.
+
 ## FileAccess pilot status
 
-The x64 Debug FileAccess build succeeded on August 17, 2026. The GUI pilot then
-stopped before launch because package identity
-`65B8319D-B5F1-42F4-8FF7-6B43D4842917` was already development-registered from
-another checkout. The harness preserved its JSON/log diagnostics and did not
-replace or unregister that package. No screenshot is claimed or committed from
-that run; rerun the pilot with a clean self-hosted capture account.
+The isolated FileAccess pilot succeeded on August 17, 2026 while its original
+identity remained development-registered from another checkout. The harness
+built x64 Debug, launched the temporary identity, validated the FileAccess HWND,
+set `1440x900` outer bounds at `(40,40)` on a 96-DPI desktop, waited for
+`Creating a file`, and captured `Samples/FileAccess/media/hero.png`. The image is
+`1440x900`, non-uniform, and has SHA-256
+`144bcaa016ce6be0e94aa7eec454e6418911f15299fc127ab367d237c3cc2eab`.
+The matching sidecar, run report, logs, and contact sheet were generated. The
+temporary process and package were removed; the external original registration
+was unchanged.
 
 ## Window bounds helper
 
@@ -111,7 +142,9 @@ fresh runner image and clear the account's app data between trusted runs.
 ## Tests
 
 The non-GUI tests cover metadata discovery, command construction, invalid HWND
-validation, report/contact-sheet generation, and PNG checks:
+validation, collision-safe identities, staged manifest immutability, recipe/path
+guards, exact package cleanup selection, report/contact-sheet generation, and
+PNG checks:
 
 ```powershell
 pwsh ./tools/screenshots/tests/Invoke-Tests.ps1

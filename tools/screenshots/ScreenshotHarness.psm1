@@ -245,6 +245,283 @@ function Test-PathWithinRoot {
     return $fullPath.StartsWith($rootPrefix, [StringComparison]::OrdinalIgnoreCase)
 }
 
+function Test-PathWithinOrEqualRoot {
+    param(
+        [Parameter(Mandatory)]
+        [string] $Path,
+
+        [Parameter(Mandatory)]
+        [string] $Root
+    )
+
+    $fullPath = [System.IO.Path]::GetFullPath($Path)
+    $fullRoot = [System.IO.Path]::GetFullPath($Root).TrimEnd(
+        [System.IO.Path]::DirectorySeparatorChar,
+        [System.IO.Path]::AltDirectorySeparatorChar)
+    return $fullPath.Equals($fullRoot, [StringComparison]::OrdinalIgnoreCase) -or
+        (Test-PathWithinRoot -Path $fullPath -Root $fullRoot)
+}
+
+function Test-CapturePackageIdentityName {
+    param(
+        [Parameter(Mandatory)]
+        [string] $PackageIdentityName
+    )
+
+    return $PackageIdentityName.Length -ge 3 -and
+        $PackageIdentityName.Length -le 50 -and
+        $PackageIdentityName -match '^[A-Za-z0-9.-]+$'
+}
+
+function New-CapturePackageIdentity {
+    param(
+        [Parameter(Mandatory)]
+        [string] $SampleId,
+
+        [Parameter(Mandatory)]
+        [string] $ScreenshotId,
+
+        [Parameter(Mandatory)]
+        [string] $RunId,
+
+        [Parameter()]
+        [AllowEmptyCollection()]
+        [string[]] $UnavailableIdentityNames = @()
+    )
+
+    foreach ($value in @($SampleId, $ScreenshotId, $RunId)) {
+        if ([string]::IsNullOrWhiteSpace($value)) {
+            throw 'Capture identity inputs must not be empty.'
+        }
+    }
+
+    $identityInput = "winui-samples-capture-v1`n$SampleId`n$ScreenshotId`n$RunId"
+    $identityBytes = [System.Text.Encoding]::UTF8.GetBytes($identityInput)
+    $sha256 = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $identityHash = [Convert]::ToHexString(
+            $sha256.ComputeHash($identityBytes)).ToLowerInvariant()
+    }
+    finally {
+        $sha256.Dispose()
+    }
+
+    $packageIdentityName = "WinUISamples.Capture.$($identityHash.Substring(0, 24))"
+    if (-not (Test-CapturePackageIdentityName -PackageIdentityName $packageIdentityName)) {
+        throw "Generated capture identity '$packageIdentityName' is not a valid package identity name."
+    }
+    if (@($UnavailableIdentityNames | Where-Object {
+            $unavailableIdentityName = [string]$_
+            $unavailableIdentityName -and
+                $unavailableIdentityName.Equals(
+                    $packageIdentityName,
+                    [StringComparison]::OrdinalIgnoreCase)
+        }).Count -gt 0) {
+        throw "Temporary capture identity '$packageIdentityName' is already registered; refusing to replace or reuse it."
+    }
+
+    return $packageIdentityName
+}
+
+function Resolve-MakePriPath {
+    $command = Get-Command makepri.exe -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($null -ne $command) {
+        return [System.IO.Path]::GetFullPath($command.Source)
+    }
+
+    $installedRoots = Get-ItemProperty `
+        -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots' `
+        -ErrorAction SilentlyContinue
+    $kitsRoot = if ($null -ne $installedRoots) {
+        [string]$installedRoots.KitsRoot10
+    }
+    else {
+        ''
+    }
+    if ([string]::IsNullOrWhiteSpace($kitsRoot)) {
+        throw 'Windows SDK 10 is required, but KitsRoot10 is not registered.'
+    }
+
+    $candidates = [System.Collections.Generic.List[object]]::new()
+    foreach ($directory in Get-ChildItem -LiteralPath (Join-Path $kitsRoot 'bin') -Directory -ErrorAction SilentlyContinue) {
+        $version = $null
+        if (-not [Version]::TryParse($directory.Name, [ref]$version)) {
+            continue
+        }
+        $candidatePath = Join-Path $directory.FullName 'x64\makepri.exe'
+        if (Test-Path -LiteralPath $candidatePath -PathType Leaf) {
+            $candidates.Add([pscustomobject]@{
+                Version = $version
+                Path = $candidatePath
+            })
+        }
+    }
+
+    $selected = $candidates | Sort-Object Version -Descending | Select-Object -First 1
+    if ($null -eq $selected) {
+        throw "Windows SDK 10 is installed at '$kitsRoot', but x64\makepri.exe was not found."
+    }
+    return [System.IO.Path]::GetFullPath($selected.Path)
+}
+
+function Copy-PackageRecipeLayout {
+    param(
+        [Parameter(Mandatory)]
+        [string] $RecipePath,
+
+        [Parameter(Mandatory)]
+        [string] $StagingRoot,
+
+        [Parameter(Mandatory)]
+        [string] $OwnedRoot
+    )
+
+    $recipePath = [System.IO.Path]::GetFullPath($RecipePath)
+    $stagingRoot = [System.IO.Path]::GetFullPath($StagingRoot)
+    $ownedRoot = [System.IO.Path]::GetFullPath($OwnedRoot)
+    if (-not (Test-Path -LiteralPath $recipePath -PathType Leaf)) {
+        throw "Package recipe '$recipePath' does not exist."
+    }
+    if (-not (Test-PathWithinRoot -Path $stagingRoot -Root $ownedRoot)) {
+        throw "Staging root '$stagingRoot' is not owned by run work directory '$ownedRoot'."
+    }
+    if (Test-Path -LiteralPath $stagingRoot) {
+        if (@(Get-ChildItem -LiteralPath $stagingRoot -Force).Count -gt 0) {
+            throw "Staging root '$stagingRoot' must be empty."
+        }
+    }
+    else {
+        [System.IO.Directory]::CreateDirectory($stagingRoot) | Out-Null
+    }
+
+    [xml] $recipe = Get-Content -LiteralPath $recipePath -Raw
+    $recipeItems = @($recipe.SelectNodes(
+        "/*[local-name()='Project']/*[local-name()='ItemGroup']/*[local-name()='AppXManifest' or local-name()='AppxPackagedFile']"))
+    $manifestItems = @($recipeItems | Where-Object { $_.LocalName -eq 'AppXManifest' })
+    if ($manifestItems.Count -ne 1) {
+        throw "Package recipe '$recipePath' must contain exactly one AppXManifest item."
+    }
+
+    $recipeDirectory = Split-Path -Parent $recipePath
+    $destinations = [System.Collections.Generic.HashSet[string]]::new(
+        [StringComparer]::OrdinalIgnoreCase)
+    $stagedManifestPath = $null
+    $sourceManifestPath = $null
+    $sourceResourceIndexPath = $null
+    $copiedFileCount = 0
+    foreach ($item in $recipeItems) {
+        $packagePathNode = $item.SelectSingleNode("./*[local-name()='PackagePath']")
+        if ($null -eq $packagePathNode -or [string]::IsNullOrWhiteSpace($packagePathNode.InnerText)) {
+            throw "Package recipe item '$($item.Include)' has no PackagePath."
+        }
+
+        $packagePath = $packagePathNode.InnerText.Trim().Replace(
+            [System.IO.Path]::AltDirectorySeparatorChar,
+            [System.IO.Path]::DirectorySeparatorChar)
+        if ([System.IO.Path]::IsPathRooted($packagePath)) {
+            throw "Package path '$packagePath' must be relative."
+        }
+        $destinationPath = [System.IO.Path]::GetFullPath((Join-Path $stagingRoot $packagePath))
+        if (-not (Test-PathWithinRoot -Path $destinationPath -Root $stagingRoot)) {
+            throw "Package path '$packagePath' escapes staging root '$stagingRoot'."
+        }
+        if (-not $destinations.Add($destinationPath)) {
+            throw "Package recipe maps multiple files to '$packagePath'."
+        }
+
+        $sourcePath = [System.IO.Path]::GetFullPath([string]$item.Include, $recipeDirectory)
+        if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+            throw "Package recipe source '$sourcePath' does not exist."
+        }
+        if ($packagePath.Equals('resources.pri', [StringComparison]::OrdinalIgnoreCase)) {
+            $sourceResourceIndexPath = $sourcePath
+            continue
+        }
+
+        [System.IO.Directory]::CreateDirectory((Split-Path -Parent $destinationPath)) | Out-Null
+        [System.IO.File]::Copy($sourcePath, $destinationPath, $false)
+        $copiedFileCount++
+        if ($item.LocalName -eq 'AppXManifest') {
+            $sourceManifestPath = $sourcePath
+            $stagedManifestPath = $destinationPath
+        }
+    }
+
+    if (-not $stagedManifestPath -or -not (Test-Path -LiteralPath $stagedManifestPath -PathType Leaf)) {
+        throw "Package recipe '$recipePath' did not stage its manifest."
+    }
+    if (-not $sourceResourceIndexPath) {
+        throw "Package recipe '$recipePath' has no root resources.pri to regenerate."
+    }
+
+    return [pscustomobject]@{
+        StagingRoot = $stagingRoot
+        StagedManifestPath = $stagedManifestPath
+        SourceManifestPath = $sourceManifestPath
+        SourceResourceIndexPath = $sourceResourceIndexPath
+        CopiedFileCount = $copiedFileCount
+    }
+}
+
+function Set-StagedPackageIdentity {
+    param(
+        [Parameter(Mandatory)]
+        [string] $ManifestPath,
+
+        [Parameter(Mandatory)]
+        [string] $OwnedRoot,
+
+        [Parameter(Mandatory)]
+        [string] $ExpectedSourceIdentityName,
+
+        [Parameter(Mandatory)]
+        [string] $CaptureIdentityName
+    )
+
+    $manifestPath = [System.IO.Path]::GetFullPath($ManifestPath)
+    if (-not (Test-PathWithinRoot -Path $manifestPath -Root $OwnedRoot)) {
+        throw "Staged manifest '$manifestPath' is outside owned root '$OwnedRoot'."
+    }
+    if (-not (Test-CapturePackageIdentityName -PackageIdentityName $CaptureIdentityName)) {
+        throw "Capture identity '$CaptureIdentityName' is not valid."
+    }
+
+    $manifest = [System.Xml.XmlDocument]::new()
+    $manifest.PreserveWhitespace = $true
+    $manifest.Load($manifestPath)
+    $identityNode = $manifest.SelectSingleNode(
+        "/*[local-name()='Package']/*[local-name()='Identity']")
+    if ($null -eq $identityNode) {
+        throw "Staged manifest '$manifestPath' has no package Identity."
+    }
+    $sourceIdentityName = $identityNode.GetAttribute('Name')
+    if (-not $sourceIdentityName.Equals(
+            $ExpectedSourceIdentityName,
+            [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Staged manifest identity '$sourceIdentityName' does not match expected source identity '$ExpectedSourceIdentityName'."
+    }
+
+    $identityNode.SetAttribute('Name', $CaptureIdentityName)
+    $settings = [System.Xml.XmlWriterSettings]::new()
+    $settings.Encoding = [System.Text.UTF8Encoding]::new($false)
+    $settings.Indent = $false
+    $settings.NewLineHandling = [System.Xml.NewLineHandling]::None
+    $writer = [System.Xml.XmlWriter]::Create($manifestPath, $settings)
+    try {
+        $manifest.Save($writer)
+    }
+    finally {
+        $writer.Dispose()
+    }
+
+    return [pscustomobject]@{
+        SourceIdentityName = $sourceIdentityName
+        CaptureIdentityName = $CaptureIdentityName
+        ManifestPath = $manifestPath
+    }
+}
+
 function Get-ScreenshotCapturePlan {
     [CmdletBinding()]
     param(
@@ -744,7 +1021,9 @@ function Test-HarnessPrerequisites {
     }
 
     $display = $null
+    $makePriPath = $null
     if (-not $DryRun) {
+        $makePriPath = Resolve-MakePriPath
         Ensure-WindowBoundsHelper -RepositoryRoot $RepositoryRoot -Context $Context | Out-Null
         $display = Invoke-WindowBoundsHelper `
             -Arguments @('system-info') `
@@ -793,6 +1072,7 @@ function Test-HarnessPrerequisites {
         operatingSystem = [Environment]::OSVersion.VersionString
         dotnetSdk = $dotnetVersionResult.StandardOutput
         winAppCli = $winAppVersion
+        makePriPath = $makePriPath
         dpi = if ($null -ne $display) { [int]$display.dpi } else { $null }
         scalePercent = if ($null -ne $display) { [double]$display.scalePercent } else { $null }
         virtualScreen = if ($null -ne $display) { $display.virtualScreen } else { $null }
@@ -853,6 +1133,36 @@ function Get-EvaluatedBuildOutput {
         throw "Built manifest identity does not match source identity '$($Identity.PackageIdentityName)'."
     }
 
+    $recipeCandidates = @(Get-ChildItem -LiteralPath $targetDirectory -File -Filter '*.build.appxrecipe')
+    if ($recipeCandidates.Count -ne 1) {
+        throw "Expected exactly one build appxrecipe in '$targetDirectory'; found $($recipeCandidates.Count)."
+    }
+    $recipePath = $recipeCandidates[0].FullName
+    [xml] $recipe = Get-Content -LiteralPath $recipePath -Raw
+    $recipeIdentityNode = $recipe.SelectSingleNode(
+        "/*[local-name()='Project']/*[local-name()='PropertyGroup']/*[local-name()='PackageIdentityName']")
+    if ($null -eq $recipeIdentityNode -or
+        -not $recipeIdentityNode.InnerText.Equals(
+            $Identity.PackageIdentityName,
+            [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Package recipe identity does not match source identity '$($Identity.PackageIdentityName)'."
+    }
+    $intermediateNode = $recipe.SelectSingleNode(
+        "/*[local-name()='Project']/*[local-name()='PropertyGroup']/*[local-name()='IntermediateOutputPath']")
+    if ($null -eq $intermediateNode -or [string]::IsNullOrWhiteSpace($intermediateNode.InnerText)) {
+        throw "Package recipe '$recipePath' has no IntermediateOutputPath."
+    }
+    $intermediateOutputPath = [System.IO.Path]::GetFullPath(
+        $intermediateNode.InnerText,
+        $Identity.SampleDirectory)
+    if (-not (Test-PathWithinRoot -Path $intermediateOutputPath -Root $Identity.SampleDirectory)) {
+        throw "Package intermediate directory '$intermediateOutputPath' escapes the sample directory."
+    }
+    $priConfigPath = Join-Path $intermediateOutputPath 'priconfig.xml'
+    if (-not (Test-Path -LiteralPath $priConfigPath -PathType Leaf)) {
+        throw "Generated PRI configuration '$priConfigPath' does not exist."
+    }
+
     return [pscustomobject]@{
         TargetDirectory = $targetDirectory
         TargetPath = $properties.TargetPath
@@ -861,6 +1171,124 @@ function Get-EvaluatedBuildOutput {
         RuntimeIdentifier = $properties.RuntimeIdentifier
         ExecutablePath = $executablePath
         ManifestPath = $manifestCandidates[0]
+        RecipePath = $recipePath
+        IntermediateOutputPath = $intermediateOutputPath
+        PriConfigPath = $priConfigPath
+    }
+}
+
+function New-IsolatedPackageLayout {
+    param(
+        [Parameter(Mandatory)]
+        [pscustomobject] $Identity,
+
+        [Parameter(Mandatory)]
+        [pscustomobject] $BuildOutput,
+
+        [Parameter(Mandatory)]
+        [string] $StagingRoot,
+
+        [Parameter(Mandatory)]
+        [string] $OwnedRoot,
+
+        [Parameter(Mandatory)]
+        [string] $CaptureIdentityName,
+
+        [Parameter(Mandatory)]
+        [string] $MakePriPath,
+
+        [Parameter(Mandatory)]
+        [string] $RepositoryRoot,
+
+        [Parameter(Mandatory)]
+        [hashtable] $Context
+    )
+
+    if (-not (Test-CapturePackageIdentityName -PackageIdentityName $CaptureIdentityName)) {
+        throw "Temporary package identity '$CaptureIdentityName' is invalid."
+    }
+    $layout = Copy-PackageRecipeLayout `
+        -RecipePath $BuildOutput.RecipePath `
+        -StagingRoot $StagingRoot `
+        -OwnedRoot $OwnedRoot
+    if (-not ([System.IO.Path]::GetFullPath($layout.SourceManifestPath).Equals(
+                [System.IO.Path]::GetFullPath($BuildOutput.ManifestPath),
+                [StringComparison]::OrdinalIgnoreCase))) {
+        throw "Package recipe manifest '$($layout.SourceManifestPath)' does not match evaluated manifest '$($BuildOutput.ManifestPath)'."
+    }
+
+    $sourceManifestHash = (Get-FileHash -LiteralPath $layout.SourceManifestPath -Algorithm SHA256).Hash
+    $sourceResourceHash = (Get-FileHash -LiteralPath $layout.SourceResourceIndexPath -Algorithm SHA256).Hash
+    Set-StagedPackageIdentity `
+        -ManifestPath $layout.StagedManifestPath `
+        -OwnedRoot $OwnedRoot `
+        -ExpectedSourceIdentityName $Identity.PackageIdentityName `
+        -CaptureIdentityName $CaptureIdentityName | Out-Null
+
+    $stagedResourceIndexPath = Join-Path $layout.StagingRoot 'resources.pri'
+    $makePriResult = Invoke-CapturedProcess `
+        -FilePath $MakePriPath `
+        -ArgumentList @(
+            'new',
+            '/pr', $Identity.SampleDirectory,
+            '/cf', $BuildOutput.PriConfigPath,
+            '/of', $stagedResourceIndexPath,
+            '/mn', $layout.StagedManifestPath,
+            '/o'
+        ) `
+        -WorkingDirectory $RepositoryRoot `
+        -TimeoutSeconds 120 `
+        -Context $Context `
+        -RequireSuccess
+    if (-not (Test-Path -LiteralPath $stagedResourceIndexPath -PathType Leaf)) {
+        throw "MakePri reported success but did not create '$stagedResourceIndexPath'."
+    }
+
+    $priDumpPath = Join-Path $OwnedRoot 'resources.pri.xml'
+    Invoke-CapturedProcess `
+        -FilePath $MakePriPath `
+        -ArgumentList @(
+            'dump',
+            '/if', $stagedResourceIndexPath,
+            '/of', $priDumpPath,
+            '/o'
+        ) `
+        -WorkingDirectory $RepositoryRoot `
+        -TimeoutSeconds 120 `
+        -Context $Context `
+        -RequireSuccess | Out-Null
+    [xml] $priDump = Get-Content -LiteralPath $priDumpPath -Raw
+    $resourceMap = $priDump.SelectSingleNode(
+        "/*[local-name()='PriInfo']/*[local-name()='ResourceMap' and @primary='true']")
+    if ($null -eq $resourceMap -or
+        -not $resourceMap.GetAttribute('name').Equals(
+            $CaptureIdentityName,
+            [StringComparison]::Ordinal)) {
+        throw "Generated PRI resource map does not match temporary identity '$CaptureIdentityName'."
+    }
+
+    $sourceManifestHashAfter = (Get-FileHash -LiteralPath $layout.SourceManifestPath -Algorithm SHA256).Hash
+    $sourceResourceHashAfter = (Get-FileHash -LiteralPath $layout.SourceResourceIndexPath -Algorithm SHA256).Hash
+    if ($sourceManifestHash -ne $sourceManifestHashAfter -or
+        $sourceResourceHash -ne $sourceResourceHashAfter) {
+        throw 'Source build outputs changed while staging the temporary package identity.'
+    }
+
+    Write-HarnessLog `
+        -Context $Context `
+        -Level INFO `
+        -Message "Staged $($layout.CopiedFileCount + 1) package files with temporary identity '$CaptureIdentityName'."
+    return [pscustomobject]@{
+        InputFolder = $layout.StagingRoot
+        ManifestPath = $layout.StagedManifestPath
+        ResourceIndexPath = $stagedResourceIndexPath
+        ResourceIndexDumpPath = $priDumpPath
+        PackageIdentityName = $CaptureIdentityName
+        SourcePackageIdentityName = $Identity.PackageIdentityName
+        CopiedFileCount = $layout.CopiedFileCount + 1
+        MakePriCommand = $makePriResult.Command
+        SourceManifestSha256 = $sourceManifestHash
+        SourceResourceIndexSha256 = $sourceResourceHash
     }
 }
 
@@ -880,6 +1308,7 @@ function Add-ValidatedLaunchedProcessIds {
         [int[]] $PreexistingProcessIds,
 
         [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
         [System.Collections.Generic.HashSet[int]] $ObservedProcessIds
     )
 
@@ -898,8 +1327,7 @@ function Add-ValidatedLaunchedProcessIds {
         catch {
             continue
         }
-        $pathIsValid = (Test-PathWithinRoot -Path $processPath -Root $PackageOutputPath) -or
-            (Test-PathWithinRoot -Path $processPath -Root $BuildOutput.TargetDirectory)
+        $pathIsValid = Test-PathWithinRoot -Path $processPath -Root $PackageOutputPath
         $fileNameIsValid = [System.IO.Path]::GetFileName($processPath).Equals(
             "$($BuildOutput.TargetName).exe",
             [StringComparison]::OrdinalIgnoreCase)
@@ -928,6 +1356,7 @@ function Wait-ForLaunchedWindow {
         [pscustomobject] $WinAppProcess,
 
         [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
         [System.Collections.Generic.HashSet[int]] $ObservedProcessIds,
 
         [Parameter(Mandatory)]
@@ -985,8 +1414,7 @@ function Wait-ForLaunchedWindow {
                 catch {
                     continue
                 }
-                $pathIsValid = (Test-PathWithinRoot -Path $processPath -Root $PackageOutputPath) -or
-                    (Test-PathWithinRoot -Path $processPath -Root $BuildOutput.TargetDirectory)
+                $pathIsValid = Test-PathWithinRoot -Path $processPath -Root $PackageOutputPath
                 if (-not $pathIsValid -or
                     -not [System.IO.Path]::GetFileName($processPath).Equals(
                         "$($BuildOutput.TargetName).exe",
@@ -1480,47 +1908,76 @@ $($cards -join "`n")
     [System.IO.File]::WriteAllText($Path, $html)
 }
 
-function Get-DescendantProcessIds {
+function Stop-OwnedProcess {
     param(
         [Parameter(Mandatory)]
-        [int] $RootProcessId
-    )
+        [int] $ProcessId,
 
-    $allProcesses = @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue)
-    $result = [System.Collections.Generic.List[int]]::new()
-    $queue = [System.Collections.Generic.Queue[int]]::new()
-    $queue.Enqueue($RootProcessId)
-    while ($queue.Count -gt 0) {
-        $parent = $queue.Dequeue()
-        foreach ($child in $allProcesses | Where-Object { [int]$_.ParentProcessId -eq $parent }) {
-            $childId = [int]$child.ProcessId
-            if (-not $result.Contains($childId)) {
-                $result.Add($childId)
-                $queue.Enqueue($childId)
-            }
-        }
-    }
-
-    $result.Reverse()
-    $result.Add($RootProcessId)
-    return $result.ToArray()
-}
-
-function Stop-LaunchedProcessTree {
-    param(
         [Parameter(Mandatory)]
-        [int] $RootProcessId,
+        [string] $PackageOutputPath,
+
+        [Parameter(Mandatory)]
+        [string] $ExpectedExecutableName,
 
         [Parameter(Mandatory)]
         [hashtable] $Context
     )
 
-    foreach ($processId in Get-DescendantProcessIds -RootProcessId $RootProcessId) {
-        if ($null -ne (Get-Process -Id $processId -ErrorAction SilentlyContinue)) {
-            Write-HarnessLog -Context $Context -Level INFO -Message "Stopping exact launched process ID $processId."
-            Stop-Process -Id $processId -Force -ErrorAction SilentlyContinue
+    $process = Get-Process -Id $ProcessId -ErrorAction SilentlyContinue
+    if ($null -eq $process -or $process.HasExited) {
+        return
+    }
+    try {
+        $processPath = [System.IO.Path]::GetFullPath($process.Path)
+    }
+    catch {
+        throw "Process $ProcessId was not stopped because its executable path could not be validated."
+    }
+
+    $isOwned = (Test-PathWithinRoot -Path $processPath -Root $PackageOutputPath) -and
+        [System.IO.Path]::GetFileName($processPath).Equals(
+            $ExpectedExecutableName,
+            [StringComparison]::OrdinalIgnoreCase)
+    if (-not $isOwned) {
+        throw "Process $ProcessId at '$processPath' was not stopped because run ownership could not be proven."
+    }
+
+    Write-HarnessLog -Context $Context -Level INFO -Message "Stopping exact launched process ID $ProcessId."
+    Stop-Process -Id $ProcessId -Force -ErrorAction Stop
+    if (-not $process.WaitForExit(10000)) {
+        throw "Run-owned process $ProcessId did not exit within 10 seconds."
+    }
+}
+
+function Select-OwnedHarnessPackages {
+    param(
+        [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
+        [object[]] $Packages,
+
+        [Parameter(Mandatory)]
+        [string] $PackageIdentityName,
+
+        [Parameter(Mandatory)]
+        [string] $OwnedRoot
+    )
+
+    $owned = [System.Collections.Generic.List[object]]::new()
+    foreach ($package in $Packages) {
+        if ($package.PSObject.Properties.Name -notcontains 'Name' -or
+            -not ([string]$package.Name).Equals(
+                $PackageIdentityName,
+                [StringComparison]::OrdinalIgnoreCase) -or
+            -not [bool]$package.IsDevelopmentMode) {
+            continue
+        }
+        $installLocation = [string]$package.InstallLocation
+        if ($installLocation -and
+            (Test-PathWithinOrEqualRoot -Path $installLocation -Root $OwnedRoot)) {
+            $owned.Add($package)
         }
     }
+    return $owned.ToArray()
 }
 
 function Remove-HarnessPackage {
@@ -1529,10 +1986,7 @@ function Remove-HarnessPackage {
         [string] $PackageIdentityName,
 
         [Parameter(Mandatory)]
-        [string] $PackageOutputPath,
-
-        [Parameter(Mandatory)]
-        [string] $BuildOutputPath,
+        [string] $OwnedRoot,
 
         [Parameter(Mandatory)]
         [bool] $PackageExistedBefore,
@@ -1542,28 +1996,28 @@ function Remove-HarnessPackage {
     )
 
     if ($PackageExistedBefore) {
-        Write-HarnessLog -Context $Context -Level WARN -Message "Package '$PackageIdentityName' existed before the run and will not be unregistered."
-        return
+        throw "Package '$PackageIdentityName' existed before the run and will not be unregistered."
     }
 
-    foreach ($package in Get-ExistingPackage -PackageIdentityName $PackageIdentityName) {
-        $installLocation = [string]$package.InstallLocation
-        $isHarnessLocation = $installLocation -and
-            ((Test-PathWithinRoot -Path $installLocation -Root $PackageOutputPath) -or
-             (Test-PathWithinRoot -Path $installLocation -Root $BuildOutputPath) -or
-             ([System.IO.Path]::GetFullPath($installLocation).Equals(
-                [System.IO.Path]::GetFullPath($PackageOutputPath),
-                [StringComparison]::OrdinalIgnoreCase)) -or
-             ([System.IO.Path]::GetFullPath($installLocation).Equals(
-                [System.IO.Path]::GetFullPath($BuildOutputPath),
-                [StringComparison]::OrdinalIgnoreCase)))
-        if ($package.IsDevelopmentMode -and $isHarnessLocation) {
+    $packages = @(Get-ExistingPackage -PackageIdentityName $PackageIdentityName)
+    $ownedPackages = @(Select-OwnedHarnessPackages `
+        -Packages $packages `
+        -PackageIdentityName $PackageIdentityName `
+        -OwnedRoot $OwnedRoot)
+    $ownedPackageFullNames = @($ownedPackages | ForEach-Object { [string]$_.PackageFullName })
+    $unownedPackageFullNames = [System.Collections.Generic.List[string]]::new()
+    foreach ($package in $packages) {
+        if ([string]$package.PackageFullName -in $ownedPackageFullNames) {
             Write-HarnessLog -Context $Context -Level INFO -Message "Unregistering exact harness package '$($package.PackageFullName)'."
             Remove-AppxPackage -Package $package.PackageFullName -ErrorAction Stop
         }
         else {
             Write-HarnessLog -Context $Context -Level WARN -Message "Package '$($package.PackageFullName)' was not removed because ownership could not be proven."
+            $unownedPackageFullNames.Add([string]$package.PackageFullName)
         }
+    }
+    if ($unownedPackageFullNames.Count -gt 0) {
+        throw "Temporary identity '$PackageIdentityName' has registration(s) outside the run work directory: $($unownedPackageFullNames -join ', ')."
     }
 }
 
@@ -1692,6 +2146,12 @@ function Invoke-OneCapture {
         [pscustomobject] $BuildOutput,
 
         [Parameter(Mandatory)]
+        [string] $CaptureIdentityName,
+
+        [Parameter(Mandatory)]
+        [string] $MakePriPath,
+
+        [Parameter(Mandatory)]
         [string] $TemporaryDirectory,
 
         [Parameter(Mandatory)]
@@ -1725,15 +2185,17 @@ function Invoke-OneCapture {
         [hashtable] $Context
     )
 
+    $TemporaryDirectory = [System.IO.Path]::GetFullPath($TemporaryDirectory)
     [System.IO.Directory]::CreateDirectory($TemporaryDirectory) | Out-Null
+    $stagingRoot = Join-Path $TemporaryDirectory 'staged'
     $packageOutputPath = Join-Path $TemporaryDirectory 'appx'
     $winAppStdoutPath = Join-Path $TemporaryDirectory 'winapp.stdout.log'
     $winAppStderrPath = Join-Path $TemporaryDirectory 'winapp.stderr.log'
     $temporaryScreenshotPath = Join-Path $TemporaryDirectory 'capture.png'
-    $preexistingPackages = @(Get-ExistingPackage -PackageIdentityName $Identity.PackageIdentityName)
+    $preexistingPackages = @(Get-ExistingPackage -PackageIdentityName $CaptureIdentityName)
     if ($preexistingPackages.Count -gt 0) {
         $locations = @($preexistingPackages | ForEach-Object { $_.InstallLocation }) -join ', '
-        throw "Package '$($Identity.PackageIdentityName)' is already registered at '$locations'. The harness will not replace or unregister a package it does not own."
+        throw "Temporary capture identity '$CaptureIdentityName' is already registered at '$locations'. The harness will not replace, reuse, or unregister it."
     }
 
     $preexistingProcessIds = @(Get-PreexistingProcessIds -ExpectedProcessName $Identity.ExpectedProcessName)
@@ -1741,9 +2203,18 @@ function Invoke-OneCapture {
         throw "Process '$($Identity.ExpectedProcessName)' is already running (PID $($preexistingProcessIds -join ', ')); close it before capture."
     }
 
+    $isolatedLayout = New-IsolatedPackageLayout `
+        -Identity $Identity `
+        -BuildOutput $BuildOutput `
+        -StagingRoot $stagingRoot `
+        -OwnedRoot $TemporaryDirectory `
+        -CaptureIdentityName $CaptureIdentityName `
+        -MakePriPath $MakePriPath `
+        -RepositoryRoot $RepositoryRoot `
+        -Context $Context
     $runCommand = New-WinAppRunCommand `
-        -InputFolder $BuildOutput.TargetDirectory `
-        -ManifestPath $BuildOutput.ManifestPath `
+        -InputFolder $isolatedLayout.InputFolder `
+        -ManifestPath $isolatedLayout.ManifestPath `
         -PackageOutputPath $packageOutputPath
     $trackedWinApp = $null
     $launchedWindow = $null
@@ -1877,38 +2348,70 @@ function Invoke-OneCapture {
             Window = $launchedWindow
             Bounds = $bounds
             CaptureScreen = $captureScreen
-            PackageIdentityName = $Identity.PackageIdentityName
+            PackageIdentityName = $CaptureIdentityName
+            SourcePackageIdentityName = $Identity.PackageIdentityName
+            IsolatedLayout = $isolatedLayout
             RunCommand = $runCommand
             ReadinessCommand = $readinessCommand
             ScreenshotCommand = $screenshotCommand
         }
     }
     finally {
-        Add-ValidatedLaunchedProcessIds `
-            -Identity $Identity `
-            -BuildOutput $BuildOutput `
-            -PackageOutputPath $packageOutputPath `
-            -PreexistingProcessIds $preexistingProcessIds `
-            -ObservedProcessIds $observedProcessIds
+        $cleanupErrors = [System.Collections.Generic.List[string]]::new()
+        try {
+            Add-ValidatedLaunchedProcessIds `
+                -Identity $Identity `
+                -BuildOutput $BuildOutput `
+                -PackageOutputPath $packageOutputPath `
+                -PreexistingProcessIds $preexistingProcessIds `
+                -ObservedProcessIds $observedProcessIds
+        }
+        catch {
+            $cleanupErrors.Add("Failed to discover run-owned processes during cleanup: $($_.Exception.Message)")
+        }
         if ($null -ne $launchedWindow) {
             [void]$observedProcessIds.Add([int]$launchedWindow.ProcessId)
         }
         foreach ($launchedProcessId in @($observedProcessIds)) {
-            Stop-LaunchedProcessTree -RootProcessId $launchedProcessId -Context $Context
+            try {
+                Stop-OwnedProcess `
+                    -ProcessId $launchedProcessId `
+                    -PackageOutputPath $packageOutputPath `
+                    -ExpectedExecutableName "$($BuildOutput.TargetName).exe" `
+                    -Context $Context
+            }
+            catch {
+                $cleanupErrors.Add("Failed to stop run-owned process $launchedProcessId`: $($_.Exception.Message)")
+            }
         }
         if ($null -ne $trackedWinApp) {
-            Complete-CapturedProcess `
-                -TrackedProcess $trackedWinApp `
-                -StandardOutputPath $winAppStdoutPath `
-                -StandardErrorPath $winAppStderrPath `
-                -Context $Context | Out-Null
+            try {
+                Complete-CapturedProcess `
+                    -TrackedProcess $trackedWinApp `
+                    -StandardOutputPath $winAppStdoutPath `
+                    -StandardErrorPath $winAppStderrPath `
+                    -Context $Context | Out-Null
+            }
+            catch {
+                $cleanupErrors.Add("Failed to complete the exact WinApp CLI process: $($_.Exception.Message)")
+            }
         }
-        Remove-HarnessPackage `
-            -PackageIdentityName $Identity.PackageIdentityName `
-            -PackageOutputPath $packageOutputPath `
-            -BuildOutputPath $BuildOutput.TargetDirectory `
-            -PackageExistedBefore ($preexistingPackages.Count -gt 0) `
-            -Context $Context
+        try {
+            Remove-HarnessPackage `
+                -PackageIdentityName $CaptureIdentityName `
+                -OwnedRoot $TemporaryDirectory `
+                -PackageExistedBefore ($preexistingPackages.Count -gt 0) `
+                -Context $Context
+        }
+        catch {
+            $cleanupErrors.Add("Failed to unregister the run-owned package: $($_.Exception.Message)")
+        }
+        if ($cleanupErrors.Count -gt 0) {
+            foreach ($cleanupError in $cleanupErrors) {
+                Write-HarnessLog -Context $Context -Level ERROR -Message $cleanupError
+            }
+            throw "Capture cleanup failed: $($cleanupErrors -join ' ')"
+        }
     }
 }
 
@@ -1944,6 +2447,9 @@ function Get-DryRunCommands {
         [Parameter(Mandatory)]
         [string] $PackageOutputPath,
 
+        [Parameter()]
+        [string] $CaptureIdentityName = '<temporary-capture-identity>',
+
         [Parameter(Mandatory)]
         [int] $WindowX,
 
@@ -1971,9 +2477,13 @@ function Get-DryRunCommands {
     $build = New-SampleBuildCommand -Identity $Identity
     $commands.Add((ConvertTo-DisplayCommand -FilePath $build.FilePath -ArgumentList $build.Arguments))
 
+    $captureWorkDirectory = Split-Path -Parent $PackageOutputPath
+    $stagingRoot = Join-Path $captureWorkDirectory 'staged'
+    $commands.Add(
+        "Stage build appxrecipe into '$stagingRoot'; set only staged Identity.Name to '$CaptureIdentityName'; regenerate staged resources.pri with MakePri")
     $run = New-WinAppRunCommand `
-        -InputFolder '<evaluated TargetDir>' `
-        -ManifestPath '<evaluated TargetDir>\AppxManifest.xml' `
+        -InputFolder $stagingRoot `
+        -ManifestPath (Join-Path $stagingRoot 'AppxManifest.xml') `
         -PackageOutputPath $PackageOutputPath
     $commands.Add((ConvertTo-DisplayCommand -FilePath $run.FilePath -ArgumentList $run.Arguments))
     $commands.Add((ConvertTo-DisplayCommand `
@@ -2254,15 +2764,9 @@ function Invoke-SampleScreenshotHarness {
                     $null -eq (Get-CaptureSkipReason -Sample $selectedSample -Screenshot $_)
                 })
                 if ($automaticRecipes.Count -gt 0) {
-                    $existingPackages = @(Get-ExistingPackage `
-                        -PackageIdentityName $selectedSample.identity.PackageIdentityName)
-                    if ($existingPackages.Count -gt 0) {
-                        $locations = @($existingPackages | ForEach-Object { $_.InstallLocation }) -join ', '
-                        $captureBlockReason = "Package '$($selectedSample.identity.PackageIdentityName)' is already registered at '$locations'. The harness will not replace or unregister a package it does not own."
-                    }
                     $existingProcesses = @(Get-PreexistingProcessIds `
                         -ExpectedProcessName $selectedSample.identity.ExpectedProcessName)
-                    if (-not $captureBlockReason -and $existingProcesses.Count -gt 0) {
+                    if ($existingProcesses.Count -gt 0) {
                         $captureBlockReason = "Process '$($selectedSample.identity.ExpectedProcessName)' is already running (PID $($existingProcesses -join ', ')); close it before capture."
                     }
                 }
@@ -2282,7 +2786,10 @@ function Invoke-SampleScreenshotHarness {
                 }
                 $plannedOutputOwners.Add($destination, $owner)
                 $skipReason = Get-CaptureSkipReason -Sample $selectedSample -Screenshot $screenshot
-                if (-not $skipReason -and (Test-Path -LiteralPath $destination) -and -not $Overwrite) {
+                if (-not $DryRun -and
+                    -not $skipReason -and
+                    (Test-Path -LiteralPath $destination) -and
+                    -not $Overwrite) {
                     throw "Output '$destination' already exists. Use -Overwrite to replace it only after a new capture validates."
                 }
             }
@@ -2331,6 +2838,10 @@ function Invoke-SampleScreenshotHarness {
                     $index = [Array]::IndexOf(@($selectedSample.screenshots), $screenshot)
                     $fileName = if ($index -eq 0) { 'hero.png' } else { "$($screenshot.id).png" }
                     $plannedWork = Join-Path $runDirectory "work\$($selectedSample.project.folder)\$($screenshot.id)\appx"
+                    $captureIdentityName = New-CapturePackageIdentity `
+                        -SampleId $selectedSample.id `
+                        -ScreenshotId $screenshot.id `
+                        -RunId $runId
                     $report.results.Add([ordered]@{
                         sampleId = $selectedSample.id
                         projectFolder = $selectedSample.project.folder
@@ -2340,6 +2851,7 @@ function Invoke-SampleScreenshotHarness {
                         reason = $skipReason
                         output = "Samples\$($selectedSample.project.folder)\media\$fileName"
                         reviewImage = $null
+                        packageIdentityName = if ($skipReason) { $null } else { $captureIdentityName }
                         commands = if ($skipReason) {
                             @()
                         }
@@ -2348,6 +2860,7 @@ function Invoke-SampleScreenshotHarness {
                                 -Identity $identity `
                                 -Screenshot $screenshot `
                                 -PackageOutputPath $plannedWork `
+                                -CaptureIdentityName $captureIdentityName `
                                 -WindowX $WindowX `
                                 -WindowY $WindowY `
                                 -WindowWidth $WindowWidth `
@@ -2385,6 +2898,10 @@ function Invoke-SampleScreenshotHarness {
 
             for ($index = 0; $index -lt @($selectedSample.screenshots).Count; $index++) {
                 $screenshot = @($selectedSample.screenshots)[$index]
+                $captureIdentityName = New-CapturePackageIdentity `
+                    -SampleId $selectedSample.id `
+                    -ScreenshotId $screenshot.id `
+                    -RunId $runId
                 $fileName = if ($index -eq 0) { 'hero.png' } else { "$($screenshot.id).png" }
                 $relativeOutput = "Samples\$($selectedSample.project.folder)\media\$fileName"
                 $destination = Join-Path $outputRoot $relativeOutput
@@ -2410,6 +2927,7 @@ function Invoke-SampleScreenshotHarness {
                     captureScreen = $null
                     hwnd = $null
                     processId = $null
+                    sourcePackageIdentityName = $identity.PackageIdentityName
                     packageIdentityName = $null
                     commands = @()
                 }
@@ -2422,6 +2940,7 @@ function Invoke-SampleScreenshotHarness {
                     $report.results.Add($result)
                     continue
                 }
+                $result.packageIdentityName = $captureIdentityName
                 if ($sampleBlockReason) {
                     $result.status = 'failed'
                     $result.reason = $sampleBlockReason
@@ -2445,6 +2964,8 @@ function Invoke-SampleScreenshotHarness {
                         -Screenshot $screenshot `
                         -Identity $identity `
                         -BuildOutput $buildOutput `
+                        -CaptureIdentityName $captureIdentityName `
+                        -MakePriPath $report.environment.makePriPath `
                         -TemporaryDirectory $temporaryDirectory `
                         -RepositoryRoot $repositoryRoot `
                         -WindowX $WindowX `
