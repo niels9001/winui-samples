@@ -1,0 +1,293 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: camera
+project:
+  folder: Camera
+  name: Camera
+title: Capturing photo, video, and camera frame data
+summary: Preview, capture, and control camera photos and video, including manual settings, resolution, profiles, frame sources, face detection, and stabilization.
+aliases:
+  - Camera
+  - Camera C# sample
+  - CameraStarterKit
+  - CameraManualControls
+  - CameraResolution
+  - CameraProfile
+  - CameraAdvancedCapture
+  - CameraGetPreviewFrame
+  - CameraFaceDetection
+  - CameraFrames
+  - CameraVideoStabilization
+  - MediaCapture
+  - MediaFrameReader
+icon: CameraRegular
+categories:
+  primary: media
+  secondary:
+    - devices-and-sensors
+tags:
+  - camera
+  - MediaCapture
+  - photo capture
+  - video capture
+  - video preview
+  - manual camera controls
+  - camera profiles
+  - media frame source
+  - face detection
+  - video stabilization
+  - HDR photo capture
+  - webcam
+originalSamples:
+  - name: CameraStarterKit
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraStarterKit
+  - name: CameraManualControls
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraManualControls
+  - name: CameraResolution
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraResolution
+  - name: CameraProfile
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraProfile
+  - name: CameraAdvancedCapture
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraAdvancedCapture
+  - name: CameraGetPreviewFrame
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraGetPreviewFrame
+  - name: CameraFaceDetection
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraFaceDetection
+  - name: CameraFrames
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraFrames
+  - name: CameraVideoStabilization
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraVideoStabilization
+scenarios:
+  - id: camera-starter-kit
+    title: Camera preview, photo, and video capture
+    summary: Preview the camera, capture a photo, and record a video to the Pictures library.
+    apis:
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Storage.StorageLibrary
+    sourceFiles:
+      - Scenarios/StarterKit/Scenario1_CameraStarterKit.xaml.cs
+  - id: manual-controls
+    title: Camera preview and manual controls
+    summary: Adjust focus, exposure, ISO, shutter, white balance, flash, and zoom through VideoDeviceController.
+    apis:
+      - Windows.Media.Devices.VideoDeviceController
+      - Windows.Media.Devices.FocusControl
+      - Windows.Media.Devices.ExposureControl
+      - Windows.Media.Devices.IsoSpeedControl
+      - Windows.Media.Devices.WhiteBalanceControl
+      - Windows.Media.Devices.FlashControl
+      - Windows.Media.Devices.ZoomControl
+    sourceFiles:
+      - Scenarios/ManualControls/Scenario1_CameraManualControls.xaml.cs
+      - Scenarios/ManualControls/Scenario1_CameraManualControls.Focus.xaml.cs
+      - Scenarios/ManualControls/Scenario1_CameraManualControls.ExposureValue.xaml.cs
+  - id: preview-settings
+    title: Change camera preview settings
+    summary: Enumerate and change the resolution and frame rate of the live preview stream.
+    apis:
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Media.MediaProperties.VideoEncodingProperties
+    sourceFiles:
+      - Scenarios/Resolution/Scenario1_PreviewSettings.xaml.cs
+  - id: photo-settings
+    title: Change preview and photo settings
+    summary: Set independent preview and photo resolutions and capture a still photo.
+    apis:
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Graphics.Imaging.BitmapDecoder
+    sourceFiles:
+      - Scenarios/Resolution/Scenario2_PhotoSettings.xaml.cs
+  - id: match-aspect-ratios
+    title: Match aspect ratios
+    summary: Choose preview and photo resolutions that share the same aspect ratio.
+    apis:
+      - Windows.Media.MediaProperties.VideoEncodingProperties
+    sourceFiles:
+      - Scenarios/Resolution/Scenario3_AspectRatio.xaml.cs
+  - id: locate-record-profile
+    title: Locate record-specific profile
+    summary: Query MediaCaptureVideoProfile entries for a video capture device.
+    apis:
+      - Windows.Media.Capture.MediaCapture.FindAllVideoProfiles
+      - Windows.Media.Capture.MediaCaptureVideoProfile
+    sourceFiles:
+      - Scenarios/Profile/Scenario1_SetRecordProfile.xaml.cs
+  - id: query-concurrent-profile
+    title: Query profile for concurrency
+    summary: Determine whether a camera supports concurrent video profiles.
+    apis:
+      - Windows.Media.Capture.MediaCapture.IsVideoProfileSupported
+    sourceFiles:
+      - Scenarios/Profile/Scenario2_ConcurrentProfile.xaml.cs
+  - id: query-hdr-profile
+    title: Query profile for HDR support
+    summary: Find known video-recording profiles that support HDR capture.
+    apis:
+      - Windows.Media.Capture.MediaCapture.FindKnownVideoProfiles
+      - Windows.Media.Capture.KnownVideoProfile
+    sourceFiles:
+      - Scenarios/Profile/Scenario3_EnableHdrProfile.xaml.cs
+  - id: advanced-photo-capture
+    title: Advanced photo capture
+    summary: Capture HDR or low-light photos with AdvancedPhotoCapture.
+    apis:
+      - Windows.Media.Capture.AdvancedPhotoCapture
+      - Windows.Media.Capture.AdvancedPhotoCaptureSettings
+    sourceFiles:
+      - Scenarios/AdvancedCapture/Scenario1_CameraAdvancedCapture.xaml.cs
+  - id: get-preview-frame
+    title: Get a preview frame
+    summary: Grab one live preview frame as a SoftwareBitmap and process its pixels.
+    apis:
+      - Windows.Media.Capture.MediaCapture.GetPreviewFrameAsync
+      - Windows.Graphics.Imaging.SoftwareBitmap
+    sourceFiles:
+      - Scenarios/GetPreviewFrame/Scenario1_GetPreviewFrame.xaml.cs
+  - id: face-detection
+    title: Camera preview with face detection
+    summary: Overlay live face-detection boxes on the camera preview with FaceDetectionEffect.
+    apis:
+      - Windows.Media.Core.FaceDetectionEffect
+      - Windows.Media.Core.FaceDetectionEffectDefinition
+    sourceFiles:
+      - Scenarios/FaceDetection/Scenario1_CameraFaceDetection.xaml.cs
+  - id: display-depth-color-ir
+    title: Shared access to color, depth, and infrared frames
+    summary: Read simultaneous color, depth, and infrared frames with MediaFrameReader.
+    apis:
+      - Windows.Media.Capture.Frames.MediaFrameReader
+      - Windows.Media.Capture.Frames.MediaFrameSourceGroup
+    sourceFiles:
+      - Scenarios/Frames/Scenario1_DisplayDepthColorIR.xaml.cs
+      - Scenarios/Frames/FrameRenderer.cs
+  - id: find-source-groups
+    title: Find and display all media frame sources
+    summary: Enumerate every MediaFrameSourceGroup and its available frame sources.
+    apis:
+      - Windows.Media.Capture.Frames.MediaFrameSourceGroup
+    sourceFiles:
+      - Scenarios/Frames/Scenario2_FindAvailableSourceGroups.xaml.cs
+  - id: video-stabilization
+    title: Video stabilization
+    summary: Apply and toggle the built-in VideoStabilizationEffect on the video-record stream.
+    apis:
+      - Windows.Media.Core.VideoStabilizationEffect
+      - Windows.Media.Core.VideoStabilizationEffectDefinition
+    sourceFiles:
+      - Scenarios/VideoStabilization/Scenario1_CameraVideoStabilization.xaml.cs
+apis:
+  - name: Windows.Media.Capture.MediaCapture
+    description: Initializes camera and microphone devices, drives preview, and captures photos and video.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapture
+  - name: Windows.Media.Capture.Frames.MediaFrameReader
+    description: Reads color, depth, and infrared frames from a MediaFrameSource.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.frames.mediaframereader
+  - name: Windows.Media.Capture.Frames.MediaFrameSourceGroup
+    description: Enumerates camera frame source groups and their available source kinds.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.frames.mediaframesourcegroup
+  - name: Windows.Media.Capture.MediaCaptureVideoProfile
+    description: Describes camera recording profiles used to locate HDR and concurrent capabilities.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapturevideoprofile
+  - name: Windows.Media.Capture.AdvancedPhotoCapture
+    description: Drives HDR and low-light advanced photo capture sessions.
+  - name: Windows.Media.Core.FaceDetectionEffect
+    description: Adds a face-detection video effect to the live camera preview stream.
+    url: https://learn.microsoft.com/uwp/api/windows.media.core.facedetectioneffect
+  - name: Windows.Media.Core.VideoStabilizationEffect
+    description: Adds a video-stabilization effect to the video-record stream.
+    url: https://learn.microsoft.com/uwp/api/windows.media.core.videostabilizationeffect
+  - name: Windows.Media.Devices.VideoDeviceController
+    description: Exposes manual focus, exposure, ISO, shutter, white balance, flash, and zoom controls.
+    url: https://learn.microsoft.com/uwp/api/windows.media.devices.videodevicecontroller
+  - name: Windows.Graphics.Imaging.SoftwareBitmap
+    description: Holds decoded pixel data captured from one preview frame.
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.softwarebitmap
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Renders live preview from a MediaFrameSource because CaptureElement is unavailable in WinUI 3.
+documentation:
+  - title: Camera overview
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/camera
+    kind: concept
+  - title: Basic photo, video, and audio capture with MediaCapture
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/basic-photo-video-and-audio-capture-with-mediacapture
+    kind: learn
+  - title: Simple camera preview access
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/simple-camera-preview-access
+    kind: learn
+  - title: Process media frames with MediaFrameReader
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/process-media-frames-with-mediaframereader
+    kind: learn
+  - title: Camera profiles
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/camera-profiles
+    kind: learn
+  - title: Get a preview frame
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/get-a-preview-frame
+    kind: learn
+  - title: FaceDetectionEffect class
+    url: https://learn.microsoft.com/uwp/api/windows.media.core.facedetectioneffect
+    kind: api-reference
+  - title: VideoStabilizationEffect class
+    url: https://learn.microsoft.com/uwp/api/windows.media.core.videostabilizationeffect
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: picturesLibrary
+      kind: general
+      description: Allows the starter scenario to save captured photos and videos in the Pictures library.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared in the manifest but not referenced by Camera source; it appears unused and needs maintainer review.
+    - name: webcam
+      kind: device
+      description: Allows scenarios to enumerate and initialize a camera through MediaCapture.
+    - name: microphone
+      kind: device
+      description: Allows audio capture in scenarios that record video.
+  hardware:
+    - Webcam or built-in camera with MediaCapture driver support
+    - Microphone for scenarios that record audio with video
+    - Compatible depth or infrared camera for those optional frame-source views
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; supported capture features depend on the installed camera and driver rather than CPU architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares nine camera feature groups and fourteen scenarios.
+  - path: Scenarios/StarterKit/Scenario1_CameraStarterKit.xaml.cs
+    label: Camera starter kit
+    description: Initializes MediaCapture, renders preview, and captures a photo or video.
+  - path: Scenarios/ManualControls/Scenario1_CameraManualControls.xaml.cs
+    label: Manual camera controls
+    description: Coordinates the VideoDeviceController-based manual settings.
+  - path: Scenarios/AdvancedCapture/Scenario1_CameraAdvancedCapture.xaml.cs
+    label: Advanced photo capture
+    description: Demonstrates HDR and low-light capture through AdvancedPhotoCapture.
+  - path: Scenarios/FaceDetection/Scenario1_CameraFaceDetection.xaml.cs
+    label: Face detection effect
+    description: Adds FaceDetectionEffect to preview and draws boxes around detected faces.
+  - path: Scenarios/Frames/Scenario1_DisplayDepthColorIR.xaml.cs
+    label: Multi-source frame reading
+    description: Uses MediaFrameReader to display color, depth, and infrared frames.
+  - path: Common/CameraRotationHelper.cs
+    label: Shared rotation helper
+    description: Provides rotation and mirroring behavior reused by the camera scenarios.
+  - path: Package.appxmanifest
+    label: Camera package capabilities
+    description: Declares full trust, Pictures library, camera, microphone, and system AI model capabilities.
+relatedSamples: []
+screenshots:
+  - id: starter-kit-preview
+    alt: The Camera app Starter kit scenario showing a live preview with photo and video capture actions.
+    scenario: camera-starter-kit
+    capture:
+      mode: manual
+      readinessSelector: text=Camera preview, photo, and video capture
+      notes: The safe initial state shows Camera preview is not available with Photo and Video disabled; grant consent and wait for live preview before capturing.

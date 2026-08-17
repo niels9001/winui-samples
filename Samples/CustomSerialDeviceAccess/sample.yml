@@ -1,0 +1,133 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: custom-serial-device-access
+project:
+  folder: CustomSerialDeviceAccess
+  name: CustomSerialDeviceAccess
+title: Communicating with a custom serial device
+summary: Enumerate, connect to, configure, and exchange data with serial port devices, including pin-change and error events.
+aliases:
+  - CustomSerialDeviceAccess
+  - Custom serial device access
+  - SerialDevice
+  - Windows.Devices.SerialCommunication
+  - COM port
+  - Serial communication
+icon: SerialPortRegular
+categories:
+  primary: devices-and-sensors
+  secondary: []
+tags:
+  - serial
+  - COM port
+  - UART
+  - device watcher
+  - baud rate
+  - handshake
+  - pin changed
+originalSamples:
+  - name: CustomSerialDeviceAccess
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CustomSerialDeviceAccess
+scenarios:
+  - id: connect-disconnect
+    title: Connecting and disconnecting from a serial device
+    summary: Watch for serial devices and open, close, or reconnect the selected device handle.
+    apis:
+      - Windows.Devices.SerialCommunication.SerialDevice.GetDeviceSelector
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - Scenarios/CustomSerialDeviceAccess/Scenario1_ConnectDisconnect.xaml.cs
+      - Scenarios/CustomSerialDeviceAccess/EventHandlerForDevice.cs
+  - id: configure-device
+    title: Configuring serial port settings
+    summary: Read and set baud rate, parity, stop bits, data bits, handshake, break signal, DTR, and RTS.
+    apis:
+      - Windows.Devices.SerialCommunication.SerialDevice.BaudRate
+      - Windows.Devices.SerialCommunication.SerialDevice.Parity
+      - Windows.Devices.SerialCommunication.SerialDevice.Handshake
+    sourceFiles:
+      - Scenarios/CustomSerialDeviceAccess/Scenario2_ConfigureDevice.xaml.cs
+      - Scenarios/CustomSerialDeviceAccess/Constants.cs
+  - id: read-write
+    title: Reading and writing serial data
+    summary: Use DataReader and DataWriter over the device streams with configurable read and write timeouts.
+    apis:
+      - Windows.Storage.Streams.DataReader
+      - Windows.Storage.Streams.DataWriter
+      - Windows.Devices.SerialCommunication.SerialDevice.ReadTimeout
+      - Windows.Devices.SerialCommunication.SerialDevice.WriteTimeout
+    sourceFiles:
+      - Scenarios/CustomSerialDeviceAccess/Scenario3_ReadWrite.xaml.cs
+  - id: events
+    title: Handling pin-changed and error events
+    summary: Toggle PinChanged and ErrorReceived subscriptions and report the event data raised by the device.
+    apis:
+      - Windows.Devices.SerialCommunication.SerialDevice.PinChanged
+      - Windows.Devices.SerialCommunication.SerialDevice.ErrorReceived
+    sourceFiles:
+      - Scenarios/CustomSerialDeviceAccess/Scenario4_Events.xaml.cs
+apis:
+  - name: Windows.Devices.SerialCommunication.SerialDevice
+    description: Represents an opened serial port and exposes its configuration, streams, and events.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.serialcommunication.serialdevice
+  - name: Windows.Storage.Streams.DataReader
+    description: Reads data from the serial device input stream with a configurable timeout.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes data to the serial device output stream and flushes it asynchronously.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Watches for serial devices being added or removed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+documentation:
+  - title: SerialCommunication namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.serialcommunication
+    kind: api-reference
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+  - title: App capability declarations
+    url: https://learn.microsoft.com/windows/uwp/packaging/app-capability-declarations
+    kind: concept
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: serialcommunication
+      kind: device
+      description: Grants access to any serial device that exposes the serialPort function.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Windows-recognized serial port device such as a USB-to-serial adapter, Arduino, or virtual COM port
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; serial stream I/O has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the four serial communication scenarios shown in the navigation shell.
+  - path: Scenarios/CustomSerialDeviceAccess/Constants.cs
+    label: Configuration presets
+    description: Defines the baud rate, parity, stop-bit, data-bit, and handshake preset values shown by the configuration scenario.
+  - path: Scenarios/CustomSerialDeviceAccess/Scenario1_ConnectDisconnect.xaml.cs
+    label: Connect to any serial device
+    description: Uses an unfiltered SerialDevice selector and watches for matching devices.
+  - path: Scenarios/CustomSerialDeviceAccess/Scenario3_ReadWrite.xaml.cs
+    label: Serial stream I/O
+    description: Uses DataReader and DataWriter over the device streams with cancellation and timeouts.
+  - path: Package.appxmanifest
+    label: Serial communication capability
+    description: Declares serialcommunication access for any serialPort device.
+relatedSamples: []
+screenshots:
+  - id: connect-empty-state
+    alt: The CustomSerialDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty serial device list.
+    scenario: connect-disconnect
+    capture:
+      mode: manual
+      readinessSelector: "text=Select a Serial Device:"
+      notes: Capture the safe initial state before attaching a COM port; configuration and I/O states require a real or virtual serial device and manual capture.
