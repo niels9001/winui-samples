@@ -1,9 +1,11 @@
-# Barcode Scanner
+# Reading barcodes with point-of-service scanners
 
-This WinUI 3 sample demonstrates how to discover, claim, configure, and read data from
-barcode scanners through the Windows Point of Service APIs.
+The `BarcodeScanner` project was ported to WinUI 3 / Windows App SDK from the UWP
+[BarcodeScanner](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BarcodeScanner)
+sample. It demonstrates how to discover, claim, configure, and read scanners through the
+Windows Point of Service APIs.
 
-## What the sample shows
+## What it shows
 
 - Receiving decoded and raw scan data.
 - Handling competing claims with `ReleaseDeviceRequested` and `RetainDevice`.
@@ -20,15 +22,13 @@ barcode scanners through the Windows Point of Service APIs.
 - `Windows.Media.Capture.MediaCapture`
 - `Windows.Media.Playback.MediaPlayer`
 
-## Related documentation
+## Learn docs this serves
 
 - [Point of Service hardware support](https://learn.microsoft.com/windows/apps/develop/devices-sensors/pos/device-support)
 - [BarcodeScanner class](https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.barcodescanner)
 - [ClaimedBarcodeScanner class](https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedbarcodescanner)
 
-## Build and run
-
-From this directory:
+## Build & run
 
 ```powershell
 dotnet build -c Debug -p:Platform=x64

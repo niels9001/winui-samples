@@ -1,0 +1,111 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: basic-face-detection
+project:
+  folder: BasicFaceDetection
+  name: BasicFaceDetection
+title: Detecting faces in photos and webcam frames
+summary: Detect human faces in selected images or webcam snapshots and keep bounding-box overlays aligned as the preview resizes.
+aliases:
+  - BasicFaceDetection
+  - Basic Face Detection
+  - FaceDetector
+  - Windows.Media.FaceAnalysis
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - devices-and-sensors
+tags:
+  - face detection
+  - image processing
+  - webcam
+  - software bitmap
+  - media frames
+originalSamples:
+  - name: BasicFaceDetection
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BasicFaceDetection
+scenarios:
+  - id: detect-photo-faces
+    title: Detect faces in a photo
+    summary: Pick and decode an image, convert it to a supported bitmap format, and draw detected face bounds.
+    apis:
+      - Windows.Storage.Pickers.FileOpenPicker
+      - Windows.Graphics.Imaging.BitmapDecoder
+      - Windows.Graphics.Imaging.SoftwareBitmap
+      - Windows.Media.FaceAnalysis.FaceDetector
+    sourceFiles:
+      - Scenarios/FaceDetection/Scenario1_DetectInPhoto.xaml.cs
+      - FaceVisualization.cs
+  - id: detect-webcam-faces
+    title: Detect faces in a webcam snapshot
+    summary: Preview a camera, acquire one frame through MediaFrameReader, and overlay the detected face bounds.
+    apis:
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Media.Capture.Frames.MediaFrameReader
+      - Windows.Media.FaceAnalysis.FaceDetector
+      - Windows.Media.Playback.MediaPlayer
+    sourceFiles:
+      - Scenarios/FaceDetection/Scenario2_DetectInWebcam.xaml.cs
+      - FaceVisualization.cs
+apis:
+  - name: Windows.Media.FaceAnalysis.FaceDetector
+    description: Analyzes supported bitmap data and returns the bounding rectangle of each detected face.
+    url: https://learn.microsoft.com/uwp/api/windows.media.faceanalysis.facedetector
+  - name: Windows.Media.FaceAnalysis.DetectedFace
+    description: Represents one detection result and exposes its face bounding box.
+    url: https://learn.microsoft.com/uwp/api/windows.media.faceanalysis.detectedface
+  - name: Windows.Graphics.Imaging.BitmapDecoder
+    description: Decodes selected JPEG, PNG, and BMP files into software bitmap data.
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.bitmapdecoder
+  - name: Windows.Media.Capture.Frames.MediaFrameReader
+    description: Acquires a webcam preview frame that can be passed to the face detector.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.frames.mediaframereader
+  - name: Windows.Media.Capture.MediaCapture
+    description: Initializes the selected webcam and exposes its preview frame source.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapture
+documentation:
+  - title: FaceDetector class
+    url: https://learn.microsoft.com/uwp/api/windows.media.faceanalysis.facedetector
+    kind: api-reference
+  - title: Windows.Media.FaceAnalysis namespace
+    url: https://learn.microsoft.com/uwp/api/windows.media.faceanalysis
+    kind: api-reference
+  - title: Detect faces in images or videos
+    url: https://learn.microsoft.com/windows/apps/develop/media-authoring-processing/detect-and-track-faces-in-an-image
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: webcam
+      kind: device
+      description: Allows the webcam snapshot scenario to initialize a camera and acquire preview frames.
+  hardware:
+    - A compatible webcam is required for the webcam snapshot scenario.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; face detection is architecture-neutral, while webcam frame formats depend on the installed camera driver.
+featuredFiles:
+  - path: Scenarios/FaceDetection/Scenario1_DetectInPhoto.xaml.cs
+    label: Photo face detection
+    description: Initializes the desktop picker, decodes and converts an image, and runs FaceDetector.
+  - path: Scenarios/FaceDetection/Scenario2_DetectInWebcam.xaml.cs
+    label: Webcam frame detection
+    description: Connects MediaCapture, MediaPlayer preview, frame acquisition, and snapshot analysis.
+  - path: FaceVisualization.cs
+    label: Responsive face overlays
+    description: Draws face boxes and rescales their positions when the display surface changes size.
+screenshots:
+  - id: photo-face-bounds
+    alt: The face detection page showing a selected photo with yellow bounding boxes drawn around the detected human faces.
+    scenario: detect-photo-faces
+    capture:
+      mode: manual
+      readinessSelector: text=Detect faces in a photo
+      notes: Select a representative local image containing faces and wait for detection and overlay rendering before capture.

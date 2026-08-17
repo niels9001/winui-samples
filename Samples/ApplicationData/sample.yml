@@ -1,0 +1,138 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: application-data
+project:
+  folder: ApplicationData
+  name: ApplicationData
+title: Storing settings and app data across sessions
+summary: Store files and settings in app-specific locations, organize related values, load app-data URIs, clear data, and migrate versions.
+aliases:
+  - ApplicationData
+  - Application data
+  - Windows.Storage.ApplicationData
+  - ms-appdata
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - app-fundamentals
+tags:
+  - app data
+  - local settings
+  - storage
+  - settings containers
+  - data versioning
+originalSamples:
+  - name: ApplicationData
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ApplicationData
+scenarios:
+  - id: app-data-files
+    title: Store app-data files
+    summary: Increment values stored in the local, local-cache, and temporary app-data folders.
+    apis:
+      - Windows.Storage.ApplicationData.LocalFolder
+      - Windows.Storage.ApplicationData.LocalCacheFolder
+      - Windows.Storage.ApplicationData.TemporaryFolder
+      - Windows.Storage.FileIO
+    sourceFiles:
+      - Scenario1_Files.xaml.cs
+  - id: app-data-settings
+    title: Store local settings
+    summary: Write and delete a simple key-value setting in the app's local settings container.
+    apis:
+      - Windows.Storage.ApplicationData.LocalSettings
+      - Windows.Storage.ApplicationDataContainer.Values
+    sourceFiles:
+      - Scenario2_Settings.xaml.cs
+  - id: setting-containers
+    title: Organize setting containers
+    summary: Create and delete a named container that groups related application settings.
+    apis:
+      - Windows.Storage.ApplicationDataContainer.CreateContainer
+      - Windows.Storage.ApplicationDataContainer.DeleteContainer
+    sourceFiles:
+      - Scenario3_SettingContainer.xaml.cs
+  - id: composite-settings
+    title: Store composite settings
+    summary: Save and retrieve multiple related values as one composite setting.
+    apis:
+      - Windows.Storage.ApplicationDataCompositeValue
+    sourceFiles:
+      - Scenario4_CompositeSettings.xaml.cs
+  - id: app-data-uris
+    title: Load ms-appdata URIs
+    summary: Copy images into app-data folders and load them through local, roaming, and temporary ms-appdata URIs.
+    apis:
+      - Windows.Storage.StorageFile.GetFileFromApplicationUriAsync
+      - Microsoft.UI.Xaml.Media.Imaging.BitmapImage
+    sourceFiles:
+      - Scenario5_Msappdata.xaml.cs
+  - id: clear-app-data
+    title: Clear app data
+    summary: Remove the current package's stored application data with one asynchronous operation.
+    apis:
+      - Windows.Storage.ApplicationData.ClearAsync
+    sourceFiles:
+      - Scenario6_ClearScenario.xaml.cs
+  - id: version-app-data
+    title: Migrate app-data versions
+    summary: Run version handlers that upgrade the stored data format before setting a new version number.
+    apis:
+      - Windows.Storage.ApplicationData.SetVersionAsync
+      - Windows.Storage.SetVersionRequest
+      - Windows.Storage.SetVersionDeferral
+    sourceFiles:
+      - Scenario7_SetVersion.xaml.cs
+apis:
+  - name: Windows.Storage.ApplicationData
+    description: Provides app-specific folders, settings containers, clearing, and data-version migration.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.applicationdata
+  - name: Windows.Storage.ApplicationDataContainer
+    description: Stores simple values and organizes related settings in named child containers.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.applicationdatacontainer
+  - name: Windows.Storage.ApplicationDataCompositeValue
+    description: Groups related setting values so the app reads and writes them as one unit.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.applicationdatacompositevalue
+  - name: Windows.Storage.StorageFile.GetFileFromApplicationUriAsync
+    description: Resolves an ms-appdata URI to a file in a supported application data location.
+documentation:
+  - title: Store and retrieve settings and other app data
+    url: https://learn.microsoft.com/windows/apps/develop/data/store-and-retrieve-app-data
+    kind: learn
+  - title: Windows.Storage.ApplicationData class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.applicationdata
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the package manifest, although this sample does not call Windows AI model APIs.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; all storage and settings scenarios use architecture-neutral Windows Runtime APIs.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the seven app-data scenarios presented by the navigation shell.
+  - path: Scenario5_Msappdata.xaml.cs
+    label: App-data URI loading
+    description: Copies packaged images into app-data folders and displays them through ms-appdata URIs.
+  - path: Scenario7_SetVersion.xaml.cs
+    label: Data version migration
+    description: Implements version handlers and deferrals for upgrading the stored app-data format.
+screenshots:
+  - id: app-data-files
+    alt: The application data app showing controls for reading and writing counters in local, cache, and temporary folders.
+    scenario: app-data-files
+    capture:
+      mode: automatic
+      readinessSelector: text=Files
+      notes: Capture the initial Files scenario before changing package data so the result is independent of prior runs.

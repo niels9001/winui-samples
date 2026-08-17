@@ -1,0 +1,117 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: basic-media-casting
+project:
+  folder: BasicMediaCasting
+  name: BasicMediaCasting
+title: Casting local media to nearby devices
+summary: Cast a selected video through built-in controls, the system casting picker, or a custom device watcher and connection workflow.
+aliases:
+  - BasicMediaCasting
+  - Basic Media Casting
+  - CastingDevicePicker
+  - Windows.Media.Casting
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - devices-and-sensors
+    - networking
+tags:
+  - media casting
+  - casting picker
+  - device discovery
+  - media playback
+  - remote playback
+originalSamples:
+  - name: BasicMediaCasting
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BasicMediaCasting
+scenarios:
+  - id: built-in-casting
+    title: Cast with built-in controls
+    summary: Load a local video and use the MediaPlayerElement transport controls to select a casting target.
+    apis:
+      - Microsoft.UI.Xaml.Controls.MediaPlayerElement
+      - Windows.Media.Playback.MediaPlayer
+      - Windows.Media.Core.MediaSource
+    sourceFiles:
+      - Scenarios/BasicMediaCasting/Scenario1_BuiltInCasting.xaml.cs
+  - id: system-casting-picker
+    title: Cast with the system picker
+    summary: Show CastingDevicePicker, connect the selected device, and send the current media source to it.
+    apis:
+      - Windows.Media.Casting.CastingDevicePicker
+      - Windows.Media.Casting.CastingConnection
+      - Windows.Media.Casting.CastingSource
+    sourceFiles:
+      - Scenarios/BasicMediaCasting/Scenario2_CastingDevicePicker.xaml.cs
+  - id: custom-casting-picker
+    title: Build a custom casting picker
+    summary: Discover casting devices with DeviceWatcher, present them in custom UI, and connect the selected receiver.
+    apis:
+      - Windows.Devices.Enumeration.DeviceWatcher
+      - Windows.Media.Casting.CastingDevice
+      - Windows.Media.Casting.CastingConnection
+    sourceFiles:
+      - Scenarios/BasicMediaCasting/Scenario3_CustomPicker.xaml.cs
+apis:
+  - name: Windows.Media.Casting.CastingDevicePicker
+    description: Displays system UI for choosing a device that supports the requested casting playback types.
+    url: https://learn.microsoft.com/uwp/api/windows.media.casting.castingdevicepicker
+  - name: Windows.Media.Casting.CastingConnection
+    description: Connects the selected receiver to the MediaPlayer casting source and reports connection state.
+    url: https://learn.microsoft.com/uwp/api/windows.media.casting.castingconnection
+  - name: Windows.Media.Casting.CastingDevice
+    description: Represents a discovered casting receiver and creates its connection.
+    url: https://learn.microsoft.com/uwp/api/windows.media.casting.castingdevice
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Reports casting-device additions, removals, updates, and enumeration completion for custom UI.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Hosts local playback and exposes the built-in transport-controls casting experience.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.mediaplayerelement
+documentation:
+  - title: CastingDevicePicker class
+    url: https://learn.microsoft.com/uwp/api/windows.media.casting.castingdevicepicker
+    kind: api-reference
+  - title: CastingConnection class
+    url: https://learn.microsoft.com/uwp/api/windows.media.casting.castingconnection
+    kind: api-reference
+  - title: DeviceWatcher class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: internetClient
+      kind: general
+      description: Allows network communication used to discover and connect to compatible casting receivers.
+  hardware:
+    - A network adapter and compatible casting receiver on the reachable network are required for picker and connection scenarios.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; discovery and connection results depend on the network and receiver capabilities, not CPU architecture.
+featuredFiles:
+  - path: Scenarios/BasicMediaCasting/Scenario1_BuiltInCasting.xaml.cs
+    label: Built-in casting
+    description: Loads a selected video into MediaPlayerElement for casting through its transport controls.
+  - path: Scenarios/BasicMediaCasting/Scenario2_CastingDevicePicker.xaml.cs
+    label: System casting picker
+    description: Initializes and displays CastingDevicePicker and manages the resulting connection.
+  - path: Scenarios/BasicMediaCasting/Scenario3_CustomPicker.xaml.cs
+    label: Custom device discovery
+    description: Marshals DeviceWatcher updates into custom receiver selection and connection UI.
+screenshots:
+  - id: system-casting-picker
+    alt: The media casting page showing a selected video, local playback controls, and the action that opens the system casting picker.
+    scenario: system-casting-picker
+    capture:
+      mode: manual
+      readinessSelector: text=Casting Using Casting Picker
+      notes: Select a local video and open the system picker with a compatible receiver available before capturing.
