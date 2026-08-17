@@ -122,6 +122,64 @@ try {
         }
         Assert-Equal 'automationid' $parsedSelector.Kind 'Selector parser should retain the property kind.'
         Assert-Equal 'RepresentativeAction' $parsedSelector.Value 'Selector parser should retain the property value.'
+
+        $automaticDeviceSample = [pscustomobject]@{
+            requirements = [pscustomobject]@{
+                supportedArchitectures = @('x64')
+                hardware = @('Optional test device')
+                accountServices = @()
+            }
+        }
+        $automaticRecipe = [pscustomobject]@{
+            capture = [pscustomobject]@{ mode = 'automatic' }
+        }
+        $skipReason = & (Get-Module ScreenshotHarness) {
+            param($Sample, $Screenshot)
+            Get-CaptureSkipReason -Sample $Sample -Screenshot $Screenshot
+        } $automaticDeviceSample $automaticRecipe
+        Assert-True ($null -eq $skipReason) 'Authored automatic mode should remain authoritative for safe no-device states.'
+
+        $dryIdentity = [pscustomobject]@{
+            ProjectPath = 'C:\repo\Samples\Deferred\Deferred.csproj'
+            ExpectedProcessName = 'Deferred'
+        }
+        $dryScreenshot = [pscustomobject]@{
+            capture = [pscustomobject]@{
+                readinessSelector = 'text=Send'
+                actions = @(
+                    [pscustomobject]@{
+                        type = 'click'
+                        selector = 'text=Adaptive Deferral'
+                    }
+                )
+            }
+        }
+        $dryCommands = @(& (Get-Module ScreenshotHarness) {
+            param($Identity, $Screenshot)
+            Get-DryRunCommands `
+                -Identity $Identity `
+                -Screenshot $Screenshot `
+                -PackageOutputPath 'C:\work\appx' `
+                -WindowX 40 `
+                -WindowY 40 `
+                -WindowWidth 1440 `
+                -WindowHeight 900 `
+                -TimeoutSeconds 60 `
+                -StabilityMilliseconds 1200 `
+                -ForceScreenCapture $false
+        } $dryIdentity $dryScreenshot)
+        $actionIndex = -1
+        $readinessIndex = -1
+        for ($index = 0; $index -lt $dryCommands.Count; $index++) {
+            if ($dryCommands[$index] -match 'ui invoke.*Adaptive Deferral') {
+                $actionIndex = $index
+            }
+            if ($dryCommands[$index] -match 'ui wait-for Send') {
+                $readinessIndex = $index
+            }
+        }
+        Assert-True ($actionIndex -ge 0) 'Dry-run should include the authored action.'
+        Assert-True ($readinessIndex -gt $actionIndex) 'Final readiness should be checked after actions.'
     }
 
     Test-Case 'rejects an invalid HWND without launching a GUI app' {

@@ -1075,6 +1075,20 @@ function Invoke-CaptureAction {
         [hashtable] $Context
     )
 
+    if ($Action.type -in @('input', 'select', 'click')) {
+        $actionReadyCommand = New-WinAppUiCommand `
+            -Operation wait-for `
+            -Selector $Action.selector `
+            -WindowHandle $WindowHandle `
+            -TimeoutMilliseconds ($TimeoutSeconds * 1000)
+        Invoke-WinAppUi `
+            -Command $actionReadyCommand `
+            -RepositoryRoot $RepositoryRoot `
+            -TimeoutSeconds ($TimeoutSeconds + 5) `
+            -Context $Context `
+            -RequireSuccess | Out-Null
+    }
+
     switch ($Action.type) {
         'wait' {
             Start-Sleep -Milliseconds ([int]$Action.durationMs)
@@ -1623,12 +1637,6 @@ function Get-CaptureSkipReason {
     if ($Screenshot.capture.mode -eq 'manual') {
         return 'Metadata marks this capture recipe as manual.'
     }
-    if (@($Sample.requirements.hardware).Count -gt 0) {
-        return "Hardware-dependent sample: $(@($Sample.requirements.hardware) -join ', ')."
-    }
-    if (@($Sample.requirements.accountServices).Count -gt 0) {
-        return "Account/service-dependent sample: $(@($Sample.requirements.accountServices) -join ', ')."
-    }
     if ('x64' -notin @($Sample.requirements.supportedArchitectures)) {
         return 'The sample metadata does not support the harness x64 target.'
     }
@@ -1772,18 +1780,6 @@ function Invoke-OneCapture {
             throw "Target window DPI must be 96 (100% scaling); found $($bounds.dpi). Use -AllowNon100PercentScaling only for diagnostics."
         }
 
-        $readinessCommand = New-WinAppUiCommand `
-            -Operation wait-for `
-            -Selector $Screenshot.capture.readinessSelector `
-            -WindowHandle $launchedWindow.Hwnd `
-            -TimeoutMilliseconds ($TimeoutSeconds * 1000)
-        Invoke-WinAppUi `
-            -Command $readinessCommand `
-            -RepositoryRoot $RepositoryRoot `
-            -TimeoutSeconds ($TimeoutSeconds + 5) `
-            -Context $Context `
-            -RequireSuccess | Out-Null
-
         $actions = if ($Screenshot.capture.PSObject.Properties.Name -contains 'actions') {
             @($Screenshot.capture.actions)
         }
@@ -1798,6 +1794,18 @@ function Invoke-OneCapture {
                 -RepositoryRoot $RepositoryRoot `
                 -Context $Context
         }
+
+        $readinessCommand = New-WinAppUiCommand `
+            -Operation wait-for `
+            -Selector $Screenshot.capture.readinessSelector `
+            -WindowHandle $launchedWindow.Hwnd `
+            -TimeoutMilliseconds ($TimeoutSeconds * 1000)
+        Invoke-WinAppUi `
+            -Command $readinessCommand `
+            -RepositoryRoot $RepositoryRoot `
+            -TimeoutSeconds ($TimeoutSeconds + 5) `
+            -Context $Context `
+            -RequireSuccess | Out-Null
 
         Start-Sleep -Milliseconds $StabilityMilliseconds
         $captureScreen = Test-RequiresScreenCapture `
@@ -1984,13 +1992,6 @@ function Get-DryRunCommands {
             '--height', [string]$WindowHeight
         )))
 
-    $readiness = New-WinAppUiCommand `
-        -Operation wait-for `
-        -Selector $Screenshot.capture.readinessSelector `
-        -WindowHandle $windowPlaceholder `
-        -TimeoutMilliseconds ($TimeoutSeconds * 1000)
-    $commands.Add((ConvertTo-DisplayCommand -FilePath $readiness.FilePath -ArgumentList $readiness.Arguments))
-
     $actions = if ($Screenshot.capture.PSObject.Properties.Name -contains 'actions') {
         @($Screenshot.capture.actions)
     }
@@ -2015,6 +2016,16 @@ function Get-DryRunCommands {
         return $Selector
     }
     foreach ($action in $actions) {
+        if ($action.type -in @('input', 'select', 'click')) {
+            $actionReady = New-WinAppUiCommand `
+                -Operation wait-for `
+                -Selector $action.selector `
+                -WindowHandle $windowPlaceholder `
+                -TimeoutMilliseconds ($TimeoutSeconds * 1000)
+            $commands.Add((ConvertTo-DisplayCommand `
+                -FilePath $actionReady.FilePath `
+                -ArgumentList $actionReady.Arguments))
+        }
         switch ($action.type) {
             'wait' {
                 $commands.Add("Start-Sleep -Milliseconds $([int]$action.durationMs)")
@@ -2076,6 +2087,12 @@ function Get-DryRunCommands {
         }
     }
 
+    $readiness = New-WinAppUiCommand `
+        -Operation wait-for `
+        -Selector $Screenshot.capture.readinessSelector `
+        -WindowHandle $windowPlaceholder `
+        -TimeoutMilliseconds ($TimeoutSeconds * 1000)
+    $commands.Add((ConvertTo-DisplayCommand -FilePath $readiness.FilePath -ArgumentList $readiness.Arguments))
     $commands.Add("Start-Sleep -Milliseconds $StabilityMilliseconds")
     $screenCapture = Test-RequiresScreenCapture `
         -Screenshot $Screenshot `
