@@ -1,0 +1,96 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: background-media-playback
+project:
+  folder: BackgroundMediaPlayback
+  name: BackgroundMediaPlayback
+title: Playing media playlists beyond the foreground
+summary: Load a packaged playlist, present media metadata, and control MediaPlayer playback while the desktop app remains open outside the foreground.
+aliases:
+  - BackgroundMediaPlayback
+  - Background Media Playback
+  - MediaPlaybackList
+  - MediaPlayer
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - app-fundamentals
+tags:
+  - media playback
+  - playlist
+  - transport controls
+  - background audio
+  - media metadata
+originalSamples:
+  - name: BackgroundMediaPlayback
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BackgroundMediaPlayback
+scenarios:
+  - id: playlist-playback
+    title: Play a media playlist
+    summary: Load packaged music and video items, display their metadata, and control playlist navigation, speed, and audio category.
+    apis:
+      - Windows.Media.Playback.MediaPlayer
+      - Windows.Media.Playback.MediaPlaybackList
+      - Windows.Media.Playback.MediaPlaybackItem
+      - Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    sourceFiles:
+      - Scenario1.xaml.cs
+      - Services/PlaybackService.cs
+      - ViewModels/PlayerViewModel.cs
+      - Views/PlaylistView.xaml.cs
+apis:
+  - name: Windows.Media.Playback.MediaPlayer
+    description: Plays the current media source and exposes playback state, rate, and audio category.
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayer
+  - name: Windows.Media.Playback.MediaPlaybackList
+    description: Maintains the ordered playlist and coordinates current-item changes and failures.
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplaybacklist
+  - name: Windows.Media.Playback.MediaPlaybackItem
+    description: Wraps a media source with title, artist, artwork, and other display properties.
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplaybackitem
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Hosts MediaPlayer and either built-in or custom transport controls in the WinUI interface.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.mediaplayerelement
+documentation:
+  - title: Media playback
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/media-playback
+    kind: learn
+  - title: Media items, playlists, and tracks
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/media-playback-with-mediasource
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the package manifest, although this sample does not call Windows AI model APIs.
+  hardware:
+    - An audio output device is needed to hear the packaged playlist.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; playback is process-owned and continues when unfocused but ends when the desktop app closes.
+featuredFiles:
+  - path: Scenario1.xaml.cs
+    label: Playlist integration
+    description: Loads the packaged playlist and connects playback services, view models, and the MediaPlayerElement.
+  - path: Services/PlaybackService.cs
+    label: Shared playback service
+    description: Owns the MediaPlayer and current MediaPlaybackList used by the scenario.
+  - path: ViewModels/PlayerViewModel.cs
+    label: Transport state model
+    description: Exposes navigation, audio category, and playback state for the custom controls.
+screenshots:
+  - id: packaged-playlist
+    alt: The media playback page showing packaged playlist items beside artwork, transport controls, speed, and audio category options.
+    scenario: playlist-playback
+    capture:
+      mode: automatic
+      readinessSelector: text=Background Media Playback
+      notes: Wait for the packaged playlist and its artwork to load before capturing the deterministic initial state.

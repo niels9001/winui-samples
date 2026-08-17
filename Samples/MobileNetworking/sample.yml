@@ -1,0 +1,208 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: mobile-networking
+project:
+  folder: MobileNetworking
+  name: MobileNetworking
+title: Inspecting cellular networks and controlling mobile hotspots
+summary: Inspect broadband accounts, modems, profiles, services, and SIM data, then configure and toggle Wi-Fi tethering.
+aliases:
+  - MobileNetworking
+  - MobileBroadband
+  - MobileHotspot
+  - MobileBroadbandAccount
+  - NetworkOperatorTetheringManager
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - devices-and-sensors
+tags:
+  - mobile broadband
+  - cellular
+  - modem
+  - SIM
+  - mobile hotspot
+  - Wi-Fi tethering
+  - carrier
+originalSamples:
+  - name: MobileBroadband
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MobileBroadband
+  - name: MobileHotspot
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MobileHotspot
+scenarios:
+  - id: broadband-device
+    title: Mobile Broadband Device
+    summary: Enumerate provisioned broadband accounts and display network, modem, registration, provider, and device information.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccount.AvailableNetworkAccountIds
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccount.CreateFromNetworkAccountId
+      - Windows.Networking.NetworkOperators.MobileBroadbandModem.GetDefault
+    sourceFiles:
+      - Scenarios/MobileBroadband/BroadbandDevice.xaml
+      - Scenarios/MobileBroadband/BroadbandDevice.xaml.cs
+  - id: account-watcher
+    title: Network Account Watcher
+    summary: Monitor mobile broadband accounts as they are added, updated, or removed and display their network state.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccountWatcher
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccount.CreateFromNetworkAccountId
+    sourceFiles:
+      - Scenarios/MobileBroadband/AccountWatcher.xaml
+      - Scenarios/MobileBroadband/AccountWatcher.xaml.cs
+  - id: connection-ui
+    title: Connection UI
+    summary: Open the system connection interface for the first available mobile broadband account.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccount.AvailableNetworkAccountIds
+      - Windows.Networking.NetworkOperators.MobileBroadbandNetwork.ShowConnectionUI
+    sourceFiles:
+      - Scenarios/MobileBroadband/ShowConnection.xaml
+      - Scenarios/MobileBroadband/ShowConnection.xaml.cs
+  - id: connection-profiles
+    title: Get Connection Profiles
+    summary: Enumerate the account's connection profiles and inspect connectivity, cost, data-plan, security, WLAN, WWAN, provider, and signal details.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandAccount.GetConnectionProfiles
+      - Windows.Networking.Connectivity.ConnectionProfile
+      - Windows.Networking.Connectivity.WlanConnectionProfileDetails
+      - Windows.Networking.Connectivity.WwanConnectionProfileDetails
+    sourceFiles:
+      - Scenarios/MobileBroadband/GetConnectionProfiles.xaml
+      - Scenarios/MobileBroadband/GetConnectionProfiles.xaml.cs
+  - id: modem-information
+    title: Modem Information
+    summary: Read cellular class, radio state, data classes, identifiers, firmware, SIM, subscriber, and telephone information.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandModem.GetDefault
+      - Windows.Networking.NetworkOperators.MobileBroadbandDeviceInformation
+    sourceFiles:
+      - Scenarios/MobileBroadband/ModemInformation.xaml
+      - Scenarios/MobileBroadband/ModemInformation.xaml.cs
+  - id: device-services
+    title: Device Services
+    summary: Enumerate the default modem's device services and report their data read and write support.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandModem.GetDefault
+      - Windows.Networking.NetworkOperators.MobileBroadbandModem.DeviceServices
+    sourceFiles:
+      - Scenarios/MobileBroadband/ModemDeviceServices.xaml
+      - Scenarios/MobileBroadband/ModemDeviceServices.xaml.cs
+  - id: sim-card
+    title: SIM Card
+    summary: Inspect the modem's UICC applications and read the ICCID record when the card and app expose it.
+    apis:
+      - Windows.Networking.NetworkOperators.MobileBroadbandModem.GetCurrentConfigurationAsync
+      - Windows.Networking.NetworkOperators.MobileBroadbandUicc.GetUiccAppsAsync
+      - Windows.Networking.NetworkOperators.MobileBroadbandUiccApp.ReadRecordAsync
+    sourceFiles:
+      - Scenarios/MobileBroadband/SimCard.xaml
+      - Scenarios/MobileBroadband/SimCard.xaml.cs
+  - id: configure-hotspot
+    title: Configure Mobile Hotspot
+    summary: Read and update the hotspot SSID, passphrase, Wi-Fi band, and authentication mode supported by the connection.
+    apis:
+      - Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager
+      - Windows.Networking.NetworkOperators.NetworkOperatorTetheringAccessPointConfiguration
+      - Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager.ConfigureAccessPointAsync
+    sourceFiles:
+      - Helpers.cs
+      - Scenarios/MobileHotspot/Scenario1_ConfigureMobileHotspot.xaml
+      - Scenarios/MobileHotspot/Scenario1_ConfigureMobileHotspot.xaml.cs
+  - id: toggle-hotspot
+    title: Toggle Mobile Hotspot
+    summary: Check tethering capability and operational state, then start or stop the mobile hotspot.
+    apis:
+      - Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager.StartTetheringAsync
+      - Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager.StopTetheringAsync
+      - Windows.Networking.NetworkOperators.TetheringOperationalState
+    sourceFiles:
+      - Helpers.cs
+      - Scenarios/MobileHotspot/Scenario2_ToggleMobileHotspot.xaml
+      - Scenarios/MobileHotspot/Scenario2_ToggleMobileHotspot.xaml.cs
+apis:
+  - name: Windows.Networking.NetworkOperators.MobileBroadbandAccount
+    description: Enumerates provisioned cellular accounts and exposes their current network and connection profiles.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.mobilebroadbandaccount
+  - name: Windows.Networking.NetworkOperators.MobileBroadbandAccountWatcher
+    description: Reports mobile broadband account additions, updates, removals, and enumeration completion.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.mobilebroadbandaccountwatcher
+  - name: Windows.Networking.NetworkOperators.MobileBroadbandModem
+    description: Provides the default modem's device information, services, configuration, and UICC.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.mobilebroadbandmodem
+  - name: Windows.Networking.NetworkOperators.MobileBroadbandUicc
+    description: Enumerates applications available on the modem's SIM or UICC.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.mobilebroadbanduicc
+  - name: Windows.Networking.NetworkOperators.NetworkOperatorTetheringManager
+    description: Checks tethering capability, configures the hotspot access point, and starts or stops tethering.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.networkoperatortetheringmanager
+  - name: Windows.Networking.Connectivity.ConnectionProfile
+    description: Describes the cellular, Wi-Fi, or other connection associated with an account or hotspot.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.connectionprofile
+documentation:
+  - title: Windows.Networking.NetworkOperators namespace
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators
+    kind: api-reference
+  - title: MobileBroadbandAccount class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.mobilebroadbandaccount
+    kind: api-reference
+  - title: NetworkOperatorTetheringManager class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.networkoperators.networkoperatortetheringmanager
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: cellularDeviceIdentity
+      kind: restricted
+      description: Allows the app to read identifying details from compatible cellular devices.
+    - name: cellularDeviceControl
+      kind: restricted
+      description: Allows the app to inspect and control compatible cellular modems and their configuration.
+    - name: cellularMessaging
+      kind: restricted
+      description: Allows access to cellular messaging functionality declared by the consolidated broadband package.
+    - name: wiFiControl
+      kind: device
+      description: Allows the app to configure and control Wi-Fi tethering on supported hardware.
+  hardware:
+    - A compatible cellular modem and SIM for the Mobile Broadband scenarios
+    - A compatible Wi-Fi adapter and connection profile for the Mobile Hotspot scenarios
+  accountServices:
+    - A provisioned mobile broadband account and active carrier service for cellular results
+    - Carrier, device, Windows SKU, and system policy permission for tethering
+  architectureNotes: The project targets x86, x64, and ARM64; cellular and tethering availability depends on the device, driver, carrier, policy, and Windows SKU.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Consolidated networking scenarios
+    description: Groups seven Mobile Broadband and two Mobile Hotspot workflows.
+  - path: Scenarios/MobileBroadband/BroadbandDevice.xaml.cs
+    label: Broadband device information
+    description: Enumerates accounts and reports network, provider, registration, and modem details.
+  - path: Scenarios/MobileBroadband/GetConnectionProfiles.xaml.cs
+    label: Cellular connection profiles
+    description: Inspects connectivity, cost, data-plan, security, WLAN, WWAN, provider, and signal properties.
+  - path: Scenarios/MobileBroadband/SimCard.xaml.cs
+    label: SIM and UICC access
+    description: Enumerates UICC apps and reads the ICCID record when supported.
+  - path: Helpers.cs
+    label: Tethering capability checks
+    description: Resolves a tethering manager and explains policy, hardware, carrier, app, SKU, and capability restrictions.
+  - path: Scenarios/MobileHotspot/Scenario1_ConfigureMobileHotspot.xaml.cs
+    label: Hotspot configuration
+    description: Reads and updates the SSID, passphrase, Wi-Fi band, and authentication mode.
+relatedSamples: []
+screenshots:
+  - id: hotspot-configuration
+    alt: The MobileNetworking app showing supported mobile hotspot settings for SSID, passphrase, Wi-Fi band, and authentication.
+    scenario: configure-hotspot
+    capture:
+      mode: manual
+      readinessSelector: text=Configure Mobile Hotspot
+      notes: Use a device and connection profile with tethering enabled; exclude credentials and subscriber identifiers from the capture.

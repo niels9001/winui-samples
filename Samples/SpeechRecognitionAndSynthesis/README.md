@@ -38,6 +38,18 @@ The sample retains all 11 upstream scenarios:
 - [Speech synthesis](https://learn.microsoft.com/uwp/api/windows.media.speechsynthesis)
 - [Speech recognition constraints](https://learn.microsoft.com/uwp/api/windows.media.speechrecognition)
 
+## Prerequisites and capabilities
+
+- Recognition scenarios require a microphone. Dictation and web-search constraints also
+  require internet access and accepted Windows online-speech privacy settings.
+- List and SRGS scenarios require an installed speech language pack matching one of the
+  localized resources or packaged grammars. Synthesis requires an installed system voice,
+  audio output, and Windows media components.
+- The package declares `internetClient`, the device capability `microphone`, the restricted
+  capabilities `runFullTrust` and `systemAIModels`. The scenarios use
+  `Windows.Media.SpeechRecognition` and `Windows.Media.SpeechSynthesis`; they do not directly
+  call a System AI Models API.
+
 ## Build & run
 
 ```powershell

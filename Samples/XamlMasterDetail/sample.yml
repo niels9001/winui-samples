@@ -1,0 +1,91 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-master-detail
+project:
+  folder: XamlMasterDetail
+  name: XamlMasterDetail
+title: Building adaptive list-and-detail layouts
+summary: Present a selectable list and its details in a layout that adapts between side-by-side and narrow drill-in views.
+aliases:
+  - XamlMasterDetail
+  - Master/detail
+  - List/details
+  - Adaptive list details
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary: []
+tags:
+  - XAML
+  - adaptive layout
+  - ListView
+  - responsive design
+  - master detail
+originalSamples:
+  - name: XamlMasterDetail
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlMasterDetail
+scenarios:
+  - id: adaptive-list-details
+    title: Adapting a list-and-detail layout
+    summary: Switch between a side-by-side list and detail pane and a narrow drill-in view at a 720-pixel breakpoint.
+    apis:
+      - Microsoft.UI.Xaml.Controls.ListView
+      - Microsoft.UI.Xaml.FrameworkElement.SizeChanged
+      - Microsoft.UI.Xaml.GridLength
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    sourceFiles:
+      - Scenarios/XamlMasterDetail/Scenario1_ListDetails.xaml
+      - Scenarios/XamlMasterDetail/Scenario1_ListDetails.xaml.cs
+      - Scenarios/XamlMasterDetail/ItemsDataSource.cs
+apis:
+  - name: Microsoft.UI.Xaml.Controls.ListView
+    description: Displays the selectable item list and reports the item that should populate the detail pane.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.listview
+  - name: Microsoft.UI.Xaml.FrameworkElement.SizeChanged
+    description: Re-evaluates the page width so the sample can switch between wide and narrow layouts.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.sizechanged
+  - name: Microsoft.UI.Xaml.GridLength
+    description: Changes the list and detail columns between fixed, star-sized, and collapsed widths.
+  - name: Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    description: Formats each item's date for display in the list and detail views.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.globalization.datetimeformatting.datetimeformatter?view=winrt-28000
+documentation:
+  - title: List/details pattern
+    url: https://learn.microsoft.com/windows/apps/develop/ui/controls/list-details
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/XamlMasterDetail/Scenario1_ListDetails.xaml
+    label: Adaptive page layout
+    description: Defines the list, detail view, narrow-view back button, and responsive column structure.
+  - path: Scenarios/XamlMasterDetail/Scenario1_ListDetails.xaml.cs
+    label: Layout state management
+    description: Responds to size and selection changes and coordinates wide and narrow navigation states.
+  - path: Scenarios/XamlMasterDetail/ItemsDataSource.cs
+    label: Sample item source
+    description: Supplies the dated items and descriptive content shown by the list and detail views.
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Registers the adaptive list-and-detail scenario in the sample shell.
+relatedSamples:
+  - xaml-state-triggers
+screenshots:
+  - id: wide-list-details
+    alt: The adaptive list-and-detail page showing My Items on the left and the selected item's details on the right.
+    scenario: adaptive-list-details
+    capture:
+      mode: automatic
+      readinessSelector: text=My Items
+      notes: Capture the initial wide layout at a window width of at least 720 pixels.

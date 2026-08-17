@@ -26,6 +26,20 @@ Run scenario 1 first to create `sample.dat`; the other scenarios operate on it.
 - `Windows.Storage.AccessCache.StorageApplicationPermissions`
 - `Microsoft.Windows.Storage.Pickers.FileOpenPicker` (Windows App SDK picker)
 
+## Learn docs this serves
+
+- [Create, write, and read a file](https://learn.microsoft.com/windows/uwp/files/quickstart-reading-and-writing-files)
+- [File access permissions](https://learn.microsoft.com/windows/uwp/files/file-access-permissions)
+- [Windows App SDK FileOpenPicker class](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.storage.pickers.fileopenpicker)
+
+## Requirements
+
+- Windows 10 version 1809 (10.0.17763.0) or later.
+- The manifest declares `picturesLibrary` so the sample can create `sample.dat` in the
+  current user's Pictures library.
+- The packaged desktop app also declares `runFullTrust`.
+- Run scenario 1 before scenarios that read, update, compare, copy, or delete `sample.dat`.
+
 ## Build & run
 
 ```powershell

@@ -1,0 +1,512 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: sensors
+project:
+  folder: Sensors
+  name: Sensors
+title: Reading motion, environment, activity, and presence sensors
+summary: Discover available Windows sensors and read motion, orientation, environmental, activity, step, presence, and proximity data through events or polling.
+aliases:
+  - Sensors
+  - Accelerometer
+  - Gyrometer
+  - Inclinometer
+  - OrientationSensor
+  - Compass
+  - Magnetometer
+  - Altimeter
+  - Barometer
+  - LightSensor
+  - HumanPresenceSensor
+  - ActivitySensor
+  - Pedometer
+  - ProximitySensor
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary: []
+tags:
+  - sensors
+  - motion
+  - orientation
+  - environment
+  - activity
+  - presence
+  - polling
+  - events
+originalSamples:
+  - name: Accelerometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Accelerometer
+  - name: ActivitySensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ActivitySensor
+  - name: Altimeter
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Altimeter
+  - name: Barometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Barometer
+  - name: Compass
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Compass
+  - name: Gyrometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Gyrometer
+  - name: Inclinometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Inclinometer
+  - name: LightSensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LightSensor
+  - name: Magnetometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Magnetometer
+  - name: OrientationSensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/OrientationSensor
+  - name: Pedometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Pedometer
+  - name: PresenceSensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PresenceSensor
+  - name: ProximitySensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ProximitySensor
+  - name: RelativeInclinometer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/RelativeInclinometer
+  - name: SimpleOrientationSensor
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SimpleOrientationSensor
+scenarios:
+  - id: accelerometer-choose
+    title: Choose an accelerometer reading type
+    summary: Select standard, linear, or gravity acceleration for the other accelerometer scenarios.
+    apis:
+      - Windows.Devices.Sensors.Accelerometer.GetDefault
+      - Windows.Devices.Sensors.AccelerometerReadingType
+    sourceFiles:
+      - Scenarios/Accelerometer/Scenario0_AccelerometerChoose.xaml
+      - Scenarios/Accelerometer/Scenario0_AccelerometerChoose.xaml.cs
+  - id: accelerometer-data-events
+    title: Read accelerometer data events
+    summary: Subscribe to acceleration readings and update X, Y, and Z values as events arrive.
+    apis:
+      - Windows.Devices.Sensors.Accelerometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Accelerometer/Scenario1_AccelerometerDataEvents.xaml
+      - Scenarios/Accelerometer/Scenario1_AccelerometerDataEvents.xaml.cs
+  - id: accelerometer-shake-events
+    title: Detect accelerometer shake events
+    summary: Listen for the accelerometer's shake notification and report each detected shake.
+    apis:
+      - Windows.Devices.Sensors.Accelerometer.Shaken
+    sourceFiles:
+      - Scenarios/Accelerometer/Scenario2_AccelerometerShakeEvents.xaml
+      - Scenarios/Accelerometer/Scenario2_AccelerometerShakeEvents.xaml.cs
+  - id: accelerometer-polling
+    title: Poll accelerometer readings
+    summary: Request the current acceleration reading on demand instead of subscribing to events.
+    apis:
+      - Windows.Devices.Sensors.Accelerometer.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Accelerometer/Scenario3_AccelerometerPolling.xaml
+      - Scenarios/Accelerometer/Scenario3_AccelerometerPolling.xaml.cs
+  - id: accelerometer-batching
+    title: Batch accelerometer data events
+    summary: Configure report latency and consume batches of accelerometer readings when the device supports batching.
+    apis:
+      - Windows.Devices.Sensors.Accelerometer.MaxBatchSize
+      - Windows.Devices.Sensors.Accelerometer.ReportLatency
+      - Windows.Devices.Sensors.Accelerometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Accelerometer/Scenario5_AccelerometerDataEventsBatching.xaml
+      - Scenarios/Accelerometer/Scenario5_AccelerometerDataEventsBatching.xaml.cs
+  - id: gyrometer-data-events
+    title: Read gyrometer data events
+    summary: Subscribe to angular velocity readings and display values for each axis.
+    apis:
+      - Windows.Devices.Sensors.Gyrometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Gyrometer/Scenario1_GyrometerDataEvents.xaml
+      - Scenarios/Gyrometer/Scenario1_GyrometerDataEvents.xaml.cs
+  - id: gyrometer-polling
+    title: Poll gyrometer readings
+    summary: Request the current angular velocity reading at a controlled interval.
+    apis:
+      - Windows.Devices.Sensors.Gyrometer.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Gyrometer/Scenario2_GyrometerPolling.xaml
+      - Scenarios/Gyrometer/Scenario2_GyrometerPolling.xaml.cs
+  - id: gyrometer-porting
+    title: Compare gyrometer porting patterns
+    summary: Demonstrate a portable gyrometer-reading pattern and report angular velocity in the WinUI page.
+    apis:
+      - Windows.Devices.Sensors.Gyrometer
+    sourceFiles:
+      - Scenarios/Gyrometer/Scenario3_GyrometerPorting.xaml
+      - Scenarios/Gyrometer/Scenario3_GyrometerPorting.xaml.cs
+  - id: inclinometer-data-events
+    title: Read inclinometer data events
+    summary: Subscribe to pitch, roll, and yaw readings from the default inclinometer.
+    apis:
+      - Windows.Devices.Sensors.Inclinometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Inclinometer/Scenario1_InclinometerDataEvents.xaml
+      - Scenarios/Inclinometer/Scenario1_InclinometerDataEvents.xaml.cs
+  - id: inclinometer-polling
+    title: Poll inclinometer readings
+    summary: Request the current pitch, roll, and yaw values without an event subscription.
+    apis:
+      - Windows.Devices.Sensors.Inclinometer.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Inclinometer/Scenario2_InclinometerPolling.xaml
+      - Scenarios/Inclinometer/Scenario2_InclinometerPolling.xaml.cs
+  - id: inclinometer-calibration
+    title: Simulate inclinometer calibration states
+    summary: Preview the shared calibration bar for simulated reliable, approximate, unreliable, and unknown accuracy states.
+    sourceFiles:
+      - Scenarios/Inclinometer/Scenario3_InclinometerCalibration.xaml
+      - Scenarios/Inclinometer/Scenario3_InclinometerCalibration.xaml.cs
+  - id: relative-inclinometer-data-events
+    title: Read relative inclinometer data events
+    summary: Subscribe to a relative inclinometer and report pitch, roll, and yaw changes from its reference orientation.
+    apis:
+      - Windows.Devices.Sensors.Inclinometer.GetDefault
+      - Windows.Devices.Sensors.SensorReadingType.Relative
+    sourceFiles:
+      - Scenarios/RelativeInclinometer/Scenario1_RelativeInclinometerDataEvents.xaml
+      - Scenarios/RelativeInclinometer/Scenario1_RelativeInclinometerDataEvents.xaml.cs
+  - id: relative-inclinometer-polling
+    title: Poll relative inclinometer readings
+    summary: Request relative pitch, roll, and yaw values on demand.
+    apis:
+      - Windows.Devices.Sensors.Inclinometer.GetCurrentReading
+      - Windows.Devices.Sensors.SensorReadingType.Relative
+    sourceFiles:
+      - Scenarios/RelativeInclinometer/Scenario2_RelativeInclinometerPolling.xaml
+      - Scenarios/RelativeInclinometer/Scenario2_RelativeInclinometerPolling.xaml.cs
+  - id: orientation-sensor-choose
+    title: Choose an orientation sensor
+    summary: Select absolute or relative orientation readings for the remaining orientation scenarios.
+    apis:
+      - Windows.Devices.Sensors.OrientationSensor.GetDefault
+      - Windows.Devices.Sensors.SensorReadingType
+    sourceFiles:
+      - Scenarios/OrientationSensor/Scenario0_OrientationSensorChoose.xaml
+      - Scenarios/OrientationSensor/Scenario0_OrientationSensorChoose.xaml.cs
+  - id: orientation-sensor-data-events
+    title: Read orientation data events
+    summary: Subscribe to quaternion and rotation-matrix orientation readings.
+    apis:
+      - Windows.Devices.Sensors.OrientationSensor.ReadingChanged
+    sourceFiles:
+      - Scenarios/OrientationSensor/Scenario1_OrientationSensorDataEvents.xaml
+      - Scenarios/OrientationSensor/Scenario1_OrientationSensorDataEvents.xaml.cs
+  - id: orientation-sensor-polling
+    title: Poll orientation readings
+    summary: Request the current quaternion and rotation matrix on demand.
+    apis:
+      - Windows.Devices.Sensors.OrientationSensor.GetCurrentReading
+    sourceFiles:
+      - Scenarios/OrientationSensor/Scenario2_OrientationSensorPolling.xaml
+      - Scenarios/OrientationSensor/Scenario2_OrientationSensorPolling.xaml.cs
+  - id: orientation-sensor-calibration
+    title: Simulate orientation calibration states
+    summary: Preview the shared calibration bar for simulated reliable, approximate, unreliable, and unknown accuracy states.
+    sourceFiles:
+      - Scenarios/OrientationSensor/Scenario3_OrientationSensorCalibration.xaml
+      - Scenarios/OrientationSensor/Scenario3_OrientationSensorCalibration.xaml.cs
+  - id: simple-orientation-data-events
+    title: Read simple orientation events
+    summary: Subscribe to coarse device-orientation changes such as face up, face down, and rotated positions.
+    apis:
+      - Windows.Devices.Sensors.SimpleOrientationSensor.OrientationChanged
+    sourceFiles:
+      - Scenarios/SimpleOrientationSensor/Scenario1_SimpleOrientationSensorDataEvents.xaml
+      - Scenarios/SimpleOrientationSensor/Scenario1_SimpleOrientationSensorDataEvents.xaml.cs
+  - id: simple-orientation-polling
+    title: Poll simple orientation
+    summary: Request the current coarse device orientation without subscribing to events.
+    apis:
+      - Windows.Devices.Sensors.SimpleOrientationSensor.GetCurrentOrientation
+    sourceFiles:
+      - Scenarios/SimpleOrientationSensor/Scenario2_SimpleOrientationSensorPolling.xaml
+      - Scenarios/SimpleOrientationSensor/Scenario2_SimpleOrientationSensorPolling.xaml.cs
+  - id: compass-data-events
+    title: Read compass data events
+    summary: Subscribe to magnetic-north and true-north heading updates.
+    apis:
+      - Windows.Devices.Sensors.Compass.ReadingChanged
+    sourceFiles:
+      - Scenarios/Compass/Scenario1_CompassDataEvents.xaml
+      - Scenarios/Compass/Scenario1_CompassDataEvents.xaml.cs
+  - id: compass-polling
+    title: Poll compass readings
+    summary: Request current compass headings on demand.
+    apis:
+      - Windows.Devices.Sensors.Compass.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Compass/Scenario2_CompassPolling.xaml
+      - Scenarios/Compass/Scenario2_CompassPolling.xaml.cs
+  - id: compass-calibration
+    title: Simulate compass calibration states
+    summary: Preview the compass calibration bar for simulated reliable, approximate, unreliable, and unknown accuracy states.
+    sourceFiles:
+      - Scenarios/Compass/Scenario3_CompassCalibration.xaml
+      - Scenarios/Compass/Scenario3_CompassCalibration.xaml.cs
+  - id: magnetometer-data-events
+    title: Read magnetometer data events
+    summary: Subscribe to magnetic field strength readings for the X, Y, and Z axes.
+    apis:
+      - Windows.Devices.Sensors.Magnetometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Magnetometer/Scenario1_MagnetometerDataEvents.xaml
+      - Scenarios/Magnetometer/Scenario1_MagnetometerDataEvents.xaml.cs
+  - id: magnetometer-polling
+    title: Poll magnetometer readings
+    summary: Request the current magnetic field reading and calibration accuracy.
+    apis:
+      - Windows.Devices.Sensors.Magnetometer.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Magnetometer/Scenario2_MagnetometerPolling.xaml
+      - Scenarios/Magnetometer/Scenario2_MagnetometerPolling.xaml.cs
+  - id: altimeter-data-events
+    title: Read altimeter data events
+    summary: Subscribe to altitude changes reported in meters.
+    apis:
+      - Windows.Devices.Sensors.Altimeter.ReadingChanged
+    sourceFiles:
+      - Scenarios/Altimeter/Scenario1_AltimeterDataEvents.xaml
+      - Scenarios/Altimeter/Scenario1_AltimeterDataEvents.xaml.cs
+  - id: altimeter-polling
+    title: Poll altimeter readings
+    summary: Request the current altitude reading on demand.
+    apis:
+      - Windows.Devices.Sensors.Altimeter.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Altimeter/Scenario2_AltimeterPolling.xaml
+      - Scenarios/Altimeter/Scenario2_AltimeterPolling.xaml.cs
+  - id: barometer-data-events
+    title: Read barometer data events
+    summary: Subscribe to atmospheric pressure changes reported in hectopascals.
+    apis:
+      - Windows.Devices.Sensors.Barometer.ReadingChanged
+    sourceFiles:
+      - Scenarios/Barometer/Scenario1_BarometerDataEvents.xaml
+      - Scenarios/Barometer/Scenario1_BarometerDataEvents.xaml.cs
+  - id: barometer-polling
+    title: Poll barometer readings
+    summary: Request the current atmospheric pressure reading on demand.
+    apis:
+      - Windows.Devices.Sensors.Barometer.GetCurrentReading
+    sourceFiles:
+      - Scenarios/Barometer/Scenario2_BarometerPolling.xaml
+      - Scenarios/Barometer/Scenario2_BarometerPolling.xaml.cs
+  - id: light-sensor-data-events
+    title: Read ambient light data events
+    summary: Subscribe to illuminance changes reported in lux.
+    apis:
+      - Windows.Devices.Sensors.LightSensor.ReadingChanged
+    sourceFiles:
+      - Scenarios/LightSensor/Scenario1_LightSensorDataEvents.xaml
+      - Scenarios/LightSensor/Scenario1_LightSensorDataEvents.xaml.cs
+  - id: light-sensor-polling
+    title: Poll ambient light readings
+    summary: Request the current illuminance reading on demand.
+    apis:
+      - Windows.Devices.Sensors.LightSensor.GetCurrentReading
+    sourceFiles:
+      - Scenarios/LightSensor/Scenario2_LightSensorPolling.xaml
+      - Scenarios/LightSensor/Scenario2_LightSensorPolling.xaml.cs
+  - id: presence-sensor-data-events
+    title: Read presence data events
+    summary: Subscribe to human presence changes from the default presence sensor.
+    apis:
+      - Windows.Devices.Sensors.HumanPresenceSensor.ReadingChanged
+    sourceFiles:
+      - Scenarios/PresenceSensor/Scenario1_PresenceSensorDataEvents.xaml
+      - Scenarios/PresenceSensor/Scenario1_PresenceSensorDataEvents.xaml.cs
+  - id: presence-sensor-polling
+    title: Poll presence readings
+    summary: Request the current human presence reading without an event subscription.
+    apis:
+      - Windows.Devices.Sensors.HumanPresenceSensor.GetCurrentReading
+    sourceFiles:
+      - Scenarios/PresenceSensor/Scenario2_PresenceSensorPolling.xaml
+      - Scenarios/PresenceSensor/Scenario2_PresenceSensorPolling.xaml.cs
+  - id: presence-sensor-choosing
+    title: Choose a presence sensor
+    summary: Enumerate compatible presence sensors and select one for explicit access.
+    apis:
+      - Windows.Devices.Sensors.HumanPresenceSensor.GetDeviceSelector
+      - Windows.Devices.Sensors.HumanPresenceSensor.FromIdAsync
+    sourceFiles:
+      - Scenarios/PresenceSensor/Scenario3_PresenceSensorChoosing.xaml
+      - Scenarios/PresenceSensor/Scenario3_PresenceSensorChoosing.xaml.cs
+  - id: activity-sensor-current
+    title: Read the current activity
+    summary: Request the current detected activity after checking device access.
+    apis:
+      - Windows.Devices.Sensors.ActivitySensor.GetCurrentReadingAsync
+      - Windows.Devices.Enumeration.DeviceAccessInformation
+    sourceFiles:
+      - Scenarios/ActivitySensor/Scenario1_ActivitySensorCurrentActivity.xaml
+      - Scenarios/ActivitySensor/Scenario1_ActivitySensorCurrentActivity.xaml.cs
+  - id: activity-sensor-history
+    title: Read activity history
+    summary: Query recent activity readings over a selected history interval.
+    apis:
+      - Windows.Devices.Sensors.ActivitySensor.GetSystemHistoryAsync
+    sourceFiles:
+      - Scenarios/ActivitySensor/Scenario2_ActivitySensorHistory.xaml
+      - Scenarios/ActivitySensor/Scenario2_ActivitySensorHistory.xaml.cs
+  - id: activity-sensor-events
+    title: Read activity change events
+    summary: Subscribe to activity changes and display the confidence of each new reading.
+    apis:
+      - Windows.Devices.Sensors.ActivitySensor.ReadingChanged
+    sourceFiles:
+      - Scenarios/ActivitySensor/Scenario3_ActivitySensorChangeEvents.xaml
+      - Scenarios/ActivitySensor/Scenario3_ActivitySensorChangeEvents.xaml.cs
+  - id: pedometer-events
+    title: Read pedometer events
+    summary: Subscribe to step-kind, cumulative-step, and duration changes after checking device access.
+    apis:
+      - Windows.Devices.Sensors.Pedometer.ReadingChanged
+      - Windows.Devices.Enumeration.DeviceAccessInformation
+    sourceFiles:
+      - Scenarios/Pedometer/Scenario1_PedometerEvents.xaml
+      - Scenarios/Pedometer/Scenario1_PedometerEvents.xaml.cs
+  - id: pedometer-history
+    title: Read pedometer history
+    summary: Query step readings stored for a recent history interval.
+    apis:
+      - Windows.Devices.Sensors.Pedometer.GetSystemHistoryAsync
+    sourceFiles:
+      - Scenarios/Pedometer/Scenario2_PedometerHistory.xaml
+      - Scenarios/Pedometer/Scenario2_PedometerHistory.xaml.cs
+  - id: pedometer-current
+    title: Read the current step count
+    summary: Retrieve the current cumulative step counts and durations by step kind.
+    apis:
+      - Windows.Devices.Sensors.Pedometer.GetCurrentReadings
+    sourceFiles:
+      - Scenarios/Pedometer/Scenario3_PedometerCurrentStepCount.xaml
+      - Scenarios/Pedometer/Scenario3_PedometerCurrentStepCount.xaml.cs
+  - id: proximity-sensor-data-events
+    title: Read proximity data events
+    summary: Subscribe to proximity changes and report whether an object is detected.
+    apis:
+      - Windows.Devices.Sensors.ProximitySensor.ReadingChanged
+    sourceFiles:
+      - Scenarios/ProximitySensor/Scenario1_ProximitySensorDataEvents.xaml
+      - Scenarios/ProximitySensor/Scenario1_ProximitySensorDataEvents.xaml.cs
+  - id: proximity-sensor-polling
+    title: Poll proximity readings
+    summary: Request the current proximity reading on demand.
+    apis:
+      - Windows.Devices.Sensors.ProximitySensor.GetCurrentReading
+    sourceFiles:
+      - Scenarios/ProximitySensor/Scenario2_ProximitySensorPolling.xaml
+      - Scenarios/ProximitySensor/Scenario2_ProximitySensorPolling.xaml.cs
+  - id: proximity-sensor-display
+    title: Control the display from proximity
+    summary: Request that Windows turn the display off while the proximity sensor detects a nearby object.
+    apis:
+      - Windows.Devices.Sensors.ProximitySensor.CreateDisplayOnOffController
+    sourceFiles:
+      - Scenarios/ProximitySensor/Scenario3_ProximitySensorDisplayOnOff.xaml
+      - Scenarios/ProximitySensor/Scenario3_ProximitySensorDisplayOnOff.xaml.cs
+apis:
+  - name: Windows.Devices.Sensors.Accelerometer
+    description: Supplies acceleration readings, shake events, reading-type selection, polling, and batching.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.accelerometer
+  - name: Windows.Devices.Sensors.Gyrometer
+    description: Supplies angular velocity readings through events or polling.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.gyrometer
+  - name: Windows.Devices.Sensors.Inclinometer
+    description: Supplies absolute or relative pitch, roll, and yaw readings.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.inclinometer
+  - name: Windows.Devices.Sensors.OrientationSensor
+    description: Supplies absolute or relative quaternion and rotation-matrix readings.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.orientationsensor
+  - name: Windows.Devices.Sensors.SimpleOrientationSensor
+    description: Reports coarse device orientations such as face up, face down, and rotations.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.simpleorientationsensor
+  - name: Windows.Devices.Sensors.Compass
+    description: Reports magnetic-north and true-north headings with calibration accuracy.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.compass
+  - name: Windows.Devices.Sensors.Magnetometer
+    description: Reports magnetic field strength on three axes and calibration accuracy.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.magnetometer
+  - name: Windows.Devices.Sensors.Altimeter
+    description: Reports altitude changes in meters.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.altimeter
+  - name: Windows.Devices.Sensors.Barometer
+    description: Reports atmospheric pressure in hectopascals.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.barometer
+  - name: Windows.Devices.Sensors.LightSensor
+    description: Reports ambient illuminance in lux.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.lightsensor
+  - name: Windows.Devices.Sensors.HumanPresenceSensor
+    description: Enumerates presence sensors and reports current or changed human presence readings.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.humanpresencesensor
+  - name: Windows.Devices.Sensors.ActivitySensor
+    description: Reports current, historical, and changed activity readings.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.activitysensor
+  - name: Windows.Devices.Sensors.Pedometer
+    description: Reports current, historical, and changed step counts and durations.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.pedometer
+  - name: Windows.Devices.Sensors.ProximitySensor
+    description: Reports nearby-object detection and can provide a display on/off controller.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.proximitysensor
+documentation:
+  - title: Sensors for Windows apps
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/sensors
+    kind: learn
+  - title: Accelerometer API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.accelerometer
+    kind: api-reference
+  - title: HumanPresenceSensor API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.humanpresencesensor
+    kind: api-reference
+  - title: ActivitySensor API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.sensors.activitysensor
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: activity
+      kind: device
+      description: Allows the activity and pedometer scenarios to request protected activity-related sensor data.
+    - name: humanPresence
+      kind: device
+      description: Allows the presence scenarios to access compatible human presence sensors.
+  hardware:
+    - Compatible motion or orientation hardware is required for accelerometer, gyrometer, inclinometer, orientation, compass, and magnetometer results.
+    - Compatible environmental hardware is required for altitude, pressure, and ambient-light results.
+    - Compatible activity, pedometer, human-presence, or proximity hardware is required for those feature groups.
+  accountServices: []
+  architectureNotes: The manifest minimum is 17763, but HumanPresenceSensor requires build 22621 or later; other sensor availability varies by hardware on all architectures.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Consolidated sensor catalog
+    description: Registers all 42 scenarios across 15 motion, orientation, environment, activity, presence, and proximity feature groups.
+  - path: Scenarios/Accelerometer/Scenario0_AccelerometerChoose.xaml.cs
+    label: Choose acceleration data
+    description: Selects a supported accelerometer reading type for the related scenarios.
+  - path: Scenarios/Accelerometer/Scenario1_AccelerometerDataEvents.xaml.cs
+    label: Sensor event lifecycle
+    description: Subscribes to readings and coordinates visibility and dispatcher behavior for live UI updates.
+  - path: Scenarios/ActivitySensor/Scenario1_ActivitySensorCurrentActivity.xaml.cs
+    label: Protected sensor access
+    description: Checks DeviceAccessInformation before requesting a current activity reading.
+  - path: Scenarios/Pedometer/Scenario1_PedometerEvents.xaml.cs
+    label: Pedometer access and events
+    description: Tracks device-access changes and presents step readings as events arrive.
+  - path: Scenarios/PresenceSensor/Scenario3_PresenceSensorChoosing.xaml.cs
+    label: Choose a presence sensor
+    description: Enumerates presence sensor devices and opens the selected sensor by identifier.
+screenshots:
+  - id: accelerometer-events
+    alt: The Sensors app showing live X, Y, and Z accelerometer values beside enable and disable controls.
+    scenario: accelerometer-data-events
+    capture:
+      mode: manual
+      readinessSelector: Name=ScenarioEnableButton
+      notes: Capture on a device with an available accelerometer after enabling readings; no software or hardware fallback is assumed.

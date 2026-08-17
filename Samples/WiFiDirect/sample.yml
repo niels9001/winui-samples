@@ -1,0 +1,138 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: wifi-direct
+project:
+  folder: WiFiDirect
+  name: WiFiDirect
+title: Connecting devices with Wi-Fi Direct
+summary: Advertise, discover, pair, and connect Wi-Fi Direct peers, then exchange framed text through a peer-to-peer TCP socket.
+aliases:
+  - WiFiDirect
+  - Wi-Fi Direct
+  - peer-to-peer Wi-Fi
+  - WiFiDirectDevice
+  - WiFiDirectAdvertisementPublisher
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - devices-and-sensors
+tags:
+  - Wi-Fi Direct
+  - peer-to-peer
+  - device discovery
+  - pairing
+  - StreamSocket
+originalSamples:
+  - name: WiFiDirect
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WiFiDirect
+scenarios:
+  - id: advertise-and-accept-a-peer
+    title: Advertising and accepting a peer
+    summary: Publish Wi-Fi Direct settings and information elements, accept an inbound connection, pair, and exchange text.
+    apis:
+      - Windows.Devices.WiFiDirect.WiFiDirectAdvertisementPublisher
+      - Windows.Devices.WiFiDirect.WiFiDirectConnectionListener
+      - Windows.Devices.WiFiDirect.WiFiDirectInformationElement
+      - Windows.Networking.Sockets.StreamSocketListener
+    sourceFiles:
+      - Scenario1_Advertiser.xaml
+      - Scenario1_Advertiser.xaml.cs
+      - ConnectionSettingsPanel.xaml
+      - ConnectionSettingsPanel.xaml.cs
+      - SocketReaderWriter.cs
+  - id: discover-and-connect-to-a-peer
+    title: Discovering and connecting to a peer
+    summary: Watch for Wi-Fi Direct devices, inspect their information elements, pair on demand, and open a TCP connection.
+    apis:
+      - Windows.Devices.Enumeration.DeviceWatcher
+      - Windows.Devices.WiFiDirect.WiFiDirectDevice
+      - Windows.Devices.WiFiDirect.WiFiDirectConnectionParameters
+      - Windows.Networking.Sockets.StreamSocket
+    sourceFiles:
+      - Scenario2_Connector.xaml
+      - Scenario2_Connector.xaml.cs
+      - ConnectionSettingsPanel.xaml
+      - ConnectionSettingsPanel.xaml.cs
+      - SocketReaderWriter.cs
+apis:
+  - name: Windows.Devices.WiFiDirect.WiFiDirectAdvertisementPublisher
+    description: Publishes Wi-Fi Direct advertisement settings and custom information elements.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectadvertisementpublisher?view=winrt-28000
+  - name: Windows.Devices.WiFiDirect.WiFiDirectConnectionListener
+    description: Reports inbound Wi-Fi Direct connection requests to the advertiser.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectconnectionlistener?view=winrt-28000
+  - name: Windows.Devices.WiFiDirect.WiFiDirectDevice
+    description: Represents the connected peer and exposes endpoint pairs for socket communication.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectdevice?view=winrt-28000
+  - name: Windows.Devices.WiFiDirect.WiFiDirectConnectionParameters
+    description: Configures group-owner intent, preferred pairing procedures, and connection behavior.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectconnectionparameters?view=winrt-28000
+  - name: Windows.Devices.WiFiDirect.WiFiDirectInformationElement
+    description: Encodes and reads custom information carried by Wi-Fi Direct advertisements.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectinformationelement?view=winrt-28000
+  - name: Windows.Networking.Sockets.StreamSocket
+    description: Carries length-prefixed UTF-8 messages over the established peer-to-peer connection.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamsocket?view=winrt-28000
+  - name: Windows.Networking.Sockets.StreamSocketListener
+    description: Accepts the advertiser-side TCP connection after the Wi-Fi Direct peer has paired.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamsocketlistener?view=winrt-28000
+documentation:
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/en-us/windows/apps/develop/devices-sensors/enumerate-devices
+    kind: learn
+  - title: Windows.Devices.WiFiDirect namespace
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect?view=winrt-28000
+    kind: api-reference
+  - title: WiFiDirectDevice class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifidirect.wifidirectdevice?view=winrt-28000
+    kind: api-reference
+  - title: StreamSocketListener class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamsocketlistener?view=winrt-28000
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClientServer
+      kind: general
+      description: Allows the packaged app to accept and initiate socket connections for peer text exchange.
+    - name: proximity
+      kind: device
+      description: Allows discovery, pairing, and communication with nearby Wi-Fi Direct devices.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Two nearby devices with Wi-Fi Direct-capable adapters and drivers, with Wi-Fi enabled on both.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; supported pairing methods, legacy mode, and information elements depend on adapter and driver support.
+featuredFiles:
+  - path: Scenario1_Advertiser.xaml.cs
+    label: Wi-Fi Direct advertiser
+    description: Publishes settings, accepts a peer request, pairs, and starts the listener for text exchange.
+  - path: Scenario2_Connector.xaml.cs
+    label: Wi-Fi Direct connector
+    description: Watches for peers, reads advertisement data, pairs, and opens the peer socket.
+  - path: ConnectionSettingsPanel.xaml.cs
+    label: Pairing configuration
+    description: Centralizes group-owner intent, configuration methods, and pairing-procedure choices.
+  - path: SocketReaderWriter.cs
+    label: Peer message transport
+    description: Reads and writes UTF-8 messages framed with a four-byte length prefix.
+  - path: Utils.cs
+    label: Pairing and UI helpers
+    description: Coordinates dispatcher-safe pairing prompts and shared Wi-Fi Direct operations.
+relatedSamples:
+  - wifi-scan
+screenshots:
+  - id: advertiser-settings
+    alt: The Wi-Fi Direct advertiser page showing listen state, legacy settings, a custom information element, and advertisement controls.
+    scenario: advertise-and-accept-a-peer
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=StartAdvertisementButton
+      notes: Do not start advertising unless compatible Wi-Fi Direct hardware is available; peer validation requires a second device.

@@ -1,11 +1,14 @@
-# ApplicationData
+# Storing settings and app data across sessions
 
-Ported to WinUI 3 / Windows App SDK from the UWP
+The `ApplicationData` project was ported to WinUI 3 / Windows App SDK from the UWP
 [ApplicationData](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ApplicationData) sample.
 
 ## What it shows
 
-This sample shows how to store and retrieve per-user app data using the Windows Runtime application data APIs. It demonstrates local, local cache, temporary, and roaming app-data folders, local settings and setting containers, composite settings, the `ms-appdata://` URI scheme, clearing app data, and app data versioning.
+Store and retrieve per-user app data using Windows Runtime APIs. The seven scenarios cover
+local, local-cache, temporary, and roaming app-data folders; local settings and setting
+containers; composite settings; the `ms-appdata://` URI scheme; clearing app data; and
+app-data versioning.
 
 ## APIs featured
 
@@ -30,9 +33,19 @@ dotnet run -c Debug -p:Platform=x64
 
 ## Migration notes
 
-This is a faithful WinUI 3 / Windows App SDK port that keeps the original `SDKTemplate` namespace and code-behind scenario structure while using the shared NavigationView/InfoBar shell from `templates\ShellTemplate`. XAML namespaces were moved from UWP XAML to WinUI 3 (`Microsoft.UI.Xaml` in code-behind), and scenario pages do not set explicit page backgrounds so the shell Mica backdrop shows through.
+This port keeps the original `SDKTemplate` namespace and code-behind scenario structure while
+using the shared NavigationView/InfoBar shell. XAML namespaces moved from UWP XAML to WinUI 3
+(`Microsoft.UI.Xaml` in code-behind), and scenario pages leave their backgrounds unset so Mica
+shows through.
 
-Known differences / limitations:
+## Known differences / limitations
 
-- The source UWP sample uses `ApplicationData.RoamingFolder` for the `ms-appdata:///roaming/...` image example. The API is still available to packaged apps, but Microsoft Learn states that roaming app data and settings are no longer supported as of Windows 11 and recommends using a service such as Azure App Service for cross-device synchronization. This port keeps the roaming folder scenario for API compatibility, but it behaves as local package data and does not demonstrate real cross-device roaming on Windows 11.
-- The current upstream UWP sample snapshot only contains shared XAML for scenarios 6 and 7. The XAML for scenarios 1 through 5 was recreated to match the original code-behind control names and event handlers.
+- The source UWP sample uses `ApplicationData.RoamingFolder` for the
+  `ms-appdata:///roaming/...` image example. The API remains available to packaged apps, but
+  Microsoft Learn states that roaming app data and settings are no longer supported as of
+  Windows 11 and recommends a service for cross-device synchronization. This port keeps the
+  scenario for API compatibility, but it does not demonstrate real cross-device roaming on
+  Windows 11.
+- The current upstream UWP snapshot contains shared XAML only for scenarios 6 and 7. The XAML
+  for scenarios 1 through 5 was recreated to match the original code-behind control names and
+  event handlers.

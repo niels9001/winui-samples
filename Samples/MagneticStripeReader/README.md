@@ -1,4 +1,4 @@
-# Magnetic stripe reader
+# MagneticStripeReader
 
 Ported to WinUI 3 / Windows App SDK from the UWP
 [MagneticStripeReader](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MagneticStripeReader)
@@ -6,9 +6,9 @@ sample.
 
 ## What it shows
 
-This sample discovers, claims, and enables a point-of-service magnetic stripe reader. It
-handles decoded bank-card and AAMVA motor-vehicle-card data and retains the device when
-another application requests its claim.
+This sample discovers, claims, and enables a point-of-service magnetic stripe reader. The
+two scenarios read decoded bank-card data and AAMVA motor-vehicle-card data. Both retain the
+claimed reader when another application requests it.
 
 ## APIs featured
 
@@ -38,5 +38,6 @@ with `DispatcherQueue`, and claimed-reader event handlers and device objects are
 when a scenario ends or navigation changes.
 
 The package retains the `pointOfService` device capability. A compatible magnetic stripe
-reader is required to receive card data; without one, either scenario reports that no reader
-was found.
+reader and a suitable encoded card are required to receive decoded data. Without reader
+hardware, either scenario reports that no reader was found. Hardware-dependent behavior has
+not been claimed as validated by this documentation update.

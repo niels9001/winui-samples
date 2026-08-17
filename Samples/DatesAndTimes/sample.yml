@@ -1,0 +1,168 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: dates-and-times
+project:
+  folder: DatesAndTimes
+  name: DatesAndTimes
+title: Formatting dates and navigating calendar systems
+summary: Format dates for languages and time zones, inspect calendar data, and perform calendar-aware enumeration and arithmetic.
+aliases:
+  - DatesAndTimes
+  - DateTimeFormatting
+  - Calendar
+  - DateTimeFormatter
+icon: CalendarRegular
+categories:
+  primary: app-fundamentals
+  secondary: []
+tags:
+  - dates
+  - time
+  - calendars
+  - time zones
+  - globalization
+originalSamples:
+  - name: DateTimeFormatting
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DateTimeFormatting
+  - name: Calendar
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Calendar
+scenarios:
+  - id: long-short-formats
+    title: Long and short formats
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario1_LongAndShortFormats.xaml.cs
+  - id: string-template
+    title: Format via string template
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario2_StringTemplate.xaml.cs
+  - id: parameterized-template
+    title: Format via parameterized template
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario3_ParameterizedTemplate.xaml.cs
+  - id: override-global-context
+    title: Override the user's global context
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+      - Windows.Globalization.CalendarIdentifiers
+      - Windows.Globalization.ClockIdentifiers
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario4_Override.xaml.cs
+  - id: formatter-unicode-extensions
+    title: Unicode extensions
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario5_UnicodeExtensions.xaml.cs
+  - id: formatter-time-zones
+    title: Time zones
+    apis:
+      - Windows.Globalization.DateTimeFormatting.DateTimeFormatter.Format
+    sourceFiles:
+      - Scenarios/DateTimeFormatting/Scenario6_TimeZone.xaml.cs
+  - id: calendar-data
+    title: Calendar data
+    apis:
+      - Windows.Globalization.Calendar
+      - Windows.Globalization.CalendarIdentifiers
+    sourceFiles:
+      - Scenarios/Calendar/Scenario1_Data.xaml.cs
+  - id: calendar-statistics
+    title: Calendar statistics
+    apis:
+      - Windows.Globalization.Calendar
+    sourceFiles:
+      - Scenarios/Calendar/Scenario2_Stats.xaml.cs
+  - id: calendar-enumeration-math
+    title: Enumeration and math
+    apis:
+      - Windows.Globalization.Calendar
+      - Windows.Globalization.CalendarIdentifiers
+    sourceFiles:
+      - Scenarios/Calendar/Scenario3_Enum.xaml.cs
+  - id: calendar-unicode-extensions
+    title: Unicode extensions
+    apis:
+      - Windows.Globalization.Calendar
+    sourceFiles:
+      - Scenarios/Calendar/Scenario4_UnicodeExtensions.xaml.cs
+  - id: calendar-time-zone
+    title: Time zone support
+    apis:
+      - Windows.Globalization.Calendar.GetTimeZone
+      - Windows.Globalization.Calendar.ChangeTimeZone
+    sourceFiles:
+      - Scenarios/Calendar/Scenario5_TimeZone.xaml.cs
+apis:
+  - name: Windows.Globalization.DateTimeFormatting.DateTimeFormatter
+    description: Formats dates and times using templates, language tags, calendar and clock overrides, and time zones.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.datetimeformatting.datetimeformatter
+  - name: Windows.Globalization.Calendar
+    description: Exposes localized calendar fields, calendar arithmetic, era enumeration, and time-zone conversion.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.calendar
+  - name: Windows.Globalization.CalendarIdentifiers
+    description: Identifies the Gregorian, Japanese, Hebrew, and other calendar systems used by the scenarios.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.calendaridentifiers
+  - name: Windows.Globalization.ClockIdentifiers
+    description: Selects 12-hour and 24-hour clock systems for localized calendar output.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.clockidentifiers
+documentation:
+  - title: DateTimeFormatter class
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.datetimeformatting.datetimeformatter
+    kind: api-reference
+  - title: Calendar class
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.calendar
+    kind: api-reference
+  - title: Globalize your app
+    url: https://learn.microsoft.com/windows/apps/design/globalizing/globalizing-portal
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: Results reflect the current date, time zone, and user language settings, but the implementation is identical on x86, x64, and ARM64.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Date and calendar catalog
+    description: Groups all six formatting scenarios and five calendar scenarios.
+  - path: Scenarios/DateTimeFormatting/Scenario1_LongAndShortFormats.xaml.cs
+    label: Long and short formats
+    description: Shows the built-in date and time templates for the current language context.
+  - path: Scenarios/DateTimeFormatting/Scenario4_Override.xaml.cs
+    label: Override global context
+    description: Supplies explicit languages, regions, calendars, and clocks to a formatter.
+  - path: Scenarios/DateTimeFormatting/Scenario6_TimeZone.xaml.cs
+    label: Format across time zones
+    description: Formats one instant for UTC and named time zones.
+  - path: Scenarios/Calendar/Scenario1_Data.xaml.cs
+    label: Inspect calendar data
+    description: Reads localized date fields from default, Japanese, and Hebrew calendars.
+  - path: Scenarios/Calendar/Scenario3_Enum.xaml.cs
+    label: Enumerate and calculate
+    description: Walks Japanese eras and performs calendar arithmetic across a daylight-saving transition.
+  - path: Scenarios/Calendar/Scenario5_TimeZone.xaml.cs
+    label: Change calendar time zones
+    description: Reads and changes a Calendar time zone and compares the resulting fields.
+relatedSamples:
+  - globalization
+screenshots:
+  - id: long-short-formats
+    alt: The dates and times app showing the Long and short formats scenario and its Display action.
+    scenario: long-short-formats
+    capture:
+      mode: automatic
+      readinessSelector: text=Long and short formats
+      notes: Capture the initial scenario before Display is selected so the image does not depend on the current date or user locale.

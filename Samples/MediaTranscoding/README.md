@@ -6,9 +6,9 @@ sample.
 
 ## What it shows
 
-The sample converts MP4 or WMV video using preset encoding profiles, custom audio and video
-settings, or a selected trim range. It also demonstrates progress reporting, cancellation,
-and previewing the source and output.
+This sample converts MP4 or WMV video in three scenarios: built-in encoding presets, custom
+audio and video settings, and a selected trim range. Each workflow demonstrates progress
+reporting, cancellation, and source and output previews.
 
 ## APIs featured
 

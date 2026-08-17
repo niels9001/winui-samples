@@ -132,9 +132,9 @@ documentation:
   - title: File access permissions
     url: https://learn.microsoft.com/windows/uwp/files/file-access-permissions
     kind: learn
-  - title: Pick files and folders with Windows App SDK
-    url: https://learn.microsoft.com/windows/apps/develop/files/using-file-pickers
-    kind: learn
+  - title: Windows App SDK FileOpenPicker class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.storage.pickers.fileopenpicker
+    kind: api-reference
 requirements:
   minimumWindowsVersion: 10.0.17763.0
   supportedArchitectures:

@@ -32,6 +32,13 @@ language-appropriate fonts, and the user's globalization preferences.
 - [Windows.Globalization namespace](https://learn.microsoft.com/uwp/api/windows.globalization)
 - [GlobalizationPreferences class](https://learn.microsoft.com/uwp/api/windows.system.userprofile.globalizationpreferences)
 
+## Requirements
+
+The sample requires Windows 10 version 1809 (10.0.17763.0) or later and declares
+`runFullTrust`. It does not require external hardware, network access, or account services.
+Results depend on installed language resources and the user's language, region, currency,
+calendar, clock, font, and input settings.
+
 ## Build & run
 
 ```powershell
@@ -45,3 +52,8 @@ The related UWP samples are combined into feature groups within one WinUI 3 app.
 Windows globalization APIs remain available to packaged desktop apps. The UWP sample shell
 was replaced with a `NavigationView` and `InfoBar`; no feature-specific limitations are
 known.
+
+## Known differences / limitations
+
+No feature group was intentionally removed. Locale-sensitive output naturally varies with
+the Windows settings and language resources installed on the capture machine.

@@ -1,0 +1,138 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: audio-creation
+project:
+  folder: AudioCreation
+  name: AudioCreation
+title: Building real-time audio graphs and effects
+summary: Build AudioGraph pipelines for file playback, microphone capture, generated frames, submixing, and configurable built-in effects.
+aliases:
+  - AudioCreation
+  - Audio Creation
+  - AudioGraph
+  - Windows.Media.Audio
+icon: VideoRegular
+categories:
+  primary: media
+  secondary: []
+tags:
+  - audio graph
+  - audio capture
+  - audio effects
+  - submix
+  - generated audio
+originalSamples:
+  - name: AudioCreation
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AudioCreation
+scenarios:
+  - id: file-playback
+    title: Play a file through AudioGraph
+    summary: Load an audio file, trim playback, change speed, and configure looping through an AudioFileInputNode.
+    apis:
+      - Windows.Media.Audio.AudioGraph
+      - Windows.Media.Audio.AudioFileInputNode
+      - Windows.Media.Audio.AudioDeviceOutputNode
+    sourceFiles:
+      - Scenarios/AudioCreation/Scenario1_FilePlayback.xaml.cs
+  - id: device-capture
+    title: Capture from an audio device
+    summary: Route a selected microphone through an AudioDeviceInputNode and record it with an AudioFileOutputNode.
+    apis:
+      - Windows.Media.Audio.AudioDeviceInputNode
+      - Windows.Media.Audio.AudioFileOutputNode
+      - Windows.Devices.Enumeration.DeviceInformation
+    sourceFiles:
+      - Scenarios/AudioCreation/Scenario2_DeviceCapture.xaml.cs
+  - id: frame-input
+    title: Generate audio frames
+    summary: Fill AudioFrame buffers with a generated sine wave and submit them through an AudioFrameInputNode.
+    apis:
+      - Windows.Media.Audio.AudioFrameInputNode
+      - Windows.Media.AudioFrame
+      - Windows.Foundation.IMemoryBufferByteAccess
+    sourceFiles:
+      - Scenarios/AudioCreation/Scenario3_FrameInputNode.xaml.cs
+  - id: submix
+    title: Mix audio through a submix
+    summary: Combine two file inputs in an AudioSubmixNode and adjust gain to avoid clipping.
+    apis:
+      - Windows.Media.Audio.AudioSubmixNode
+      - Windows.Media.Audio.AudioFileInputNode
+      - Windows.Media.Audio.EchoEffectDefinition
+    sourceFiles:
+      - Scenarios/AudioCreation/Scenario4_Submix.xaml.cs
+  - id: inbox-effects
+    title: Configure built-in audio effects
+    summary: Add, enable, disable, and tune echo, reverb, equalizer, and limiter effects on a file input.
+    apis:
+      - Windows.Media.Audio.EchoEffectDefinition
+      - Windows.Media.Audio.ReverbEffectDefinition
+      - Windows.Media.Audio.EqualizerEffectDefinition
+      - Windows.Media.Audio.LimiterEffectDefinition
+    sourceFiles:
+      - Scenarios/AudioCreation/Scenario5_InboxEffects.xaml.cs
+apis:
+  - name: Windows.Media.Audio.AudioGraph
+    description: Creates and coordinates the nodes that capture, generate, mix, process, and render audio.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audiograph
+  - name: Windows.Media.Audio.AudioFileInputNode
+    description: Reads an audio file into the graph with trimming, looping, and playback-speed controls.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audiofileinputnode
+  - name: Windows.Media.Audio.AudioDeviceInputNode
+    description: Captures audio from a selected microphone or other input device.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audiodeviceinputnode
+  - name: Windows.Media.Audio.AudioFrameInputNode
+    description: Accepts audio frames generated or transformed by application code.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audioframeinputnode
+  - name: Windows.Media.Audio.AudioSubmixNode
+    description: Combines multiple input nodes before routing the mixed stream onward.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audiosubmixnode
+  - name: Windows.Media.Audio.EchoEffectDefinition
+    description: Adds a configurable built-in echo effect to an audio node.
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.echoeffectdefinition
+documentation:
+  - title: Audio graphs
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/audio-graphs
+    kind: learn
+  - title: AudioGraph class
+    url: https://learn.microsoft.com/uwp/api/windows.media.audio.audiograph
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: musicLibrary
+      kind: general
+      description: Allows scenarios to select and create audio content in the current user's Music library.
+    - name: microphone
+      kind: device
+      description: Allows the device-capture scenario to record from a microphone or other audio input.
+  hardware:
+    - An audio output device is needed to hear playback, generated frames, submixes, and effects.
+    - A microphone or other audio input device is needed for the device-capture scenario.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; frame generation enables unsafe buffer access but uses the same AudioGraph pipeline on each architecture.
+featuredFiles:
+  - path: Scenarios/AudioCreation/Scenario1_FilePlayback.xaml.cs
+    label: AudioGraph file playback
+    description: Creates file and output nodes and exposes trimming, looping, and playback-speed controls.
+  - path: Scenarios/AudioCreation/Scenario3_FrameInputNode.xaml.cs
+    label: Generated frame input
+    description: Writes a sine wave directly into AudioFrame buffers and supplies frames on demand.
+  - path: Scenarios/AudioCreation/Scenario5_InboxEffects.xaml.cs
+    label: Built-in audio effects
+    description: Creates and tunes echo, reverb, equalizer, and limiter effect definitions.
+screenshots:
+  - id: audio-file-playback
+    alt: The audio graph file playback page showing file selection, graph controls, trimming, speed, and looping options.
+    scenario: file-playback
+    capture:
+      mode: manual
+      readinessSelector: text=File Playback
+      notes: Select a supported audio file before capture because the representative controls depend on a picker result.

@@ -25,6 +25,15 @@ The sample retains both upstream scenarios:
 - [IUserConsentVerifierInterop interface](https://learn.microsoft.com/windows/win32/api/userconsentverifierinterop/nn-userconsentverifierinterop-iuserconsentverifierinterop)
 - [Call interop APIs from a .NET app](https://learn.microsoft.com/windows/apps/desktop/modernize/winrt-com-interop-csharp)
 
+## Prerequisites and capabilities
+
+- Windows 11 build 22000 or later is required for the desktop interop interface used by the
+  interactive verification scenario.
+- The signed-in user must configure Windows Hello or a PIN. Face or fingerprint verification
+  additionally requires compatible enrolled biometric hardware.
+- Device policy can disable verification even when hardware and enrollment are present.
+- The package declares only the restricted `runFullTrust` capability.
+
 ## Build & run
 
 ```powershell

@@ -1,0 +1,92 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: compression
+project:
+  folder: Compression
+  name: Compression
+title: Compressing and decompressing file data
+summary: Compress a picked file with Xpress, XpressHuff, Mszip, or Lzms and decompress it to report the round-trip byte counts.
+aliases:
+  - Compression
+  - Compression C# sample
+  - Windows.Storage.Compression
+  - Compressor
+  - Decompressor
+icon: FolderZipRegular
+categories:
+  primary: files-and-data
+  secondary: []
+tags:
+  - compression
+  - decompression
+  - zip
+  - xpress
+  - mszip
+  - lzms
+  - file streams
+originalSamples:
+  - name: Compression
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Compression
+scenarios:
+  - id: compress-decompress-file
+    title: Compressing and decompressing a picked file
+    summary: Pick a file, compress it with the selected algorithm, then decompress the result and report byte counts.
+    apis:
+      - Windows.Storage.Compression.Compressor
+      - Windows.Storage.Compression.Decompressor
+      - Windows.Storage.Compression.CompressAlgorithm
+      - Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/Compression/Scenario1.xaml.cs
+apis:
+  - name: Windows.Storage.Compression.Compressor
+    description: Wraps an output stream to write Xpress, XpressHuff, Mszip, or Lzms compressed data.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.compression.compressor
+  - name: Windows.Storage.Compression.Decompressor
+    description: Wraps an input stream to decompress previously compressed data.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.compression.decompressor
+  - name: Windows.Storage.Compression.CompressAlgorithm
+    description: Enumerates the compression algorithms selectable by the sample.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.compression.compressalgorithm
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Lets the user select the source file after the picker is associated with the desktop window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+documentation:
+  - title: Windows.Storage.Compression namespace
+    url: https://learn.microsoft.com/uwp/api/windows.storage.compression
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/Compression/Scenario1.xaml.cs
+    label: Compress and decompress a file
+    description: Picks a file, compresses it with Compressor, and decompresses the result with Decompressor.
+  - path: Scenarios/Compression/Scenario1.xaml
+    label: Algorithm selection UI
+    description: Provides the algorithm picker, compression action, and progress output.
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the single Compression and Decompression scenario.
+  - path: Package.appxmanifest
+    label: Package capabilities
+    description: Declares the runFullTrust capability required by the packaged desktop app.
+relatedSamples: []
+screenshots:
+  - id: compress-decompress-initial-state
+    alt: The Compression app before file selection, showing the Default algorithm, its description, the Compress File button, and empty output.
+    scenario: compress-decompress-file
+    capture:
+      mode: manual
+      readinessSelector: text=Compress File...
+      notes: Capture the safe initial state; the file picker and post-compression result require a manually selected file.

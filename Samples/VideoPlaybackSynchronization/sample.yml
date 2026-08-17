@@ -1,0 +1,136 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: video-playback-synchronization
+project:
+  folder: VideoPlaybackSynchronization
+  name: VideoPlaybackSynchronization
+title: Synchronizing playback across multiple video streams
+summary: Drive multiple media players from one timeline, correct an authored offset, and align two adaptive HLS sources.
+aliases:
+  - VideoPlaybackSynchronization
+  - video playback synchronization
+  - MediaTimelineController
+  - TimelineControllerPositionOffset
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - networking
+tags:
+  - video
+  - synchronized playback
+  - media timeline
+  - HLS
+  - adaptive streaming
+  - multi-camera
+originalSamples:
+  - name: VideoPlaybackSynchronization
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/VideoPlaybackSynchronization
+scenarios:
+  - id: multi-camera
+    title: Synchronize five camera angles
+    summary: Load five packaged clips into independent players and control them with one shared timeline.
+    apis:
+      - Windows.Media.MediaTimelineController
+      - Windows.Media.Playback.MediaPlayer
+      - Windows.Media.Core.MediaSource.CreateFromUri
+    sourceFiles:
+      - Scenarios/MultiCameraPage.xaml
+      - Scenarios/MultiCameraPage.xaml.cs
+      - Services/SynchronizedPlaybackSession.cs
+  - id: offset-correction
+    title: Correct an authored playback offset
+    summary: Compare reference and delayed packaged clips and apply a five-second timeline offset to align their content.
+    apis:
+      - Windows.Media.Playback.MediaPlayer.TimelineControllerPositionOffset
+      - Windows.Media.MediaTimelineController
+    sourceFiles:
+      - Scenarios/OffsetSyncPage.xaml
+      - Scenarios/OffsetSyncPage.xaml.cs
+      - Services/SynchronizedPlaybackSession.cs
+  - id: adaptive-hls
+    title: Synchronize adaptive HLS streams
+    summary: Create two editable adaptive media sources, apply an optional second-stream offset, and control them together.
+    apis:
+      - Windows.Media.Streaming.Adaptive.AdaptiveMediaSource.CreateFromUriAsync
+      - Windows.Media.Playback.MediaPlayer.TimelineControllerPositionOffset
+      - Windows.Media.MediaTimelineController
+    sourceFiles:
+      - Scenarios/AdaptiveSyncPage.xaml
+      - Scenarios/AdaptiveSyncPage.xaml.cs
+      - Services/SynchronizedPlaybackSession.cs
+apis:
+  - name: Windows.Media.MediaTimelineController
+    description: Provides shared play, pause, position, and bounded seek control for every player in a session.
+    url: https://learn.microsoft.com/uwp/api/windows.media.mediatimelinecontroller
+  - name: Windows.Media.Playback.MediaPlayer
+    description: Plays each independent packaged or adaptive source under the shared timeline controller.
+  - name: Windows.Media.Playback.MediaPlayer.TimelineControllerPositionOffset
+    description: Advances or delays one player's content relative to the shared timeline.
+  - name: Windows.Media.Streaming.Adaptive.AdaptiveMediaSource
+    description: Creates media sources from editable HTTPS HLS manifests for synchronized adaptive playback.
+  - name: Windows.Media.Core.MediaSource
+    description: Wraps packaged clip URIs and adaptive sources for assignment to MediaPlayer.
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Presents each MediaPlayer while custom shared controls drive the timeline.
+documentation:
+  - title: Play audio and video with MediaPlayer
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/play-audio-and-video-with-mediaplayer
+    kind: learn
+  - title: Adaptive streaming
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/adaptive-streaming
+    kind: learn
+  - title: MediaTimelineController class
+    url: https://learn.microsoft.com/uwp/api/windows.media.mediatimelinecontroller
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Lets the adaptive scenario retrieve its two editable HTTPS HLS manifests.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices:
+    - Windows media playback components capable of decoding the packaged H.264 clips.
+    - Two reachable HTTPS HLS manifests for the adaptive scenario; the fields default to a public test stream.
+  architectureNotes: The project targets x86, x64, and ARM64; codec availability and adaptive-stream performance depend on the Windows media stack and device.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Playback scenario catalog
+    description: Declares the multi-camera, offset-correction, and adaptive HLS scenarios.
+  - path: Services/SynchronizedPlaybackSession.cs
+    label: Shared playback timeline
+    description: Owns the players, sources, timeline, offsets, load generations, seeking, events, and disposal.
+  - path: Scenarios/MultiCameraPage.xaml.cs
+    label: Five-angle playback
+    description: Loads five packaged clips and exposes unified play, pause, and ten-second seeking.
+  - path: Scenarios/OffsetSyncPage.xaml.cs
+    label: Authored offset correction
+    description: Applies or removes the five-second offset for the delayed packaged clip.
+  - path: Scenarios/AdaptiveSyncPage.xaml.cs
+    label: Adaptive HLS synchronization
+    description: Creates two adaptive media sources from editable URIs and applies an optional offset.
+  - path: VideoPlaybackSynchronization.csproj
+    label: Packaged media assets
+    description: Includes the seven synthetic H.264 clips used by the offline scenarios.
+screenshots:
+  - id: five-camera-angles
+    alt: Five packaged camera-angle videos aligned around a shared crosshair and clock with unified playback controls.
+    scenario: multi-camera
+    capture:
+      mode: automatic
+      readinessSelector: text=Five synchronized players are ready.
+      actions:
+        - type: click
+          selector: AutomationId=LoadPackagedMediaButton
+        - type: wait
+          durationMs: 3000
+          notes: Allow all five packaged clips to open before evaluating readiness.
+      notes: Capture the packaged multi-camera scenario because it is deterministic and does not require the public HLS service.

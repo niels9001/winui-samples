@@ -1,0 +1,128 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: custom-hid-device-access
+project:
+  folder: CustomHidDeviceAccess
+  name: CustomHidDeviceAccess
+title: Communicating with a custom HID device
+summary: Enumerate, connect to, and exchange feature, input, and output reports with a vendor-defined HID device such as Microsoft SuperMUTT.
+aliases:
+  - CustomHidDeviceAccess
+  - Custom HID device access
+  - HidDevice
+  - Windows.Devices.HumanInterfaceDevice
+  - SuperMUTT
+  - HID feature reports
+icon: PlugConnectedRegular
+categories:
+  primary: devices-and-sensors
+  secondary: []
+tags:
+  - HID
+  - human interface device
+  - device watcher
+  - feature report
+  - input report
+  - output report
+  - SuperMUTT
+originalSamples:
+  - name: CustomHidDeviceAccess
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CustomHidDeviceAccess
+scenarios:
+  - id: connecting-to-device
+    title: Connecting to a HID device
+    summary: Watch for the vendor-defined HID device and open, close, or reconnect its device handle.
+    apis:
+      - Windows.Devices.Enumeration.DeviceWatcher
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.GetDeviceSelector
+    sourceFiles:
+      - Scenarios/CustomHidDeviceAccess/Scenario1_DeviceConnect.xaml.cs
+      - Scenarios/CustomHidDeviceAccess/EventHandlerForDevice.cs
+  - id: feature-reports
+    title: Getting and setting feature reports
+    summary: Create and send a HID feature report, then read a feature report back from the device.
+    apis:
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.CreateFeatureReport
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.SendFeatureReportAsync
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.GetFeatureReportAsync
+    sourceFiles:
+      - Scenarios/CustomHidDeviceAccess/Scenario2_FeatureReports.xaml.cs
+  - id: input-report-events
+    title: Handling input report events
+    summary: Subscribe to InputReportReceived and read button and volume usages from incoming HID reports.
+    apis:
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.InputReportReceived
+      - Windows.Devices.HumanInterfaceDevice.HidInputReportReceivedEventArgs
+    sourceFiles:
+      - Scenarios/CustomHidDeviceAccess/Scenario3_InputReportEvents.xaml.cs
+  - id: input-output-reports
+    title: Reading and writing input and output reports
+    summary: Poll an input report and create and send an output report that controls device button and volume state.
+    apis:
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.GetInputReportAsync
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.CreateOutputReport
+      - Windows.Devices.HumanInterfaceDevice.HidDevice.SendOutputReportAsync
+    sourceFiles:
+      - Scenarios/CustomHidDeviceAccess/Scenario4_InputOutputReports.xaml.cs
+apis:
+  - name: Windows.Devices.HumanInterfaceDevice.HidDevice
+    description: Opens a HID collection and exchanges feature, input, and output reports with it.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.humaninterfacedevice.hiddevice
+  - name: Windows.Devices.HumanInterfaceDevice.HidInputReportReceivedEventArgs
+    description: Carries the HidInputReport delivered by the device's InputReportReceived event.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.humaninterfacedevice.hidinputreportreceivedeventargs
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Watches for the vendor-defined HID device being added or removed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+documentation:
+  - title: HumanInterfaceDevice namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.humaninterfacedevice
+    kind: api-reference
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+  - title: DeviceCapability manifest element
+    url: https://learn.microsoft.com/uwp/schemas/appxpackage/uapmanifestschema/element-devicecapability
+    kind: concept
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: humaninterfacedevice
+      kind: device
+      description: Grants access to the SuperMUTT HID device with VID 045E, PID 0610, usage page FFAA, and usage 0001.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Microsoft SuperMUTT HID test device with VID 0x045E, PID 0x0610, usage page 0xFFAA, and usage 0x01
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; HID report I/O has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the four HID scenarios shown in the navigation shell.
+  - path: Scenarios/CustomHidDeviceAccess/HidSampleTypes.cs
+    label: SuperMUTT device constants
+    description: Defines the SuperMUTT VID, PID, usage identifiers, and report layout shared by the scenarios.
+  - path: Scenarios/CustomHidDeviceAccess/EventHandlerForDevice.cs
+    label: Connection lifecycle helper
+    description: Opens, closes, and reconnects the HID device across scenario navigation.
+  - path: Scenarios/CustomHidDeviceAccess/Scenario1_DeviceConnect.xaml.cs
+    label: Connect to the device
+    description: Creates a DeviceWatcher scoped to the SuperMUTT identifiers and lists matching devices.
+  - path: Package.appxmanifest
+    label: HID device capability
+    description: Declares the humaninterfacedevice capability restricted to the SuperMUTT identifiers.
+relatedSamples: []
+screenshots:
+  - id: connect-empty-state
+    alt: The CustomHidDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty HID device list.
+    scenario: connecting-to-device
+    capture:
+      mode: manual
+      readinessSelector: "text=Select a Hid Device:"
+      notes: Capture the safe initial state before attaching a SuperMUTT; real report scenarios require the matching test device and manual capture.

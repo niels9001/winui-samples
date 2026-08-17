@@ -1,0 +1,121 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: association-launching
+project:
+  folder: AssociationLaunching
+  name: AssociationLaunching
+title: Launching files and handling association activations
+summary: Launch files and URIs through registered handlers, then receive custom file-type and protocol activations in one WinUI process.
+aliases:
+  - AssociationLaunching
+  - Association launching
+  - File associations
+  - Protocol activation
+  - Windows.System.Launcher
+icon: AppsRegular
+categories:
+  primary: app-fundamentals
+  secondary:
+    - files-and-data
+tags:
+  - activation
+  - file associations
+  - protocol handler
+  - app lifecycle
+  - launcher
+originalSamples:
+  - name: AssociationLaunching
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AssociationLaunching
+scenarios:
+  - id: launch-file
+    title: Launch a file
+    summary: Open a packaged image with its default handler, a selected handler, or an untrusted-file warning.
+    apis:
+      - Windows.System.Launcher.LaunchFileAsync
+      - Windows.System.LauncherOptions
+      - Microsoft.Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/Scenario1_LaunchFile.xaml.cs
+  - id: launch-uri
+    title: Launch a URI
+    summary: Open a URI through its default handler, the application picker, or an untrusted-content warning.
+    apis:
+      - Windows.System.Launcher.LaunchUriAsync
+      - Windows.System.LauncherOptions
+    sourceFiles:
+      - Scenarios/Scenario2_LaunchUri.xaml.cs
+  - id: receive-file
+    title: Receive a file activation
+    summary: Create test files and inspect file activation arguments redirected to the app's primary instance.
+    apis:
+      - Microsoft.Windows.AppLifecycle.AppInstance
+      - Windows.ApplicationModel.Activation.IFileActivatedEventArgs
+      - Windows.ApplicationModel.Activation.IFileActivatedEventArgsWithNeighboringFiles
+    sourceFiles:
+      - Program.cs
+      - App.xaml.cs
+      - Scenarios/Scenario3_ReceiveFile.xaml.cs
+  - id: receive-uri
+    title: Receive a protocol activation
+    summary: Handle the registered alsdk URI scheme and display the URI redirected to the primary instance.
+    apis:
+      - Microsoft.Windows.AppLifecycle.AppInstance
+      - Windows.ApplicationModel.Activation.IProtocolActivatedEventArgs
+    sourceFiles:
+      - Program.cs
+      - App.xaml.cs
+      - Scenarios/Scenario4_ReceiveUri.xaml.cs
+apis:
+  - name: Windows.System.Launcher
+    description: Opens files and URIs with a default or user-selected registered handler.
+    url: https://learn.microsoft.com/uwp/api/windows.system.launcher
+  - name: Windows.System.LauncherOptions
+    description: Requests the application picker or an untrusted-content warning for launch operations.
+    url: https://learn.microsoft.com/uwp/api/windows.system.launcheroptions
+  - name: Microsoft.Windows.AppLifecycle.AppInstance
+    description: Registers the primary process and redirects later file or protocol activations to it.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.applifecycle.appinstance
+  - name: Microsoft.Windows.Storage.Pickers.FileOpenPicker
+    description: Selects a file by using the Windows App SDK picker associated with the current AppWindow.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.storage.pickers.fileopenpicker
+documentation:
+  - title: Windows.System.Launcher class
+    url: https://learn.microsoft.com/uwp/api/windows.system.launcher
+    kind: api-reference
+  - title: AppInstance.FindOrRegisterForKey method
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.applifecycle.appinstance.findorregisterforkey
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application and its custom entry point to run at full trust.
+    - name: picturesLibrary
+      kind: general
+      description: Allows the receive-file scenario to create and remove activation test files in the Pictures library.
+  hardware: []
+  accountServices: []
+  architectureNotes: A custom entry point redirects activations to one process; the package registers alsdk and .alsdk associations and targets x86, x64, and ARM64.
+featuredFiles:
+  - path: Program.cs
+    label: Single-instance entry point
+    description: Registers the primary AppInstance and redirects later activation payloads before XAML starts.
+  - path: App.xaml.cs
+    label: Activation routing
+    description: Reads cold-start or redirected activation arguments and navigates to the receiving scenario.
+  - path: Package.appxmanifest
+    label: Association declarations
+    description: Registers the alsdk protocol, the .alsdk file type, extensionless files, and Pictures library access.
+screenshots:
+  - id: launch-file-options
+    alt: The association launching app showing controls for opening a file with its default handler, a warning, or the app picker.
+    scenario: launch-file
+    capture:
+      mode: automatic
+      readinessSelector: text=Launching a file
+      notes: Capture the stable initial controls without invoking an external file handler.

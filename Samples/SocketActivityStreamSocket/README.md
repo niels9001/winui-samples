@@ -1,16 +1,22 @@
-# Socket activity stream socket
+# SocketActivityStreamSocket
 
-Demonstrates how a packaged WinUI 3 app can transfer a connected stream socket to
-the Windows socket broker so the connection survives after the foreground app closes.
+Ported to WinUI 3 / Windows App SDK from the UWP
+[SocketActivityStreamSocket](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SocketActivityStreamSocket)
+sample.
 
-## What the sample shows
+## What it shows
 
-- Registering an out-of-process `SocketActivityTrigger` background task.
-- Enabling and transferring a `StreamSocket` to the system socket broker.
-- Recovering an existing broker-owned socket after the client restarts.
-- Receiving socket traffic in `backgroundtaskhost.exe` and displaying a notification.
-- Reconnecting after the broker reports that the socket closed.
-- Hosting a companion `StreamSocketListener` server that sends test messages.
+The sample combines a packaged client, an out-of-process C#/WinRT background component, and
+a companion listener server:
+
+1. The client requests background access and registers a `SocketActivityTrigger`.
+2. A connected `StreamSocket` is enabled for transfer and handed to the Windows socket
+   broker. If connected-standby wake is unavailable, the client retries with `DoNotWake`.
+3. The background component handles socket data, keep-alive expiration, and socket-closed
+   reasons, then returns an active socket to the broker or reconnects it.
+4. Received data is shown through a platform toast while the foreground client is closed.
+5. When relaunched, the client recovers broker-owned socket state from
+   `SocketActivityInformation.AllSockets`.
 
 ## APIs featured
 
@@ -19,13 +25,26 @@ the Windows socket broker so the connection survives after the foreground app cl
 - [`Windows.ApplicationModel.Background.SocketActivityTrigger`](https://learn.microsoft.com/uwp/api/windows.applicationmodel.background.socketactivitytrigger)
 - [`Windows.Networking.Sockets.StreamSocketListener`](https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener)
 
-## Learn documentation
+## Learn docs this serves
 
 - [Network communications in the background](https://learn.microsoft.com/windows/apps/develop/networking/network-communications-in-the-background)
 - [Background task migration strategy](https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/guides/background-task-migration-strategy)
 - [C#/WinRT component authoring](https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/authoring)
 
-## Build and run
+## Prerequisites and capabilities
+
+- Run the included companion server on a reachable address. The basic broker transfer works
+  over localhost, but a second PC or a development loopback exemption is needed to exercise
+  the automatic reconnect path after the server closes.
+- Windows must grant background activity, and notifications must be enabled for the client
+  package to display received messages.
+- The client declares `internetClient`, `privateNetworkClientServer`, and `runFullTrust`.
+  The companion server declares `internetClientServer`, `privateNetworkClientServer`, and
+  `runFullTrust`.
+- The package registers the C#/WinRT component as both a `windows.backgroundTasks` entry point
+  and a `WinRT.Host.dll` activatable class.
+
+## Build & run
 
 Build the client and its background component from this folder:
 

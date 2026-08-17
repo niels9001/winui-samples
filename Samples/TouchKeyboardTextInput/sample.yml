@@ -1,0 +1,104 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: touch-keyboard-text-input
+project:
+  folder: TouchKeyboardTextInput
+  name: TouchKeyboardTextInput
+title: Configuring text suggestions and touch keyboard layouts
+summary: Enable spelling and prediction on WinUI text controls and choose touch-keyboard layouts with declarative input scopes.
+aliases:
+  - TouchKeyboardTextInput
+  - Touch keyboard text input
+  - InputScope
+  - text prediction
+  - spell checking
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary: []
+tags:
+  - text input
+  - touch keyboard
+  - spelling
+  - prediction
+  - input scope
+  - XAML
+originalSamples:
+  - name: TouchKeyboardTextInput
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TouchKeyboardTextInput
+scenarios:
+  - id: spelling-and-suggestions
+    title: Configure spelling and text suggestions
+    summary: Compare TextBox and RichEditBox controls with spell checking and prediction explicitly disabled or enabled.
+    apis:
+      - Microsoft.UI.Xaml.Controls.TextBox.IsSpellCheckEnabled
+      - Microsoft.UI.Xaml.Controls.TextBox.IsTextPredictionEnabled
+      - Microsoft.UI.Xaml.Controls.RichEditBox.IsSpellCheckEnabled
+      - Microsoft.UI.Xaml.Controls.RichEditBox.IsTextPredictionEnabled
+    sourceFiles:
+      - Scenarios/TouchKeyboardTextInput/Scenario1_SpellingTextSuggestions.xaml
+      - Scenarios/TouchKeyboardTextInput/Scenario1_SpellingTextSuggestions.xaml.cs
+  - id: scoped-keyboard-layouts
+    title: Select touch keyboard layouts
+    summary: Apply seven built-in input scopes for numbers, search, URLs, email, default text, telephone numbers, and formulas.
+    apis:
+      - Microsoft.UI.Xaml.Controls.TextBox.InputScope
+      - Microsoft.UI.Xaml.Input.InputScope
+      - Microsoft.UI.Xaml.Input.InputScopeName
+    sourceFiles:
+      - Scenarios/TouchKeyboardTextInput/Scenario2_ScopedViews.xaml
+      - Scenarios/TouchKeyboardTextInput/Scenario2_ScopedViews.xaml.cs
+apis:
+  - name: Microsoft.UI.Xaml.Controls.TextBox
+    description: Exposes spell checking, prediction, and input-scope properties for single- or multi-line text input.
+  - name: Microsoft.UI.Xaml.Controls.RichEditBox
+    description: Demonstrates the same spelling and prediction switches on rich-text input.
+  - name: Microsoft.UI.Xaml.Input.InputScope
+    description: Groups one or more input-scope names that describe the expected value.
+  - name: Microsoft.UI.Xaml.Input.InputScopeName
+    description: Requests a specialized software-keyboard layout such as number, URL, email, telephone, or formula.
+documentation:
+  - title: Use input scope to change the touch keyboard
+    url: https://learn.microsoft.com/windows/apps/design/input/use-input-scope-to-change-the-touch-keyboard
+    kind: learn
+  - title: Respond to the presence of the touch keyboard
+    url: https://learn.microsoft.com/windows/apps/design/input/respond-to-the-presence-of-the-touch-keyboard
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A touch keyboard is needed to observe the specialized layout requested by each InputScope.
+  accountServices:
+    - Installed Windows language resources influence spelling and text-prediction results.
+  architectureNotes: The project targets x86, x64, and ARM64; input behavior depends on Windows language and keyboard state rather than architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Text-input scenario catalog
+    description: Declares the spelling and suggestions scenario and the scoped keyboard-layout scenario.
+  - path: Scenarios/TouchKeyboardTextInput/Scenario1_SpellingTextSuggestions.xaml
+    label: Spelling and prediction settings
+    description: Compares TextBox and RichEditBox controls with both text-processing properties on and off.
+  - path: Scenarios/TouchKeyboardTextInput/Scenario2_ScopedViews.xaml
+    label: Input scope examples
+    description: Assigns seven input-scope values to individual text boxes in declarative XAML.
+  - path: MainPage.xaml.cs
+    label: Scenario navigation shell
+    description: Builds the NavigationView entries and hosts the selected text-input page.
+relatedSamples:
+  - touch-keyboard
+screenshots:
+  - id: spelling-and-prediction
+    alt: The Touch Keyboard Text Input app comparing text boxes and rich-edit controls with spelling and prediction disabled or enabled.
+    scenario: spelling-and-suggestions
+    capture:
+      mode: automatic
+      readinessSelector: text=IsSpellCheckEnabled and IsTextPredictionEnabled = false
+      notes: Capture the initial comparison without entering text so spelling and prediction results do not depend on language state.
