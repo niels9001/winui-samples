@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Stream socket listener server</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Accept a stream socket connection and send messages to the socket activity client.</value>
+  </data>
+  <data name="PageTitle.Text" xml:space="preserve">
+    <value>Send socket activity</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Wait for the companion client to connect, then send a message after the client app closes. The socket broker delivers it through the client's background task.</value>
+  </data>
+  <data name="ListenerHeading.Text" xml:space="preserve">
+    <value>Listener</value>
+  </data>
+  <data name="ListenerPort.Text" xml:space="preserve">
+    <value>TCP port 40404</value>
+  </data>
+  <data name="MessageTextBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Message to send to the connected client</value>
+  </data>
+  <data name="MessageTextBox.Header" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MessageTextBox.PlaceholderText" xml:space="preserve">
+    <value>Enter up to 250 characters</value>
+  </data>
+  <data name="SendButton.AccessKey" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SendButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Send message to the connected client</value>
+  </data>
+  <data name="SendButton.Content" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendProgressRing.AutomationProperties.Name" xml:space="preserve">
+    <value>Sending the message</value>
+  </data>
+  <data name="StatusInfoBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Listener status</value>
+  </data>
+  <data name="ListeningStatusFormat" xml:space="preserve">
+    <value>Listening on TCP port {0}. Waiting for a client.</value>
+  </data>
+  <data name="ClientConnectedStatus" xml:space="preserve">
+    <value>A client connected. You can send a message now.</value>
+  </data>
+  <data name="MessageRequiredError" xml:space="preserve">
+    <value>Enter a message before sending.</value>
+  </data>
+  <data name="NoClientError" xml:space="preserve">
+    <value>No client is connected.</value>
+  </data>
+  <data name="MessageSentStatus" xml:space="preserve">
+    <value>The message was sent.</value>
+  </data>
+  <data name="StartListenerOperation" xml:space="preserve">
+    <value>Starting the socket listener</value>
+  </data>
+  <data name="SendMessageOperation" xml:space="preserve">
+    <value>Sending the message</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+</root>

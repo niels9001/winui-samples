@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SocketActivityStreamSocket (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SocketActivityStreamSocket (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
