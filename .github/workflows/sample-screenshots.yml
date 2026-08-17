@@ -1,0 +1,112 @@
+name: Sample screenshots (self-hosted)
+
+on:
+  workflow_dispatch:
+    inputs:
+      samples:
+        description: "Comma-separated sample IDs/project folders, or all"
+        required: true
+        default: "FileAccess"
+        type: string
+      theme:
+        description: "Theme used for newly launched sample apps"
+        required: true
+        default: system
+        type: choice
+        options:
+          - system
+          - light
+          - dark
+      dry_run:
+        description: "Validate and emit commands without building or launching apps"
+        required: true
+        default: true
+        type: boolean
+      confirm_trusted_ref:
+        description: "I confirm this selected ref is trusted to execute on a self-hosted desktop"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: ${{ inputs.confirm_trusted_ref }}
+    runs-on: [self-hosted, Windows, X64, winui-screenshot]
+    timeout-minutes: 90
+    env:
+      CAPTURE_OUTPUT: ${{ runner.temp }}\winui-screenshot-output
+    steps:
+      # This job builds and launches repository code with desktop-user privileges.
+      # Dispatch only reviewed, trusted refs on an isolated interactive runner.
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: pnpm install --frozen-lockfile
+      - name: Validate harness tests
+        shell: pwsh
+        run: ./tools/screenshots/tests/Invoke-Tests.ps1
+      - name: Capture samples
+        shell: pwsh
+        env:
+          REQUESTED_SAMPLES: ${{ inputs.samples }}
+          REQUESTED_THEME: ${{ inputs.theme }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          $requestedSamples = @($env:REQUESTED_SAMPLES -split ',' | ForEach-Object { $_.Trim() })
+          if ($requestedSamples.Count -eq 0 -or
+              @($requestedSamples | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -gt 0) {
+            throw 'samples must contain non-empty comma-separated sample IDs or project folders'
+          }
+          $captureAll = $requestedSamples.Count -eq 1 -and
+            $requestedSamples[0].Equals('all', [StringComparison]::OrdinalIgnoreCase)
+          if (-not $captureAll -and
+              @($requestedSamples | Where-Object { $_.Equals('all', [StringComparison]::OrdinalIgnoreCase) }).Count -gt 0) {
+            throw "'all' cannot be combined with individual sample selectors"
+          }
+
+          $env:REQUESTED_SAMPLES_JSON = ConvertTo-Json -InputObject $requestedSamples -Compress
+          $env:CAPTURE_ALL = $captureAll.ToString().ToLowerInvariant()
+          $childScript = @'
+          $arguments = @{
+            OutputRoot = $env:CAPTURE_OUTPUT
+            Theme = $env:REQUESTED_THEME
+            NonInteractive = $true
+            Json = $true
+          }
+          if ($env:DRY_RUN -eq 'true') {
+            $arguments.DryRun = $true
+          }
+          if ($env:CAPTURE_ALL -eq 'true') {
+            $arguments.All = $true
+          }
+          else {
+            $arguments.Sample = @($env:REQUESTED_SAMPLES_JSON | ConvertFrom-Json)
+          }
+          & ./tools/screenshots/Invoke-SampleScreenshots.ps1 @arguments
+          '@
+
+          $output = & pwsh -NoProfile -Command $childScript
+          $exitCode = $LASTEXITCODE
+          $output | Set-Content -LiteralPath (Join-Path $env:CAPTURE_OUTPUT 'summary.json')
+          if ($exitCode -ne 0) {
+            exit $exitCode
+          }
+      - name: Upload capture report and images
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-screenshots-${{ github.run_id }}
+          path: ${{ env.CAPTURE_OUTPUT }}
+          if-no-files-found: warn
+          retention-days: 14
