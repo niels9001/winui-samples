@@ -1,0 +1,180 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: file-access
+project:
+  folder: FileAccess
+  name: FileAccess
+title: Reading and writing files in a Windows app
+summary: Create, inspect, update, compare, copy, and delete files while preserving access to storage items across sessions.
+aliases:
+  - FileAccess
+  - File access
+  - Windows.Storage
+  - StorageFile
+  - FileIO
+  - FileOpenPicker
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - app-fundamentals
+tags:
+  - files
+  - storage
+  - streams
+  - pictures library
+  - pickers
+originalSamples:
+  - name: FileAccess
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/FileAccess
+scenarios:
+  - id: create-file
+    title: Creating a file
+    apis:
+      - Windows.Storage.StorageFolder.CreateFileAsync
+    sourceFiles:
+      - Scenarios/Scenario1_Create.xaml.cs
+  - id: get-parent
+    title: Getting a file's parent folder
+    apis:
+      - Windows.Storage.StorageFile.GetParentAsync
+    sourceFiles:
+      - Scenarios/Scenario2_GetParent.xaml.cs
+  - id: read-write-text
+    title: Writing and reading text
+    apis:
+      - Windows.Storage.FileIO.ReadTextAsync
+      - Windows.Storage.FileIO.WriteTextAsync
+    sourceFiles:
+      - Scenarios/Scenario3_Text.xaml.cs
+  - id: read-write-bytes
+    title: Writing and reading bytes
+    apis:
+      - Windows.Storage.FileIO.ReadBufferAsync
+      - Windows.Storage.FileIO.WriteBufferAsync
+    sourceFiles:
+      - Scenarios/Scenario4_Bytes.xaml.cs
+  - id: read-write-stream
+    title: Writing and reading with a stream
+    apis:
+      - Windows.Storage.StorageFile.OpenAsync
+      - Windows.Storage.Streams.DataReader
+      - Windows.Storage.Streams.DataWriter
+    sourceFiles:
+      - Scenarios/Scenario5_Stream.xaml.cs
+  - id: display-properties
+    title: Displaying file properties
+    apis:
+      - Windows.Storage.FileProperties.BasicProperties
+      - Windows.Storage.StorageFile.Properties
+    sourceFiles:
+      - Scenarios/Scenario6_Properties.xaml.cs
+  - id: preserve-access
+    title: Preserving access for future use
+    apis:
+      - Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList
+      - Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList
+    sourceFiles:
+      - Scenarios/Scenario7_FutureAccess.xaml.cs
+  - id: copy-file
+    title: Copying a file
+    apis:
+      - Windows.Storage.StorageFile.CopyAsync
+    sourceFiles:
+      - Scenarios/Scenario8_Copy.xaml.cs
+  - id: compare-files
+    title: Comparing two storage files
+    apis:
+      - Microsoft.Windows.Storage.Pickers.FileOpenPicker
+      - Windows.Storage.StorageFile.IsEqual
+    sourceFiles:
+      - Scenarios/Scenario9_Compare.xaml.cs
+  - id: delete-file
+    title: Deleting a file
+    apis:
+      - Windows.Storage.StorageFile.DeleteAsync
+    sourceFiles:
+      - Scenarios/Scenario10_Delete.xaml.cs
+  - id: try-get-file
+    title: Looking up a file without throwing
+    apis:
+      - Windows.Storage.StorageFolder.TryGetItemAsync
+    sourceFiles:
+      - Scenarios/Scenario11_TryGet.xaml.cs
+apis:
+  - name: Windows.Storage.StorageFile
+    description: Represents a file and provides copy, delete, comparison, property, and stream operations.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.storagefile
+  - name: Windows.Storage.StorageFolder
+    description: Creates files, looks up storage items, and provides access to their containing folders.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.storagefolder
+  - name: Windows.Storage.FileIO
+    description: Reads and writes text and buffers without manually managing a stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileio
+  - name: Windows.Storage.KnownFolders
+    description: Provides access to the current user's Pictures library for the sample data file.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.knownfolders
+  - name: Windows.Storage.AccessCache.StorageApplicationPermissions
+    description: Retains access tokens for storage items that the app needs in later sessions.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.accesscache.storageapplicationpermissions
+  - name: Windows.Storage.Streams.DataReader
+    description: Reads primitive values and bytes from the sample file stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes primitive values and bytes to the sample file stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+  - name: Microsoft.Windows.Storage.Pickers.FileOpenPicker
+    description: Opens the Windows App SDK file picker by using the current window's AppWindowId.
+documentation:
+  - title: Read and write files
+    url: https://learn.microsoft.com/windows/uwp/files/quickstart-reading-and-writing-files
+    kind: learn
+  - title: File access permissions
+    url: https://learn.microsoft.com/windows/uwp/files/file-access-permissions
+    kind: learn
+  - title: Pick files and folders with Windows App SDK
+    url: https://learn.microsoft.com/windows/apps/develop/files/using-file-pickers
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: picturesLibrary
+      kind: general
+      description: Allows the sample to create and reuse sample.dat in the current user's Pictures library.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the eleven file operation scenarios shown in the navigation shell.
+  - path: Scenarios/Scenario1_Create.xaml.cs
+    label: Create a file
+    description: Creates sample.dat in the Pictures library and initializes shared sample state.
+  - path: Scenarios/Scenario5_Stream.xaml.cs
+    label: Stream file data
+    description: Demonstrates explicit file streams with DataReader and DataWriter.
+  - path: Scenarios/Scenario7_FutureAccess.xaml.cs
+    label: Preserve future access
+    description: Adds and retrieves storage items through the future-access and recently-used lists.
+  - path: Scenarios/Scenario9_Compare.xaml.cs
+    label: Compare selected files
+    description: Uses the Windows App SDK picker and compares the selected item with sample.dat.
+  - path: Package.appxmanifest
+    label: Storage capabilities
+    description: Declares the Pictures library and full-trust package capabilities.
+screenshots:
+  - id: create-file
+    alt: The File Access app showing the Creating a file scenario beside its file operation navigation.
+    scenario: create-file
+    capture:
+      mode: automatic
+      readinessSelector: text=Creating a file
+      notes: Capture the initial scenario before creating sample.dat so the image does not depend on existing Pictures library state.

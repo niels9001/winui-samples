@@ -18,6 +18,14 @@ winapp run
 
 Requirements: .NET 8+, the Windows App SDK workload, and Windows 10 1809+ (some samples need Windows 11).
 
+## Sample catalog metadata
+
+Each enriched sample keeps human-readable guidance in `README.md` and canonical
+structured metadata in `sample.yml`. See
+[the sample metadata contract](docs/SAMPLE_METADATA.md) for the versioned schema,
+intent-led taxonomy, authoring guidance, and catalog commands. Generated catalog
+JSON is deterministic and must not be edited by hand.
+
 ## Migration status
 
 The original UWP repo was reviewed sample by sample. Of **266** UWP samples analyzed:

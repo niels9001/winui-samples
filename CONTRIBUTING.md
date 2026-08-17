@@ -6,7 +6,9 @@
 2. Follow [docs/MIGRATION_VERIFICATION.md](docs/MIGRATION_VERIFICATION.md) end to end.
 3. Use the `winui-uwp-migration` skill (win-dev-skills) to drive the port.
 4. Start each sample README from `templates/SAMPLE_README_TEMPLATE.md`.
-5. A sample is only mergeable once the manual verification checklist passes and the
+5. Copy `templates/sample.yml` into the sample folder and follow
+   [the metadata editorial contract](docs/SAMPLE_METADATA.md).
+6. A sample is only mergeable once the manual verification checklist passes and the
    per-sample README links the Learn doc(s) it serves.
 
 ## Scope
@@ -20,3 +22,17 @@
 - One sample per folder; standard WinUI 3 (Windows App SDK) project shape.
 - `<RootNamespace>` matches the original UWP namespace where practical.
 - Launch with `winapp run`, never the raw `.exe`.
+
+## Sample metadata
+
+Install the lightweight catalog tooling with `pnpm install`, then run:
+
+```powershell
+pnpm catalog:test
+pnpm catalog:validate
+pnpm catalog:generate -- --output site/src/generated/sample-catalog.json
+```
+
+The regular validator supports the staged metadata rollout. The stricter
+`pnpm catalog:validate:complete` command fails until every sample project has a
+valid `sample.yml`; it is not yet a required CI gate.

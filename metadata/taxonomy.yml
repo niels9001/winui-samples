@@ -1,0 +1,38 @@
+schemaVersion: 1
+categories:
+  - id: app-fundamentals
+    label: App fundamentals
+    description: Build app behaviors that integrate with Windows, user settings, localization, and system state.
+    icon: AppsRegular
+  - id: files-and-data
+    label: Files and data
+    description: Read, write, transform, index, and present local data and documents.
+    icon: DocumentRegular
+  - id: devices-and-sensors
+    label: Devices and sensors
+    description: Discover, pair, and communicate with hardware, peripherals, radios, and sensors.
+    icon: DesktopRegular
+  - id: media
+    label: Media
+    description: Capture, create, process, protect, cast, and play audio, video, and images.
+    icon: VideoRegular
+  - id: networking
+    label: Networking
+    description: Connect apps, devices, and services over HTTP, sockets, Wi-Fi, and mobile networks.
+    icon: GlobeRegular
+  - id: security-and-identity
+    label: Security and identity
+    description: Verify users, protect content, manage credentials, and request sensitive access.
+    icon: ShieldRegular
+  - id: ui-and-input
+    label: UI and input
+    description: Create responsive interfaces and support pointer, touch, keyboard, pen, and drag interactions.
+    icon: WindowRegular
+  - id: location
+    label: Location
+    description: Request location, respond to movement, and attach geographic context to content.
+    icon: LocationRegular
+  - id: retail-and-industry
+    label: Retail and industry
+    description: Integrate point-of-service and specialized industry hardware into desktop apps.
+    icon: CartRegular
