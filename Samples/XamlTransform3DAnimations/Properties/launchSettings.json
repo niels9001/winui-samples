@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "XamlTransform3DAnimations (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "XamlTransform3DAnimations (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
