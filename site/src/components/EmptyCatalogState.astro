@@ -1,0 +1,31 @@
+---
+import { sitePath } from "../lib/urls";
+---
+
+<section class="empty-state surface stack" aria-labelledby="empty-catalog-title">
+  <p class="eyebrow">Catalog foundation ready</p>
+  <h2 id="empty-catalog-title">Sample metadata is on its way</h2>
+  <p>
+    The site is ready to publish samples as reviewed metadata lands. Until then,
+    use the repository to explore the migrated projects directly.
+  </p>
+  <div>
+    <a class="button-link button-link--secondary" href={sitePath("/#get-started")}>
+      Get started
+    </a>
+  </div>
+</section>
+
+<style>
+  .empty-state {
+    --stack-space: var(--site-space-3);
+    padding: var(--site-space-6);
+    text-align: center;
+  }
+
+  .empty-state p:not(.eyebrow) {
+    max-width: 38rem;
+    margin-inline: auto;
+    color: var(--site-color-text-secondary);
+  }
+</style>

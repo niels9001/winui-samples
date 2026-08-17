@@ -1,0 +1,87 @@
+name: Build and deploy showcase
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/pages.yml"
+      - "Samples/**"
+      - "metadata/**"
+      - "site/**"
+      - "tools/catalog/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pages.yml"
+      - "Samples/**"
+      - "metadata/**"
+      - "site/**"
+      - "tools/catalog/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.15.1
+          run_install: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Configure GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test catalog tooling
+        run: pnpm catalog:test
+      - name: Validate staged metadata
+        run: pnpm catalog:validate
+      - name: Generate site catalog
+        run: pnpm catalog:generate:site
+      - name: Test site data contracts
+        run: pnpm --filter @winui-samples/site test
+      - name: Check site types
+        run: pnpm --filter @winui-samples/site check
+      - name: Build static site
+        run: pnpm --filter @winui-samples/site build
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

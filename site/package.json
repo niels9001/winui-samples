@@ -1,0 +1,36 @@
+{
+  "name": "@winui-samples/site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "preview": "astro preview",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@fluentui/react-button": "9.10.1",
+    "@fluentui/react-components": "9.74.5",
+    "@fluentui/react-icons": "2.0.335",
+    "@fluentui/react-provider": "9.22.19",
+    "@fluentui/react-theme": "9.2.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "shiki": "4.4.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@astrojs/react": "6.0.2",
+    "@types/node": "22.20.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "astro": "7.2.0",
+    "tsx": "4.23.12",
+    "typescript": "6.0.3"
+  }
+}

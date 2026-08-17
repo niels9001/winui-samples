@@ -1,0 +1,52 @@
+---
+import type { CatalogCoverage } from "../lib/catalog";
+
+interface Props {
+  coverage: CatalogCoverage;
+}
+
+const { coverage } = Astro.props;
+const isPartial = coverage.metadataFiles < coverage.totalProjects;
+---
+
+{
+  isPartial && (
+    <aside class="coverage-notice surface" aria-labelledby="coverage-title">
+      <div class="coverage-indicator" aria-hidden="true"></div>
+      <div class="stack" style="--stack-space: var(--site-space-2)">
+        <h2 id="coverage-title">Catalog rollout in progress</h2>
+        <p>
+          {coverage.metadataFiles} of {coverage.totalProjects} projects currently
+          have published metadata. New entries appear here as their metadata is
+          reviewed.
+        </p>
+      </div>
+    </aside>
+  )
+}
+
+<style>
+  .coverage-notice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--site-space-4);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .coverage-indicator {
+    width: 0.3rem;
+    border-radius: 99px;
+    background: var(--site-color-brand);
+  }
+
+  h2 {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.92rem;
+  }
+</style>

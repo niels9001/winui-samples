@@ -1,0 +1,165 @@
+---
+import AppShell from "../components/AppShell.astro";
+import CoverageNotice from "../components/CoverageNotice.astro";
+import EmptyCatalogState from "../components/EmptyCatalogState.astro";
+import GetStarted from "../components/GetStarted.astro";
+import SampleCard from "../components/SampleCard.astro";
+import { catalog } from "../lib/catalog-data";
+import { categoryById } from "../lib/catalog";
+import { sitePath } from "../lib/urls";
+
+const categories = categoryById(catalog);
+const pilot =
+  catalog.samples.find((sample) => sample.id === "file-access") ??
+  catalog.samples[0];
+const pilotCategory = pilot
+  ? categories.get(pilot.categories.primary)
+  : undefined;
+---
+
+<AppShell
+  title="Windows app samples"
+  description="Practical WinUI 3 and Windows App SDK samples migrated from the Windows Universal samples collection."
+  activeNav="home"
+>
+  <section class="hero">
+    <div class="site-container hero-layout">
+      <div class="stack hero-copy">
+        <p class="eyebrow">WinUI 3 and Windows App SDK</p>
+        <h1>Build Windows experiences from working code</h1>
+        <p class="hero-summary">
+          Explore focused, modernized samples that connect Windows APIs to
+          production-ready WinUI 3 patterns.
+        </p>
+        <div class="cluster hero-actions">
+          <a class="button-link" href={sitePath("/samples/")}>Browse samples</a>
+          <a class="button-link button-link--secondary" href="#get-started">
+            Get started
+          </a>
+        </div>
+      </div>
+      <div class="hero-panel surface" aria-label="Catalog snapshot">
+        <div class="hero-stat">
+          <strong>{catalog.coverage.metadataFiles}</strong>
+          <span>published now</span>
+        </div>
+        <div class="hero-stat">
+          <strong>{catalog.coverage.totalProjects}</strong>
+          <span>projects in the migration set</span>
+        </div>
+        <p>
+          Static, reviewed metadata keeps every page reproducible and available
+          without a runtime API.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pilot-section" aria-labelledby="pilot-title">
+    <div class="site-container stack pilot-content">
+      <CoverageNotice coverage={catalog.coverage} />
+      <div class="section-header">
+        <p class="eyebrow">Metadata-backed pilot</p>
+        <h2 id="pilot-title">Start with a proven sample route</h2>
+        <p class="secondary-text">
+          The first catalog entry establishes the content and routing contract
+          while the broader metadata rollout continues.
+        </p>
+      </div>
+      {
+        pilot ? (
+          <div class="pilot-card">
+            <SampleCard sample={pilot} category={pilotCategory} />
+          </div>
+        ) : (
+          <EmptyCatalogState />
+        )
+      }
+    </div>
+  </section>
+
+  <GetStarted />
+</AppShell>
+
+<style>
+  .hero {
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.7fr);
+    align-items: end;
+    gap: var(--site-space-7);
+  }
+
+  .hero-copy {
+    --stack-space: var(--site-space-5);
+    max-width: 54rem;
+  }
+
+  .hero-summary {
+    max-width: 44rem;
+    color: var(--site-color-text-secondary);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+  }
+
+  .hero-actions {
+    --cluster-space: var(--site-space-3);
+  }
+
+  .hero-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--site-space-4);
+    padding: var(--site-space-5);
+  }
+
+  .hero-panel p {
+    grid-column: 1 / -1;
+    color: var(--site-color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--site-space-1);
+  }
+
+  .hero-stat strong {
+    color: var(--site-color-brand);
+    font-family: var(--site-font-display);
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .hero-stat span {
+    color: var(--site-color-text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .pilot-section {
+    border-block: 1px solid var(--site-color-border-subtle);
+    background: var(--site-color-canvas-subtle);
+  }
+
+  .pilot-content {
+    --stack-space: var(--site-space-6);
+  }
+
+  .pilot-content .section-header {
+    margin-bottom: 0;
+  }
+
+  .pilot-card {
+    max-width: 50rem;
+  }
+
+  @media (max-width: 50rem) {
+    .hero-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+</style>
