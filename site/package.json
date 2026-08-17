@@ -25,7 +25,8 @@
     "@fluentui/react-theme": "9.2.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "shiki": "4.4.3"
+    "shiki": "4.4.3",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
@@ -33,6 +34,7 @@
     "@types/node": "22.20.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
+    "@types/three": "^0.185.4",
     "astro": "7.2.0",
     "tsx": "4.23.12",
     "typescript": "6.0.3"

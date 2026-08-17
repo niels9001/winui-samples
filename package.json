@@ -12,13 +12,15 @@
     "catalog:generate": "node tools/catalog/generate.mjs",
     "catalog:generate:site": "node tools/catalog/generate.mjs --require-complete --output site/src/generated/sample-catalog.json",
     "catalog:test": "node --test tools/catalog/test/*.test.mjs",
-    "site:prepare": "pnpm catalog:validate:complete && pnpm catalog:generate:site",
+    "activity:generate": "node tools/activity/generate.mjs",
+    "activity:test": "node --test tools/activity/test/*.test.mjs",
+    "site:prepare": "pnpm catalog:validate:complete && pnpm catalog:generate:site && pnpm activity:generate",
     "site:check": "pnpm site:prepare && pnpm --filter @winui-samples/site check",
     "site:test": "pnpm site:prepare && pnpm --filter @winui-samples/site test",
     "site:build": "pnpm site:prepare && pnpm --filter @winui-samples/site build",
     "site:smoke": "pnpm --filter @winui-samples/site smoke",
-    "site:verify": "pnpm catalog:test && pnpm site:prepare && pnpm --filter @winui-samples/site test && pnpm --filter @winui-samples/site check && pnpm --filter @winui-samples/site build && pnpm --filter @winui-samples/site smoke",
-    "test": "pnpm catalog:test && pnpm site:test"
+    "site:verify": "pnpm catalog:test && pnpm activity:test && pnpm site:prepare && pnpm --filter @winui-samples/site test && pnpm --filter @winui-samples/site check && pnpm --filter @winui-samples/site build && pnpm --filter @winui-samples/site smoke",
+    "test": "pnpm catalog:test && pnpm activity:test && pnpm site:test"
   },
   "devDependencies": {
     "ajv": "8.20.0",
