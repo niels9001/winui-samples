@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Capabilities (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Capabilities (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
