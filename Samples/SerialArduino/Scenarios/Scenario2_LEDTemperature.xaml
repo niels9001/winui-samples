@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.Scenario2_LEDTemperature"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Stretch"
+            Spacing="16">
+            <TextBlock
+                x:Uid="LedTemperatureHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="LedTemperatureDescription"
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <Grid
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <FontIcon
+                    AutomationProperties.AccessibilityView="Raw"
+                    FontSize="16"
+                    Glyph="&#xE701;" />
+                <TextBlock
+                    x:Name="ConnectionStateTextBlock"
+                    Grid.Column="1"
+                    AutomationProperties.LiveSetting="Polite"
+                    TextWrapping="Wrap" />
+            </Grid>
+            <TextBlock
+                x:Uid="ProtocolSummaryText"
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                x:Uid="LedControlsHeading"
+                Margin="0,8,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}" />
+            <TextBlock
+                x:Uid="LedControlsDescription"
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                TextWrapping="Wrap" />
+
+            <Grid
+                x:Name="LedControlsGrid"
+                MaxWidth="720"
+                HorizontalAlignment="Stretch"
+                ColumnSpacing="32"
+                RowSpacing="12">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState x:Name="NarrowLayout">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                        </VisualState>
+                        <VisualState x:Name="WideLayout">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="720" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="Led4Switch.(Grid.Row)" Value="0" />
+                                <Setter Target="Led4Switch.(Grid.Column)" Value="1" />
+                                <Setter Target="Led5Switch.(Grid.Row)" Value="1" />
+                                <Setter Target="Led5Switch.(Grid.Column)" Value="0" />
+                                <Setter Target="Led6Switch.(Grid.Row)" Value="1" />
+                                <Setter Target="Led6Switch.(Grid.Column)" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ToggleSwitch
+                    x:Name="Led3Switch"
+                    x:Uid="Led3Switch"
+                    AutomationProperties.AutomationId="Led3ToggleSwitch"
+                    Toggled="Led3Switch_Toggled" />
+                <ToggleSwitch
+                    x:Name="Led4Switch"
+                    x:Uid="Led4Switch"
+                    Grid.Row="1"
+                    AutomationProperties.AutomationId="Led4ToggleSwitch"
+                    Toggled="Led4Switch_Toggled" />
+                <ToggleSwitch
+                    x:Name="Led5Switch"
+                    x:Uid="Led5Switch"
+                    Grid.Row="2"
+                    AutomationProperties.AutomationId="Led5ToggleSwitch"
+                    Toggled="Led5Switch_Toggled" />
+                <ToggleSwitch
+                    x:Name="Led6Switch"
+                    x:Uid="Led6Switch"
+                    Grid.Row="3"
+                    AutomationProperties.AutomationId="Led6ToggleSwitch"
+                    Toggled="Led6Switch_Toggled" />
+            </Grid>
+
+            <TextBlock
+                x:Uid="TemperatureHeading"
+                Margin="0,12,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}" />
+            <TextBlock
+                x:Uid="TemperatureDescription"
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                TextWrapping="Wrap" />
+            <TextBox
+                x:Name="TemperatureValueTextBox"
+                x:Uid="TemperatureValueTextBox"
+                AutomationProperties.AutomationId="TemperatureValueTextBox"
+                IsReadOnly="True"
+                MaxWidth="320"
+                HorizontalAlignment="Left" />
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="ReadTemperatureButton"
+                    x:Uid="ReadTemperatureButton"
+                    AutomationProperties.AutomationId="ReadTemperatureButton"
+                    Click="ReadTemperatureButton_Click"
+                    Style="{StaticResource AccentButtonStyle}" />
+                <ProgressRing
+                    x:Name="TemperatureProgressRing"
+                    x:Uid="TemperatureProgressRing"
+                    Width="20"
+                    Height="20"
+                    AutomationProperties.AutomationId="TemperatureProgressRing"
+                    IsActive="False"
+                    Visibility="Collapsed" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
