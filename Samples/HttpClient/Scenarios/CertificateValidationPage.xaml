@@ -1,0 +1,69 @@
+<Page
+    x:Class="SDKTemplate.CertificateValidationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="800"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Server certificate validation" />
+            <TextBlock
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Send an HTTPS request using default OS certificate validation or attach custom validation. The sample custom validator intentionally rejects every certificate to demonstrate secure failure behavior."
+                TextWrapping="Wrap" />
+            <TextBlock Text="Address" />
+            <TextBox
+                x:Name="AddressField"
+                InputScope="Url"
+                Text="https://www.microsoft.com/" />
+            <StackPanel Spacing="6">
+                <RadioButton
+                    x:Name="DefaultValidationRadio"
+                    Checked="ValidationMode_Checked"
+                    Content="Default OS validation"
+                    GroupName="ValidationMode"
+                    IsChecked="True"
+                    Tag="Default" />
+                <RadioButton
+                    x:Name="CustomValidationRadio"
+                    Checked="ValidationMode_Checked"
+                    Content="OS validation plus custom validation"
+                    GroupName="ValidationMode"
+                    Tag="Custom" />
+                <RadioButton
+                    x:Name="IgnoreAndCustomValidationRadio"
+                    Checked="ValidationMode_Checked"
+                    Content="Ignore selected OS errors, then apply custom validation"
+                    GroupName="ValidationMode"
+                    Tag="IgnoreAndCustom" />
+            </StackPanel>
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="StartButton"
+                    Click="StartButton_Click"
+                    Content="Start" />
+                <Button
+                    x:Name="CancelButton"
+                    Click="CancelButton_Click"
+                    Content="Cancel"
+                    IsEnabled="False" />
+            </StackPanel>
+            <TextBox
+                x:Name="OutputField"
+                MinHeight="260"
+                AcceptsReturn="True"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>
