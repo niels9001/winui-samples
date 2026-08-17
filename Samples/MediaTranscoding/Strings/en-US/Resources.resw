@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Media transcoding</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Convert, customize, and trim local video files.</value>
+  </data>
+  <data name="NavigationItemFormat" xml:space="preserve">
+    <value>{0}) {1}</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="ScenarioPresetTitle" xml:space="preserve">
+    <value>Transcode using default presets</value>
+  </data>
+  <data name="ScenarioCustomTitle" xml:space="preserve">
+    <value>Transcode with custom settings</value>
+  </data>
+  <data name="ScenarioTrimTitle" xml:space="preserve">
+    <value>Trim and transcode</value>
+  </data>
+  <data name="ScenarioPresetDescription" xml:space="preserve">
+    <value>Convert an MP4 or WMV video to MP4, WMV, or uncompressed AVI using one of the built-in resolution profiles.</value>
+  </data>
+  <data name="ScenarioCustomDescription" xml:space="preserve">
+    <value>Convert a video to MP4 or WMV while specifying the output video and audio encoding values.</value>
+  </data>
+  <data name="ScenarioTrimDescription" xml:space="preserve">
+    <value>Choose mark-in and mark-out positions from the source preview, then transcode only that range using a preset profile.</value>
+  </data>
+  <data name="ScenarioNavigationView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Media transcoding scenarios</value>
+  </data>
+  <data name="SourceLabel.Text" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="PickSourceButton.Content" xml:space="preserve">
+    <value>Pick video file</value>
+  </data>
+  <data name="PickSourceButton.AccessKey" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="PickSourceButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Pick source video file</value>
+  </data>
+  <data name="TargetFormatLabel.Text" xml:space="preserve">
+    <value>Target format</value>
+  </data>
+  <data name="TargetFormatComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Target format</value>
+  </data>
+  <data name="Mp4OutputOption.Content" xml:space="preserve">
+    <value>H.264 / MP4</value>
+  </data>
+  <data name="WmvOutputOption.Content" xml:space="preserve">
+    <value>VC-1 / WMV</value>
+  </data>
+  <data name="AviOutputOption.Content" xml:space="preserve">
+    <value>Uncompressed / AVI</value>
+  </data>
+  <data name="PresetLabel.Text" xml:space="preserve">
+    <value>Transcode profile</value>
+  </data>
+  <data name="PresetComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Transcode profile</value>
+  </data>
+  <data name="Preset1080pOption.Content" xml:space="preserve">
+    <value>1080p (1920 x 1080)</value>
+  </data>
+  <data name="Preset720pOption.Content" xml:space="preserve">
+    <value>720p (1280 x 720)</value>
+  </data>
+  <data name="PresetWvgaOption.Content" xml:space="preserve">
+    <value>WVGA (800 x 480)</value>
+  </data>
+  <data name="PresetNtscOption.Content" xml:space="preserve">
+    <value>NTSC (720 x 480)</value>
+  </data>
+  <data name="PresetPalOption.Content" xml:space="preserve">
+    <value>PAL (720 x 576)</value>
+  </data>
+  <data name="PresetVgaOption.Content" xml:space="preserve">
+    <value>VGA (640 x 480)</value>
+  </data>
+  <data name="PresetQvgaOption.Content" xml:space="preserve">
+    <value>QVGA (320 x 240)</value>
+  </data>
+  <data name="EnableMrfCheckBox.Content" xml:space="preserve">
+    <value>Use the MRF CRF 4:4:4 video processing algorithm (disables hardware acceleration)</value>
+  </data>
+  <data name="EnableMrfCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Use MRF CRF 4:4:4 video processing</value>
+  </data>
+  <data name="OutputLabel.Text" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="PickOutputButton.Content" xml:space="preserve">
+    <value>Choose output file</value>
+  </data>
+  <data name="PickOutputButton.AccessKey" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="PickOutputButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Choose output video file</value>
+  </data>
+  <data name="VideoSettingsHeading.Text" xml:space="preserve">
+    <value>Video settings</value>
+  </data>
+  <data name="VideoWidthLabel.Text" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="VideoWidthTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Video width</value>
+  </data>
+  <data name="VideoHeightLabel.Text" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="VideoHeightTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Video height</value>
+  </data>
+  <data name="VideoBitrateLabel.Text" xml:space="preserve">
+    <value>Bit rate</value>
+  </data>
+  <data name="VideoBitrateTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Video bit rate</value>
+  </data>
+  <data name="VideoFrameRateLabel.Text" xml:space="preserve">
+    <value>Frame rate</value>
+  </data>
+  <data name="VideoFrameRateTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Video frame rate</value>
+  </data>
+  <data name="AudioSettingsHeading.Text" xml:space="preserve">
+    <value>Audio settings</value>
+  </data>
+  <data name="AudioBitsPerSampleLabel.Text" xml:space="preserve">
+    <value>Bits per sample</value>
+  </data>
+  <data name="AudioBitsPerSampleTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Audio bits per sample</value>
+  </data>
+  <data name="AudioSampleRateLabel.Text" xml:space="preserve">
+    <value>Sample rate</value>
+  </data>
+  <data name="AudioSampleRateTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Audio sample rate</value>
+  </data>
+  <data name="AudioBitrateLabel.Text" xml:space="preserve">
+    <value>Bit rate</value>
+  </data>
+  <data name="AudioBitrateTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Audio bit rate</value>
+  </data>
+  <data name="AudioChannelCountLabel.Text" xml:space="preserve">
+    <value>Channel count</value>
+  </data>
+  <data name="AudioChannelCountTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Audio channel count</value>
+  </data>
+  <data name="TrimSettingsHeading.Text" xml:space="preserve">
+    <value>Trim range</value>
+  </data>
+  <data name="TrimStartLabel.Text" xml:space="preserve">
+    <value>Mark-in position</value>
+  </data>
+  <data name="TrimEndLabel.Text" xml:space="preserve">
+    <value>Mark-out position</value>
+  </data>
+  <data name="MarkInButton.Content" xml:space="preserve">
+    <value>Use current position</value>
+  </data>
+  <data name="MarkInButton.AccessKey" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="MarkInButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Use current playback position as mark-in</value>
+  </data>
+  <data name="MarkOutButton.Content" xml:space="preserve">
+    <value>Use current position</value>
+  </data>
+  <data name="MarkOutButton.AccessKey" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="MarkOutButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Use current playback position as mark-out</value>
+  </data>
+  <data name="TranscodeButton.Content" xml:space="preserve">
+    <value>Transcode</value>
+  </data>
+  <data name="TranscodeButton.AccessKey" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="TranscodeButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Start transcoding</value>
+  </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelButton.AccessKey" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="CancelButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Cancel transcoding</value>
+  </data>
+  <data name="ProgressIdleText.Text" xml:space="preserve">
+    <value>Ready to transcode.</value>
+  </data>
+  <data name="TranscodeProgressBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Transcoding progress</value>
+  </data>
+  <data name="InputPreviewHeading.Text" xml:space="preserve">
+    <value>Source preview</value>
+  </data>
+  <data name="InputPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Source video preview</value>
+  </data>
+  <data name="OutputPreviewHeading.Text" xml:space="preserve">
+    <value>Output preview</value>
+  </data>
+  <data name="OutputPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Transcoded video preview</value>
+  </data>
+  <data name="NoSourceSelected" xml:space="preserve">
+    <value>No source selected.</value>
+  </data>
+  <data name="NoOutputSelected" xml:space="preserve">
+    <value>No output selected.</value>
+  </data>
+  <data name="ProgressIdle" xml:space="preserve">
+    <value>Ready to transcode.</value>
+  </data>
+  <data name="SelectedSourceFormat" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="SourceSelectedFormat" xml:space="preserve">
+    <value>Selected source: {0}</value>
+  </data>
+  <data name="SelectedOutputFormat" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="OutputSelectedFormat" xml:space="preserve">
+    <value>Selected output: {0}</value>
+  </data>
+  <data name="SelectingSourceOperation" xml:space="preserve">
+    <value>Selecting the source video</value>
+  </data>
+  <data name="SelectingOutputOperation" xml:space="preserve">
+    <value>Selecting the output video</value>
+  </data>
+  <data name="ChooseSourceFirst" xml:space="preserve">
+    <value>Choose a source video first.</value>
+  </data>
+  <data name="ChooseOutputFirst" xml:space="preserve">
+    <value>Choose an output file first.</value>
+  </data>
+  <data name="ChooseOutputAgain" xml:space="preserve">
+    <value>The target format changed. Choose the output file again.</value>
+  </data>
+  <data name="DefaultOutputFileName" xml:space="preserve">
+    <value>TranscodeSampleOutput</value>
+  </data>
+  <data name="SourceAndOutputMustDiffer" xml:space="preserve">
+    <value>The source and output files must be different.</value>
+  </data>
+  <data name="PreparingTranscode" xml:space="preserve">
+    <value>Preparing to transcode...</value>
+  </data>
+  <data name="ProgressPercentFormat" xml:space="preserve">
+    <value>Transcoding: {0:0}%</value>
+  </data>
+  <data name="OutputPathFormat" xml:space="preserve">
+    <value>Output: {0}</value>
+  </data>
+  <data name="TranscodeCompleted" xml:space="preserve">
+    <value>Transcoding completed.</value>
+  </data>
+  <data name="TranscodeCompletedFormat" xml:space="preserve">
+    <value>Transcoding completed: {0}</value>
+  </data>
+  <data name="TranscodeCanceled" xml:space="preserve">
+    <value>Transcoding canceled. The partial output was deleted.</value>
+  </data>
+  <data name="CancelingTranscode" xml:space="preserve">
+    <value>Canceling transcoding...</value>
+  </data>
+  <data name="TranscodingOperation" xml:space="preserve">
+    <value>Transcoding the video</value>
+  </data>
+  <data name="DeletingPartialOutputOperation" xml:space="preserve">
+    <value>Deleting the partial output file</value>
+  </data>
+  <data name="CodecNotFound" xml:space="preserve">
+    <value>The required codec was not found.</value>
+  </data>
+  <data name="InvalidProfile" xml:space="preserve">
+    <value>The selected encoding profile is invalid.</value>
+  </data>
+  <data name="UnknownTranscodeFailureFormat" xml:space="preserve">
+    <value>Transcoding could not be prepared: {0}</value>
+  </data>
+  <data name="InvalidCustomSettings" xml:space="preserve">
+    <value>Enter a positive whole number for every custom video and audio setting.</value>
+  </data>
+  <data name="SourceDurationUnavailable" xml:space="preserve">
+    <value>The source duration is not available, so a trim range cannot be created.</value>
+  </data>
+  <data name="InvalidTrimRange" xml:space="preserve">
+    <value>The trim range must start before it ends and stay within the source duration.</value>
+  </data>
+  <data name="TrimStartBeforeEnd" xml:space="preserve">
+    <value>The mark-in position must be before the mark-out position.</value>
+  </data>
+  <data name="TrimEndAfterStart" xml:space="preserve">
+    <value>The mark-out position must be after the mark-in position.</value>
+  </data>
+  <data name="TrimStartUpdatedFormat" xml:space="preserve">
+    <value>Mark-in set to {0}.</value>
+  </data>
+  <data name="TrimEndUpdatedFormat" xml:space="preserve">
+    <value>Mark-out set to {0}.</value>
+  </data>
+  <data name="TimeValueFormat" xml:space="preserve">
+    <value>{0:00}:{1:00}:{2:00}.{3:000}</value>
+  </data>
+  <data name="Mp4FileType" xml:space="preserve">
+    <value>MP4 video</value>
+  </data>
+  <data name="WmvFileType" xml:space="preserve">
+    <value>Windows Media video</value>
+  </data>
+  <data name="AviFileType" xml:space="preserve">
+    <value>AVI video</value>
+  </data>
+</root>
