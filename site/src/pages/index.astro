@@ -1,165 +1,765 @@
 ---
 import AppShell from "../components/AppShell.astro";
-import CoverageNotice from "../components/CoverageNotice.astro";
-import EmptyCatalogState from "../components/EmptyCatalogState.astro";
 import GetStarted from "../components/GetStarted.astro";
-import SampleCard from "../components/SampleCard.astro";
+import SampleMedia from "../components/SampleMedia.astro";
+import ShowcaseStage from "../components/ShowcaseStage.astro";
+import { activity } from "../lib/activity";
 import { catalog } from "../lib/catalog-data";
 import { categoryById } from "../lib/catalog";
-import { sitePath } from "../lib/urls";
+import {
+  originalSourceSampleCount,
+  outcomeBrowsePath,
+  outcomeLinks,
+  selectFeaturedSamples,
+} from "../lib/landing";
+import { resolveAllHeroMedia } from "../lib/sample-media";
+import { repositoryWebUrl, sitePath } from "../lib/urls";
 
 const categories = categoryById(catalog);
-const pilot =
-  catalog.samples.find((sample) => sample.id === "file-access") ??
-  catalog.samples[0];
-const pilotCategory = pilot
-  ? categories.get(pilot.categories.primary)
-  : undefined;
+const featured = selectFeaturedSamples(catalog.samples);
+const stageSamples = featured.slice(0, 3);
+const sourceSampleCount = originalSourceSampleCount(catalog);
+const heroMedia = new Map(
+  (await resolveAllHeroMedia(featured)).map((media) => [media.sampleId, media]),
+);
+const samplesById = new Map(catalog.samples.map((sample) => [sample.id, sample]));
+const activityEntries = activity.entries.flatMap((entry) => {
+  const sample = samplesById.get(entry.sampleId);
+  return sample ? [{ entry, sample }] : [];
+});
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const activityLabels = {
+  new: "New sample",
+  updated: "Implementation updated",
+  refreshed: "Docs and media refreshed",
+} as const;
 ---
 
 <AppShell
   title="Windows app samples"
-  description="Practical WinUI 3 and Windows App SDK samples migrated from the Windows Universal samples collection."
+  description="Explore 71 practical WinUI 3 and Windows App SDK projects mapped from 105 Windows source samples."
   activeNav="home"
 >
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="site-container hero-layout">
-      <div class="stack hero-copy">
-        <p class="eyebrow">WinUI 3 and Windows App SDK</p>
-        <h1>Build Windows experiences from working code</h1>
+      <div class="hero-copy">
+        <p class="eyebrow">WinUI 3 + Windows App SDK</p>
+        <h1 id="hero-title">Find the Windows capability. Ship the experience.</h1>
         <p class="hero-summary">
-          Explore focused, modernized samples that connect Windows APIs to
-          production-ready WinUI 3 patterns.
+          Start with what your app needs to do, then open the working project,
+          scenarios, APIs, and focused source that make it real.
         </p>
         <div class="cluster hero-actions">
-          <a class="button-link" href={sitePath("/samples/")}>Browse samples</a>
-          <a class="button-link button-link--secondary" href="#get-started">
-            Get started
+          <a class="button-link" href={sitePath("/samples/")}>
+            Browse all samples <span aria-hidden="true">→</span>
+          </a>
+          <a class="button-link button-link--secondary" href={repositoryWebUrl}>
+            View on GitHub <span aria-hidden="true">↗</span>
           </a>
         </div>
+        <dl class="hero-proof" aria-label="Catalog coverage">
+          <div>
+            <dt>{catalog.coverage.totalProjects}</dt>
+            <dd>buildable WinUI projects</dd>
+          </div>
+          <div>
+            <dt>{sourceSampleCount}</dt>
+            <dd>source samples mapped</dd>
+          </div>
+          <div>
+            <dt>100%</dt>
+            <dd>metadata coverage</dd>
+          </div>
+        </dl>
       </div>
-      <div class="hero-panel surface" aria-label="Catalog snapshot">
-        <div class="hero-stat">
-          <strong>{catalog.coverage.metadataFiles}</strong>
-          <span>published now</span>
+
+      <div class="hero-composition" aria-hidden="true">
+        <div class="hero-orbit"></div>
+        <div class="hero-window hero-window--back">
+          <span class="hero-window-bar"></span>
+          <span class="hero-window-lines"></span>
         </div>
-        <div class="hero-stat">
-          <strong>{catalog.coverage.totalProjects}</strong>
-          <span>projects in the migration set</span>
+        <div class="hero-window hero-window--front">
+          <span class="hero-window-bar"></span>
+          <span class="hero-window-nav"></span>
+          <span class="hero-window-cards"></span>
         </div>
-        <p>
-          Static, reviewed metadata keeps every page reproducible and available
-          without a runtime API.
-        </p>
+        <div class="hero-chip hero-chip--one">WinUI 3</div>
+        <div class="hero-chip hero-chip--two">Windows App SDK</div>
       </div>
     </div>
   </section>
 
-  <section class="section pilot-section" aria-labelledby="pilot-title">
-    <div class="site-container stack pilot-content">
-      <CoverageNotice coverage={catalog.coverage} />
-      <div class="section-header">
-        <p class="eyebrow">Metadata-backed pilot</p>
-        <h2 id="pilot-title">Start with a proven sample route</h2>
+  <ShowcaseStage samples={stageSamples} categories={categories} />
+
+  <section class="section activity-section" aria-labelledby="activity-title">
+    <div class="site-container">
+      <div class="section-header activity-heading">
+        <p class="eyebrow">Recently shipped</p>
+        <h2 id="activity-title">Changes tied to merged pull requests</h2>
         <p class="secondary-text">
-          The first catalog entry establishes the content and routing contract
-          while the broader metadata rollout continues.
+          Build-time activity only. Functional updates, new projects, and
+          documentation refreshes are labeled separately.
         </p>
       </div>
       {
-        pilot ? (
-          <div class="pilot-card">
-            <SampleCard sample={pilot} category={pilotCategory} />
-          </div>
+        activityEntries.length > 0 ? (
+          <ol class="activity-list">
+            {activityEntries.map(({ entry, sample }) => (
+              <li>
+                <article class="activity-card">
+                  <div>
+                    <span class={`activity-kind activity-kind--${entry.kind}`}>
+                      {activityLabels[entry.kind]}
+                    </span>
+                    <h3>
+                      <a href={sitePath(`/samples/${sample.id}/`)}>
+                        {sample.title}
+                      </a>
+                    </h3>
+                  </div>
+                  <p>{entry.pullRequest.title}</p>
+                  <div class="activity-meta">
+                    <time datetime={entry.mergedAt}>
+                      {dateFormatter.format(new Date(entry.mergedAt))}
+                    </time>
+                    <a href={entry.pullRequest.url}>PR #{entry.pullRequest.number}</a>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ol>
         ) : (
-          <EmptyCatalogState />
+          <div class="activity-empty surface">
+            <div class="activity-empty-mark" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div>
+              <h3>The next shipment will appear here</h3>
+              <p>
+                This feed stays empty until a merged pull request changes a
+                cataloged sample. No placeholder dates or invented releases.
+              </p>
+            </div>
+            <a href={`${repositoryWebUrl}/pulls?q=is%3Apr+is%3Amerged`}>
+              View merged pull requests <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         )
       }
     </div>
   </section>
 
+  <section class="section featured-section" aria-labelledby="featured-title">
+    <div class="site-container">
+      <div class="section-header">
+        <p class="eyebrow">Featured samples</p>
+        <h2 id="featured-title">A cross-section of the Windows platform</h2>
+        <p class="secondary-text">
+          Curated across device, data, media, input, and app experiences—not
+          ranked by recency.
+        </p>
+      </div>
+      <div class="featured-mosaic">
+        {
+          featured.map((sample, index) => {
+            const category = categories.get(sample.categories.primary);
+            return (
+              <article class:list={["featured-card", `featured-card--${index + 1}`]}>
+                <SampleMedia
+                  sample={sample}
+                  category={category}
+                  hero={heroMedia.get(sample.id)}
+                />
+                <div class="featured-card-copy">
+                  <p>{category?.label ?? sample.categories.primary}</p>
+                  <h3>
+                    <a href={sitePath(`/samples/${sample.id}/`)}>{sample.title}</a>
+                  </h3>
+                  <span>{sample.scenarios.length} focused scenarios</span>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+      <a class="featured-all" href={sitePath("/samples/")}>
+        Browse all 71 projects <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section outcomes-section" aria-labelledby="outcomes-title">
+    <div class="site-container outcomes-layout">
+      <div class="section-header">
+        <p class="eyebrow">Explore by outcome</p>
+        <h2 id="outcomes-title">Start with the job, not the namespace</h2>
+        <p class="secondary-text">
+          Each link opens a shareable Browse view with the relevant catalog
+          filter already applied.
+        </p>
+      </div>
+      <div class="outcome-links">
+        {
+          outcomeLinks.map((outcome, index) => (
+            <a href={sitePath(outcomeBrowsePath(outcome))}>
+              <span class="outcome-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>
+                <strong>{outcome.title}</strong>
+                <small>{outcome.description}</small>
+              </span>
+              <span aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <GetStarted />
+
+  <section class="contribution-close" aria-labelledby="contribute-title">
+    <div class="site-container contribution-panel">
+      <div>
+        <p class="eyebrow">Open source, built in the open</p>
+        <h2 id="contribute-title">Make one Windows path clearer for everyone</h2>
+        <p>
+          Port a sample, sharpen its metadata, or improve the code path developers
+          land on first.
+        </p>
+      </div>
+      <a class="button-link" href={`${repositoryWebUrl}/blob/main/CONTRIBUTING.md`}>
+        Read the contribution guide <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
 </AppShell>
 
 <style>
   .hero {
-    padding-block: clamp(4rem, 10vw, 8rem);
+    position: relative;
+    overflow: clip;
+    padding-block: clamp(5rem, 11vw, 9rem);
+  }
+
+  .hero::before {
+    position: absolute;
+    width: 42rem;
+    height: 42rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--site-color-brand) 16%, transparent);
+    content: "";
+    filter: blur(6rem);
+    inset: -24rem -12rem auto auto;
+    pointer-events: none;
   }
 
   .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.7fr);
-    align-items: end;
-    gap: var(--site-space-7);
+    grid-template-columns: minmax(0, 1.05fr) minmax(23rem, 0.8fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
   }
 
   .hero-copy {
-    --stack-space: var(--site-space-5);
-    max-width: 54rem;
+    display: grid;
+    max-width: 47rem;
+    gap: var(--site-space-5);
+  }
+
+  .hero h1 {
+    max-width: 13ch;
+    font-size: clamp(3rem, 7vw, 5.7rem);
+    letter-spacing: -0.055em;
   }
 
   .hero-summary {
-    max-width: 44rem;
+    max-width: 40rem;
     color: var(--site-color-text-secondary);
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-size: clamp(1.08rem, 2vw, 1.32rem);
   }
 
   .hero-actions {
     --cluster-space: var(--site-space-3);
   }
 
-  .hero-panel {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--site-space-4);
-    padding: var(--site-space-5);
-  }
-
-  .hero-panel p {
-    grid-column: 1 / -1;
-    color: var(--site-color-text-secondary);
-    font-size: 0.9rem;
-  }
-
-  .hero-stat {
+  .hero-proof {
     display: flex;
-    flex-direction: column;
-    gap: var(--site-space-1);
+    flex-wrap: wrap;
+    gap: var(--site-space-5);
+    padding-top: var(--site-space-4);
+    border-top: 1px solid var(--site-color-border-subtle);
   }
 
-  .hero-stat strong {
-    color: var(--site-color-brand);
+  .hero-proof div {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .hero-proof dt {
     font-family: var(--site-font-display);
-    font-size: 2rem;
+    font-size: 1.65rem;
+    font-weight: 680;
     line-height: 1;
   }
 
-  .hero-stat span {
-    color: var(--site-color-text-secondary);
-    font-size: 0.8rem;
+  .hero-proof dd {
+    margin: 0;
+    color: var(--site-color-text-muted);
+    font-size: 0.78rem;
   }
 
-  .pilot-section {
+  .hero-composition {
+    position: relative;
+    min-height: 31rem;
+    perspective: 80rem;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    inset: 7% 0 0;
+    border: 1px solid color-mix(in srgb, var(--site-color-brand) 24%, transparent);
+    border-radius: 50%;
+    transform: rotate(-13deg);
+  }
+
+  .hero-window {
+    position: absolute;
+    display: grid;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, white 28%, var(--site-color-border));
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--site-color-surface-solid) 76%, transparent);
+    box-shadow: 0 2.5rem 5rem rgb(0 0 0 / 20%);
+    backdrop-filter: blur(30px) saturate(130%);
+  }
+
+  .hero-window--back {
+    width: 72%;
+    height: 56%;
+    top: 4%;
+    right: 0;
+    transform: rotateY(-16deg) rotateZ(4deg);
+  }
+
+  .hero-window--front {
+    width: 84%;
+    height: 68%;
+    bottom: 3%;
+    left: 0;
+    grid-template: 2.5rem 1fr / 4.5rem 1fr;
+    transform: rotateY(8deg) rotateZ(-2deg);
+  }
+
+  .hero-window-bar {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--site-color-border-subtle);
+    background:
+      radial-gradient(circle at calc(100% - 1.4rem) 50%, var(--site-color-text-muted) 0 2px, transparent 3px),
+      color-mix(in srgb, var(--site-color-surface-solid) 64%, transparent);
+  }
+
+  .hero-window-nav {
+    border-right: 1px solid var(--site-color-border-subtle);
+    background:
+      linear-gradient(var(--site-color-brand) 0 0) 50% 1.2rem / 45% 0.3rem no-repeat,
+      repeating-linear-gradient(180deg, var(--site-color-border) 0 2px, transparent 2px 2.2rem);
+    opacity: 0.65;
+  }
+
+  .hero-window-lines {
+    margin: 12%;
+    background: repeating-linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--site-color-brand) 36%, transparent) 0 0.4rem,
+      transparent 0.4rem 2.1rem
+    );
+  }
+
+  .hero-window-cards {
+    margin: 8%;
+    border-radius: 0.7rem;
+    background:
+      linear-gradient(125deg, color-mix(in srgb, var(--site-color-brand) 64%, #8a6cff), transparent 65%),
+      repeating-linear-gradient(180deg, var(--site-color-border-subtle) 0 1px, transparent 1px 1.8rem);
+  }
+
+  .hero-chip {
+    position: absolute;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid rgb(255 255 255 / 30%);
+    border-radius: 999px;
+    background: #0f6cbd;
+    box-shadow: var(--site-shadow-flyout);
+    color: white;
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .hero-chip--one {
+    top: 18%;
+    left: -3%;
+  }
+
+  .hero-chip--two {
+    right: -2%;
+    bottom: 12%;
+    background: #5b2e91;
+  }
+
+  .activity-section {
     border-block: 1px solid var(--site-color-border-subtle);
     background: var(--site-color-canvas-subtle);
   }
 
-  .pilot-content {
-    --stack-space: var(--site-space-6);
+  .activity-list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: var(--site-space-3);
+    list-style: none;
   }
 
-  .pilot-content .section-header {
-    margin-bottom: 0;
+  .activity-card {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.8fr) minmax(14rem, 1fr) auto;
+    align-items: center;
+    gap: var(--site-space-5);
+    padding: var(--site-space-4) var(--site-space-5);
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: var(--site-radius-large);
+    background: var(--site-color-surface);
   }
 
-  .pilot-card {
-    max-width: 50rem;
+  .activity-card h3 {
+    margin-top: var(--site-space-1);
+    font-size: 1.05rem;
   }
 
-  @media (max-width: 50rem) {
-    .hero-layout {
+  .activity-card h3 a {
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  .activity-card > p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .activity-kind {
+    color: var(--site-color-brand);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .activity-kind--refreshed {
+    color: var(--site-color-text-muted);
+  }
+
+  .activity-meta {
+    display: grid;
+    justify-items: end;
+    color: var(--site-color-text-muted);
+    font-size: 0.78rem;
+  }
+
+  .activity-empty {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--site-space-5);
+    padding: var(--site-space-6);
+    box-shadow: none;
+  }
+
+  .activity-empty p {
+    color: var(--site-color-text-secondary);
+  }
+
+  .activity-empty a {
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .activity-empty-mark {
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    align-items: end;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.8rem;
+    border-radius: 50%;
+    background: var(--site-color-brand-subtle);
+  }
+
+  .activity-empty-mark span {
+    width: 0.35rem;
+    border-radius: 999px;
+    background: var(--site-color-brand);
+  }
+
+  .activity-empty-mark span:nth-child(1) { height: 35%; }
+  .activity-empty-mark span:nth-child(2) { height: 75%; }
+  .activity-empty-mark span:nth-child(3) { height: 52%; }
+
+  .featured-section {
+    overflow: clip;
+  }
+
+  .featured-mosaic {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--site-space-4);
+  }
+
+  .featured-card {
+    position: relative;
+    overflow: hidden;
+    grid-column: span 4;
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: 1.25rem;
+    background: var(--site-color-surface);
+    box-shadow: var(--site-shadow-card);
+  }
+
+  .featured-card--1,
+  .featured-card--4 {
+    grid-column: span 7;
+  }
+
+  .featured-card--2,
+  .featured-card--3 {
+    grid-column: span 5;
+  }
+
+  .featured-card :global(.detail-visual) {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .featured-card-copy {
+    display: grid;
+    gap: 0.25rem;
+    padding: var(--site-space-4) var(--site-space-5) var(--site-space-5);
+  }
+
+  .featured-card-copy p,
+  .featured-card-copy span {
+    color: var(--site-color-text-muted);
+    font-size: 0.76rem;
+  }
+
+  .featured-card-copy h3 a {
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  .featured-card-copy h3 a::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+
+  .featured-all {
+    display: inline-flex;
+    margin-top: var(--site-space-5);
+    font-weight: 680;
+    text-decoration: none;
+  }
+
+  .outcomes-section {
+    background: var(--site-color-text);
+    color: var(--site-color-canvas);
+  }
+
+  .outcomes-layout {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .outcomes-section .eyebrow {
+    color: #69bfff;
+  }
+
+  .outcomes-section .secondary-text {
+    color: color-mix(in srgb, var(--site-color-canvas) 72%, transparent);
+  }
+
+  .outcome-links {
+    border-top: 1px solid color-mix(in srgb, var(--site-color-canvas) 24%, transparent);
+  }
+
+  .outcome-links a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--site-space-4);
+    padding-block: var(--site-space-5);
+    border-bottom: 1px solid color-mix(in srgb, var(--site-color-canvas) 24%, transparent);
+    color: var(--site-color-canvas);
+    text-decoration: none;
+  }
+
+  .outcome-links strong,
+  .outcome-links small {
+    display: block;
+  }
+
+  .outcome-links small {
+    margin-top: var(--site-space-1);
+    color: color-mix(in srgb, var(--site-color-canvas) 70%, transparent);
+  }
+
+  .outcome-number {
+    color: #69bfff;
+    font-family: ui-monospace, "Cascadia Code", monospace;
+    font-size: 0.75rem;
+  }
+
+  .contribution-close {
+    padding-block: var(--site-space-8);
+  }
+
+  .contribution-panel {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--site-space-7);
+    padding: clamp(2rem, 5vw, 4rem);
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: 1.5rem;
+    background:
+      radial-gradient(circle at 90% 10%, var(--site-color-brand-subtle), transparent 24rem),
+      var(--site-color-surface);
+    box-shadow: var(--site-shadow-card);
+  }
+
+  .contribution-panel div {
+    display: grid;
+    max-width: 45rem;
+    gap: var(--site-space-3);
+  }
+
+  .contribution-panel p:last-child {
+    color: var(--site-color-text-secondary);
+  }
+
+  @media (max-width: 60rem) {
+    .hero-layout,
+    .outcomes-layout {
       grid-template-columns: 1fr;
+    }
+
+    .hero-composition {
+      min-height: 27rem;
+    }
+
+    .activity-card {
+      grid-template-columns: 1fr auto;
+    }
+
+    .activity-card > p {
+      grid-row: 2;
+      grid-column: 1 / -1;
+    }
+
+    .featured-card,
+    .featured-card--1,
+    .featured-card--2,
+    .featured-card--3,
+    .featured-card--4 {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .hero {
+      padding-block: 4rem 3rem;
+    }
+
+    .hero-composition {
+      min-height: 21rem;
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--site-space-3);
+    }
+
+    .hero-proof dt {
+      font-size: 1.3rem;
+    }
+
+    .hero-actions .button-link {
+      width: 100%;
+    }
+
+    .activity-empty,
+    .activity-card {
+      grid-template-columns: 1fr;
+    }
+
+    .activity-meta {
+      justify-items: start;
+    }
+
+    .featured-card,
+    .featured-card--1,
+    .featured-card--2,
+    .featured-card--3,
+    .featured-card--4 {
+      grid-column: 1 / -1;
+    }
+
+    .contribution-panel {
       align-items: start;
+      flex-direction: column;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .hero-window,
+    .hero-chip,
+    .featured-card,
+    .contribution-panel {
+      border: 2px solid CanvasText;
+      background: Canvas;
+      color: CanvasText;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-window {
+      animation: hero-arrive 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .featured-card {
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .featured-card:hover {
+      box-shadow: var(--site-shadow-flyout);
+      transform: translateY(-3px);
+    }
+
+    @keyframes hero-arrive {
+      from {
+        opacity: 0;
+        transform: translateY(1.5rem) rotateY(0) rotateZ(0);
+      }
     }
   }
 </style>

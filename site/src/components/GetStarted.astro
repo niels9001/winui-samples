@@ -1,6 +1,7 @@
 ---
 import { BookOpenRegular } from "@fluentui/react-icons/svg/book-open";
 import { CodeRegular } from "@fluentui/react-icons/svg/code";
+import { GlobeRegular } from "@fluentui/react-icons/svg/globe";
 import { PeopleCommunityRegular } from "@fluentui/react-icons/svg/people-community";
 import { ToolboxRegular } from "@fluentui/react-icons/svg/toolbox";
 
@@ -11,6 +12,7 @@ const resourceIcons = {
   "windows-app-sdk": ToolboxRegular,
   "windows-app-development": BookOpenRegular,
   contributing: PeopleCommunityRegular,
+  github: GlobeRegular,
   "winui-skills": CodeRegular,
 } as const;
 
@@ -49,10 +51,10 @@ dotnet build -c Debug -p:Platform=x64`;
       </div>
       <div class="quick-start stack">
         <div class="stack" style="--stack-space: var(--site-space-2)">
-          <p class="eyebrow">Try the pilot</p>
-          <h3>Build the FileAccess sample</h3>
+          <p class="eyebrow">Build locally</p>
+          <h3>Run the FileAccess sample</h3>
           <p class="secondary-text">
-            Clone the repository and build the metadata-backed pilot on Windows.
+            Clone the repository and build a packaged WinUI 3 project on Windows.
           </p>
         </div>
         <CodeBlock code={quickStart} label="PowerShell" />

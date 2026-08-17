@@ -32,6 +32,14 @@ export const getStartedResources = [
     linkLabel: "Read the contributing guide",
   },
   {
+    id: "github",
+    title: "Browse the repository",
+    description:
+      "Inspect every project, follow pull requests, and clone the complete sample collection.",
+    href: "https://github.com/niels9001/winui-samples",
+    linkLabel: "Open the GitHub repository",
+  },
+  {
     id: "winui-skills",
     title: "WinUI agent and skills",
     description:

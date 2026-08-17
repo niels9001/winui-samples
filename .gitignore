@@ -52,7 +52,9 @@ Thumbs.db
 node_modules/
 .pnpm-store/
 /site/.astro/
+/.astro/
 /site/dist/
 
 # Generated sample catalog
 /site/src/generated/sample-catalog.json
+/site/src/generated/sample-activity.json
