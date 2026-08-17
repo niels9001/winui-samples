@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "VideoPlaybackSynchronization (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "VideoPlaybackSynchronization (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

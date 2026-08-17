@@ -1,0 +1,57 @@
+<Page
+    x:Class="SDKTemplate.CookieBehaviorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="800"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Disable cookies" />
+            <TextBlock
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="First receive two cookies from the local test server. Then enable or disable cookie handling and send another request; the echoed request headers show whether the Cookie header was attached."
+                TextWrapping="Wrap" />
+            <TextBlock Text="Address" />
+            <TextBox
+                x:Name="AddressField"
+                InputScope="Url" />
+            <ToggleSwitch
+                x:Name="CookieUsageToggle"
+                Header="Cookie handling for the next request"
+                OffContent="Disabled"
+                OnContent="Enabled" />
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="InitialRequestButton"
+                    Click="InitialRequestButton_Click"
+                    Content="Send initial request" />
+                <Button
+                    x:Name="NextRequestButton"
+                    Click="NextRequestButton_Click"
+                    Content="Send next request"
+                    IsEnabled="False" />
+                <Button
+                    x:Name="CancelButton"
+                    Click="CancelButton_Click"
+                    Content="Cancel"
+                    IsEnabled="False" />
+            </StackPanel>
+            <TextBox
+                x:Name="OutputField"
+                MinHeight="320"
+                AcceptsReturn="True"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

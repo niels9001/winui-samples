@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ClientDeviceInformation (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ClientDeviceInformation (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

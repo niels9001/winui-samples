@@ -1,0 +1,76 @@
+<Page
+    x:Class="SDKTemplate.BinaryStreamPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer
+        VerticalScrollBarVisibility="Auto"
+        VerticalScrollMode="Auto">
+        <StackPanel
+            MaxWidth="900"
+            Padding="24"
+            HorizontalAlignment="Stretch"
+            Spacing="12">
+            <TextBlock
+                x:Uid="BinaryHeading"
+                Style="{StaticResource TitleTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Uid="BinaryDescription"
+                TextWrapping="Wrap" />
+
+            <TextBox
+                x:Name="ServerAddressField"
+                x:Uid="BinaryServerAddress"
+                AutomationProperties.AutomationId="BinaryServerAddress"
+                InputScope="Url" />
+            <CheckBox
+                x:Name="SecureWebSocketCheckBox"
+                x:Uid="BinarySecureWebSocket"
+                AutomationProperties.AutomationId="BinarySecureWebSocket"
+                Checked="OnSecureEndpointChanged"
+                Unchecked="OnSecureEndpointChanged" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="StartButton"
+                    x:Uid="BinaryStartButton"
+                    AutomationProperties.AutomationId="BinaryStartButton"
+                    Click="OnStart"
+                    Style="{StaticResource AccentButtonStyle}" />
+                <Button
+                    x:Name="StopButton"
+                    x:Uid="BinaryStopButton"
+                    AutomationProperties.AutomationId="BinaryStopButton"
+                    Click="OnStop" />
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <TextBlock x:Uid="BinaryBytesSentLabel" />
+                <TextBlock x:Name="DataSentField" />
+            </StackPanel>
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <TextBlock x:Uid="BinaryBytesReceivedLabel" />
+                <TextBlock x:Name="DataReceivedField" />
+            </StackPanel>
+
+            <TextBlock
+                x:Uid="BinaryOutputLabel"
+                Margin="0,8,0,0" />
+            <TextBox
+                x:Name="OutputField"
+                x:Uid="BinaryOutput"
+                Height="240"
+                AutomationProperties.AutomationId="BinaryOutput"
+                IsReadOnly="True"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                TextWrapping="Wrap"
+                />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

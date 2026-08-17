@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PdfDocument (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "PdfDocument (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

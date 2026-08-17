@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Socket activity stream socket</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Keep a stream socket alive with the Windows socket broker after the app closes.</value>
+  </data>
+  <data name="PageTitle.Text" xml:space="preserve">
+    <value>Connect to a listener</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Connect to the companion server on TCP port 40404, transfer the socket to the system broker, then close this app and receive server messages as notifications.</value>
+  </data>
+  <data name="TestInstructionsInfoBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>How to test socket activity</value>
+  </data>
+  <data name="TestInstructionsInfoBar.Title" xml:space="preserve">
+    <value>How to test</value>
+  </data>
+  <data name="TestInstructionsInfoBar.Message" xml:space="preserve">
+    <value>1. Start the companion server. 2. Enter its address and select Connect. 3. After the connection succeeds, close this client and send a message from the server. The message appears as a Windows notification.</value>
+  </data>
+  <data name="ConnectionHeading.Text" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="TargetServerTextBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Target server host name or IP address</value>
+  </data>
+  <data name="TargetServerTextBox.Header" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="TargetServerTextBox.PlaceholderText" xml:space="preserve">
+    <value>Host name or IP address</value>
+  </data>
+  <data name="TargetServerTextBox.Text" xml:space="preserve">
+    <value>localhost</value>
+  </data>
+  <data name="ConnectButton.AccessKey" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="ConnectButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Connect to the socket listener</value>
+  </data>
+  <data name="ConnectButton.Content" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectionProgressRing.AutomationProperties.Name" xml:space="preserve">
+    <value>Connecting to the server</value>
+  </data>
+  <data name="ConnectionHint.Text" xml:space="preserve">
+    <value>Start the companion server first. Use localhost on this PC, or enter the host name or IP address of another PC.</value>
+  </data>
+  <data name="StatusInfoBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Socket connection status</value>
+  </data>
+  <data name="ReadyStatus" xml:space="preserve">
+    <value>Ready to connect.</value>
+  </data>
+  <data name="ExistingConnectionStatus" xml:space="preserve">
+    <value>The socket broker is already maintaining this connection. You may close the app.</value>
+  </data>
+  <data name="HostNameRequiredError" xml:space="preserve">
+    <value>Enter a server host name or IP address.</value>
+  </data>
+  <data name="BackgroundTaskUnavailableError" xml:space="preserve">
+    <value>The socket activity background task is not available.</value>
+  </data>
+  <data name="BackgroundAccessDeniedFormat" xml:space="preserve">
+    <value>Windows did not grant background access ({0}). Enable background activity for this app in Windows Settings and try again.</value>
+  </data>
+  <data name="BackgroundTaskSetupOperation" xml:space="preserve">
+    <value>Setting up the socket activity background task</value>
+  </data>
+  <data name="ConnectOperation" xml:space="preserve">
+    <value>Connecting to the server</value>
+  </data>
+  <data name="ConnectingStatusFormat" xml:space="preserve">
+    <value>Connecting to {0} on TCP port {1}...</value>
+  </data>
+  <data name="ConnectedStatusFormat" xml:space="preserve">
+    <value>Connected to {0} on TCP port {1}. You may close this app and send a message from the server.</value>
+  </data>
+  <data name="ConnectedWithoutWakeStatusFormat" xml:space="preserve">
+    <value>Connected to {0} on TCP port {1}. This PC does not support connected-standby wake, but messages will arrive while the PC is awake after this app closes.</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+</root>

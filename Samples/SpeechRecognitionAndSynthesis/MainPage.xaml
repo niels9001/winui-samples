@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView
+        x:Name="NavView"
+        AutomationProperties.AutomationId="ScenarioNavigationView"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        PaneDisplayMode="Left"
+        SelectionChanged="NavView_SelectionChanged">
+        <NavigationView.MenuItems>
+            <NavigationViewItemHeader Content="Speech synthesis" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="SynthesizeTextNavigationItem"
+                Content="1. Synthesize Text"
+                Tag="synthesize-text" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="SynthesizeBoundariesNavigationItem"
+                Content="2. Synthesize Text with Boundaries"
+                Tag="synthesize-boundaries" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="SynthesizeSsmlNavigationItem"
+                Content="3. Synthesize SSML"
+                Tag="synthesize-ssml" />
+            <NavigationViewItemHeader Content="One-shot recognition" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="DictationNavigationItem"
+                Content="4. Predefined Dictation Grammar"
+                Tag="one-shot-dictation" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="WebSearchNavigationItem"
+                Content="5. Predefined WebSearch Grammar"
+                Tag="one-shot-web-search" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="ListConstraintNavigationItem"
+                Content="6. Custom List Constraint"
+                Tag="one-shot-list" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="SrgsConstraintNavigationItem"
+                Content="7. Custom SRGS Constraint"
+                Tag="one-shot-srgs" />
+            <NavigationViewItemHeader Content="Continuous recognition" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="ContinuousDictationNavigationItem"
+                Content="8. Continuous Dictation"
+                Tag="continuous-dictation" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="ContinuousListNavigationItem"
+                Content="9. Continuous List Commands"
+                Tag="continuous-list" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="ContinuousSrgsNavigationItem"
+                Content="10. Continuous SRGS Commands"
+                Tag="continuous-srgs" />
+            <NavigationViewItem
+                AutomationProperties.AutomationId="PauseGrammarNavigationItem"
+                Content="11. PauseAsync to Change Grammar"
+                Tag="pause-grammar" />
+        </NavigationView.MenuItems>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Frame x:Name="ScenarioFrame" />
+
+            <InfoBar
+                x:Name="StatusInfoBar"
+                Grid.Row="1"
+                Margin="12,0,12,12"
+                IsClosable="True"
+                IsOpen="False" />
+        </Grid>
+    </NavigationView>
+</Page>

@@ -1,0 +1,74 @@
+<Page
+    x:Class="SDKTemplate.Utf8MessagesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer
+        VerticalScrollBarVisibility="Auto"
+        VerticalScrollMode="Auto">
+        <StackPanel
+            MaxWidth="900"
+            Padding="24"
+            HorizontalAlignment="Stretch"
+            Spacing="12">
+            <TextBlock
+                x:Uid="Utf8Heading"
+                Style="{StaticResource TitleTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Uid="Utf8Description"
+                TextWrapping="Wrap" />
+
+            <TextBox
+                x:Name="ServerAddressField"
+                x:Uid="Utf8ServerAddress"
+                AutomationProperties.AutomationId="Utf8ServerAddress"
+                InputScope="Url" />
+            <CheckBox
+                x:Name="SecureWebSocketCheckBox"
+                x:Uid="Utf8SecureWebSocket"
+                AutomationProperties.AutomationId="Utf8SecureWebSocket"
+                Checked="OnSecureEndpointChanged"
+                Unchecked="OnSecureEndpointChanged" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="ConnectButton"
+                    x:Uid="Utf8ConnectButton"
+                    AutomationProperties.AutomationId="Utf8ConnectButton"
+                    Click="OnConnect"
+                    Style="{StaticResource AccentButtonStyle}" />
+                <Button
+                    x:Name="DisconnectButton"
+                    x:Uid="Utf8DisconnectButton"
+                    AutomationProperties.AutomationId="Utf8DisconnectButton"
+                    Click="OnDisconnect" />
+            </StackPanel>
+
+            <TextBox
+                x:Name="InputField"
+                x:Uid="Utf8Input"
+                AutomationProperties.AutomationId="Utf8Input" />
+            <Button
+                x:Name="SendButton"
+                x:Uid="Utf8SendButton"
+                AutomationProperties.AutomationId="Utf8SendButton"
+                HorizontalAlignment="Left"
+                Click="OnSend" />
+
+            <TextBlock
+                x:Uid="Utf8OutputLabel"
+                Margin="0,8,0,0" />
+            <TextBox
+                x:Name="OutputField"
+                x:Uid="Utf8Output"
+                Height="240"
+                AutomationProperties.AutomationId="Utf8Output"
+                IsReadOnly="True"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                TextWrapping="Wrap"
+                />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

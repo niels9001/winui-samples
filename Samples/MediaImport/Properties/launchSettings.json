@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MediaImport (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MediaImport (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -136,6 +136,13 @@ namespace SDKTemplate
             }
         }
 
+        public void NotifyOperationError(string operation, Exception exception)
+        {
+            NotifyUser(
+                $"{operation} failed (0x{exception.HResult:X8}): {exception.Message}",
+                NotifyType.ErrorMessage);
+        }
+
         private void UpdateStatus(string strMessage, NotifyType type)
         {
             if (string.IsNullOrEmpty(strMessage))

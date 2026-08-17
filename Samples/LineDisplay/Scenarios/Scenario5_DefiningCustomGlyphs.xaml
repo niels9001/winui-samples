@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.Scenario5_DefiningCustomGlyphs"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                x:Uid="GlyphsHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="GlyphsDescription"
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <ComboBox
+                x:Name="SupportedGlyphsComboBox"
+                x:Uid="SupportedGlyphsComboBox"
+                AutomationProperties.AutomationId="SupportedGlyphsComboBox"
+                SelectionChanged="SupportedGlyphsComboBox_SelectionChanged" />
+            <Button
+                x:Name="DefineGlyphButton"
+                x:Uid="DefineGlyphButton"
+                AutomationProperties.AutomationId="DefineCustomGlyphButton"
+                Click="DefineGlyphButton_Click"
+                IsEnabled="False" />
+            <Button
+                x:Name="ResetButton"
+                x:Uid="ResetGlyphsButton"
+                AutomationProperties.AutomationId="ResetCustomGlyphsButton"
+                Click="ResetButton_Click"
+                IsEnabled="False" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="3" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="5" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Media import</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Import photos and videos from cameras, phones, and removable media.</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="ImportHeading.Text" xml:space="preserve">
+    <value>Import photos and videos</value>
+  </data>
+  <data name="ImportDescription.Text" xml:space="preserve">
+    <value>Find a connected camera, phone, or removable-media source; select photos and videos; import them into the Pictures library; and optionally remove successfully imported items from the source.</value>
+  </data>
+  <data name="FindSourcesButton.Content" xml:space="preserve">
+    <value>Find sources</value>
+  </data>
+  <data name="FindSourcesButton.AccessKey" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="FindSourcesButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Find media import sources</value>
+  </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>Cancel operation</value>
+  </data>
+  <data name="CancelButton.AccessKey" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="CancelButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Cancel the current media import operation</value>
+  </data>
+  <data name="SourcesHeading.Text" xml:space="preserve">
+    <value>Sources</value>
+  </data>
+  <data name="SourceListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Available media import sources</value>
+  </data>
+  <data name="SourceDetailsHeading.Text" xml:space="preserve">
+    <value>Source details</value>
+  </data>
+  <data name="SourceDetailsTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Selected source details</value>
+  </data>
+  <data name="ItemsHeading.Text" xml:space="preserve">
+    <value>Importable items</value>
+  </data>
+  <data name="ContentFilterComboBox.Header" xml:space="preserve">
+    <value>Content filter</value>
+  </data>
+  <data name="ContentFilterComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Content type to find</value>
+  </data>
+  <data name="ImagesAndVideosOption.Content" xml:space="preserve">
+    <value>Images and videos</value>
+  </data>
+  <data name="ImagesOnlyOption.Content" xml:space="preserve">
+    <value>Images only</value>
+  </data>
+  <data name="VideosOnlyOption.Content" xml:space="preserve">
+    <value>Videos only</value>
+  </data>
+  <data name="FindNewItemsButton.Content" xml:space="preserve">
+    <value>Find and select new</value>
+  </data>
+  <data name="FindNewItemsButton.AccessKey" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="FindNewItemsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Find items and select only new items</value>
+  </data>
+  <data name="FindAllItemsButton.Content" xml:space="preserve">
+    <value>Find and select all</value>
+  </data>
+  <data name="FindAllItemsButton.AccessKey" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="FindAllItemsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Find and select all importable items</value>
+  </data>
+  <data name="ItemsListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Importable photos and videos</value>
+  </data>
+  <data name="SelectNewButton.Content" xml:space="preserve">
+    <value>Select new</value>
+  </data>
+  <data name="SelectNewButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Select items that have not been imported</value>
+  </data>
+  <data name="SelectAllButton.Content" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="SelectAllButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Select all importable items</value>
+  </data>
+  <data name="SelectNoneButton.Content" xml:space="preserve">
+    <value>Select none</value>
+  </data>
+  <data name="SelectNoneButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Deselect all importable items</value>
+  </data>
+  <data name="AppendDateCheckBox.Content" xml:space="preserve">
+    <value>Add session-date folder</value>
+  </data>
+  <data name="AppendDateCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Add a session-date folder to the import destination</value>
+  </data>
+  <data name="SubfolderModeComboBox.Header" xml:space="preserve">
+    <value>Subfolder mode</value>
+  </data>
+  <data name="SubfolderModeComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Import destination subfolder mode</value>
+  </data>
+  <data name="NoSubfolderOption.Content" xml:space="preserve">
+    <value>No subfolders</value>
+  </data>
+  <data name="FileDateSubfolderOption.Content" xml:space="preserve">
+    <value>File-date subfolders</value>
+  </data>
+  <data name="ExifDateSubfolderOption.Content" xml:space="preserve">
+    <value>EXIF-date subfolders</value>
+  </data>
+  <data name="KeepOriginalFoldersOption.Content" xml:space="preserve">
+    <value>Keep original folders</value>
+  </data>
+  <data name="ImportButton.Content" xml:space="preserve">
+    <value>Import selected</value>
+  </data>
+  <data name="ImportButton.AccessKey" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="ImportButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Import selected photos and videos</value>
+  </data>
+  <data name="DeleteImportedButton.Content" xml:space="preserve">
+    <value>Delete imported from source</value>
+  </data>
+  <data name="DeleteImportedButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Delete successfully imported items from the source</value>
+  </data>
+  <data name="OperationProgressBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Media import operation progress</value>
+  </data>
+  <data name="ResultsHeading.Text" xml:space="preserve">
+    <value>Operation summary</value>
+  </data>
+  <data name="ResultsTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Media import operation summary</value>
+  </data>
+  <data name="ImportNotSupported" xml:space="preserve">
+    <value>Media import is not supported on this device.</value>
+  </data>
+  <data name="FindSourcesInstruction" xml:space="preserve">
+    <value>Select Find sources to discover connected cameras, phones, and removable media.</value>
+  </data>
+  <data name="InitializingImportOperation" xml:space="preserve">
+    <value>Initializing media import</value>
+  </data>
+  <data name="NoSourcesFound" xml:space="preserve">
+    <value>No media import sources were found. Connect a camera, phone, or removable-media device and try again.</value>
+  </data>
+  <data name="SourcesFoundFormat" xml:space="preserve">
+    <value>Found {0} media import source(s).</value>
+  </data>
+  <data name="FindingSourcesOperation" xml:space="preserve">
+    <value>Finding media import sources</value>
+  </data>
+  <data name="SourceSelectedFormat" xml:space="preserve">
+    <value>Selected source: {0}</value>
+  </data>
+  <data name="CancellationRequested" xml:space="preserve">
+    <value>Cancellation requested.</value>
+  </data>
+  <data name="SourceDescriptionFormat" xml:space="preserve">
+    <value>Description: {0}</value>
+  </data>
+  <data name="SourceManufacturerFormat" xml:space="preserve">
+    <value>Manufacturer: {0}</value>
+  </data>
+  <data name="SourceMassStorageFormat" xml:space="preserve">
+    <value>Mass storage: {0}</value>
+  </data>
+  <data name="SourceIdFormat" xml:space="preserve">
+    <value>ID: {0}</value>
+  </data>
+  <data name="NoStorageMediaDetails" xml:space="preserve">
+    <value>No storage-medium details are available.</value>
+  </data>
+  <data name="StorageMediumNameFormat" xml:space="preserve">
+    <value>Storage medium: {0}</value>
+  </data>
+  <data name="StorageMediumTypeFormat" xml:space="preserve">
+    <value>Type: {0}</value>
+  </data>
+  <data name="StorageMediumAvailableFormat" xml:space="preserve">
+    <value>Available: {0}</value>
+  </data>
+  <data name="StorageMediumCapacityFormat" xml:space="preserve">
+    <value>Capacity: {0}</value>
+  </data>
+  <data name="StorageMediumSerialFormat" xml:space="preserve">
+    <value>Serial number: {0}</value>
+  </data>
+  <data name="SelectSourceFirst" xml:space="preserve">
+    <value>Select a media import source first.</value>
+  </data>
+  <data name="FilesFoundProgressFormat" xml:space="preserve">
+    <value>Found {0} file(s).</value>
+  </data>
+  <data name="ItemsFoundFormat" xml:space="preserve">
+    <value>Found {0} importable item(s).</value>
+  </data>
+  <data name="FindingItemsIncomplete" xml:space="preserve">
+    <value>Finding importable items did not complete successfully.</value>
+  </data>
+  <data name="OperationCanceled" xml:space="preserve">
+    <value>The operation was canceled.</value>
+  </data>
+  <data name="FindingItemsOperation" xml:space="preserve">
+    <value>Finding importable items</value>
+  </data>
+  <data name="SelectingNewItemsOperation" xml:space="preserve">
+    <value>Selecting new items</value>
+  </data>
+  <data name="NothingSelectedForImport" xml:space="preserve">
+    <value>Select at least one item to import.</value>
+  </data>
+  <data name="ImportCompletedFormat" xml:space="preserve">
+    <value>Imported {0} item(s).</value>
+  </data>
+  <data name="ImportIncomplete" xml:space="preserve">
+    <value>The import did not complete successfully.</value>
+  </data>
+  <data name="ImportingItemsOperation" xml:space="preserve">
+    <value>Importing selected items</value>
+  </data>
+  <data name="NothingImportedForDeletion" xml:space="preserve">
+    <value>No completed import is available for deletion.</value>
+  </data>
+  <data name="DeleteDialogTitle" xml:space="preserve">
+    <value>Delete imported items from the source?</value>
+  </data>
+  <data name="DeleteDialogContent" xml:space="preserve">
+    <value>This permanently removes only the items that were successfully imported during the current operation.</value>
+  </data>
+  <data name="DeleteDialogPrimaryButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteDialogCloseButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteCompletedFormat" xml:space="preserve">
+    <value>Deleted {0} imported item(s) from the source.</value>
+  </data>
+  <data name="DeleteIncomplete" xml:space="preserve">
+    <value>The delete operation did not complete successfully.</value>
+  </data>
+  <data name="DeletingItemsOperation" xml:space="preserve">
+    <value>Deleting imported items from the source</value>
+  </data>
+  <data name="ItemImportedFormat" xml:space="preserve">
+    <value>Imported: {0}</value>
+  </data>
+  <data name="PhotosSummaryFormat" xml:space="preserve">
+    <value>Photos: {0} total, {1} selected</value>
+  </data>
+  <data name="VideosSummaryFormat" xml:space="preserve">
+    <value>Videos: {0} total, {1} selected</value>
+  </data>
+  <data name="SidecarsSummaryFormat" xml:space="preserve">
+    <value>Sidecars: {0} total, {1} selected</value>
+  </data>
+  <data name="SiblingsSummaryFormat" xml:space="preserve">
+    <value>Siblings: {0} total, {1} selected</value>
+  </data>
+  <data name="TotalItemsSummaryFormat" xml:space="preserve">
+    <value>All items: {0} total, {1} selected</value>
+  </data>
+  <data name="ImportedPhotosFormat" xml:space="preserve">
+    <value>Photos imported: {0}</value>
+  </data>
+  <data name="ImportedVideosFormat" xml:space="preserve">
+    <value>Videos imported: {0}</value>
+  </data>
+  <data name="ImportedSidecarsFormat" xml:space="preserve">
+    <value>Sidecars imported: {0}</value>
+  </data>
+  <data name="ImportedSiblingsFormat" xml:space="preserve">
+    <value>Siblings imported: {0}</value>
+  </data>
+  <data name="ImportedTotalFormat" xml:space="preserve">
+    <value>Total items imported: {0}</value>
+  </data>
+  <data name="ImportedBytesFormat" xml:space="preserve">
+    <value>Total data imported: {0}</value>
+  </data>
+  <data name="DeletedPhotosFormat" xml:space="preserve">
+    <value>Photos deleted: {0}</value>
+  </data>
+  <data name="DeletedVideosFormat" xml:space="preserve">
+    <value>Videos deleted: {0}</value>
+  </data>
+  <data name="DeletedSidecarsFormat" xml:space="preserve">
+    <value>Sidecars deleted: {0}</value>
+  </data>
+  <data name="DeletedSiblingsFormat" xml:space="preserve">
+    <value>Siblings deleted: {0}</value>
+  </data>
+  <data name="DeletedTotalFormat" xml:space="preserve">
+    <value>Total items deleted: {0}</value>
+  </data>
+  <data name="DeletedBytesFormat" xml:space="preserve">
+    <value>Total data deleted: {0}</value>
+  </data>
+  <data name="ReconnectingFindOperation" xml:space="preserve">
+    <value>Reconnecting to a pending item-discovery operation.</value>
+  </data>
+  <data name="FindOperationReconnected" xml:space="preserve">
+    <value>Reconnected to the pending item-discovery operation.</value>
+  </data>
+  <data name="ReconnectingImportOperation" xml:space="preserve">
+    <value>Reconnecting to a pending import operation.</value>
+  </data>
+  <data name="ImportOperationReconnected" xml:space="preserve">
+    <value>Reconnected to the pending import operation.</value>
+  </data>
+  <data name="ReconnectingDeleteOperation" xml:space="preserve">
+    <value>Reconnecting to a pending delete operation.</value>
+  </data>
+  <data name="DeleteOperationReconnected" xml:space="preserve">
+    <value>Reconnected to the pending delete operation.</value>
+  </data>
+</root>

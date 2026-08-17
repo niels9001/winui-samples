@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:viewmodels="using:SDKTemplate.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Unloaded="MainPage_Unloaded">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Resources>
+            <Style x:Key="NewsHubSectionStyle" TargetType="HubSection">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate x:DataType="viewmodels:NewsSectionViewModel">
+                            <local:SectionView
+                                ArticleSelected="SectionView_ArticleSelected"
+                                ViewModel="{x:Bind Articles, Mode=OneWay}" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Width" Value="400" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.Transform3D>
+            <PerspectiveTransform3D />
+        </Grid.Transform3D>
+
+        <Hub
+            x:Name="HeadlinesHub"
+            AutomationProperties.Name="News sections"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal"
+            VerticalAlignment="Stretch">
+            <Hub.Header>
+                <TextBlock
+                    Text="My News"
+                    Style="{ThemeResource TitleTextBlockStyle}" />
+            </Hub.Header>
+
+            <HubSection Style="{StaticResource NewsHubSectionStyle}">
+                <HubSection.Header>
+                    <TextBlock
+                        Text="Headlines"
+                        Style="{ThemeResource TitleTextBlockStyle}" />
+                </HubSection.Header>
+                <HubSection.DataContext>
+                    <viewmodels:NewsSectionViewModel />
+                </HubSection.DataContext>
+            </HubSection>
+
+            <HubSection Style="{StaticResource NewsHubSectionStyle}">
+                <HubSection.Header>
+                    <TextBlock
+                        Text="World News"
+                        Style="{ThemeResource TitleTextBlockStyle}" />
+                </HubSection.Header>
+                <HubSection.DataContext>
+                    <viewmodels:NewsSectionViewModel />
+                </HubSection.DataContext>
+            </HubSection>
+
+            <HubSection Style="{StaticResource NewsHubSectionStyle}">
+                <HubSection.Header>
+                    <TextBlock
+                        Text="Technology"
+                        Style="{ThemeResource TitleTextBlockStyle}" />
+                </HubSection.Header>
+                <HubSection.DataContext>
+                    <viewmodels:NewsSectionViewModel />
+                </HubSection.DataContext>
+            </HubSection>
+
+            <HubSection Style="{StaticResource NewsHubSectionStyle}">
+                <HubSection.Header>
+                    <TextBlock
+                        Text="Entertainment"
+                        Style="{ThemeResource TitleTextBlockStyle}" />
+                </HubSection.Header>
+                <HubSection.DataContext>
+                    <viewmodels:NewsSectionViewModel />
+                </HubSection.DataContext>
+            </HubSection>
+
+            <HubSection Style="{StaticResource NewsHubSectionStyle}">
+                <HubSection.Header>
+                    <TextBlock
+                        Text="Sports"
+                        Style="{ThemeResource TitleTextBlockStyle}" />
+                </HubSection.Header>
+                <HubSection.DataContext>
+                    <viewmodels:NewsSectionViewModel />
+                </HubSection.DataContext>
+            </HubSection>
+        </Hub>
+    </Grid>
+</Page>

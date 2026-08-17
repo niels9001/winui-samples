@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MediaTranscoding (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MediaTranscoding (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

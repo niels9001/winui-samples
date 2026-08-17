@@ -1,0 +1,173 @@
+<Page
+    x:Class="SDKTemplate.RequestScenarioPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="900"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                x:Name="TitleText"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Name="DescriptionText"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <TextBlock Text="Address" />
+            <TextBox
+                x:Name="AddressField"
+                InputScope="Url" />
+
+            <StackPanel
+                x:Name="BodyPanel"
+                Spacing="4"
+                Visibility="Collapsed">
+                <TextBlock Text="Request body" />
+                <TextBox
+                    x:Name="RequestBodyField"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="CacheOptionsPanel"
+                Spacing="8"
+                Visibility="Collapsed">
+                <ToggleSwitch
+                    x:Name="MaxHttpVersionToggle"
+                    Header="Maximum HTTP version"
+                    OffContent="HTTP 1.1"
+                    OnContent="HTTP 2.0"
+                    Toggled="MaxHttpVersionToggle_Toggled" />
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Cache read behavior" />
+                        <ComboBox
+                            x:Name="CacheReadCombo"
+                            HorizontalAlignment="Stretch"
+                            SelectedIndex="0">
+                            <ComboBoxItem Content="Default" />
+                            <ComboBoxItem Content="Most recent" />
+                            <ComboBoxItem Content="Only from cache" />
+                            <ComboBoxItem Content="No cache" />
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        Spacing="4">
+                        <TextBlock Text="Cache write behavior" />
+                        <ComboBox
+                            x:Name="CacheWriteCombo"
+                            HorizontalAlignment="Stretch"
+                            SelectedIndex="0">
+                            <ComboBoxItem Content="Default" />
+                            <ComboBoxItem Content="No cache" />
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel
+                x:Name="ProgressOptionsPanel"
+                Spacing="8"
+                Visibility="Collapsed">
+                <ToggleSwitch
+                    x:Name="ChunkedRequestToggle"
+                    Header="Request transfer encoding"
+                    OffContent="Content-Length"
+                    OnContent="Chunked" />
+                <ToggleSwitch
+                    x:Name="ChunkedResponseToggle"
+                    Header="Response transfer encoding"
+                    OffContent="Content-Length"
+                    OnContent="Chunked"
+                    Toggled="ChunkedResponseToggle_Toggled" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="RetryOptionsPanel"
+                Spacing="4"
+                Visibility="Collapsed">
+                <ToggleSwitch
+                    x:Name="RetryAfterToggle"
+                    Header="Retry-After format"
+                    OffContent="HTTP-date"
+                    OnContent="delta-seconds"
+                    Toggled="RetryAfterToggle_Toggled" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="MeteredOptionsPanel"
+                Spacing="8"
+                Visibility="Collapsed">
+                <TextBlock Text="Request priority" />
+                <ComboBox
+                    x:Name="PriorityCombo"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="Low" />
+                    <ComboBoxItem Content="Medium" />
+                    <ComboBoxItem Content="High" />
+                </ComboBox>
+                <ToggleSwitch
+                    x:Name="MeteredOptInToggle"
+                    Header="Allow high-priority requests in opt-in mode" />
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="StartButton"
+                    Click="Start_Click"
+                    Content="Start" />
+                <Button
+                    x:Name="CancelButton"
+                    Click="Cancel_Click"
+                    Content="Cancel"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="ProgressPanel"
+                Spacing="4"
+                Visibility="Collapsed">
+                <TextBlock
+                    x:Name="ProgressText"
+                    Text="Not started"
+                    TextWrapping="Wrap" />
+                <ProgressBar
+                    x:Name="RequestProgressBar"
+                    Maximum="100" />
+            </StackPanel>
+
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    x:Name="OutputField"
+                    MinHeight="300"
+                    AcceptsReturn="True"
+                    IsReadOnly="True"
+                    TextWrapping="Wrap" />
+                <ListView
+                    x:Name="ListOutput"
+                    Grid.Column="1"
+                    MinHeight="300"
+                    Visibility="Collapsed" />
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

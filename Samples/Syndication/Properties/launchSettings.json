@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Syndication (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Syndication (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

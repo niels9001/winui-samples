@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.Scenario3_UsingWindows"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Stretch"
+            Spacing="12">
+            <TextBlock
+                x:Uid="WindowsHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="WindowsDescription"
+                MaxWidth="720"
+                HorizontalAlignment="Left"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <Expander
+                x:Uid="NewWindowExpander"
+                AutomationProperties.AutomationId="NewWindowExpander"
+                HorizontalAlignment="Stretch">
+                <Grid
+                    MaxWidth="480"
+                    Margin="0,8,0,0"
+                    HorizontalAlignment="Left"
+                    ColumnSpacing="12"
+                    RowSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox
+                        x:Name="NewViewportWidthTextBox"
+                        x:Uid="ViewportWidthTextBox"
+                        AutomationProperties.AutomationId="ViewportWidthTextBox" />
+                    <TextBox
+                        x:Name="NewViewportHeightTextBox"
+                        x:Uid="ViewportHeightTextBox"
+                        Grid.Column="1"
+                        AutomationProperties.AutomationId="ViewportHeightTextBox" />
+                    <TextBox
+                        x:Name="NewViewportXTextBox"
+                        x:Uid="ViewportXTextBox"
+                        Grid.Row="1"
+                        AutomationProperties.AutomationId="ViewportXTextBox" />
+                    <TextBox
+                        x:Name="NewViewportYTextBox"
+                        x:Uid="ViewportYTextBox"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        AutomationProperties.AutomationId="ViewportYTextBox" />
+                    <TextBox
+                        x:Name="NewWindowWidthTextBox"
+                        x:Uid="WindowWidthTextBox"
+                        Grid.Row="2"
+                        AutomationProperties.AutomationId="WindowWidthTextBox" />
+                    <TextBox
+                        x:Name="NewWindowHeightTextBox"
+                        x:Uid="WindowHeightTextBox"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        AutomationProperties.AutomationId="WindowHeightTextBox" />
+                    <Button
+                        x:Name="NewWindowButton"
+                        x:Uid="NewWindowButton"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        AutomationProperties.AutomationId="NewLineDisplayWindowButton"
+                        Click="NewWindowButton_Click"
+                        IsEnabled="False" />
+                </Grid>
+            </Expander>
+
+            <ListView
+                x:Name="WindowsListView"
+                x:Uid="WindowsListView"
+                AutomationProperties.AutomationId="LineDisplayWindowsListView"
+                Height="180"
+                ItemsSource="{x:Bind WindowList, Mode=OneWay}"
+                SelectionChanged="WindowsListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:WindowInfo">
+                        <TextBlock Text="{x:Bind DisplayName}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="RefreshWindowButton"
+                    x:Uid="RefreshWindowButton"
+                    AutomationProperties.AutomationId="RefreshLineDisplayWindowButton"
+                    Click="RefreshWindowButton_Click"
+                    IsEnabled="False" />
+                <Button
+                    x:Name="DestroyWindowButton"
+                    x:Uid="DestroyWindowButton"
+                    AutomationProperties.AutomationId="DestroyLineDisplayWindowButton"
+                    Click="DestroyWindowButton_Click"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <TextBox
+                x:Name="DisplayTextTextBox"
+                x:Uid="WindowDisplayTextTextBox"
+                AutomationProperties.AutomationId="WindowDisplayTextTextBox"
+                MaxWidth="480"
+                HorizontalAlignment="Stretch" />
+            <Button
+                x:Name="DisplayWindowTextButton"
+                x:Uid="DisplayWindowTextButton"
+                AutomationProperties.AutomationId="DisplayWindowTextButton"
+                HorizontalAlignment="Left"
+                Click="DisplayWindowTextButton_Click"
+                IsEnabled="False" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

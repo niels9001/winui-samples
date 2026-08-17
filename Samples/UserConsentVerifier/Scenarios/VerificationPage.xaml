@@ -1,0 +1,43 @@
+<Page
+    x:Class="SDKTemplate.Scenarios.VerificationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="720"
+            Margin="28"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="Request user verification" />
+            <TextBlock
+                MaxWidth="680"
+                Text="Ask Windows to verify the current user with Windows Hello, a PIN, fingerprint, or another configured verifier. The system prompt is explicitly associated with this app window."
+                TextWrapping="Wrap" />
+
+            <TextBox
+                x:Name="VerificationMessageTextBox"
+                MaxWidth="680"
+                HorizontalAlignment="Stretch"
+                AutomationProperties.AutomationId="VerificationMessageTextBox"
+                Header="Message shown by Windows"
+                Text="Confirm your identity to authorize this sample action." />
+
+            <Button
+                x:Name="RequestVerificationButton"
+                AutomationProperties.AutomationId="RequestVerificationButton"
+                Click="RequestVerificationButton_Click"
+                Content="Request verification"
+                Style="{StaticResource AccentButtonStyle}" />
+
+            <TextBlock
+                x:Name="VerificationResultTextBlock"
+                AutomationProperties.AutomationId="VerificationResultTextBlock"
+                FontWeight="SemiBold"
+                Text="No verification requested."
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

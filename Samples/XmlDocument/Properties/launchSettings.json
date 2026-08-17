@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "XmlDocument (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "XmlDocument (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

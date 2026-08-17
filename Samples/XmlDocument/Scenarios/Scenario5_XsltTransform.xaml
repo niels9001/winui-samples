@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.Scenario5_XsltTransform"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24,20,24,24"
+            Spacing="12">
+            <TextBlock
+                x:Uid="DescriptionLabel"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="XsltDescription"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <StackPanel
+                Margin="0,4,0,0"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="TransformToStringButton"
+                    x:Uid="TransformToStringButton"
+                    AutomationProperties.AutomationId="TransformToStringButton"
+                    Click="TransformToStringButton_Click" />
+                <Button
+                    x:Name="TransformToDocumentButton"
+                    x:Uid="TransformToDocumentButton"
+                    AutomationProperties.AutomationId="TransformToDocumentButton"
+                    Click="TransformToDocumentButton_Click" />
+            </StackPanel>
+
+            <TextBlock
+                x:Uid="SourceXmlLabel"
+                Margin="0,8,0,0"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <RichEditBox
+                x:Name="SourceXmlBox"
+                x:Uid="SourceXmlBox"
+                AutomationProperties.AutomationId="SourceXmlBox"
+                MinHeight="180" />
+
+            <TextBlock
+                x:Uid="StylesheetLabel"
+                Margin="0,8,0,0"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <RichEditBox
+                x:Name="StylesheetBox"
+                x:Uid="StylesheetBox"
+                AutomationProperties.AutomationId="StylesheetBox"
+                MinHeight="220" />
+
+            <TextBlock
+                x:Uid="ResultLabel"
+                Margin="0,8,0,0"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <RichEditBox
+                x:Name="ResultBox"
+                x:Uid="XsltResultBox"
+                AutomationProperties.AutomationId="XsltResultBox"
+                IsReadOnly="True"
+                MinHeight="160" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

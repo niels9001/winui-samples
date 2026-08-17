@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="MouseCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+        <Style
+            x:Key="TouchCheckBoxStyle"
+            BasedOn="{StaticResource MouseCheckBoxStyle}"
+            TargetType="CheckBox">
+            <Setter Property="MinHeight" Value="52" />
+            <Setter Property="Padding" Value="8,12" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer>
+            <StackPanel
+                MaxWidth="760"
+                Margin="28"
+                HorizontalAlignment="Left"
+                Spacing="16">
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="Respond to the interaction mode" />
+                <TextBlock
+                    MaxWidth="720"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    Text="Query the mode Windows associates with this app window, then use mouse-optimized or touch-optimized spacing. The value is refreshed whenever the window size changes."
+                    TextWrapping="Wrap" />
+
+                <InfoBar
+                    IsClosable="False"
+                    IsOpen="True"
+                    Message="Windows 11 removed the manual Tablet mode switch. On most desktop PCs the reported mode remains Mouse; convertible hardware can report a different device mode."
+                    Severity="Informational"
+                    Title="Windows 11 behavior" />
+
+                <StackPanel Spacing="4">
+                    <TextBlock
+                        Style="{StaticResource BodyStrongTextBlockStyle}"
+                        Text="Current user interaction mode" />
+                    <TextBlock
+                        x:Name="CurrentModeTextBlock"
+                        AutomationProperties.AutomationId="CurrentModeTextBlock"
+                        AutomationProperties.Name="Current user interaction mode"
+                        Style="{StaticResource TitleTextBlockStyle}"
+                        Text="Checking..." />
+                    <TextBlock
+                        x:Name="ModeExplanationTextBlock"
+                        MaxWidth="720"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+                <Button
+                    x:Name="RefreshModeButton"
+                    AccessKey="R"
+                    AutomationProperties.AutomationId="RefreshModeButton"
+                    AutomationProperties.Name="Refresh interaction mode"
+                    Click="RefreshModeButton_Click"
+                    Content="Refresh mode"
+                    Style="{StaticResource AccentButtonStyle}" />
+
+                <TextBlock
+                    Margin="0,8,0,0"
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="Adaptive controls" />
+                <TextBlock
+                    MaxWidth="720"
+                    Text="The vertical spacing below changes with the reported mode. Touch mode uses larger targets while Mouse mode keeps the controls compact."
+                    TextWrapping="Wrap" />
+                <StackPanel
+                    x:Name="AdaptiveControlsPanel"
+                    AutomationProperties.Name="Interaction mode spacing example">
+                    <CheckBox
+                        x:Name="FirstCheckBox"
+                        AutomationProperties.AutomationId="FirstCheckBox"
+                        Content="One"
+                        IsChecked="True" />
+                    <CheckBox
+                        x:Name="SecondCheckBox"
+                        AutomationProperties.AutomationId="SecondCheckBox"
+                        Content="Two" />
+                    <CheckBox
+                        x:Name="ThirdCheckBox"
+                        AutomationProperties.AutomationId="ThirdCheckBox"
+                        Content="Three" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <InfoBar
+            x:Name="StatusInfoBar"
+            Grid.Row="1"
+            Margin="12,0,12,12"
+            IsClosable="True"
+            IsOpen="False" />
+    </Grid>
+</Page>

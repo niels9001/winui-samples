@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.Scenario4_UpdatingLineDisplayAttributes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                x:Uid="AttributesHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="AttributesDescription"
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <Slider
+                x:Name="BlinkRateSlider"
+                x:Uid="BlinkRateSlider"
+                AutomationProperties.AutomationId="BlinkRateSlider"
+                IsEnabled="False"
+                Maximum="4000"
+                Minimum="100"
+                SnapsTo="StepValues"
+                StepFrequency="1" />
+            <Slider
+                x:Name="BrightnessSlider"
+                x:Uid="BrightnessSlider"
+                AutomationProperties.AutomationId="BrightnessSlider"
+                IsEnabled="False"
+                Maximum="100"
+                Minimum="0"
+                SnapsTo="StepValues"
+                StepFrequency="1" />
+            <ComboBox
+                x:Name="SupportedScreenSizesComboBox"
+                x:Uid="SupportedScreenSizesComboBox"
+                AutomationProperties.AutomationId="SupportedScreenSizesComboBox"
+                IsEnabled="False" />
+            <CheckBox
+                x:Name="CharacterSetMappingEnabledCheckBox"
+                x:Uid="CharacterSetMappingEnabledCheckBox"
+                AutomationProperties.AutomationId="CharacterSetMappingEnabledCheckBox"
+                IsEnabled="False" />
+            <Button
+                x:Name="UpdateButton"
+                x:Uid="UpdateAttributesButton"
+                AutomationProperties.AutomationId="UpdateLineDisplayAttributesButton"
+                Click="UpdateButton_Click"
+                IsEnabled="False" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

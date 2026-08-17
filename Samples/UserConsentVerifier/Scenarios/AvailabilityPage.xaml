@@ -1,0 +1,41 @@
+<Page
+    x:Class="SDKTemplate.Scenarios.AvailabilityPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="720"
+            Margin="28"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="Check verification availability" />
+            <TextBlock
+                MaxWidth="680"
+                Text="Check whether Windows Hello, a PIN, fingerprint, or another user-verification device is configured and available for the signed-in user."
+                TextWrapping="Wrap" />
+            <InfoBar
+                IsClosable="False"
+                IsOpen="True"
+                Message="Desktop verification interop requires Windows 11, build 22000 or later."
+                Severity="Informational"
+                Title="Platform requirement" />
+
+            <Button
+                x:Name="CheckAvailabilityButton"
+                AutomationProperties.AutomationId="CheckAvailabilityButton"
+                Click="CheckAvailabilityButton_Click"
+                Content="Check availability"
+                Style="{StaticResource AccentButtonStyle}" />
+
+            <TextBlock
+                x:Name="AvailabilityResultTextBlock"
+                AutomationProperties.AutomationId="AvailabilityResultTextBlock"
+                FontWeight="SemiBold"
+                Text="Availability has not been checked."
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LineDisplay (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LineDisplay (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

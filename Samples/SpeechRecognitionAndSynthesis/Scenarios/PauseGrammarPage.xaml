@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.Scenarios.PauseGrammarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="900"
+            Padding="32,24,32,32"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="PauseAsync to Change Grammar"
+                TextWrapping="Wrap" />
+            <TextBlock
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Pause a continuous recognition session, add or remove list constraints, recompile the grammar, and resume without starting a new session."
+                TextWrapping="Wrap" />
+
+            <InfoBar
+                IsClosable="False"
+                IsOpen="True"
+                Message="Requires microphone access and an installed speech language pack. The command-list grammar can run offline."
+                Severity="Informational" />
+
+            <Button
+                x:Name="StartStopButton"
+                AutomationProperties.Name="Start continuous recognition"
+                Click="StartStopButton_Click"
+                Content="Start continuous recognition"
+                HorizontalAlignment="Left"
+                IsEnabled="False" />
+
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <Button
+                    x:Name="EmailGrammarButton"
+                    Click="EmailGrammarButton_Click"
+                    Content="Remove 'email' grammar"
+                    IsEnabled="False" />
+                <Button
+                    x:Name="PhoneGrammarButton"
+                    Click="PhoneGrammarButton_Click"
+                    Content="Add 'phone' grammar"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <StackPanel
+                x:Name="ListeningForPanel"
+                Spacing="4"
+                Visibility="Collapsed">
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="Listening for" />
+                <TextBlock Text="Go home" />
+                <TextBlock
+                    x:Name="EmailGrammarTextBlock"
+                    Text="Send email" />
+                <TextBlock
+                    x:Name="PhoneGrammarTextBlock"
+                    Text="Call phone"
+                    Visibility="Collapsed" />
+            </StackPanel>
+
+            <TextBlock
+                x:Name="ResultHeadingTextBlock"
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Latest result"
+                Visibility="Collapsed" />
+            <TextBlock
+                x:Name="ResultTextBlock"
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="TimingTextBlock"
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

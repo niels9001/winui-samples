@@ -1,0 +1,200 @@
+<Page
+    x:Class="SDKTemplate.Scenario1_Advertiser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wifidirect="using:Windows.Devices.WiFiDirect"
+    mc:Ignorable="d">
+
+    <ScrollViewer
+        Padding="24,16,24,24"
+        VerticalScrollBarVisibility="Auto"
+        VerticalScrollMode="Auto">
+        <StackPanel Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Advertise and accept connections" />
+            <TextBlock
+                Style="{StaticResource ScenarioDescriptionTextStyle}"
+                Text="Make this PC discoverable, listen for an incoming Wi-Fi Direct request, and exchange text over a TCP socket after the user accepts and pairs."
+                TextWrapping="Wrap" />
+
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <StackPanel
+                    Width="360"
+                    Margin="0,8,16,0"
+                    Padding="8"
+                    Spacing="8">
+                    <TextBlock
+                        Style="{StaticResource SubtitleTextBlockStyle}"
+                        Text="Advertisement" />
+
+                    <TextBlock Text="Listen state" />
+                    <ComboBox
+                        x:Name="ListenStateComboBox"
+                        AutomationProperties.AutomationId="ListenStateComboBox"
+                        AutomationProperties.Name="Advertisement listen state"
+                        MinWidth="180">
+                        <ComboBoxItem Content="Normal" IsSelected="True">
+                            <ComboBoxItem.Tag>
+                                <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>Normal</wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                            </ComboBoxItem.Tag>
+                        </ComboBoxItem>
+                        <ComboBoxItem Content="Intensive">
+                            <ComboBoxItem.Tag>
+                                <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>Intensive</wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                            </ComboBoxItem.Tag>
+                        </ComboBoxItem>
+                        <ComboBoxItem Content="None">
+                            <ComboBoxItem.Tag>
+                                <wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>None</wifidirect:WiFiDirectAdvertisementListenStateDiscoverability>
+                            </ComboBoxItem.Tag>
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                    <CheckBox
+                        x:Name="EnableListenerCheckBox"
+                        AutomationProperties.AutomationId="EnableListenerCheckBox"
+                        AutomationProperties.Name="Enable connection listener"
+                        Content="Enable listener"
+                        IsChecked="True" />
+                    <CheckBox
+                        x:Name="PreferGroupOwnerCheckBox"
+                        AutomationProperties.AutomationId="PreferGroupOwnerCheckBox"
+                        AutomationProperties.Name="Prefer group owner mode"
+                        Checked="PreferGroupOwnerCheckBox_Changed"
+                        Content="Prefer group owner mode"
+                        Unchecked="PreferGroupOwnerCheckBox_Changed" />
+
+                    <StackPanel
+                        x:Name="LegacySettingsPanel"
+                        Margin="20,0,0,0"
+                        Spacing="8"
+                        Visibility="Collapsed">
+                        <CheckBox
+                            x:Name="EnableLegacyModeCheckBox"
+                            AutomationProperties.AutomationId="EnableLegacyModeCheckBox"
+                            AutomationProperties.Name="Enable legacy group owner mode"
+                            Checked="EnableLegacyModeCheckBox_Changed"
+                            Content="Enable legacy mode"
+                            Unchecked="EnableLegacyModeCheckBox_Changed" />
+                        <Grid
+                            x:Name="LegacyCredentialsPanel"
+                            ColumnSpacing="8"
+                            RowSpacing="8"
+                            Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                VerticalAlignment="Center"
+                                Text="Passphrase" />
+                            <PasswordBox
+                                x:Name="PassphraseBox"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                AutomationProperties.AutomationId="PassphraseBox"
+                                AutomationProperties.Name="Legacy network passphrase"
+                                MinWidth="220" />
+                            <TextBlock
+                                Grid.Row="1"
+                                VerticalAlignment="Center"
+                                Text="SSID" />
+                            <TextBox
+                                x:Name="SsidTextBox"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                AutomationProperties.AutomationId="SsidTextBox"
+                                AutomationProperties.Name="Legacy network SSID"
+                                MinWidth="220" />
+                        </Grid>
+                    </StackPanel>
+
+                    <TextBlock Text="Custom information element" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBox
+                            x:Name="InformationElementTextBox"
+                            AutomationProperties.AutomationId="InformationElementTextBox"
+                            AutomationProperties.Name="Custom information element"
+                            MinWidth="240"
+                            TextChanged="InformationElementTextBox_TextChanged" />
+                        <Button
+                            x:Name="AddInformationElementButton"
+                            AutomationProperties.AutomationId="AddInformationElementButton"
+                            AutomationProperties.Name="Add custom information element"
+                            Click="AddInformationElementButton_Click"
+                            Content="Add"
+                            IsEnabled="False" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Name="StartAdvertisementButton"
+                            AutomationProperties.AutomationId="StartAdvertisementButton"
+                            AutomationProperties.Name="Start Wi-Fi Direct advertisement"
+                            Click="StartAdvertisementButton_Click"
+                            Content="Start advertisement" />
+                        <Button
+                            x:Name="StopAdvertisementButton"
+                            AutomationProperties.AutomationId="StopAdvertisementButton"
+                            AutomationProperties.Name="Stop Wi-Fi Direct advertisement"
+                            Click="StopAdvertisementButton_Click"
+                            Content="Stop advertisement"
+                            IsEnabled="False" />
+                    </StackPanel>
+                </StackPanel>
+
+                <local:ConnectionSettingsPanel
+                    x:Name="ConnectionSettingsPanel"
+                    Width="360"
+                    Margin="0,8,0,0"
+                    Padding="8" />
+            </VariableSizedWrapGrid>
+
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Connected devices" />
+            <ListView
+                x:Name="ConnectedDevicesListView"
+                AutomationProperties.AutomationId="AdvertiserConnectedDevicesList"
+                AutomationProperties.Name="Connected Wi-Fi Direct devices"
+                Height="150"
+                HorizontalAlignment="Stretch"
+                DisplayMemberPath="DisplayName"
+                ItemsSource="{x:Bind ConnectedDevices}"
+                SelectionChanged="ConnectedDevicesListView_SelectionChanged"
+                SelectionMode="Single" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button
+                    x:Name="CloseDeviceButton"
+                    AutomationProperties.AutomationId="AdvertiserCloseDeviceButton"
+                    AutomationProperties.Name="Close selected device"
+                    Click="CloseDeviceButton_Click"
+                    Content="Close device"
+                    IsEnabled="False" />
+                <TextBox
+                    x:Name="SendMessageTextBox"
+                    AutomationProperties.AutomationId="AdvertiserMessageTextBox"
+                    AutomationProperties.Name="Message to send"
+                    MinWidth="260"
+                    PlaceholderText="Enter a message"
+                    TextChanged="SendMessageTextBox_TextChanged" />
+                <Button
+                    x:Name="SendMessageButton"
+                    AutomationProperties.AutomationId="AdvertiserSendMessageButton"
+                    AutomationProperties.Name="Send message"
+                    Click="SendMessageButton_Click"
+                    Content="Send"
+                    IsEnabled="False" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

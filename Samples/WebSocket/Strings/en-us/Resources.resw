@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="AppDisplayName" xml:space="preserve"><value>WebSocket C# sample</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>Send and receive WebSocket messages and streams.</value></data>
+  <data name="MainWindow.Title" xml:space="preserve"><value>WebSocket C# sample</value></data>
+  <data name="AppTitleBar.Title" xml:space="preserve"><value>WebSocket C# sample</value></data>
+  <data name="ScenarioNavigation.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>WebSocket scenarios</value></data>
+  <data name="StatusInfoBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Sample status</value></data>
+
+  <data name="ScenarioUtf8Title" xml:space="preserve"><value>UTF-8 text messages</value></data>
+  <data name="ScenarioBinaryTitle" xml:space="preserve"><value>Binary data stream</value></data>
+  <data name="ScenarioClientAuthenticationTitle" xml:space="preserve"><value>Client authentication</value></data>
+  <data name="ScenarioPartialTitle" xml:space="preserve"><value>Partial and complete messages</value></data>
+
+  <data name="LoopbackServerStartFailed" xml:space="preserve"><value>The in-process loopback server could not start: {0}</value></data>
+  <data name="LoopbackServerDiagnostic" xml:space="preserve"><value>Loopback server: {0}</value></data>
+  <data name="InvalidUri" xml:space="preserve"><value>Enter a valid absolute WebSocket URI.</value></data>
+  <data name="UriFragmentNotSupported" xml:space="preserve"><value>WebSocket URIs cannot contain fragments.</value></data>
+  <data name="UnsupportedUriScheme" xml:space="preserve"><value>WebSockets support only ws:// and wss:// URIs.</value></data>
+  <data name="CertificateValidationRejected" xml:space="preserve"><value>The connection was rejected by custom certificate validation.</value></data>
+  <data name="CannotConnect" xml:space="preserve"><value>Cannot connect to the server. Verify the URI and network prerequisites.</value></data>
+  <data name="ComError" xml:space="preserve"><value>COM error: {0}</value></data>
+  <data name="WebSocketError" xml:space="preserve"><value>WebSocket error: {0}</value></data>
+
+  <data name="ConnectedStatus" xml:space="preserve"><value>Connected</value></data>
+  <data name="ClosedStatus" xml:space="preserve"><value>Closed</value></data>
+  <data name="ClosingStatus" xml:space="preserve"><value>Closing</value></data>
+  <data name="SendCompleteStatus" xml:space="preserve"><value>Send complete</value></data>
+  <data name="StoppedStatus" xml:space="preserve"><value>Stopped</value></data>
+  <data name="StoppingStatus" xml:space="preserve"><value>Stopping</value></data>
+  <data name="ConnectingLog" xml:space="preserve"><value>Connecting to {0}...</value></data>
+  <data name="ClosedLog" xml:space="preserve"><value>Closed; code: {0}, reason: {1}</value></data>
+  <data name="CustomValidationPassed" xml:space="preserve"><value>Custom validation of the server certificate passed.</value></data>
+  <data name="CustomValidationFailed" xml:space="preserve"><value>Custom validation of the server certificate failed.</value></data>
+  <data name="CertificateValidationRequiresWss" xml:space="preserve"><value>Certificate validation is performed only for the wss:// scheme.</value></data>
+  <data name="ExternalCertificateValidation" xml:space="preserve"><value>Test-certificate exceptions apply only to generated loopback endpoints. This address uses normal platform TLS validation.</value></data>
+  <data name="ClientAuthenticationRequiresWss" xml:space="preserve"><value>Client certificate authentication requires a secure wss:// endpoint.</value></data>
+  <data name="ClientAuthenticationLoopbackOnly" xml:space="preserve"><value>This scenario verifies mutual TLS only with the generated loopback client-authentication endpoint.</value></data>
+  <data name="TextRequired" xml:space="preserve"><value>Enter text to send.</value></data>
+  <data name="SocketNotConnected" xml:space="preserve"><value>Connect the WebSocket before sending.</value></data>
+  <data name="ClientCertificateNotFound" xml:space="preserve"><value>The generated client certificate could not be loaded from the app certificate store.</value></data>
+
+  <data name="Utf8Heading.Text" xml:space="preserve"><value>UTF-8 text messages</value></data>
+  <data name="Utf8Description.Text" xml:space="preserve"><value>Connect a MessageWebSocket, send a complete UTF-8 message, receive the echoed message, and close the connection. Select the secure endpoint to inspect and custom-validate the ephemeral server certificate.</value></data>
+  <data name="Utf8ServerAddress.Header" xml:space="preserve"><value>Server address</value></data>
+  <data name="Utf8ServerAddress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>UTF-8 WebSocket server address</value></data>
+  <data name="Utf8SecureWebSocket.Content" xml:space="preserve"><value>Use secure WebSocket and custom certificate validation</value></data>
+  <data name="Utf8SecureWebSocket.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Use secure WebSocket and custom certificate validation</value></data>
+  <data name="Utf8ConnectButton.Content" xml:space="preserve"><value>Connect</value></data>
+  <data name="Utf8ConnectButton.AccessKey" xml:space="preserve"><value>C</value></data>
+  <data name="Utf8ConnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Connect UTF-8 WebSocket</value></data>
+  <data name="Utf8DisconnectButton.Content" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="Utf8DisconnectButton.AccessKey" xml:space="preserve"><value>D</value></data>
+  <data name="Utf8DisconnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Disconnect UTF-8 WebSocket</value></data>
+  <data name="Utf8Input.Header" xml:space="preserve"><value>Text to send</value></data>
+  <data name="Utf8Input.Text" xml:space="preserve"><value>Hello WebSocket</value></data>
+  <data name="Utf8Input.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>UTF-8 text to send</value></data>
+  <data name="Utf8SendButton.Content" xml:space="preserve"><value>Send</value></data>
+  <data name="Utf8SendButton.AccessKey" xml:space="preserve"><value>S</value></data>
+  <data name="Utf8SendButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Send UTF-8 message</value></data>
+  <data name="Utf8OutputLabel.Text" xml:space="preserve"><value>Activity</value></data>
+  <data name="Utf8Output.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>UTF-8 WebSocket activity</value></data>
+
+  <data name="BinaryHeading.Text" xml:space="preserve"><value>Binary data stream</value></data>
+  <data name="BinaryDescription.Text" xml:space="preserve"><value>Use a StreamWebSocket to continuously write a ten-byte binary sequence and read the echoed bytes as a .NET stream. The byte counters update once data crosses the loopback connection.</value></data>
+  <data name="BinaryServerAddress.Header" xml:space="preserve"><value>Server address</value></data>
+  <data name="BinaryServerAddress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Binary WebSocket server address</value></data>
+  <data name="BinarySecureWebSocket.Content" xml:space="preserve"><value>Use secure WebSocket and custom certificate validation</value></data>
+  <data name="BinarySecureWebSocket.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Use secure binary WebSocket and custom certificate validation</value></data>
+  <data name="BinaryStartButton.Content" xml:space="preserve"><value>Start</value></data>
+  <data name="BinaryStartButton.AccessKey" xml:space="preserve"><value>S</value></data>
+  <data name="BinaryStartButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Start binary stream</value></data>
+  <data name="BinaryStopButton.Content" xml:space="preserve"><value>Stop</value></data>
+  <data name="BinaryStopButton.AccessKey" xml:space="preserve"><value>T</value></data>
+  <data name="BinaryStopButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Stop binary stream</value></data>
+  <data name="BinaryBytesSentLabel.Text" xml:space="preserve"><value>Bytes sent:</value></data>
+  <data name="BinaryBytesReceivedLabel.Text" xml:space="preserve"><value>Bytes received:</value></data>
+  <data name="BinaryOutputLabel.Text" xml:space="preserve"><value>Activity</value></data>
+  <data name="BinaryOutput.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Binary WebSocket activity</value></data>
+
+  <data name="ClientAuthenticationHeading.Text" xml:space="preserve"><value>Client certificate authentication</value></data>
+  <data name="ClientAuthenticationDescription.Text" xml:space="preserve"><value>Generate an ephemeral client certificate, import it into the app certificate store, assign it to StreamWebSocketControl.ClientCertificate, and complete a mutually authenticated TLS WebSocket connection.</value></data>
+  <data name="ClientAuthenticationWarning.Title" xml:space="preserve"><value>Test certificates only</value></data>
+  <data name="ClientAuthenticationWarning.Message" xml:space="preserve"><value>The server and client certificates are generated for this app run. Test-only trust and name exceptions are restricted to the generated loopback endpoint, whose certificate is pinned; production apps must not ignore these errors.</value></data>
+  <data name="ClientAuthenticationServerAddress.Header" xml:space="preserve"><value>Secure server address</value></data>
+  <data name="ClientAuthenticationServerAddress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Client authentication WebSocket server address</value></data>
+  <data name="ClientAuthenticationConnectButton.Content" xml:space="preserve"><value>Connect</value></data>
+  <data name="ClientAuthenticationConnectButton.AccessKey" xml:space="preserve"><value>C</value></data>
+  <data name="ClientAuthenticationConnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Connect with client certificate</value></data>
+  <data name="ClientAuthenticationDisconnectButton.Content" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="ClientAuthenticationDisconnectButton.AccessKey" xml:space="preserve"><value>D</value></data>
+  <data name="ClientAuthenticationDisconnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Disconnect client authentication WebSocket</value></data>
+  <data name="ClientAuthenticationOutputLabel.Text" xml:space="preserve"><value>Activity</value></data>
+  <data name="ClientAuthenticationOutput.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Client authentication activity</value></data>
+
+  <data name="PartialHeading.Text" xml:space="preserve"><value>Partial and complete messages</value></data>
+  <data name="PartialDescription.Text" xml:space="preserve"><value>Set MessageWebSocketReceiveMode.PartialMessage, send non-final or final UTF-8 frames, and process each echoed fragment as soon as it arrives. Use ASCII text when testing split frames so a multi-byte UTF-8 character is not divided between fragments.</value></data>
+  <data name="PartialServerAddress.Header" xml:space="preserve"><value>Server address</value></data>
+  <data name="PartialServerAddress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Partial-message WebSocket server address</value></data>
+  <data name="PartialSecureWebSocket.Content" xml:space="preserve"><value>Use secure WebSocket</value></data>
+  <data name="PartialSecureWebSocket.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Use secure partial-message WebSocket</value></data>
+  <data name="PartialConnectButton.Content" xml:space="preserve"><value>Connect</value></data>
+  <data name="PartialConnectButton.AccessKey" xml:space="preserve"><value>C</value></data>
+  <data name="PartialConnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Connect partial-message WebSocket</value></data>
+  <data name="PartialDisconnectButton.Content" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="PartialDisconnectButton.AccessKey" xml:space="preserve"><value>D</value></data>
+  <data name="PartialDisconnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Disconnect partial-message WebSocket</value></data>
+  <data name="PartialInput.Header" xml:space="preserve"><value>Text frame to send</value></data>
+  <data name="PartialInput.Text" xml:space="preserve"><value>Hello World</value></data>
+  <data name="PartialInput.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Partial-message text to send</value></data>
+  <data name="PartialEndOfMessage.Content" xml:space="preserve"><value>End of message</value></data>
+  <data name="PartialEndOfMessage.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Mark this frame as the end of the message</value></data>
+  <data name="PartialSendButton.Content" xml:space="preserve"><value>Send frame</value></data>
+  <data name="PartialSendButton.AccessKey" xml:space="preserve"><value>S</value></data>
+  <data name="PartialSendButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Send partial or final frame</value></data>
+  <data name="PartialOutputLabel.Text" xml:space="preserve"><value>Activity</value></data>
+  <data name="PartialOutput.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Partial-message WebSocket activity</value></data>
+
+  <data name="SendingTextLog" xml:space="preserve"><value>Sending message: {0}</value></data>
+  <data name="TextMessageReceivedLog" xml:space="preserve"><value>Message received; type: {0}&#x0D;&#x0A;{1}</value></data>
+  <data name="UserRequestedCloseReason" xml:space="preserve"><value>Closed at the user's request.</value></data>
+  <data name="BinarySendingStartedLog" xml:space="preserve"><value>Sending {0}-byte binary chunks once per second.</value></data>
+  <data name="BinaryWriteStoppedLog" xml:space="preserve"><value>Background write stopped.</value></data>
+  <data name="BinaryWriteCanceledLog" xml:space="preserve"><value>Background write canceled.</value></data>
+  <data name="BinaryReadStartedLog" xml:space="preserve"><value>Background read started.</value></data>
+  <data name="BinaryReadStoppedLog" xml:space="preserve"><value>Background read stopped.</value></data>
+  <data name="BinaryReadCanceledLog" xml:space="preserve"><value>Background read canceled.</value></data>
+  <data name="BinaryOperationCanceledLog" xml:space="preserve"><value>The background binary operation was canceled.</value></data>
+  <data name="LoopbackServerUnavailable" xml:space="preserve"><value>The in-process loopback server is unavailable.</value></data>
+  <data name="InstallingClientCertificateLog" xml:space="preserve"><value>Importing the generated client certificate into the app certificate store...</value></data>
+  <data name="ClientCertificateReadyLog" xml:space="preserve"><value>Client certificate ready. Subject: {0}; issuer: {1}</value></data>
+  <data name="ClientAuthenticatedLog" xml:space="preserve"><value>The server accepted the client certificate and completed the WebSocket handshake.</value></data>
+  <data name="SendingFinalFrameLog" xml:space="preserve"><value>Sending final frame: {0}</value></data>
+  <data name="SendingPartialFrameLog" xml:space="preserve"><value>Sending non-final frame: {0}</value></data>
+  <data name="CompleteFrameReceivedLog" xml:space="preserve"><value>Complete frame received; type: {0}&#x0D;&#x0A;{1}</value></data>
+  <data name="PartialFrameReceivedLog" xml:space="preserve"><value>Partial frame received; type: {0}&#x0D;&#x0A;{1}</value></data>
+  <data name="SocketCloseFailedLog" xml:space="preserve"><value>Closing the WebSocket reported an error.</value></data>
+  <data name="WriterDisposeFailedLog" xml:space="preserve"><value>Disposing the message writer reported an error.</value></data>
+  <data name="SocketDisposeFailedLog" xml:space="preserve"><value>Disposing the WebSocket reported an error.</value></data>
+</root>
