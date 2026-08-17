@@ -1,0 +1,126 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: socket-activity-stream-socket
+project:
+  folder: SocketActivityStreamSocket
+  name: SocketActivityStreamSocket
+title: Keeping socket connections active in the background
+summary: Transfer a connected TCP socket to the Windows socket broker, process traffic out of process, and recover or reconnect the socket.
+aliases:
+  - SocketActivityStreamSocket
+  - Socket activity stream socket
+  - SocketActivityTrigger
+  - SocketActivityInformation
+  - StreamSocket
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - app-fundamentals
+tags:
+  - TCP
+  - background tasks
+  - socket broker
+  - C#/WinRT
+  - connected standby
+  - notifications
+originalSamples:
+  - name: SocketActivityStreamSocket
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SocketActivityStreamSocket
+scenarios:
+  - id: broker-socket-activity
+    title: Transfer a connected socket to the system broker
+    summary: Connect to the companion listener, transfer ownership, receive traffic in a background task, and reconnect closed sockets.
+    apis:
+      - Windows.ApplicationModel.Background.BackgroundExecutionManager.RequestAccessAsync
+      - Windows.ApplicationModel.Background.SocketActivityTrigger
+      - Windows.Networking.Sockets.StreamSocket.EnableTransferOwnership
+      - Windows.Networking.Sockets.StreamSocket.TransferOwnership
+      - Windows.Networking.Sockets.SocketActivityInformation.AllSockets
+      - Windows.Networking.Sockets.StreamSocketListener
+    sourceFiles:
+      - MainPage.xaml
+      - MainPage.xaml.cs
+      - SocketActivityBackgroundTask/SocketActivityTask.cs
+      - Server/MainPage.xaml.cs
+apis:
+  - name: Windows.Networking.Sockets.StreamSocket
+    description: Connects the client and transfers ownership of the live TCP connection to the socket broker.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocket
+  - name: Windows.Networking.Sockets.SocketActivityInformation
+    description: Exposes broker-owned sockets to the foreground app and the activated background task.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.socketactivityinformation
+  - name: Windows.ApplicationModel.Background.SocketActivityTrigger
+    description: Activates the out-of-process component for socket data, keep-alive, and close notifications.
+    url: https://learn.microsoft.com/uwp/api/windows.applicationmodel.background.socketactivitytrigger
+  - name: Windows.ApplicationModel.Background.BackgroundExecutionManager
+    description: Requests the user's background-activity permission before the socket trigger is registered.
+  - name: Windows.Networking.Sockets.StreamSocketListener
+    description: Hosts the companion TCP endpoint used to generate foreground and background socket traffic.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener
+  - name: Windows.UI.Notifications.ToastNotificationManager
+    description: Displays received background messages from the low-integrity background task host.
+documentation:
+  - title: Network communications in the background
+    url: https://learn.microsoft.com/windows/apps/develop/networking/network-communications-in-the-background
+    kind: learn
+  - title: Background task migration strategy
+    url: https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/guides/background-task-migration-strategy
+    kind: migration
+  - title: Author C#/WinRT components
+    url: https://learn.microsoft.com/windows/apps/develop/platform/csharp-winrt/authoring
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Lets the foreground client connect to a companion listener on a public network.
+    - name: internetClientServer
+      kind: general
+      description: Lets the separately packaged companion server accept incoming TCP connections.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Lets the client and companion server communicate across localhost or a private network.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows both packaged WinUI 3 foreground applications to run at full trust.
+  hardware:
+    - A reachable TCP endpoint; use the included companion server, preferably on a second PC when testing automatic reconnect.
+  accountServices:
+    - Windows background activity permission for the client package.
+    - Windows notifications enabled for the client package to observe received messages.
+  architectureNotes: The client, companion server, and C#/WinRT background component target x86, x64, and ARM64; their deployed binaries must use the same architecture.
+featuredFiles:
+  - path: MainPage.xaml.cs
+    label: Foreground socket transfer
+    description: Requests background access, restores broker state, connects the socket, and transfers ownership.
+  - path: SocketActivityBackgroundTask/SocketActivityTask.cs
+    label: Socket activity background task
+    description: Handles data, keep-alive, and close reasons before re-transferring or reconnecting the socket.
+  - path: SocketActivityBackgroundTask/SocketActivityBackgroundTask.csproj
+    label: C#/WinRT component project
+    description: Builds the architecture-specific out-of-process Windows Runtime background component.
+  - path: Package.appxmanifest
+    label: Background activation registration
+    description: Registers the background task entry point, WinRT host activatable class, and client capabilities.
+  - path: Server/MainPage.xaml.cs
+    label: Companion message server
+    description: Accepts the brokered client connection and sends length-prefixed test messages.
+  - path: Server/Package.appxmanifest
+    label: Server network capabilities
+    description: Declares incoming TCP, private-network, and full-trust access for the companion server.
+relatedSamples:
+  - stream-socket
+screenshots:
+  - id: connected-client
+    alt: The Socket Activity client connected to its companion listener and ready to transfer the socket to the broker.
+    scenario: broker-socket-activity
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=TargetServerTextBox
+      notes: Start the companion server, connect successfully, and capture only a non-sensitive test address because networking and background access are environment dependent.

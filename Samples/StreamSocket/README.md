@@ -32,6 +32,16 @@ The sample retains all five upstream scenarios:
 - [StreamSocket class](https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocket)
 - [StreamSocketListener class](https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener)
 
+## Prerequisites and capabilities
+
+- Scenarios 1 through 4 can run over localhost. Binding to one address or network adapter
+  requires an active local address with an associated adapter.
+- Scenario 5 starts an in-process loopback TLS server and does not require IIS, PowerShell
+  setup, an external certificate, or an internet service.
+- The package declares `internetClientServer`, `privateNetworkClientServer`,
+  `runFullTrust`, and `systemAIModels`. The socket scenarios do not directly call a System AI
+  Models API.
+
 ## Build & run
 
 ```powershell
