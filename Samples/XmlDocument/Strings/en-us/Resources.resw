@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>XML document sample</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Demonstrates Windows Runtime XML DOM and XSLT APIs.</value>
+  </data>
+  <data name="PublisherDisplayName" xml:space="preserve">
+    <value>AppPublisher</value>
+  </data>
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>XML document sample</value>
+  </data>
+  <data name="ScenarioNavigation.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>XML document scenarios</value>
+  </data>
+
+  <data name="DescriptionLabel.Text" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="ResultLabel.Text" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="OriginalXmlLabel.Text" xml:space="preserve">
+    <value>Original XML data</value>
+  </data>
+
+  <data name="BuildRssDescription.Text" xml:space="preserve">
+    <value>Load an RSS template into a Windows Runtime XML DOM, create a CDATA section from the entered text, append it to the document, and serialize the result.</value>
+  </data>
+  <data name="RssContentLabel.Text" xml:space="preserve">
+    <value>RSS content</value>
+  </data>
+  <data name="RssContentInput.PlaceholderText" xml:space="preserve">
+    <value>Enter content for the RSS feed</value>
+  </data>
+  <data name="RssContentInput.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>RSS content</value>
+  </data>
+  <data name="BuildRssButton.Content" xml:space="preserve">
+    <value>Build RSS feed</value>
+  </data>
+  <data name="BuildRssButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Build RSS feed</value>
+  </data>
+  <data name="RssTemplateLabel.Text" xml:space="preserve">
+    <value>RSS template</value>
+  </data>
+  <data name="RssTemplateBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>RSS template XML</value>
+  </data>
+  <data name="BuildRssResultBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Built RSS XML result</value>
+  </data>
+
+  <data name="MarkHotProductsDescription.Text" xml:space="preserve">
+    <value>Use XPath to find products whose ten-day sales exceed current inventory, update their hot attributes in the DOM, serialize the result, and save it to local app storage.</value>
+  </data>
+  <data name="MarkHotProductsButton.Content" xml:space="preserve">
+    <value>Mark hot products</value>
+  </data>
+  <data name="MarkHotProductsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mark hot products</value>
+  </data>
+  <data name="SaveHotProductsButton.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveHotProductsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Save updated product XML</value>
+  </data>
+  <data name="MarketDataLabel.Text" xml:space="preserve">
+    <value>Market data</value>
+  </data>
+  <data name="MarketDataBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Original product XML</value>
+  </data>
+  <data name="MarkHotProductsResultBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Updated product XML result</value>
+  </data>
+
+  <data name="XmlLoadingDescription.Text" xml:space="preserve">
+    <value>Compare XmlLoadSettings.ProhibitDtd and ResolveExternals while loading the same XML from a packaged file or an in-memory buffer. External resolution is demonstrated only with the trusted packaged DTD.</value>
+  </data>
+  <data name="XmlLoadSettingsLink.Content" xml:space="preserve">
+    <value>XmlLoadSettings API reference</value>
+  </data>
+  <data name="XmlLoadSettingsLink.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Open the XmlLoadSettings API reference</value>
+  </data>
+  <data name="ProhibitDtdRadioButton.Content" xml:space="preserve">
+    <value>ProhibitDtd = true, ResolveExternals = false</value>
+  </data>
+  <data name="ProhibitDtdRadioButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Prohibit DTD and do not resolve externals</value>
+  </data>
+  <data name="AllowDtdRadioButton.Content" xml:space="preserve">
+    <value>ProhibitDtd = false, ResolveExternals = false</value>
+  </data>
+  <data name="AllowDtdRadioButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Allow DTD and do not resolve externals</value>
+  </data>
+  <data name="ResolveExternalsRadioButton.Content" xml:space="preserve">
+    <value>ProhibitDtd = false, ResolveExternals = true</value>
+  </data>
+  <data name="ResolveExternalsRadioButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Allow DTD and resolve externals</value>
+  </data>
+  <data name="LoadFromFileButton.Content" xml:space="preserve">
+    <value>Load XML from file</value>
+  </data>
+  <data name="LoadFromFileButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Load XML from file</value>
+  </data>
+  <data name="LoadFromBufferButton.Content" xml:space="preserve">
+    <value>Load XML from buffer</value>
+  </data>
+  <data name="LoadFromBufferButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Load XML from buffer</value>
+  </data>
+  <data name="XmlLoadingOriginalBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Original XML with external DTD</value>
+  </data>
+  <data name="XmlLoadingResultBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>XML loading result</value>
+  </data>
+
+  <data name="GiftDispatchDescription.Text" xml:space="preserve">
+    <value>Run three XPath queries against employee data and assign an anniversary gift based on each employee's years of service as of the original sample's 2012 reference year.</value>
+  </data>
+  <data name="ShowGiftsButton.Content" xml:space="preserve">
+    <value>Show anniversary gifts</value>
+  </data>
+  <data name="ShowGiftsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Show anniversary gifts</value>
+  </data>
+  <data name="EmployeeProfileLabel.Text" xml:space="preserve">
+    <value>Employee profiles</value>
+  </data>
+  <data name="EmployeeProfileBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Employee profile XML</value>
+  </data>
+  <data name="GiftDispatchResultBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Anniversary gift query result</value>
+  </data>
+
+  <data name="XsltDescription.Text" xml:space="preserve">
+    <value>Edit the source XML or XSLT, then transform to an HTML string or to an XML document saved in local app storage. String output is shown as markup in a native editor; no browser engine is used.</value>
+  </data>
+  <data name="TransformToStringButton.Content" xml:space="preserve">
+    <value>Transform to string</value>
+  </data>
+  <data name="TransformToStringButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Transform XML to a string</value>
+  </data>
+  <data name="TransformToDocumentButton.Content" xml:space="preserve">
+    <value>Transform to document</value>
+  </data>
+  <data name="TransformToDocumentButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Transform XML to a saved document</value>
+  </data>
+  <data name="SourceXmlLabel.Text" xml:space="preserve">
+    <value>Source XML</value>
+  </data>
+  <data name="SourceXmlBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Editable source XML</value>
+  </data>
+  <data name="StylesheetLabel.Text" xml:space="preserve">
+    <value>XSLT stylesheet</value>
+  </data>
+  <data name="StylesheetBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Editable XSLT stylesheet</value>
+  </data>
+  <data name="XsltResultBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>XSLT transformation result</value>
+  </data>
+
+  <data name="ScenarioBuildRssTitle" xml:space="preserve">
+    <value>Build new RSS</value>
+  </data>
+  <data name="ScenarioDomLoadSaveTitle" xml:space="preserve">
+    <value>DOM load and save</value>
+  </data>
+  <data name="ScenarioLoadSettingsTitle" xml:space="preserve">
+    <value>Set load settings</value>
+  </data>
+  <data name="ScenarioXPathTitle" xml:space="preserve">
+    <value>XPath query</value>
+  </data>
+  <data name="ScenarioXsltTitle" xml:space="preserve">
+    <value>XSLT transformation</value>
+  </data>
+
+  <data name="PackagedFileError" xml:space="preserve">
+    <value>The packaged file '{0}' could not be loaded: {1}</value>
+  </data>
+  <data name="XmlOperationError" xml:space="preserve">
+    <value>Could not {0}: {1}</value>
+  </data>
+  <data name="OperationLoadRssTemplate" xml:space="preserve">
+    <value>load the RSS template</value>
+  </data>
+  <data name="OperationBuildRss" xml:space="preserve">
+    <value>build the RSS document</value>
+  </data>
+  <data name="RssContentRequired" xml:space="preserve">
+    <value>Enter RSS content before building the feed.</value>
+  </data>
+  <data name="RssTemplateMissingContent" xml:space="preserve">
+    <value>The RSS template is missing its required content element.</value>
+  </data>
+  <data name="RssContentInvalid" xml:space="preserve">
+    <value>The RSS content could not be added as CDATA: {0}</value>
+  </data>
+  <data name="RssBuiltStatus" xml:space="preserve">
+    <value>The RSS document was built successfully.</value>
+  </data>
+  <data name="OperationLoadProductData" xml:space="preserve">
+    <value>load the product XML</value>
+  </data>
+  <data name="OperationMarkHotProducts" xml:space="preserve">
+    <value>query and update the product XML</value>
+  </data>
+  <data name="OperationValidateProductData" xml:space="preserve">
+    <value>validate the updated product XML before saving</value>
+  </data>
+  <data name="HotProductsMarkedStatus" xml:space="preserve">
+    <value>Marked {0} product attribute(s) as hot.</value>
+  </data>
+  <data name="XmlSavedStatus" xml:space="preserve">
+    <value>The XML document was saved to: {0}</value>
+  </data>
+  <data name="SaveXmlError" xml:space="preserve">
+    <value>Could not save the XML document: {0}</value>
+  </data>
+  <data name="DtdProhibitedError" xml:space="preserve">
+    <value>The XML contains a DTD, and the selected settings explicitly prohibit DTD processing.</value>
+  </data>
+  <data name="XmlLoadedStatus" xml:space="preserve">
+    <value>The XML document loaded successfully with the selected settings.</value>
+  </data>
+  <data name="OperationLoadXml" xml:space="preserve">
+    <value>load the XML with the selected settings</value>
+  </data>
+  <data name="OperationLoadEmployeeData" xml:space="preserve">
+    <value>load the employee XML</value>
+  </data>
+  <data name="OperationQueryEmployees" xml:space="preserve">
+    <value>query the employee XML</value>
+  </data>
+  <data name="GiftCard" xml:space="preserve">
+    <value>Gift Card</value>
+  </data>
+  <data name="Xbox" xml:space="preserve">
+    <value>XBOX</value>
+  </data>
+  <data name="WindowsPhone" xml:space="preserve">
+    <value>Windows Phone</value>
+  </data>
+  <data name="EmployeeDataMissingFields" xml:space="preserve">
+    <value>An employee entry is missing a name or department element.</value>
+  </data>
+  <data name="GiftsCalculatedStatus" xml:space="preserve">
+    <value>Anniversary gifts were calculated successfully.</value>
+  </data>
+  <data name="OperationLoadXsltInputs" xml:space="preserve">
+    <value>load the source XML and XSLT stylesheet</value>
+  </data>
+  <data name="SourceXmlRequired" xml:space="preserve">
+    <value>Source XML cannot be empty.</value>
+  </data>
+  <data name="StylesheetRequired" xml:space="preserve">
+    <value>The XSLT stylesheet cannot be empty.</value>
+  </data>
+  <data name="MalformedSourceXml" xml:space="preserve">
+    <value>The source XML is malformed: {0}</value>
+  </data>
+  <data name="MalformedStylesheetXml" xml:space="preserve">
+    <value>The XSLT stylesheet is not well-formed XML: {0}</value>
+  </data>
+  <data name="XsltTransformationError" xml:space="preserve">
+    <value>The XSLT transformation failed: {0}</value>
+  </data>
+  <data name="XsltStringStatus" xml:space="preserve">
+    <value>The XSLT transformation returned an HTML string.</value>
+  </data>
+  <data name="XsltDocumentSavedStatus" xml:space="preserve">
+    <value>The transformed document was saved to: {0}</value>
+  </data>
+</root>
