@@ -29,10 +29,10 @@ Install the lightweight catalog tooling with `pnpm install`, then run:
 
 ```powershell
 pnpm catalog:test
-pnpm catalog:validate
-pnpm catalog:generate -- --output site/src/generated/sample-catalog.json
+pnpm catalog:validate:complete
+pnpm catalog:generate -- --require-complete --output site/src/generated/sample-catalog.json
 ```
 
-The regular validator supports the staged metadata rollout. The stricter
-`pnpm catalog:validate:complete` command fails until every sample project has a
-valid `sample.yml`; it is not yet a required CI gate.
+Catalog CI requires every sample project to have a valid `sample.yml`. The regular
+`pnpm catalog:validate` command remains available for isolated metadata drafting,
+but run the completeness command before opening a pull request.

@@ -1,0 +1,134 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: datagram-socket
+project:
+  folder: DatagramSocket
+  name: DatagramSocket
+title: Sending and receiving UDP datagrams
+summary: Create UDP listeners and clients, exchange datagrams, and work with unicast, multicast, and broadcast endpoints.
+aliases:
+  - DatagramSocket
+  - UDP sockets
+  - Windows.Networking.Sockets
+  - DatagramSocketMessageReceivedEventArgs
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary: []
+tags:
+  - UDP
+  - datagrams
+  - sockets
+  - multicast
+  - broadcast
+originalSamples:
+  - name: DatagramSocket
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DatagramSocket
+scenarios:
+  - id: start-datagram-listener
+    title: Start Datagram Listener
+    apis:
+      - Windows.Networking.Sockets.DatagramSocket.BindServiceNameAsync
+      - Windows.Networking.Sockets.DatagramSocket.BindEndpointAsync
+      - Windows.Networking.Sockets.DatagramSocket.MessageReceived
+    sourceFiles:
+      - Scenarios/DatagramSocket/Scenario1_Start.xaml.cs
+  - id: connect-to-listener
+    title: Connect to Listener
+    apis:
+      - Windows.Networking.Sockets.DatagramSocket.ConnectAsync
+      - Windows.Networking.HostName
+    sourceFiles:
+      - Scenarios/DatagramSocket/Scenario2_Connect.xaml.cs
+  - id: send-data
+    title: Send Data
+    apis:
+      - Windows.Storage.Streams.DataWriter
+      - Windows.Networking.Sockets.DatagramSocket.OutputStream
+    sourceFiles:
+      - Scenarios/DatagramSocket/Scenario3_Send.xaml.cs
+  - id: close-socket
+    title: Close Socket
+    apis:
+      - Windows.Networking.Sockets.DatagramSocket.Dispose
+      - Windows.Storage.Streams.DataWriter.Dispose
+    sourceFiles:
+      - Scenarios/DatagramSocket/Scenario4_Close.xaml.cs
+  - id: multicast-broadcast
+    title: Multicast/Broadcast
+    apis:
+      - Windows.Networking.Sockets.DatagramSocket.JoinMulticastGroup
+      - Windows.Networking.Sockets.DatagramSocket.GetOutputStreamAsync
+      - Windows.Networking.Sockets.DatagramSocketControl.MulticastOnly
+    sourceFiles:
+      - Scenarios/DatagramSocket/Scenario5_MulticastAndBroadcast.xaml.cs
+apis:
+  - name: Windows.Networking.Sockets.DatagramSocket
+    description: Creates UDP listeners and clients and sends datagrams to unicast, multicast, or broadcast endpoints.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.datagramsocket
+  - name: Windows.Networking.Sockets.DatagramSocketMessageReceivedEventArgs
+    description: Exposes the payload and remote endpoint for each received UDP datagram.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.datagramsocketmessagereceivedeventargs
+  - name: Windows.Storage.Streams.DataReader
+    description: Reads string payloads from received datagrams.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes string payloads to connected or endpoint-specific output streams.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+documentation:
+  - title: DatagramSocket class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.datagramsocket
+    kind: api-reference
+  - title: Windows.Networking.Sockets namespace
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClientServer
+      kind: general
+      description: Allows the sample to send and receive datagrams across internet network boundaries.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Allows listener and client scenarios to communicate on private networks.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A network adapter is required for cross-device, multicast, and broadcast communication.
+  accountServices:
+    - A reachable UDP peer is required for cross-device testing; the sample can also host its own listener.
+  architectureNotes: The sample shares listener and client state between scenarios, so run Start, Connect, Send, and Close in order; it has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Datagram scenarios
+    description: Declares the listener, client, send, close, and multicast or broadcast scenarios.
+  - path: Scenarios/DatagramSocket/Scenario1_Start.xaml.cs
+    label: Start a UDP listener
+    description: Binds a DatagramSocket, selects an optional adapter, and echoes received messages.
+  - path: Scenarios/DatagramSocket/Scenario2_Connect.xaml.cs
+    label: Connect a UDP client
+    description: Resolves a host and connects a client DatagramSocket to the listener service.
+  - path: Scenarios/DatagramSocket/Scenario3_Send.xaml.cs
+    label: Send a datagram
+    description: Reuses a DataWriter over the connected socket output stream to transmit text.
+  - path: Scenarios/DatagramSocket/Scenario5_MulticastAndBroadcast.xaml.cs
+    label: Use multicast and broadcast
+    description: Configures multicast-only binding and sends to multicast or broadcast addresses.
+  - path: Package.appxmanifest
+    label: Network capabilities
+    description: Declares internet, private-network, and full-trust capabilities.
+relatedSamples:
+  - data-reader-writer
+screenshots:
+  - id: start-listener
+    alt: The UDP datagram app showing listener service, binding, and inbound buffer options beside a Listen button.
+    scenario: start-datagram-listener
+    capture:
+      mode: manual
+      readinessSelector: text=Start Datagram Listener
+      notes: Capture the listener form before binding, because available adapters and successful ports depend on the machine and network.

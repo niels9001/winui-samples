@@ -1,0 +1,159 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: lighting
+project:
+  folder: Lighting
+  name: Lighting
+title: Controlling lamps and programmable lighting arrays
+summary: Discover lighting hardware, set lamp colors and brightness, run LampArray effects, and respond to device availability changes.
+aliases:
+  - Lighting
+  - LampArray
+  - LampDevice
+  - Windows.Devices.Lights
+  - Windows.Devices.Lights.Effects
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - app-fundamentals
+tags:
+  - lighting
+  - lamp
+  - LampArray
+  - RGB
+  - device watcher
+  - lighting effects
+originalSamples:
+  - name: LampArray
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LampArray
+  - name: LampDevice
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LampDevice
+scenarios:
+  - id: lamp-array-basics
+    title: LampArray basics
+    summary: Discover attached lighting arrays, inspect their capabilities, and apply colors, gradients, key highlights, and brightness.
+    apis:
+      - Windows.Devices.Lights.LampArray.GetDeviceSelector
+      - Windows.Devices.Lights.LampArray.FromIdAsync
+      - Windows.Devices.Lights.LampArray.SetColor
+      - Windows.Devices.Lights.LampArray.SetColorsForIndices
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - Scenarios/LampArray/Scenario1_Basics.xaml
+      - Scenarios/LampArray/Scenario1_Basics.xaml.cs
+  - id: lamp-array-effects
+    title: LampArray effects
+    summary: Build and coordinate bitmap, blink, custom animation, generated bitmap, and color-ramp effect playlists.
+    apis:
+      - Windows.Devices.Lights.Effects.LampArrayEffectPlaylist
+      - Windows.Devices.Lights.Effects.LampArrayBitmapEffect
+      - Windows.Devices.Lights.Effects.LampArrayBlinkEffect
+      - Windows.Devices.Lights.Effects.LampArrayCustomEffect
+      - Windows.Devices.Lights.Effects.LampArrayColorRampEffect
+    sourceFiles:
+      - Scenarios/LampArray/Scenario2_Effects.xaml
+      - Scenarios/LampArray/Scenario2_Effects.xaml.cs
+  - id: get-lamp
+    title: Get lamp instance
+    summary: Enumerate lamp devices or request the default lamp and display its supported capabilities.
+    apis:
+      - Windows.Devices.Lights.Lamp.GetDeviceSelector
+      - Windows.Devices.Lights.Lamp.FromIdAsync
+      - Windows.Devices.Lights.Lamp.GetDefaultAsync
+    sourceFiles:
+      - Scenarios/LampDevice/Scenario1_GetLamp.xaml
+      - Scenarios/LampDevice/Scenario1_GetLamp.xaml.cs
+  - id: adjust-lamp
+    title: Enable lamp and settings adjustment
+    summary: Turn on the default lamp and adjust its brightness or color when the hardware supports those settings.
+    apis:
+      - Windows.Devices.Lights.Lamp.GetDefaultAsync
+      - Windows.Devices.Lights.Lamp.BrightnessLevel
+      - Windows.Devices.Lights.Lamp.Color
+      - Windows.Devices.Lights.Lamp.IsEnabled
+    sourceFiles:
+      - Scenarios/LampDevice/Scenario2_EnableSettings.xaml
+      - Scenarios/LampDevice/Scenario2_EnableSettings.xaml.cs
+  - id: lamp-availability
+    title: Lamp device change events
+    summary: Register for lamp availability changes and keep an individual lamp's enabled state synchronized with the UI.
+    apis:
+      - Windows.Devices.Lights.Lamp.AvailabilityChanged
+      - Windows.Devices.Lights.LampAvailabilityChangedEventArgs.IsAvailable
+      - Windows.Devices.Lights.Lamp.IsEnabled
+    sourceFiles:
+      - Scenarios/LampDevice/Scenario3_AvailabilityChanged.xaml
+      - Scenarios/LampDevice/Scenario3_AvailabilityChanged.xaml.cs
+apis:
+  - name: Windows.Devices.Lights.LampArray
+    description: Represents an addressable array of lamps and exposes topology, color, brightness, and availability controls.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.lamparray
+  - name: Windows.Devices.Lights.Lamp
+    description: Represents an individual lamp and exposes its availability, enabled state, brightness, and color.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.lamp
+  - name: Windows.Devices.Lights.Effects.LampArrayEffectPlaylist
+    description: Sequences, starts, pauses, and stops one or more LampArray effects.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.effects.lamparrayeffectplaylist
+  - name: Windows.Devices.Lights.Effects.LampArrayBitmapEffect
+    description: Maps a bitmap to the physical positions of lamps in an attached array.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.effects.lamparraybitmapeffect
+  - name: Windows.Devices.Lights.Effects.LampArrayCustomEffect
+    description: Requests periodic custom color updates for programmable lighting animations.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.effects.lamparraycustomeffect
+documentation:
+  - title: LampArray class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.lamparray
+    kind: api-reference
+  - title: Lamp class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.lamp
+    kind: api-reference
+  - title: Windows.Devices.Lights.Effects namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.lights.effects
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: internetClient
+      kind: general
+      description: Is declared by the package, although the lighting scenarios do not otherwise require network access.
+  hardware:
+    - A compatible Windows LampArray device for the array and effect scenarios
+    - A compatible Windows Lamp device for the individual lamp scenarios
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific lighting behavior.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Consolidated lighting scenarios
+    description: Groups the LampArray and Lamp device workflows in one navigation shell.
+  - path: Scenarios/LampArray/Scenario1_Basics.xaml.cs
+    label: LampArray discovery and control
+    description: Watches for lighting arrays and applies colors, key highlights, gradients, and brightness.
+  - path: Scenarios/LampArray/Scenario2_Effects.xaml.cs
+    label: LampArray effects
+    description: Creates bitmap, blink, custom, generated bitmap, and color-ramp effect playlists.
+  - path: Scenarios/LampDevice/Scenario1_GetLamp.xaml.cs
+    label: Lamp discovery
+    description: Retrieves a lamp through device enumeration or the default-lamp API.
+  - path: Scenarios/LampDevice/Scenario3_AvailabilityChanged.xaml.cs
+    label: Lamp availability
+    description: Observes availability changes and controls the enabled state of an individual lamp.
+relatedSamples: []
+screenshots:
+  - id: lamp-array-basics
+    alt: The Lighting app showing attached LampArray details with color pattern choices and a brightness control.
+    scenario: lamp-array-basics
+    capture:
+      mode: manual
+      readinessSelector: text=LampArray basics
+      actions:
+        - type: click
+          selector: name=Apply
+      notes: Connect compatible LampArray hardware for a populated state, or explicitly capture the no-device state without implying hardware validation.

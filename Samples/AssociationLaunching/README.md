@@ -1,6 +1,8 @@
-# AssociationLaunching
+# Launching files and handling association activations
 
-Ported to WinUI 3 / Windows App SDK from the UWP [AssociationLaunching](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AssociationLaunching) sample.
+The `AssociationLaunching` project was ported to WinUI 3 / Windows App SDK from the UWP
+[AssociationLaunching](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AssociationLaunching)
+sample.
 
 ## What it shows
 
@@ -24,6 +26,11 @@ open its file types or custom URI scheme, across 4 scenarios:
 - `Windows.ApplicationModel.Activation` (`IFileActivatedEventArgs`, `IProtocolActivatedEventArgs`)
 - `Microsoft.Windows.Storage.Pickers.FileOpenPicker` (Windows App SDK picker)
 
+## Learn docs this serves
+
+- [Windows.System.Launcher](https://learn.microsoft.com/uwp/api/windows.system.launcher)
+- [Microsoft.Windows.AppLifecycle.AppInstance](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.applifecycle.appinstance)
+
 ## Build & run
 
 ```powershell
@@ -31,7 +38,7 @@ dotnet build -c Debug -p:Platform=x64
 dotnet run -c Debug -p:Platform=x64
 ```
 
-Register the file/protocol associations by deploying the app once (build + run). Then open the
+Register the file and protocol associations by deploying the app once. Then open the
 "Receiving a file" scenario, create a test file, and double-click it in the Pictures folder; or
 use the "Launching a URI" scenario to launch `alsdk://hello`.
 
@@ -49,9 +56,9 @@ so this port reproduces the UWP behavior with two pieces:
   activations to scenario 3 and Protocol activations to scenario 4, passing the
   `IFileActivatedEventArgs` / `IProtocolActivatedEventArgs` as the navigation parameter.
 
-Other transforms are the standard ones: `Windows.UI.Xaml` namespaces updated to
+Other changes update `Windows.UI.Xaml` namespaces to
 `Microsoft.UI.Xaml`, page backgrounds removed so the Mica backdrop shows through, and the UWP
-`SampleHeaderTextStyle` / `ScenarioDescriptionTextStyle` / `BasicTextStyle` replaced with a
+`SampleHeaderTextStyle`, `ScenarioDescriptionTextStyle`, and `BasicTextStyle` replaced with a
 "Description:" header (`SubtitleTextBlockStyle`) plus `BodyTextBlockStyle` body text. The
 pick-and-launch file picker uses the Windows App SDK `Microsoft.Windows.Storage.Pickers.FileOpenPicker`
 (constructed with `this.XamlRoot.ContentIslandEnvironment.AppWindowId`) instead of the legacy

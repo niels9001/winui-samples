@@ -1,0 +1,164 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: stream-socket
+project:
+  folder: StreamSocket
+  name: StreamSocket
+title: Building TCP clients, listeners, and TLS diagnostics
+summary: Bind TCP listeners, connect clients, exchange framed data, release socket resources, and inspect TLS certificate failures.
+aliases:
+  - StreamSocket
+  - StreamSocketListener
+  - TCP sockets
+  - SSL/TLS server certificates
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - security-and-identity
+tags:
+  - TCP
+  - sockets
+  - listener
+  - network adapter
+  - TLS
+  - certificates
+originalSamples:
+  - name: StreamSocket
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/StreamSocket
+scenarios:
+  - id: start-listener
+    title: Start a stream socket listener
+    summary: Bind a TCP listener to every local address, one selected address, or the selected address's network adapter.
+    apis:
+      - Windows.Networking.Sockets.StreamSocketListener
+      - Windows.Networking.Sockets.StreamSocketListener.BindServiceNameAsync
+      - Windows.Networking.Sockets.StreamSocketListener.BindEndpointAsync
+      - Windows.Networking.Connectivity.NetworkAdapter
+    sourceFiles:
+      - Scenarios/StartListenerPage.xaml
+      - Scenarios/StartListenerPage.xaml.cs
+      - SocketService.cs
+  - id: connect
+    title: Connect to the listener
+    summary: Create a TCP client and optionally constrain its connection to the adapter selected by the listener scenario.
+    apis:
+      - Windows.Networking.Sockets.StreamSocket
+      - Windows.Networking.Sockets.StreamSocket.ConnectAsync
+      - Windows.Networking.Sockets.StreamSocketControl
+    sourceFiles:
+      - Scenarios/ConnectPage.xaml
+      - Scenarios/ConnectPage.xaml.cs
+      - SocketService.cs
+  - id: send
+    title: Send and receive framed data
+    summary: Send a length-prefixed UTF-8 message and read the 32-bit length and payload from the accepted socket.
+    apis:
+      - Windows.Storage.Streams.DataWriter
+      - Windows.Storage.Streams.DataReader
+    sourceFiles:
+      - Scenarios/SendPage.xaml
+      - Scenarios/SendPage.xaml.cs
+      - SocketService.cs
+  - id: close
+    title: Close sockets and the listener
+    summary: Detach and dispose the writer, client, accepted socket, and listener to complete the TCP workflow.
+    apis:
+      - Windows.Storage.Streams.DataWriter.DetachStream
+      - Windows.Networking.Sockets.StreamSocket.Dispose
+      - Windows.Networking.Sockets.StreamSocketListener.Dispose
+    sourceFiles:
+      - Scenarios/ClosePage.xaml
+      - Scenarios/ClosePage.xaml.cs
+      - SocketService.cs
+  - id: inspect-tls-certificates
+    title: Inspect TLS certificate failures
+    summary: Connect to a local TLS 1.2 server, review validation errors, approve a test-only retry, and display certificate details.
+    apis:
+      - Windows.Networking.Sockets.StreamSocketInformation.ServerCertificateErrors
+      - Windows.Networking.Sockets.StreamSocketControl.IgnorableServerCertificateErrors
+      - Windows.Security.Cryptography.Certificates.Certificate
+      - System.Net.Security.SslStream
+    sourceFiles:
+      - Scenarios/CertificatesPage.xaml
+      - Scenarios/CertificatesPage.xaml.cs
+      - LocalTlsTestServer.cs
+apis:
+  - name: Windows.Networking.Sockets.StreamSocketListener
+    description: Binds to local endpoints or adapters and accepts incoming TCP connections.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener
+  - name: Windows.Networking.Sockets.StreamSocket
+    description: Connects the client to plain TCP and TLS endpoints and exposes input and output streams.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocket
+  - name: Windows.Networking.Sockets.StreamSocketControl
+    description: Applies adapter constraints and explicitly allows selected test certificate errors.
+  - name: Windows.Networking.Sockets.StreamSocketInformation
+    description: Reports the server certificate, intermediate chain, validation errors, and error severity.
+  - name: Windows.Networking.Connectivity.NetworkAdapter
+    description: Restricts listener and client traffic to the adapter associated with a selected local address.
+  - name: Windows.Storage.Streams.DataReader
+    description: Reads the message length and UTF-8 payload from an accepted socket.
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes and flushes the length-prefixed UTF-8 payload over the client socket.
+documentation:
+  - title: Sockets
+    url: https://learn.microsoft.com/windows/uwp/networking/sockets
+    kind: learn
+  - title: StreamSocket class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocket
+    kind: api-reference
+  - title: StreamSocketListener class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClientServer
+      kind: general
+      description: Lets the sample accept and initiate TCP connections when the selected endpoint is public.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Lets the full-trust package use localhost and private-network TCP endpoints.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the current manifest; the sample does not directly call a System AI Models API.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - An active network adapter is required only for address-specific and adapter-bound listener options.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; localhost, TCP framing, and TLS behavior are architecture independent.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Socket scenario navigation
+    description: Defines the ordered listener, connection, data, cleanup, and certificate scenarios.
+  - path: SocketService.cs
+    label: Shared TCP state
+    description: Owns listener and client state, binding modes, adapter selection, framing, and deterministic cleanup.
+  - path: Scenarios/StartListenerPage.xaml.cs
+    label: Listener binding
+    description: Selects a bind mode and starts the shared StreamSocketListener.
+  - path: Scenarios/SendPage.xaml.cs
+    label: Framed data exchange
+    description: Sends the sample message while SocketService reads and reports the accepted payload.
+  - path: Scenarios/CertificatesPage.xaml.cs
+    label: Certificate diagnostics
+    description: Surfaces certificate errors, asks for an explicit test-only retry, and formats the chain.
+  - path: LocalTlsTestServer.cs
+    label: Local TLS endpoint
+    description: Generates an ephemeral self-signed certificate and serves TLS 1.2 on an available loopback port.
+relatedSamples:
+  - socket-activity-stream-socket
+screenshots:
+  - id: listener-options
+    alt: The StreamSocket app showing options to bind a TCP listener to any address, one address, or one network adapter.
+    scenario: start-listener
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=StartListenerButton
+      notes: Capture the initial listener scenario without starting a port so the image is deterministic and needs no network state.

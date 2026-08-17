@@ -1,0 +1,100 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: power-grid
+project:
+  folder: PowerGrid
+  name: PowerGrid
+title: Scheduling work around power grid forecasts
+summary: Query Windows power grid forecast blocks, find a low-severity time window, and inspect the complete forecast available to the device.
+aliases:
+  - PowerGrid
+  - Power grid forecast
+  - PowerGridForecast
+  - PowerGridData
+  - Energy-aware scheduling
+icon: AppsRegular
+categories:
+  primary: app-fundamentals
+  secondary:
+    - devices-and-sensors
+tags:
+  - power grid
+  - forecast
+  - energy
+  - scheduling
+  - severity
+originalSamples:
+  - name: PowerGrid
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PowerGrid
+scenarios:
+  - id: find-best-time
+    title: Find the best forecast time
+    summary: Search a configurable number of forecast hours for the lowest severity, optionally requiring low user-experience impact.
+    apis:
+      - Windows.Devices.Power.PowerGridForecast.GetForecast
+      - Windows.Devices.Power.PowerGridData.Severity
+      - Windows.Devices.Power.PowerGridData.IsLowUserExperienceImpact
+    sourceFiles:
+      - Scenarios/PowerGrid/Scenario1_FindBest.xaml
+      - Scenarios/PowerGrid/Scenario1_FindBest.xaml.cs
+  - id: display-forecast
+    title: Display the full forecast
+    summary: Enumerate every returned forecast block with its time, severity, duration, and low-impact indicator.
+    apis:
+      - Windows.Devices.Power.PowerGridForecast.GetForecast
+      - Windows.Devices.Power.PowerGridForecast.Forecast
+      - Windows.Devices.Power.PowerGridForecast.BlockDuration
+    sourceFiles:
+      - Scenarios/PowerGrid/Scenario2_PrintFullForecast.xaml
+      - Scenarios/PowerGrid/Scenario2_PrintFullForecast.xaml.cs
+apis:
+  - name: Windows.Devices.Power.PowerGridForecast
+    description: Retrieves the forecast start time, block duration, and ordered power grid data available to the device.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.power.powergridforecast
+  - name: Windows.Devices.Power.PowerGridData
+    description: Reports severity and low-user-experience-impact values for one forecast block.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.power.powergriddata
+documentation:
+  - title: PowerGridForecast API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.power.powergridforecast
+    kind: api-reference
+  - title: PowerGridData API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.power.powergriddata
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The manifest minimum is 17763, but PowerGridForecast is available starting with Windows build 26100; the project targets x86, x64, and ARM64.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Forecast scenario catalog
+    description: Registers the best-time search and full-forecast display workflows.
+  - path: Scenarios/PowerGrid/Scenario1_FindBest.xaml.cs
+    label: Find a low-severity window
+    description: Searches returned forecast blocks and applies the optional low-impact filter and severity threshold.
+  - path: Scenarios/PowerGrid/Scenario1_FindBest.xaml
+    label: Forecast search controls
+    description: Defines named inputs and result fields for hours, low-impact filtering, time, and severity.
+  - path: Scenarios/PowerGrid/Scenario2_PrintFullForecast.xaml.cs
+    label: Enumerate forecast blocks
+    description: Handles an empty forecast and formats every returned block for the list.
+  - path: Scenarios/PowerGrid/Scenario2_PrintFullForecast.xaml
+    label: Full forecast list
+    description: Presents forecast start time, duration, severity, and low-impact state.
+screenshots:
+  - id: best-time
+    alt: The Power Grid app showing a forecast search window and the lowest-severity time returned by Windows.
+    scenario: find-best-time
+    capture:
+      mode: manual
+      readinessSelector: Name=FindBest
+      notes: Run the search in an environment where PowerGridForecast returns data; an empty forecast is a valid environment-dependent result.

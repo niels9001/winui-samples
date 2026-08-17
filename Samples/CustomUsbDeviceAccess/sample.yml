@@ -1,0 +1,151 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: custom-usb-device-access
+project:
+  folder: CustomUsbDeviceAccess
+  name: CustomUsbDeviceAccess
+title: Communicating with a custom USB device
+summary: Connect to custom USB devices, exchange control, interrupt, and bulk transfers, and inspect descriptors and interface settings.
+aliases:
+  - CustomUsbDeviceAccess
+  - Custom USB device access
+  - UsbDevice
+  - Windows.Devices.Usb
+  - OSR FX2
+  - SuperMUTT
+icon: UsbPlugRegular
+categories:
+  primary: devices-and-sensors
+  secondary: []
+tags:
+  - USB
+  - WinUsb
+  - control transfer
+  - bulk pipe
+  - interrupt pipe
+  - USB descriptors
+  - OSR FX2
+  - SuperMUTT
+originalSamples:
+  - name: CustomUsbDeviceAccess
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CustomUsbDeviceAccess
+scenarios:
+  - id: connect-disconnect
+    title: Connecting to OSR FX2 and SuperMUTT USB devices
+    summary: Watch for the OSR FX2 and SuperMUTT devices by VID and PID and open or close the selected handle.
+    apis:
+      - Windows.Devices.Usb.UsbDevice.GetDeviceSelector
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario1_ConnectDisconnect.xaml.cs
+      - Scenarios/CustomUsbDeviceAccess/EventHandlerForDevice.cs
+  - id: control-transfer
+    title: Sending USB control transfers
+    summary: Build a UsbSetupPacket and send control-in and control-out transfers for device-specific state.
+    apis:
+      - Windows.Devices.Usb.UsbDevice.SendControlOutTransferAsync
+      - Windows.Devices.Usb.UsbDevice.SendControlInTransferAsync
+      - Windows.Devices.Usb.UsbSetupPacket
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario2_ControlTransfer.xaml.cs
+  - id: interrupt-pipes
+    title: Reading and writing interrupt pipes
+    summary: Receive interrupt-in data and write data to an interrupt-out pipe on the default interface.
+    apis:
+      - Windows.Devices.Usb.UsbInterruptInPipe
+      - Windows.Devices.Usb.UsbInterruptOutPipe
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario3_InterruptPipes.xaml.cs
+  - id: bulk-pipes
+    title: Reading and writing bulk pipes
+    summary: Stream bytes through the default interface's bulk-in and bulk-out pipes.
+    apis:
+      - Windows.Devices.Usb.UsbBulkInPipe
+      - Windows.Devices.Usb.UsbBulkOutPipe
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario4_BulkPipes.xaml.cs
+  - id: usb-descriptors
+    title: Inspecting USB device and configuration descriptors
+    summary: Read the device descriptor and enumerate raw descriptors exposed by the active configuration.
+    apis:
+      - Windows.Devices.Usb.UsbDevice.DeviceDescriptor
+      - Windows.Devices.Usb.UsbConfiguration.Descriptors
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario5_UsbDescriptors.xaml.cs
+  - id: interface-settings
+    title: Selecting alternate USB interface settings
+    summary: List the default interface's alternate settings and activate the selected setting.
+    apis:
+      - Windows.Devices.Usb.UsbInterface.InterfaceSettings
+      - Windows.Devices.Usb.UsbInterfaceSetting.SelectSettingAsync
+    sourceFiles:
+      - Scenarios/CustomUsbDeviceAccess/Scenario6_InterfaceSettings.xaml.cs
+apis:
+  - name: Windows.Devices.Usb.UsbDevice
+    description: Opens a custom USB device and exposes its descriptors, interfaces, pipes, and control-transfer methods.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.usb.usbdevice
+  - name: Windows.Devices.Usb.UsbSetupPacket
+    description: Describes the request type, value, and index sent with a USB control transfer.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.usb.usbsetuppacket
+  - name: Windows.Devices.Usb.UsbInterruptInPipe
+    description: Raises DataReceived when the device sends data on an interrupt-in endpoint.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.usb.usbinterruptinpipe
+  - name: Windows.Devices.Usb.UsbBulkInPipe
+    description: Exposes the input stream used to read bulk-transfer data from the device.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.usb.usbbulkinpipe
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Watches for the supported OSR FX2 and SuperMUTT devices being added or removed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+documentation:
+  - title: Usb namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.usb
+    kind: api-reference
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+  - title: App capability declarations
+    url: https://learn.microsoft.com/windows/uwp/packaging/app-capability-declarations
+    kind: concept
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: usb
+      kind: device
+      description: Grants access to OSR FX2 VID 0547 PID 1002, SuperMUTT VID 045E PID 0611, and the inherited VID 045E PID 078E filter.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - OSR USB-FX2 Learning Kit board with VID 0x0547 and PID 0x1002
+    - Microsoft SuperMUTT USB test device with VID 0x045E, PID 0x0611, and interface class 875d47fc-d331-4663-b339-624001a2dc5e
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; USB control and pipe I/O has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the six USB scenarios retained from the original sample.
+  - path: Scenarios/CustomUsbDeviceAccess/UsbSampleTypes.cs
+    label: OSR FX2 and SuperMUTT constants
+    description: Defines VID, PID, interface-class, and vendor-command constants for the supported devices.
+  - path: Scenarios/CustomUsbDeviceAccess/Scenario1_ConnectDisconnect.xaml.cs
+    label: Connect to OSR FX2 or SuperMUTT
+    description: Creates device watchers scoped to the active OSR FX2 and SuperMUTT selectors.
+  - path: Scenarios/CustomUsbDeviceAccess/Scenario2_ControlTransfer.xaml.cs
+    label: Control transfers
+    description: Builds UsbSetupPacket values and sends control-in and control-out transfers.
+  - path: Package.appxmanifest
+    label: USB device capability
+    description: Declares three VID, PID, and class filters, including one inherited legacy filter.
+relatedSamples: []
+screenshots:
+  - id: connect-empty-state
+    alt: The CustomUsbDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty USB device list.
+    scenario: connect-disconnect
+    capture:
+      mode: manual
+      readinessSelector: "text=Select a Usb Device:"
+      notes: Capture the safe initial state before attaching hardware; control, pipe, descriptor, and interface states require OSR FX2 or SuperMUTT and manual capture.

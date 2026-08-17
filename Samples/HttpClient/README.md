@@ -25,6 +25,15 @@ validation with `Windows.Web.Http.HttpClient`.
 - [HttpClient class](https://learn.microsoft.com/uwp/api/windows.web.http.httpclient)
 - [HttpBaseProtocolFilter class](https://learn.microsoft.com/uwp/api/windows.web.http.filters.httpbaseprotocolfilter)
 
+## Requirements
+
+- Windows 10 version 1903 (10.0.18362.0) or later.
+- The manifest declares `internetClient`, `privateNetworkClientServer`, and `runFullTrust`.
+- The app starts an HTTP-only loopback server on an OS-assigned port for the GET, POST,
+  cookie, retry, and metered-connection scenarios.
+- Server certificate validation requires internet access to `https://www.microsoft.com/`
+  and, for the ignored-error path, `https://self-signed.badssl.com/`.
+
 ## Build & run
 
 ```powershell
@@ -39,3 +48,8 @@ This port hosts a small HTTP-only loopback test server in the full-trust sample 
 implements the plug-in, retry, and metered-connection filters in managed code. Certificate
 validation still uses external HTTPS endpoints because the loopback server intentionally
 does not implement TLS. The sample requires Windows 10 version 1903 or later.
+
+## Known differences / limitations
+
+The local test server does not implement TLS. Certificate validation therefore depends on
+the external HTTPS endpoints listed above, while the remaining scenarios are self-contained.

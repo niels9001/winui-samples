@@ -1,0 +1,126 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: pen-haptics
+project:
+  folder: PenHaptics
+  name: PenHaptics
+title: Adding tactile feedback to pen interactions
+summary: Detect a pen's simple haptics support and send continuous or discrete tactile feedback during drawing, button, and drag interactions.
+aliases:
+  - PenHaptics
+  - Pen haptics
+  - Tactile feedback
+  - SimpleHapticsController
+  - PenDevice
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - devices-and-sensors
+tags:
+  - pen
+  - haptics
+  - tactile feedback
+  - inking
+  - pointer input
+originalSamples:
+  - name: PenHaptics
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PenHaptics
+scenarios:
+  - id: query-support
+    title: Query tactile feedback support
+    summary: Resolve the pen for a pointer and list the simple haptics features and waveforms that its controller exposes.
+    apis:
+      - Windows.Devices.Input.PenDevice.GetFromPointerId
+      - Windows.Devices.Haptics.SimpleHapticsController.SupportedFeedback
+    sourceFiles:
+      - Scenarios/PenHaptics/Scenario2_SupportedTactileFeedback.xaml
+      - Scenarios/PenHaptics/Scenario2_SupportedTactileFeedback.xaml.cs
+  - id: inking-feedback
+    title: Send continuous inking feedback
+    summary: Select an inking waveform and intensity, start feedback when the pen enters the canvas, and stop it when the pen leaves.
+    apis:
+      - Windows.Devices.Haptics.SimpleHapticsController.SendHapticFeedback
+      - Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
+    sourceFiles:
+      - Scenarios/PenHaptics/Scenario3_InkingFeedback.xaml
+      - Scenarios/PenHaptics/Scenario3_InkingFeedback.xaml.cs
+  - id: interaction-feedback
+    title: Send discrete interaction feedback
+    summary: Choose a click, error, hover, press, release, or success waveform and send it from a button interaction.
+    apis:
+      - Windows.Devices.Haptics.SimpleHapticsController.SendHapticFeedback
+      - Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
+    sourceFiles:
+      - Scenarios/PenHaptics/Scenario4_InteractionFeedback.xaml
+      - Scenarios/PenHaptics/Scenario4_InteractionFeedback.xaml.cs
+  - id: combined-feedback
+    title: Combine inking and interaction feedback
+    summary: Send continuous feedback while dragging and discrete clicks when a rectangle approaches and completes a grid snap.
+    apis:
+      - Windows.Devices.Haptics.SimpleHapticsController.SendHapticFeedback
+      - Microsoft.UI.Xaml.UIElement.ManipulationDelta
+    sourceFiles:
+      - Scenarios/PenHaptics/Scenario5_InkingAndInteractionFeedback.xaml
+      - Scenarios/PenHaptics/Scenario5_InkingAndInteractionFeedback.xaml.cs
+apis:
+  - name: Windows.Devices.Input.PenDevice
+    description: Resolves the pen associated with a pointer identifier and exposes its optional haptics controller.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.input.pendevice
+  - name: Windows.Devices.Haptics.SimpleHapticsController
+    description: Reports supported waveforms and sends continuous or discrete feedback with optional intensity.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontroller
+  - name: Windows.Devices.Haptics.SimpleHapticsControllerFeedback
+    description: Describes a waveform supported by the current pen haptics controller.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontrollerfeedback
+  - name: Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
+    description: Identifies the standard inking and interaction waveforms used by the scenarios.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.haptics.knownsimplehapticscontrollerwaveforms
+documentation:
+  - title: PenDevice API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.input.pendevice
+    kind: api-reference
+  - title: SimpleHapticsController API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.haptics.simplehapticscontroller
+    kind: api-reference
+  - title: WinUI discussion about adding InkCanvas support
+    url: https://github.com/microsoft/microsoft-ui-xaml/issues/6742
+    kind: other
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A pen and digitizer that expose a SimpleHapticsController are required to feel or send feedback.
+  accountServices: []
+  architectureNotes: The manifest minimum is 17763, but the unguarded GalaxyPenContinuous waveform requires Windows build 22000 or later; haptics also vary by pen.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Haptics scenario catalog
+    description: Registers the four retained scenarios and maps known waveform identifiers to readable names.
+  - path: Scenarios/PenHaptics/Scenario2_SupportedTactileFeedback.xaml.cs
+    label: Query pen support
+    description: Resolves a PenDevice from pointer input and reports its haptics controller capabilities.
+  - path: Scenarios/PenHaptics/Scenario3_InkingFeedback.xaml.cs
+    label: Continuous feedback
+    description: Selects a supported inking waveform and applies optional intensity while the pen is active.
+  - path: Scenarios/PenHaptics/Scenario4_InteractionFeedback.xaml.cs
+    label: Discrete feedback
+    description: Sends one-shot interaction waveforms and stops feedback when the pen leaves the target.
+  - path: Scenarios/PenHaptics/Scenario5_InkingAndInteractionFeedback.xaml.cs
+    label: Combined drag feedback
+    description: Coordinates continuous drag feedback with click feedback near and at a snap position.
+screenshots:
+  - id: inking-feedback
+    alt: The Pen Haptics app showing waveform and intensity controls beside the interactive inking feedback canvas.
+    scenario: inking-feedback
+    capture:
+      mode: manual
+      readinessSelector: Name=intensitySlider
+      notes: Capture with a compatible pen available; the physical tactile result cannot be represented visually.

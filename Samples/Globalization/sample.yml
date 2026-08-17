@@ -1,0 +1,243 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: globalization
+project:
+  folder: Globalization
+  name: Globalization
+title: Adapting text, numbers, and fonts for global users
+summary: Format and parse localized numbers, segment and suggest text, analyze Japanese readings, choose fonts, and inspect user preferences.
+aliases:
+  - Globalization
+  - GlobalizationPreferences
+  - NumberFormatting
+  - TextSegmentation
+  - TextSuggestion
+  - LanguageFont
+icon: GlobeRegular
+categories:
+  primary: app-fundamentals
+  secondary:
+    - ui-and-input
+tags:
+  - globalization
+  - localization
+  - number formatting
+  - text segmentation
+  - fonts
+originalSamples:
+  - name: GlobalizationPreferences
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/GlobalizationPreferences
+  - name: JapanesePhoneticAnalysis
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/JapanesePhoneticAnalysis
+  - name: LanguageFont
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LanguageFont
+  - name: NumberFormatting
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/NumberFormatting
+  - name: TextSegmentation
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TextSegmentation
+  - name: TextSuggestion
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TextSuggestion
+  - name: Unicode
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Unicode
+scenarios:
+  - id: percent-permille-formatting
+    title: Percent and permille formatting
+    apis:
+      - Windows.Globalization.NumberFormatting.PercentFormatter
+      - Windows.Globalization.NumberFormatting.PermilleFormatter
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario1_PercentPermilleFormatting.xaml.cs
+  - id: decimal-formatting
+    title: Decimal formatting
+    apis:
+      - Windows.Globalization.NumberFormatting.DecimalFormatter
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario2_DecimalFormatting.xaml.cs
+  - id: currency-formatting
+    title: Currency formatting
+    apis:
+      - Windows.Globalization.NumberFormatting.CurrencyFormatter
+      - Windows.Globalization.CurrencyIdentifiers
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario3_CurrencyFormatting.xaml.cs
+  - id: number-parsing
+    title: Number parsing
+    apis:
+      - Windows.Globalization.NumberFormatting.DecimalFormatter.ParseDouble
+      - Windows.Globalization.NumberFormatting.CurrencyFormatter.ParseDouble
+      - Windows.Globalization.NumberFormatting.PercentFormatter.ParseDouble
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario4_NumberParsing.xaml.cs
+  - id: rounding-padding
+    title: Rounding and padding
+    apis:
+      - Windows.Globalization.NumberFormatting.IncrementNumberRounder
+      - Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario5_RoundingAndPadding.xaml.cs
+  - id: numeral-system-translation
+    title: Numeral system translation
+    apis:
+      - Windows.Globalization.NumberFormatting.NumeralSystemTranslator
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario6_NumeralSystemTranslation.xaml.cs
+  - id: number-unicode-extensions
+    title: Formatting/translation using Unicode extensions
+    apis:
+      - Windows.Globalization.NumberFormatting.DecimalFormatter
+      - Windows.Globalization.NumberFormatting.NumeralSystemTranslator
+    sourceFiles:
+      - Scenarios/NumberFormatting/Scenario7_UsingUnicodeExtensions.xaml.cs
+  - id: unicode-tokenization
+    title: Tokenize lexical identifiers within a string
+    apis:
+      - Windows.Data.Text.UnicodeCharacters.IsIdStart
+      - Windows.Data.Text.UnicodeCharacters.IsIdContinue
+    sourceFiles:
+      - Scenarios/Unicode/Scenario1_FindId.xaml.cs
+  - id: extract-text-segments
+    title: Extract text segments
+    apis:
+      - Windows.Data.Text.WordsSegmenter
+      - Windows.Data.Text.SelectableWordsSegmenter
+    sourceFiles:
+      - Scenarios/TextSegmentation/Scenario1_ExtractTextSegments.xaml.cs
+  - id: segment-from-index
+    title: Get current text segment from index
+    apis:
+      - Windows.Data.Text.WordsSegmenter.GetTokenAt
+      - Windows.Data.Text.SelectableWordsSegmenter.GetTokenAt
+    sourceFiles:
+      - Scenarios/TextSegmentation/Scenario2_GetCurrentTextSegmentFromIndex.xaml.cs
+  - id: ui-fonts
+    title: Fonts for UI
+    apis:
+      - Windows.Globalization.Fonts.LanguageFontGroup
+    sourceFiles:
+      - Scenarios/LanguageFont/Scenario1_UIFonts.xaml.cs
+  - id: document-fonts
+    title: Fonts for documents
+    apis:
+      - Windows.Globalization.Fonts.LanguageFontGroup
+    sourceFiles:
+      - Scenarios/LanguageFont/Scenario2_DocumentFonts.xaml.cs
+  - id: user-preferences
+    title: User preferences
+    apis:
+      - Windows.System.UserProfile.GlobalizationPreferences
+    sourceFiles:
+      - Scenarios/GlobalizationPreferences/Scenario1_Prefs.xaml.cs
+  - id: language-characteristics
+    title: Language characteristics
+    apis:
+      - Windows.Globalization.Language
+      - Windows.System.UserProfile.GlobalizationPreferences.Languages
+    sourceFiles:
+      - Scenarios/GlobalizationPreferences/Scenario2_Lang.xaml.cs
+  - id: region-characteristics
+    title: Region characteristics
+    apis:
+      - Windows.Globalization.GeographicRegion
+    sourceFiles:
+      - Scenarios/GlobalizationPreferences/Scenario3_Region.xaml.cs
+  - id: current-input-language
+    title: Current input language
+    apis:
+      - Windows.Globalization.Language.CurrentInputMethodLanguageTag
+    sourceFiles:
+      - Scenarios/GlobalizationPreferences/Scenario4_Input.xaml.cs
+  - id: analyze-japanese-text
+    title: Analyze Japanese text
+    apis:
+      - Windows.Globalization.JapanesePhoneticAnalyzer.GetWords
+    sourceFiles:
+      - Scenarios/JapanesePhoneticAnalysis/Scenario1_AnalyzeJapanese.xaml.cs
+  - id: text-conversion
+    title: Conversion
+    apis:
+      - Windows.Data.Text.TextConversionGenerator
+    sourceFiles:
+      - Scenarios/TextSuggestion/Scenario1_Conversion.xaml.cs
+  - id: text-prediction
+    title: Prediction
+    apis:
+      - Windows.Data.Text.TextPredictionGenerator
+    sourceFiles:
+      - Scenarios/TextSuggestion/Scenario2_Prediction.xaml.cs
+  - id: reverse-conversion
+    title: Reverse conversion
+    apis:
+      - Windows.Data.Text.TextReverseConversionGenerator
+    sourceFiles:
+      - Scenarios/TextSuggestion/Scenario3_ReverseConversion.xaml.cs
+apis:
+  - name: Windows.Globalization.NumberFormatting
+    description: Formats, parses, rounds, pads, and translates numbers for specific languages and numeral systems.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.numberformatting
+  - name: Windows.Data.Text
+    description: Segments text, identifies Unicode identifiers, and generates conversion and prediction candidates.
+    url: https://learn.microsoft.com/uwp/api/windows.data.text
+  - name: Windows.Globalization.Fonts.LanguageFontGroup
+    description: Selects language-appropriate UI and document fonts.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.fonts.languagefontgroup
+  - name: Windows.Globalization.JapanesePhoneticAnalyzer
+    description: Produces display and reading text for Japanese input.
+    url: https://learn.microsoft.com/uwp/api/windows.globalization.japanesephoneticanalyzer
+  - name: Windows.System.UserProfile.GlobalizationPreferences
+    description: Exposes the current user's languages, region, calendars, clocks, currencies, and week settings.
+    url: https://learn.microsoft.com/uwp/api/windows.system.userprofile.globalizationpreferences
+documentation:
+  - title: Globalize your app
+    url: https://learn.microsoft.com/windows/apps/design/globalizing/globalizing-portal
+    kind: learn
+  - title: Windows.Globalization namespace
+    url: https://learn.microsoft.com/uwp/api/windows.globalization
+    kind: api-reference
+  - title: GlobalizationPreferences class
+    url: https://learn.microsoft.com/uwp/api/windows.system.userprofile.globalizationpreferences
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: Output follows installed fonts and the user's language, region, currency, calendar, and input settings; no scenario is architecture-specific.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Globalization feature catalog
+    description: Groups twenty scenarios from seven original UWP samples.
+  - path: Scenarios/NumberFormatting/Scenario5_RoundingAndPadding.xaml.cs
+    label: Round and pad numbers
+    description: Combines number formatters with increment and significant-digit rounding strategies.
+  - path: Scenarios/TextSegmentation/Scenario1_ExtractTextSegments.xaml.cs
+    label: Segment words
+    description: Compares word and selectable-word segmentation for a supplied language tag.
+  - path: Scenarios/LanguageFont/LanguageFontHelper.cs
+    label: Apply language fonts
+    description: Maps LanguageFont recommendations to WinUI FontFamily and typography properties.
+  - path: Scenarios/GlobalizationPreferences/Scenario1_Prefs.xaml.cs
+    label: Read user preferences
+    description: Displays the user's languages, home region, calendars, clocks, and first day of the week.
+  - path: Scenarios/JapanesePhoneticAnalysis/Scenario1_AnalyzeJapanese.xaml.cs
+    label: Analyze Japanese readings
+    description: Converts Japanese text into display and phonetic reading results.
+  - path: Scenarios/TextSuggestion/Scenario2_Prediction.xaml.cs
+    label: Predict text
+    description: Produces text prediction candidates for a selected language.
+relatedSamples:
+  - dates-and-times
+screenshots:
+  - id: globalization-preferences
+    alt: The globalization app showing the current user's language, region, calendar, clock, and week preferences.
+    scenario: user-preferences
+    capture:
+      mode: manual
+      readinessSelector: text=User preferences
+      notes: Display the preferences before capture; values vary with the Windows language and region settings on the capture machine.

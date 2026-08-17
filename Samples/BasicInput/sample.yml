@@ -1,0 +1,146 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: basic-input
+project:
+  folder: BasicInput
+  name: BasicInput
+title: Handling pointer gestures and direct manipulation
+summary: Handle mouse, touch, and pen events, inspect pointer data, recognize gestures, manipulate elements, and track multiple contacts.
+aliases:
+  - BasicInput
+  - Basic Input
+  - PointerPoint
+  - GestureRecognizer
+  - XAML manipulations
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - devices-and-sensors
+tags:
+  - pointer input
+  - gestures
+  - touch
+  - pen
+  - manipulation
+  - multi-pointer
+originalSamples:
+  - name: BasicInput
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BasicInput
+scenarios:
+  - id: input-events
+    title: Handle input events
+    summary: Respond to pointer transitions and routed tap, double-tap, holding, and right-tap gestures.
+    apis:
+      - Microsoft.UI.Xaml.Input.PointerRoutedEventArgs
+      - Microsoft.UI.Xaml.UIElement.Tapped
+      - Microsoft.UI.Xaml.UIElement.Holding
+      - Microsoft.UI.Xaml.UIElement.RightTapped
+    sourceFiles:
+      - 1-InputEvents.xaml.cs
+  - id: pointer-properties
+    title: Inspect pointer properties
+    summary: Display location, contact, button, wheel, touch-contact, and pen-pressure data for active pointers.
+    apis:
+      - Microsoft.UI.Input.PointerPoint
+      - Microsoft.UI.Input.PointerPointProperties
+      - Microsoft.UI.Input.PointerDeviceType
+    sourceFiles:
+      - 2-PointerPointProperties.xaml.cs
+  - id: device-capabilities
+    title: Query input device capabilities
+    summary: Report whether the current system has a keyboard, mouse, and touch contacts.
+    apis:
+      - Windows.Devices.Input.KeyboardCapabilities
+      - Windows.Devices.Input.MouseCapabilities
+      - Windows.Devices.Input.TouchCapabilities
+    sourceFiles:
+      - 3-DeviceCapabilities.xaml.cs
+  - id: xaml-manipulations
+    title: Manipulate an element with XAML
+    summary: Move and rotate an element through XAML manipulation events with optional inertia and axis constraints.
+    apis:
+      - Microsoft.UI.Xaml.ManipulationMode
+      - Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs
+      - Microsoft.UI.Xaml.Media.TransformGroup
+    sourceFiles:
+      - 4-XAMLManipulations.xaml.cs
+  - id: gesture-recognizer
+    title: Recognize gestures from pointer data
+    summary: Feed pointer updates into GestureRecognizer and apply its manipulation output to a visual element.
+    apis:
+      - Microsoft.UI.Input.GestureRecognizer
+      - Microsoft.UI.Input.GestureSettings
+    sourceFiles:
+      - 5-GestureRecognizer.xaml.cs
+  - id: pointer-tracking
+    title: Track multiple pointers
+    summary: Capture simultaneous contacts and distinguish the animated primary pointer from secondary pointer feedback.
+    apis:
+      - Microsoft.UI.Xaml.UIElement.CapturePointer
+      - Microsoft.UI.Input.PointerPoint.IsPrimary
+    sourceFiles:
+      - 6-PointerTracking.xaml.cs
+      - PointerEllipse.xaml.cs
+apis:
+  - name: Microsoft.UI.Xaml.Input.PointerRoutedEventArgs
+    description: Supplies pointer identity and state to routed pointer event handlers.
+  - name: Microsoft.UI.Input.PointerPoint
+    description: Describes one pointer update, including position, device type, contact state, and detailed properties.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.input.pointerpoint
+  - name: Microsoft.UI.Input.GestureRecognizer
+    description: Converts raw pointer updates into tap, hold, and manipulation gesture events.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.input.gesturerecognizer
+  - name: Microsoft.UI.Xaml.ManipulationMode
+    description: Configures the translation, rotation, scaling, and inertia behavior recognized by a XAML element.
+  - name: Windows.Devices.Input.TouchCapabilities
+    description: Reports whether touch input is present and how many contacts it supports.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.input.touchcapabilities
+documentation:
+  - title: Handle pointer input
+    url: https://learn.microsoft.com/windows/apps/design/input/handle-pointer-input
+    kind: learn
+  - title: Touch interactions
+    url: https://learn.microsoft.com/windows/apps/design/input/touch-interactions
+    kind: learn
+  - title: Input overview
+    url: https://learn.microsoft.com/windows/apps/design/input/
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the package manifest, although this sample does not call Windows AI model APIs.
+  hardware:
+    - A touchscreen or pen device is optional but required to observe modality-specific and multi-contact properties.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; input behavior depends on the connected mouse, keyboard, touch, and pen hardware rather than CPU architecture.
+featuredFiles:
+  - path: 2-PointerPointProperties.xaml.cs
+    label: Pointer property inspection
+    description: Tracks active pointers and formats mouse, touch, and pen-specific state.
+  - path: 5-GestureRecognizer.xaml.cs
+    label: Explicit gesture recognition
+    description: Feeds pointer data into GestureRecognizer and applies manipulation output.
+  - path: 6-PointerTracking.xaml.cs
+    label: Multi-pointer tracking
+    description: Captures contacts and maintains distinct primary and secondary pointer visuals.
+  - path: PointerEllipse.xaml.cs
+    label: Pointer feedback control
+    description: Implements the reusable animated indicator used by pointer tracking.
+screenshots:
+  - id: input-event-feedback
+    alt: The input events page showing a large interaction surface and labels for pointer, tap, hold, and right-tap event feedback.
+    scenario: input-events
+    capture:
+      mode: automatic
+      readinessSelector: text=Input Events
+      notes: Capture the deterministic initial event surface before generating device-specific pointer input.
