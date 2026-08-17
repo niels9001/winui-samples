@@ -1,0 +1,152 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xml-document
+project:
+  folder: XmlDocument
+  name: XmlDocument
+title: Building and transforming XML documents
+summary: Create, load, query, update, save, and transform XML documents with DOM, XPath, DTD, and XSLT APIs.
+aliases:
+  - XmlDocument
+  - XML DOM
+  - XPath
+  - XSLT
+  - XmlLoadSettings
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - app-fundamentals
+tags:
+  - XML
+  - DOM
+  - XPath
+  - XSLT
+  - DTD
+originalSamples:
+  - name: XmlDocument
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XmlDocument
+scenarios:
+  - id: build-rss
+    title: Building a new RSS document
+    summary: Load an RSS template, append channel and item nodes, and add article text as CDATA.
+    apis:
+      - Windows.Data.Xml.Dom.XmlDocument
+      - Windows.Data.Xml.Dom.XmlDocument.CreateElement
+      - Windows.Data.Xml.Dom.XmlDocument.CreateCDataSection
+    sourceFiles:
+      - Scenarios/Scenario1_BuildNewRss.xaml
+      - Scenarios/Scenario1_BuildNewRss.xaml.cs
+      - Data/BuildRss/rssTemplate.xml
+  - id: mark-hot-products
+    title: Loading, updating, and saving a DOM
+    summary: Select product nodes with XPath, add a hot-product attribute, and save the updated document.
+    apis:
+      - Windows.Data.Xml.Dom.XmlDocument.LoadFromFileAsync
+      - Windows.Data.Xml.Dom.XmlNode.SelectNodes
+      - Windows.Data.Xml.Dom.XmlDocument.SaveToFileAsync
+    sourceFiles:
+      - Scenarios/Scenario2_MarkHotProducts.xaml
+      - Scenarios/Scenario2_MarkHotProducts.xaml.cs
+      - Data/MarkHotProducts/products.xml
+  - id: configure-xml-loading
+    title: Configuring DTD and external loading
+    summary: Compare file and buffer loading while changing whether DTDs are prohibited and external resources are resolved.
+    apis:
+      - Windows.Data.Xml.Dom.XmlLoadSettings
+      - Windows.Data.Xml.Dom.XmlDocument.LoadFromFileAsync
+      - Windows.Data.Xml.Dom.XmlDocument.LoadXml
+    sourceFiles:
+      - Scenarios/Scenario3_XmlLoading.xaml
+      - Scenarios/Scenario3_XmlLoading.xaml.cs
+      - Data/LoadExternalDtd/xmlWithExternaldtd.xml
+      - Data/LoadExternalDtd/dtd.txt
+  - id: query-with-xpath
+    title: Querying employee data with XPath
+    summary: Select employees by years of service and derive gift assignments from the matching XML nodes.
+    apis:
+      - Windows.Data.Xml.Dom.XmlNode.SelectNodes
+      - Windows.Data.Xml.Dom.IXmlNode.InnerText
+    sourceFiles:
+      - Scenarios/Scenario4_GiftDispatch.xaml
+      - Scenarios/Scenario4_GiftDispatch.xaml.cs
+      - Data/GiftDispatch/employees.xml
+  - id: transform-with-xslt
+    title: Transforming XML with XSLT
+    summary: Apply an editable stylesheet to XML and display the result as text or save it to local app storage.
+    apis:
+      - Windows.Data.Xml.Xsl.XsltProcessor
+      - Microsoft.UI.Text.TextGetOptions
+      - Microsoft.UI.Text.TextSetOptions
+    sourceFiles:
+      - Scenarios/Scenario5_XsltTransform.xaml
+      - Scenarios/Scenario5_XsltTransform.xaml.cs
+      - Data/XsltTransform/xmlContent.xml
+      - Data/XsltTransform/xslContent.xml
+apis:
+  - name: Windows.Data.Xml.Dom.XmlDocument
+    description: Creates, loads, queries, edits, and saves the XML DOM used throughout the scenarios.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.dom.xmldocument?view=winrt-28000
+  - name: Windows.Data.Xml.Dom.XmlLoadSettings
+    description: Controls whether XML loading permits DTDs and resolves external resources.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.dom.xmlloadsettings?view=winrt-28000
+  - name: Windows.Data.Xml.Xsl.XsltProcessor
+    description: Applies an XSL stylesheet and returns the transformed XML or HTML text.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.xsl.xsltprocessor?view=winrt-28000
+  - name: Microsoft.UI.Text.TextGetOptions
+    description: Reads editable XML and stylesheet text from the WinUI RichEditBox controls.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.text.textgetoptions
+  - name: Microsoft.UI.Text.TextSetOptions
+    description: Writes loaded and transformed markup into the WinUI RichEditBox controls.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.text.textsetoptions
+documentation:
+  - title: XmlDocument class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.dom.xmldocument?view=winrt-28000
+    kind: api-reference
+  - title: XmlLoadSettings class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.dom.xmlloadsettings?view=winrt-28000
+    kind: api-reference
+  - title: XsltProcessor class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.data.xml.xsl.xsltprocessor?view=winrt-28000
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/Scenario1_BuildNewRss.xaml.cs
+    label: RSS DOM construction
+    description: Builds a feed from an XML template by creating elements, attributes, text, and CDATA nodes.
+  - path: Scenarios/Scenario2_MarkHotProducts.xaml.cs
+    label: XPath DOM update
+    description: Selects qualifying product nodes, marks them with an attribute, and saves the document.
+  - path: Scenarios/Scenario3_XmlLoading.xaml.cs
+    label: XML loading settings
+    description: Compares DTD and external-resource behavior when loading from a file or an in-memory buffer.
+  - path: Scenarios/Scenario4_GiftDispatch.xaml.cs
+    label: XPath query
+    description: Queries employee records and derives output from the matching XML nodes.
+  - path: Scenarios/Scenario5_XsltTransform.xaml.cs
+    label: XSLT transformation
+    description: Reads editable markup, performs the transformation, and displays or saves the result.
+  - path: XmlSampleUtilities.cs
+    label: XML sample utilities
+    description: Loads packaged XML data and supports the shared document workflows.
+relatedSamples: []
+screenshots:
+  - id: build-rss
+    alt: The XML Document app showing the Build new RSS scenario with its input fields and Build RSS action.
+    scenario: build-rss
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=BuildRssButton
+      notes: Capture the initial form before building the document so the result is independent of operator input.

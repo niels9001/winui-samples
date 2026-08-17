@@ -1,0 +1,130 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-defer-load-strategy
+project:
+  folder: XamlDeferLoadStrategy
+  name: XamlDeferLoadStrategy
+title: Deferring UI creation until needed
+summary: Reduce initial UI work by realizing deferred page content, adaptive panes, and control-template parts only when they are needed.
+aliases:
+  - XamlDeferLoadStrategy
+  - x:DeferLoadStrategy
+  - Lazy loading
+  - Deferred loading
+  - ControlTemplate
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - app-fundamentals
+tags:
+  - XAML
+  - performance
+  - deferred loading
+  - adaptive layout
+  - control templates
+originalSamples:
+  - name: XamlDeferLoadStrategy
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDeferLoadStrategy
+scenarios:
+  - id: realize-deferred-content
+    title: Realizing deferred page content
+    summary: Create a lazy Grid on demand by resolving its name only after the user requests it.
+    apis:
+      - Microsoft.UI.Xaml.FrameworkElement.FindName
+      - x:DeferLoadStrategy
+    sourceFiles:
+      - Scenarios/XamlDeferLoadStrategy/BasicDeferral.xaml
+      - Scenarios/XamlDeferLoadStrategy/BasicDeferral.xaml.cs
+  - id: defer-adaptive-panes
+    title: Deferring adaptive panes
+    summary: Realize account and reading panes only when responsive visual states make them useful.
+    apis:
+      - x:DeferLoadStrategy
+      - Microsoft.UI.Xaml.FrameworkElement.SizeChanged
+      - Microsoft.UI.Xaml.VisualStateManager
+    sourceFiles:
+      - Scenarios/XamlDeferLoadStrategy/AdaptivePage.xaml
+      - Scenarios/XamlDeferLoadStrategy/AdaptivePage.xaml.cs
+  - id: defer-template-parts
+    title: Deferring a control-template part
+    summary: Realize a custom control's header presenter only when the control receives header content.
+    apis:
+      - Microsoft.UI.Xaml.Controls.ControlTemplate
+      - Microsoft.UI.Xaml.Controls.ContentPresenter
+      - Microsoft.UI.Xaml.FrameworkElement.FindName
+    sourceFiles:
+      - Scenarios/XamlDeferLoadStrategy/DeferredControlTemplatePart.xaml
+      - Scenarios/XamlDeferLoadStrategy/TitledImage.cs
+      - Themes/Generic.xaml
+apis:
+  - name: Microsoft.UI.Xaml.FrameworkElement.FindName
+    description: Resolves a deferred element by name and causes that lazy element to be created.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.findname?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.FrameworkElement.SizeChanged
+    description: Drives the adaptive desktop layout after replacing the UWP visible-bounds event.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.sizechanged?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Controls.ControlTemplate
+    description: Defines the custom TitledImage visual tree that contains a deferred header presenter.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.controltemplate?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Controls.ContentPresenter
+    description: Hosts the optional header and is realized only when header content is present.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.contentpresenter?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.VisualStateManager
+    description: Applies the width-dependent states that reveal deferred panes in the mail layout.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.visualstatemanager?view=windows-app-sdk-2.2
+documentation:
+  - title: XAML styles
+    url: https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-styles
+    kind: learn
+  - title: XAML control templates
+    url: https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-control-templates
+    kind: learn
+  - title: FrameworkElement.FindName method
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.findname?view=windows-app-sdk-2.2
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Declared by the package; the current scenarios use packaged images and do not require network access.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/XamlDeferLoadStrategy/BasicDeferral.xaml
+    label: Basic deferred element
+    description: Marks a Grid for lazy creation and exposes the action that realizes it.
+  - path: Scenarios/XamlDeferLoadStrategy/AdaptivePage.xaml
+    label: Adaptive deferred layout
+    description: Defines the mail-style responsive states and lazy account and reading panes.
+  - path: Scenarios/XamlDeferLoadStrategy/AdaptivePage.xaml.cs
+    label: Adaptive realization logic
+    description: Populates deferred content when it loads and responds to page-size changes.
+  - path: Scenarios/XamlDeferLoadStrategy/TitledImage.cs
+    label: Deferred custom control
+    description: Realizes the optional header presenter only when a Header value is provided.
+  - path: Themes/Generic.xaml
+    label: Deferred control template
+    description: Defines the TitledImage template and its lazy ContentPresenter.
+relatedSamples:
+  - xaml-state-triggers
+screenshots:
+  - id: adaptive-mail-layout
+    alt: The adaptive deferred-loading page showing Accounts, Mail, Reading Pane, and the Send button in a desktop-width layout.
+    scenario: defer-adaptive-panes
+    capture:
+      mode: automatic
+      readinessSelector: text=Send
+      actions:
+        - type: click
+          selector: text=Adaptive Deferral
+      notes: Use a window width of at least 1200 pixels so both deferred panes are realized.

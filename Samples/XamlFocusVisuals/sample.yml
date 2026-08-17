@@ -1,0 +1,116 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-focus-visuals
+project:
+  folder: XamlFocusVisuals
+  name: XamlFocusVisuals
+title: Customizing keyboard focus indicators
+summary: Replace a built-in control's focus treatment and apply system focus visuals to a reusable custom control.
+aliases:
+  - XamlFocusVisuals
+  - Focus visuals
+  - UseSystemFocusVisuals
+  - IsTemplateFocusTarget
+  - Keyboard focus
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - app-fundamentals
+tags:
+  - XAML
+  - accessibility
+  - keyboard
+  - focus
+  - control templates
+originalSamples:
+  - name: XamlFocusVisuals
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals
+scenarios:
+  - id: create-custom-focus-visuals
+    title: Creating custom focus visuals
+    summary: Retemplate a CheckBox and use focus visual states to draw a red keyboard-focus rectangle.
+    apis:
+      - Microsoft.UI.Xaml.Controls.Control.UseSystemFocusVisuals
+      - Microsoft.UI.Xaml.VisualStateManager
+      - Microsoft.UI.Xaml.Controls.CheckBox
+    sourceFiles:
+      - CustomFocusVisuals.xaml
+      - CustomFocusVisuals.xaml.cs
+  - id: focus-a-custom-control
+    title: Applying focus visuals to a custom control
+    summary: Enable system focus visuals and identify the template element that should receive the focus indicator.
+    apis:
+      - Microsoft.UI.Xaml.Controls.Control.UseSystemFocusVisuals
+      - Microsoft.UI.Xaml.Controls.Control.IsTemplateFocusTarget
+      - Microsoft.UI.Xaml.Controls.HyperlinkButton
+    sourceFiles:
+      - CustomControlUsage.xaml
+      - SocialMediaCounter.cs
+      - Themes/Generic.xaml
+apis:
+  - name: Microsoft.UI.Xaml.Controls.Control
+    description: Exposes UseSystemFocusVisuals for choosing whether a control receives the system focus treatment.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.control?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Controls.Control.IsTemplateFocusTarget
+    description: Marks the custom-control template element that should receive the system focus indicator.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.control.istemplatefocustarget?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.VisualStateManager
+    description: Activates the custom CheckBox template's focused and unfocused visual states.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.visualstatemanager?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Controls.HyperlinkButton
+    description: Provides keyboard focus and invocation behavior for the SocialMediaCounter custom control.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.hyperlinkbutton?view=windows-app-sdk-2.2
+documentation:
+  - title: Keyboard interactions
+    url: https://learn.microsoft.com/en-us/windows/apps/design/input/keyboard-interactions
+    kind: learn
+  - title: Focus navigation for keyboard, gamepad, remote control, and accessibility tools
+    url: https://learn.microsoft.com/en-us/windows/apps/design/input/focus-navigation
+    kind: learn
+  - title: Control.IsTemplateFocusTarget attached property
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.control.istemplatefocustarget?view=windows-app-sdk-2.2
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared in the package manifest, although the focus-visual scenarios do not call System AI APIs.
+  hardware:
+    - A keyboard is needed to reproduce the keyboard-focus states shown by the sample.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: CustomFocusVisuals.xaml
+    label: Custom CheckBox focus template
+    description: Retemplates a CheckBox and defines the red rectangle used by its custom focus state.
+  - path: CustomControlUsage.xaml
+    label: Custom control usage
+    description: Hosts the reusable SocialMediaCounter control with system focus visuals enabled.
+  - path: SocialMediaCounter.cs
+    label: Focusable custom control
+    description: Derives the social counter from HyperlinkButton so it participates in keyboard focus and invocation.
+  - path: Themes/Generic.xaml
+    label: Custom control template
+    description: Marks the image template part as the target for the system focus visual.
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Registers the custom-focus and custom-control scenarios in the navigation shell.
+relatedSamples:
+  - xaml-drag-and-drop
+screenshots:
+  - id: custom-checkbox-focus
+    alt: The custom-focus page showing the Focus me checkbox surrounded by its red keyboard-focus rectangle.
+    scenario: create-custom-focus-visuals
+    capture:
+      mode: manual
+      readinessSelector: text=Focus me
+      notes: Press Tab until the checkbox has keyboard focus and the custom red focus rectangle is visible.

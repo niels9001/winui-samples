@@ -1,22 +1,34 @@
 # XamlDragAndDrop
 
-Ported to WinUI 3 from the UWP [XamlDragAndDrop](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDragAndDrop) sample.
+Ported to WinUI 3 / Windows App SDK from the UWP
+[XamlDragAndDrop](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDragAndDrop)
+sample.
 
 ## What it shows
 
-Three scenarios demonstrating XAML drag and drop with `Windows.ApplicationModel.DataTransfer`:
+The sample demonstrates three drag-and-drop workflows:
 
-1. **ListView Drag and Drop and Reorder**: drag items from an "All Items" list into a "Selection" list (copy), reorder items within the Selection list, and drag items onto a trash glyph to remove them. Uses `CanDragItems`, `CanReorderItems`, `AllowDrop`, `DragItemsStarting`, `DragOver`, `Drop`, and `DragItemsCompleted`, with deferrals for asynchronous drop handling.
-2. **Drag UI Customization**: customize the drag visual on both the source and the target. The source can show the default dragged element, the standard `DataPackage` icon, or a custom bitmap rendered from the dragged `TextBox`. The target can keep the default drag UI, hide the glyph and content, or supply a custom image via `DragUIOverride.SetContentFromBitmapImage`.
-3. **StartDragAsync**: a small timed game that uses `UIElement.StartDragAsync` so the app owns the drag operation and can cancel it (here, when a timer expires). Drag the emoji shape onto its matching tile before time runs out.
+1. Move items from an **All Items** list to **Selection**, reorder selected items,
+   and remove them with a trash drop target.
+2. Customize the drag visual at both the source and target.
+3. Start a drag from app logic, supply rendered bitmap content, and cancel the
+   operation when a timed symbol game expires.
 
 ## APIs featured
 
-- `Windows.ApplicationModel.DataTransfer` (`DataPackage`, `DataPackageOperation`, `StandardDataFormats`)
-- Drag and drop events on `UIElement` and `ListView` (`DragStarting`, `DragOver`, `DragEnter`, `DragLeave`, `Drop`, `DragItemsStarting`, `DragItemsCompleted`)
-- `DragUI.SetContentFromSoftwareBitmap` / `DragUIOverride.SetContentFromBitmapImage`
-- `UIElement.StartDragAsync`
-- `RenderTargetBitmap`, `SoftwareBitmap`
+- `Windows.ApplicationModel.DataTransfer.DataPackage`
+- `Windows.ApplicationModel.DataTransfer.DataPackageOperation`
+- `Windows.ApplicationModel.DataTransfer.StandardDataFormats`
+- `Microsoft.UI.Xaml.UIElement.StartDragAsync`
+- `Microsoft.UI.Xaml.DragUIOverride`
+- `Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap`
+
+## Learn docs this serves
+
+- [Drag and drop](https://learn.microsoft.com/en-us/windows/apps/design/input/drag-and-drop)
+- [DataPackage class](https://learn.microsoft.com/en-us/uwp/api/windows.applicationmodel.datatransfer.datapackage?view=winrt-26100)
+- [UIElement.StartDragAsync method](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startdragasync?view=windows-app-sdk-2.2)
+- [RenderTargetBitmap class](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.imaging.rendertargetbitmap?view=windows-app-sdk-2.2)
 
 ## Build & run
 
@@ -25,12 +37,18 @@ dotnet build -c Debug -p:Platform=x64
 dotnet run -c Debug -p:Platform=x64
 ```
 
+A mouse, touchscreen, or pen is needed to perform the drag interactions.
+
 ## Migration notes
 
-Standard WinUI 3 transforms apply: `Windows.UI.Xaml` namespaces updated to `Microsoft.UI.Xaml`, namespaces unified to `SDKTemplate`, page backgrounds removed so the template Mica backdrop shows through, and the UWP `SampleHeaderTextStyle` / `ScenarioDescriptionTextStyle` replaced with a "Description:" header (`SubtitleTextBlockStyle`) plus `BodyTextBlockStyle`. The drag and drop APIs port directly with no functional changes.
+The `Windows.ApplicationModel.DataTransfer` APIs used by the UWP sample remain
+available to the packaged WinUI 3 app. XAML namespaces and dispatcher usage follow
+the WinUI 3 shell conventions.
 
-The `dropcursor.png` (custom target drag image) and `Symbols.txt` (emoji list for scenario 3) assets are declared as `Content` in the project so they are packaged and reachable via `ms-appx:///`.
+`Assets/dropcursor.png` and `Assets/Symbols.txt` are packaged as content for the
+custom drag visual and timed game.
 
 ## Known differences / limitations
 
-None. The Windows App SDK exposes the same drag and drop surface as UWP.
+No functional API gap is known. The timed game and drag-over visuals require manual
+pointer interaction and are not deterministic screenshot states.

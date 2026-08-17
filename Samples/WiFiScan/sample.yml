@@ -1,0 +1,138 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: wifi-scan
+project:
+  folder: WiFiScan
+  name: WiFiScan
+title: Discovering and connecting to Wi-Fi networks
+summary: Inspect cached Wi-Fi reports, initiate scans, observe network-list changes, and connect or disconnect from selected networks.
+aliases:
+  - WiFiScan
+  - Wi-Fi scan
+  - WiFiAdapter
+  - wireless networks
+  - WLAN
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - devices-and-sensors
+tags:
+  - Wi-Fi
+  - network scan
+  - wireless adapter
+  - connectivity
+  - SSID
+originalSamples:
+  - name: WiFiScan
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WiFiScan
+scenarios:
+  - id: inspect-cached-networks
+    title: Inspecting cached network reports
+    summary: Enumerate Wi-Fi adapters and display each adapter's cached network report without initiating a scan.
+    apis:
+      - Windows.Devices.WiFi.WiFiAdapter.FindAllAdaptersAsync
+      - Windows.Devices.WiFi.WiFiAdapter.NetworkReport
+      - Windows.Devices.WiFi.WiFiNetworkReport
+    sourceFiles:
+      - Scenarios/WiFiScan/Scenario1_CachedNetworks.xaml
+      - Scenarios/WiFiScan/Scenario1_CachedNetworks.xaml.cs
+      - Scenarios/WiFiScan/DisplayHelpers.cs
+  - id: scan-for-networks
+    title: Scanning for networks
+    summary: Ask the first available adapter to scan and refresh the displayed network report.
+    apis:
+      - Windows.Devices.WiFi.WiFiAdapter.ScanAsync
+      - Windows.Devices.WiFi.WiFiAdapter.NetworkReport
+    sourceFiles:
+      - Scenarios/WiFiScan/Scenario2_Scan.xaml
+      - Scenarios/WiFiScan/Scenario2_Scan.xaml.cs
+  - id: observe-scan-updates
+    title: Observing available-network updates
+    summary: Register for system scan changes and refresh the report on the UI thread as new results arrive.
+    apis:
+      - Windows.Devices.WiFi.WiFiAdapter.AvailableNetworksChanged
+      - Microsoft.UI.Dispatching.DispatcherQueue.TryEnqueue
+    sourceFiles:
+      - Scenarios/WiFiScan/Scenario3_RegisterForUpdates.xaml
+      - Scenarios/WiFiScan/Scenario3_RegisterForUpdates.xaml.cs
+  - id: connect-to-a-network
+    title: Connecting to a selected network
+    summary: Connect to open or password-protected networks, monitor connectivity, and disconnect from the adapter.
+    apis:
+      - Windows.Devices.WiFi.WiFiAdapter.ConnectAsync
+      - Windows.Devices.WiFi.WiFiAdapter.Disconnect
+      - Windows.Networking.Connectivity.NetworkInformation.NetworkStatusChanged
+      - Windows.Security.Credentials.PasswordCredential
+    sourceFiles:
+      - Scenarios/WiFiScan/Scenario4_Connect.xaml
+      - Scenarios/WiFiScan/Scenario4_Connect.xaml.cs
+apis:
+  - name: Windows.Devices.WiFi.WiFiAdapter
+    description: Requests access, enumerates adapters, scans, reports networks, and manages connections.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wifiadapter?view=winrt-28000
+  - name: Windows.Devices.WiFi.WiFiNetworkReport
+    description: Provides the cached or newly scanned snapshot of networks visible to an adapter.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wifinetworkreport?view=winrt-28000
+  - name: Windows.Devices.WiFi.WiFiConnectionResult
+    description: Reports whether the selected network connection attempt succeeded and why it failed.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wificonnectionresult?view=winrt-28000
+  - name: Windows.Devices.WiFi.WiFiReconnectionKind
+    description: Selects automatic or manual reconnection behavior for the requested network.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wifireconnectionkind?view=winrt-28000
+  - name: Windows.Networking.Connectivity.NetworkInformation
+    description: Reports connectivity changes after connecting to or disconnecting from a network.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.connectivity.networkinformation?view=winrt-28000
+documentation:
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/en-us/windows/apps/develop/devices-sensors/enumerate-devices
+    kind: learn
+  - title: WiFiAdapter class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wifiadapter?view=winrt-28000
+    kind: api-reference
+  - title: WiFiNetworkReport class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.devices.wifi.wifinetworkreport?view=winrt-28000
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: wiFiControl
+      kind: device
+      description: Allows the app to enumerate Wi-Fi adapters, scan, and manage network connections.
+  hardware:
+    - A Windows-compatible Wi-Fi adapter is required to enumerate, scan, or connect to wireless networks.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; scenarios two through four use the first adapter returned by the system.
+featuredFiles:
+  - path: Scenarios/WiFiScan/Scenario1_CachedNetworks.xaml.cs
+    label: Cached network reports
+    description: Requests Wi-Fi access, enumerates adapters, and displays reports without starting a scan.
+  - path: Scenarios/WiFiScan/Scenario2_Scan.xaml.cs
+    label: On-demand scan
+    description: Initiates a scan with the first available adapter and refreshes the displayed report.
+  - path: Scenarios/WiFiScan/Scenario3_RegisterForUpdates.xaml.cs
+    label: Network update subscription
+    description: Handles available-network changes and marshals report updates through DispatcherQueue.
+  - path: Scenarios/WiFiScan/Scenario4_Connect.xaml.cs
+    label: Network connection workflow
+    description: Connects with open or password credentials, observes status changes, and disconnects.
+  - path: Scenarios/WiFiScan/DisplayHelpers.cs
+    label: Network display helpers
+    description: Maps signal strength and security state to labels and packaged signal-bar assets.
+relatedSamples:
+  - wifi-direct
+screenshots:
+  - id: cached-network-report
+    alt: The WiFi scan page showing adapter controls above the list used for cached wireless network results.
+    scenario: inspect-cached-networks
+    capture:
+      mode: manual
+      readinessSelector: "text=Description:"
+      notes: Capture on a system with an accessible Wi-Fi adapter; do not assume that cached networks are present.

@@ -1,0 +1,123 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-drag-and-drop
+project:
+  folder: XamlDragAndDrop
+  name: XamlDragAndDrop
+title: Adding drag-and-drop interactions to apps
+summary: Move and reorder list items, customize drag visuals, and start app-owned drag operations with pointer input.
+aliases:
+  - XamlDragAndDrop
+  - Drag and drop
+  - DataPackage
+  - StartDragAsync
+  - Drag UI
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary: []
+tags:
+  - XAML
+  - drag and drop
+  - pointer input
+  - ListView
+  - reorder
+originalSamples:
+  - name: XamlDragAndDrop
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDragAndDrop
+scenarios:
+  - id: move-and-reorder-list-items
+    title: Moving and reordering list items
+    summary: Drag items between lists, reorder the selected list, and remove items by dropping them on a trash target.
+    apis:
+      - Windows.ApplicationModel.DataTransfer.DataPackage
+      - Windows.ApplicationModel.DataTransfer.DataPackageOperation
+      - Microsoft.UI.Xaml.Controls.ListView
+    sourceFiles:
+      - Scenarios/XamlDragAndDrop/Scenario1_ListView.xaml
+      - Scenarios/XamlDragAndDrop/Scenario1_ListView.xaml.cs
+  - id: customize-drag-ui
+    title: Customizing drag visuals
+    summary: Change source and target feedback while a text payload moves through the drag lifecycle.
+    apis:
+      - Windows.ApplicationModel.DataTransfer.DataPackage
+      - Windows.ApplicationModel.DataTransfer.StandardDataFormats
+      - Microsoft.UI.Xaml.DragUIOverride
+    sourceFiles:
+      - Scenarios/XamlDragAndDrop/Scenario2_DragUICustomization.xaml
+      - Scenarios/XamlDragAndDrop/Scenario2_DragUICustomization.xaml.cs
+  - id: start-app-owned-drag
+    title: Starting and cancelling a drag
+    summary: Start a drag from app logic, render custom drag content, and cancel a timed drag game.
+    apis:
+      - Microsoft.UI.Xaml.UIElement.StartDragAsync
+      - Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap
+      - Windows.Graphics.Imaging.SoftwareBitmap
+    sourceFiles:
+      - Scenarios/XamlDragAndDrop/Scenario3_StartDragAsync.xaml
+      - Scenarios/XamlDragAndDrop/Scenario3_StartDragAsync.xaml.cs
+      - Assets/Symbols.txt
+      - Assets/dropcursor.png
+apis:
+  - name: Windows.ApplicationModel.DataTransfer.DataPackage
+    description: Carries text data and the requested operation through each drag interaction.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.applicationmodel.datatransfer.datapackage?view=winrt-26100
+  - name: Windows.ApplicationModel.DataTransfer.DataPackageOperation
+    description: Communicates copy, move, and no-operation results between drag sources and targets.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.applicationmodel.datatransfer.datapackageoperation?view=winrt-26100
+  - name: Microsoft.UI.Xaml.UIElement.StartDragAsync
+    description: Starts the app-owned drag operation used by the timed symbol game.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startdragasync?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap
+    description: Renders the source control into custom bitmap content for the drag visual.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.imaging.rendertargetbitmap?view=windows-app-sdk-2.2
+documentation:
+  - title: Drag and drop
+    url: https://learn.microsoft.com/en-us/windows/apps/design/input/drag-and-drop
+    kind: learn
+  - title: DataPackage class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.applicationmodel.datatransfer.datapackage?view=winrt-26100
+    kind: api-reference
+  - title: UIElement.StartDragAsync method
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startdragasync?view=windows-app-sdk-2.2
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A mouse, touchscreen, or pen is required to perform the drag interactions.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/XamlDragAndDrop/Scenario1_ListView.xaml.cs
+    label: List drag and reorder logic
+    description: Moves items between observable collections, reorders them, and handles the trash target.
+  - path: Scenarios/XamlDragAndDrop/Scenario2_DragUICustomization.xaml.cs
+    label: Drag UI customization
+    description: Changes source and target visual feedback during drag-enter, drag-over, and drop events.
+  - path: Scenarios/XamlDragAndDrop/Scenario3_StartDragAsync.xaml.cs
+    label: App-owned drag workflow
+    description: Starts, times, customizes, and cancels the symbol drag operation.
+  - path: Assets/dropcursor.png
+    label: Custom drop cursor
+    description: Provides packaged bitmap content for the customized drag feedback.
+  - path: Assets/Symbols.txt
+    label: Drag game symbols
+    description: Supplies the symbol set used to generate rounds in the StartDragAsync scenario.
+relatedSamples:
+  - xaml-focus-visuals
+screenshots:
+  - id: list-drag-and-drop
+    alt: The drag-and-drop page showing All Items, Selection, and a trash target in three columns.
+    scenario: move-and-reorder-list-items
+    capture:
+      mode: automatic
+      readinessSelector: text=All Items
+      notes: Capture the initial deterministic list state before performing a pointer drag.

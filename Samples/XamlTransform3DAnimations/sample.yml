@@ -1,0 +1,110 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-transform-3d-animations
+project:
+  folder: XamlTransform3DAnimations
+  name: XamlTransform3DAnimations
+title: Animating content with three-dimensional transforms
+summary: Build a news hub with rotating card transitions, staggered article entrances, and motion that respects the Windows animation setting.
+aliases:
+  - XamlTransform3DAnimations
+  - Transform3D
+  - CompositeTransform3D
+  - PerspectiveTransform3D
+  - 3D animations
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - media
+tags:
+  - XAML
+  - animation
+  - 3D transforms
+  - storyboards
+  - Hub
+originalSamples:
+  - name: XamlTransform3DAnimations
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlTransform3DAnimations
+scenarios:
+  - id: animated-news-hub
+    title: Presenting an animated news hub
+    summary: Rotate news cards in three dimensions, open article details, and stagger article content into view.
+    apis:
+      - Microsoft.UI.Xaml.UIElement.Transform3D
+      - Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D
+      - Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D
+      - Microsoft.UI.Xaml.Media.Animation.Storyboard
+      - Windows.UI.ViewManagement.UISettings.AnimationsEnabled
+    sourceFiles:
+      - MainPage.xaml
+      - SectionView.xaml
+      - SectionView.xaml.cs
+      - ArticlePage.xaml
+      - ArticlePage.xaml.cs
+apis:
+  - name: Microsoft.UI.Xaml.UIElement.Transform3D
+    description: Applies three-dimensional transforms to news cards and article elements.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transform3d
+  - name: Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D
+    description: Combines rotation, translation, scale, and center values for card-prism transitions.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.media3d.compositetransform3d
+  - name: Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D
+    description: Adds perspective depth to the animated three-dimensional content.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.media3d.perspectivetransform3d
+  - name: Microsoft.UI.Xaml.Media.Animation.Storyboard
+    description: Coordinates card rotations and staggered article entrance animations.
+  - name: Windows.UI.ViewManagement.UISettings.AnimationsEnabled
+    description: Suppresses custom motion when Windows animation effects are unavailable or disabled.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.ui.viewmanagement.uisettings.animationsenabled?view=winrt-28000
+documentation:
+  - title: Storyboarded animations
+    url: https://learn.microsoft.com/en-us/windows/apps/develop/motion/storyboarded-animations
+    kind: learn
+  - title: UIElement.Transform3D property
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transform3d
+    kind: api-reference
+  - title: CompositeTransform3D class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.media3d.compositetransform3d
+    kind: api-reference
+  - title: Hub class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.hub
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; custom motion is disabled when Windows reports animation effects unavailable.
+featuredFiles:
+  - path: MainPage.xaml
+    label: News hub layout
+    description: Defines the five-section Hub that hosts the animated news cards.
+  - path: SectionView.xaml
+    label: Three-dimensional card visuals
+    description: Declares the card faces, transforms, and storyboards used by each news section.
+  - path: SectionView.xaml.cs
+    label: Card transition orchestration
+    description: Rotates section content on a timer and pauses updates when the view is inactive.
+  - path: ArticlePage.xaml
+    label: Article entrance animations
+    description: Defines the article layout and staggered three-dimensional zoom and fade effects.
+  - path: MotionSettings.cs
+    label: Motion preference
+    description: Reads the Windows animation setting so the experience can avoid unavailable custom motion.
+relatedSamples: []
+screenshots:
+  - id: animated-news-hub
+    alt: The My News hub showing multiple sections of image cards arranged across the horizontally scrolling page.
+    scenario: animated-news-hub
+    capture:
+      mode: automatic
+      readinessSelector: text=My News
+      notes: Capture the stable initial hub before relying on timer-driven card transitions.
