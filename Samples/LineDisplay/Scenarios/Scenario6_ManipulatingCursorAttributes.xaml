@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.Scenario6_ManipulatingCursorAttributes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                x:Uid="CursorHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="CursorDescription"
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+            <ComboBox
+                x:Name="CursorTypeComboBox"
+                x:Uid="CursorTypeComboBox"
+                AutomationProperties.AutomationId="CursorTypeComboBox"
+                IsEnabled="False" />
+            <CheckBox
+                x:Name="AutoAdvanceCheckBox"
+                x:Uid="AutoAdvanceCheckBox"
+                AutomationProperties.AutomationId="AutoAdvanceCheckBox"
+                IsEnabled="False" />
+            <CheckBox
+                x:Name="BlinkCursorCheckBox"
+                x:Uid="BlinkCursorCheckBox"
+                AutomationProperties.AutomationId="BlinkCursorCheckBox"
+                IsEnabled="False" />
+            <CheckBox
+                x:Name="SetCursorPositionCheckBox"
+                x:Uid="SetCursorPositionCheckBox"
+                AutomationProperties.AutomationId="SetCursorPositionCheckBox"
+                IsEnabled="False" />
+            <Grid
+                ColumnSpacing="12"
+                RowSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    x:Name="CursorPositionXTextBox"
+                    x:Uid="CursorPositionXTextBox"
+                    AutomationProperties.AutomationId="CursorPositionXTextBox" />
+                <TextBox
+                    x:Name="CursorPositionYTextBox"
+                    x:Uid="CursorPositionYTextBox"
+                    Grid.Column="1"
+                    AutomationProperties.AutomationId="CursorPositionYTextBox" />
+            </Grid>
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="UpdateButton"
+                    x:Uid="UpdateCursorButton"
+                    AutomationProperties.AutomationId="UpdateCursorButton"
+                    Click="UpdateButton_Click"
+                    IsEnabled="False" />
+                <Button
+                    x:Name="DisplayTextButton"
+                    x:Uid="DisplayCursorTextButton"
+                    AutomationProperties.AutomationId="DisplayCursorTextButton"
+                    Click="DisplayTextButton_Click"
+                    IsEnabled="False" />
+                <Button
+                    x:Name="ResetButton"
+                    x:Uid="ResetCursorButton"
+                    AutomationProperties.AutomationId="ResetCursorButton"
+                    Click="ResetButton_Click"
+                    IsEnabled="False" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
