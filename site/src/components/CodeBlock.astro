@@ -1,0 +1,47 @@
+---
+import { codeToHtml } from "shiki";
+
+interface Props {
+  code: string;
+  language?: string;
+  label: string;
+}
+
+const { code, language = "powershell", label } = Astro.props;
+const html = await codeToHtml(code, {
+  lang: language,
+  themes: {
+    light: "github-light",
+    dark: "github-dark",
+  },
+  defaultColor: false,
+});
+---
+
+<div class="code-block">
+  <div class="code-block-label">{label}</div>
+  <div set:html={html}></div>
+</div>
+
+<style>
+  .code-block {
+    overflow: hidden;
+    border-radius: var(--site-radius-medium);
+    box-shadow: var(--site-shadow-card);
+  }
+
+  .code-block-label {
+    padding: var(--site-space-2) var(--site-space-4);
+    border: 1px solid var(--site-color-border-subtle);
+    border-bottom: 0;
+    border-radius: var(--site-radius-medium) var(--site-radius-medium) 0 0;
+    background: var(--site-color-canvas-subtle);
+    color: var(--site-color-text-secondary);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .code-block :global(.astro-code) {
+    border-radius: 0 0 var(--site-radius-medium) var(--site-radius-medium);
+  }
+</style>

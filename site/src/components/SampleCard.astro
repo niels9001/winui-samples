@@ -1,0 +1,121 @@
+---
+import { SampleIcon } from "./SampleIcon";
+import type { CatalogCategory, CatalogSample } from "../lib/catalog";
+import { sitePath } from "../lib/urls";
+
+interface Props {
+  sample: CatalogSample;
+  category?: CatalogCategory;
+}
+
+const { sample, category } = Astro.props;
+---
+
+<article class="sample-card surface">
+  <div class="sample-icon">
+    <SampleIcon name={sample.icon} />
+  </div>
+  <div class="stack sample-content">
+    <div class="cluster sample-meta">
+      {category && <span class="badge">{category.label}</span>}
+      <span>{sample.scenarios.length} scenarios</span>
+    </div>
+    <div class="stack sample-heading">
+      <h3>
+        <a href={sitePath(`/samples/${sample.id}/`)}>{sample.title}</a>
+      </h3>
+      <p class="technical-name">Project: {sample.project.name}</p>
+    </div>
+    <p class="sample-summary">{sample.summary}</p>
+    <a class="sample-link" href={sitePath(`/samples/${sample.id}/`)}>
+      View sample overview <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .sample-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--site-space-4);
+    padding: var(--site-space-5);
+    transition:
+      border-color 120ms ease,
+      transform 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .sample-card:hover {
+    border-color: var(--site-color-brand);
+    box-shadow: var(--site-shadow-flyout);
+    transform: translateY(-2px);
+  }
+
+  .sample-icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: var(--site-radius-medium);
+    background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-size: 1.45rem;
+  }
+
+  .sample-content {
+    --stack-space: var(--site-space-3);
+    min-width: 0;
+  }
+
+  .sample-meta {
+    --cluster-space: var(--site-space-2);
+    color: var(--site-color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  .sample-heading {
+    --stack-space: var(--site-space-1);
+  }
+
+  h3 a {
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  h3 a::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+
+  .sample-card {
+    position: relative;
+  }
+
+  .sample-summary {
+    color: var(--site-color-text-secondary);
+  }
+
+  .sample-link {
+    width: fit-content;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .sample-link,
+  .sample-meta,
+  .sample-heading,
+  .sample-summary {
+    position: relative;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sample-card {
+      transition: none;
+    }
+
+    .sample-card:hover {
+      transform: none;
+    }
+  }
+</style>

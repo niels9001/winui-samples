@@ -1,0 +1,88 @@
+---
+import AppShell from "../../components/AppShell.astro";
+import CoverageNotice from "../../components/CoverageNotice.astro";
+import EmptyCatalogState from "../../components/EmptyCatalogState.astro";
+import SampleCard from "../../components/SampleCard.astro";
+import { categoryById } from "../../lib/catalog";
+import { catalog } from "../../lib/catalog-data";
+
+const categories = categoryById(catalog);
+---
+
+<AppShell
+  title="Browse Windows app samples"
+  description="Browse metadata-backed WinUI 3 and Windows App SDK samples by the experience they help you build."
+  activeNav="samples"
+>
+  <section class="page-intro">
+    <div class="site-container stack intro-content">
+      <p class="eyebrow">Browse samples</p>
+      <h1>Find the Windows experience you want to build</h1>
+      <p>
+        Intent-led titles make the outcome clear. The original project name
+        remains visible for source navigation and migration history.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="catalog-title">
+    <div class="site-container stack catalog-layout">
+      <CoverageNotice coverage={catalog.coverage} />
+      <div class="catalog-heading cluster">
+        <h2 id="catalog-title">Published samples</h2>
+        <span class="badge">
+          {catalog.samples.length} {catalog.samples.length === 1 ? "sample" : "samples"}
+        </span>
+      </div>
+      {
+        catalog.samples.length > 0 ? (
+          <div class="responsive-grid" role="list">
+            {catalog.samples.map((sample) => (
+              <div role="listitem">
+                <SampleCard
+                  sample={sample}
+                  category={categories.get(sample.categories.primary)}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyCatalogState />
+        )
+      }
+    </div>
+  </section>
+</AppShell>
+
+<style>
+  .page-intro {
+    padding-block: clamp(3.5rem, 8vw, 6.5rem);
+    border-bottom: 1px solid var(--site-color-border-subtle);
+    background: var(--site-color-canvas-subtle);
+  }
+
+  .intro-content {
+    --stack-space: var(--site-space-4);
+    max-width: 58rem;
+    margin-inline: 0;
+  }
+
+  .intro-content h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+  }
+
+  .intro-content > p:last-child {
+    max-width: var(--site-reading-width);
+    color: var(--site-color-text-secondary);
+    font-size: 1.08rem;
+  }
+
+  .catalog-layout {
+    --stack-space: var(--site-space-6);
+  }
+
+  .catalog-heading {
+    --cluster-space: var(--site-space-3);
+    justify-content: space-between;
+  }
+</style>

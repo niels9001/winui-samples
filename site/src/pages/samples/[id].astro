@@ -1,0 +1,396 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import AppShell from "../../components/AppShell.astro";
+import CoverageNotice from "../../components/CoverageNotice.astro";
+import type { CatalogSample } from "../../lib/catalog";
+import { categoryById } from "../../lib/catalog";
+import { catalog } from "../../lib/catalog-data";
+import { sitePath } from "../../lib/urls";
+
+interface Props {
+  sample: CatalogSample;
+}
+
+export const getStaticPaths = (() =>
+  catalog.samples.map((sample) => ({
+    params: { id: sample.id },
+    props: { sample },
+  }))) satisfies GetStaticPaths;
+
+const { sample } = Astro.props;
+const categories = categoryById(catalog);
+const primaryCategory = categories.get(sample.categories.primary);
+const repositoryUrl = `https://github.com/niels9001/winui-samples/tree/main/${sample.project.repositoryPath}`;
+---
+
+<AppShell
+  title={`${sample.title} | Windows app samples`}
+  description={sample.summary}
+  activeNav="samples"
+>
+  <section class="detail-header">
+    <div class="site-container stack detail-heading">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+          <li><a href={sitePath("/")}>Home</a></li>
+          <li><a href={sitePath("/samples/")}>Samples</a></li>
+          <li aria-current="page">{sample.project.name}</li>
+        </ol>
+      </nav>
+      <div class="cluster detail-meta">
+        {primaryCategory && <span class="badge">{primaryCategory.label}</span>}
+        <span>{sample.scenarios.length} scenarios</span>
+      </div>
+      <h1>{sample.title}</h1>
+      <p class="technical-name">Project: {sample.project.name}</p>
+      <p class="detail-summary">{sample.summary}</p>
+      <div class="cluster">
+        <a class="button-link" href={repositoryUrl}>View source on GitHub</a>
+        {
+          sample.documentation[0] && (
+            <a
+              class="button-link button-link--secondary"
+              href={sample.documentation[0].url}
+            >
+              Read the primary documentation
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="site-container detail-layout">
+    <div class="stack detail-main" aria-label="Sample overview">
+      <CoverageNotice coverage={catalog.coverage} />
+      <section class="stack detail-section" aria-labelledby="scenarios-title">
+        <div class="stack section-copy">
+          <p class="eyebrow">What it demonstrates</p>
+          <h2 id="scenarios-title">Scenarios</h2>
+          <p class="secondary-text">
+            This foundation exposes the authored scenario contract. Rich code
+            browsing and guided walkthroughs will build on it later.
+          </p>
+        </div>
+        <ol class="scenario-list">
+          {
+            sample.scenarios.map((scenario) => (
+              <li>
+                <span>{scenario.title}</span>
+                {scenario.sourceFiles?.[0] && (
+                  <code>{scenario.sourceFiles[0]}</code>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section
+        class="stack detail-section"
+        aria-labelledby="package-prerequisites-title"
+      >
+        <div class="stack section-copy">
+          <p class="eyebrow">Package and environment</p>
+          <h2 id="package-prerequisites-title">
+            Declarations and prerequisites
+          </h2>
+          <p class="secondary-text">
+            Manifest declarations are reported separately from hardware and
+            service prerequisites so incidental capabilities do not imply a
+            feature requirement.
+          </p>
+        </div>
+        <div class="prerequisite-grid">
+          <article class="surface prerequisite-card stack">
+            <h3>Declared package capabilities</h3>
+            {
+              sample.requirements.capabilities.length > 0 ? (
+                <ul class="capability-list">
+                  {sample.requirements.capabilities.map((capability) => (
+                    <li>
+                      <code>{capability.name}</code>
+                      <p>{capability.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="secondary-text">
+                  No package capabilities are declared.
+                </p>
+              )
+            }
+          </article>
+          <article class="surface prerequisite-card stack">
+            <h3>Hardware and account/service prerequisites</h3>
+            {
+              sample.requirements.hardware.length === 0 &&
+              sample.requirements.accountServices.length === 0 ? (
+                <p class="secondary-text">
+                  No additional hardware or account/service prerequisites.
+                </p>
+              ) : (
+                <dl class="prerequisite-list">
+                  {sample.requirements.hardware.length > 0 && (
+                    <div>
+                      <dt>Hardware</dt>
+                      <dd>{sample.requirements.hardware.join(", ")}</dd>
+                    </div>
+                  )}
+                  {sample.requirements.accountServices.length > 0 && (
+                    <div>
+                      <dt>Accounts and services</dt>
+                      <dd>{sample.requirements.accountServices.join(", ")}</dd>
+                    </div>
+                  )}
+                </dl>
+              )
+            }
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <aside class="sample-facts surface stack" aria-labelledby="facts-title">
+      <h2 id="facts-title">Sample facts</h2>
+      <dl>
+        <div>
+          <dt>Minimum Windows version</dt>
+          <dd>{sample.requirements.minimumWindowsVersion}</dd>
+        </div>
+        <div>
+          <dt>Architectures</dt>
+          <dd>{sample.requirements.supportedArchitectures.join(", ")}</dd>
+        </div>
+        <div>
+          <dt>Featured files</dt>
+          <dd>{sample.featuredFiles.length}</dd>
+        </div>
+      </dl>
+      <div class="stack tags">
+        <h3>Topics</h3>
+        <div class="cluster">
+          {sample.tags.map((tag) => <span class="badge">{tag}</span>)}
+        </div>
+      </div>
+    </aside>
+  </div>
+</AppShell>
+
+<style>
+  .detail-header {
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-bottom: 1px solid var(--site-color-border-subtle);
+    background: var(--site-color-canvas-subtle);
+  }
+
+  .detail-heading {
+    --stack-space: var(--site-space-4);
+    max-width: 60rem;
+  }
+
+  .detail-heading h1 {
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+  }
+
+  .detail-summary {
+    max-width: var(--site-reading-width);
+    color: var(--site-color-text-secondary);
+    font-size: 1.15rem;
+  }
+
+  .detail-meta {
+    color: var(--site-color-text-muted);
+    font-size: 0.86rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-2);
+    padding: 0;
+    color: var(--site-color-text-muted);
+    font-size: 0.86rem;
+    list-style: none;
+  }
+
+  .breadcrumb li:not(:last-child)::after {
+    margin-left: var(--site-space-2);
+    content: "/";
+  }
+
+  .detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    gap: var(--site-space-7);
+    padding-block: var(--site-space-7);
+  }
+
+  .detail-main {
+    --stack-space: var(--site-space-7);
+    min-width: 0;
+  }
+
+  .detail-section {
+    --stack-space: var(--site-space-5);
+  }
+
+  .section-copy {
+    --stack-space: var(--site-space-3);
+    max-width: var(--site-reading-width);
+  }
+
+  .scenario-list {
+    display: grid;
+    gap: var(--site-space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .scenario-list li {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.8fr) minmax(0, 1fr);
+    gap: var(--site-space-4);
+    align-items: baseline;
+    padding: var(--site-space-3) var(--site-space-4);
+    border-bottom: 1px solid var(--site-color-border-subtle);
+  }
+
+  .scenario-list span {
+    font-weight: 650;
+  }
+
+  .scenario-list code {
+    overflow: hidden;
+    color: var(--site-color-text-muted);
+    font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+  }
+
+  .prerequisite-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .prerequisite-card {
+    --stack-space: var(--site-space-4);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .prerequisite-card h3 {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .capability-list {
+    display: grid;
+    gap: var(--site-space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .capability-list li {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .capability-list code {
+    width: fit-content;
+    color: var(--site-color-text);
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+
+  .capability-list p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.88rem;
+  }
+
+  .prerequisite-list {
+    display: grid;
+    gap: var(--site-space-4);
+  }
+
+  .prerequisite-list div {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .prerequisite-list dt {
+    color: var(--site-color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .prerequisite-list dd {
+    margin: 0;
+  }
+
+  .sample-facts {
+    --stack-space: var(--site-space-5);
+    position: sticky;
+    top: 7rem;
+    height: fit-content;
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .sample-facts h2 {
+    font-size: 1.35rem;
+  }
+
+  .sample-facts dl {
+    display: grid;
+    gap: var(--site-space-4);
+  }
+
+  .sample-facts dl div {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .sample-facts dt {
+    color: var(--site-color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .sample-facts dd {
+    margin: 0;
+  }
+
+  .tags {
+    --stack-space: var(--site-space-2);
+  }
+
+  .tags h3 {
+    font-size: 0.9rem;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 52rem) {
+    .detail-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sample-facts {
+      position: static;
+      grid-row: 1;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .prerequisite-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .scenario-list li {
+      grid-template-columns: 1fr;
+      gap: var(--site-space-1);
+    }
+  }
+</style>

@@ -51,6 +51,8 @@ Thumbs.db
 # Node tooling
 node_modules/
 .pnpm-store/
+/site/.astro/
+/site/dist/
 
 # Generated sample catalog
 /site/src/generated/sample-catalog.json

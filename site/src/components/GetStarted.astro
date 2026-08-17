@@ -1,0 +1,121 @@
+---
+import { BookOpenRegular } from "@fluentui/react-icons/svg/book-open";
+import { CodeRegular } from "@fluentui/react-icons/svg/code";
+import { PeopleCommunityRegular } from "@fluentui/react-icons/svg/people-community";
+import { ToolboxRegular } from "@fluentui/react-icons/svg/toolbox";
+
+import CodeBlock from "./CodeBlock.astro";
+import { getStartedResources } from "../data/get-started";
+
+const resourceIcons = {
+  "windows-app-sdk": ToolboxRegular,
+  "windows-app-development": BookOpenRegular,
+  contributing: PeopleCommunityRegular,
+  "winui-skills": CodeRegular,
+} as const;
+
+const quickStart = `git clone https://github.com/niels9001/winui-samples.git
+cd winui-samples\\Samples\\FileAccess
+dotnet build -c Debug -p:Platform=x64`;
+---
+
+<section class="section" id="get-started" aria-labelledby="get-started-title">
+  <div class="site-container">
+    <div class="section-header">
+      <p class="eyebrow">Get started</p>
+      <h2 id="get-started-title">Build on the Windows App SDK</h2>
+      <p class="secondary-text">
+        Use the platform guidance, repository conventions, and focused WinUI
+        tooling behind these samples.
+      </p>
+    </div>
+    <div class="get-started-layout">
+      <div class="resource-grid">
+        {
+          getStartedResources.map((resource) => {
+            const Icon = resourceIcons[resource.id];
+            return (
+              <article class="resource-card surface stack">
+                <Icon aria-hidden="true" className="resource-icon" />
+                <h3>{resource.title}</h3>
+                <p>{resource.description}</p>
+                <a href={resource.href}>
+                  {resource.linkLabel} <span aria-hidden="true">↗</span>
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+      <div class="quick-start stack">
+        <div class="stack" style="--stack-space: var(--site-space-2)">
+          <p class="eyebrow">Try the pilot</p>
+          <h3>Build the FileAccess sample</h3>
+          <p class="secondary-text">
+            Clone the repository and build the metadata-backed pilot on Windows.
+          </p>
+        </div>
+        <CodeBlock code={quickStart} label="PowerShell" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .get-started-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
+    gap: var(--site-space-6);
+    align-items: start;
+  }
+
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .resource-card {
+    --stack-space: var(--site-space-3);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .resource-card :global(.resource-icon) {
+    color: var(--site-color-brand);
+    font-size: 1.5rem;
+  }
+
+  .resource-card p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.92rem;
+  }
+
+  .resource-card a {
+    margin-top: auto;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .quick-start {
+    --stack-space: var(--site-space-4);
+    position: sticky;
+    top: 7rem;
+  }
+
+  @media (max-width: 58rem) {
+    .get-started-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .quick-start {
+      position: static;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .resource-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
