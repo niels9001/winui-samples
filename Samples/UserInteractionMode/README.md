@@ -25,6 +25,14 @@ The sample retains the upstream scenario:
 - [IUIViewSettingsInterop interface](https://learn.microsoft.com/windows/win32/api/uiviewsettingsinterop/nn-uiviewsettingsinterop-iuiviewsettingsinterop)
 - [Call interop APIs from a .NET app](https://learn.microsoft.com/windows/apps/desktop/modernize/winrt-com-interop-csharp)
 
+## Prerequisites and capabilities
+
+- The interop interface requires Windows build 20348 or later; the project and package set
+  Windows 11 build 22000 as their minimum.
+- Any supported desktop can show its current mode. Compatible convertible hardware is needed
+  to observe Windows report `Touch` or change modes through device posture.
+- The package declares only the restricted `runFullTrust` capability.
+
 ## Build & run
 
 ```powershell
