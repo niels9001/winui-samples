@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Magnetic stripe reader</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Read bank cards and motor vehicle cards with a point-of-service magnetic stripe reader.</value>
+  </data>
+  <data name="NavigationItemFormat" xml:space="preserve">
+    <value>{0}) {1}</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="ScenarioBankCardsTitle" xml:space="preserve">
+    <value>Reading bank cards</value>
+  </data>
+  <data name="ScenarioAamvaCardsTitle" xml:space="preserve">
+    <value>Reading AAMVA cards</value>
+  </data>
+  <data name="ScenarioNavigationView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Magnetic stripe reader scenarios</value>
+  </data>
+  <data name="BankCardsHeading.Text" xml:space="preserve">
+    <value>Read bank-card data</value>
+  </data>
+  <data name="BankCardsDescription.Text" xml:space="preserve">
+    <value>Acquire and claim the first available magnetic stripe reader, then display decoded bank-card fields when a card is swiped.</value>
+  </data>
+  <data name="AamvaCardsHeading.Text" xml:space="preserve">
+    <value>Read AAMVA card data</value>
+  </data>
+  <data name="AamvaCardsDescription.Text" xml:space="preserve">
+    <value>Acquire and claim the first available magnetic stripe reader, then display decoded AAMVA motor-vehicle-card fields when a card is swiped.</value>
+  </data>
+  <data name="StartReadingButton.Content" xml:space="preserve">
+    <value>Start receiving data</value>
+  </data>
+  <data name="StartReadingButton.AccessKey" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="StartReadingButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Start receiving magnetic stripe reader data</value>
+  </data>
+  <data name="EndReadingButton.Content" xml:space="preserve">
+    <value>End receiving data</value>
+  </data>
+  <data name="EndReadingButton.AccessKey" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="EndReadingButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>End receiving magnetic stripe reader data</value>
+  </data>
+  <data name="BankCardFields.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bank-card data fields</value>
+  </data>
+  <data name="AamvaCardFields.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>AAMVA card data fields</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="AccountNumberLabel" xml:space="preserve">
+    <value>Account number:</value>
+  </data>
+  <data name="ExpirationDateLabel" xml:space="preserve">
+    <value>Expiration date:</value>
+  </data>
+  <data name="FirstNameLabel" xml:space="preserve">
+    <value>First name:</value>
+  </data>
+  <data name="MiddleInitialLabel" xml:space="preserve">
+    <value>Middle initial:</value>
+  </data>
+  <data name="ServiceCodeLabel" xml:space="preserve">
+    <value>Service code:</value>
+  </data>
+  <data name="SuffixLabel" xml:space="preserve">
+    <value>Suffix:</value>
+  </data>
+  <data name="SurnameLabel" xml:space="preserve">
+    <value>Surname:</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="AddressLabel" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="BirthDateLabel" xml:space="preserve">
+    <value>Birth date:</value>
+  </data>
+  <data name="CityLabel" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="ClassLabel" xml:space="preserve">
+    <value>Class:</value>
+  </data>
+  <data name="EndorsementsLabel" xml:space="preserve">
+    <value>Endorsements:</value>
+  </data>
+  <data name="EyeColorLabel" xml:space="preserve">
+    <value>Eye color:</value>
+  </data>
+  <data name="GenderLabel" xml:space="preserve">
+    <value>Gender:</value>
+  </data>
+  <data name="HairColorLabel" xml:space="preserve">
+    <value>Hair color:</value>
+  </data>
+  <data name="HeightLabel" xml:space="preserve">
+    <value>Height:</value>
+  </data>
+  <data name="LicenseNumberLabel" xml:space="preserve">
+    <value>License number:</value>
+  </data>
+  <data name="PostalCodeLabel" xml:space="preserve">
+    <value>Postal code:</value>
+  </data>
+  <data name="RestrictionsLabel" xml:space="preserve">
+    <value>Restrictions:</value>
+  </data>
+  <data name="StateLabel" xml:space="preserve">
+    <value>State:</value>
+  </data>
+  <data name="WeightLabel" xml:space="preserve">
+    <value>Weight:</value>
+  </data>
+  <data name="StartReadingInstruction" xml:space="preserve">
+    <value>Select Start receiving data to acquire the first available reader.</value>
+  </data>
+  <data name="SearchingForReader" xml:space="preserve">
+    <value>Searching for a magnetic stripe reader.</value>
+  </data>
+  <data name="ReaderNotFound" xml:space="preserve">
+    <value>No magnetic stripe reader was found. Connect a compatible reader and try again.</value>
+  </data>
+  <data name="ClaimReaderFailed" xml:space="preserve">
+    <value>The magnetic stripe reader could not be claimed.</value>
+  </data>
+  <data name="ReadyToSwipeFormat" xml:space="preserve">
+    <value>Ready to swipe. Device ID: {0}</value>
+  </data>
+  <data name="CardDataReceived" xml:space="preserve">
+    <value>Card data received.</value>
+  </data>
+  <data name="ReaderClaimRetained" xml:space="preserve">
+    <value>A release request was received, and the reader claim was retained.</value>
+  </data>
+  <data name="StartingReaderOperation" xml:space="preserve">
+    <value>Starting the magnetic stripe reader</value>
+  </data>
+  <data name="RetainingReaderOperation" xml:space="preserve">
+    <value>Retaining the magnetic stripe reader claim</value>
+  </data>
+</root>

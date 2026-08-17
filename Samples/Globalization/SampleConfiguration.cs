@@ -46,6 +46,17 @@ namespace SDKTemplate
                 new Scenario { Title = "Fonts for UI", ClassType = typeof(Scenario1_UIFonts) },
                 new Scenario { Title = "Fonts for documents", ClassType = typeof(Scenario2_DocumentFonts) },
             }),
+            new FeatureGroup("Globalization preferences", new()
+            {
+                new Scenario { Title = "User preferences", ClassType = typeof(Scenario1_Prefs) },
+                new Scenario { Title = "Language characteristics", ClassType = typeof(Scenario2_Lang) },
+                new Scenario { Title = "Region characteristics", ClassType = typeof(Scenario3_Region) },
+                new Scenario { Title = "Current input language", ClassType = typeof(Scenario4_Input) },
+            }),
+            new FeatureGroup("Japanese phonetic analysis", new()
+            {
+                new Scenario { Title = "Analyze Japanese text", ClassType = typeof(Scenario1_AnalyzeJapanese) },
+            }),
             new FeatureGroup("Text suggestion", new()
             {
                 new Scenario { Title = "Conversion", ClassType = typeof(Scenario1_Conversion) },

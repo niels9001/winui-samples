@@ -1,0 +1,38 @@
+<Page
+    x:Class="SDKTemplate.RemoveFolderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="720"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Remove a Pictures library folder" />
+            <TextBlock
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Select a folder and request its removal from the Pictures library definition. This does not delete the folder or its files."
+                TextWrapping="Wrap" />
+            <ComboBox
+                x:Name="FoldersComboBox"
+                MinWidth="360"
+                DisplayMemberPath="DisplayName"
+                PlaceholderText="No removable folders" />
+            <Button
+                x:Name="RemoveFolderButton"
+                HorizontalAlignment="Left"
+                Click="RemoveFolderButton_Click"
+                Content="Remove folder"
+                IsEnabled="False" />
+            <TextBlock
+                x:Name="OutputText"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

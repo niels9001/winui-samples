@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SerialArduino (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SerialArduino (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

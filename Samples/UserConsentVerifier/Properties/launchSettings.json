@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "UserConsentVerifier (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "UserConsentVerifier (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<Page
+    x:Class="SDKTemplate.Scenarios.StartListenerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="760"
+            Margin="28"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="Start StreamSocketListener" />
+            <TextBlock
+                MaxWidth="680"
+                Text="Create a TCP listener, then choose whether it accepts connections on every local address, one address, or one network adapter."
+                TextWrapping="Wrap" />
+            <InfoBar
+                IsClosable="False"
+                IsOpen="True"
+                Message="Run this scenario first. The listener remains available while you use scenarios 2 and 3."
+                Severity="Informational"
+                Title="TCP workflow" />
+
+            <TextBox
+                x:Name="ServiceNameTextBox"
+                Width="260"
+                HorizontalAlignment="Left"
+                AutomationProperties.AutomationId="ListenerServiceNameTextBox"
+                Header="Service name or TCP port"
+                Text="22112" />
+
+            <RadioButtons
+                x:Name="BindModeRadioButtons"
+                Header="Bind listener to"
+                SelectedIndex="0"
+                SelectionChanged="BindModeRadioButtons_SelectionChanged">
+                <x:String>Any local address</x:String>
+                <x:String>A specific local address</x:String>
+                <x:String>A specific network adapter</x:String>
+            </RadioButtons>
+
+            <ComboBox
+                x:Name="LocalHostsComboBox"
+                MinWidth="520"
+                HorizontalAlignment="Left"
+                AutomationProperties.AutomationId="LocalHostsComboBox"
+                DisplayMemberPath="DisplayName"
+                Header="Local address"
+                IsEnabled="False"
+                PlaceholderText="Select a local address" />
+
+            <Button
+                x:Name="StartListenerButton"
+                AutomationProperties.AutomationId="StartListenerButton"
+                Click="StartListenerButton_Click"
+                Content="Start listener"
+                Style="{StaticResource AccentButtonStyle}" />
+
+            <TextBlock
+                x:Name="ListenerStateTextBlock"
+                FontWeight="SemiBold"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

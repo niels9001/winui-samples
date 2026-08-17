@@ -1,0 +1,36 @@
+<Page
+    x:Class="SDKTemplate.Scenario1_Check"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Check capability and set display message" />
+            <TextBlock
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="An app can check whether a declared capability is available and react when its access status changes. While location is in use, the app sets a display message that explains why the resource is being accessed."
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="LocationAccessBlock"
+                MaxWidth="720"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="LocationTextBlock"
+                MaxWidth="720"
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="StreamLocationButton"
+                Click="StreamLocationButton_Click"
+                Content="Stream location for 2 seconds" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

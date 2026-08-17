@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MagneticStripeReader (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MagneticStripeReader (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

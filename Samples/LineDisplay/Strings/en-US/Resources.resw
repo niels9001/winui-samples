@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Line display</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Explore point-of-service line display features.</value>
+  </data>
+  <data name="NavigationItemFormat" xml:space="preserve">
+    <value>{0}) {1}</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="ScenarioSelectDisplayTitle" xml:space="preserve">
+    <value>Selecting a line display</value>
+  </data>
+  <data name="ScenarioDisplayTextTitle" xml:space="preserve">
+    <value>Displaying text</value>
+  </data>
+  <data name="ScenarioWindowsTitle" xml:space="preserve">
+    <value>Using windows to control layout</value>
+  </data>
+  <data name="ScenarioAttributesTitle" xml:space="preserve">
+    <value>Updating line display attributes</value>
+  </data>
+  <data name="ScenarioGlyphsTitle" xml:space="preserve">
+    <value>Defining custom glyphs</value>
+  </data>
+  <data name="ScenarioCursorTitle" xml:space="preserve">
+    <value>Modifying the display cursor</value>
+  </data>
+  <data name="ScenarioMarqueeTitle" xml:space="preserve">
+    <value>Scrolling content using marquee</value>
+  </data>
+  <data name="SelectLineDisplayFirst" xml:space="preserve">
+    <value>Select a line display in the first scenario before using this feature.</value>
+  </data>
+  <data name="UnableToClaimSelectedLineDisplay" xml:space="preserve">
+    <value>The selected line display could not be claimed.</value>
+  </data>
+  <data name="ClaimingLineDisplayOperation" xml:space="preserve">
+    <value>Claiming the selected line display</value>
+  </data>
+  <data name="ScenarioNavigationView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Line display scenarios</value>
+  </data>
+  <data name="SelectDisplayHeading.Text" xml:space="preserve">
+    <value>Select a line display</value>
+  </data>
+  <data name="SelectDisplayDescription.Text" xml:space="preserve">
+    <value>Discover a compatible point-of-service line display, claim it, and clear its current contents. The selected display is used by the remaining scenarios.</value>
+  </data>
+  <data name="DisplaysListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Available line displays</value>
+  </data>
+  <data name="SelectButton.Content" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectButton.AccessKey" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SelectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Select line display</value>
+  </data>
+  <data name="RefreshButton.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RefreshButton.AccessKey" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="RefreshButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh line displays</value>
+  </data>
+  <data name="DisplayTextHeading.Text" xml:space="preserve">
+    <value>Display text</value>
+  </data>
+  <data name="DisplayTextDescription.Text" xml:space="preserve">
+    <value>Display a greeting on the selected line display. Blinking text is available only when the device supports it.</value>
+  </data>
+  <data name="BlinkCheckBox.Content" xml:space="preserve">
+    <value>Use blinking text</value>
+  </data>
+  <data name="BlinkCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Use blinking text</value>
+  </data>
+  <data name="CenterCheckBox.Content" xml:space="preserve">
+    <value>Center the text</value>
+  </data>
+  <data name="CenterCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Center the text</value>
+  </data>
+  <data name="DisplayTextButton.Content" xml:space="preserve">
+    <value>Display text</value>
+  </data>
+  <data name="DisplayTextButton.AccessKey" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="DisplayTextButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Display text</value>
+  </data>
+  <data name="WindowsHeading.Text" xml:space="preserve">
+    <value>Use windows to control layout</value>
+  </data>
+  <data name="WindowsDescription.Text" xml:space="preserve">
+    <value>Create and manipulate line display windows. A new window can be created only when the selected device supports more than its default window.</value>
+  </data>
+  <data name="NewWindowExpander.Header" xml:space="preserve">
+    <value>Create a window</value>
+  </data>
+  <data name="NewWindowExpander.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Create a line display window</value>
+  </data>
+  <data name="ViewportWidthTextBox.Header" xml:space="preserve">
+    <value>Viewport width</value>
+  </data>
+  <data name="ViewportWidthTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Viewport width</value>
+  </data>
+  <data name="ViewportHeightTextBox.Header" xml:space="preserve">
+    <value>Viewport height</value>
+  </data>
+  <data name="ViewportHeightTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Viewport height</value>
+  </data>
+  <data name="ViewportXTextBox.Header" xml:space="preserve">
+    <value>Viewport X</value>
+  </data>
+  <data name="ViewportXTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Viewport X position</value>
+  </data>
+  <data name="ViewportYTextBox.Header" xml:space="preserve">
+    <value>Viewport Y</value>
+  </data>
+  <data name="ViewportYTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Viewport Y position</value>
+  </data>
+  <data name="WindowWidthTextBox.Header" xml:space="preserve">
+    <value>Window width</value>
+  </data>
+  <data name="WindowWidthTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Window width</value>
+  </data>
+  <data name="WindowHeightTextBox.Header" xml:space="preserve">
+    <value>Window height</value>
+  </data>
+  <data name="WindowHeightTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Window height</value>
+  </data>
+  <data name="NewWindowButton.Content" xml:space="preserve">
+    <value>New window</value>
+  </data>
+  <data name="NewWindowButton.AccessKey" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NewWindowButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Create line display window</value>
+  </data>
+  <data name="WindowsListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Line display windows</value>
+  </data>
+  <data name="RefreshWindowButton.Content" xml:space="preserve">
+    <value>Refresh window</value>
+  </data>
+  <data name="RefreshWindowButton.AccessKey" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="RefreshWindowButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh selected window</value>
+  </data>
+  <data name="DestroyWindowButton.Content" xml:space="preserve">
+    <value>Destroy window</value>
+  </data>
+  <data name="DestroyWindowButton.AccessKey" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="DestroyWindowButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Destroy selected window</value>
+  </data>
+  <data name="WindowDisplayTextTextBox.Header" xml:space="preserve">
+    <value>Text to display</value>
+  </data>
+  <data name="WindowDisplayTextTextBox.Text" xml:space="preserve">
+    <value>Sample text</value>
+  </data>
+  <data name="WindowDisplayTextTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Text to display in the selected window</value>
+  </data>
+  <data name="DisplayWindowTextButton.Content" xml:space="preserve">
+    <value>Display text</value>
+  </data>
+  <data name="DisplayWindowTextButton.AccessKey" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="DisplayWindowTextButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Display text in the selected window</value>
+  </data>
+  <data name="AttributesHeading.Text" xml:space="preserve">
+    <value>Update line display attributes</value>
+  </data>
+  <data name="AttributesDescription.Text" xml:space="preserve">
+    <value>Change screen-wide attributes supported by the selected line display. Unsupported controls remain disabled.</value>
+  </data>
+  <data name="BlinkRateSlider.Header" xml:space="preserve">
+    <value>Blink interval in milliseconds</value>
+  </data>
+  <data name="BlinkRateSlider.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Blink interval in milliseconds</value>
+  </data>
+  <data name="BrightnessSlider.Header" xml:space="preserve">
+    <value>Brightness</value>
+  </data>
+  <data name="BrightnessSlider.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Brightness from zero to one hundred</value>
+  </data>
+  <data name="SupportedScreenSizesComboBox.Header" xml:space="preserve">
+    <value>Screen size in characters</value>
+  </data>
+  <data name="SupportedScreenSizesComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Screen size in characters</value>
+  </data>
+  <data name="CharacterSetMappingEnabledCheckBox.Content" xml:space="preserve">
+    <value>Enable character set mapping</value>
+  </data>
+  <data name="CharacterSetMappingEnabledCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Enable character set mapping</value>
+  </data>
+  <data name="UpdateAttributesButton.Content" xml:space="preserve">
+    <value>Update attributes</value>
+  </data>
+  <data name="UpdateAttributesButton.AccessKey" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="UpdateAttributesButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Update line display attributes</value>
+  </data>
+  <data name="GlyphsHeading.Text" xml:space="preserve">
+    <value>Define custom glyphs</value>
+  </data>
+  <data name="GlyphsDescription.Text" xml:space="preserve">
+    <value>Replace a supported built-in glyph with a solid block. This feature is available only on line displays that support custom glyphs.</value>
+  </data>
+  <data name="SupportedGlyphsComboBox.Header" xml:space="preserve">
+    <value>Glyph to replace</value>
+  </data>
+  <data name="SupportedGlyphsComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Glyph to replace</value>
+  </data>
+  <data name="DefineGlyphButton.Content" xml:space="preserve">
+    <value>Change glyph to a solid block</value>
+  </data>
+  <data name="DefineGlyphButton.AccessKey" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="DefineGlyphButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Change selected glyph to a solid block</value>
+  </data>
+  <data name="ResetGlyphsButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ResetGlyphsButton.AccessKey" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="ResetGlyphsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Reset custom glyphs</value>
+  </data>
+  <data name="CursorHeading.Text" xml:space="preserve">
+    <value>Modify the display cursor</value>
+  </data>
+  <data name="CursorDescription.Text" xml:space="preserve">
+    <value>Change the style, blinking behavior, auto advance, and position of the selected line display's cursor. Unsupported controls remain disabled.</value>
+  </data>
+  <data name="CursorTypeComboBox.Header" xml:space="preserve">
+    <value>Cursor type</value>
+  </data>
+  <data name="CursorTypeComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Cursor type</value>
+  </data>
+  <data name="AutoAdvanceCheckBox.Content" xml:space="preserve">
+    <value>Auto advance</value>
+  </data>
+  <data name="AutoAdvanceCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Enable cursor auto advance</value>
+  </data>
+  <data name="BlinkCursorCheckBox.Content" xml:space="preserve">
+    <value>Blink cursor</value>
+  </data>
+  <data name="BlinkCursorCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Enable cursor blinking</value>
+  </data>
+  <data name="SetCursorPositionCheckBox.Content" xml:space="preserve">
+    <value>Set cursor position</value>
+  </data>
+  <data name="SetCursorPositionCheckBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Set cursor position</value>
+  </data>
+  <data name="CursorPositionXTextBox.Header" xml:space="preserve">
+    <value>Cursor X</value>
+  </data>
+  <data name="CursorPositionXTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Cursor X position</value>
+  </data>
+  <data name="CursorPositionYTextBox.Header" xml:space="preserve">
+    <value>Cursor Y</value>
+  </data>
+  <data name="CursorPositionYTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Cursor Y position</value>
+  </data>
+  <data name="UpdateCursorButton.Content" xml:space="preserve">
+    <value>Update cursor</value>
+  </data>
+  <data name="UpdateCursorButton.AccessKey" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="UpdateCursorButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Update cursor attributes</value>
+  </data>
+  <data name="DisplayCursorTextButton.Content" xml:space="preserve">
+    <value>Display text</value>
+  </data>
+  <data name="DisplayCursorTextButton.AccessKey" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="DisplayCursorTextButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Display text at the cursor</value>
+  </data>
+  <data name="ResetCursorButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ResetCursorButton.AccessKey" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="ResetCursorButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Reset cursor</value>
+  </data>
+  <data name="MarqueeHeading.Text" xml:space="preserve">
+    <value>Scroll content using marquee</value>
+  </data>
+  <data name="MarqueeDescription.Text" xml:space="preserve">
+    <value>Scroll text through a line display window. Directions unavailable on the selected device are omitted.</value>
+  </data>
+  <data name="MarqueeFormatComboBox.Header" xml:space="preserve">
+    <value>Marquee format</value>
+  </data>
+  <data name="MarqueeFormatComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Marquee format</value>
+  </data>
+  <data name="ScrollDirectionComboBox.Header" xml:space="preserve">
+    <value>Scroll direction</value>
+  </data>
+  <data name="ScrollDirectionComboBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Scroll direction</value>
+  </data>
+  <data name="RepeatWaitIntervalSlider.Header" xml:space="preserve">
+    <value>Repeat wait interval in milliseconds</value>
+  </data>
+  <data name="RepeatWaitIntervalSlider.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Repeat wait interval in milliseconds</value>
+  </data>
+  <data name="ScrollWaitIntervalSlider.Header" xml:space="preserve">
+    <value>Scroll wait interval in milliseconds</value>
+  </data>
+  <data name="ScrollWaitIntervalSlider.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Scroll wait interval in milliseconds</value>
+  </data>
+  <data name="StartScrollingButton.Content" xml:space="preserve">
+    <value>Start scrolling</value>
+  </data>
+  <data name="StartScrollingButton.AccessKey" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="StartScrollingButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Start marquee scrolling</value>
+  </data>
+  <data name="StopScrollingButton.Content" xml:space="preserve">
+    <value>Stop scrolling</value>
+  </data>
+  <data name="StopScrollingButton.AccessKey" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="StopScrollingButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Stop marquee scrolling</value>
+  </data>
+  <data name="SearchingForLineDisplays" xml:space="preserve">
+    <value>Searching for line displays...</value>
+  </data>
+  <data name="EnumeratingLineDisplaysOperation" xml:space="preserve">
+    <value>Enumerating line displays</value>
+  </data>
+  <data name="NoLineDisplaysFound" xml:space="preserve">
+    <value>No line displays were found. Connect a compatible point-of-service display and select Refresh.</value>
+  </data>
+  <data name="LineDisplaysFoundFormat" xml:space="preserve">
+    <value>Found {0} line display(s).</value>
+  </data>
+  <data name="SelectedLineDisplayDisconnected" xml:space="preserve">
+    <value>The selected line display was disconnected.</value>
+  </data>
+  <data name="SelectDeviceFromList" xml:space="preserve">
+    <value>Select a line display from the list.</value>
+  </data>
+  <data name="UnableToClaimLineDisplay" xml:space="preserve">
+    <value>The line display could not be claimed.</value>
+  </data>
+  <data name="UnableToClearLineDisplay" xml:space="preserve">
+    <value>The line display was claimed but could not be cleared.</value>
+  </data>
+  <data name="SelectedLineDisplayFormat" xml:space="preserve">
+    <value>Selected: {0}</value>
+  </data>
+  <data name="SelectingLineDisplayOperation" xml:space="preserve">
+    <value>Selecting the line display</value>
+  </data>
+  <data name="LineDisplayReady" xml:space="preserve">
+    <value>The selected line display is ready.</value>
+  </data>
+  <data name="ReadingCapabilitiesOperation" xml:space="preserve">
+    <value>Reading line display capabilities</value>
+  </data>
+  <data name="GreetingText" xml:space="preserve">
+    <value>Hello from WinUI 3</value>
+  </data>
+  <data name="TextDisplayed" xml:space="preserve">
+    <value>Text displayed successfully.</value>
+  </data>
+  <data name="UnableToDisplayText" xml:space="preserve">
+    <value>The text could not be displayed.</value>
+  </data>
+  <data name="DisplayingTextOperation" xml:space="preserve">
+    <value>Displaying text</value>
+  </data>
+  <data name="ViewportSizeMustBePositive" xml:space="preserve">
+    <value>The viewport width and height must be positive whole numbers.</value>
+  </data>
+  <data name="ViewportMustFitScreen" xml:space="preserve">
+    <value>The viewport must fit within the line display screen.</value>
+  </data>
+  <data name="WindowSizeMustBePositive" xml:space="preserve">
+    <value>The window width and height must be positive whole numbers.</value>
+  </data>
+  <data name="WindowMustContainViewport" xml:space="preserve">
+    <value>The window must be at least as large as its viewport.</value>
+  </data>
+  <data name="VerticalMarqueeNotSupported" xml:space="preserve">
+    <value>This line display does not support a window taller than its viewport.</value>
+  </data>
+  <data name="HorizontalMarqueeNotSupported" xml:space="preserve">
+    <value>This line display does not support a window wider than its viewport.</value>
+  </data>
+  <data name="TwoDimensionalScrollingNotSupported" xml:space="preserve">
+    <value>A window cannot exceed its viewport in both dimensions.</value>
+  </data>
+  <data name="UnableToCreateWindow" xml:space="preserve">
+    <value>The line display window could not be created.</value>
+  </data>
+  <data name="WindowCreatedFormat" xml:space="preserve">
+    <value>Created window {0}.</value>
+  </data>
+  <data name="CreatingWindowOperation" xml:space="preserve">
+    <value>Creating a line display window</value>
+  </data>
+  <data name="WindowRefreshedFormat" xml:space="preserve">
+    <value>Refreshed window {0}.</value>
+  </data>
+  <data name="WindowRefreshFailedFormat" xml:space="preserve">
+    <value>Window {0} could not be refreshed.</value>
+  </data>
+  <data name="RefreshingWindowOperation" xml:space="preserve">
+    <value>Refreshing the line display window</value>
+  </data>
+  <data name="WindowDestroyedFormat" xml:space="preserve">
+    <value>Destroyed window {0}.</value>
+  </data>
+  <data name="DestroyingWindowOperation" xml:space="preserve">
+    <value>Destroying the line display window</value>
+  </data>
+  <data name="WindowTextDisplayedFormat" xml:space="preserve">
+    <value>Displayed text in window {0}.</value>
+  </data>
+  <data name="WindowTextDisplayFailedFormat" xml:space="preserve">
+    <value>Text could not be displayed in window {0}.</value>
+  </data>
+  <data name="DisplayingWindowTextOperation" xml:space="preserve">
+    <value>Displaying text in the line display window</value>
+  </data>
+  <data name="DefaultWindowNameFormat" xml:space="preserve">
+    <value>Window {0} (default)</value>
+  </data>
+  <data name="WindowNameFormat" xml:space="preserve">
+    <value>Window {0}</value>
+  </data>
+  <data name="ReadingAttributesOperation" xml:space="preserve">
+    <value>Reading line display attributes</value>
+  </data>
+  <data name="ScreenSizeFormat" xml:space="preserve">
+    <value>{0} x {1} characters</value>
+  </data>
+  <data name="AttributeSampleText" xml:space="preserve">
+    <value>Blinking text</value>
+  </data>
+  <data name="SelectScreenSize" xml:space="preserve">
+    <value>Select a supported screen size.</value>
+  </data>
+  <data name="AttributesUpdated" xml:space="preserve">
+    <value>Line display attributes were updated.</value>
+  </data>
+  <data name="AttributesUpdateFailed" xml:space="preserve">
+    <value>The line display attributes could not be updated.</value>
+  </data>
+  <data name="UpdatingAttributesOperation" xml:space="preserve">
+    <value>Updating line display attributes</value>
+  </data>
+  <data name="CustomGlyphsNotSupported" xml:space="preserve">
+    <value>The selected line display does not support custom glyphs.</value>
+  </data>
+  <data name="GlyphSampleText" xml:space="preserve">
+    <value>ABC</value>
+  </data>
+  <data name="GlyphCodeFormat" xml:space="preserve">
+    <value>Code {0}</value>
+  </data>
+  <data name="GlyphCodeWithCharacterFormat" xml:space="preserve">
+    <value>Code {0} (UTF-32 '{1}')</value>
+  </data>
+  <data name="ReadingCustomGlyphsOperation" xml:space="preserve">
+    <value>Reading custom glyph capabilities</value>
+  </data>
+  <data name="SelectGlyph" xml:space="preserve">
+    <value>Select a glyph to redefine.</value>
+  </data>
+  <data name="GlyphRedefinedFormat" xml:space="preserve">
+    <value>Redefined glyph {0}.</value>
+  </data>
+  <data name="GlyphRedefinitionFailed" xml:space="preserve">
+    <value>The glyph could not be redefined and refreshed.</value>
+  </data>
+  <data name="RedefiningGlyphOperation" xml:space="preserve">
+    <value>Redefining the custom glyph</value>
+  </data>
+  <data name="ReadingCursorOperation" xml:space="preserve">
+    <value>Reading cursor attributes</value>
+  </data>
+  <data name="CursorTypeBlock" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="CursorTypeHalfBlock" xml:space="preserve">
+    <value>Half block</value>
+  </data>
+  <data name="CursorTypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="CursorTypeReverse" xml:space="preserve">
+    <value>Reverse</value>
+  </data>
+  <data name="CursorTypeUnderline" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="CursorPositionOutsideWindow" xml:space="preserve">
+    <value>The cursor position must be within the selected window.</value>
+  </data>
+  <data name="CursorUpdated" xml:space="preserve">
+    <value>The cursor was updated.</value>
+  </data>
+  <data name="CursorUpdateFailed" xml:space="preserve">
+    <value>The cursor could not be updated.</value>
+  </data>
+  <data name="UpdatingCursorOperation" xml:space="preserve">
+    <value>Updating the display cursor</value>
+  </data>
+  <data name="CursorSampleText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="MarqueeFormatNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="MarqueeFormatPlace" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="MarqueeFormatWalk" xml:space="preserve">
+    <value>Walk</value>
+  </data>
+  <data name="ScrollDirectionLeft" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="ScrollDirectionRight" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="ScrollDirectionUp" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="ScrollDirectionDown" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="InitializingMarqueeOperation" xml:space="preserve">
+    <value>Initializing marquee scrolling</value>
+  </data>
+  <data name="MarqueeNotSupported" xml:space="preserve">
+    <value>The selected line display does not support marquee windows.</value>
+  </data>
+  <data name="SelectScrollDirection" xml:space="preserve">
+    <value>Select a scroll direction and marquee format.</value>
+  </data>
+  <data name="MarqueeWindowUnavailable" xml:space="preserve">
+    <value>The window for the selected scroll direction is unavailable.</value>
+  </data>
+  <data name="MarqueeSampleText" xml:space="preserve">
+    <value>This text is longer than most line displays and scrolls into view using the selected marquee direction.</value>
+  </data>
+  <data name="PreparingMarqueeFailed" xml:space="preserve">
+    <value>The marquee window could not be prepared.</value>
+  </data>
+  <data name="MarqueeStarted" xml:space="preserve">
+    <value>Marquee scrolling started.</value>
+  </data>
+  <data name="MarqueeStartFailed" xml:space="preserve">
+    <value>Marquee scrolling could not be started.</value>
+  </data>
+  <data name="StartingMarqueeOperation" xml:space="preserve">
+    <value>Starting marquee scrolling</value>
+  </data>
+  <data name="MarqueeStopped" xml:space="preserve">
+    <value>Marquee scrolling stopped.</value>
+  </data>
+  <data name="MarqueeStopFailed" xml:space="preserve">
+    <value>Marquee scrolling could not be stopped.</value>
+  </data>
+  <data name="StoppingMarqueeOperation" xml:space="preserve">
+    <value>Stopping marquee scrolling</value>
+  </data>
+</root>

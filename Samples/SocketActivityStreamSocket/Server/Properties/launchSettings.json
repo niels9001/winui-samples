@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "StreamSocketListenerServer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "StreamSocketListenerServer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

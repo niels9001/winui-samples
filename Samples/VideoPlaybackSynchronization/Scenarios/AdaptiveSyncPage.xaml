@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SDKTemplate.AdaptiveSyncPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Unloaded="Page_Unloaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Disabled"
+        HorizontalScrollMode="Disabled"
+        VerticalScrollBarVisibility="Auto"
+        VerticalScrollMode="Auto">
+        <Grid
+            Margin="24"
+            MaxWidth="1200"
+            HorizontalAlignment="Stretch"
+            RowSpacing="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel MaxWidth="850" HorizontalAlignment="Left" Spacing="8">
+                <TextBlock
+                    x:Uid="AdaptivePageTitle"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Uid="AdaptivePageDescription"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <InfoBar
+                x:Uid="AdaptiveNetworkInfoBar"
+                Grid.Row="1"
+                IsClosable="False"
+                IsOpen="True"
+                Severity="Informational" />
+
+            <Grid
+                Grid.Row="2"
+                ColumnSpacing="16"
+                RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBox
+                    x:Name="FirstStreamUriTextBox"
+                    x:Uid="FirstStreamUriTextBox"
+                    AutomationProperties.AutomationId="FirstStreamUriTextBox"
+                    TextWrapping="Wrap" />
+                <TextBox
+                    x:Name="SecondStreamUriTextBox"
+                    x:Uid="SecondStreamUriTextBox"
+                    AutomationProperties.AutomationId="SecondStreamUriTextBox"
+                    Grid.Column="1"
+                    TextWrapping="Wrap" />
+                <NumberBox
+                    x:Name="SecondStreamOffsetNumberBox"
+                    x:Uid="SecondStreamOffsetNumberBox"
+                    AutomationProperties.AutomationId="SecondStreamOffsetNumberBox"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    MaxWidth="320"
+                    HorizontalAlignment="Left"
+                    Maximum="300"
+                    Minimum="-300"
+                    SmallChange="0.1"
+                    SpinButtonPlacementMode="Inline"
+                    Value="0" />
+            </Grid>
+
+            <Grid
+                Grid.Row="3"
+                Height="330"
+                ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Background="Black" CornerRadius="4">
+                    <MediaPlayerElement
+                        x:Name="FirstStreamPlayerElement"
+                        x:Uid="FirstStreamPlayerElement"
+                        AreTransportControlsEnabled="False"
+                        Stretch="Uniform" />
+                </Border>
+                <Border
+                    Grid.Column="1"
+                    Background="Black"
+                    CornerRadius="4">
+                    <MediaPlayerElement
+                        x:Name="SecondStreamPlayerElement"
+                        x:Uid="SecondStreamPlayerElement"
+                        AreTransportControlsEnabled="False"
+                        Stretch="Uniform" />
+                </Border>
+            </Grid>
+
+            <CommandBar Grid.Row="4" DefaultLabelPosition="Right">
+                <CommandBar.Content>
+                    <StackPanel
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <ProgressRing
+                            x:Name="LoadingProgressRing"
+                            x:Uid="LoadingProgressRing"
+                            Width="20"
+                            Height="20"
+                            IsActive="False"
+                            Visibility="Collapsed" />
+                        <StackPanel Spacing="2">
+                            <TextBlock
+                                x:Name="PlaybackStatusTextBlock"
+                                x:Uid="AdaptiveInitialStatus"
+                                Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock
+                                x:Name="PlaybackPositionTextBlock"
+                                x:Uid="PlaybackPositionInitial"
+                                Style="{StaticResource CaptionTextBlockStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+                </CommandBar.Content>
+
+                <AppBarButton
+                    x:Name="LoadButton"
+                    x:Uid="LoadAdaptiveStreamsButton"
+                    AutomationProperties.AutomationId="LoadAdaptiveStreamsButton"
+                    Click="LoadButton_Click">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Refresh" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarSeparator />
+                <AppBarButton
+                    x:Name="SeekBack30Button"
+                    x:Uid="SeekBack30Button"
+                    AutomationProperties.AutomationId="AdaptiveSeekBack30Button"
+                    Click="SeekBack30Button_Click"
+                    IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Back" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Name="SeekBack2Button"
+                    x:Uid="SeekBack2Button"
+                    AutomationProperties.AutomationId="AdaptiveSeekBack2Button"
+                    Click="SeekBack2Button_Click"
+                    IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Back" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Name="PlayPauseButton"
+                    x:Uid="PlayPauseButton"
+                    AutomationProperties.AutomationId="AdaptivePlayPauseButton"
+                    Click="PlayPauseButton_Click"
+                    IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <SymbolIcon x:Name="PlayPauseIcon" Symbol="Play" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Name="SeekForward2Button"
+                    x:Uid="SeekForward2Button"
+                    AutomationProperties.AutomationId="AdaptiveSeekForward2Button"
+                    Click="SeekForward2Button_Click"
+                    IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Forward" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton
+                    x:Name="SeekForward30Button"
+                    x:Uid="SeekForward30Button"
+                    AutomationProperties.AutomationId="AdaptiveSeekForward30Button"
+                    Click="SeekForward30Button_Click"
+                    IsEnabled="False">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Forward" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+    </ScrollViewer>
+</Page>

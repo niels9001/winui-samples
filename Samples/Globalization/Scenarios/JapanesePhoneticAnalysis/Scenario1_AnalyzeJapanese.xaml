@@ -1,0 +1,47 @@
+<Page
+    x:Class="SDKTemplate.Scenario1_AnalyzeJapanese"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="720"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Analyze Japanese text" />
+            <TextBlock
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Split Japanese text into words or pronunciation units. Each result includes its display text, Yomi reading, and phrase boundary."
+                TextWrapping="Wrap" />
+            <TextBlock Text="Japanese text" />
+            <TextBox
+                x:Name="InputTextBox"
+                MaxLength="100"
+                Text="今日はいい天気です" />
+            <RadioButton
+                x:Name="WordRadioButton"
+                Content="Break into words"
+                GroupName="AnalysisMethod"
+                IsChecked="True" />
+            <RadioButton
+                x:Name="PronunciationRadioButton"
+                Content="Break into units of pronunciation"
+                GroupName="AnalysisMethod" />
+            <Button
+                Click="AnalyzeButton_Click"
+                Content="Analyze" />
+            <TextBox
+                x:Name="OutputTextBox"
+                MinHeight="220"
+                AcceptsReturn="True"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

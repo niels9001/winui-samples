@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Video playback synchronization</value>
+  </data>
+  <data name="NavigationItemFormat" xml:space="preserve">
+    <value>{0}) {1}</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="PlaybackFailedFormat" xml:space="preserve">
+    <value>Playback failed ({0}, 0x{1:X8}): {2}</value>
+  </data>
+  <data name="ScenarioMultiCameraTitle" xml:space="preserve">
+    <value>Multi-camera angle</value>
+  </data>
+  <data name="ScenarioOffsetTitle" xml:space="preserve">
+    <value>Side-by-side offset sync</value>
+  </data>
+  <data name="ScenarioAdaptiveTitle" xml:space="preserve">
+    <value>Adaptive HLS stream sync</value>
+  </data>
+  <data name="ScenarioNavigationView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Video playback synchronization scenarios</value>
+  </data>
+  <data name="MultiCameraPageTitle.Text" xml:space="preserve">
+    <value>Synchronize five camera angles</value>
+  </data>
+  <data name="MultiCameraPageDescription.Text" xml:space="preserve">
+    <value>One MediaTimelineController drives five independent MediaPlayer instances. The packaged clips share a moving crosshair and clock, making any timing drift visible at a glance.</value>
+  </data>
+  <data name="FrontPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Front camera angle</value>
+  </data>
+  <data name="LeftPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Left camera angle</value>
+  </data>
+  <data name="RightPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Right camera angle</value>
+  </data>
+  <data name="ClosePlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Close camera angle</value>
+  </data>
+  <data name="WidePlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Wide camera angle</value>
+  </data>
+  <data name="LoadingProgressRing.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Loading media</value>
+  </data>
+  <data name="MultiCameraInitialStatus.Text" xml:space="preserve">
+    <value>Load the packaged clips to begin.</value>
+  </data>
+  <data name="OffsetInitialStatus.Text" xml:space="preserve">
+    <value>Load the packaged clips to compare their timing.</value>
+  </data>
+  <data name="AdaptiveInitialStatus.Text" xml:space="preserve">
+    <value>Load the HLS sources to begin.</value>
+  </data>
+  <data name="PlaybackPositionInitial.Text" xml:space="preserve">
+    <value>Position 0:00.0 / 0:00.0</value>
+  </data>
+  <data name="LoadPackagedMediaButton.Label" xml:space="preserve">
+    <value>Load media</value>
+  </data>
+  <data name="LoadPackagedMediaButton.AccessKey" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="LoadPackagedMediaButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Load all five packaged camera angles</value>
+  </data>
+  <data name="LoadOffsetMediaButton.Label" xml:space="preserve">
+    <value>Load media</value>
+  </data>
+  <data name="LoadOffsetMediaButton.AccessKey" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="LoadOffsetMediaButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Load the reference and delayed clips</value>
+  </data>
+  <data name="PlayPauseButton.Label" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PlayPauseButton.AccessKey" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="PlayPauseButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Play synchronized media</value>
+  </data>
+  <data name="SeekBack10Button.Label" xml:space="preserve">
+    <value>Back 10 s</value>
+  </data>
+  <data name="SeekBack10Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek backward 10 seconds</value>
+  </data>
+  <data name="SeekForward10Button.Label" xml:space="preserve">
+    <value>Forward 10 s</value>
+  </data>
+  <data name="SeekForward10Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek forward 10 seconds</value>
+  </data>
+  <data name="SeekBack2Button.Label" xml:space="preserve">
+    <value>Back 2 s</value>
+  </data>
+  <data name="SeekBack2Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek backward 2 seconds</value>
+  </data>
+  <data name="SeekForward2Button.Label" xml:space="preserve">
+    <value>Forward 2 s</value>
+  </data>
+  <data name="SeekForward2Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek forward 2 seconds</value>
+  </data>
+  <data name="OffsetPageTitle.Text" xml:space="preserve">
+    <value>Correct authored timing with a player offset</value>
+  </data>
+  <data name="OffsetPageDescription.Text" xml:space="preserve">
+    <value>The second clip contains a five-second authored lead-in. TimelineControllerPositionOffset advances that player by five seconds so both visible clocks and crosshairs align.</value>
+  </data>
+  <data name="OffsetCorrectionToggle.Header" xml:space="preserve">
+    <value>Apply a +5 second offset to the delayed source</value>
+  </data>
+  <data name="OffsetCorrectionToggle.OnContent" xml:space="preserve">
+    <value>Correction on</value>
+  </data>
+  <data name="OffsetCorrectionToggle.OffContent" xml:space="preserve">
+    <value>Correction off</value>
+  </data>
+  <data name="OffsetCorrectionToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Apply five-second synchronization correction</value>
+  </data>
+  <data name="ReferencePlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Reference video</value>
+  </data>
+  <data name="DelayedPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Delayed source video</value>
+  </data>
+  <data name="AdaptivePageTitle.Text" xml:space="preserve">
+    <value>Synchronize adaptive HLS streams</value>
+  </data>
+  <data name="AdaptivePageDescription.Text" xml:space="preserve">
+    <value>Create two AdaptiveMediaSource instances, attach them to one timeline, and apply an optional offset to the second stream. The default uses a current public HLS test asset.</value>
+  </data>
+  <data name="AdaptiveNetworkInfoBar.Title" xml:space="preserve">
+    <value>Network required</value>
+  </data>
+  <data name="AdaptiveNetworkInfoBar.Message" xml:space="preserve">
+    <value>The public test stream can change or become unavailable. You can replace either address with another HTTPS HLS manifest.</value>
+  </data>
+  <data name="FirstStreamUriTextBox.Header" xml:space="preserve">
+    <value>First HLS manifest</value>
+  </data>
+  <data name="FirstStreamUriTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>First HLS manifest address</value>
+  </data>
+  <data name="SecondStreamUriTextBox.Header" xml:space="preserve">
+    <value>Second HLS manifest</value>
+  </data>
+  <data name="SecondStreamUriTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Second HLS manifest address</value>
+  </data>
+  <data name="SecondStreamOffsetNumberBox.Header" xml:space="preserve">
+    <value>Second stream offset (seconds)</value>
+  </data>
+  <data name="SecondStreamOffsetNumberBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Second stream synchronization offset in seconds</value>
+  </data>
+  <data name="FirstStreamPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>First adaptive stream</value>
+  </data>
+  <data name="SecondStreamPlayerElement.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Second adaptive stream</value>
+  </data>
+  <data name="LoadAdaptiveStreamsButton.Label" xml:space="preserve">
+    <value>Load streams</value>
+  </data>
+  <data name="LoadAdaptiveStreamsButton.AccessKey" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="LoadAdaptiveStreamsButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Load both adaptive HLS streams</value>
+  </data>
+  <data name="SeekBack30Button.Label" xml:space="preserve">
+    <value>Back 30 s</value>
+  </data>
+  <data name="SeekBack30Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek backward 30 seconds</value>
+  </data>
+  <data name="SeekForward30Button.Label" xml:space="preserve">
+    <value>Forward 30 s</value>
+  </data>
+  <data name="SeekForward30Button.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Seek forward 30 seconds</value>
+  </data>
+  <data name="LoadingPackagedMedia" xml:space="preserve">
+    <value>Opening five packaged clips...</value>
+  </data>
+  <data name="LoadingOffsetMedia" xml:space="preserve">
+    <value>Opening the reference and delayed clips...</value>
+  </data>
+  <data name="CreatingAdaptiveSources" xml:space="preserve">
+    <value>Creating adaptive media sources...</value>
+  </data>
+  <data name="OpeningAdaptiveStreams" xml:space="preserve">
+    <value>Waiting for both streams to open...</value>
+  </data>
+  <data name="PackagedMediaReady" xml:space="preserve">
+    <value>Five synchronized players are ready.</value>
+  </data>
+  <data name="OffsetMediaReady" xml:space="preserve">
+    <value>The +5 second correction is applied.</value>
+  </data>
+  <data name="OffsetMediaUncorrected" xml:space="preserve">
+    <value>The authored delay is visible; no correction is applied.</value>
+  </data>
+  <data name="AdaptiveStreamsReady" xml:space="preserve">
+    <value>Both adaptive streams are ready.</value>
+  </data>
+  <data name="PlaybackFailedStatus" xml:space="preserve">
+    <value>Playback could not continue.</value>
+  </data>
+  <data name="AdaptiveLoadFailedStatus" xml:space="preserve">
+    <value>The adaptive streams were not loaded.</value>
+  </data>
+  <data name="PackagedMediaReadyMessage" xml:space="preserve">
+    <value>All five packaged camera angles opened successfully.</value>
+  </data>
+  <data name="OffsetMediaReadyMessage" xml:space="preserve">
+    <value>The second player is advanced by five seconds to correct the authored lead-in.</value>
+  </data>
+  <data name="OffsetMediaUncorrectedMessage" xml:space="preserve">
+    <value>The clips are loaded without an offset so the authored timing difference remains visible.</value>
+  </data>
+  <data name="AdaptiveStreamsReadyMessage" xml:space="preserve">
+    <value>Both adaptive HLS sources opened successfully.</value>
+  </data>
+  <data name="PlaybackPositionFormat" xml:space="preserve">
+    <value>Position {0} / {1}</value>
+  </data>
+  <data name="PlayLabel" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="PauseLabel" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="LiveDuration" xml:space="preserve">
+    <value>live</value>
+  </data>
+  <data name="FirstStreamName" xml:space="preserve">
+    <value>the first stream</value>
+  </data>
+  <data name="SecondStreamName" xml:space="preserve">
+    <value>the second stream</value>
+  </data>
+  <data name="HttpsUriRequired" xml:space="preserve">
+    <value>Enter an absolute HTTPS address for {0}.</value>
+  </data>
+  <data name="InvalidAdaptiveOffset" xml:space="preserve">
+    <value>Enter an offset from -300 through 300 seconds.</value>
+  </data>
+  <data name="AdaptiveCreationFailedFormat" xml:space="preserve">
+    <value>Could not create the adaptive source ({0}, 0x{1:X8}).</value>
+  </data>
+  <data name="LoadingPackagedMediaOperation" xml:space="preserve">
+    <value>Loading the packaged media</value>
+  </data>
+  <data name="LoadingOffsetMediaOperation" xml:space="preserve">
+    <value>Loading the offset media</value>
+  </data>
+  <data name="LoadingAdaptiveStreamsOperation" xml:space="preserve">
+    <value>Loading the adaptive streams</value>
+  </data>
+  <data name="OpeningScenarioOperation" xml:space="preserve">
+    <value>Opening the scenario</value>
+  </data>
+</root>

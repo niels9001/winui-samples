@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CashDrawer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CashDrawer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

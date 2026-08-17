@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Serial Arduino</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Communicate with an Arduino Uno over a serial connection.</value>
+  </data>
+  <data name="NavigationItemFormat" xml:space="preserve">
+    <value>{0}) {1}</value>
+  </data>
+  <data name="ScenarioConnectDisconnectTitle" xml:space="preserve">
+    <value>Connect and disconnect</value>
+  </data>
+  <data name="ScenarioLedTemperatureTitle" xml:space="preserve">
+    <value>LEDs and temperature</value>
+  </data>
+  <data name="ScenarioNavigationView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Serial Arduino scenarios</value>
+  </data>
+  <data name="StatusInfoBar.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Serial operation status</value>
+  </data>
+
+  <data name="ConnectDisconnectHeading.Text" xml:space="preserve">
+    <value>Choose an Arduino</value>
+  </data>
+  <data name="ConnectDisconnectDescription.Text" xml:space="preserve">
+    <value>Discover matching Arduino Uno serial devices, select one, and explicitly open or close the shared connection.</value>
+  </data>
+  <data name="SupportedDeviceLabel.Text" xml:space="preserve">
+    <value>Compatible device</value>
+  </data>
+  <data name="SupportedDeviceValue.Text" xml:space="preserve">
+    <value>Arduino Uno (VID 2341, PID 0043)</value>
+  </data>
+  <data name="SerialSettingsLabel.Text" xml:space="preserve">
+    <value>Serial settings</value>
+  </data>
+  <data name="SerialSettingsValue.Text" xml:space="preserve">
+    <value>9600 baud, 8 data bits, no parity, 1 stop bit, no handshake</value>
+  </data>
+  <data name="AvailableDevicesHeading.Text" xml:space="preserve">
+    <value>Available devices</value>
+  </data>
+  <data name="DevicesListView.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Available matching Arduino serial devices</value>
+  </data>
+  <data name="DiscoveryProgressRing.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Searching for matching Arduino devices</value>
+  </data>
+  <data name="SearchingForDevicesText.Text" xml:space="preserve">
+    <value>Searching for a matching Arduino Uno…</value>
+  </data>
+  <data name="EmptyDevicesTextBlock.Text" xml:space="preserve">
+    <value>No matching Arduino Uno is connected. Plug in the board and keep this page open; the list updates automatically.</value>
+  </data>
+  <data name="ConnectButton.Content" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="ConnectButton.AccessKey" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="ConnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Connect to the selected Arduino</value>
+  </data>
+  <data name="DisconnectButton.Content" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="DisconnectButton.AccessKey" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="DisconnectButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Disconnect from the Arduino</value>
+  </data>
+
+  <data name="LedTemperatureHeading.Text" xml:space="preserve">
+    <value>Control LEDs and read temperature</value>
+  </data>
+  <data name="LedTemperatureDescription.Text" xml:space="preserve">
+    <value>Use the connection opened in the first scenario to control four LEDs independently and request a reading from the temperature sensor.</value>
+  </data>
+  <data name="ProtocolSummaryText.Text" xml:space="preserve">
+    <value>Protocol: ledon &lt;pin&gt;\r, ledoff &lt;pin&gt;\r, and temp\r. Temperature replies contain five characters followed by CRLF.</value>
+  </data>
+  <data name="LedControlsHeading.Text" xml:space="preserve">
+    <value>LED outputs</value>
+  </data>
+  <data name="LedControlsDescription.Text" xml:space="preserve">
+    <value>Toggle the LEDs connected to Arduino digital pins 3 through 6.</value>
+  </data>
+  <data name="Led3Switch.Header" xml:space="preserve">
+    <value>LED 3</value>
+  </data>
+  <data name="Led3Switch.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Led3Switch.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Led3Switch.AccessKey" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Led3Switch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>LED on digital pin 3</value>
+  </data>
+  <data name="Led4Switch.Header" xml:space="preserve">
+    <value>LED 4</value>
+  </data>
+  <data name="Led4Switch.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Led4Switch.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Led4Switch.AccessKey" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Led4Switch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>LED on digital pin 4</value>
+  </data>
+  <data name="Led5Switch.Header" xml:space="preserve">
+    <value>LED 5</value>
+  </data>
+  <data name="Led5Switch.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Led5Switch.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Led5Switch.AccessKey" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Led5Switch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>LED on digital pin 5</value>
+  </data>
+  <data name="Led6Switch.Header" xml:space="preserve">
+    <value>LED 6</value>
+  </data>
+  <data name="Led6Switch.OnContent" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Led6Switch.OffContent" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Led6Switch.AccessKey" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="Led6Switch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>LED on digital pin 6</value>
+  </data>
+  <data name="TemperatureHeading.Text" xml:space="preserve">
+    <value>Temperature sensor</value>
+  </data>
+  <data name="TemperatureDescription.Text" xml:space="preserve">
+    <value>Ask the Arduino for one Celsius reading. The firmware reports −9.99 °C when the sensor cannot be read.</value>
+  </data>
+  <data name="TemperatureValueTextBox.Header" xml:space="preserve">
+    <value>Latest reading</value>
+  </data>
+  <data name="TemperatureValueTextBox.PlaceholderText" xml:space="preserve">
+    <value>No reading yet</value>
+  </data>
+  <data name="TemperatureValueTextBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Latest temperature reading in degrees Celsius</value>
+  </data>
+  <data name="ReadTemperatureButton.Content" xml:space="preserve">
+    <value>Get temperature</value>
+  </data>
+  <data name="ReadTemperatureButton.AccessKey" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="ReadTemperatureButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Request a temperature reading</value>
+  </data>
+  <data name="TemperatureProgressRing.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Waiting for the Arduino temperature response</value>
+  </data>
+
+  <data name="ConnectionStateDisconnected" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="ConnectionStateConnectedFormat" xml:space="preserve">
+    <value>Connected to {0}</value>
+  </data>
+  <data name="SearchingForDevices" xml:space="preserve">
+    <value>Searching for matching Arduino devices…</value>
+  </data>
+  <data name="NoDevicesFound" xml:space="preserve">
+    <value>No matching Arduino Uno devices were found.</value>
+  </data>
+  <data name="OneDeviceFound" xml:space="preserve">
+    <value>One matching Arduino Uno device was found.</value>
+  </data>
+  <data name="DevicesFoundFormat" xml:space="preserve">
+    <value>{0} matching Arduino Uno devices were found.</value>
+  </data>
+  <data name="DeviceAddedFormat" xml:space="preserve">
+    <value>{0} is now available.</value>
+  </data>
+  <data name="DeviceRemovedFormat" xml:space="preserve">
+    <value>{0} is no longer available.</value>
+  </data>
+  <data name="SelectDeviceFirst" xml:space="preserve">
+    <value>Select an Arduino from the device list first.</value>
+  </data>
+  <data name="ConnectedToDeviceFormat" xml:space="preserve">
+    <value>Connected to {0}.</value>
+  </data>
+  <data name="DisconnectedFromDeviceFormat" xml:space="preserve">
+    <value>Disconnected from {0}.</value>
+  </data>
+  <data name="ConnectedDeviceRemovedFormat" xml:space="preserve">
+    <value>{0} was removed. The serial connection has been closed.</value>
+  </data>
+  <data name="AlreadyConnectedFormat" xml:space="preserve">
+    <value>{0} is already connected.</value>
+  </data>
+  <data name="DisconnectCurrentDeviceFirst" xml:space="preserve">
+    <value>Disconnect the current Arduino before connecting to another device.</value>
+  </data>
+  <data name="UnableToOpenDeviceFormat" xml:space="preserve">
+    <value>Could not open {0}. It may have been removed, blocked, or opened by another app.</value>
+  </data>
+  <data name="ConnectDeviceFirst" xml:space="preserve">
+    <value>Connect to an Arduino in the first scenario before using these controls.</value>
+  </data>
+  <data name="LedStateOn" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="LedStateOff" xml:space="preserve">
+    <value>off</value>
+  </data>
+  <data name="LedCommandCompletedFormat" xml:space="preserve">
+    <value>LED {0} is {1}; {2} bytes were written.</value>
+  </data>
+  <data name="TemperatureReadingInProgress" xml:space="preserve">
+    <value>Reading…</value>
+  </data>
+  <data name="TemperatureUnavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="TemperatureValueFormat" xml:space="preserve">
+    <value>{0:F2} °C</value>
+  </data>
+  <data name="TemperatureReadCompletedFormat" xml:space="preserve">
+    <value>Temperature received; {0} bytes were read.</value>
+  </data>
+  <data name="TemperatureSensorErrorFormat" xml:space="preserve">
+    <value>The Arduino reported the sensor error value {0:F2} °C. Check the sensor wiring.</value>
+  </data>
+
+  <data name="DiscoverDevicesOperation" xml:space="preserve">
+    <value>Discovering Arduino devices</value>
+  </data>
+  <data name="ConnectDeviceOperation" xml:space="preserve">
+    <value>Connecting to the Arduino</value>
+  </data>
+  <data name="DisconnectDeviceOperation" xml:space="preserve">
+    <value>Disconnecting from the Arduino</value>
+  </data>
+  <data name="SetLedOperation" xml:space="preserve">
+    <value>Updating an LED</value>
+  </data>
+  <data name="ReadTemperatureOperation" xml:space="preserve">
+    <value>Reading the temperature</value>
+  </data>
+  <data name="SerialCommunicationOperation" xml:space="preserve">
+    <value>Communicating with the Arduino</value>
+  </data>
+  <data name="OperationTimedOutFormat" xml:space="preserve">
+    <value>{0} timed out. The serial connection has been closed.</value>
+  </data>
+  <data name="InvalidTemperatureResponseFormat" xml:space="preserve">
+    <value>The Arduino returned an invalid temperature response: “{0}”. The serial connection has been closed.</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="DeviceWatcherStopped" xml:space="preserve">
+    <value>Arduino device discovery stopped unexpectedly.</value>
+  </data>
+</root>

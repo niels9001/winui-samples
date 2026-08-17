@@ -1,0 +1,139 @@
+<Page
+    x:Class="SDKTemplate.CookieManagerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            MaxWidth="800"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                x:Name="TitleText"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Name="DescriptionText"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <StackPanel
+                x:Name="AddressPanel"
+                Spacing="4">
+                <TextBlock Text="Address" />
+                <TextBox
+                    x:Name="AddressField"
+                    InputScope="Url" />
+            </StackPanel>
+
+            <Grid
+                x:Name="CookieFields"
+                ColumnSpacing="12"
+                RowSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    VerticalAlignment="Center"
+                    Text="Name" />
+                <TextBox
+                    x:Name="NameField"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="SampleCookie" />
+                <TextBlock
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    Text="Domain" />
+                <TextBox
+                    x:Name="DomainField"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="127.0.0.1" />
+                <TextBlock
+                    Grid.Row="2"
+                    VerticalAlignment="Center"
+                    Text="Path" />
+                <TextBox
+                    x:Name="PathField"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="/" />
+                <TextBlock
+                    Grid.Row="3"
+                    VerticalAlignment="Center"
+                    Text="Value" />
+                <TextBox
+                    x:Name="ValueField"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="SampleValue" />
+                <TextBlock
+                    Grid.Row="4"
+                    VerticalAlignment="Center"
+                    Text="Lifetime" />
+                <ToggleSwitch
+                    x:Name="PersistentCookieToggle"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Header="Expiration"
+                    OffContent="Session cookie"
+                    OnContent="Expires in one hour" />
+                <TextBlock
+                    Grid.Row="5"
+                    VerticalAlignment="Center"
+                    Text="Secure" />
+                <ToggleSwitch
+                    x:Name="SecureToggle"
+                    Grid.Row="5"
+                    Grid.Column="1" />
+                <TextBlock
+                    Grid.Row="6"
+                    VerticalAlignment="Center"
+                    Text="HTTP only" />
+                <ToggleSwitch
+                    x:Name="HttpOnlyToggle"
+                    Grid.Row="6"
+                    Grid.Column="1" />
+            </Grid>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="PrimaryButton"
+                    Click="PrimaryButton_Click" />
+                <Button
+                    x:Name="SecondaryButton"
+                    Click="SecondaryButton_Click" />
+                <Button
+                    x:Name="CancelButton"
+                    Click="CancelButton_Click"
+                    Content="Cancel"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <TextBox
+                x:Name="OutputField"
+                MinHeight="300"
+                AcceptsReturn="True"
+                IsReadOnly="True"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

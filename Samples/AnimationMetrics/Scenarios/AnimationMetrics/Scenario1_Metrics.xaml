@@ -1,0 +1,74 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Metrics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            MaxWidth="840"
+            HorizontalAlignment="Left"
+            Text="Choose a Windows animation to inspect the raw timing, easing, scale, translation, and opacity parameters supplied by the Animation Metrics API."
+            TextWrapping="Wrap" />
+
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,24,0,8"
+            FontSize="18"
+            FontWeight="SemiBold"
+            Text="Animation" />
+
+        <ListView
+            x:Name="Animations"
+            Grid.Row="2"
+            MaxHeight="160"
+            HorizontalAlignment="Stretch"
+            AutomationProperties.Name="Windows animation"
+            DisplayMemberPath="Name"
+            SelectionChanged="Animations_SelectionChanged"
+            SelectionMode="Single" />
+
+        <TextBlock
+            Grid.Row="3"
+            Margin="0,24,0,8"
+            FontSize="18"
+            FontWeight="SemiBold"
+            Text="Raw metrics" />
+
+        <TextBox
+            x:Name="Metrics"
+            Grid.Row="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            AcceptsReturn="True"
+            AutomationProperties.Name="Animation metrics output"
+            FontFamily="Consolas"
+            IsReadOnly="True"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            TextWrapping="NoWrap"
+            />
+    </Grid>
+</Page>

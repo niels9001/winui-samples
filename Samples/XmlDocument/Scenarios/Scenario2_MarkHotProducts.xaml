@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="SDKTemplate.Scenario2_MarkHotProducts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24,20,24,24"
+            Spacing="12">
+            <TextBlock
+                x:Uid="DescriptionLabel"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="MarkHotProductsDescription"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <StackPanel
+                Margin="0,4,0,0"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="MarkHotProductsButton"
+                    x:Uid="MarkHotProductsButton"
+                    AutomationProperties.AutomationId="MarkHotProductsButton"
+                    Click="MarkHotProductsButton_Click" />
+                <Button
+                    x:Name="SaveHotProductsButton"
+                    x:Uid="SaveHotProductsButton"
+                    AutomationProperties.AutomationId="SaveHotProductsButton"
+                    Click="SaveHotProductsButton_Click"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <TextBlock
+                x:Uid="MarketDataLabel"
+                Margin="0,8,0,0"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <RichEditBox
+                x:Name="MarketDataBox"
+                x:Uid="MarketDataBox"
+                AutomationProperties.AutomationId="MarketDataBox"
+                IsReadOnly="True"
+                MinHeight="170" />
+
+            <TextBlock
+                x:Uid="ResultLabel"
+                Margin="0,8,0,0"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <RichEditBox
+                x:Name="ResultBox"
+                x:Uid="MarkHotProductsResultBox"
+                AutomationProperties.AutomationId="MarkHotProductsResultBox"
+                IsReadOnly="True"
+                MinHeight="170" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

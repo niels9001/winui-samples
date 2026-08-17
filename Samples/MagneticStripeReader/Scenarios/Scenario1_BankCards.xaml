@@ -1,0 +1,69 @@
+<Page
+    x:Class="SDKTemplate.Scenario1_BankCards"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SDKTemplate"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="16">
+            <TextBlock
+                x:Uid="BankCardsHeading"
+                Style="{StaticResource SubtitleTextBlockStyle}" />
+            <TextBlock
+                x:Uid="BankCardsDescription"
+                MaxWidth="760"
+                Style="{StaticResource BodyTextBlockStyle}"
+                TextWrapping="Wrap" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="StartReadingButton"
+                    x:Uid="StartReadingButton"
+                    Click="StartReadingButton_Click" />
+                <Button
+                    x:Name="EndReadingButton"
+                    x:Uid="EndReadingButton"
+                    Click="EndReadingButton_Click"
+                    IsEnabled="False" />
+            </StackPanel>
+
+            <ItemsControl
+                x:Name="BankCardFields"
+                x:Uid="BankCardFields"
+                ItemsSource="{x:Bind CardFields}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:CardField">
+                        <Grid
+                            MinHeight="36"
+                            MaxWidth="760"
+                            Padding="8,6"
+                            ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                FontWeight="SemiBold"
+                                Text="{x:Bind Label}"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="{x:Bind Value, Mode=OneWay}"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
