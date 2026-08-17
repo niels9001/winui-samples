@@ -1,0 +1,94 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: audio-category
+project:
+  folder: AudioCategory
+  name: AudioCategory
+title: Controlling how concurrent audio streams interact
+summary: Assign playback categories and compare concurrent app instances to observe Windows audio ducking, muting, and routing behavior.
+aliases:
+  - AudioCategory
+  - Audio Category
+  - MediaPlayerAudioCategory
+  - Audio ducking
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - app-fundamentals
+tags:
+  - audio category
+  - ducking
+  - media playback
+  - system mixer
+  - multi-instance
+originalSamples:
+  - name: AudioCategory
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AudioCategory
+scenarios:
+  - id: audio-categories
+    title: Compare audio categories
+    summary: Choose a playback category, play an audio file, and launch another instance to compare mixer interactions.
+    apis:
+      - Windows.Media.Playback.MediaPlayer.AudioCategory
+      - Windows.Media.Playback.MediaPlayerAudioCategory
+      - Windows.Media.SystemMediaTransportControls
+      - Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/AudioCategory/Scenario1.xaml.cs
+      - Controls/PlaybackControl.xaml.cs
+apis:
+  - name: Windows.Media.Playback.MediaPlayer.AudioCategory
+    description: Assigns a mixer category that influences how the stream interacts with concurrent audio.
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayer.audiocategory
+  - name: Windows.Media.Playback.MediaPlayerAudioCategory
+    description: Defines the media, communications, alerts, speech, game, and other playback categories.
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayeraudiocategory
+  - name: Windows.Media.SystemMediaTransportControls
+    description: Publishes play, pause, and stop state through the system media transport controls.
+    url: https://learn.microsoft.com/uwp/api/windows.media.systemmediatransportcontrols
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Hosts the MediaPlayer used by the reusable playback control.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.mediaplayerelement
+documentation:
+  - title: MediaPlayerAudioCategory enumeration
+    url: https://learn.microsoft.com/uwp/api/windows.media.playback.mediaplayeraudiocategory
+    kind: api-reference
+  - title: SystemMediaTransportControls class
+    url: https://learn.microsoft.com/uwp/api/windows.media.systemmediatransportcontrols
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: internetClient
+      kind: general
+      description: Declared by the package manifest for network access, although the scenario selects local media files.
+  hardware:
+    - Speakers or headphones are needed to hear category interactions between app instances.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; it launches a second packaged process and obtains transport controls through HWND interop.
+featuredFiles:
+  - path: Scenarios/AudioCategory/Scenario1.xaml.cs
+    label: Category and instance control
+    description: Applies the selected audio category and launches another packaged instance for comparison.
+  - path: Controls/PlaybackControl.xaml.cs
+    label: Reusable audio playback
+    description: Connects MediaPlayer, the file picker, transport controls, and sound-level notifications.
+  - path: Scenarios/AudioCategory/Scenario1.xaml
+    label: Category comparison interface
+    description: Presents category descriptions, file selection, playback controls, and the second-instance action.
+screenshots:
+  - id: audio-category-selection
+    alt: The audio category page showing a category selector, its mixer behavior description, file selection, and playback controls.
+    scenario: audio-categories
+    capture:
+      mode: automatic
+      readinessSelector: text=Audio categories
+      notes: Capture the deterministic initial category selection before opening the file picker or launching another instance.

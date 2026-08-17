@@ -1,0 +1,108 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-state-triggers
+project:
+  folder: XamlStateTriggers
+  name: XamlStateTriggers
+title: Adapting interfaces with visual state triggers
+summary: Adapt layout, hit targets, and styling with built-in state triggers and custom triggers for pointer type and control size.
+aliases:
+  - XamlStateTriggers
+  - StateTrigger
+  - StateTriggerBase
+  - AdaptiveTrigger
+  - VisualStateManager
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary: []
+tags:
+  - XAML
+  - visual states
+  - adaptive UI
+  - custom triggers
+  - pointer input
+originalSamples:
+  - name: XamlStateTriggers
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers
+scenarios:
+  - id: responsive-state-triggers
+    title: Responding with built-in and custom triggers
+    summary: Change the interface for window width, pointer type, control size, and a view-model property.
+    apis:
+      - Microsoft.UI.Xaml.AdaptiveTrigger
+      - Microsoft.UI.Xaml.StateTrigger
+      - Microsoft.UI.Xaml.StateTriggerBase
+      - Microsoft.UI.Xaml.VisualStateManager
+      - Microsoft.UI.Input.PointerDeviceType
+    sourceFiles:
+      - Scenarios/XamlStateTriggers/Scenario1_StateTriggers.xaml
+      - Scenarios/XamlStateTriggers/Scenario1_StateTriggers.xaml.cs
+      - Scenarios/XamlStateTriggers/CustomTriggers/InputTypeTrigger.cs
+      - Scenarios/XamlStateTriggers/CustomTriggers/ControlSizeTrigger.cs
+apis:
+  - name: Microsoft.UI.Xaml.AdaptiveTrigger
+    description: Activates responsive visual states when the window reaches configured width thresholds.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.adaptivetrigger
+  - name: Microsoft.UI.Xaml.StateTrigger
+    description: Activates a visual state from the view model's color-enabled property.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.statetrigger
+  - name: Microsoft.UI.Xaml.StateTriggerBase
+    description: Provides the base for custom input-type and control-size trigger implementations.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.statetriggerbase
+  - name: Microsoft.UI.Xaml.VisualStateManager
+    description: Applies the setters and transitions associated with the active trigger state.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.visualstatemanager
+  - name: Microsoft.UI.Input.PointerDeviceType
+    description: Identifies whether mouse, touch, or pen input last interacted with the trigger host.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.input.pointerdevicetype
+documentation:
+  - title: StateTriggerBase class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.statetriggerbase
+    kind: api-reference
+  - title: AdaptiveTrigger class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.adaptivetrigger
+    kind: api-reference
+  - title: VisualStateManager class
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.visualstatemanager
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; pointer-specific states depend on the input devices available to the user.
+featuredFiles:
+  - path: Scenarios/XamlStateTriggers/Scenario1_StateTriggers.xaml
+    label: Trigger-driven interface
+    description: Declares the adaptive, custom, and view-model-driven visual states demonstrated on the page.
+  - path: Scenarios/XamlStateTriggers/CustomTriggers/InputTypeTrigger.cs
+    label: Input type trigger
+    description: Activates states according to the most recent mouse, touch, or pen pointer input.
+  - path: Scenarios/XamlStateTriggers/CustomTriggers/ControlSizeTrigger.cs
+    label: Control size trigger
+    description: Activates states when a monitored element crosses configured width and height thresholds.
+  - path: Scenarios/XamlStateTriggers/ViewModel/MainViewModel.cs
+    label: Bound trigger state
+    description: Exposes the property used by an inline StateTrigger to enable or disable color.
+  - path: Scenarios/XamlStateTriggers/ItemTemplateControl.xaml
+    label: Responsive item template
+    description: Adjusts item presentation and hit targets in response to the active visual states.
+relatedSamples:
+  - xaml-master-detail
+  - xaml-defer-load-strategy
+screenshots:
+  - id: state-trigger-gallery
+    alt: The state-trigger page showing its Color Palette Button and responsive collection of colored items.
+    scenario: responsive-state-triggers
+    capture:
+      mode: automatic
+      readinessSelector: text=Color Palette Button
+      notes: Capture the initial state; pointer- and size-specific variants depend on the capture environment.

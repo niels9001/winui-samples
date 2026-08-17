@@ -1,0 +1,90 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: personalization
+project:
+  folder: Personalization
+  name: Personalization
+title: Setting a user's lock screen image
+summary: Pick a local image, set it as the current user's lock screen, and display the resulting lock screen stream in WinUI.
+aliases:
+  - Personalization
+  - Lock screen
+  - LockScreen
+  - Windows.System.UserProfile
+  - Lock screen wallpaper
+icon: AppsRegular
+categories:
+  primary: app-fundamentals
+  secondary:
+    - files-and-data
+tags:
+  - personalization
+  - lock screen
+  - user profile
+  - image picker
+  - wallpaper
+originalSamples:
+  - name: Personalization
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Personalization
+scenarios:
+  - id: set-lock-screen-image
+    title: Pick and set a lock screen image
+    summary: Choose a JPEG, PNG, or BMP file, apply it to the current user's lock screen, and show the returned image stream.
+    apis:
+      - Windows.Storage.Pickers.FileOpenPicker
+      - Windows.System.UserProfile.LockScreen.SetImageFileAsync
+      - Windows.System.UserProfile.LockScreen.GetImageStream
+    sourceFiles:
+      - Scenarios/Personalization/SetLockScreenImage.xaml
+      - Scenarios/Personalization/SetLockScreenImage.xaml.cs
+apis:
+  - name: Windows.System.UserProfile.LockScreen
+    description: Applies the selected file as the current user's lock screen image and returns the active image stream.
+    url: https://learn.microsoft.com/uwp/api/windows.system.userprofile.lockscreen
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Lets the user choose a JPEG, PNG, or BMP after the picker is associated with the desktop window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+  - name: Windows.Storage.Streams.IRandomAccessStream
+    description: Carries the current lock screen image into the WinUI BitmapImage preview.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.irandomaccessstream
+documentation:
+  - title: LockScreen API reference
+    url: https://learn.microsoft.com/uwp/api/windows.system.userprofile.lockscreen
+    kind: api-reference
+  - title: FileOpenPicker API reference
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and applies the same user-profile workflow on each architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Lock screen scenario
+    description: Registers the single lock screen image workflow in the navigation shell.
+  - path: Scenarios/Personalization/SetLockScreenImage.xaml.cs
+    label: Apply and retrieve the image
+    description: Initializes the picker, calls LockScreen, opens the returned stream, and updates the preview.
+  - path: Scenarios/Personalization/SetLockScreenImage.xaml
+    label: Picker and preview interface
+    description: Defines the image-selection button and the initially hidden lock screen preview.
+  - path: Package.appxmanifest
+    label: Package requirements
+    description: Records the minimum Windows version and full-trust capability for the desktop package.
+screenshots:
+  - id: lock-screen-preview
+    alt: The Personalization app showing its image picker action and a preview of the newly selected lock screen image.
+    scenario: set-lock-screen-image
+    capture:
+      mode: manual
+      readinessSelector: Name=PickAndSetButton
+      notes: Choose a non-sensitive local image and capture only after Windows accepts the lock screen update and the preview appears.

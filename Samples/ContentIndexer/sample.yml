@@ -1,0 +1,155 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: content-indexer
+project:
+  folder: ContentIndexer
+  name: ContentIndexer
+title: Indexing app content for Windows Search
+summary: Add, update, delete, and query app content in Windows Search through the ContentIndexer API or appcontent-ms files.
+aliases:
+  - ContentIndexer
+  - Content Indexer C# sample
+  - Windows.Storage.Search
+  - appcontent-ms
+icon: DocumentSearchRegular
+categories:
+  primary: files-and-data
+  secondary: []
+tags:
+  - search
+  - indexing
+  - content indexer
+  - appcontent-ms
+  - windows search
+  - local settings
+originalSamples:
+  - name: ContentIndexer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ContentIndexer
+scenarios:
+  - id: add-item-with-api
+    title: Adding an item with the ContentIndexer API
+    summary: Build an IndexableContent item from form values and add it to the app's search index.
+    apis:
+      - Windows.Storage.Search.ContentIndexer.AddAsync
+      - Windows.Storage.Search.IndexableContent
+      - Windows.Storage.Search.ValueAndLanguage
+    sourceFiles:
+      - Scenarios/ContentIndexer/S1_AddWithAPI.xaml.cs
+  - id: update-delete-with-api
+    title: Updating and deleting indexed items
+    summary: Update one indexed item or delete one, several, or all items through ContentIndexer.
+    apis:
+      - Windows.Storage.Search.ContentIndexer.UpdateAsync
+      - Windows.Storage.Search.ContentIndexer.DeleteAsync
+      - Windows.Storage.Search.ContentIndexer.DeleteMultipleAsync
+      - Windows.Storage.Search.ContentIndexer.DeleteAllAsync
+    sourceFiles:
+      - Scenarios/ContentIndexer/S2_UpdateAndDeleteWithAPI.xaml.cs
+  - id: retrieve-with-api
+    title: Retrieving indexed items with a query
+    summary: Create and execute a ContentIndexerQuery that returns properties for matching indexed items.
+    apis:
+      - Windows.Storage.Search.ContentIndexer.CreateQuery
+      - Windows.Storage.Search.ContentIndexerQuery
+    sourceFiles:
+      - Scenarios/ContentIndexer/S3_RetrieveWithAPI.xaml.cs
+  - id: check-index-revision
+    title: Checking the index revision number
+    summary: Compare the current ContentIndexer revision with the expected value saved in local settings.
+    apis:
+      - Windows.Storage.Search.ContentIndexer.Revision
+      - Windows.Storage.ApplicationData
+    sourceFiles:
+      - Scenarios/ContentIndexer/S4_CheckIndexRevision.xaml.cs
+  - id: add-with-appcontent
+    title: Adding indexed items with appcontent-ms files
+    summary: Copy packaged appcontent-ms files into the app's indexed local folder for Windows Search to ingest.
+    apis:
+      - Windows.Storage.StorageFolder.GetFolderAsync
+      - Windows.Storage.StorageFile.CopyAsync
+    sourceFiles:
+      - Scenarios/ContentIndexer/S5_AddWithAppContent.xaml.cs
+      - Helpers.cs
+  - id: delete-with-appcontent
+    title: Deleting indexed appcontent-ms files
+    summary: Delete the copied appcontent-ms files from the indexed local folder.
+    apis:
+      - Windows.Storage.StorageFile.DeleteAsync
+    sourceFiles:
+      - Scenarios/ContentIndexer/S6_DeleteWithAppContent.xaml.cs
+  - id: retrieve-with-appcontent
+    title: Retrieving properties from appcontent-ms files
+    summary: Query indexed appcontent-ms files and retrieve their declared search properties.
+    apis:
+      - Windows.Storage.Search.CommonFileQuery
+      - Windows.Storage.Search.QueryOptions
+      - Windows.Storage.Search.IndexerOption
+    sourceFiles:
+      - Scenarios/ContentIndexer/S7_RetrieveWithAppContent.xaml.cs
+apis:
+  - name: Windows.Storage.Search.ContentIndexer
+    description: Adds, updates, deletes, and queries app content directly in the Windows Search index.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.search.contentindexer
+  - name: Windows.Storage.Search.IndexableContent
+    description: Represents the properties and stream content of one item to index.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.search.indexablecontent
+  - name: Windows.Storage.Search.ContentIndexerQuery
+    description: Runs a query created by ContentIndexer and returns matching indexed documents.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.search.contentindexerquery
+  - name: Windows.Storage.SystemProperties
+    description: Supplies well-known property keys used when adding and retrieving indexed content.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.systemproperties
+  - name: Windows.Storage.Search.QueryOptions
+    description: Restricts file queries to indexed results and supplies the application search filter.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.search.queryoptions
+  - name: Windows.Storage.ApplicationData
+    description: Persists the expected index revision in local settings across app sessions.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.applicationdata
+documentation:
+  - title: Application content schema
+    url: https://learn.microsoft.com/uwp/schemas/appcontentschema/schema-root
+    kind: concept
+  - title: ContentIndexer class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.search.contentindexer
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: Helpers.cs
+    label: Shared indexer helpers
+    description: Tracks the expected revision and implements shared ContentIndexer and appcontent-ms operations.
+  - path: Scenarios/ContentIndexer/S1_AddWithAPI.xaml.cs
+    label: Add an item through the API
+    description: Builds an IndexableContent item with optional per-property language and adds it to the index.
+  - path: Scenarios/ContentIndexer/S4_CheckIndexRevision.xaml.cs
+    label: Check the index revision
+    description: Compares the saved expected revision with ContentIndexer.Revision.
+  - path: Scenarios/ContentIndexer/S5_AddWithAppContent.xaml.cs
+    label: Add appcontent-ms files
+    description: Copies bundled appcontent-ms files into the indexed local folder.
+  - path: appcontent-ms/sample1.appcontent-ms
+    label: Application content fixture
+    description: Defines sample Name, Keywords, Comment, and System properties with the application content schema.
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the seven indexing scenarios shown in the navigation shell.
+relatedSamples: []
+screenshots:
+  - id: add-item-initial-state
+    alt: The Content Indexer app showing the untouched Add item form with its six fields and Add to index action.
+    scenario: add-item-with-api
+    capture:
+      mode: automatic
+      readinessSelector: text=Add to index
+      notes: Capture the initial form without input or clicks because repeated index mutation is not proven deterministic.

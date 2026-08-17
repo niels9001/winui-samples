@@ -1,0 +1,20 @@
+{
+  "name": "winui-samples",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "catalog:validate": "node tools/catalog/validate.mjs",
+    "catalog:validate:complete": "node tools/catalog/validate.mjs --require-complete",
+    "catalog:generate": "node tools/catalog/generate.mjs",
+    "catalog:test": "node --test tools/catalog/test/*.test.mjs",
+    "test": "pnpm catalog:test"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "yaml": "2.9.0"
+  }
+}

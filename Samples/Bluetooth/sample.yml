@@ -1,0 +1,168 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: bluetooth
+project:
+  folder: Bluetooth
+  name: Bluetooth
+title: Connecting to nearby Bluetooth devices
+summary: Discover, pair, and exchange data with nearby Bluetooth LE and classic Bluetooth devices using GATT and RFCOMM.
+aliases:
+  - Bluetooth
+  - Bluetooth C# sample
+  - BluetoothLE
+  - BluetoothRfcommChat
+  - BluetoothLEClient
+  - Bluetooth Low Energy
+  - GATT
+  - RFCOMM
+icon: BluetoothRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - networking
+tags:
+  - bluetooth
+  - bluetooth low energy
+  - ble
+  - gatt
+  - rfcomm
+  - device pairing
+  - device watcher
+  - StreamSocket
+originalSamples:
+  - name: BluetoothLE
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BluetoothLE
+  - name: BluetoothRfcommChat
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BluetoothRfcommChat
+scenarios:
+  - id: discover-and-pair-ble
+    title: "Client: Discover servers"
+    summary: Watches for nearby Bluetooth LE GATT servers and pairs the selected device for use by the client scenario.
+    apis:
+      - Windows.Devices.Enumeration.DeviceWatcher
+      - Windows.Devices.Enumeration.DeviceInformation
+      - Windows.Devices.Enumeration.DeviceInformation.Pairing
+    sourceFiles:
+      - Scenarios/BluetoothLE/Scenario1_Discovery.xaml
+      - Scenarios/BluetoothLE/Scenario1_Discovery.xaml.cs
+  - id: connect-ble-gatt-server
+    title: "Client: Connect to a server"
+    summary: Connects to the selected BLE device, enumerates its GATT services and characteristics, and reads, writes, or subscribes to values.
+    apis:
+      - Windows.Devices.Bluetooth.BluetoothLEDevice
+      - Windows.Devices.Bluetooth.GenericAttributeProfile.GattDeviceService
+      - Windows.Devices.Bluetooth.GenericAttributeProfile.GattCharacteristic
+    sourceFiles:
+      - Scenarios/BluetoothLE/Scenario2_Client.xaml
+      - Scenarios/BluetoothLE/Scenario2_Client.xaml.cs
+      - Scenarios/BluetoothLE/DisplayHelpers.cs
+  - id: rfcomm-chat-client
+    title: Chat client
+    summary: Discovers a classic Bluetooth RFCOMM chat service, connects over a StreamSocket, and exchanges text messages.
+    apis:
+      - Windows.Devices.Bluetooth.BluetoothDevice
+      - Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService
+      - Windows.Networking.Sockets.StreamSocket
+    sourceFiles:
+      - Scenarios/RfcommChat/Scenario1_ChatClient.xaml
+      - Scenarios/RfcommChat/Scenario1_ChatClient.xaml.cs
+  - id: rfcomm-chat-server
+    title: Foreground chat server
+    summary: Advertises a custom RFCOMM chat service, listens for one incoming client connection, and exchanges text messages.
+    apis:
+      - Windows.Devices.Bluetooth.Rfcomm.RfcommServiceProvider
+      - Windows.Networking.Sockets.StreamSocketListener
+    sourceFiles:
+      - Scenarios/RfcommChat/Scenario2_ChatServer.xaml
+      - Scenarios/RfcommChat/Scenario2_ChatServer.xaml.cs
+      - Scenarios/RfcommChat/RfcommChatConstants.cs
+apis:
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Watches for nearby Bluetooth LE and classic devices and reports changes to the discovery results.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+  - name: Windows.Devices.Enumeration.DeviceInformation
+    description: Represents a discovered device and exposes the pairing operation used by the BLE discovery scenario.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.deviceinformation
+  - name: Windows.Devices.Bluetooth.BluetoothLEDevice
+    description: Represents a Bluetooth LE device and provides access to its GATT services.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.bluetoothledevice
+  - name: Windows.Devices.Bluetooth.GenericAttributeProfile.GattDeviceService
+    description: Represents a remote GATT service and exposes its characteristics.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.genericattributeprofile.gattdeviceservice
+  - name: Windows.Devices.Bluetooth.GenericAttributeProfile.GattCharacteristic
+    description: Reads, writes, and subscribes to value changes on a GATT characteristic.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.genericattributeprofile.gattcharacteristic
+  - name: Windows.Devices.Bluetooth.BluetoothDevice
+    description: Represents a classic Bluetooth device and resolves its RFCOMM services.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.bluetoothdevice
+  - name: Windows.Devices.Bluetooth.Rfcomm.RfcommDeviceService
+    description: Represents the remote RFCOMM service used to open the chat connection.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.rfcomm.rfcommdeviceservice
+  - name: Windows.Devices.Bluetooth.Rfcomm.RfcommServiceProvider
+    description: Advertises the custom RFCOMM service UUID and SDP record used by the chat server.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.bluetooth.rfcomm.rfcommserviceprovider
+  - name: Windows.Networking.Sockets.StreamSocket
+    description: Sends and receives chat messages over the RFCOMM connection.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocket
+  - name: Windows.Networking.Sockets.StreamSocketListener
+    description: Accepts an incoming RFCOMM client connection on the foreground chat server.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.sockets.streamsocketlistener
+documentation:
+  - title: Bluetooth Low Energy overview
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/bluetooth-low-energy-overview
+    kind: concept
+  - title: GATT client
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/gatt-client
+    kind: learn
+  - title: Bluetooth RFCOMM
+    url: https://learn.microsoft.com/windows/apps/develop/devices-sensors/send-or-receive-files-with-rfcomm
+    kind: concept
+  - title: Enumerate and pair devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: bluetooth
+      kind: device
+      description: Allows the sample to enumerate, pair with, and communicate over Bluetooth LE GATT and RFCOMM.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Bluetooth radio or adapter enabled on the host PC
+    - A nearby BLE peripheral or a second Bluetooth device running the complementary RFCOMM chat role
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the Bluetooth LE and RFCOMM feature groups and their four navigation scenarios.
+  - path: Scenarios/BluetoothLE/Scenario1_Discovery.xaml.cs
+    label: BLE discovery and pairing
+    description: Watches for nearby BLE devices and pairs the selected result.
+  - path: Scenarios/BluetoothLE/Scenario2_Client.xaml.cs
+    label: GATT client
+    description: Connects to the selected device and enumerates, reads, writes, and subscribes to GATT characteristics.
+  - path: Scenarios/RfcommChat/Scenario1_ChatClient.xaml.cs
+    label: RFCOMM chat client
+    description: Discovers the custom chat service and exchanges text over a StreamSocket.
+  - path: Scenarios/RfcommChat/Scenario2_ChatServer.xaml.cs
+    label: RFCOMM chat server
+    description: Advertises the chat service and accepts one incoming StreamSocketListener connection.
+  - path: Package.appxmanifest
+    label: Bluetooth capability
+    description: Declares the Bluetooth device capability and full-trust package capability.
+relatedSamples: []
+screenshots:
+  - id: ble-discovery-results
+    alt: The Bluetooth app showing nearby Bluetooth LE devices in the Client Discover servers scenario.
+    scenario: discover-and-pair-ble
+    capture:
+      mode: manual
+      readinessSelector: text=Discover GATT servers
+      notes: The page starts with an empty results list and pairing disabled; manually start enumeration near a BLE device before capturing the populated state.

@@ -1,0 +1,118 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: library-management
+project:
+  folder: LibraryManagement
+  name: LibraryManagement
+title: Managing folders in the Pictures library
+summary: Add, list, and remove folders from the Pictures library definition while responding to library changes and user consent.
+aliases:
+  - LibraryManagement
+  - Library management
+  - Windows.Storage.StorageLibrary
+  - KnownLibraryId.Pictures
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - app-fundamentals
+tags:
+  - storage library
+  - Pictures library
+  - folders
+  - user consent
+  - library definition
+originalSamples:
+  - name: LibraryManagement
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LibraryManagement
+scenarios:
+  - id: add-folder
+    title: Add a folder
+    summary: Ask the user to add a folder to the Pictures library definition and report the selected folder.
+    apis:
+      - Windows.Storage.StorageLibrary.GetLibraryAsync
+      - Windows.Storage.StorageLibrary.RequestAddFolderAsync
+      - Windows.Storage.KnownLibraryId.Pictures
+    sourceFiles:
+      - Scenarios/AddFolderPage.xaml
+      - Scenarios/AddFolderPage.xaml.cs
+  - id: list-folders
+    title: List folders
+    summary: Enumerate the folders in the Pictures library and refresh the list when its definition changes.
+    apis:
+      - Windows.Storage.StorageLibrary.Folders
+      - Windows.Storage.StorageLibrary.DefinitionChanged
+      - Microsoft.UI.Dispatching.DispatcherQueue.TryEnqueue
+    sourceFiles:
+      - Scenarios/ListFoldersPage.xaml
+      - Scenarios/ListFoldersPage.xaml.cs
+  - id: remove-folder
+    title: Remove a folder
+    summary: Ask the user to remove a selected folder from the library definition without deleting its contents.
+    apis:
+      - Windows.Storage.StorageLibrary.RequestRemoveFolderAsync
+      - Windows.Storage.StorageLibrary.DefinitionChanged
+    sourceFiles:
+      - Scenarios/RemoveFolderPage.xaml
+      - Scenarios/RemoveFolderPage.xaml.cs
+apis:
+  - name: Windows.Storage.StorageLibrary
+    description: Opens a known library and adds, lists, removes, and monitors the folders in its definition.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.storagelibrary
+  - name: Windows.Storage.KnownLibraryId
+    description: Identifies the Pictures library that all three workflows manage.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.knownlibraryid
+  - name: Windows.Storage.StorageLibrary.DefinitionChanged
+    description: Notifies the listing and removal pages when the set of library folders changes.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.storagelibrary.definitionchanged
+documentation:
+  - title: StorageLibrary class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.storagelibrary
+    kind: api-reference
+  - title: Files, folders, and libraries
+    url: https://learn.microsoft.com/windows/uwp/files/
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: picturesLibrary
+      kind: general
+      description: Allows the app to enumerate and manage the current user's Pictures library definition.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific storage behavior.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Library scenarios
+    description: Registers the add, list, and remove workflows in the navigation shell.
+  - path: Scenarios/AddFolderPage.xaml.cs
+    label: Add a library folder
+    description: Opens the Pictures library and requests user consent to add a folder.
+  - path: Scenarios/ListFoldersPage.xaml.cs
+    label: List library folders
+    description: Enumerates folders and marshals DefinitionChanged updates through DispatcherQueue.
+  - path: Scenarios/RemoveFolderPage.xaml.cs
+    label: Remove a library folder
+    description: Tracks library changes and asks the user to remove the selected folder definition.
+  - path: Package.appxmanifest
+    label: Pictures library capability
+    description: Declares full-trust execution and access to the user's Pictures library.
+relatedSamples: []
+screenshots:
+  - id: pictures-library-folders
+    alt: The LibraryManagement app listing the folders currently included in the user's Pictures library.
+    scenario: list-folders
+    capture:
+      mode: manual
+      readinessSelector: text=List folders
+      actions:
+        - type: click
+          selector: name=List folders
+      notes: Capture a non-sensitive library state; adding or removing folders requires the packaged system consent experience.

@@ -1,0 +1,121 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: media-import
+project:
+  folder: MediaImport
+  name: MediaImport
+title: Importing photos and videos from connected devices
+summary: Discover cameras, phones, and removable media, then select, import, delete, cancel, or resume photo and video operations.
+aliases:
+  - MediaImport
+  - Media import
+  - Windows.Media.Import
+  - PhotoImportManager
+  - PhotoImportSession
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - files-and-data
+    - devices-and-sensors
+tags:
+  - photo import
+  - video import
+  - camera
+  - phone
+  - PTP
+  - MTP
+  - removable storage
+originalSamples:
+  - name: MediaImport
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MediaImport
+scenarios:
+  - id: import-media
+    title: Importing photos and videos
+    summary: Discover a source, find and select media, import it into the Pictures library, optionally delete it, and resume pending work.
+    apis:
+      - Windows.Media.Import.PhotoImportManager
+      - Windows.Media.Import.PhotoImportSource.CreateImportSession
+      - Windows.Media.Import.PhotoImportSession.FindItemsAsync
+      - Windows.Media.Import.PhotoImportFindItemsResult.ImportItemsAsync
+      - Windows.Media.Import.PhotoImportImportItemsResult.DeleteImportedItemsFromSourceAsync
+      - Windows.Media.Import.PhotoImportManager.GetPendingOperations
+    sourceFiles:
+      - MainPage.xaml
+      - MainPage.xaml.cs
+      - MainPage.ImportOperations.cs
+      - MainPage.Resume.cs
+apis:
+  - name: Windows.Media.Import.PhotoImportManager
+    description: Detects media-import support, discovers connected sources, and returns operations that can be resumed.
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportmanager
+  - name: Windows.Media.Import.PhotoImportSource
+    description: Represents a connected camera, phone, or removable-media source and creates an import session.
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportsource
+  - name: Windows.Media.Import.PhotoImportSession
+    description: Configures the source, destination, content filter, and item discovery operation.
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportsession
+  - name: Windows.Media.Import.PhotoImportFindItemsResult
+    description: Exposes discovered items, selection state, progress events, and the operation that imports selected media.
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportfinditemsresult
+  - name: Windows.Media.Import.PhotoImportOperation
+    description: Reconnects the app to a pending find, import, or delete operation after launch.
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportoperation
+documentation:
+  - title: Windows.Media.Import namespace
+    url: https://learn.microsoft.com/uwp/api/windows.media.import
+    kind: api-reference
+  - title: PhotoImportManager class
+    url: https://learn.microsoft.com/uwp/api/windows.media.import.photoimportmanager
+    kind: api-reference
+  - title: Application lifecycle migration
+    url: https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/guides/applifecycle
+    kind: migration
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: picturesLibrary
+      kind: general
+      description: Allows the app to import selected photos and videos into the current user's Pictures library.
+    - name: removableStorage
+      kind: general
+      description: Allows the app to discover and import media from compatible removable-storage sources.
+  hardware:
+    - A compatible PTP or MTP camera or phone, or removable media containing photos or videos
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific import behavior.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Import workflow
+    description: Defines the source, item-selection, destination, progress, and result surfaces for the direct-page workflow.
+  - path: MainPage.xaml.cs
+    label: Source discovery
+    description: Initializes photo import, discovers connected sources, and coordinates shared page state.
+  - path: MainPage.ImportOperations.cs
+    label: Import operations
+    description: Finds, selects, imports, and deletes media while reporting progress and supporting cancellation.
+  - path: MainPage.Resume.cs
+    label: Pending-operation recovery
+    description: Reconnects to interrupted find, import, and delete operations after a fresh app launch.
+  - path: Package.appxmanifest
+    label: Media access capabilities
+    description: Declares full-trust, Pictures library, and removable-storage access.
+relatedSamples: []
+screenshots:
+  - id: importable-media
+    alt: The MediaImport app showing a connected source, its importable photos and videos, and the import controls.
+    scenario: import-media
+    capture:
+      mode: manual
+      readinessSelector: text=Import photos and videos
+      actions:
+        - type: click
+          selector: name=Find media import sources
+      notes: Connect a compatible camera, phone, or removable-media source, discover it, and select non-sensitive test media before capture.

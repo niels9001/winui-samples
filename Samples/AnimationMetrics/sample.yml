@@ -1,0 +1,91 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: animation-metrics
+project:
+  folder: AnimationMetrics
+  name: AnimationMetrics
+title: Inspecting Windows animation timing and easing
+summary: Inspect the timing, easing, scale, translation, opacity, and z-order values that define selected Windows animation effects.
+aliases:
+  - AnimationMetrics
+  - Animation metrics
+  - Windows.UI.Core.AnimationMetrics
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - app-fundamentals
+tags:
+  - animation timing
+  - easing
+  - motion
+  - cubic Bezier
+originalSamples:
+  - name: AnimationMetrics
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AnimationMetrics
+scenarios:
+  - id: inspect-animation-metrics
+    title: Inspect animation metrics
+    summary: Compare the raw values for AddToList added and affected targets and the EnterPage primary target.
+    apis:
+      - Windows.UI.Core.AnimationMetrics.AnimationDescription
+      - Windows.UI.Core.AnimationMetrics.AnimationEffect
+      - Windows.UI.Core.AnimationMetrics.AnimationEffectTarget
+      - Windows.UI.Core.AnimationMetrics.IPropertyAnimation
+    sourceFiles:
+      - Scenarios/AnimationMetrics/Scenario1_Metrics.xaml
+      - Scenarios/AnimationMetrics/Scenario1_Metrics.xaml.cs
+apis:
+  - name: Windows.UI.Core.AnimationMetrics.AnimationDescription
+    description: Retrieves the platform metrics for a selected animation effect and target.
+    url: https://learn.microsoft.com/uwp/api/windows.ui.core.animationmetrics.animationdescription
+  - name: Windows.UI.Core.AnimationMetrics.AnimationEffect
+    description: Identifies the Windows animation effect whose timing and property values are requested.
+    url: https://learn.microsoft.com/uwp/api/windows.ui.core.animationmetrics.animationeffect
+  - name: Windows.UI.Core.AnimationMetrics.AnimationEffectTarget
+    description: Selects the primary, added, or affected target represented by the returned metrics.
+    url: https://learn.microsoft.com/uwp/api/windows.ui.core.animationmetrics.animationeffecttarget
+  - name: Windows.UI.Core.AnimationMetrics.IPropertyAnimation
+    description: Exposes shared timing and easing data for each property animation in the description.
+    url: https://learn.microsoft.com/uwp/api/windows.ui.core.animationmetrics.ipropertyanimation
+documentation:
+  - title: Windows.UI.Core.AnimationMetrics namespace
+    url: https://learn.microsoft.com/uwp/api/windows.ui.core.animationmetrics
+    kind: api-reference
+  - title: Timing and easing for Windows apps
+    url: https://learn.microsoft.com/windows/apps/design/motion/timing-and-easing
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the package manifest, although this sample does not call Windows AI model APIs.
+  hardware: []
+  accountServices: []
+  architectureNotes: The packaged project targets x86, x64, and ARM64 and uses the same Windows animation metrics implementation on every architecture.
+featuredFiles:
+  - path: Scenarios/AnimationMetrics/Scenario1_Metrics.xaml.cs
+    label: Animation metric inspection
+    description: Builds animation descriptions and formats their timing, easing, and property-specific values.
+  - path: Scenarios/AnimationMetrics/Scenario1_Metrics.xaml
+    label: Metric selection interface
+    description: Presents the effect and target choices with selectable read-only metric output.
+  - path: MainWindow.xaml.cs
+    label: Direct scenario navigation
+    description: Navigates directly to the only scenario instead of adding a single-item navigation shell.
+screenshots:
+  - id: animation-metric-values
+    alt: The animation metrics page showing effect choices beside raw duration, easing, scale, opacity, and z-order values.
+    scenario: inspect-animation-metrics
+    capture:
+      mode: automatic
+      readinessSelector: text=Metrics
+      notes: Capture the deterministic initial selection after the read-only metrics output has populated.

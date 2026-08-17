@@ -1,33 +1,46 @@
-# PDF document
+# PdfDocument
 
-Demonstrates how to load and render PDF files in a packaged WinUI 3 desktop app.
+Ported to WinUI 3 / Windows App SDK from the UWP
+[PdfDocument](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PdfDocument)
+sample.
 
-## What the sample shows
+## What it shows
 
-- Selecting a PDF file with a window-owned `FileOpenPicker`.
-- Loading both unprotected and password-protected documents.
-- Selecting a page with a one-based page number.
-- Rendering a complete page at its actual size.
-- Rendering a page at half size with a custom background color.
-- Rendering only the center region of a page.
-- Displaying rendered output from an in-memory random-access stream.
+This sample opens normal or password-protected PDF files and renders a selected page
+to a WinUI `Image`. It demonstrates full-size rendering, half-size rendering with a
+custom background, and center-cropped rendering.
+
+## Scenario
+
+**Load and render a PDF page** - Pick a PDF, optionally enter its password, select a
+page and rendering mode, and display the resulting bitmap. The workflow distinguishes
+an incorrect password from an invalid PDF and prevents overlapping load or render
+operations.
 
 ## APIs featured
 
-- [`Windows.Data.Pdf.PdfDocument`](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfdocument)
-- [`Windows.Data.Pdf.PdfPage`](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpage)
-- [`Windows.Data.Pdf.PdfPageRenderOptions`](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpagerenderoptions)
-- [`Windows.Storage.Pickers.FileOpenPicker`](https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker)
-- [`Microsoft.UI.Xaml.Media.Imaging.BitmapImage`](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.imaging.bitmapimage)
+- `Windows.Data.Pdf.PdfDocument`
+- `Windows.Data.Pdf.PdfPage`
+- `Windows.Data.Pdf.PdfPageRenderOptions`
+- `Windows.Storage.Pickers.FileOpenPicker`
+- `Windows.Storage.Streams.InMemoryRandomAccessStream`
+- `Microsoft.UI.Xaml.Media.Imaging.BitmapImage`
 
-## Learn documentation
+## Requirements
 
-- [UWP to Windows App SDK migration overview](https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/overview)
-- [Display WinRT UI objects that depend on CoreWindow](https://learn.microsoft.com/windows/apps/develop/ui-input/display-ui-objects)
+- A local PDF file is required for the interactive workflow.
+- A password is required only when the selected document is protected.
+- Large pages rendered at their native dimensions can require scrolling.
 
-## Build and run
+## Learn docs this serves
 
-From the sample folder:
+- [PdfDocument API reference](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfdocument)
+- [PdfPage API reference](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpage)
+- [PdfPageRenderOptions API reference](https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpagerenderoptions)
+- [FileOpenPicker API reference](https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker)
+- [BitmapImage API reference](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.imaging.bitmapimage)
+
+## Build & run
 
 ```powershell
 dotnet build -c Debug -p:Platform=x64
@@ -36,16 +49,15 @@ dotnet run -c Debug -p:Platform=x64
 
 ## Migration notes
 
-- The sample uses the WinUI 3 window lifecycle and stores the main window in
-  `App.MainWindow`.
-- `FileOpenPicker` is initialized with the main window's HWND before it is displayed.
-- The rendered stream is rewound before it is assigned to a WinUI 3 `BitmapImage`.
-- Pages and in-memory streams are disposed immediately after each render.
+The `FileOpenPicker` is initialized with the WinUI window handle. After a PDF page is
+rendered, the in-memory stream is rewound before it is passed to
+`BitmapImage.SetSource`.
 
 ## Known differences / limitations
 
-- The single scenario is hosted directly below the standard WinUI 3 title bar, with an
-  `InfoBar` for status and error messages.
-- PDF files are selected interactively rather than activated through a UWP file-association
-  contract.
-- Large pages render at their native pixel dimensions and may require scrolling.
+- The sample is an interactive direct page; it does not implement file-association
+  activation.
+- Rendering uses the selected page's requested dimensions and does not add
+  virtualization for very large output.
+- Successful rendering requires a valid PDF and the correct password when one is
+  configured.

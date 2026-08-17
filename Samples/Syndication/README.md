@@ -25,6 +25,14 @@ nodes.
 - [SyndicationClient class](https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationclient)
 - [SyndicationItem class](https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationitem)
 
+## Prerequisites and capabilities
+
+- Retrieving data requires a reachable HTTP or HTTPS RSS or Atom endpoint. The verified
+  default redirects to the Windows Developer Blog feed, and the address remains editable for
+  another public or intranet feed.
+- Opening an item link requires a registered handler for its URI scheme.
+- The package declares `internetClient`, `privateNetworkClientServer`, and `runFullTrust`.
+
 ## Build & run
 
 ```powershell

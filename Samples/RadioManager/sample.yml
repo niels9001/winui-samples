@@ -1,0 +1,102 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: radio-manager
+project:
+  folder: RadioManager
+  name: RadioManager
+title: Discovering and controlling device radios
+summary: Request radio access, enumerate the device's radios, track state changes, and turn supported non-cellular radios on or off.
+aliases:
+  - RadioManager
+  - Radio manager
+  - Windows.Devices.Radios
+  - Radio
+  - RadioState
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - app-fundamentals
+tags:
+  - radios
+  - Wi-Fi
+  - Bluetooth
+  - NFC
+  - device access
+originalSamples:
+  - name: RadioManager
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/RadioManager
+scenarios:
+  - id: toggle-radios
+    title: Enumerate and toggle radios
+    summary: Request access, bind discovered radios to switches, change their states, and marshal hardware state events back to the UI.
+    apis:
+      - Windows.Devices.Radios.Radio.RequestAccessAsync
+      - Windows.Devices.Radios.Radio.GetRadiosAsync
+      - Windows.Devices.Radios.Radio.SetStateAsync
+      - Windows.Devices.Radios.Radio.StateChanged
+    sourceFiles:
+      - Scenarios/RadioManager/Scenario1_Toggle.xaml
+      - Scenarios/RadioManager/Scenario1_Toggle.xaml.cs
+      - Scenarios/RadioManager/RadioModel.cs
+apis:
+  - name: Windows.Devices.Radios.Radio
+    description: Requests access, enumerates system radios, changes supported radio states, and raises state-change events.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.radios.radio
+  - name: Windows.Devices.Radios.RadioAccessStatus
+    description: Reports whether Windows allows the application to access radio controls.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.radios.radioaccessstatus
+  - name: Windows.Devices.Radios.RadioKind
+    description: Identifies the radio type and lets the sample disable MobileBroadband controls.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.radios.radiokind
+  - name: Microsoft.UI.Dispatching.DispatcherQueue
+    description: Marshals radio StateChanged notifications to the WinUI thread before updating bound properties.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.dispatching.dispatcherqueue
+documentation:
+  - title: Radio API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.radios.radio
+    kind: api-reference
+  - title: RadioAccessStatus API reference
+    url: https://learn.microsoft.com/uwp/api/windows.devices.radios.radioaccessstatus
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: radios
+      kind: device
+      description: Allows the sample to request access to and control supported system radios.
+  hardware:
+    - At least one Windows radio is needed to display a device; available radio kinds depend on the current hardware.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; discovered radios and allowed state changes depend on the device and Windows access status.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Radio scenario catalog
+    description: Registers the single radio enumeration and control workflow.
+  - path: Scenarios/RadioManager/Scenario1_Toggle.xaml.cs
+    label: Request and enumerate radios
+    description: Requests access, retrieves radios, and creates the models shown in the switch list.
+  - path: Scenarios/RadioManager/RadioModel.cs
+    label: Synchronize radio state
+    description: Changes radio state asynchronously, disables cellular controls, and dispatches state events to the UI.
+  - path: Scenarios/RadioManager/Scenario1_Toggle.xaml
+    label: Bound radio switches
+    description: Defines the named list and per-radio ToggleSwitch bindings for name, state, and availability.
+  - path: Package.appxmanifest
+    label: Radio capability
+    description: Declares the radios device capability and full-trust desktop execution.
+screenshots:
+  - id: radio-list
+    alt: The Radio Manager app listing available device radios with switches for their current on or off states.
+    scenario: toggle-radios
+    capture:
+      mode: manual
+      readinessSelector: Name=RadioSwitchList
+      notes: Capture after access and enumeration complete; the visible radio kinds and states are device-dependent.

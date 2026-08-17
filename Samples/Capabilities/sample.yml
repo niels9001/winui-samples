@@ -1,0 +1,107 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: capabilities
+project:
+  folder: Capabilities
+  name: Capabilities
+title: Checking and requesting declared app capabilities
+summary: Check whether a declared capability is granted, react to access changes, set a usage message, and request location and webcam access together.
+aliases:
+  - Capabilities
+  - Capability
+  - Capability sample
+  - AppCapability
+  - App capability access
+icon: ShieldCheckmarkRegular
+categories:
+  primary: security-and-identity
+  secondary:
+    - location
+    - devices-and-sensors
+tags:
+  - capabilities
+  - privacy
+  - location
+  - webcam
+  - permissions
+originalSamples:
+  - name: Capabilities
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Capabilities
+scenarios:
+  - id: check-capability-display-message
+    title: Check capability and set display message
+    summary: Check location capability access, react to changes, and set a usage message while streaming a location.
+    apis:
+      - Windows.Security.Authorization.AppCapabilityAccess.AppCapability
+      - Windows.Devices.Geolocation.Geolocator
+      - Windows.System.Launcher
+    sourceFiles:
+      - Scenarios/Capabilities/Scenario1_Check.xaml.cs
+  - id: request-multiple-capabilities
+    title: Request multiple capabilities
+    summary: Request access to location and webcam capabilities in one call and report each result.
+    apis:
+      - Windows.Security.Authorization.AppCapabilityAccess.AppCapability
+    sourceFiles:
+      - Scenarios/Capabilities/Scenario2_RequestMany.xaml.cs
+apis:
+  - name: Windows.Security.Authorization.AppCapabilityAccess.AppCapability
+    description: Creates a capability object, checks and requests access, and sets a usage display message.
+    url: https://learn.microsoft.com/uwp/api/windows.security.authorization.appcapabilityaccess.appcapability
+  - name: Windows.Security.Authorization.AppCapabilityAccess.AppCapabilityAccessStatus
+    description: Reports whether access to a declared capability is allowed, denied, or requires a prompt.
+    url: https://learn.microsoft.com/uwp/api/windows.security.authorization.appcapabilityaccess.appcapabilityaccessstatus
+  - name: Windows.Devices.Geolocation.Geolocator
+    description: Requests geolocation access and streams position updates after location access is allowed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geolocator
+  - name: Windows.System.Launcher
+    description: Opens the Windows privacy settings page when capability access has been denied.
+    url: https://learn.microsoft.com/uwp/api/windows.system.launcher
+documentation:
+  - title: AppCapability class
+    url: https://learn.microsoft.com/uwp/api/windows.security.authorization.appcapabilityaccess.appcapability
+    kind: api-reference
+  - title: App capability declarations
+    url: https://learn.microsoft.com/windows/uwp/packaging/app-capability-declarations
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.22621.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: location
+      kind: device
+      description: Declares the location capability that the scenarios check, stream, and set a usage message for.
+    - name: webcam
+      kind: device
+      description: Declares the webcam capability requested together with location in the multi-capability scenario.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 with no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the two capability scenarios shown in the navigation shell.
+  - path: Scenarios/Capabilities/Scenario1_Check.xaml.cs
+    label: Check capability and stream location
+    description: Checks access, reacts to AccessChanged, sets DisplayMessage, and streams Geolocator positions.
+  - path: Scenarios/Capabilities/Scenario2_RequestMany.xaml.cs
+    label: Request multiple capabilities
+    description: Requests access to the location and webcam capabilities in one operation.
+  - path: Package.appxmanifest
+    label: Declared capabilities
+    description: Declares the runFullTrust, location, and webcam capabilities exercised by the scenarios.
+relatedSamples: []
+screenshots:
+  - id: check-capability-display-message
+    alt: The Capabilities app showing location access status and the Stream location for 2 seconds action.
+    scenario: check-capability-display-message
+    capture:
+      mode: automatic
+      readinessSelector: text=Check capability and set display message
+      notes: Capture before starting location streaming so the image does not depend on a consent prompt or location provider.

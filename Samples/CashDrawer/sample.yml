@@ -1,0 +1,119 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: cash-drawer
+project:
+  folder: CashDrawer
+  name: CashDrawer
+title: Claiming, opening, and monitoring a cash drawer
+summary: Discover, claim, enable, and open a point-of-service cash drawer, monitor its close status, and handle competing device claims.
+aliases:
+  - CashDrawer
+  - Cash Drawer
+  - Cash drawer sample
+  - Windows.Devices.PointOfService.CashDrawer
+  - POS cash drawer
+icon: PaymentRegular
+categories:
+  primary: retail-and-industry
+  secondary:
+    - devices-and-sensors
+tags:
+  - point of service
+  - pos
+  - cash drawer
+  - retail hardware
+  - device claim
+originalSamples:
+  - name: CashDrawer
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CashDrawer
+scenarios:
+  - id: claim-and-open-drawer
+    title: Drawer claim and open
+    summary: Discover the first connected cash drawer, claim and enable it, then open the drawer.
+    apis:
+      - Windows.Devices.PointOfService.CashDrawer
+      - Windows.Devices.PointOfService.ClaimedCashDrawer
+      - Windows.Devices.Enumeration.DeviceInformation
+    sourceFiles:
+      - Scenarios/CashDrawer/Scenario1_OpenDrawer.xaml.cs
+      - DeviceHelpers.cs
+  - id: wait-for-drawer-close
+    title: Wait for drawer close
+    summary: Subscribe to drawer status updates and configure an alarm while waiting for an open drawer to close.
+    apis:
+      - Windows.Devices.PointOfService.CashDrawer
+      - Windows.Devices.PointOfService.CashDrawerCloseAlarm
+    sourceFiles:
+      - Scenarios/CashDrawer/Scenario2_CloseDrawer.xaml.cs
+  - id: drawer-retain-and-release
+    title: Drawer retain and release
+    summary: Create two claims on one drawer and choose whether each instance retains or releases it on request.
+    apis:
+      - Windows.Devices.PointOfService.ClaimedCashDrawer
+    sourceFiles:
+      - Scenarios/CashDrawer/Scenario3_MultipleDrawers.xaml.cs
+apis:
+  - name: Windows.Devices.PointOfService.CashDrawer
+    description: Enumerates, opens by ID, claims, and reports status for a physical cash drawer.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.cashdrawer
+  - name: Windows.Devices.PointOfService.ClaimedCashDrawer
+    description: Provides exclusive enable, open, close-alarm, and competing-claim operations.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedcashdrawer
+  - name: Windows.Devices.PointOfService.CashDrawerCloseAlarm
+    description: Configures beep timing and waits for the drawer to close, with a timeout.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.cashdrawerclosealarm
+  - name: Windows.Devices.Enumeration.DeviceInformation
+    description: Finds locally connected cash drawers with a cash-drawer-specific device selector.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.deviceinformation
+documentation:
+  - title: CashDrawer class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.cashdrawer
+    kind: api-reference
+  - title: Point of service device support
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/point-of-service
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: pointOfService
+      kind: device
+      description: Allows the sample to enumerate and claim compatible point-of-service cash drawers.
+  hardware:
+    - Point-of-service cash drawer compatible with Windows.Devices.PointOfService
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 with no architecture-specific implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scenario catalog
+    description: Declares the three cash drawer scenarios shown in the navigation shell.
+  - path: DeviceHelpers.cs
+    label: Cash drawer discovery
+    description: Selects and returns the first connected CashDrawer.
+  - path: Scenarios/CashDrawer/Scenario1_OpenDrawer.xaml.cs
+    label: Claim, enable, and open
+    description: Claims the first cash drawer, enables it, and opens it.
+  - path: Scenarios/CashDrawer/Scenario2_CloseDrawer.xaml.cs
+    label: Status and close alarm
+    description: Subscribes to status updates and waits on CashDrawerCloseAlarm.
+  - path: Scenarios/CashDrawer/Scenario3_MultipleDrawers.xaml.cs
+    label: Competing claims
+    description: Handles retain-or-release requests between two claims on the same drawer.
+  - path: Package.appxmanifest
+    label: Point-of-service capability
+    description: Declares the pointOfService device capability required by the scenarios.
+relatedSamples: []
+screenshots:
+  - id: claim-and-open-drawer
+    alt: The Cash Drawer app showing Initialize drawer and a disabled Open drawer action before a device is connected.
+    scenario: claim-and-open-drawer
+    capture:
+      mode: automatic
+      readinessSelector: text=Drawer claim and open
+      notes: Capture the safe initial no-device state; a successful claim or open requires POS hardware and manual capture.

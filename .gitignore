@@ -47,3 +47,10 @@ Generated Files/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Node tooling
+node_modules/
+.pnpm-store/
+
+# Generated sample catalog
+/site/src/generated/sample-catalog.json

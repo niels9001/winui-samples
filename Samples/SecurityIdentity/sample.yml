@@ -1,0 +1,178 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: security-identity
+project:
+  folder: SecurityIdentity
+  name: SecurityIdentity
+title: Working with Windows identity and protected data
+summary: Enumerate users, create local Windows Hello credentials, and protect files or memory according to the current user's data-availability state.
+aliases:
+  - SecurityIdentity
+  - UserInfo
+  - KeyCredentialManager
+  - PersonalDataEncryption
+  - Windows Hello
+  - UserDataProtectionManager
+icon: ShieldRegular
+categories:
+  primary: security-and-identity
+  secondary:
+    - app-fundamentals
+    - files-and-data
+tags:
+  - users
+  - Windows Hello
+  - key credentials
+  - personal data encryption
+  - user consent
+  - data protection
+originalSamples:
+  - name: KeyCredentialManager
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/KeyCredentialManager
+  - name: PersonalDataEncryption
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PersonalDataEncryption
+  - name: UserInfo
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/UserInfo
+scenarios:
+  - id: find-users
+    title: Find users
+    summary: Enumerate users available to the app and retrieve selected profile properties for the chosen user.
+    apis:
+      - Windows.System.User.FindAllAsync
+      - Windows.System.User.GetPropertiesAsync
+      - Windows.System.KnownUserProperties
+    sourceFiles:
+      - Scenarios/UserInfo/Scenario1_FindUsers.xaml
+      - Scenarios/UserInfo/Scenario1_FindUsers.xaml.cs
+      - Scenarios/UserInfo/UserInfoHelper.cs
+  - id: watch-users
+    title: Watch users
+    summary: Create a UserWatcher and update the UI as users are added, updated, removed, or finish enumeration.
+    apis:
+      - Windows.System.User.CreateWatcher
+      - Windows.System.UserWatcher
+      - Windows.System.User.GetPropertyAsync
+    sourceFiles:
+      - Scenarios/UserInfo/Scenario2_WatchUsers.xaml
+      - Scenarios/UserInfo/Scenario2_WatchUsers.xaml.cs
+  - id: user-consent-groups
+    title: Check user age-consent groups
+    summary: Evaluate child, minor, and adult age-consent groups for a selected Windows user.
+    apis:
+      - Windows.System.User.CheckUserAgeConsentGroupAsync
+      - Windows.System.UserAgeConsentGroup
+      - Windows.System.UserAgeConsentResult
+    sourceFiles:
+      - Scenarios/UserInfo/Scenario3_CheckUserConsentGroup.xaml
+      - Scenarios/UserInfo/Scenario3_CheckUserConsentGroup.xaml.cs
+  - id: windows-hello-sign-in
+    title: Create and use a Windows Hello credential
+    summary: Create or open a local key credential, retrieve its public key and attestation, and request a user-authorized signature.
+    apis:
+      - Windows.Security.Credentials.KeyCredentialManager.IsSupportedAsync
+      - Windows.Security.Credentials.KeyCredentialManager.RequestCreateAsync
+      - Windows.Security.Credentials.KeyCredentialManager.OpenAsync
+      - Windows.Security.Credentials.KeyCredential.RequestSignAsync
+    sourceFiles:
+      - Scenarios/KeyCredentialManager/UserSelect.xaml
+      - Scenarios/KeyCredentialManager/UserSelect.xaml.cs
+      - Scenarios/KeyCredentialManager/SignIn.xaml
+      - Scenarios/KeyCredentialManager/SignIn.xaml.cs
+  - id: protect-files
+    title: Protect files and folders
+    summary: Pick a storage item and set its personal-data availability to after first unlock, while unlocked, or always available.
+    apis:
+      - Windows.Security.DataProtection.UserDataProtectionManager.TryGetDefault
+      - Windows.Security.DataProtection.UserDataProtectionManager.ProtectStorageItemAsync
+      - Windows.Security.DataProtection.UserDataAvailability
+    sourceFiles:
+      - Scenarios/PersonalDataEncryption/Scenario1_Files.xaml
+      - Scenarios/PersonalDataEncryption/Scenario1_Files.xaml.cs
+  - id: protect-memory
+    title: Protect data in memory
+    summary: Protect a UTF-8 buffer for the selected availability level and unprotect it when user data is available.
+    apis:
+      - Windows.Security.DataProtection.UserDataProtectionManager.ProtectBufferAsync
+      - Windows.Security.DataProtection.UserDataProtectionManager.UnprotectBufferAsync
+      - Windows.Security.Cryptography.CryptographicBuffer
+    sourceFiles:
+      - Scenarios/PersonalDataEncryption/Scenario2_Memory.xaml
+      - Scenarios/PersonalDataEncryption/Scenario2_Memory.xaml.cs
+apis:
+  - name: Windows.System.User
+    description: Enumerates Windows users, reads permitted profile properties, and evaluates age-consent groups.
+    url: https://learn.microsoft.com/uwp/api/windows.system.user
+  - name: Windows.System.UserWatcher
+    description: Reports user additions, updates, removals, initial enumeration completion, and watcher shutdown.
+    url: https://learn.microsoft.com/uwp/api/windows.system.userwatcher
+  - name: Windows.Security.Credentials.KeyCredentialManager
+    description: Checks Windows Hello key support and creates, opens, or deletes credentials stored for a local account identifier.
+    url: https://learn.microsoft.com/uwp/api/windows.security.credentials.keycredentialmanager
+  - name: Windows.Security.Credentials.KeyCredential
+    description: Retrieves a public key and attestation and requests a user-authorized signature with the private key.
+    url: https://learn.microsoft.com/uwp/api/windows.security.credentials.keycredential
+  - name: Windows.Security.DataProtection.UserDataProtectionManager
+    description: Protects storage items and buffers according to whether the current user's protected data is available.
+    url: https://learn.microsoft.com/uwp/api/windows.security.dataprotection.userdataprotectionmanager
+  - name: Windows.Security.DataProtection.UserDataAvailability
+    description: Selects after-first-unlock, while-unlocked, or always-available protection for personal data.
+    url: https://learn.microsoft.com/uwp/api/windows.security.dataprotection.userdataavailability
+documentation:
+  - title: User API reference
+    url: https://learn.microsoft.com/uwp/api/windows.system.user
+    kind: api-reference
+  - title: KeyCredentialManager API reference
+    url: https://learn.microsoft.com/uwp/api/windows.security.credentials.keycredentialmanager
+    kind: api-reference
+  - title: UserDataProtectionManager API reference
+    url: https://learn.microsoft.com/uwp/api/windows.security.dataprotection.userdataprotectionmanager
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: userAccountInformation
+      kind: general
+      description: Allows the UserInfo scenarios to request profile properties for users visible to the app.
+    - name: internetClient
+      kind: general
+      description: Is declared by the package, although the audited scenarios contain no implemented external network request.
+  hardware:
+    - A Windows Hello-capable security device may be used for key protection or attestation; the configured gesture is determined by Windows.
+  accountServices:
+    - The Windows Hello scenario expects a connected Microsoft account and a Windows PIN, as documented by its availability check.
+    - Personal Data Encryption must be available for the current user for the file and memory protection controls to be enabled.
+  architectureNotes: The manifest minimum is 17763, but Personal Data Encryption APIs require build 18362 or later; the project targets x86, x64, and ARM64.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Identity scenario catalog
+    description: Groups the six UserInfo, key credential, and personal data encryption workflows.
+  - path: Scenarios/UserInfo/Scenario1_FindUsers.xaml.cs
+    label: Enumerate user profiles
+    description: Finds users and retrieves the permitted properties selected by the scenario.
+  - path: Scenarios/UserInfo/Scenario2_WatchUsers.xaml.cs
+    label: Watch user changes
+    description: Handles every UserWatcher event and marshals the resulting user list updates.
+  - path: Scenarios/KeyCredentialManager/SignIn.xaml.cs
+    label: Windows Hello credential flow
+    description: Checks support, creates or opens a credential, retrieves attestation, and requests a signature.
+  - path: Scenarios/PersonalDataEncryption/Scenario1_Files.xaml.cs
+    label: Protect storage items
+    description: Uses a window-associated picker and applies the selected personal-data availability level.
+  - path: Scenarios/PersonalDataEncryption/Scenario2_Memory.xaml.cs
+    label: Protect memory buffers
+    description: Converts text to a buffer, protects it, and reports whether unprotection succeeds.
+screenshots:
+  - id: user-list
+    alt: The Security and Identity app showing available Windows users and controls for displaying selected profile properties.
+    scenario: find-users
+    capture:
+      mode: manual
+      readinessSelector: Name=UserList
+      notes: User enumeration and visible profile properties depend on the accounts and permissions of the current Windows environment.

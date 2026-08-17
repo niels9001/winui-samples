@@ -1,0 +1,132 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: media-transcoding
+project:
+  folder: MediaTranscoding
+  name: MediaTranscoding
+title: Transcoding and trimming local video files
+summary: Convert MP4 or WMV video with presets or custom settings, trim a selected range, report progress, and preview the result.
+aliases:
+  - MediaTranscoding
+  - Media transcoding
+  - Windows.Media.Transcoding
+  - MediaTranscoder
+  - MediaEncodingProfile
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - files-and-data
+tags:
+  - transcoding
+  - video encoding
+  - trimming
+  - media playback
+  - MP4
+  - WMV
+  - AVI
+originalSamples:
+  - name: MediaTranscoding
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MediaTranscoding
+scenarios:
+  - id: preset-transcoding
+    title: Transcode using default presets
+    summary: Convert an MP4 or WMV source to MP4, WMV, or uncompressed AVI with a built-in resolution profile.
+    apis:
+      - Windows.Media.Transcoding.MediaTranscoder.PrepareFileTranscodeAsync
+      - Windows.Media.MediaProperties.MediaEncodingProfile.CreateMp4
+      - Windows.Media.MediaProperties.MediaEncodingProfile.CreateWmv
+      - Windows.Media.MediaProperties.MediaEncodingProfile.CreateAvi
+    sourceFiles:
+      - Scenarios/TranscodingPage.xaml
+      - Scenarios/TranscodingPage.xaml.cs
+      - Scenarios/TranscodingPage.Profiles.cs
+  - id: custom-transcoding
+    title: Transcode with custom settings
+    summary: Configure output dimensions, frame rate, video bitrate, sample rate, audio bitrate, sample size, and channel count.
+    apis:
+      - Windows.Media.Transcoding.MediaTranscoder
+      - Windows.Media.MediaProperties.MediaEncodingProfile
+      - Windows.Media.MediaProperties.VideoEncodingProperties
+      - Windows.Media.MediaProperties.AudioEncodingProperties
+    sourceFiles:
+      - Scenarios/TranscodingPage.xaml
+      - Scenarios/TranscodingPage.Profiles.cs
+  - id: trim-and-transcode
+    title: Trim and transcode
+    summary: Choose mark-in and mark-out positions from the source preview and transcode only the selected range.
+    apis:
+      - Windows.Media.Transcoding.MediaTranscoder.TrimStartTime
+      - Windows.Media.Transcoding.MediaTranscoder.TrimStopTime
+      - Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    sourceFiles:
+      - Scenarios/TranscodingPage.xaml
+      - Scenarios/TranscodingPage.xaml.cs
+      - Scenarios/TranscodingPage.Profiles.cs
+apis:
+  - name: Windows.Media.Transcoding.MediaTranscoder
+    description: Prepares and runs file transcoding operations with progress, cancellation, trim, and processing controls.
+    url: https://learn.microsoft.com/uwp/api/windows.media.transcoding.mediatranscoder
+  - name: Windows.Media.Transcoding.PrepareTranscodeResult
+    description: Reports whether the requested conversion can run and starts the asynchronous transcode operation.
+    url: https://learn.microsoft.com/uwp/api/windows.media.transcoding.preparetranscoderesult
+  - name: Windows.Media.MediaProperties.MediaEncodingProfile
+    description: Creates built-in profiles and carries custom video and audio encoding properties.
+    url: https://learn.microsoft.com/uwp/api/windows.media.mediaproperties.mediaencodingprofile
+  - name: Microsoft.UI.Xaml.Controls.MediaPlayerElement
+    description: Hosts the source and transcoded-output previews in the WinUI interface.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.mediaplayerelement
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Selects a local MP4 or WMV source after the picker is associated with the WinUI window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+  - name: Windows.Storage.Pickers.FileSavePicker
+    description: Chooses the output file and format after the picker is associated with the WinUI window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.filesavepicker
+documentation:
+  - title: Transcode media files
+    url: https://learn.microsoft.com/windows/apps/develop/media-authoring-processing/transcode-media-files
+    kind: learn
+  - title: MediaTranscoder class
+    url: https://learn.microsoft.com/uwp/api/windows.media.transcoding.mediatranscoder
+    kind: api-reference
+  - title: Display audio and video with MediaPlayer
+    url: https://learn.microsoft.com/windows/apps/develop/media-playback/play-audio-and-video-with-mediaplayer
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; supported input, output, and playback formats depend on installed Windows codecs.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Transcoding scenarios
+    description: Registers the preset, custom-settings, and trim workflows that share the transcoding page.
+  - path: Scenarios/TranscodingPage.xaml.cs
+    label: Transcoding workflow
+    description: Coordinates file pickers, preview players, preparation, progress, cancellation, output, and cleanup.
+  - path: Scenarios/TranscodingPage.Profiles.cs
+    label: Encoding profiles
+    description: Builds preset and custom encoding profiles and configures trim offsets for each scenario.
+  - path: MediaFoundationConstants.cs
+    label: H.264 profile constants
+    description: Defines the Media Foundation identifiers used to request H.264 Level 5.2 for custom output.
+relatedSamples: []
+screenshots:
+  - id: preset-transcoding
+    alt: The MediaTranscoding app showing preset output controls with source and transcoded-video preview panels.
+    scenario: preset-transcoding
+    capture:
+      mode: manual
+      readinessSelector: text=Transcode using default presets
+      actions:
+        - type: click
+          selector: AutomationId=PickSourceButton
+      notes: Select a non-sensitive local MP4 or WMV file and a writable output path, then capture the stable preset UI after transcoding finishes.

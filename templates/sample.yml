@@ -1,0 +1,62 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: replace-with-stable-slug
+project:
+  folder: ExactFolderName
+  name: ExactProjectName
+title: Describe the developer outcome
+summary: Explain what a developer can accomplish with this sample in one concise sentence.
+aliases:
+  - ExactProjectName
+  - Original UWP sample or API name
+icon: AppsRegular
+categories:
+  primary: app-fundamentals
+  secondary: []
+tags:
+  - searchable term
+originalSamples:
+  - name: OriginalSampleName
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/OriginalSampleName
+scenarios:
+  - id: representative-scenario
+    title: Describe the scenario
+    summary: Explain the scenario outcome.
+    apis:
+      - Windows.Example.ApiName
+    sourceFiles:
+      - Scenarios/Scenario1.xaml.cs
+apis:
+  - name: Windows.Example.ApiName
+    description: Explain why this API matters to the sample.
+    url: https://learn.microsoft.com/uwp/api/windows.example.apiname
+documentation:
+  - title: Relevant Microsoft Learn documentation
+    url: https://learn.microsoft.com/windows/apps/
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities: []
+  hardware: []
+  accountServices: []
+  architectureNotes: The sample has no architecture-specific behavior.
+featuredFiles:
+  - path: Scenarios/Scenario1.xaml.cs
+    label: Representative implementation
+    description: Explain what a developer should learn from this file.
+relatedSamples: []
+screenshots:
+  - id: representative-state
+    alt: Describe the meaningful app UI and state shown in the image.
+    scenario: representative-scenario
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=RepresentativeControl
+      actions:
+        - type: click
+          selector: AutomationId=RepresentativeAction
+      notes: Capture the stable result after the scenario finishes.

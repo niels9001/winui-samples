@@ -1,12 +1,12 @@
-# AnimationMetrics
+# Inspecting Windows animation timing and easing
 
-Ported to WinUI 3 / Windows App SDK from the UWP
+The `AnimationMetrics` project was ported to WinUI 3 / Windows App SDK from the UWP
 [AnimationMetrics](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/AnimationMetrics)
 sample.
 
 ## What it shows
 
-The sample retrieves the raw parameters that define selected Windows animations. Choose
+Inspect the raw parameters that define selected Windows animations. Choose
 between the added and affected targets of the `AddToList` effect or the primary target of
 the `EnterPage` effect to inspect:
 

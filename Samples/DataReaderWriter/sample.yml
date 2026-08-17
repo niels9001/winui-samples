@@ -1,0 +1,106 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: data-reader-writer
+project:
+  folder: DataReaderWriter
+  name: DataReaderWriter
+title: Reading and writing structured stream data
+summary: Serialize strings into an in-memory stream, read them back, and inspect packaged file bytes as a hexadecimal dump.
+aliases:
+  - DataReaderWriter
+  - DataReader
+  - DataWriter
+  - Windows.Storage.Streams
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary: []
+tags:
+  - streams
+  - serialization
+  - binary data
+  - buffers
+  - hex dump
+originalSamples:
+  - name: DataReaderWriter
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DataReaderWriter
+scenarios:
+  - id: read-write-structured-data
+    title: Read and write simple structured data
+    apis:
+      - Windows.Storage.Streams.InMemoryRandomAccessStream
+      - Windows.Storage.Streams.DataWriter
+      - Windows.Storage.Streams.DataReader
+    sourceFiles:
+      - Scenarios/DataReaderWriter/Scenario1_WriteReadStream.xaml.cs
+  - id: dump-file-bytes
+    title: Dump file contents using ReadBytes()
+    apis:
+      - Windows.Storage.StorageFile.OpenSequentialReadAsync
+      - Windows.Storage.Streams.DataReader.LoadAsync
+      - Windows.Storage.Streams.DataReader.ReadBytes
+    sourceFiles:
+      - Scenarios/DataReaderWriter/Scenario2_ReadBytes.xaml.cs
+apis:
+  - name: Windows.Storage.Streams.DataReader
+    description: Loads primitive values, strings, and byte arrays from an input stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+  - name: Windows.Storage.Streams.DataWriter
+    description: Encodes structured values and stores them in an output stream.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+  - name: Windows.Storage.Streams.InMemoryRandomAccessStream
+    description: Provides the memory-backed stream used for the round-trip serialization scenario.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.inmemoryrandomaccessstream
+documentation:
+  - title: DataReader class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datareader
+    kind: api-reference
+  - title: DataWriter class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+    kind: api-reference
+  - title: InMemoryRandomAccessStream class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.inmemoryrandomaccessstream
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: Both scenarios use memory or packaged assets and have no architecture-specific or external-service requirements.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Stream scenarios
+    description: Declares the structured-data round trip and packaged-file byte dump.
+  - path: Scenarios/DataReaderWriter/Scenario1_WriteReadStream.xaml.cs
+    label: Round-trip structured data
+    description: Writes length-prefixed UTF-8 strings to memory and reads them back with matching byte order.
+  - path: Scenarios/DataReaderWriter/Scenario1_WriteReadStream.xaml
+    label: Structured data interface
+    description: Presents the fixed input values and the output produced by the round trip.
+  - path: Scenarios/DataReaderWriter/Scenario2_ReadBytes.xaml.cs
+    label: Read file bytes
+    description: Opens a packaged image sequentially and formats DataReader byte chunks as a hexadecimal dump.
+  - path: Scenarios/DataReaderWriter/Scenario2_ReadBytes.xaml
+    label: Hex dump interface
+    description: Displays the packaged file and the hexadecimal byte output.
+relatedSamples:
+  - datagram-socket
+  - file-access
+screenshots:
+  - id: structured-data-round-trip
+    alt: The structured stream data app showing fixed input strings and the values copied through an in-memory stream.
+    scenario: read-write-structured-data
+    capture:
+      mode: automatic
+      readinessSelector: text=Copy Strings
+      actions:
+        - type: click
+          selector: text=Copy Strings
+      notes: Capture after the fixed strings appear in the output; this scenario has no external dependencies.

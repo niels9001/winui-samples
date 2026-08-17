@@ -1,0 +1,515 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/niels9001/winui-samples/blob/main/metadata/schema/v1/sample.schema.json",
+  "title": "WinUI sample metadata",
+  "description": "Canonical authored metadata for one WinUI sample project.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "id",
+    "project",
+    "title",
+    "summary",
+    "aliases",
+    "icon",
+    "categories",
+    "tags",
+    "originalSamples",
+    "scenarios",
+    "apis",
+    "documentation",
+    "requirements",
+    "featuredFiles",
+    "screenshots"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../../metadata/schema/v1/sample.schema.json"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/slug"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "folder",
+        "name"
+      ],
+      "properties": {
+        "folder": {
+          "$ref": "#/$defs/technicalName"
+        },
+        "name": {
+          "$ref": "#/$defs/technicalName"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 100
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 240,
+      "pattern": "^[^\\r\\n]+[.!?]$"
+    },
+    "aliases": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      }
+    },
+    "icon": {
+      "$ref": "#/$defs/fluentIcon"
+    },
+    "categories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary",
+        "secondary"
+      ],
+      "properties": {
+        "primary": {
+          "$ref": "#/$defs/slug"
+        },
+        "secondary": {
+          "type": "array",
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/slug"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 50
+      }
+    },
+    "originalSamples": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "url"
+        ],
+        "properties": {
+          "name": {
+            "$ref": "#/$defs/technicalName"
+          },
+          "url": {
+            "$ref": "#/$defs/httpsUrl"
+          }
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/slug"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 240
+          },
+          "apis": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160
+            }
+          },
+          "sourceFiles": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/relativePath"
+            }
+          }
+        }
+      }
+    },
+    "apis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "description": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 240
+          },
+          "url": {
+            "$ref": "#/$defs/httpsUrl"
+          }
+        }
+      }
+    },
+    "documentation": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "url",
+          "kind"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 140
+          },
+          "url": {
+            "$ref": "#/$defs/httpsUrl"
+          },
+          "kind": {
+            "enum": [
+              "learn",
+              "api-reference",
+              "concept",
+              "migration",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumWindowsVersion",
+        "supportedArchitectures",
+        "capabilities",
+        "hardware",
+        "accountServices",
+        "architectureNotes"
+      ],
+      "properties": {
+        "minimumWindowsVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "supportedArchitectures": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "x86",
+              "x64",
+              "arm64"
+            ]
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "kind",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "kind": {
+                "enum": [
+                  "general",
+                  "device",
+                  "restricted"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 240
+              }
+            }
+          }
+        },
+        "hardware": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 160
+          }
+        },
+        "accountServices": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 160
+          }
+        },
+        "architectureNotes": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 300
+        }
+      }
+    },
+    "featuredFiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "label"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/relativePath"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 240
+          }
+        }
+      }
+    },
+    "relatedSamples": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/slug"
+      }
+    },
+    "screenshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "alt",
+          "scenario",
+          "capture"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/slug"
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 200
+          },
+          "scenario": {
+            "$ref": "#/$defs/slug"
+          },
+          "capture": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode",
+              "readinessSelector"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "automatic",
+                  "manual"
+                ]
+              },
+              "readinessSelector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "actions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/captureAction"
+                }
+              },
+              "notes": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "technicalName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
+      "maxLength": 100
+    },
+    "fluentIcon": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*(Regular|Filled)$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$",
+      "maxLength": 500
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 260
+    },
+    "captureAction": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "selector"
+          ],
+          "properties": {
+            "type": {
+              "const": "click"
+            },
+            "selector": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "selector",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "input",
+                "select"
+              ]
+            },
+            "selector": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "value": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "durationMs"
+          ],
+          "properties": {
+            "type": {
+              "const": "wait"
+            },
+            "durationMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 60000
+            },
+            "notes": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            }
+          }
+        }
+      ]
+    }
+  }
+}
