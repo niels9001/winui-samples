@@ -1,0 +1,35 @@
+<Page
+    x:Class="SDKTemplate.Scenario1_OpenDrawer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Drawer claim and open" />
+            <TextBlock
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Discover the first locally connected cash drawer, claim and enable it, and then open the drawer."
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="InitDrawerButton"
+                Width="180"
+                Click="InitDrawerButton_Click"
+                Content="Initialize drawer" />
+            <Button
+                x:Name="OpenDrawerButton"
+                Width="180"
+                Click="OpenDrawerButton_Click"
+                Content="Open drawer"
+                IsEnabled="False" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

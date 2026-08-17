@@ -1,0 +1,45 @@
+<Page
+    x:Class="SDKTemplate.Scenario2_CloseDrawer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="24"
+            HorizontalAlignment="Left"
+            Spacing="12">
+            <TextBlock
+                Style="{StaticResource SubtitleTextBlockStyle}"
+                Text="Wait for drawer close" />
+            <TextBlock
+                MaxWidth="720"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="Register for cash-drawer status changes and configure an alarm while waiting for an open drawer to close."
+                TextWrapping="Wrap" />
+            <Button
+                x:Name="InitDrawerButton"
+                Width="210"
+                Click="InitDrawerButton_Click"
+                Content="Initialize drawer" />
+            <Button
+                x:Name="DrawerWaitButton"
+                Width="210"
+                Click="WaitForDrawerCloseButton_Click"
+                Content="Wait for drawer close"
+                IsEnabled="False" />
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="Drawer status:" />
+                <TextBlock
+                    x:Name="DrawerStatusBlock"
+                    VerticalAlignment="Center"
+                    Text="Offline" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
