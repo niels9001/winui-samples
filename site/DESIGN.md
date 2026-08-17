@@ -4,9 +4,9 @@
 
 1. Lead with the task a developer can accomplish. The authored intent title is
    always the primary heading; the technical project name is secondary.
-2. Keep the catalog honest during rollout. Coverage and empty states describe
-   what is published without implying that missing metadata means a missing
-   project.
+2. Keep the catalog honest. Coverage and empty states remain valid UI contracts
+   for previews and inventory transitions, while production currently enforces
+   complete metadata.
 3. Preserve a Windows character without imitating product chrome. Fluent color,
    Segoe typography, restrained surfaces, System Icons, and clear focus states
    provide the shared language.

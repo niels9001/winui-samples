@@ -15,8 +15,9 @@ pnpm site:check
 pnpm site:build
 ```
 
-Each root `site:*` command validates the staged metadata and regenerates
-`site/src/generated/sample-catalog.json` before invoking the site workspace.
+Each root `site:*` command validates the complete metadata inventory and
+regenerates `site/src/generated/sample-catalog.json` before invoking the site
+workspace.
 `pnpm site:verify` runs the catalog tests, site contract tests, type checks, and
 static build in deployment order.
 
@@ -41,10 +42,10 @@ deterministic JSON output is generated into `src/generated/` and ignored by Git.
 `src/lib/catalog.ts` defines and checks the site-facing contract; pages import
 the checked singleton from `src/lib/catalog-data.ts`.
 
-The regular catalog validator intentionally supports partial metadata. The site
-uses the generated coverage object to explain staged rollout and renders an
-empty state when no samples are available. The 71/71 completeness command
-remains opt-in until every metadata pull request has landed.
+Site components continue to support partial and empty generated catalogs for
+local previews and future inventory transitions. Production verification and
+deployment now require complete metadata because all 71 catalog records have
+landed.
 
 ## Foundation boundaries
 
