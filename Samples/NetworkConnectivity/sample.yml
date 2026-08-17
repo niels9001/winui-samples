@@ -1,0 +1,135 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: network-connectivity
+project:
+  folder: NetworkConnectivity
+  name: NetworkConnectivity
+title: Adapting app behavior to network availability and cost
+summary: Query connectivity and connection cost, decide when to use the network, and respond to status changes on the UI thread.
+aliases:
+  - NetworkConnectivity
+  - Network connectivity
+  - Windows.Networking.Connectivity
+  - NetworkInformation
+  - ConnectionProfile
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - app-fundamentals
+tags:
+  - connectivity
+  - network status
+  - connection cost
+  - metered network
+  - roaming
+  - internet access
+originalSamples:
+  - name: NetworkConnectivity
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/NetworkConnectivity
+scenarios:
+  - id: query-connectivity
+    title: Query network connectivity
+    summary: Read the current internet connection profile, evaluate its connectivity and cost, and optionally confirm access with HTTP.
+    apis:
+      - Windows.Networking.Connectivity.NetworkInformation.GetInternetConnectionProfile
+      - Windows.Networking.Connectivity.ConnectionProfile.GetNetworkConnectivityLevel
+      - Windows.Networking.Connectivity.ConnectionProfile.GetConnectionCost
+      - Windows.Web.Http.HttpClient
+    sourceFiles:
+      - Scenarios/NetworkConnectivity/Scenario1_NetworkConnectivity.xaml
+      - Scenarios/NetworkConnectivity/Scenario1_NetworkConnectivity.xaml.cs
+      - Scenarios/NetworkConnectivity/Helpers.cs
+  - id: network-cost
+    title: Get network cost information
+    summary: Report the current network cost type and derive normal, conservative, or opt-in usage guidance.
+    apis:
+      - Windows.Networking.Connectivity.ConnectionProfile.GetConnectionCost
+      - Windows.Networking.Connectivity.ConnectionCost
+      - Windows.Networking.Connectivity.NetworkCostType
+    sourceFiles:
+      - Scenarios/NetworkConnectivity/Scenario2_NetworkCost.xaml
+      - Scenarios/NetworkConnectivity/Scenario2_NetworkCost.xaml.cs
+      - Scenarios/NetworkConnectivity/Helpers.cs
+  - id: connectivity-changes
+    title: Listen to connectivity changes
+    summary: Register for network status changes, coalesce rapid notifications, and update connectivity and cost guidance.
+    apis:
+      - Windows.Networking.Connectivity.NetworkInformation.NetworkStatusChanged
+      - Microsoft.UI.Dispatching.DispatcherQueue.TryEnqueue
+    sourceFiles:
+      - Scenarios/NetworkConnectivity/Scenario3_NetworkConnectivityChanges.xaml
+      - Scenarios/NetworkConnectivity/Scenario3_NetworkConnectivityChanges.xaml.cs
+      - Scenarios/NetworkConnectivity/Helpers.cs
+apis:
+  - name: Windows.Networking.Connectivity.NetworkInformation
+    description: Returns the current connection profile and raises notifications when network status changes.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.networkinformation
+  - name: Windows.Networking.Connectivity.ConnectionProfile
+    description: Reports connectivity level and cost information for the current internet connection.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.connectionprofile
+  - name: Windows.Networking.Connectivity.ConnectionCost
+    description: Describes network cost type, roaming state, and whether the data limit has been exceeded.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.connectioncost
+  - name: Windows.Networking.Connectivity.NetworkConnectivityLevel
+    description: Distinguishes no connectivity, constrained access, local access, and internet access.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.networkconnectivitylevel
+  - name: Windows.Web.Http.HttpClient
+    description: Performs the optional connectivity probe after the sample evaluates network availability and cost.
+    url: https://learn.microsoft.com/uwp/api/windows.web.http.httpclient
+documentation:
+  - title: NetworkInformation.GetInternetConnectionProfile method
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.networkinformation.getinternetconnectionprofile
+    kind: api-reference
+  - title: Windows.Networking.Connectivity namespace
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity
+    kind: api-reference
+  - title: NetworkInformation class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.connectivity.networkinformation
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: internetClient
+      kind: general
+      description: Allows the optional HTTP probe that confirms internet access after connectivity and cost checks.
+  hardware:
+    - A Wi-Fi, Ethernet, or cellular network adapter for connected results
+  accountServices:
+    - An active local or internet connection for non-empty connectivity and cost results
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific networking behavior.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Connectivity scenarios
+    description: Registers query, cost, and network-status-change workflows.
+  - path: Scenarios/NetworkConnectivity/Scenario1_NetworkConnectivity.xaml.cs
+    label: Connectivity query
+    description: Reads the current profile and delegates cost-aware connection decisions to the helper.
+  - path: Scenarios/NetworkConnectivity/Scenario3_NetworkConnectivityChanges.xaml.cs
+    label: Connectivity notifications
+    description: Registers for status changes, coalesces callbacks, and marshals updates through DispatcherQueue.
+  - path: Scenarios/NetworkConnectivity/Helpers.cs
+    label: Cost-aware connection policy
+    description: Evaluates connectivity and cost before making the HTTP connectivity request.
+  - path: Package.appxmanifest
+    label: Network capability
+    description: Declares full-trust execution and internet client access.
+relatedSamples: []
+screenshots:
+  - id: current-connectivity
+    alt: The NetworkConnectivity app reporting the current connection level and cost-aware internet access decision.
+    scenario: query-connectivity
+    capture:
+      mode: manual
+      readinessSelector: text=Query network connectivity
+      actions:
+        - type: click
+          selector: name=Check network connectivity
+      notes: Capture on a known test network and avoid presenting the environment-specific result as universal or hardware validation.

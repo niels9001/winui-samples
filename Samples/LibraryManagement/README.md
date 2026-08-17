@@ -1,4 +1,4 @@
-# Library management
+# LibraryManagement
 
 Ported to WinUI 3 / Windows App SDK from the UWP
 [LibraryManagement](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/LibraryManagement)
@@ -6,8 +6,9 @@ sample.
 
 ## What it shows
 
-This sample adds, lists, and removes folders from the user's Pictures library definition.
-Removing a folder from the library does not delete the folder or its contents.
+This sample provides three scenarios for adding, listing, and removing folders from the
+user's Pictures library definition. Removing a folder from the library does not delete the
+folder or its contents.
 
 ## APIs featured
 

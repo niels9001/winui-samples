@@ -1,0 +1,112 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: magnetic-stripe-reader
+project:
+  folder: MagneticStripeReader
+  name: MagneticStripeReader
+title: Reading cards with a magnetic stripe reader
+summary: Discover, claim, and read decoded bank-card and AAMVA data from a point-of-service magnetic stripe reader.
+aliases:
+  - MagneticStripeReader
+  - Magnetic stripe reader
+  - Windows.Devices.PointOfService.MagneticStripeReader
+  - MSR
+  - AAMVA
+icon: CartRegular
+categories:
+  primary: retail-and-industry
+  secondary:
+    - devices-and-sensors
+tags:
+  - point of service
+  - POS
+  - card reader
+  - bank card
+  - AAMVA
+  - hardware
+originalSamples:
+  - name: MagneticStripeReader
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MagneticStripeReader
+scenarios:
+  - id: read-bank-cards
+    title: Reading bank cards
+    summary: Claim and enable a reader, receive decoded bank-card fields, and retain the device when its claim is requested.
+    apis:
+      - Windows.Devices.PointOfService.MagneticStripeReader
+      - Windows.Devices.PointOfService.ClaimedMagneticStripeReader.BankCardDataReceived
+      - Windows.Devices.PointOfService.ClaimedMagneticStripeReader.RetainDevice
+    sourceFiles:
+      - Scenarios/Scenario1_BankCards.xaml
+      - Scenarios/Scenario1_BankCards.xaml.cs
+  - id: read-aamva-cards
+    title: Reading AAMVA cards
+    summary: Receive decoded identity, license, address, and physical-description fields from an AAMVA motor-vehicle card.
+    apis:
+      - Windows.Devices.PointOfService.MagneticStripeReader
+      - Windows.Devices.PointOfService.ClaimedMagneticStripeReader.AamvaCardDataReceived
+    sourceFiles:
+      - Scenarios/Scenario2_AamvaCards.xaml
+      - Scenarios/Scenario2_AamvaCards.xaml.cs
+apis:
+  - name: Windows.Devices.PointOfService.MagneticStripeReader
+    description: Discovers a magnetic stripe reader and creates the claim used to receive decoded card data.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.magneticstripereader
+  - name: Windows.Devices.PointOfService.ClaimedMagneticStripeReader
+    description: Enables the claimed reader, raises decoded card events, and supports retaining the device claim.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedmagneticstripereader
+  - name: Windows.Devices.PointOfService.MagneticStripeReaderBankCardDataReceivedEventArgs
+    description: Exposes the decoded account, cardholder, expiration, and service-code fields for a bank card.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.magneticstripereaderbankcarddatareceivedeventargs
+  - name: Windows.Devices.PointOfService.MagneticStripeReaderAamvaCardDataReceivedEventArgs
+    description: Exposes decoded AAMVA identity, license, address, and physical-description fields.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.magneticstripereaderaamvacarddatareceivedeventargs
+documentation:
+  - title: Windows.Devices.PointOfService namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice
+    kind: api-reference
+  - title: MagneticStripeReader class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.magneticstripereader
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: pointOfService
+      kind: device
+      description: Allows the app to discover, claim, and communicate with point-of-service reader hardware.
+  hardware:
+    - A compatible point-of-service magnetic stripe reader
+    - A suitable encoded bank card or AAMVA motor-vehicle card for live data
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and uses the same point-of-service APIs on every architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Reader scenarios
+    description: Declares the bank-card and AAMVA-card workflows shown in the navigation shell.
+  - path: DeviceHelpers.cs
+    label: Reader discovery
+    description: Enumerates point-of-service devices and opens the first available magnetic stripe reader.
+  - path: Scenarios/Scenario1_BankCards.xaml.cs
+    label: Bank-card reader
+    description: Claims and enables the reader, handles decoded bank-card events, and manages the device lifetime.
+  - path: Scenarios/Scenario2_AamvaCards.xaml.cs
+    label: AAMVA-card reader
+    description: Handles decoded motor-vehicle-card data and presents the returned fields.
+  - path: Package.appxmanifest
+    label: Point-of-service capability
+    description: Declares full-trust execution and access to point-of-service hardware.
+relatedSamples: []
+screenshots:
+  - id: bank-card-data
+    alt: The MagneticStripeReader app displaying decoded bank-card fields beside controls for starting and ending reading.
+    scenario: read-bank-cards
+    capture:
+      mode: manual
+      readinessSelector: text=Reading bank cards
+      notes: Connect a compatible reader, start reading, and swipe a non-sensitive test card; never capture real payment data.
