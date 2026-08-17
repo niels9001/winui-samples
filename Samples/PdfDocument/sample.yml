@@ -1,0 +1,100 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: pdf-document
+project:
+  folder: PdfDocument
+  name: PdfDocument
+title: Loading and rendering PDF pages
+summary: Open normal or password-protected PDF files and render complete, resized, or center-cropped pages into WinUI image content.
+aliases:
+  - PdfDocument
+  - PDF document
+  - Windows.Data.Pdf
+  - PdfPage
+  - PdfPageRenderOptions
+icon: DocumentRegular
+categories:
+  primary: files-and-data
+  secondary:
+    - ui-and-input
+tags:
+  - PDF
+  - documents
+  - rendering
+  - password protected
+  - file picker
+originalSamples:
+  - name: PdfDocument
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/PdfDocument
+scenarios:
+  - id: render-page
+    title: Load and render a PDF page
+    summary: Pick a PDF, optionally supply its password, choose a page and render mode, and display the rendered image.
+    apis:
+      - Windows.Data.Pdf.PdfDocument
+      - Windows.Data.Pdf.PdfPage
+      - Windows.Data.Pdf.PdfPageRenderOptions
+      - Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/PdfRenderPage.xaml
+      - Scenarios/PdfRenderPage.xaml.cs
+apis:
+  - name: Windows.Data.Pdf.PdfDocument
+    description: Loads a selected PDF file, including documents that require a password, and exposes its pages.
+    url: https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfdocument
+  - name: Windows.Data.Pdf.PdfPage
+    description: Represents one PDF page and renders it into an in-memory random-access stream.
+    url: https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpage
+  - name: Windows.Data.Pdf.PdfPageRenderOptions
+    description: Controls destination size, background color, and source rectangle for resized and cropped rendering.
+    url: https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpagerenderoptions
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Selects a local PDF after the picker is initialized with the desktop window handle.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+  - name: Microsoft.UI.Xaml.Media.Imaging.BitmapImage
+    description: Displays the rendered PDF stream in the WinUI image surface.
+    url: https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.media.imaging.bitmapimage
+documentation:
+  - title: PdfDocument API reference
+    url: https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfdocument
+    kind: api-reference
+  - title: PdfPageRenderOptions API reference
+    url: https://learn.microsoft.com/uwp/api/windows.data.pdf.pdfpagerenderoptions
+    kind: api-reference
+  - title: FileOpenPicker API reference
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific PDF rendering path.
+featuredFiles:
+  - path: Scenarios/PdfRenderPage.xaml.cs
+    label: PDF loading and rendering
+    description: Handles file selection, password errors, page validation, render options, stream lifetime, and image display.
+  - path: Scenarios/PdfRenderPage.xaml
+    label: Rendering controls
+    description: Defines accessible controls for passwords, page selection, render modes, progress, and output.
+  - path: Strings/en-US/Resources.resw
+    label: PDF user interface resources
+    description: Contains the localized labels and error messages used by the rendering workflow.
+  - path: Package.appxmanifest
+    label: Package requirements
+    description: Declares the minimum Windows version and full-trust capability for the packaged app.
+screenshots:
+  - id: rendered-page
+    alt: The PDF Document app showing a rendered page beside page-number and rendering-option controls.
+    scenario: render-page
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=LoadDocumentButton
+      notes: Load a known PDF and render a page before capture; file selection and optional password entry require operator input.

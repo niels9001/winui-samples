@@ -1,0 +1,132 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: midi
+project:
+  folder: MIDI
+  name: MIDI
+title: Discovering devices and exchanging MIDI messages
+summary: Enumerate MIDI ports, receive and inspect incoming messages, and construct and send channel and system messages.
+aliases:
+  - MIDI
+  - Musical Instrument Digital Interface
+  - Windows.Devices.Midi
+  - MidiInPort
+  - MidiOutPort
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - media
+tags:
+  - MIDI
+  - musical instruments
+  - device enumeration
+  - input port
+  - output port
+  - messages
+originalSamples:
+  - name: MIDI
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/MIDI
+scenarios:
+  - id: enumerate-midi-devices
+    title: MIDI Device Enumeration
+    summary: Enumerate input and output ports manually or watch for live device additions, removals, and updates.
+    apis:
+      - Windows.Devices.Midi.MidiInPort.GetDeviceSelector
+      - Windows.Devices.Midi.MidiOutPort.GetDeviceSelector
+      - Windows.Devices.Enumeration.DeviceInformation.FindAllAsync
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - MidiDeviceWatcher.cs
+      - Scenarios/MIDI/Scenario1_MIDIDeviceEnumeration.xaml
+      - Scenarios/MIDI/Scenario1_MIDIDeviceEnumeration.xaml.cs
+  - id: receive-midi-messages
+    title: Receive MIDI Messages
+    summary: Open selected input ports, receive messages, and decode their timestamps, types, channels, and message-specific values.
+    apis:
+      - Windows.Devices.Midi.MidiInPort.FromIdAsync
+      - Windows.Devices.Midi.MidiInPort.MessageReceived
+      - Windows.Devices.Midi.IMidiMessage
+      - Windows.Devices.Midi.MidiMessageType
+    sourceFiles:
+      - Scenarios/MIDI/Scenario2_ReceiveMIDIMessages.xaml
+      - Scenarios/MIDI/Scenario2_ReceiveMIDIMessages.xaml.cs
+  - id: send-midi-messages
+    title: Send MIDI Messages
+    summary: Select an output port, construct channel or system messages, and send them to the connected device.
+    apis:
+      - Windows.Devices.Midi.MidiOutPort.FromIdAsync
+      - Windows.Devices.Midi.IMidiOutPort.SendMessage
+      - Windows.Devices.Midi.MidiMessageType
+      - Windows.Devices.Midi.MidiSystemExclusiveMessage
+    sourceFiles:
+      - Scenarios/MIDI/Scenario3_SendMIDIMessages.xaml
+      - Scenarios/MIDI/Scenario3_SendMIDIMessages.xaml.cs
+apis:
+  - name: Windows.Devices.Midi.MidiInPort
+    description: Discovers and opens MIDI input ports and raises events for incoming messages.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.midiinport
+  - name: Windows.Devices.Midi.MidiOutPort
+    description: Discovers and opens MIDI output ports that can send constructed messages.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.midioutport
+  - name: Windows.Devices.Midi.IMidiMessage
+    description: Provides the timestamp, message type, and raw data shared by incoming and outgoing MIDI messages.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.imidimessage
+  - name: Windows.Devices.Midi.MidiMessageType
+    description: Identifies channel, system-common, and system-real-time message formats.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.midimessagetype
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Tracks MIDI input and output devices as they are connected, updated, and removed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+documentation:
+  - title: MIDI
+    url: https://learn.microsoft.com/windows/uwp/audio-video-camera/midi
+    kind: learn
+  - title: Windows.Devices.Midi namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi
+    kind: api-reference
+  - title: MidiInPort class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.midiinport
+    kind: api-reference
+  - title: MidiOutPort class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.midi.midioutport
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A physical MIDI input or output device, or a configured virtual MIDI port, for live messaging
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and uses the same Windows MIDI APIs on every architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: MIDI scenarios
+    description: Registers device enumeration, message receive, and message send workflows.
+  - path: MidiDeviceWatcher.cs
+    label: MIDI device watcher
+    description: Wraps DeviceWatcher and marshals live MIDI device-list updates to the UI thread.
+  - path: Scenarios/MIDI/Scenario1_MIDIDeviceEnumeration.xaml.cs
+    label: MIDI enumeration
+    description: Implements manual enumeration and automatic detection for input and output ports.
+  - path: Scenarios/MIDI/Scenario2_ReceiveMIDIMessages.xaml.cs
+    label: MIDI message receiver
+    description: Opens selected input ports and formats every supported incoming message type.
+  - path: Scenarios/MIDI/Scenario3_SendMIDIMessages.xaml.cs
+    label: MIDI message sender
+    description: Builds and sends channel, system-common, system-real-time, and SysEx messages.
+relatedSamples: []
+screenshots:
+  - id: midi-device-enumeration
+    alt: The MIDI app showing connected input and output ports with the selected device's properties.
+    scenario: enumerate-midi-devices
+    capture:
+      mode: manual
+      readinessSelector: text=MIDI Device Enumeration
+      notes: Connect physical MIDI hardware or configure virtual ports, allow auto-detection to populate the lists, and select a port before capture.

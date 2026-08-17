@@ -55,8 +55,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Test catalog tooling
         run: pnpm catalog:test
-      - name: Validate staged metadata
-        run: pnpm catalog:validate
+      - name: Validate complete metadata
+        run: pnpm catalog:validate:complete
       - name: Generate site catalog
         run: pnpm catalog:generate:site
       - name: Test site data contracts

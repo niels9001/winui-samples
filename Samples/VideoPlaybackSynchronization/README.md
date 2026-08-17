@@ -25,6 +25,15 @@ and synchronizing two adaptive HLS sources.
 - [Adaptive streaming](https://learn.microsoft.com/windows/uwp/audio-video-camera/adaptive-streaming)
 - [MediaTimelineController](https://learn.microsoft.com/uwp/api/windows.media.mediatimelinecontroller)
 
+## Prerequisites and capabilities
+
+- The multi-camera and offset scenarios use seven packaged synthetic H.264 clips and work
+  offline when Windows media playback components are available.
+- The adaptive scenario requires internet access and two reachable HTTPS HLS manifests. Both
+  fields default to a verified public video-on-demand test stream and remain editable.
+- The package declares `internetClient` for adaptive media and `runFullTrust` for the packaged
+  WinUI 3 desktop app.
+
 ## Build & run
 
 ```powershell
@@ -48,4 +57,11 @@ dotnet run -c Debug -p:Platform=x64
 - Media source wrappers, underlying adaptive sources, and players are explicitly detached and
   disposed when a scenario is reloaded or left.
 
-Only the adaptive HLS scenario requires network access. Packaged scenarios work offline.
+## Known differences / limitations
+
+- The packaged clips replace retired hosted media and are intentionally short synthetic
+  synchronization aids, not production camera footage.
+- The public HLS endpoint is an external test service and can change or become unavailable.
+  Enter another compatible HTTPS HLS video-on-demand or live manifest when needed.
+- A shared timeline aligns player position and applies authored offsets; it does not correct
+  mismatched content, incompatible manifests, decoder failures, or network stalls.

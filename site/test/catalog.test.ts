@@ -9,7 +9,7 @@ const generatedCatalogUrl = new URL(
   import.meta.url,
 );
 
-test("loads the generated partial catalog and FileAccess pilot", async () => {
+test("loads the generated complete catalog and FileAccess pilot", async () => {
   const source = await readFile(generatedCatalogUrl, "utf8");
   const catalog = parseCatalog(JSON.parse(source));
   const pilot = catalog.samples.find((sample) => sample.id === "file-access");
@@ -20,7 +20,16 @@ test("loads the generated partial catalog and FileAccess pilot", async () => {
     pilot.title,
     "Reading and writing files in a Windows app",
   );
-  assert.ok(catalog.coverage.metadataFiles < catalog.coverage.totalProjects);
+  assert.equal(
+    catalog.coverage.metadataFiles,
+    catalog.coverage.totalProjects,
+  );
+  assert.equal(
+    catalog.coverage.validSamples,
+    catalog.coverage.totalProjects,
+  );
+  assert.equal(catalog.samples.length, catalog.coverage.totalProjects);
+  assert.deepEqual(catalog.coverage.missingProjects, []);
 });
 
 test("fails clearly when generated data does not match the catalog contract", () => {

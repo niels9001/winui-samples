@@ -66,8 +66,8 @@ the technical project name separately and keep it searchable through `project`,
   arrays when none are required.
 - Keep featured file paths relative to the sample folder. Every path must exist with
   the exact spelling and casing in the repository.
-- Use stable sample ids in `relatedSamples`. During staged rollout, unresolved ids
-  warn; the completeness gate treats them as errors.
+- Use stable sample ids in `relatedSamples`. Unresolved ids warn in the regular
+  validator and fail the required completeness gate.
 
 ## Screenshot and capture metadata
 
@@ -87,9 +87,10 @@ or environment-dependent states.
 2. Read the project README, manifest, project file, scenario configuration, and
    featured implementation files.
 3. Replace every placeholder with verified facts and remove unused optional fields.
-4. Run `pnpm catalog:validate`.
-5. Generate a local preview with `pnpm catalog:generate -- --output <path>`.
+4. Run `pnpm catalog:validate:complete`.
+5. Generate a local preview with
+   `pnpm catalog:generate -- --require-complete --output <path>`.
 
-The default validator supports incremental enrichment. Run
-`pnpm catalog:validate:complete` only when checking whether every discovered project
-has metadata.
+Catalog CI runs the completeness gate so every discovered project must have valid
+metadata. The regular validator remains available when drafting an isolated fixture
+or metadata record.

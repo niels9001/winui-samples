@@ -1,0 +1,112 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: user-consent-verifier
+project:
+  folder: UserConsentVerifier
+  name: UserConsentVerifier
+title: Verifying the signed-in user with Windows Hello
+summary: Check whether user verification is available and request a Windows-owned Hello, biometric, or PIN prompt for a WinUI window.
+aliases:
+  - UserConsentVerifier
+  - Windows Hello
+  - user verification
+  - IUserConsentVerifierInterop
+icon: ShieldRegular
+categories:
+  primary: security-and-identity
+  secondary:
+    - app-fundamentals
+tags:
+  - Windows Hello
+  - PIN
+  - biometrics
+  - consent
+  - HWND interop
+originalSamples:
+  - name: UserConsentVerifier
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/UserConsentVerifier
+scenarios:
+  - id: check-availability
+    title: Check verification availability
+    summary: Report whether a verifier is available, absent, unconfigured, busy, or disabled by policy for the signed-in user.
+    apis:
+      - Windows.Security.Credentials.UI.UserConsentVerifier.CheckAvailabilityAsync
+      - Windows.Security.Credentials.UI.UserConsentVerifierAvailability
+    sourceFiles:
+      - Scenarios/AvailabilityPage.xaml
+      - Scenarios/AvailabilityPage.xaml.cs
+      - ConsentResultFormatter.cs
+  - id: request-verification
+    title: Request user verification
+    summary: Associate a Windows-owned verification prompt with the WinUI window and report the resulting verification status.
+    apis:
+      - Windows.Security.Credentials.UI.UserConsentVerifierInterop.RequestVerificationForWindowAsync
+      - Windows.Security.Credentials.UI.UserConsentVerificationResult
+      - WinRT.Interop.WindowNative.GetWindowHandle
+    sourceFiles:
+      - Scenarios/VerificationPage.xaml
+      - Scenarios/VerificationPage.xaml.cs
+      - ConsentResultFormatter.cs
+apis:
+  - name: Windows.Security.Credentials.UI.UserConsentVerifier
+    description: Checks whether Windows can verify the signed-in user with a configured method.
+    url: https://learn.microsoft.com/uwp/api/windows.security.credentials.ui.userconsentverifier
+  - name: Windows.Security.Credentials.UI.UserConsentVerifierInterop
+    description: Requests interactive verification owned by a specific desktop window.
+    url: https://learn.microsoft.com/windows/win32/api/userconsentverifierinterop/nn-userconsentverifierinterop-iuserconsentverifierinterop
+  - name: Windows.Security.Credentials.UI.UserConsentVerifierAvailability
+    description: Distinguishes available, absent, unconfigured, busy, and policy-disabled verifier states.
+  - name: Windows.Security.Credentials.UI.UserConsentVerificationResult
+    description: Reports verified, canceled, unavailable, busy, policy-disabled, and retry-exhausted outcomes.
+  - name: WinRT.Interop.WindowNative
+    description: Supplies the HWND used to associate the Windows verification prompt with the WinUI window.
+documentation:
+  - title: UserConsentVerifier class
+    url: https://learn.microsoft.com/uwp/api/windows.security.credentials.ui.userconsentverifier
+    kind: api-reference
+  - title: IUserConsentVerifierInterop interface
+    url: https://learn.microsoft.com/windows/win32/api/userconsentverifierinterop/nn-userconsentverifierinterop-iuserconsentverifierinterop
+    kind: api-reference
+  - title: Call interop APIs from a .NET app
+    url: https://learn.microsoft.com/windows/apps/desktop/modernize/winrt-com-interop-csharp
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.22000.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to call the window-owned verifier interop API.
+  hardware:
+    - Windows Hello-compatible biometric hardware is needed only for face or fingerprint verification.
+  accountServices:
+    - Windows Hello or a PIN configured for the signed-in user.
+    - Device policy must permit user verification.
+  architectureNotes: The project targets x86, x64, and ARM64; the desktop verifier interop path requires Windows 11 build 22000 or later on every architecture.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Verification scenario navigation
+    description: Defines separate entries for availability checking and interactive verification.
+  - path: Scenarios/AvailabilityPage.xaml.cs
+    label: Availability check
+    description: Queries CheckAvailabilityAsync and reports the current verifier state.
+  - path: Scenarios/VerificationPage.xaml.cs
+    label: Window-owned verification
+    description: Gets the main HWND and requests a Windows verification prompt for that window.
+  - path: ConsentResultFormatter.cs
+    label: Verification result messages
+    description: Converts availability and verification result enums into actionable sample output.
+  - path: UserConsentVerifier.csproj
+    label: Windows 11 minimum
+    description: Sets Windows 11 build 22000 as the minimum required by the interop interface.
+screenshots:
+  - id: verification-request
+    alt: The User Consent Verifier app showing the message field and button used to request Windows Hello or PIN verification.
+    scenario: request-verification
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=RequestVerificationButton
+      notes: Capture the app before opening the Windows-owned prompt so no account name, biometric state, or other personal information appears.

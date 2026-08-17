@@ -1,0 +1,224 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: speech-recognition-and-synthesis
+project:
+  folder: SpeechRecognitionAndSynthesis
+  name: SpeechRecognitionAndSynthesis
+title: Adding speech recognition and synthesis
+summary: Synthesize text and SSML, recognize topic and custom grammars, and update continuous recognition constraints at runtime.
+aliases:
+  - SpeechRecognitionAndSynthesis
+  - Speech recognition and synthesis
+  - SpeechRecognizer
+  - SpeechSynthesizer
+  - SRGS
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - ui-and-input
+tags:
+  - speech
+  - text to speech
+  - dictation
+  - SRGS
+  - microphone
+  - localization
+originalSamples:
+  - name: SpeechRecognitionAndSynthesis
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SpeechRecognitionAndSynthesis
+scenarios:
+  - id: synthesize-text
+    title: Synthesize text
+    summary: Convert editable plain text to speech with a selected installed system voice.
+    apis:
+      - Windows.Media.SpeechSynthesis.SpeechSynthesizer.SynthesizeTextToStreamAsync
+      - Windows.Media.Core.MediaSource.CreateFromStream
+      - Windows.Media.Playback.MediaPlaybackItem
+    sourceFiles:
+      - Scenarios/SynthesisPage.xaml
+      - Scenarios/SynthesisPage.xaml.cs
+  - id: synthesize-boundaries
+    title: Synthesize text with boundaries
+    summary: Request word and sentence metadata and update the interface as timed speech cues are played.
+    apis:
+      - Windows.Media.SpeechSynthesis.SpeechSynthesizerOptions.IncludeWordBoundaryMetadata
+      - Windows.Media.SpeechSynthesis.SpeechSynthesizerOptions.IncludeSentenceBoundaryMetadata
+      - Windows.Media.Playback.MediaPlaybackItem.TimedMetadataTracks
+    sourceFiles:
+      - Scenarios/SynthesisPage.xaml
+      - Scenarios/SynthesisPage.xaml.cs
+  - id: synthesize-ssml
+    title: Synthesize SSML and receive marks
+    summary: Synthesize editable Speech Synthesis Markup Language and report timed SSML bookmark cues.
+    apis:
+      - Windows.Media.SpeechSynthesis.SpeechSynthesizer.SynthesizeSsmlToStreamAsync
+      - Windows.Media.Core.TimedMetadataTrack
+      - Windows.Media.Core.SpeechCue
+    sourceFiles:
+      - Scenarios/SynthesisPage.xaml
+      - Scenarios/SynthesisPage.xaml.cs
+  - id: one-shot-dictation
+    title: Recognize one-shot dictation
+    summary: Recognize a short dictated phrase with a predefined topic constraint, with or without Windows-owned recognition UI.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionTopicConstraint
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.RecognizeWithUIAsync
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.RecognizeAsync
+    sourceFiles:
+      - Scenarios/OneShotRecognitionPage.xaml
+      - Scenarios/OneShotRecognitionPage.xaml.cs
+  - id: one-shot-web-search
+    title: Recognize a one-shot web search
+    summary: Recognize a spoken search query with the predefined web-search topic grammar and optional system UI.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionTopicConstraint
+      - Windows.Media.SpeechRecognition.SpeechRecognitionScenario.WebSearch
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.RecognizeWithUIAsync
+    sourceFiles:
+      - Scenarios/OneShotRecognitionPage.xaml
+      - Scenarios/OneShotRecognitionPage.xaml.cs
+  - id: one-shot-list
+    title: Recognize localized list commands
+    summary: Build localized command-list constraints, group alternate phrases under tags, and inspect the matched confidence.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.CompileConstraintsAsync
+    sourceFiles:
+      - Scenarios/OneShotRecognitionPage.xaml.cs
+      - SpeechRecognitionHelpers.cs
+      - SpeechResourceProvider.cs
+  - id: one-shot-srgs
+    title: Recognize a packaged SRGS grammar
+    summary: Compile a localized GRXML file and use semantic properties from the result to update preview colors.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionGrammarFileConstraint
+      - Windows.Media.SpeechRecognition.SpeechRecognitionSemanticInterpretation
+    sourceFiles:
+      - Scenarios/OneShotRecognitionPage.xaml.cs
+      - SpeechRecognitionHelpers.cs
+      - SRGS/en-US/SRGSColors.xml
+  - id: continuous-dictation
+    title: Run continuous dictation
+    summary: Combine confirmed multi-sentence results with in-progress hypotheses while continuous recognition is active.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.HypothesisGenerated
+    sourceFiles:
+      - Scenarios/ContinuousRecognitionPage.xaml
+      - Scenarios/ContinuousRecognitionPage.xaml.cs
+  - id: continuous-list
+    title: Run continuous localized list commands
+    summary: Listen continuously for localized command-list phrases and report each matched tag and confidence.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint
+      - Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession.ResultGenerated
+    sourceFiles:
+      - Scenarios/ContinuousRecognitionPage.xaml.cs
+      - SpeechRecognitionHelpers.cs
+  - id: continuous-srgs
+    title: Run continuous SRGS commands
+    summary: Apply semantic color values as continuous results arrive from a packaged localized SRGS grammar.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechRecognitionGrammarFileConstraint
+      - Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession.ResultGenerated
+    sourceFiles:
+      - Scenarios/ContinuousRecognitionPage.xaml.cs
+      - SpeechRecognitionHelpers.cs
+      - SRGS/en-US/SRGSColors.xml
+  - id: pause-and-change-grammar
+    title: Pause recognition to change grammar
+    summary: Pause a running session, add or remove list constraints, recompile them, and resume recognition.
+    apis:
+      - Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession.PauseAsync
+      - Windows.Media.SpeechRecognition.SpeechRecognizer.CompileConstraintsAsync
+      - Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession.Resume
+    sourceFiles:
+      - Scenarios/PauseGrammarPage.xaml
+      - Scenarios/PauseGrammarPage.xaml.cs
+apis:
+  - name: Windows.Media.SpeechSynthesis.SpeechSynthesizer
+    description: Produces audio streams and timed metadata from text or SSML with an installed system voice.
+    url: https://learn.microsoft.com/uwp/api/windows.media.speechsynthesis.speechsynthesizer
+  - name: Windows.Media.SpeechRecognition.SpeechRecognizer
+    description: Compiles topic, list, and grammar-file constraints for one-shot and continuous recognition.
+    url: https://learn.microsoft.com/uwp/api/windows.media.speechrecognition.speechrecognizer
+  - name: Windows.Media.SpeechRecognition.SpeechRecognitionTopicConstraint
+    description: Selects predefined dictation and web-search recognition topics.
+  - name: Windows.Media.SpeechRecognition.SpeechRecognitionListConstraint
+    description: Builds localized phrase lists whose alternates share command tags.
+  - name: Windows.Media.SpeechRecognition.SpeechRecognitionGrammarFileConstraint
+    description: Loads packaged SRGS grammar files with semantic interpretation values.
+  - name: Windows.Media.SpeechRecognition.SpeechContinuousRecognitionSession
+    description: Starts, pauses, resumes, and reports results from long-running recognition.
+  - name: Windows.Media.Playback.MediaPlaybackItem
+    description: Presents synthesized audio and exposes speech word, sentence, and bookmark metadata tracks.
+  - name: Microsoft.Windows.ApplicationModel.Resources.ResourceManager
+    description: Loads localized recognition phrases and synthesis text through MRT Core resources.
+documentation:
+  - title: Speech recognition
+    url: https://learn.microsoft.com/windows/apps/design/input/speech-recognition
+    kind: learn
+  - title: Speech synthesis API
+    url: https://learn.microsoft.com/uwp/api/windows.media.speechsynthesis
+    kind: api-reference
+  - title: Speech recognition API
+    url: https://learn.microsoft.com/uwp/api/windows.media.speechrecognition
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Supports topic-based recognition scenarios that use Windows online speech services.
+    - name: microphone
+      kind: device
+      description: Allows recognition scenarios to capture speech from an available microphone.
+    - name: systemAIModels
+      kind: restricted
+      description: Declared by the current manifest; the sample does not directly call a System AI Models API.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A microphone for recognition scenarios.
+    - Speakers or headphones for listening to synthesized speech.
+  accountServices:
+    - Windows online speech services and accepted privacy settings for dictation and web-search recognition.
+    - An installed Windows speech language pack matching a list or SRGS grammar.
+    - An installed system voice and Windows media components for synthesis playback.
+  architectureNotes: The project targets x86, x64, and ARM64; available speech languages, voices, and online services depend on Windows configuration rather than architecture.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Eleven-scenario navigation
+    description: Defines the synthesis, one-shot recognition, continuous recognition, and grammar-update entries.
+  - path: Scenarios/SynthesisPage.xaml.cs
+    label: Speech synthesis
+    description: Produces text and SSML streams and consumes word, sentence, and bookmark metadata.
+  - path: Scenarios/OneShotRecognitionPage.xaml.cs
+    label: One-shot recognition
+    description: Configures topic, localized list, and packaged SRGS constraints with optional system UI.
+  - path: Scenarios/ContinuousRecognitionPage.xaml.cs
+    label: Continuous recognition
+    description: Handles hypotheses and final results for dictation, list, and SRGS sessions.
+  - path: Scenarios/PauseGrammarPage.xaml.cs
+    label: Live grammar updates
+    description: Pauses recognition, changes constraints, recompiles the grammar, and resumes the session.
+  - path: SpeechRecognitionHelpers.cs
+    label: Localized grammar helpers
+    description: Defines supported grammar languages, command lists, semantic values, and recognition error handling.
+  - path: MicrophonePermission.cs
+    label: Microphone permission check
+    description: Uses audio-only media capture to verify microphone access before creating a recognizer.
+screenshots:
+  - id: synthesis-workspace
+    alt: The Speech Recognition and Synthesis app showing editable text, installed voice selection, and speech playback controls.
+    scenario: synthesize-text
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=SynthesizeTextNavigationItem
+      notes: Capture the initial synthesis page with an installed non-sensitive system voice; do not record microphone input or Windows-owned recognition UI.

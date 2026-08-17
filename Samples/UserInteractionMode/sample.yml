@@ -1,0 +1,94 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: user-interaction-mode
+project:
+  folder: UserInteractionMode
+  name: UserInteractionMode
+title: Adapting controls for mouse and touch interaction
+summary: Query the interaction mode associated with a WinUI window and switch controls between compact mouse spacing and larger touch targets.
+aliases:
+  - UserInteractionMode
+  - UIViewSettings
+  - IUIViewSettingsInterop
+  - tablet mode
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - app-fundamentals
+tags:
+  - interaction mode
+  - touch
+  - mouse
+  - adaptive UI
+  - HWND interop
+originalSamples:
+  - name: UserInteractionMode
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/UserInteractionMode
+scenarios:
+  - id: adapt-to-interaction-mode
+    title: Respond to the window interaction mode
+    summary: Read the current Mouse or Touch value and apply matching checkbox size and padding whenever the window is refreshed or resized.
+    apis:
+      - Windows.UI.ViewManagement.UIViewSettingsInterop.GetForWindow
+      - Windows.UI.ViewManagement.UIViewSettings.UserInteractionMode
+      - Windows.UI.ViewManagement.UserInteractionMode
+      - Microsoft.UI.Xaml.Window.SizeChanged
+    sourceFiles:
+      - MainPage.xaml
+      - MainPage.xaml.cs
+apis:
+  - name: Windows.UI.ViewManagement.UIViewSettings
+    description: Exposes the user interaction mode Windows associates with the app window.
+  - name: Windows.UI.ViewManagement.UIViewSettingsInterop
+    description: Retrieves UIViewSettings for a desktop HWND instead of relying on a UWP current view.
+    url: https://learn.microsoft.com/windows/win32/api/uiviewsettingsinterop/nn-uiviewsettingsinterop-iuiviewsettingsinterop
+  - name: Windows.UI.ViewManagement.UserInteractionMode
+    description: Distinguishes Mouse and Touch modes used to choose compact or touch-friendly control styles.
+  - name: WinRT.Interop.WindowNative
+    description: Supplies the HWND required by the desktop UIViewSettings interop API.
+documentation:
+  - title: UIViewSettings.UserInteractionMode property
+    url: https://learn.microsoft.com/uwp/api/windows.ui.viewmanagement.uiviewsettings.userinteractionmode
+    kind: api-reference
+  - title: IUIViewSettingsInterop interface
+    url: https://learn.microsoft.com/windows/win32/api/uiviewsettingsinterop/nn-uiviewsettingsinterop-iuiviewsettingsinterop
+    kind: api-reference
+  - title: Call interop APIs from a .NET app
+    url: https://learn.microsoft.com/windows/apps/desktop/modernize/winrt-com-interop-csharp
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.22000.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to call the per-window interop API.
+  hardware:
+    - Compatible convertible hardware is needed to observe Touch mode or a posture-driven mode change.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; the interop interface requires Windows build 20348 or later and the project targets build 22000.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Adaptive control styles
+    description: Defines compact mouse and larger touch checkbox styles plus the current-mode interface.
+  - path: MainPage.xaml.cs
+    label: Interaction mode query
+    description: Gets UIViewSettings for the HWND and reapplies the matching style on refresh or resize.
+  - path: UserInteractionMode.csproj
+    label: Interop minimum version
+    description: Sets Windows 11 build 22000 as the minimum platform for the sample.
+  - path: Package.appxmanifest
+    label: Desktop package requirements
+    description: Mirrors the Windows 11 minimum and declares the full-trust capability.
+screenshots:
+  - id: current-mode
+    alt: The User Interaction Mode app reporting Mouse mode and showing compact adaptive checkbox spacing.
+    scenario: adapt-to-interaction-mode
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=CurrentModeTextBlock
+      notes: Capture the mode Windows actually reports; do not claim Touch mode unless compatible hardware produces it.

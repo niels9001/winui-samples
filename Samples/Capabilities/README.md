@@ -21,7 +21,6 @@ This WinUI 3 sample queries and requests declared app capabilities through
 
 - [AppCapability class](https://learn.microsoft.com/uwp/api/windows.security.authorization.appcapabilityaccess.appcapability)
 - [App capability declarations](https://learn.microsoft.com/windows/uwp/packaging/app-capability-declarations)
-- [Guidelines for privacy-aware apps](https://learn.microsoft.com/windows/apps/develop/privacy-aware-apps)
 
 ## Build and run
 

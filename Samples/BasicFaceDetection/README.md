@@ -1,9 +1,11 @@
-# Basic Face Detection
+# Detecting faces in photos and webcam frames
 
-This WinUI 3 sample uses `FaceDetector` to locate human faces in a still image or in one
-frame captured from a webcam.
+The `BasicFaceDetection` project was ported to WinUI 3 / Windows App SDK from the UWP
+[BasicFaceDetection](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BasicFaceDetection)
+sample. It uses `FaceDetector` to locate human faces in a still image or one frame captured
+from a webcam.
 
-## What the sample shows
+## What it shows
 
 - Selecting and decoding a JPEG, PNG, or BMP image.
 - Converting a `SoftwareBitmap` to a format supported by `FaceDetector`.
@@ -20,15 +22,13 @@ frame captured from a webcam.
 - `Windows.Media.Capture.Frames.MediaFrameReader`
 - `Windows.Media.Playback.MediaPlayer`
 
-## Related documentation
+## Learn docs this serves
 
 - [FaceDetector class](https://learn.microsoft.com/uwp/api/windows.media.faceanalysis.facedetector)
 - [Windows.Media.FaceAnalysis namespace](https://learn.microsoft.com/uwp/api/windows.media.faceanalysis)
 - [Detect faces in images or videos](https://learn.microsoft.com/windows/apps/develop/media-authoring-processing/detect-and-track-faces-in-an-image)
 
-## Build and run
-
-From this directory:
+## Build & run
 
 ```powershell
 dotnet build -c Debug -p:Platform=x64

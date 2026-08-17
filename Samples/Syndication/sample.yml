@@ -1,0 +1,107 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: syndication
+project:
+  folder: Syndication
+  name: Syndication
+title: Retrieving and browsing RSS and Atom feeds
+summary: Download a syndication feed, inspect its metadata and extensions, browse returned items, and open their primary links.
+aliases:
+  - Syndication
+  - RSS
+  - Atom
+  - SyndicationClient
+  - web feeds
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - files-and-data
+tags:
+  - RSS
+  - Atom
+  - feeds
+  - XML
+  - URI launcher
+originalSamples:
+  - name: Syndication
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Syndication
+scenarios:
+  - id: retrieve-and-browse-feed
+    title: Retrieve and browse a syndication feed
+    summary: Download RSS or Atom XML, display feed and item metadata, navigate items, open a primary link, and list extension nodes.
+    apis:
+      - Windows.Web.Syndication.SyndicationClient.RetrieveFeedAsync
+      - Windows.Web.Syndication.SyndicationFeed
+      - Windows.Web.Syndication.SyndicationItem
+      - Windows.Web.Syndication.SyndicationElementExtension
+      - Windows.System.Launcher.LaunchUriAsync
+    sourceFiles:
+      - MainPage.xaml
+      - MainPage.xaml.cs
+      - HtmlToTextConverter.cs
+apis:
+  - name: Windows.Web.Syndication.SyndicationClient
+    description: Retrieves and parses an HTTP or HTTPS RSS or Atom feed.
+    url: https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationclient
+  - name: Windows.Web.Syndication.SyndicationFeed
+    description: Provides feed-level metadata and the ordered collection of returned items.
+  - name: Windows.Web.Syndication.SyndicationItem
+    description: Exposes each item's title, content, summary, links, and extension elements.
+    url: https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationitem
+  - name: Windows.Web.Syndication.SyndicationError
+    description: Maps retrieval failures to syndication-specific status values such as invalid XML.
+  - name: Windows.System.Launcher
+    description: Opens the first primary item URI with its registered Windows handler.
+documentation:
+  - title: RSS and Atom feeds
+    url: https://learn.microsoft.com/windows/uwp/networking/web-feeds
+    kind: learn
+  - title: SyndicationClient class
+    url: https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationclient
+    kind: api-reference
+  - title: SyndicationItem class
+    url: https://learn.microsoft.com/uwp/api/windows.web.syndication.syndicationitem
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Lets the app retrieve public HTTP or HTTPS syndication feeds.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Lets the editable feed address target an RSS or Atom endpoint on a private network.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices:
+    - A reachable public or intranet HTTP or HTTPS RSS or Atom endpoint.
+    - A registered Windows handler is required to open an item's primary URI.
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific feed parsing behavior.
+featuredFiles:
+  - path: MainPage.xaml
+    label: Feed browser interface
+    description: Defines the editable feed address, item navigation, link, text content, and extension views.
+  - path: MainPage.xaml.cs
+    label: Syndication workflow
+    description: Retrieves feeds, navigates items, launches links, and maps syndication and web errors.
+  - path: HtmlToTextConverter.cs
+    label: Managed HTML conversion
+    description: Converts feed markup to readable decoded text without invoking a legacy browser engine.
+  - path: Package.appxmanifest
+    label: Feed network capabilities
+    description: Declares public and private network access plus full trust for the packaged desktop app.
+screenshots:
+  - id: feed-address
+    alt: The Syndication app ready to retrieve the Windows Developer Blog feed, with empty item details below.
+    scenario: retrieve-and-browse-feed
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=GetFeedButton
+      notes: Capture the initial state without downloading so the image remains deterministic and independent of live feed content.

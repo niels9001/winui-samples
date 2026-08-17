@@ -1,24 +1,35 @@
 # XamlStateTriggers
 
-Ported to WinUI 3 from the UWP [XamlStateTriggers](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers) sample.
+Ported to WinUI 3 / Windows App SDK from the UWP
+[XamlStateTriggers](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlStateTriggers)
+sample.
 
 ## What it shows
 
-A single scenario that demonstrates building responsive, adaptive UI with built-in and custom XAML state triggers. Four trigger types are shown:
+This sample uses visual state triggers to adapt an interface in four ways:
 
-1. **AdaptiveTrigger** (built-in): the `RelativePanel` reflows its layout when the window crosses 720 effective pixels wide. Resize the window to see elements rearrange.
-2. **InputTypeTrigger** (custom, `StateTriggerBase`): open the "Color Palette Button" flyout. The color swatches use small hit targets when invoked with a mouse and larger hit targets when invoked with touch or pen.
-3. **ControlSizeTrigger** (custom, `StateTriggerBase`): in the list, an item whose content grows past 150 effective pixels tall (Item3) switches to a dark background.
-4. **StateTrigger bound to a view model property**: an item flips its colors when its `IsColorEnabled` view model property is `true` (Item2). No custom trigger needed, just an inline `StateTrigger` with `IsActive="{Binding IsColorEnabled}"`.
-
-The custom triggers live under `Scenarios/XamlStateTriggers/CustomTriggers/`.
+1. `AdaptiveTrigger` changes the layout at window-width thresholds.
+2. A custom `InputTypeTrigger` responds to mouse, touch, and pen input.
+3. A custom `ControlSizeTrigger` responds to an element's dimensions.
+4. A `StateTrigger` bound to the view model enables or disables color styling.
 
 ## APIs featured
 
-- `Microsoft.UI.Xaml.StateTriggerBase` (custom trigger authoring)
-- `AdaptiveTrigger`, `StateTrigger`, `VisualStateManager`
-- `RelativePanel` with simplified `Setter` targets
-- `Microsoft.UI.Input.PointerDeviceType` (input-type detection)
+- `Microsoft.UI.Xaml.AdaptiveTrigger`
+- `Microsoft.UI.Xaml.StateTrigger`
+- `Microsoft.UI.Xaml.StateTriggerBase`
+- `Microsoft.UI.Xaml.VisualStateManager`
+- `Microsoft.UI.Input.PointerDeviceType`
+- `Microsoft.UI.Xaml.Controls.RelativePanel`
+- `Microsoft.UI.Xaml.Controls.ItemsWrapGrid`
+
+## Learn docs this serves
+
+- [StateTriggerBase class](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.statetriggerbase)
+- [AdaptiveTrigger class](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.adaptivetrigger)
+- [StateTrigger class](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.statetrigger)
+- [VisualStateManager class](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.visualstatemanager)
+- [PointerDeviceType enumeration](https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.input.pointerdevicetype)
 
 ## Build & run
 
@@ -29,13 +40,14 @@ dotnet run -c Debug -p:Platform=x64
 
 ## Migration notes
 
-Standard WinUI 3 transforms apply: `Windows.UI.Xaml` namespaces updated to `Microsoft.UI.Xaml`, the page background removed so the template Mica backdrop shows through, all namespaces unified to `SDKTemplate`, and the UWP `HeaderTextBlockStyle` replaced with the built-in `TitleTextBlockStyle`.
+The custom triggers derive from WinUI 3's `Microsoft.UI.Xaml.StateTriggerBase`.
+`PointerDeviceType` comes from `Microsoft.UI.Input`, and the UWP `WrapGrid` usage
+was replaced with `ItemsWrapGrid`.
 
-Two concrete API changes:
-
-- The UWP `WrapGrid` items panel is replaced with `ItemsWrapGrid`, which is the WinUI 3 equivalent for an items control panel (same `Orientation` / `ItemHeight` / `ItemWidth`).
-- In the custom `InputTypeTrigger`, `PointerDeviceType` now comes from `Microsoft.UI.Input` instead of the UWP `Windows.Devices.Input`.
+The original Xbox-only `DeviceFamilyTrigger` scenario is omitted because this
+desktop WinUI 3 project does not target Xbox.
 
 ## Known differences / limitations
 
-The UWP sample included a fifth demonstration, a custom `DeviceFamilyTrigger` that showed an Xbox-only avatar. That scenario was dropped in this port because these samples do not target Xbox, so the trigger never activated on the supported desktop platform.
+Mouse, touch, and pen states can only be observed when the corresponding input
+device is available. The device-family scenario from the UWP sample is not included.

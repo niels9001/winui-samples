@@ -1,0 +1,99 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: geotag
+project:
+  folder: Geotag
+  name: Geotag
+title: Reading and writing location metadata in files
+summary: Read geotags from JPEG and MP4 files and write either the current position or a known geographic point.
+aliases:
+  - Geotag
+  - GeotagHelper
+  - location metadata
+  - Windows.Storage.FileProperties
+icon: LocationRegular
+categories:
+  primary: location
+  secondary:
+    - files-and-data
+tags:
+  - geotags
+  - metadata
+  - JPEG
+  - MP4
+  - location
+originalSamples:
+  - name: Geotag
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geotag
+scenarios:
+  - id: geotag-file
+    title: Geotag a file
+    summary: Pick a JPEG or MP4 file, read its location, or write a current or fixed location.
+    apis:
+      - Windows.Storage.Pickers.FileOpenPicker
+      - Windows.Storage.FileProperties.GeotagHelper
+      - Windows.Devices.Geolocation.Geolocator
+      - Windows.Devices.Geolocation.Geopoint
+    sourceFiles:
+      - Scenarios/Geotag/Scenario1_Geotag.xaml.cs
+apis:
+  - name: Windows.Storage.FileProperties.GeotagHelper
+    description: Reads a geographic point from a storage file and writes a supplied point or Geolocator result.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileproperties.geotaghelper
+  - name: Windows.Devices.Geolocation.Geolocator
+    description: Supplies the device's current position after the user grants location access.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geolocator
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Lets the user choose a JPEG or MP4 file and is associated with the WinUI window through HWND interop.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+documentation:
+  - title: GeotagHelper class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileproperties.geotaghelper
+    kind: api-reference
+  - title: Geolocator class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geolocator
+    kind: api-reference
+  - title: FileOpenPicker class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: location
+      kind: device
+      description: Allows the current-location operation to request a position from Windows location services.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A Windows-supported location provider is required only when writing the current position.
+  accountServices: []
+  architectureNotes: The user must provide a JPEG or MP4 file; location consent is required only for the Geolocator operation, and behavior is architecture-independent.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Geotag scenario
+    description: Declares the single file metadata scenario.
+  - path: Scenarios/Geotag/Scenario1_Geotag.xaml
+    label: Geotag interface
+    description: Presents file selection and actions for reading, current-location writing, and fixed-location writing.
+  - path: Scenarios/Geotag/Scenario1_Geotag.xaml.cs
+    label: Read and write geotags
+    description: Initializes the desktop file picker and calls GeotagHelper with a Geolocator or Seattle Space Needle point.
+  - path: Package.appxmanifest
+    label: Location capability
+    description: Declares location access and full-trust desktop execution.
+relatedSamples:
+  - file-access
+  - geolocation
+screenshots:
+  - id: choose-media-file
+    alt: The file geotagging app showing a Choose file action before location metadata operations become available.
+    scenario: geotag-file
+    capture:
+      mode: manual
+      readinessSelector: text=Choose file
+      notes: Capture the initial form or use a known test image; file picking and current-location writing require user interaction.

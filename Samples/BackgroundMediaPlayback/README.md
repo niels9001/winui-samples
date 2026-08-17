@@ -1,10 +1,14 @@
-# BackgroundMediaPlayback
+# Playing media playlists beyond the foreground
 
-Ported to WinUI 3 / Windows App SDK from the UWP [BackgroundMediaPlayback](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BackgroundMediaPlayback) sample.
+The `BackgroundMediaPlayback` project was ported to WinUI 3 / Windows App SDK from the UWP
+[BackgroundMediaPlayback](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BackgroundMediaPlayback)
+sample.
 
 ## What it shows
 
-This sample demonstrates playing a playlist with `MediaPlayer`, `MediaPlaybackList`, `MediaPlaybackItem` display properties, `MediaPlayerElement`, and custom transport controls.
+Load a packaged music and video playlist, display each item's metadata, and control playback
+with `MediaPlayerElement`, built-in or custom transport controls, playback-rate choices, and an
+audio-category selector.
 
 ## APIs featured
 
@@ -18,7 +22,6 @@ This sample demonstrates playing a playlist with `MediaPlayer`, `MediaPlaybackLi
 
 - [Media playback](https://learn.microsoft.com/windows/uwp/audio-video-camera/media-playback)
 - [Media items, playlists, and tracks](https://learn.microsoft.com/windows/uwp/audio-video-camera/media-playback-with-mediasource)
-- [Migrate from UWP to the Windows App SDK](https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/overview)
 
 ## Build & run
 

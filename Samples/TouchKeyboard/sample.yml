@@ -1,0 +1,121 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: touch-keyboard
+project:
+  folder: TouchKeyboard
+  name: TouchKeyboard
+title: Controlling the touch keyboard from a WinUI app
+summary: Observe automatic touch-keyboard display, handle visibility events, and request that the window's InputPane show or hide.
+aliases:
+  - TouchKeyboard
+  - Touch keyboard
+  - InputPane
+  - IInputPaneInterop
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - app-fundamentals
+tags:
+  - touch keyboard
+  - InputPane
+  - text controls
+  - visibility events
+  - HWND interop
+originalSamples:
+  - name: TouchKeyboard
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/TouchKeyboard
+scenarios:
+  - id: automatic-display
+    title: Display the touch keyboard automatically
+    summary: Focus standard and derived text boxes to observe when Windows automatically presents the touch keyboard.
+    apis:
+      - Microsoft.UI.Xaml.Controls.TextBox
+      - Windows.UI.ViewManagement.InputPane
+    sourceFiles:
+      - Scenarios/TouchKeyboard/Scenario1_Launch.xaml
+      - Scenarios/TouchKeyboard/CustomTextBox.cs
+  - id: visibility-events
+    title: Listen for show and hide events
+    summary: Obtain the InputPane for the WinUI window and report its Showing and Hiding events.
+    apis:
+      - Windows.UI.ViewManagement.InputPaneInterop.GetForWindow
+      - Windows.UI.ViewManagement.InputPane.Showing
+      - Windows.UI.ViewManagement.InputPane.Hiding
+    sourceFiles:
+      - Scenarios/TouchKeyboard/Scenario2_ShowHideEvents.xaml
+      - Scenarios/TouchKeyboard/Scenario2_ShowHideEvents.xaml.cs
+  - id: show-hide-requests
+    title: Request that the keyboard show or hide
+    summary: Hide the keyboard before displaying entered text and request it again after the result animation.
+    apis:
+      - Windows.UI.ViewManagement.InputPane.TryHide
+      - Windows.UI.ViewManagement.InputPane.TryShow
+      - Windows.UI.ViewManagement.InputPaneInterop.GetForWindow
+    sourceFiles:
+      - Scenarios/TouchKeyboard/Scenario3_ShowHideMethods.xaml
+      - Scenarios/TouchKeyboard/Scenario3_ShowHideMethods.xaml.cs
+apis:
+  - name: Windows.UI.ViewManagement.InputPane
+    description: Exposes touch-keyboard visibility events and app requests to show or hide the pane.
+    url: https://learn.microsoft.com/uwp/api/windows.ui.viewmanagement.inputpane
+  - name: Windows.UI.ViewManagement.InputPaneInterop
+    description: Retrieves the InputPane associated with the WinUI desktop window's HWND.
+  - name: Microsoft.UI.Xaml.Controls.TextBox
+    description: Provides focusable text input that Windows can use to invoke the touch keyboard automatically.
+  - name: WinRT.Interop.WindowNative
+    description: Supplies the main window handle required by the desktop InputPane interop API.
+documentation:
+  - title: InputPane class
+    url: https://learn.microsoft.com/uwp/api/windows.ui.viewmanagement.inputpane
+    kind: api-reference
+  - title: IInputPaneInterop interface
+    url: https://learn.microsoft.com/windows/win32/api/inputpaneinterop/nn-inputpaneinterop-iinputpaneinterop
+    kind: api-reference
+  - title: Respond to the presence of the touch keyboard
+    url: https://learn.microsoft.com/windows/apps/design/input/respond-to-the-presence-of-the-touch-keyboard
+    kind: learn
+  - title: Proposed WinUI 3 TouchKeyboard migration
+    url: https://github.com/microsoft/WindowsAppSDK-Samples/pull/649
+    kind: migration
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Touch or pen input is needed to exercise automatic touch-keyboard behavior reliably.
+    - A hardware keyboard, device posture, and Windows touch-keyboard settings can suppress automatic display.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; keyboard visibility depends on Windows input state rather than processor architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Touch-keyboard scenarios
+    description: Declares the automatic display, visibility event, and show or hide request scenarios.
+  - path: Scenarios/TouchKeyboard/Scenario1_Launch.xaml
+    label: Automatic display controls
+    description: Provides standard and derived text boxes plus the device-state conditions for automatic display.
+  - path: Scenarios/TouchKeyboard/Scenario2_ShowHideEvents.xaml.cs
+    label: InputPane visibility events
+    description: Gets the window-scoped InputPane and subscribes to Showing and Hiding.
+  - path: Scenarios/TouchKeyboard/Scenario3_ShowHideMethods.xaml.cs
+    label: Show and hide requests
+    description: Coordinates TryHide and TryShow with text submission and a result animation.
+  - path: Scenarios/TouchKeyboard/CustomTextBox.cs
+    label: Derived text control
+    description: Confirms that automatic touch-keyboard behavior also applies to a TextBox-derived control.
+relatedSamples:
+  - touch-keyboard-text-input
+screenshots:
+  - id: automatic-keyboard
+    alt: The TouchKeyboard app showing standard and custom text boxes while the Windows touch keyboard is visible.
+    scenario: automatic-display
+    capture:
+      mode: manual
+      readinessSelector: AutomationId=StandardTextBox
+      notes: Use touch or pen with automatic keyboard display enabled and avoid entering personal text before capture.

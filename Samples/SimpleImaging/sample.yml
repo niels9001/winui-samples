@@ -1,0 +1,117 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: simple-imaging
+project:
+  folder: SimpleImaging
+  name: SimpleImaging
+title: Inspecting and transforming image files
+summary: Read and update image metadata, then rotate, scale, and re-encode local images with Windows imaging APIs.
+aliases:
+  - SimpleImaging
+  - Simple imaging C# sample
+  - ImageProperties
+  - BitmapDecoder
+  - BitmapEncoder
+icon: VideoRegular
+categories:
+  primary: media
+  secondary:
+    - files-and-data
+tags:
+  - images
+  - metadata
+  - EXIF
+  - bitmap codecs
+  - file pickers
+originalSamples:
+  - name: SimpleImaging
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/SimpleImaging
+scenarios:
+  - id: inspect-image-properties
+    title: Inspect and edit image properties
+    summary: Open an image, read common and extended metadata, and write supported title, keyword, and location changes.
+    apis:
+      - Windows.Storage.FileProperties.ImageProperties
+      - Windows.Storage.FileProperties.StorageItemContentProperties.GetImagePropertiesAsync
+      - Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList
+      - Windows.Storage.Pickers.FileOpenPicker
+    sourceFiles:
+      - Scenarios/SimpleImaging/Scenario1.xaml
+      - Scenarios/SimpleImaging/Scenario1.xaml.cs
+  - id: transform-and-encode
+    title: Transform and encode an image
+    summary: Preview scaling and rotation, account for EXIF orientation, and save changes in place or to a new encoded file.
+    apis:
+      - Windows.Graphics.Imaging.BitmapDecoder
+      - Windows.Graphics.Imaging.BitmapEncoder
+      - Windows.Graphics.Imaging.BitmapTransform
+      - Windows.Storage.Pickers.FileOpenPicker
+      - Windows.Storage.Pickers.FileSavePicker
+    sourceFiles:
+      - Scenarios/SimpleImaging/Scenario2.xaml
+      - Scenarios/SimpleImaging/Scenario2.xaml.cs
+      - Scenarios/SimpleImaging/Helpers.cs
+apis:
+  - name: Windows.Storage.FileProperties.ImageProperties
+    description: Reads common photo metadata and retrieves or saves Windows property-system values.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileproperties.imageproperties
+  - name: Windows.Graphics.Imaging.BitmapDecoder
+    description: Opens the selected image, reports native dimensions and orientation, and supplies decoded pixels.
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.bitmapdecoder
+  - name: Windows.Graphics.Imaging.BitmapEncoder
+    description: Transcodes the source or writes decoded pixels to JPEG, PNG, and BMP output streams.
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.bitmapencoder
+  - name: Windows.Graphics.Imaging.BitmapTransform
+    description: Applies scaling, rotation, and high-quality interpolation during decoding or encoding.
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Lets the user select an image supported by the installed Windows imaging codecs.
+  - name: Windows.Storage.Pickers.FileSavePicker
+    description: Selects the destination and output format for the save-as image workflow.
+documentation:
+  - title: ImageProperties class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileproperties.imageproperties
+    kind: api-reference
+  - title: BitmapDecoder class
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.bitmapdecoder
+    kind: api-reference
+  - title: BitmapEncoder class
+    url: https://learn.microsoft.com/uwp/api/windows.graphics.imaging.bitmapencoder
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - An image file in a format supported by an installed Windows Imaging Component codec.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and has no architecture-specific imaging implementation.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Imaging scenario catalog
+    description: Declares the metadata and transform scenarios shown in the navigation shell.
+  - path: Scenarios/SimpleImaging/Scenario1.xaml.cs
+    label: Image metadata workflow
+    description: Opens an image, restores picker access, reads photo properties, and saves supported edits.
+  - path: Scenarios/SimpleImaging/Scenario2.xaml.cs
+    label: Decode and encode workflow
+    description: Implements preview transforms, EXIF-aware rotation, transcoding, and save-as encoding.
+  - path: Scenarios/SimpleImaging/Helpers.cs
+    label: Imaging helpers
+    description: Enumerates decoder extensions and converts between EXIF orientation and bitmap rotation values.
+  - path: Package.appxmanifest
+    label: Package requirements
+    description: Declares the desktop package identity, minimum Windows version, and full-trust capability.
+screenshots:
+  - id: image-properties
+    alt: The Simple Imaging app showing editable photo metadata and a preview for a user-selected image.
+    scenario: inspect-image-properties
+    capture:
+      mode: manual
+      readinessSelector: text=Image properties (FileProperties)
+      notes: Open a non-sensitive image with readable metadata before capture because this scenario depends on a file picker and codec support.

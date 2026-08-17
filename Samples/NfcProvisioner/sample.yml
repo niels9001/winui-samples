@@ -1,0 +1,111 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: nfc-provisioner
+project:
+  folder: NfcProvisioner
+  name: NfcProvisioner
+title: Transferring provisioning packages between nearby devices
+summary: Select a Windows provisioning package, divide it into NFC-sized messages, and transfer it to a nearby peer device.
+aliases:
+  - NfcProvisioner
+  - NFC provisioner
+  - Near field communication
+  - ProximityDevice
+  - Windows.ProvPlugins.Chunk
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary:
+    - files-and-data
+tags:
+  - NFC
+  - proximity
+  - provisioning package
+  - ppkg
+  - peer device
+  - binary messages
+originalSamples:
+  - name: NfcProvisioner
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/NfcProvisioner
+scenarios:
+  - id: provision-peer-device
+    title: Provision Peer Device
+    summary: Select a .ppkg file, frame and publish its chunks over NFC, and stop queuing more chunks when cancellation is requested.
+    apis:
+      - Windows.Storage.Pickers.FileOpenPicker.PickSingleFileAsync
+      - Windows.Storage.FileIO.ReadBufferAsync
+      - Windows.Networking.Proximity.ProximityDevice.GetDefault
+      - Windows.Networking.Proximity.ProximityDevice.MaxMessageBytes
+      - Windows.Networking.Proximity.ProximityDevice.PublishBinaryMessage
+    sourceFiles:
+      - Scenarios/NfcProvisioner/Scenario1.xaml
+      - Scenarios/NfcProvisioner/Scenario1.xaml.cs
+apis:
+  - name: Windows.Networking.Proximity.ProximityDevice
+    description: Represents the local NFC proximity device and publishes payloads to a nearby peer.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.proximity.proximitydevice
+  - name: Windows.Networking.Proximity.ProximityDevice.PublishBinaryMessage
+    description: Publishes each framed provisioning-package chunk and invokes a handler after transmission.
+    url: https://learn.microsoft.com/uwp/api/windows.networking.proximity.proximitydevice.publishbinarymessage
+  - name: Windows.Storage.Pickers.FileOpenPicker
+    description: Selects the .ppkg source file after the picker is associated with the WinUI window.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+  - name: Windows.Storage.FileIO
+    description: Reads the selected provisioning package into a buffer for chunking.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.fileio
+  - name: Windows.Storage.Streams.DataWriter
+    description: Writes the NFC provisioning header and payload bytes for each transmitted chunk.
+    url: https://learn.microsoft.com/uwp/api/windows.storage.streams.datawriter
+documentation:
+  - title: ProximityDevice class
+    url: https://learn.microsoft.com/uwp/api/windows.networking.proximity.proximitydevice
+    kind: api-reference
+  - title: FileOpenPicker class
+    url: https://learn.microsoft.com/uwp/api/windows.storage.pickers.fileopenpicker
+    kind: api-reference
+  - title: Create a provisioning package
+    url: https://learn.microsoft.com/windows/configuration/provisioning-packages/provisioning-create-package
+    kind: learn
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: proximity
+      kind: device
+      description: Allows the app to publish NFC proximity messages to a nearby peer device.
+  hardware:
+    - An NFC-enabled Windows source device
+    - A compatible NFC peer device positioned within proximity range
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; NFC availability depends on hardware and drivers rather than processor architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Provisioning scenario
+    description: Registers the single peer-device provisioning workflow.
+  - path: Scenarios/NfcProvisioner/Scenario1.xaml.cs
+    label: NFC transfer
+    description: Selects the package, frames and chunks its bytes, publishes each message, and supports cancellation.
+  - path: Scenarios/NfcProvisioner/Scenario1.xaml
+    label: Transfer controls
+    description: Defines the package browser, transfer, cancellation, and selected-file state.
+  - path: Package.appxmanifest
+    label: NFC capability
+    description: Declares full-trust execution and proximity-device access.
+relatedSamples: []
+screenshots:
+  - id: ready-to-transfer
+    alt: The NfcProvisioner app showing a selected provisioning package with the Transfer control ready.
+    scenario: provision-peer-device
+    capture:
+      mode: manual
+      readinessSelector: text=Choose a provisioning package to transfer
+      actions:
+        - type: click
+          selector: name=Browse
+      notes: Select a non-sensitive test .ppkg and use NFC-enabled source and peer devices; do not claim a successful transfer without hardware evidence.

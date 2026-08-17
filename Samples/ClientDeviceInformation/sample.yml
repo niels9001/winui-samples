@@ -1,0 +1,74 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: client-device-information
+project:
+  folder: ClientDeviceInformation
+  name: ClientDeviceInformation
+title: Reading device identity and operating system details
+summary: Retrieve a device's ID, operating system, friendly name, manufacturer, product name, and system SKU through EasClientDeviceInformation.
+aliases:
+  - ClientDeviceInformation
+  - Client Device Information
+  - Client Device Information sample
+  - EasClientDeviceInformation
+icon: DesktopRegular
+categories:
+  primary: app-fundamentals
+  secondary:
+    - devices-and-sensors
+tags:
+  - device information
+  - system information
+  - device identity
+  - EAS
+originalSamples:
+  - name: ClientDeviceInformation
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/ClientDeviceInformation
+scenarios:
+  - id: get-device-information
+    title: Get device information
+    summary: Read the device ID, operating system, friendly name, manufacturer, product name, and system SKU.
+    apis:
+      - Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation
+    sourceFiles:
+      - Scenarios/ClientDeviceInformation/Scenario1_GetDeviceInformation.xaml.cs
+apis:
+  - name: Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation
+    description: Reports the device ID and hardware and operating-system identity strings for the current device.
+    url: https://learn.microsoft.com/uwp/api/windows.security.exchangeactivesyncprovisioning.easclientdeviceinformation
+documentation:
+  - title: EasClientDeviceInformation class
+    url: https://learn.microsoft.com/uwp/api/windows.security.exchangeactivesyncprovisioning.easclientdeviceinformation
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 with no architecture-specific implementation.
+featuredFiles:
+  - path: Scenarios/ClientDeviceInformation/Scenario1_GetDeviceInformation.xaml.cs
+    label: Get device information
+    description: Instantiates EasClientDeviceInformation and displays its identity properties in read-only fields.
+  - path: MainWindow.xaml.cs
+    label: Direct single-scenario navigation
+    description: Navigates directly to the one scenario instead of showing a one-item NavigationView.
+  - path: Package.appxmanifest
+    label: No extra capability required
+    description: Confirms that EasClientDeviceInformation needs no device capability beyond the app's full-trust declaration.
+relatedSamples: []
+screenshots:
+  - id: get-device-information
+    alt: The Client Device Information app showing empty device ID, operating system, manufacturer, product name, and system SKU fields before retrieval.
+    scenario: get-device-information
+    capture:
+      mode: automatic
+      readinessSelector: text=Get device information
+      notes: Capture the initial empty-field state because the heading and action button share the same visible text.

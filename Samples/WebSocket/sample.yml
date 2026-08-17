@@ -1,0 +1,147 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: web-socket
+project:
+  folder: WebSocket
+  name: WebSocket
+title: Exchanging text and binary WebSocket messages
+summary: Connect, send, receive, stream, authenticate, and inspect partial WebSocket messages against a managed in-process loopback service.
+aliases:
+  - WebSocket
+  - MessageWebSocket
+  - StreamWebSocket
+  - WebSocket client
+  - mutual TLS
+icon: GlobeRegular
+categories:
+  primary: networking
+  secondary:
+    - security-and-identity
+tags:
+  - WebSocket
+  - sockets
+  - UTF-8
+  - binary streaming
+  - TLS
+originalSamples:
+  - name: WebSocket
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/WebSocket
+scenarios:
+  - id: utf8-text-messages
+    title: Exchanging UTF-8 messages
+    summary: Connect a MessageWebSocket, send text, receive echoed messages, and validate the generated secure loopback endpoint.
+    apis:
+      - Windows.Networking.Sockets.MessageWebSocket
+      - Windows.Networking.Sockets.WebSocketServerCustomValidationRequestedEventArgs
+      - Windows.Storage.Streams.DataWriter
+    sourceFiles:
+      - Scenarios/Utf8MessagesPage.xaml
+      - Scenarios/Utf8MessagesPage.xaml.cs
+      - WebSocketUtilities.cs
+  - id: binary-data-stream
+    title: Streaming binary data
+    summary: Continuously write and read binary payloads through a StreamWebSocket while tracking byte totals.
+    apis:
+      - Windows.Networking.Sockets.StreamWebSocket
+      - Windows.Storage.Streams.DataReader
+      - Windows.Storage.Streams.DataWriter
+    sourceFiles:
+      - Scenarios/BinaryStreamPage.xaml
+      - Scenarios/BinaryStreamPage.xaml.cs
+  - id: client-certificate-authentication
+    title: Authenticating with a client certificate
+    summary: Import a generated client certificate and use it to authenticate to the mutual-TLS loopback endpoint.
+    apis:
+      - Windows.Networking.Sockets.StreamWebSocketControl.ClientCertificate
+      - Windows.Security.Cryptography.Certificates.CertificateEnrollmentManager
+      - Windows.Security.Cryptography.Certificates.Certificate
+    sourceFiles:
+      - Scenarios/ClientAuthenticationPage.xaml
+      - Scenarios/ClientAuthenticationPage.xaml.cs
+      - ClientCertificateService.cs
+      - LoopbackWebSocketServer.cs
+  - id: partial-and-complete-messages
+    title: Receiving partial and complete messages
+    summary: Compare partial frame delivery with complete MessageWebSocket messages and identify the final frame.
+    apis:
+      - Windows.Networking.Sockets.MessageWebSocketReceiveMode
+      - Windows.Networking.Sockets.MessageWebSocketMessageReceivedEventArgs.IsMessageComplete
+    sourceFiles:
+      - Scenarios/PartialMessagesPage.xaml
+      - Scenarios/PartialMessagesPage.xaml.cs
+apis:
+  - name: Windows.Networking.Sockets.MessageWebSocket
+    description: Sends and receives framed UTF-8 messages and exposes message-received events.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocket?view=winrt-28000
+  - name: Windows.Networking.Sockets.StreamWebSocket
+    description: Provides stream-based binary communication and client-certificate configuration.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamwebsocket?view=winrt-28000
+  - name: Windows.Networking.Sockets.MessageWebSocketReceiveMode
+    description: Selects whether the client receives complete messages or individual partial frames.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocketreceivemode?view=winrt-28000
+  - name: Windows.Networking.Sockets.WebSocketServerCustomValidationRequestedEventArgs
+    description: Restricts test-only certificate exceptions to the generated secure loopback endpoints.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.websocketservercustomvalidationrequestedeventargs?view=winrt-28000
+  - name: Windows.Security.Cryptography.Certificates.CertificateEnrollmentManager
+    description: Imports the ephemeral client certificate used by the mutual-TLS scenario.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.security.cryptography.certificates.certificateenrollmentmanager?view=winrt-28000
+documentation:
+  - title: Sockets
+    url: https://learn.microsoft.com/en-us/windows/apps/develop/networking/sockets
+    kind: learn
+  - title: WebSockets
+    url: https://learn.microsoft.com/en-us/windows/apps/develop/networking/websockets
+    kind: learn
+  - title: MessageWebSocket class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.messagewebsocket?view=winrt-28000
+    kind: api-reference
+  - title: StreamWebSocket class
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.networking.sockets.streamwebsocket?view=winrt-28000
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: internetClient
+      kind: general
+      description: Allows WebSocket clients to connect to internet endpoints when the operator replaces the loopback address.
+    - name: privateNetworkClientServer
+      kind: general
+      description: Allows the packaged client and managed loopback service to communicate over private and local networks.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application and its in-process loopback listeners to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; it starts architecture-neutral managed loopback listeners and generates certificates per run.
+featuredFiles:
+  - path: App.xaml.cs
+    label: Loopback service lifecycle
+    description: Starts and stops the managed WebSocket service and per-run certificate support with the application.
+  - path: LoopbackWebSocketServer.cs
+    label: Managed loopback server
+    description: Hosts ws and wss endpoints, echoes messages, and configures generated server and client certificates.
+  - path: ClientCertificateService.cs
+    label: Client certificate setup
+    description: Creates, imports, locates, and removes the ephemeral certificate used for mutual TLS.
+  - path: Scenarios/Utf8MessagesPage.xaml.cs
+    label: Message WebSocket client
+    description: Connects, writes UTF-8 messages, receives echoed frames, and handles secure endpoint validation.
+  - path: Scenarios/BinaryStreamPage.xaml.cs
+    label: Binary stream client
+    description: Runs concurrent binary send and receive loops and reports byte counts.
+  - path: Scenarios/PartialMessagesPage.xaml.cs
+    label: Partial message handling
+    description: Selects receive mode and reports partial and final WebSocket message frames.
+relatedSamples: []
+screenshots:
+  - id: utf8-client
+    alt: The UTF-8 WebSocket page showing its loopback server address, secure option, connection controls, message input, and activity log.
+    scenario: utf8-text-messages
+    capture:
+      mode: automatic
+      readinessSelector: AutomationId=Utf8ServerAddress
+      notes: Capture the initial client page without connecting; the app seeds a deterministic loopback address on launch.
