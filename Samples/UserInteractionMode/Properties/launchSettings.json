@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "UserInteractionMode (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "UserInteractionMode (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
