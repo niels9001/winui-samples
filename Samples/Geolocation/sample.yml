@@ -1,0 +1,132 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: geolocation
+project:
+  folder: Geolocation
+  name: Geolocation
+title: Tracking location, geofences, and visits
+summary: Request location access, retrieve and track positions, monitor foreground geofences, and observe significant visits.
+aliases:
+  - Geolocation
+  - Geolocator
+  - Geofence
+  - GeovisitMonitor
+  - Windows.Devices.Geolocation
+icon: LocationRegular
+categories:
+  primary: location
+  secondary:
+    - devices-and-sensors
+tags:
+  - location
+  - GPS
+  - geofencing
+  - visits
+  - tracking
+originalSamples:
+  - name: Geolocation
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/Geolocation
+scenarios:
+  - id: track-position
+    title: Track position
+    apis:
+      - Windows.Devices.Geolocation.Geolocator.PositionChanged
+      - Windows.Devices.Geolocation.Geolocator.StatusChanged
+    sourceFiles:
+      - Scenarios/Geolocation/Scenario1_TrackPosition.xaml.cs
+  - id: get-position
+    title: Get position
+    apis:
+      - Windows.Devices.Geolocation.Geolocator.GetGeopositionAsync
+      - Windows.Devices.Geolocation.Geolocator.DesiredAccuracyInMeters
+    sourceFiles:
+      - Scenarios/Geolocation/Scenario2_GetPosition.xaml.cs
+  - id: foreground-geofencing
+    title: Foreground geofencing
+    apis:
+      - Windows.Devices.Geolocation.Geofencing.Geofence
+      - Windows.Devices.Geolocation.Geofencing.GeofenceMonitor
+    sourceFiles:
+      - Scenarios/Geolocation/Scenario4_ForegroundGeofence.xaml.cs
+  - id: get-last-visit
+    title: Get last visit
+    apis:
+      - Windows.Devices.Geolocation.GeovisitMonitor.GetLastReportAsync
+    sourceFiles:
+      - Scenarios/Geolocation/Scenario6_GetLastVisit.xaml.cs
+  - id: foreground-visit-monitoring
+    title: Foreground visit monitoring
+    apis:
+      - Windows.Devices.Geolocation.GeovisitMonitor
+      - Windows.Devices.Geolocation.VisitMonitoringScope
+    sourceFiles:
+      - Scenarios/Geolocation/Scenario7_ForegroundVisits.xaml.cs
+apis:
+  - name: Windows.Devices.Geolocation.Geolocator
+    description: Requests location access, retrieves one position, and reports foreground position and status changes.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geolocator
+  - name: Windows.Devices.Geolocation.Geofencing.GeofenceMonitor
+    description: Stores foreground geofences and reports entered, exited, removed, and status changes.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geofencing.geofencemonitor
+  - name: Windows.Devices.Geolocation.GeovisitMonitor
+    description: Retrieves the last significant visit and reports foreground visit state changes.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geovisitmonitor
+documentation:
+  - title: Get current location
+    url: https://learn.microsoft.com/windows/uwp/maps-and-location/get-location
+    kind: learn
+  - title: Windows.Devices.Geolocation namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation
+    kind: api-reference
+  - title: Windows.Devices.Geolocation.Geofencing namespace
+    url: https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geofencing
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: location
+      kind: device
+      description: Allows the sample to request positions, geofence events, and visit data from Windows location services.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - A Windows-supported location provider such as GPS, Wi-Fi positioning, or cellular positioning is required.
+  accountServices: []
+  architectureNotes: Windows location services must be enabled and the user must grant access; accuracy and event timing depend on the location provider, not the processor architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Foreground location scenarios
+    description: Declares the five foreground scenarios and records the omitted background-task scenarios.
+  - path: Scenarios/Geolocation/Scenario1_TrackPosition.xaml.cs
+    label: Track position changes
+    description: Requests access and reports location and provider status events on the UI dispatcher queue.
+  - path: Scenarios/Geolocation/Scenario2_GetPosition.xaml.cs
+    label: Get one position
+    description: Retrieves a cancellable one-shot position with a requested accuracy.
+  - path: Scenarios/Geolocation/Scenario4_ForegroundGeofence.xaml.cs
+    label: Monitor geofences
+    description: Creates, lists, removes, and handles state changes for foreground geofences.
+  - path: Scenarios/Geolocation/Scenario6_GetLastVisit.xaml.cs
+    label: Read the last visit
+    description: Retrieves the latest Geovisit report and displays its state, time, and optional position.
+  - path: Scenarios/Geolocation/Scenario7_ForegroundVisits.xaml.cs
+    label: Monitor visits
+    description: Starts venue-scope visit monitoring and handles foreground visit state changes.
+  - path: Package.appxmanifest
+    label: Location capability
+    description: Declares location access and full-trust desktop execution.
+relatedSamples:
+  - geotag
+screenshots:
+  - id: track-position
+    alt: The location app showing Start and Stop Tracking controls with status, latitude, longitude, accuracy, and source fields.
+    scenario: track-position
+    capture:
+      mode: manual
+      readinessSelector: text=Track position
+      notes: Capture after granting location access and receiving a position, preferably with a configured simulated location for repeatability.

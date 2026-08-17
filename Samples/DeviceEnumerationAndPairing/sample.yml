@@ -1,0 +1,153 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: device-enumeration-and-pairing
+project:
+  folder: DeviceEnumerationAndPairing
+  name: DeviceEnumerationAndPairing
+title: Discovering and pairing connected devices
+summary: Find connected or nearby devices, watch for changes, request device properties, and complete basic or custom pairing.
+aliases:
+  - DeviceEnumerationAndPairing
+  - Device enumeration
+  - DeviceWatcher
+  - DevicePicker
+  - DeviceInformation
+icon: DesktopRegular
+categories:
+  primary: devices-and-sensors
+  secondary: []
+tags:
+  - devices
+  - discovery
+  - pairing
+  - watchers
+  - AQS
+originalSamples:
+  - name: DeviceEnumerationAndPairing
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/DeviceEnumerationAndPairing
+scenarios:
+  - id: device-picker
+    title: Device Picker Common Control
+    apis:
+      - Windows.Devices.Enumeration.DevicePicker
+      - Windows.Devices.Enumeration.DevicePicker.PickSingleDeviceAsync
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario1_DevicePicker.xaml.cs
+  - id: enumerate-watch-devices
+    title: Enumerate and Watch Devices
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformation.CreateWatcher
+      - Windows.Devices.Enumeration.DeviceWatcher
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario2_DeviceWatcher.xaml.cs
+  - id: enumerate-snapshot
+    title: Enumerate Snapshot of Devices
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformation.FindAllAsync
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario4_Snapshot.xaml.cs
+  - id: get-single-device
+    title: Get Single Device
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformation.CreateFromIdAsync
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario5_GetSingleDevice.xaml.cs
+  - id: custom-filter-properties
+    title: Custom Filter with Additional Properties
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformation.CreateWatcher
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario6_CustomFilterAddedProps.xaml.cs
+  - id: device-information-kind
+    title: Request Specific DeviceInformationKind
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformationKind
+      - Windows.Devices.Enumeration.DeviceInformation.CreateWatcher
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario7_DeviceInformationKind.xaml.cs
+  - id: basic-pairing
+    title: Basic Device Pairing
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformationPairing.PairAsync
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario8_PairDevice.xaml.cs
+  - id: custom-pairing
+    title: Custom Device Pairing
+    apis:
+      - Windows.Devices.Enumeration.DeviceInformationCustomPairing.PairAsync
+      - Windows.Devices.Enumeration.DevicePairingRequestedEventArgs
+      - Windows.Devices.Enumeration.DevicePairingKinds
+    sourceFiles:
+      - Scenarios/DeviceEnumerationAndPairing/Scenario9_CustomPairDevice.xaml.cs
+apis:
+  - name: Windows.Devices.Enumeration.DevicePicker
+    description: Presents system device discovery UI and returns the device selected by the user.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicepicker
+  - name: Windows.Devices.Enumeration.DeviceWatcher
+    description: Reports devices incrementally and raises events when matching devices are added, updated, or removed.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+  - name: Windows.Devices.Enumeration.DeviceInformation
+    description: Finds device snapshots, recreates devices from ids, and creates watchers with selectors and requested properties.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.deviceinformation
+  - name: Windows.Devices.Enumeration.DeviceInformationPairing
+    description: Starts Windows-managed pairing for a pairable association endpoint.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.deviceinformationpairing
+  - name: Windows.Devices.Enumeration.DeviceInformationCustomPairing
+    description: Lets the app participate in pairing ceremonies and provide its own prompts.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.deviceinformationcustompairing
+documentation:
+  - title: Enumerate devices
+    url: https://learn.microsoft.com/windows/uwp/devices-sensors/enumerate-devices
+    kind: learn
+  - title: DevicePicker class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicepicker
+    kind: api-reference
+  - title: DeviceWatcher class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.enumeration.devicewatcher
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware:
+    - Connected or discoverable devices are needed to produce meaningful enumeration results.
+    - Pairing scenarios require a pairable DeviceInformationKind.AssociationEndpoint device.
+  accountServices: []
+  architectureNotes: Available selectors, devices, and pairing ceremonies depend on installed hardware and drivers; the code has no architecture-specific behavior.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Device scenarios
+    description: Declares the eight foreground enumeration and pairing scenarios.
+  - path: DeviceWatcherHelper.cs
+    label: Device watcher lifecycle
+    description: Maintains an observable result set from Added, Updated, Removed, EnumerationCompleted, and Stopped events.
+  - path: Scenarios/DeviceEnumerationAndPairing/Scenario1_DevicePicker.xaml.cs
+    label: Pick a device
+    description: Initializes DevicePicker with the WinUI window and demonstrates modal and event-driven selection.
+  - path: Scenarios/DeviceEnumerationAndPairing/Scenario6_CustomFilterAddedProps.xaml.cs
+    label: Filter and request properties
+    description: Creates a watcher with an AQS selector and an explicit additional-property list.
+  - path: Scenarios/DeviceEnumerationAndPairing/Scenario8_PairDevice.xaml.cs
+    label: Basic pairing
+    description: Discovers pairable association endpoints and starts Windows-managed pairing.
+  - path: Scenarios/DeviceEnumerationAndPairing/Scenario9_CustomPairDevice.xaml.cs
+    label: Custom pairing
+    description: Handles confirmation, PIN, and credential pairing ceremonies with app-provided UI.
+  - path: Package.appxmanifest
+    label: Package requirements
+    description: Declares the full-trust capability used by the packaged desktop app.
+relatedSamples: []
+screenshots:
+  - id: enumerate-devices
+    alt: The device discovery app showing selector options and controls for starting and stopping a live device watcher.
+    scenario: enumerate-watch-devices
+    capture:
+      mode: manual
+      readinessSelector: text=Enumerate and Watch Devices
+      notes: Capture before starting the watcher or use a controlled device lab, because discovered names and counts depend on connected hardware.

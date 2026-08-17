@@ -29,6 +29,18 @@ This sample groups two related globalization features under one NavigationView:
 - `Windows.Globalization.Calendar`
 - `Windows.Globalization.CalendarIdentifiers`, `Windows.Globalization.ClockIdentifiers`
 
+## Learn docs this serves
+
+- [DateTimeFormatter class](https://learn.microsoft.com/uwp/api/windows.globalization.datetimeformatting.datetimeformatter)
+- [Calendar class](https://learn.microsoft.com/uwp/api/windows.globalization.calendar)
+- [Globalize your app](https://learn.microsoft.com/windows/apps/design/globalizing/globalizing-portal)
+
+## Requirements
+
+The sample requires Windows 10 version 1809 (10.0.17763.0) or later and declares
+`runFullTrust`. It does not require hardware, network access, or account services. Results
+reflect the current date, time zone, language, calendar, clock, and numeral preferences.
+
 ## Build & run
 
 ```powershell
