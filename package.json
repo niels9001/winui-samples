@@ -16,7 +16,8 @@
     "site:check": "pnpm site:prepare && pnpm --filter @winui-samples/site check",
     "site:test": "pnpm site:prepare && pnpm --filter @winui-samples/site test",
     "site:build": "pnpm site:prepare && pnpm --filter @winui-samples/site build",
-    "site:verify": "pnpm catalog:test && pnpm site:prepare && pnpm --filter @winui-samples/site test && pnpm --filter @winui-samples/site check && pnpm --filter @winui-samples/site build",
+    "site:smoke": "pnpm --filter @winui-samples/site smoke",
+    "site:verify": "pnpm catalog:test && pnpm site:prepare && pnpm --filter @winui-samples/site test && pnpm --filter @winui-samples/site check && pnpm --filter @winui-samples/site build && pnpm --filter @winui-samples/site smoke",
     "test": "pnpm catalog:test && pnpm site:test"
   },
   "devDependencies": {

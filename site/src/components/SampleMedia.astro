@@ -1,0 +1,137 @@
+---
+import { SampleIcon } from "./SampleIcon";
+import type {
+  CatalogCategory,
+  CatalogSample,
+} from "../lib/catalog";
+import type { HeroMedia } from "../lib/sample-media";
+import { sitePath } from "../lib/urls";
+import { fallbackVisualIndex } from "../lib/visuals";
+
+interface Props {
+  sample: CatalogSample;
+  category?: CatalogCategory;
+  hero?: HeroMedia;
+  eager?: boolean;
+}
+
+const { sample, category, hero, eager = false } = Astro.props;
+const categoryLabel = category?.label ?? sample.categories.primary;
+---
+
+<div class="detail-visual">
+  {
+    hero ? (
+      <img
+        alt={sample.screenshots[0]?.alt ?? ""}
+        decoding="async"
+        fetchpriority={eager ? "high" : "auto"}
+        height="720"
+        loading={eager ? "eager" : "lazy"}
+        src={sitePath(hero.routePath)}
+        width="1280"
+      />
+    ) : (
+      <div
+        class={`detail-visual-fallback visual-theme-${fallbackVisualIndex(
+          sample.categories.primary,
+        )}`}
+        role="img"
+        aria-label={`${categoryLabel} sample illustration`}
+      >
+        <span class="detail-visual-grid" aria-hidden="true"></span>
+        <SampleIcon name={category?.icon ?? sample.icon} />
+        <span>{categoryLabel}</span>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .detail-visual {
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, white 28%, transparent);
+    border-radius: calc(var(--site-radius-large) + 4px);
+    box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 22%);
+  }
+
+  .detail-visual,
+  .detail-visual img,
+  .detail-visual-fallback {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+
+  .detail-visual img {
+    object-fit: cover;
+  }
+
+  .detail-visual-fallback {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    background:
+      radial-gradient(circle at 78% 18%, rgb(255 255 255 / 32%), transparent 28%),
+      linear-gradient(135deg, var(--visual-start), var(--visual-end));
+    color: #ffffff;
+    isolation: isolate;
+  }
+
+  .detail-visual-fallback :global(svg) {
+    width: clamp(4rem, 10vw, 7rem);
+    height: clamp(4rem, 10vw, 7rem);
+    filter: drop-shadow(0 0.75rem 1.25rem rgb(0 0 0 / 25%));
+  }
+
+  .detail-visual-fallback > span:last-child {
+    position: absolute;
+    right: var(--site-space-5);
+    bottom: var(--site-space-4);
+    left: var(--site-space-5);
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 45%);
+  }
+
+  .detail-visual-grid {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 9%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 9%) 1px, transparent 1px);
+    background-size: 2.5rem 2.5rem;
+    mask-image: linear-gradient(to bottom right, #000, transparent 82%);
+  }
+
+  .visual-theme-0 {
+    --visual-start: #0f6cbd;
+    --visual-end: #5b2e91;
+  }
+
+  .visual-theme-1 {
+    --visual-start: #005a9e;
+    --visual-end: #008272;
+  }
+
+  .visual-theme-2 {
+    --visual-start: #744da9;
+    --visual-end: #c239b3;
+  }
+
+  .visual-theme-3 {
+    --visual-start: #0067c0;
+    --visual-end: #00b7c3;
+  }
+
+  .visual-theme-4 {
+    --visual-start: #4f6bed;
+    --visual-end: #881798;
+  }
+
+  .visual-theme-5 {
+    --visual-start: #107c10;
+    --visual-end: #0078d4;
+  }
+</style>
