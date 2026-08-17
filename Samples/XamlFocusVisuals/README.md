@@ -1,22 +1,34 @@
 # XamlFocusVisuals
 
-Ported to WinUI 3 / Windows App SDK from the UWP [XamlFocusVisuals](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals) sample.
+Ported to WinUI 3 / Windows App SDK from the UWP
+[XamlFocusVisuals](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlFocusVisuals)
+sample.
 
 ## What it shows
 
-This sample demonstrates XAML focus visuals in WinUI, including custom focus visuals for an in-box control and applying system focus visuals to a custom templated control.
+This sample demonstrates two focus treatments:
+
+1. A retemplated `CheckBox` disables the system focus visual and uses custom
+   `FocusStates` to draw a red focus rectangle.
+2. A `SocialMediaCounter` custom control enables system focus visuals and marks an
+   image in its template with `Control.IsTemplateFocusTarget`.
+
+Use the Tab key to move keyboard focus through each scenario.
 
 ## APIs featured
 
 - `Microsoft.UI.Xaml.Controls.Control.UseSystemFocusVisuals`
 - `Microsoft.UI.Xaml.Controls.Control.IsTemplateFocusTarget`
 - `Microsoft.UI.Xaml.VisualStateManager`
+- `Microsoft.UI.Xaml.Controls.CheckBox`
 - `Microsoft.UI.Xaml.Controls.HyperlinkButton`
 
 ## Learn docs this serves
 
-- [Keyboard interactions](https://learn.microsoft.com/windows/apps/design/input/keyboard-interactions)
-- [Focus navigation for keyboard, gamepad, remote control, and accessibility tools](https://learn.microsoft.com/windows/apps/design/input/focus-navigation)
+- [Keyboard interactions](https://learn.microsoft.com/en-us/windows/apps/design/input/keyboard-interactions)
+- [Focus navigation for keyboard, gamepad, remote control, and accessibility tools](https://learn.microsoft.com/en-us/windows/apps/design/input/focus-navigation)
+- [Control class](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.control?view=windows-app-sdk-2.2)
+- [Control.IsTemplateFocusTarget attached property](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.control.istemplatefocustarget?view=windows-app-sdk-2.2)
 
 ## Build & run
 
@@ -27,8 +39,14 @@ dotnet run -c Debug -p:Platform=x64
 
 ## Migration notes
 
-The UWP `Windows.UI.Xaml` namespaces were updated to `Microsoft.UI.Xaml`, and scenario backgrounds were removed so the template Mica backdrop shows through. The sample keeps the SDKTemplate code-behind structure and uses the WinUI 3 NavigationView shell.
+The focus APIs map directly to `Microsoft.UI.Xaml`. The custom control's default
+style remains in `Themes/Generic.xaml`, where its image is marked as the focus
+target.
+
+The package manifest also declares the restricted `systemAIModels` capability, but
+the focus-visual scenarios do not call System AI APIs or require an AI model.
 
 ## Known differences / limitations
 
-No API gaps were found. The focus visual APIs used by the UWP sample are available in WinUI 3.
+A keyboard is needed to reproduce the focus states as presented. No functional
+focus-API gap is known in the WinUI 3 port.

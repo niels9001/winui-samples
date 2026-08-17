@@ -1,0 +1,117 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: xaml-data-virtualization
+project:
+  folder: XamlDataVirtualization
+  name: XamlDataVirtualization
+title: Virtualizing large picture collections
+summary: Load Pictures library items on demand, cache visible ranges, and preserve selection without materializing the entire collection.
+aliases:
+  - XamlDataVirtualization
+  - Data virtualization
+  - IItemsRangeInfo
+  - ISelectionInfo
+  - Pictures library
+icon: WindowRegular
+categories:
+  primary: ui-and-input
+  secondary:
+    - files-and-data
+tags:
+  - XAML
+  - virtualization
+  - GridView
+  - thumbnails
+  - selection
+originalSamples:
+  - name: XamlDataVirtualization
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/XamlDataVirtualization
+scenarios:
+  - id: virtualize-picture-data
+    title: Virtualizing picture data
+    summary: Fetch and cache Pictures library items as GridView-visible and tracked ranges change.
+    apis:
+      - Microsoft.UI.Xaml.Data.IItemsRangeInfo
+      - Windows.Storage.StorageLibrary
+      - Windows.Storage.Search.StorageFileQueryResult
+    sourceFiles:
+      - Scenarios/XamlDataVirtualization/Scenario1.xaml
+      - Scenarios/XamlDataVirtualization/Scenario1.xaml.cs
+      - Scenarios/XamlDataVirtualization/FileDataSource.cs
+      - Scenarios/XamlDataVirtualization/ItemCacheManager.cs
+  - id: manage-virtualized-selection
+    title: Managing virtualized selection
+    summary: Track extended selection independently from realized containers and remap it after a data-source reset.
+    apis:
+      - Microsoft.UI.Xaml.Data.ISelectionInfo
+      - Microsoft.UI.Xaml.Data.ItemIndexRange
+    sourceFiles:
+      - Scenarios/XamlDataVirtualization/Scenario2.xaml
+      - Scenarios/XamlDataVirtualization/Scenario2.xaml.cs
+      - Scenarios/XamlDataVirtualization/FileDataSource2.cs
+      - Scenarios/XamlDataVirtualization/ItemIndexRangeList.cs
+apis:
+  - name: Microsoft.UI.Xaml.Data.IItemsRangeInfo
+    description: Reports visible and tracked item ranges so the source can prioritize loading and release cached items.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.data.iitemsrangeinfo?view=windows-app-sdk-2.2
+  - name: Microsoft.UI.Xaml.Data.ISelectionInfo
+    description: Stores and remaps selection independently from the GridView containers currently realized.
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.data.iselectioninfo?view=windows-app-sdk-2.2
+  - name: Windows.Storage.StorageLibrary
+    description: Opens the current user's Pictures library for the virtualized file query.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.storage.storagelibrary?view=winrt-26100
+  - name: Windows.Storage.Search.StorageFileQueryResult
+    description: Supplies file counts, ranged results, and content-change notifications for the Pictures library.
+    url: https://learn.microsoft.com/en-us/uwp/api/windows.storage.search.storagefilequeryresult?view=winrt-26100
+documentation:
+  - title: ListView and GridView
+    url: https://learn.microsoft.com/en-us/windows/apps/design/controls/listview-and-gridview
+    kind: learn
+  - title: IItemsRangeInfo interface
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.data.iitemsrangeinfo?view=windows-app-sdk-2.2
+    kind: api-reference
+  - title: ISelectionInfo interface
+    url: https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.data.iselectioninfo?view=windows-app-sdk-2.2
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: picturesLibrary
+      kind: general
+      description: Allows the data sources to query files and thumbnails from the current user's Pictures library.
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+  hardware: []
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64 and uses DispatcherQueue to marshal file-query updates to the UI thread.
+featuredFiles:
+  - path: Scenarios/XamlDataVirtualization/FileDataSource.cs
+    label: Virtualized item source
+    description: Implements IList and IItemsRangeInfo over a ranged Pictures library query.
+  - path: Scenarios/XamlDataVirtualization/ItemCacheManager.cs
+    label: Visible-range cache
+    description: Loads prioritized ranges, tracks cached items, and discards data that is no longer needed.
+  - path: Scenarios/XamlDataVirtualization/FileDataSource2.cs
+    label: Selection-aware source
+    description: Extends the virtualized source with ISelectionInfo and reset remapping.
+  - path: Scenarios/XamlDataVirtualization/ItemIndexRangeList.cs
+    label: Selection range collection
+    description: Merges, removes, and queries index ranges used by the custom selection implementation.
+  - path: Scenarios/XamlDataVirtualization/Scenario2.xaml
+    label: Virtualized selection UI
+    description: Configures the extended-selection GridView and the command that forces a source reset.
+relatedSamples:
+  - xaml-master-detail
+screenshots:
+  - id: virtualized-selection
+    alt: The selection-management page showing Pictures library thumbnails and the Force a reset button above the GridView.
+    scenario: manage-virtualized-selection
+    capture:
+      mode: manual
+      readinessSelector: text=Force a reset
+      notes: Grant Pictures library access, open Selection Management, and wait for available thumbnails to populate.
