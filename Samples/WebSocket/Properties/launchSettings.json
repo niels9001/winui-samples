@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebSocket (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WebSocket (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
