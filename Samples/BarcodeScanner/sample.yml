@@ -1,0 +1,134 @@
+$schema: ../../metadata/schema/v1/sample.schema.json
+schemaVersion: 1
+id: barcode-scanner
+project:
+  folder: BarcodeScanner
+  name: BarcodeScanner
+title: Reading barcodes with point-of-service scanners
+summary: Discover, claim, configure, and read barcode scanners, including competing claims, symbologies, attributes, and camera-backed preview.
+aliases:
+  - BarcodeScanner
+  - Barcode Scanner
+  - Windows.Devices.PointOfService
+  - POS scanner
+icon: CartRegular
+categories:
+  primary: retail-and-industry
+  secondary:
+    - devices-and-sensors
+    - media
+tags:
+  - barcode
+  - point of service
+  - scanner
+  - symbology
+  - device claim
+originalSamples:
+  - name: BarcodeScanner
+    url: https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BarcodeScanner
+scenarios:
+  - id: data-received
+    title: Receive scan data
+    summary: Claim and enable a scanner, then display decoded labels, raw data, and symbology from DataReceived events.
+    apis:
+      - Windows.Devices.PointOfService.BarcodeScanner.ClaimScannerAsync
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.DataReceived
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.EnableAsync
+    sourceFiles:
+      - Scenarios/BarcodeScanner/Scenario1_BasicFunctionality.xaml.cs
+  - id: release-and-retain
+    title: Resolve competing scanner claims
+    summary: Observe a second claim request and choose whether to release or retain the active scanner.
+    apis:
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.ReleaseDeviceRequested
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.RetainDevice
+    sourceFiles:
+      - Scenarios/BarcodeScanner/Scenario2_MultipleScanners.xaml.cs
+  - id: active-symbologies
+    title: Configure active symbologies
+    summary: Compare supported and active barcode formats and apply a new active symbology set.
+    apis:
+      - Windows.Devices.PointOfService.BarcodeScanner.GetSupportedSymbologiesAsync
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.SetActiveSymbologiesAsync
+    sourceFiles:
+      - Scenarios/BarcodeScanner/Scenario3_ActiveSymbologies.xaml.cs
+  - id: symbology-attributes
+    title: Edit symbology attributes
+    summary: Read and update scanner-supported settings such as check digits and decode lengths.
+    apis:
+      - Windows.Devices.PointOfService.BarcodeScanner.GetSymbologyAttributesAsync
+      - Windows.Devices.PointOfService.BarcodeSymbologyAttributes
+    sourceFiles:
+      - Scenarios/BarcodeScanner/Scenario4_SymbologyAttributes.xaml.cs
+  - id: camera-preview
+    title: Preview a camera-backed scanner
+    summary: Show the scanner's video source and control software-triggered scanning through a claimed device.
+    apis:
+      - Windows.Devices.PointOfService.BarcodeScanner.VideoDeviceId
+      - Windows.Devices.PointOfService.ClaimedBarcodeScanner.StartSoftwareTriggerAsync
+      - Windows.Media.Capture.MediaCapture
+      - Windows.Media.Playback.MediaPlayer
+    sourceFiles:
+      - Scenarios/BarcodeScanner/Scenario5_DisplayingBarcodePreview.xaml.cs
+apis:
+  - name: Windows.Devices.PointOfService.BarcodeScanner
+    description: Discovers scanner devices and exposes supported symbologies, attributes, and camera information.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.barcodescanner
+  - name: Windows.Devices.PointOfService.ClaimedBarcodeScanner
+    description: Owns an active scanner session and provides scan events, triggers, and claim coordination.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedbarcodescanner
+  - name: Windows.Devices.PointOfService.BarcodeSymbologyAttributes
+    description: Reads and updates scanner-specific decoding behavior for a barcode symbology.
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.barcodesymbologyattributes
+  - name: Windows.Media.Capture.MediaCapture
+    description: Opens the video source exposed by a camera-backed barcode scanner.
+    url: https://learn.microsoft.com/uwp/api/windows.media.capture.mediacapture
+documentation:
+  - title: Point of Service hardware support
+    url: https://learn.microsoft.com/windows/apps/develop/devices-sensors/pos/device-support
+    kind: learn
+  - title: BarcodeScanner class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.barcodescanner
+    kind: api-reference
+  - title: ClaimedBarcodeScanner class
+    url: https://learn.microsoft.com/uwp/api/windows.devices.pointofservice.claimedbarcodescanner
+    kind: api-reference
+requirements:
+  minimumWindowsVersion: 10.0.17763.0
+  supportedArchitectures:
+    - x86
+    - x64
+    - arm64
+  capabilities:
+    - name: runFullTrust
+      kind: restricted
+      description: Allows the packaged WinUI 3 desktop application to run at full trust.
+    - name: pointOfService
+      kind: device
+      description: Allows discovery, claiming, configuration, and reading of point-of-service barcode scanners.
+    - name: webcam
+      kind: device
+      description: Allows preview and software-trigger control for camera-backed scanner devices.
+  hardware:
+    - A compatible point-of-service barcode scanner is required for hardware scan, claim, and symbology behavior.
+    - A camera-backed scanner exposed by Windows is required for the preview and software-trigger scenario.
+  accountServices: []
+  architectureNotes: The project targets x86, x64, and ARM64; device availability and supported operations depend on the connected scanner rather than CPU architecture.
+featuredFiles:
+  - path: SampleConfiguration.cs
+    label: Scanner scenario catalog
+    description: Declares the five claim, configuration, data, and preview scenarios.
+  - path: Scenarios/BarcodeScanner/Scenario1_BasicFunctionality.xaml.cs
+    label: Event-driven scanning
+    description: Claims and enables a scanner and handles decoded and raw DataReceived payloads.
+  - path: Scenarios/BarcodeScanner/Scenario5_DisplayingBarcodePreview.xaml.cs
+    label: Camera-backed preview
+    description: Connects scanner discovery, media-frame preview, and software-trigger controls.
+screenshots:
+  - id: received-barcode
+    alt: The barcode scanner page showing scan controls and fields for symbology, raw bytes, and a decoded barcode label.
+    scenario: data-received
+    capture:
+      mode: manual
+      readinessSelector: text=DataReceived event
+      notes: Connect and claim a compatible scanner, scan a representative barcode, and capture the populated result fields.

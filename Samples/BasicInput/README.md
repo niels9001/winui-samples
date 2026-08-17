@@ -1,18 +1,20 @@
-# Basic Input
+# Handling pointer gestures and direct manipulation
 
-Ported to WinUI 3 / Windows App SDK from the UWP
+The `BasicInput` project was ported to WinUI 3 / Windows App SDK from the UWP
 [BasicInput](https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/BasicInput)
 sample.
 
 ## What it shows
 
-Basic pointer, gesture, keyboard, mouse, touch, and manipulation input in five scenarios:
+Handle pointer, gesture, keyboard, mouse, touch, and manipulation input in six scenarios:
 
 1. **Input Events** - pointer pressed/released/entered/exited plus tap, double-tap, holding, and right-tap events.
 2. **PointerPoint Properties** - reading pointer location, contact state, wheel/button, touch contact rectangle, and pen pressure properties.
 3. **Device Capabilities** - querying keyboard, mouse, and touch capability objects.
 4. **XAML Manipulations** - moving and rotating an element with XAML manipulation events and inertia.
 5. **Gesture Recognizer** - feeding pointer data to `GestureRecognizer` and applying its manipulation output.
+6. **Pointer Tracking** - capturing multiple contacts and distinguishing primary and secondary
+   pointer feedback.
 
 ## APIs featured
 
@@ -41,6 +43,7 @@ winapp run
 - **Pointer APIs:** `PointerRoutedEventArgs` and XAML input events are under `Microsoft.UI.Xaml.Input`; `PointerPoint`, `PointerPointProperties`, `GestureRecognizer`, and `PointerDeviceType` are under `Microsoft.UI.Input`. WinUI's `PointerPoint` exposes `PointerDeviceType` directly instead of through `PointerDevice.PointerDeviceType`.
 - **Shell:** standard NavigationView + InfoBar shell (see repo `AGENTS.md`); Mica backdrop, app icon in the title bar, no page backgrounds. The pointer canvas uses a transparent hit-test surface so it can still receive pointer events without painting over Mica.
 
-### Known differences / limitations
+## Known differences / limitations
 
-- None. All five scenarios port directly to WinUI 3 / Windows App SDK.
+- All six scenarios port directly to WinUI 3 / Windows App SDK. Touch, pen, and simultaneous
+  pointer details depend on compatible input hardware.
