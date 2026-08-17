@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>PDF document</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Demonstrates loading and rendering PDF documents with Windows.Data.Pdf.</value>
+  </data>
+  <data name="PageTitle.Text" xml:space="preserve">
+    <value>Render a PDF document</value>
+  </data>
+  <data name="PageDescription.Text" xml:space="preserve">
+    <value>Open a PDF, including a password-protected document, then render a complete page at two sizes or render its center region.</value>
+  </data>
+  <data name="LoadSectionHeading.Text" xml:space="preserve">
+    <value>Load document</value>
+  </data>
+  <data name="PasswordInput.AutomationProperties.Name" xml:space="preserve">
+    <value>PDF password</value>
+  </data>
+  <data name="PasswordInput.Header" xml:space="preserve">
+    <value>Password (optional)</value>
+  </data>
+  <data name="PasswordInput.PlaceholderText" xml:space="preserve">
+    <value>Enter the document password</value>
+  </data>
+  <data name="LoadDocumentButton.AccessKey" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="LoadDocumentButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Open PDF document</value>
+  </data>
+  <data name="LoadDocumentButton.Content" xml:space="preserve">
+    <value>Open PDF</value>
+  </data>
+  <data name="NoDocumentSelectedText.Text" xml:space="preserve">
+    <value>No document selected.</value>
+  </data>
+  <data name="RenderSectionHeading.Text" xml:space="preserve">
+    <value>Render options</value>
+  </data>
+  <data name="PageNumberInput.AutomationProperties.Name" xml:space="preserve">
+    <value>Page number</value>
+  </data>
+  <data name="PageNumberInput.Header" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="RenderOptionsComboBox.AutomationProperties.Name" xml:space="preserve">
+    <value>Rendering mode</value>
+  </data>
+  <data name="RenderOptionsComboBox.Header" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="ActualSizeOption.Content" xml:space="preserve">
+    <value>Actual size</value>
+  </data>
+  <data name="HalfSizeOption.Content" xml:space="preserve">
+    <value>Half size, beige background</value>
+  </data>
+  <data name="CenterCropOption.Content" xml:space="preserve">
+    <value>Center crop</value>
+  </data>
+  <data name="RenderPageButton.AccessKey" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="RenderPageButton.AutomationProperties.Name" xml:space="preserve">
+    <value>Render selected page</value>
+  </data>
+  <data name="RenderPageButton.Content" xml:space="preserve">
+    <value>Render page</value>
+  </data>
+  <data name="PageCountUnavailableText.Text" xml:space="preserve">
+    <value>Open a document to see its page count.</value>
+  </data>
+  <data name="RenderedPageHeading.Text" xml:space="preserve">
+    <value>Rendered page</value>
+  </data>
+  <data name="NoPageRenderedText.Text" xml:space="preserve">
+    <value>No page has been rendered.</value>
+  </data>
+  <data name="EmptyStateText.Text" xml:space="preserve">
+    <value>Open a PDF document to render its first page.</value>
+  </data>
+  <data name="RenderedPageImage.AutomationProperties.Name" xml:space="preserve">
+    <value>Rendered PDF page</value>
+  </data>
+  <data name="BusyProgressRing.AutomationProperties.Name" xml:space="preserve">
+    <value>PDF operation in progress</value>
+  </data>
+  <data name="OperationFailedFormat" xml:space="preserve">
+    <value>{0} failed (0x{1:X8}): {2}</value>
+  </data>
+  <data name="SelectingDocumentOperation" xml:space="preserve">
+    <value>Selecting a PDF document</value>
+  </data>
+  <data name="LoadingDocumentOperation" xml:space="preserve">
+    <value>Loading the PDF document</value>
+  </data>
+  <data name="RenderingPageOperation" xml:space="preserve">
+    <value>Rendering the PDF page</value>
+  </data>
+  <data name="WrongPasswordError" xml:space="preserve">
+    <value>The PDF could not be opened because its password is missing or incorrect.</value>
+  </data>
+  <data name="InvalidPdfError" xml:space="preserve">
+    <value>The selected file is not a valid PDF document or cannot be opened.</value>
+  </data>
+  <data name="DocumentHasNoPagesError" xml:space="preserve">
+    <value>The selected PDF document does not contain any pages.</value>
+  </data>
+  <data name="InvalidPageNumberError" xml:space="preserve">
+    <value>Enter a whole page number from 1 through {0}.</value>
+  </data>
+  <data name="SelectedDocumentFormat" xml:space="preserve">
+    <value>Selected document: {0}</value>
+  </data>
+  <data name="PageCountFormat" xml:space="preserve">
+    <value>{0} page(s) available</value>
+  </data>
+  <data name="PasswordProtectedDocument" xml:space="preserve">
+    <value>password protected</value>
+  </data>
+  <data name="UnprotectedDocument" xml:space="preserve">
+    <value>not password protected</value>
+  </data>
+  <data name="DocumentLoadedFormat" xml:space="preserve">
+    <value>Loaded {0}: {1} page(s), {2}. The first page is rendered.</value>
+  </data>
+  <data name="NoPageRendered" xml:space="preserve">
+    <value>No page has been rendered.</value>
+  </data>
+  <data name="ActualSizeRenderDescriptionFormat" xml:space="preserve">
+    <value>Page {0} rendered at its actual size.</value>
+  </data>
+  <data name="HalfSizeRenderDescriptionFormat" xml:space="preserve">
+    <value>Page {0} rendered at half size with a beige background.</value>
+  </data>
+  <data name="CenterCropRenderDescriptionFormat" xml:space="preserve">
+    <value>The center half of page {0} is rendered.</value>
+  </data>
+  <data name="PageRenderedFormat" xml:space="preserve">
+    <value>Rendered page {0} from {1}.</value>
+  </data>
+</root>
