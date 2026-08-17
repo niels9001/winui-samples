@@ -4,6 +4,9 @@ WinUI 3 / Windows App SDK samples, ported from the original [Windows-universal-s
 
 This repo exists so that Microsoft Learn documentation can link to runnable WinUI 3 samples instead of legacy UWP ones. Each sample is built, launched, and manually verified against the original UWP sample before it is accepted.
 
+> [!NOTE]
+> This is a community-maintained WinUI 3 / Windows App SDK port. It is not an official Microsoft repository.
+
 ## Building and running
 
 Each sample is a standard WinUI 3 (Windows App SDK) project. From a sample folder:
