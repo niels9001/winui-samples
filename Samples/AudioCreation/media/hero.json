@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "audio-creation",
+  "screenshotId": "audio-file-playback",
+  "scenario": "file-playback",
+  "alt": "The audio graph file playback page showing file selection, graph controls, trimming, speed, and looping options.",
+  "sourceMetadata": "Samples/AudioCreation/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "345e94d5cdfaada32a533db942d82f93b29e5f6599ad733eeaa443444f6ee350"
+  }
+}

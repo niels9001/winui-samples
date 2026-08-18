@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "ocr",
+  "screenshotId": "image-recognition",
+  "scenario": "image-file",
+  "alt": "The OCR app displaying a selected image with recognized text and colored bounding boxes around individual words.",
+  "sourceMetadata": "Samples/OCR/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "acea61610b9eeb9a58dda383190a9f68ff6b160f59cb06a5c1070da178c9ebc5"
+  }
+}

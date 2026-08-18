@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "compression",
+  "screenshotId": "compress-decompress-initial-state",
+  "scenario": "compress-decompress-file",
+  "alt": "The Compression app before file selection, showing the Default algorithm, its description, the Compress File button, and empty output.",
+  "sourceMetadata": "Samples/Compression/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "c350c47c60b7db6d47379f07c9539ac6b5b7846eea09eaaa4219409c1c03fc4d"
+  }
+}

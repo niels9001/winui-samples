@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xaml-focus-visuals",
+  "screenshotId": "custom-checkbox-focus",
+  "scenario": "create-custom-focus-visuals",
+  "alt": "The custom-focus page showing the Focus me checkbox surrounded by its red keyboard-focus rectangle.",
+  "sourceMetadata": "Samples/XamlFocusVisuals/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "a2a3b88668cbec69e2d8aef54ab222d11ba05a921e5fc2971b36fa81565227ee"
+  }
+}

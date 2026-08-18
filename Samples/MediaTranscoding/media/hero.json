@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "media-transcoding",
+  "screenshotId": "preset-transcoding",
+  "scenario": "preset-transcoding",
+  "alt": "The MediaTranscoding app showing preset output controls with source and transcoded-video preview panels.",
+  "sourceMetadata": "Samples/MediaTranscoding/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "396f98297f57a41271a99d505252431643bcf021931f44e2f575a5a5a97ea7e3"
+  }
+}

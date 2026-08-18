@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "animation-metrics",
+  "screenshotId": "animation-metric-values",
+  "scenario": "inspect-animation-metrics",
+  "alt": "The animation metrics page showing effect choices beside raw duration, easing, scale, opacity, and z-order values.",
+  "sourceMetadata": "Samples/AnimationMetrics/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "06b4d8268a81a299c2b00087a4654af2e053381dbfb2cdb61eac8e92902a121c"
+  }
+}

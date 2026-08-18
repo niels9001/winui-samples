@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xaml-drag-and-drop",
+  "screenshotId": "list-drag-and-drop",
+  "scenario": "move-and-reorder-list-items",
+  "alt": "The drag-and-drop page showing All Items, Selection, and a trash target in three columns.",
+  "sourceMetadata": "Samples/XamlDragAndDrop/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "3bc04b9100d6ead4d51d78a234d06d7479713c392ab633749628b2ca4eab9826"
+  }
+}

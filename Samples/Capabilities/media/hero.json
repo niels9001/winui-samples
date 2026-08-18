@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "capabilities",
+  "screenshotId": "check-capability-display-message",
+  "scenario": "check-capability-display-message",
+  "alt": "The Capabilities app showing location access status and the Stream location for 2 seconds action.",
+  "sourceMetadata": "Samples/Capabilities/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "767bfa8be6097bf27c3d56d4c40442bcdfb1ce591602d120c3afb04ed57a0251"
+  }
+}

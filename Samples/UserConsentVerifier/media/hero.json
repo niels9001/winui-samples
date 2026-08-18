@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "user-consent-verifier",
+  "screenshotId": "verification-request",
+  "scenario": "request-verification",
+  "alt": "The User Consent Verifier app showing the message field and button used to request Windows Hello or PIN verification.",
+  "sourceMetadata": "Samples/UserConsentVerifier/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "901ebd298d58626e4cdcdac78ecee51b30b5d9cb52fd2936e7fb0ce8d858dd0c"
+  }
+}

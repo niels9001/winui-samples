@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xaml-master-detail",
+  "screenshotId": "wide-list-details",
+  "scenario": "adaptive-list-details",
+  "alt": "The adaptive list-and-detail page showing My Items on the left and the selected item's details on the right.",
+  "sourceMetadata": "Samples/XamlMasterDetail/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "32fcd8ae7d76f946f8149a7ece02a3cabc1f69499f25eb2fc22c0916ede94112"
+  }
+}

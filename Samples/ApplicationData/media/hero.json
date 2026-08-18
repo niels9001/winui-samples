@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "application-data",
+  "screenshotId": "app-data-files",
+  "scenario": "app-data-files",
+  "alt": "The application data app showing controls for reading and writing counters in local, cache, and temporary folders.",
+  "sourceMetadata": "Samples/ApplicationData/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "0f4f12d32f30b426b937332fb49180e74d32684754d8ea34ca8ba08aa33f7240"
+  }
+}

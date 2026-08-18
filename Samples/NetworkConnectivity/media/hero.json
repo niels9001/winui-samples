@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "network-connectivity",
+  "screenshotId": "current-connectivity",
+  "scenario": "query-connectivity",
+  "alt": "The NetworkConnectivity app reporting the current connection level and cost-aware internet access decision.",
+  "sourceMetadata": "Samples/NetworkConnectivity/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "23a9491d33413e2fa7b6eecacf81cc9acde6b36295ab468df89456228a59a6ee"
+  }
+}

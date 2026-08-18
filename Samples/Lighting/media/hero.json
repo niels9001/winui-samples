@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "lighting",
+  "screenshotId": "lamp-array-basics",
+  "scenario": "lamp-array-basics",
+  "alt": "The Lighting app showing attached LampArray details with color pattern choices and a brightness control.",
+  "sourceMetadata": "Samples/Lighting/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "334fb5d86edb5efef74cca6ea42e86f1afdf2e82b5c7b070feed4413848d64bb"
+  }
+}

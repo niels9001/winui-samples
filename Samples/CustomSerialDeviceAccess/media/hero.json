@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "custom-serial-device-access",
+  "screenshotId": "connect-empty-state",
+  "scenario": "connect-disconnect",
+  "alt": "The CustomSerialDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty serial device list.",
+  "sourceMetadata": "Samples/CustomSerialDeviceAccess/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "4856ddc49d2af6dce94cb67a8801571a66ba31eceda2392a9ed2078b3d0ecba8"
+  }
+}
