@@ -1,5 +1,439 @@
 {
   "$schema": "../metadata/schema/federated/v1/sync-history.schema.json",
-  "schemaVersion": 1,
-  "providers": []
+  "providers": [
+    {
+      "latestSyncId": "windows-app-sdk-samples-2026-08-18-18431c6d",
+      "providerId": "windows-app-sdk-samples",
+      "records": [
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/activation",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/activation",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-activation--cb5546636ba5",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/environment-variables",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/environment-variables",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-environment-variables--bfc5f88d0885",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/instancing",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/instancing",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-instancing--6a5f616d3a5b",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/restart",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/restart",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-restart--512ee97de336",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/restart-registration",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/restart-registration",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-restart-registration--ec595f25a1fe",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/share-target",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/share-target",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-share-target--7eec362daf3d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:app-lifecycle/state-notifications",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "app-lifecycle/state-notifications",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--app-lifecycle-state-notifications--61da0b4ea859",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:background-task/in-process",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "background-task/in-process",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--background-task-in-process--79d36abfd560",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:background-task/out-of-process",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "background-task/out-of-process",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--background-task-out-of-process--fe6a524eb10c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:composition/dynamic-refresh-rate-tool",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "composition/dynamic-refresh-rate-tool",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--composition-dynamic-refresh-rate-tool--b719b52bc0db",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:custom-controls",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "custom-controls",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--custom-controls--0ff90d4656c7",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:deployment-manager",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "deployment-manager",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--deployment-manager--e41e18b1585d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:dynamic-dependencies",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "dynamic-dependencies",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--dynamic-dependencies--d1aca365cce0",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:input",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "input",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--input--dd23cae42733",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:insights",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "insights",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--insights--c9ad75847b44",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:installer",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "installer",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--installer--2845cf8e79ed",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:islands/simple-island-app",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "islands/simple-island-app",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--islands-simple-island-app--1055cfa293d3",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:islands/ux-frameworks-on-islands",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "islands/ux-frameworks-on-islands",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--islands-ux-frameworks-on-islands--ee9ca76b6259",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:islands/winforms-island-app",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "islands/winforms-island-app",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--islands-winforms-island-app--80afbbaa6ad7",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:mica",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "mica",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--mica--a50964cb5bfe",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:notifications/app",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "notifications/app",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--notifications-app--a8d333b3126c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:notifications/push",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "notifications/push",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--notifications-push--1c4a74e3d256",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:photo-editor",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "photo-editor",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--photo-editor--9974079a54c2",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:resource-management",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "resource-management",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--resource-management--f593b64cbe7a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:scene-graph/depth-demo",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "scene-graph/depth-demo",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--scene-graph-depth-demo--a03dd012943b",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:scene-graph/effect-editor",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "scene-graph/effect-editor",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--scene-graph-effect-editor--b9afee274bc3",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:scene-graph/expression-builder",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "scene-graph/expression-builder",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--scene-graph-expression-builder--cbcfc117240c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:scene-graph/material-creator",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "scene-graph/material-creator",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--scene-graph-material-creator--f7ce5976cfab",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:scene-graph/sample-gallery",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "scene-graph/sample-gallery",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--scene-graph-sample-gallery--a086a61504f9",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:secure-ui",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "secure-ui",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--secure-ui--174d4739093c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:self-contained-deployment",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "self-contained-deployment",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--self-contained-deployment--e9292ecfddce",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:text-rendering",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "text-rendering",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--text-rendering--8889cc0474ae",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:unpackaged",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "unpackaged",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--unpackaged--a9dd3b796e07",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:widgets",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "widgets",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--widgets--31888c3ac26f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windowing",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windowing",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windowing--cd45666ede81",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ai",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ai",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ai--758f3a1721e6",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/abi-execution-providers",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/abi-execution-providers",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-abi-execution-providers--17c5c61cfe23",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/cmake-execution-provider-catalog",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/cmake-execution-provider-catalog",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-cmake-execution-provider-catalog--e85809035cd9",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/console-inference",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/console-inference",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-console-inference--b41086f991d1",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/desktop-image-classification",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/desktop-image-classification",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-desktop-image-classification--e732202d5ed8",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/genai",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/genai",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-genai--15b4549b862f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "id": "windows-app-sdk-samples:windows-ml/python-squeezenet",
+          "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "recordKey": "windows-ml/python-squeezenet",
+          "removedAtSync": null,
+          "routePath": "samples/windows-app-sdk-samples--windows-ml-python-squeezenet--085fe58d1ab2",
+          "status": "active"
+        }
+      ],
+      "syncs": [
+        {
+          "id": "windows-app-sdk-samples-2026-08-18-18431c6d",
+          "lockCommitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+          "reviewedAt": "2026-08-18T09:02:23Z"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1
 }
