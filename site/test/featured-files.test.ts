@@ -83,7 +83,7 @@ test("creates stable code routes and exact main-branch GitHub links", () => {
     "/samples/file-access/code/01-scenarios-scenario1-create-xaml-cs/",
   );
   assert.equal(
-    descriptor.githubUrl,
+    descriptor.sourceUrl,
     "https://github.com/niels9001/winui-samples/blob/main/Samples/FileAccess/Scenarios/Scenario1_Create.xaml.cs",
   );
 });

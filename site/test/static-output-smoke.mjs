@@ -20,13 +20,11 @@ const catalogPath = path.join(
   "generated",
   "sample-catalog.json",
 );
-const activityPath = path.join(
-  siteRoot,
-  "src",
-  "generated",
-  "sample-activity.json",
-);
 const basePath = "/winui-samples/";
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 function featuredFileKey(file, index) {
   const slug = file.path
@@ -77,8 +75,36 @@ function localOutputPath(urlValue) {
   return path.join(distRoot, relative);
 }
 
+function assertOrdered(html, markers, label) {
+  let previousIndex = -1;
+  for (const marker of markers) {
+    const markerIndex = html.indexOf(marker);
+    assert.ok(markerIndex > previousIndex, `${label}: ${marker}`);
+    previousIndex = markerIndex;
+  }
+}
+
+function assertDeveloperChrome(html, label) {
+  const forbidden = [
+    /Read the README/i,
+    /href=["'][^"']*README\.md/i,
+    /Migration notes?/i,
+    /ported from UWP/i,
+    /Recently shipped/i,
+    /PR #\d+/i,
+    /merged pull request/i,
+  ];
+  for (const pattern of forbidden) {
+    assert.doesNotMatch(html, pattern, `${label}: ${pattern}`);
+  }
+}
+
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
-const activity = JSON.parse(await readFile(activityPath, "utf8"));
+const originalSourceCount = new Set(
+  catalog.samples.flatMap((sample) =>
+    sample.originalSamples.map((original) => original.url),
+  ),
+).size;
 const browsePath = path.join(distRoot, "samples", "index.html");
 const browseHtml = await readFile(browsePath, "utf8");
 const landingPath = path.join(distRoot, "index.html");
@@ -86,44 +112,49 @@ const landingHtml = await readFile(landingPath, "utf8");
 
 assert.match(browseHtml, /<main\b[^>]*\bid="main-content"/);
 assert.match(browseHtml, /aria-live="polite"/);
-assert.match(browseHtml, /Browse samples/);
-assert.match(browseHtml, /Declared package capabilities/);
-assert.doesNotMatch(browseHtml, /(?:New|Updated)\s*(?:first|recent)/i);
+assert.match(browseHtml, /Browse Windows app code/);
+assert.match(browseHtml, /WinUI samples/);
+assert.match(browseHtml, /<noscript>/);
+assert.match(browseHtml, /Every current title remains available below/);
+assert.doesNotMatch(browseHtml, /readinessSelector|screenshot-recipes|pullRequest/);
+assertDeveloperChrome(browseHtml, "Browse");
 
-const landingSections = [
-  'id="hero-title"',
-  'id="stage-title"',
-  'id="activity-title"',
-  'id="featured-title"',
-  'id="outcomes-title"',
-  'id="get-started-title"',
-  'id="contribute-title"',
-];
-let previousSectionIndex = -1;
-for (const section of landingSections) {
-  const sectionIndex = landingHtml.indexOf(section);
-  assert.ok(sectionIndex > previousSectionIndex, `Landing section order: ${section}`);
-  previousSectionIndex = sectionIndex;
+for (const document of catalog.samples.flatMap((sample) =>
+  sample.documentation.filter((entry) => entry.kind === "migration"),
+)) {
+  assert.ok(
+    !browseHtml.includes(document.title),
+    `Browse index contains migration documentation: ${document.title}`,
+  );
 }
-assert.match(landingHtml, />71<\/dt>/);
-assert.match(landingHtml, />105<\/dt>/);
-if (activity.entries.length === 0) {
-  assert.match(landingHtml, /The next shipment will appear here/);
-  assert.match(landingHtml, /No placeholder dates or invented releases/);
-} else {
-  assert.match(landingHtml, /class="activity-list"/);
-  for (const entry of activity.entries) {
-    assert.match(
-      landingHtml,
-      new RegExp(`PR #${entry.pullRequest.number}\\b`),
-      `Missing activity PR #${entry.pullRequest.number}`,
-    );
-  }
-}
+
+assertOrdered(
+  landingHtml,
+  [
+    'id="hero-title"',
+    'data-showcase-stage',
+    'id="build-paths"',
+    'id="featured-title"',
+    'id="get-started-title"',
+  ],
+  "Landing section order",
+);
+assert.match(landingHtml, /Find working Windows code for what you want to build/);
+assert.match(landingHtml, /data-showcase-stage/);
+assert.match(landingHtml, /Windows code workspace/);
+assert.match(landingHtml, /Search by outcome or API/);
+assert.match(
+  landingHtml,
+  new RegExp(
+    `<strong[^>]*>${catalog.coverage.totalProjects} buildable projects<\\/strong><span[^>]*>drawn from ${originalSourceCount}`,
+  ),
+);
+assert.doesNotMatch(landingHtml, /sample-activity|pullRequest|contribute-title/);
 assert.doesNotMatch(
   landingHtml,
   /(?:ghp|github_pat)_[A-Za-z0-9_]+|Bearer\s+[A-Za-z0-9._-]+/,
 );
+assertDeveloperChrome(landingHtml, "Landing");
 
 for (const sample of catalog.samples) {
   const detailPath = path.join(
@@ -139,16 +170,77 @@ for (const sample of catalog.samples) {
   );
 
   const detailHtml = await readFile(detailPath, "utf8");
-  assert.match(detailHtml, /<aside[^>]*class="sample-facts/);
-  assert.match(detailHtml, /Declared package capabilities/);
-  assert.match(detailHtml, /Actual prerequisites/);
-  assert.match(detailHtml, /Browse featured code/);
+  assertDeveloperChrome(detailHtml, sample.id);
+  assert.match(detailHtml, /WinUI samples/);
+  assertOrdered(
+    detailHtml,
+    [
+      'id="overview"',
+      'id="run"',
+      'id="scenarios"',
+      'id="apis"',
+      'id="code"',
+      'id="requirements"',
+      'id="limitations"',
+      'id="resources"',
+      'id="related-title"',
+    ],
+    `${sample.id} documentation order`,
+  );
+  assert.doesNotMatch(detailHtml, /class="sample-facts/);
+  assert.match(detailHtml, /Build and launch from a local checkout/);
+  assert.match(detailHtml, /aria-label="Copy [^"]+ build commands"/);
+  assert.match(detailHtml, /data-copy-control/);
+  assert.match(detailHtml, /Source and documentation/);
+  assert.match(detailHtml, /Related projects/);
+  const limitationsStart = detailHtml.indexOf('id="limitations"');
+  const limitationsEnd = detailHtml.indexOf('id="resources"', limitationsStart);
+  assert.doesNotMatch(
+    detailHtml.slice(limitationsStart, limitationsEnd),
+    /\b(?:UWP|ported|porting|Migration notes?)\b/i,
+    `${sample.id} limitations contain platform history`,
+  );
+
+  const heroStart = detailHtml.indexOf('<section class="detail-hero"');
+  const heroEnd = detailHtml.indexOf("</section>", heroStart);
+  const heroHtml = detailHtml.slice(heroStart, heroEnd);
+  assert.equal(
+    (heroHtml.match(/class="button-link"/g) ?? []).length,
+    1,
+    `${sample.id} must have one primary hero action`,
+  );
+  assert.match(heroHtml, />\s*View source\b/);
+  assert.doesNotMatch(heroHtml, /data-copy-control|git clone|README/i);
+
+  if (sample.scenarios.length > 6) {
+    assert.match(
+      detailHtml,
+      new RegExp(`Show all ${sample.scenarios.length} scenarios`),
+    );
+  }
+  if (sample.scenarios.some((scenario) => (scenario.apis?.length ?? 0) > 3)) {
+    assert.match(detailHtml, /class="scenario-api-disclosure"/);
+  }
+
+  const migrationDocuments = sample.documentation.filter(
+    (document) => document.kind === "migration",
+  );
+  for (const document of migrationDocuments) {
+    assert.ok(
+      !detailHtml.includes(document.title),
+      `${sample.id} shows migration documentation: ${document.title}`,
+    );
+  }
+
+  const repositoryPath = sample.project.repositoryPath
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
   assert.match(
     detailHtml,
     new RegExp(
-      `github\\.com/niels9001/winui-samples/tree/main/${sample.project.repositoryPath.replaceAll(
-        "/",
-        "\\/",
+      `github\\.com/niels9001/winui-samples/tree/main/${escapeRegExp(
+        repositoryPath,
       )}`,
     ),
   );
@@ -170,7 +262,11 @@ for (const sample of catalog.samples) {
     );
 
     const codeHtml = await readFile(codePath, "utf8");
-    assert.match(codeHtml, /Featured implementation/);
+    assertDeveloperChrome(codeHtml, `${sample.id}/${file.path}`);
+    assert.match(codeHtml, /aria-label="Code actions"/);
+    assert.match(codeHtml, /aria-label="Copy file path"/);
+    assert.match(codeHtml, /aria-label="Open file in source"/);
+    assert.match(codeHtml, /aria-label="Curated files"/);
     assert.match(
       codeHtml,
       /class="line"|Preview unavailable/,
@@ -184,15 +280,12 @@ for (const sample of catalog.samples) {
 }
 
 const htmlFiles = await collectFiles(distRoot, ".html");
-assert.ok(
-  htmlFiles.length >= catalog.samples.length + 2,
-  "Expected browse, detail, and code HTML output.",
-);
+assert.equal(htmlFiles.length, 427, "Expected the complete 427-route site.");
 
 for (const htmlPath of htmlFiles) {
   const html = await readFile(htmlPath, "utf8");
   const htmlSize = (await stat(htmlPath)).size;
-  const htmlLimit = htmlPath === browsePath ? 2 * 1024 * 1024 : 1024 * 1024;
+  const htmlLimit = htmlPath === browsePath ? 500_000 : 1024 * 1024;
   assert.ok(
     htmlSize <= htmlLimit,
     `${path.relative(distRoot, htmlPath)} is ${(htmlSize / 1024).toFixed(1)} KiB`,
@@ -235,22 +328,26 @@ for (const htmlPath of htmlFiles) {
 }
 
 const browseSize = (await stat(browsePath)).size;
-assert.ok(
-  browseSize <= 669_000,
-  `Browse HTML is ${(browseSize / 1024).toFixed(1)} KiB`,
-);
-
-const assetFiles = await collectFiles(path.join(distRoot, "_astro"), ".js");
+const assetRoot = path.join(distRoot, "_astro");
+const jsFiles = await collectFiles(assetRoot, ".js");
+const cssFiles = await collectFiles(assetRoot, ".css");
 let initialLandingGzip = 0;
+let browseJavaScriptGzip = 0;
 let lazyThreeGzip = 0;
-for (const assetPath of assetFiles) {
+let cssGzip = 0;
+let fallbackJavaScript = "";
+
+for (const assetPath of jsFiles) {
   const size = (await stat(assetPath)).size;
   const contents = await readFile(assetPath);
+  fallbackJavaScript += contents.toString("utf8");
   const gzipSize = gzipSync(contents, { level: 9 }).length;
   const filename = path.basename(assetPath);
   if (filename.startsWith("three-stage.")) {
     lazyThreeGzip += gzipSize;
-  } else if (!filename.startsWith("SampleExplorer.")) {
+  } else if (filename.startsWith("SampleExplorer.")) {
+    browseJavaScriptGzip += gzipSize;
+  } else {
     initialLandingGzip += gzipSize;
   }
   assert.ok(
@@ -258,15 +355,39 @@ for (const assetPath of assetFiles) {
     `${filename} is ${(size / 1024).toFixed(1)} KiB`,
   );
 }
+
+assert.match(fallbackJavaScript, /saveData/);
+assert.match(fallbackJavaScript, /prefers-reduced-motion: reduce/);
+assert.match(fallbackJavaScript, /forced-colors: active/);
+
+for (const assetPath of cssFiles) {
+  cssGzip += gzipSync(await readFile(assetPath), { level: 9 }).length;
+}
+
 assert.ok(
-  initialLandingGzip < 180 * 1024,
+  initialLandingGzip <= 130 * 1024,
   `Initial landing JavaScript is ${(initialLandingGzip / 1024).toFixed(1)} KiB gzip`,
 );
 assert.ok(
-  lazyThreeGzip < 180 * 1024,
+  lazyThreeGzip <= 132 * 1024,
   `Lazy Three JavaScript is ${(lazyThreeGzip / 1024).toFixed(1)} KiB gzip`,
+);
+assert.ok(
+  browseJavaScriptGzip <= 70 * 1024,
+  `Browse JavaScript is ${(browseJavaScriptGzip / 1024).toFixed(1)} KiB gzip`,
+);
+assert.ok(
+  cssGzip <= 80 * 1024,
+  `Site CSS is ${(cssGzip / 1024).toFixed(1)} KiB gzip`,
 );
 
 console.log(
-  `Static smoke passed: ${catalog.samples.length} samples, ${htmlFiles.length} HTML routes, ${(initialLandingGzip / 1024).toFixed(1)} KiB initial landing JS, ${(lazyThreeGzip / 1024).toFixed(1)} KiB lazy Three JS.`,
+  [
+    `Static smoke passed: ${catalog.samples.length} records, ${htmlFiles.length} HTML routes.`,
+    `${(initialLandingGzip / 1024).toFixed(1)} KiB initial landing JS gzip;`,
+    `${(lazyThreeGzip / 1024).toFixed(1)} KiB lazy Three JS gzip;`,
+    `${(browseJavaScriptGzip / 1024).toFixed(1)} KiB Browse JS gzip;`,
+    `${(cssGzip / 1024).toFixed(1)} KiB CSS gzip;`,
+    `${(browseSize / 1024).toFixed(1)} KiB Browse HTML.`,
+  ].join(" "),
 );

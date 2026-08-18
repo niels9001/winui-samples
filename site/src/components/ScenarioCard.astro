@@ -1,0 +1,163 @@
+---
+import type { CatalogSample, SampleScenario } from "../lib/catalog";
+import { repositoryBlobUrl } from "../lib/urls";
+
+interface Props {
+  sample: CatalogSample;
+  scenario: SampleScenario;
+  index: number;
+}
+
+const { sample, scenario, index } = Astro.props;
+const apis = scenario.apis ?? [];
+const sourceFiles = scenario.sourceFiles ?? [];
+---
+
+<article class="scenario-card surface" data-pointer-surface>
+  <span class="scenario-number" aria-hidden="true">
+    {String(index + 1).padStart(2, "0")}
+  </span>
+  <div class="stack scenario-content">
+    <h3>{scenario.title}</h3>
+    {scenario.summary && <p>{scenario.summary}</p>}
+    {
+      apis.length > 0 && (
+        <div class="scenario-apis" aria-label="Key APIs">
+          {apis.slice(0, 3).map((api) => <code>{api}</code>)}
+          {apis.length > 3 && (
+            <details class="scenario-api-disclosure">
+              <summary>+{apis.length - 3} APIs</summary>
+              <div>
+                {apis.slice(3).map((api) => <code>{api}</code>)}
+              </div>
+            </details>
+          )}
+        </div>
+      )
+    }
+    {
+      sourceFiles.length > 0 && (
+        <details class="scenario-files">
+          <summary>
+            {sourceFiles.length} source {
+              sourceFiles.length === 1 ? "file" : "files"
+            }
+          </summary>
+          <ul>
+            {sourceFiles.map((file) => (
+              <li>
+                <a
+                  href={repositoryBlobUrl(
+                    sample.project.repositoryPath,
+                    file,
+                  )}
+                >
+                  {file} <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .scenario-card {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--site-space-3);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .scenario-number {
+    padding-top: 0.18rem;
+    color: var(--site-color-brand);
+    font-family: var(--site-font-mono);
+    font-size: 0.72rem;
+    font-weight: 720;
+  }
+
+  .scenario-content {
+    --stack-space: var(--site-space-3);
+    min-width: 0;
+  }
+
+  .scenario-content h3 {
+    font-size: 1.08rem;
+    letter-spacing: -0.015em;
+  }
+
+  .scenario-content > p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.88rem;
+  }
+
+  .scenario-apis {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: var(--site-space-1);
+  }
+
+  .scenario-apis code,
+  .scenario-api-disclosure summary {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0.18rem 0.4rem;
+    border-radius: var(--site-radius-small);
+    background: var(--site-color-canvas-subtle);
+    color: var(--site-color-text-secondary);
+    font-size: 0.68rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scenario-api-disclosure summary {
+    cursor: pointer;
+    font-family: var(--site-font-sans);
+    font-weight: 680;
+    list-style: none;
+  }
+
+  .scenario-api-disclosure summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .scenario-api-disclosure[open] {
+    width: 100%;
+  }
+
+  .scenario-api-disclosure > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-1);
+    padding-top: var(--site-space-2);
+  }
+
+  .scenario-files {
+    font-size: 0.76rem;
+  }
+
+  .scenario-files summary {
+    width: fit-content;
+    color: var(--site-color-brand);
+    cursor: pointer;
+    font-weight: 680;
+  }
+
+  .scenario-files ul {
+    display: grid;
+    gap: var(--site-space-1);
+    padding: var(--site-space-2) 0 0 var(--site-space-4);
+  }
+
+  .scenario-files a {
+    overflow-wrap: anywhere;
+    font-family: var(--site-font-mono);
+    font-size: 0.7rem;
+  }
+</style>

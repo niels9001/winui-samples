@@ -1,0 +1,87 @@
+---
+import type { CatalogSample } from "../lib/catalog";
+import ScenarioCard from "./ScenarioCard.astro";
+
+interface Props {
+  sample: CatalogSample;
+  visibleCount?: number;
+}
+
+const { sample, visibleCount = 6 } = Astro.props;
+const visible = sample.scenarios.slice(0, visibleCount);
+const remaining = sample.scenarios.slice(visibleCount);
+---
+
+<div class="scenario-grid">
+  {
+    visible.map((scenario, index) => (
+      <ScenarioCard sample={sample} scenario={scenario} index={index} />
+    ))
+  }
+</div>
+{
+  remaining.length > 0 && (
+    <details class="scenario-disclosure">
+      <summary>
+        Show all {sample.scenarios.length} scenarios
+        <span aria-hidden="true">↓</span>
+      </summary>
+      <div class="scenario-grid">
+        {remaining.map((scenario, index) => (
+          <ScenarioCard
+            sample={sample}
+            scenario={scenario}
+            index={index + visibleCount}
+          />
+        ))}
+      </div>
+    </details>
+  )
+}
+
+<style>
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .scenario-disclosure {
+    display: grid;
+    gap: var(--site-space-4);
+  }
+
+  .scenario-disclosure > summary {
+    display: flex;
+    width: fit-content;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: var(--site-space-3);
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--site-color-border);
+    border-radius: var(--site-radius-medium);
+    background: var(--site-color-surface-elevated);
+    color: var(--site-color-text);
+    cursor: pointer;
+    font-weight: 680;
+    list-style: none;
+  }
+
+  .scenario-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .scenario-disclosure[open] > summary span {
+    transform: rotate(180deg);
+  }
+
+  .scenario-disclosure[open] > .scenario-grid {
+    margin-top: var(--site-space-4);
+  }
+
+  @media (max-width: 44rem) {
+    .scenario-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

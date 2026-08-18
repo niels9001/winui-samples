@@ -2,8 +2,10 @@ import type {
   CatalogCategory,
   CatalogSample,
 } from "./catalog";
+import { getSampleSource } from "./source-provenance";
 
 export const explorerFacetKeys = [
+  "source",
   "primaryCategory",
   "secondaryCategory",
   "tag",
@@ -15,6 +17,9 @@ export const explorerFacetKeys = [
 ] as const;
 
 export type ExplorerFacetKey = (typeof explorerFacetKeys)[number];
+export const visibleExplorerFacetKeys = explorerFacetKeys.filter(
+  (key) => key !== "capture",
+);
 export type ExplorerSort = "recommended" | "title" | "project";
 
 export interface ExplorerState {
@@ -28,10 +33,29 @@ export interface ExplorerFacetOption {
   label: string;
 }
 
+export interface ExplorerSampleSummary {
+  id: string;
+  title: string;
+  summary: string;
+  project: {
+    name: string;
+  };
+  categories: {
+    primary: string;
+  };
+  scenarioCount: number;
+  minimumWindowsVersion: string;
+  supportedArchitectures: string[];
+  source: {
+    id: string;
+    label: string;
+    canonicalUrl: string;
+  };
+}
+
 export interface IndexedSample {
-  sample: CatalogSample;
+  sample: ExplorerSampleSummary;
   order: number;
-  searchText: string;
   searchGroups: {
     title: string;
     summary: string;
@@ -41,11 +65,15 @@ export interface IndexedSample {
     scenarios: string;
     apis: string;
     originals: string;
+    source: string;
+    category: string;
   };
   facets: Record<ExplorerFacetKey, string[]>;
+  facetLabels: Record<ExplorerFacetKey, string[]>;
 }
 
 const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
+  source: "source",
   primaryCategory: "primary",
   secondaryCategory: "secondary",
   tag: "tag",
@@ -57,9 +85,9 @@ const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
 };
 
 const captureLabels = new Map([
-  ["automatic", "Automatic capture"],
-  ["manual", "Manual capture"],
-  ["none", "No capture recipe"],
+  ["automatic", "Automated preview"],
+  ["manual", "Manual preview"],
+  ["none", "No preview recipe"],
 ]);
 
 function compareText(left: string, right: string): number {
@@ -92,9 +120,9 @@ function captureModes(sample: CatalogSample): string[] {
     return ["none"];
   }
 
-  return [
-    ...new Set(sample.screenshots.map((screenshot) => screenshot.capture.mode)),
-  ].sort(compareText);
+  return sortedUnique(
+    sample.screenshots.map((screenshot) => screenshot.capture.mode),
+  );
 }
 
 function canonicalFacetValue(
@@ -122,19 +150,23 @@ export function createExplorerIndex(
   );
 
   return samples.map((sample, order) => {
+    const source = getSampleSource(sample);
+    const primaryCategoryLabel =
+      categoryLabels.get(sample.categories.primary) ??
+      sample.categories.primary;
+    const secondaryCategoryLabels = sample.categories.secondary.map(
+      (id) => categoryLabels.get(id) ?? id,
+    );
     const searchGroups = {
       title: normalizeSearchText(sample.title),
       summary: normalizeSearchText(sample.summary),
       project: joinSearchValues([
         sample.project.name,
-        sample.project.folder,
-        sample.project.repositoryPath,
       ]),
       aliases: joinSearchValues(sample.aliases),
       tags: joinSearchValues(sample.tags),
       scenarios: joinSearchValues(
         sample.scenarios.flatMap((scenario) => [
-          scenario.id,
           scenario.title,
           scenario.summary,
           ...(scenario.apis ?? []),
@@ -147,40 +179,67 @@ export function createExplorerIndex(
       originals: joinSearchValues(
         sample.originalSamples.map((original) => original.name),
       ),
+      source: normalizeSearchText(source.label),
+      category: joinSearchValues([
+        primaryCategoryLabel,
+        ...secondaryCategoryLabels,
+      ]),
     };
-    const categorySearch = joinSearchValues([
-      categoryLabels.get(sample.categories.primary),
-      ...sample.categories.secondary.map((id) => categoryLabels.get(id)),
-    ]);
+    const facets = {
+      source: [source.id],
+      primaryCategory: [sample.categories.primary],
+      secondaryCategory: sample.categories.secondary,
+      tag: sample.tags.map((value) =>
+        canonicalFacetValue("tag", value),
+      ),
+      capability: sample.requirements.capabilities.map(
+        (capability) =>
+          canonicalFacetValue("capability", capability.name),
+      ),
+      hardware: sample.requirements.hardware.map((value) =>
+        canonicalFacetValue("hardware", value),
+      ),
+      accountService: sample.requirements.accountServices.map((value) =>
+        canonicalFacetValue("accountService", value),
+      ),
+      architecture: sample.requirements.supportedArchitectures,
+      capture: captureModes(sample),
+    };
 
     return {
-      sample,
+      sample: {
+        id: sample.id,
+        title: sample.title,
+        summary: sample.summary,
+        project: {
+          name: sample.project.name,
+        },
+        categories: {
+          primary: sample.categories.primary,
+        },
+        scenarioCount: sample.scenarios.length,
+        minimumWindowsVersion: sample.requirements.minimumWindowsVersion,
+        supportedArchitectures:
+          sample.requirements.supportedArchitectures,
+        source,
+      },
       order,
       searchGroups,
-      searchText: [
-        ...Object.values(searchGroups),
-        categorySearch,
-      ]
-        .filter(Boolean)
-        .join(" "),
-      facets: {
-        primaryCategory: [sample.categories.primary],
-        secondaryCategory: sample.categories.secondary,
-        tag: sample.tags.map((value) =>
-          canonicalFacetValue("tag", value),
-        ),
+      facets,
+      facetLabels: {
+        source: [source.label],
+        primaryCategory: [primaryCategoryLabel],
+        secondaryCategory: secondaryCategoryLabels,
+        tag: sample.tags,
         capability: sample.requirements.capabilities.map(
-          (capability) =>
-            canonicalFacetValue("capability", capability.name),
+          (capability) => capability.name,
         ),
-        hardware: sample.requirements.hardware.map((value) =>
-          canonicalFacetValue("hardware", value),
-        ),
-        accountService: sample.requirements.accountServices.map((value) =>
-          canonicalFacetValue("accountService", value),
-        ),
+        hardware: sample.requirements.hardware,
+        accountService: sample.requirements.accountServices,
         architecture: sample.requirements.supportedArchitectures,
-        capture: captureModes(sample),
+        capture: captureModes(sample).map(
+          (value) => captureLabels.get(value) ?? value,
+        ),
       },
     };
   });
@@ -191,6 +250,7 @@ export function createDefaultExplorerState(): ExplorerState {
     query: "",
     sort: "recommended",
     facets: {
+      source: [],
       primaryCategory: [],
       secondaryCategory: [],
       tag: [],
@@ -259,11 +319,7 @@ export function serializeExplorerState(
 
 export function getFacetOptions(
   index: IndexedSample[],
-  categories: CatalogCategory[],
 ): Record<ExplorerFacetKey, ExplorerFacetOption[]> {
-  const categoryById = new Map(
-    categories.map((category) => [category.id, category]),
-  );
   const authoredLabels = new Map<ExplorerFacetKey, Map<string, string>>(
     explorerFacetKeys.map((key) => [key, new Map()]),
   );
@@ -286,35 +342,10 @@ export function getFacetOptions(
   }
 
   for (const entry of index) {
-    rememberLabel(
-      "primaryCategory",
-      entry.sample.categories.primary,
-      categoryById.get(entry.sample.categories.primary)?.label,
-    );
-    for (const value of entry.sample.categories.secondary) {
-      rememberLabel(
-        "secondaryCategory",
-        value,
-        categoryById.get(value)?.label,
-      );
-    }
-    for (const value of entry.sample.tags) {
-      rememberLabel("tag", value);
-    }
-    for (const capability of entry.sample.requirements.capabilities) {
-      rememberLabel("capability", capability.name);
-    }
-    for (const value of entry.sample.requirements.hardware) {
-      rememberLabel("hardware", value);
-    }
-    for (const value of entry.sample.requirements.accountServices) {
-      rememberLabel("accountService", value);
-    }
-    for (const value of entry.sample.requirements.supportedArchitectures) {
-      rememberLabel("architecture", value);
-    }
-    for (const value of captureModes(entry.sample)) {
-      rememberLabel("capture", value, captureLabels.get(value));
+    for (const key of explorerFacetKeys) {
+      entry.facets[key].forEach((value, index) => {
+        rememberLabel(key, value, entry.facetLabels[key][index]);
+      });
     }
   }
 
@@ -358,7 +389,10 @@ function searchScore(entry: IndexedSample, normalizedQuery: string): number {
   }
 
   const terms = normalizedQuery.split(" ");
-  if (!terms.every((term) => entry.searchText.includes(term))) {
+  const searchText = Object.values(entry.searchGroups)
+    .filter(Boolean)
+    .join(" ");
+  if (!terms.every((term) => searchText.includes(term))) {
     return -1;
   }
 

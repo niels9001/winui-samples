@@ -45,10 +45,6 @@ export function repositoryBlobUrl(
   )}`;
 }
 
-export function repositoryReadmeUrl(repositoryPath: string): string {
-  return repositoryBlobUrl(repositoryPath, "README.md");
-}
-
 export function sampleDetailPath(sampleId: string): string {
   return `/samples/${encodeURIComponent(sampleId)}/`;
 }

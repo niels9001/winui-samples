@@ -1,9 +1,11 @@
 ---
+import { ArrowRightRegular } from "@fluentui/react-icons/svg/arrow-right";
+
 import AppShell from "../components/AppShell.astro";
 import GetStarted from "../components/GetStarted.astro";
 import SampleMedia from "../components/SampleMedia.astro";
 import ShowcaseStage from "../components/ShowcaseStage.astro";
-import { activity } from "../lib/activity";
+import { SampleIcon } from "../components/SampleIcon";
 import { catalog } from "../lib/catalog-data";
 import { categoryById } from "../lib/catalog";
 import {
@@ -13,753 +15,507 @@ import {
   selectFeaturedSamples,
 } from "../lib/landing";
 import { resolveAllHeroMedia } from "../lib/sample-media";
-import { repositoryWebUrl, sitePath } from "../lib/urls";
+import { getSampleSource } from "../lib/source-provenance";
+import { sitePath } from "../lib/urls";
 
 const categories = categoryById(catalog);
-const featured = selectFeaturedSamples(catalog.samples);
-const stageSamples = featured.slice(0, 3);
+const featured = selectFeaturedSamples(catalog.samples, 4);
+const stageSamples = selectFeaturedSamples(catalog.samples, 3);
 const sourceSampleCount = originalSourceSampleCount(catalog);
 const heroMedia = new Map(
   (await resolveAllHeroMedia(featured)).map((media) => [media.sampleId, media]),
 );
-const samplesById = new Map(catalog.samples.map((sample) => [sample.id, sample]));
-const activityEntries = activity.entries.flatMap((entry) => {
-  const sample = samplesById.get(entry.sampleId);
-  return sample ? [{ entry, sample }] : [];
-});
-const dateFormatter = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
-const activityLabels = {
-  new: "New sample",
-  updated: "Implementation updated",
-  refreshed: "Docs and media refreshed",
-} as const;
 ---
 
 <AppShell
-  title="Windows app samples"
-  description="Explore 71 practical WinUI 3 and Windows App SDK projects mapped from 105 Windows source samples."
+  title="Windows app code | Working WinUI examples"
+  description="Find working WinUI and Windows App SDK code by outcome, API, requirement, and implementation."
   activeNav="home"
 >
   <section class="hero" aria-labelledby="hero-title">
     <div class="site-container hero-layout">
       <div class="hero-copy">
-        <p class="eyebrow">WinUI 3 + Windows App SDK</p>
-        <h1 id="hero-title">Find the Windows capability. Ship the experience.</h1>
+        <p class="eyebrow">WinUI + Windows App SDK</p>
+        <h1 id="hero-title">
+          Find working Windows code for what you want to build.
+        </h1>
         <p class="hero-summary">
-          Start with what your app needs to do, then open the working project,
-          scenarios, APIs, and focused source that make it real.
+          Start with an outcome, then move directly into the APIs,
+          requirements, and implementation that make it work.
         </p>
         <div class="cluster hero-actions">
           <a class="button-link" href={sitePath("/samples/")}>
-            Browse all samples <span aria-hidden="true">→</span>
+            Find an example <ArrowRightRegular aria-hidden="true" />
           </a>
-          <a class="button-link button-link--secondary" href={repositoryWebUrl}>
-            View on GitHub <span aria-hidden="true">↗</span>
+          <a class="hero-text-link" href="#build-paths">
+            Browse by capability
           </a>
         </div>
-        <dl class="hero-proof" aria-label="Catalog coverage">
-          <div>
-            <dt>{catalog.coverage.totalProjects}</dt>
-            <dd>buildable WinUI projects</dd>
-          </div>
-          <div>
-            <dt>{sourceSampleCount}</dt>
-            <dd>source samples mapped</dd>
-          </div>
-          <div>
-            <dt>100%</dt>
-            <dd>metadata coverage</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div class="hero-composition" aria-hidden="true">
-        <div class="hero-orbit"></div>
-        <div class="hero-window hero-window--back">
-          <span class="hero-window-bar"></span>
-          <span class="hero-window-lines"></span>
-        </div>
-        <div class="hero-window hero-window--front">
-          <span class="hero-window-bar"></span>
-          <span class="hero-window-nav"></span>
-          <span class="hero-window-cards"></span>
-        </div>
-        <div class="hero-chip hero-chip--one">WinUI 3</div>
-        <div class="hero-chip hero-chip--two">Windows App SDK</div>
-      </div>
-    </div>
-  </section>
-
-  <ShowcaseStage samples={stageSamples} categories={categories} />
-
-  <section class="section activity-section" aria-labelledby="activity-title">
-    <div class="site-container">
-      <div class="section-header activity-heading">
-        <p class="eyebrow">Recently shipped</p>
-        <h2 id="activity-title">Changes tied to merged pull requests</h2>
-        <p class="secondary-text">
-          Build-time activity only. Functional updates, new projects, and
-          documentation refreshes are labeled separately.
+        <p class="hero-proof">
+          <strong>{catalog.coverage.totalProjects} buildable projects</strong>
+          <span>drawn from {sourceSampleCount} Windows SDK examples.</span>
         </p>
       </div>
-      {
-        activityEntries.length > 0 ? (
-          <ol class="activity-list">
-            {activityEntries.map(({ entry, sample }) => (
-              <li>
-                <article class="activity-card">
-                  <div>
-                    <span class={`activity-kind activity-kind--${entry.kind}`}>
-                      {activityLabels[entry.kind]}
-                    </span>
-                    <h3>
-                      <a href={sitePath(`/samples/${sample.id}/`)}>
-                        {sample.title}
-                      </a>
-                    </h3>
-                  </div>
-                  <p>{entry.pullRequest.title}</p>
-                  <div class="activity-meta">
-                    <time datetime={entry.mergedAt}>
-                      {dateFormatter.format(new Date(entry.mergedAt))}
-                    </time>
-                    <a href={entry.pullRequest.url}>PR #{entry.pullRequest.number}</a>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ol>
-        ) : (
-          <div class="activity-empty surface">
-            <div class="activity-empty-mark" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div>
-              <h3>The next shipment will appear here</h3>
-              <p>
-                This feed stays empty until a merged pull request changes a
-                cataloged sample. No placeholder dates or invented releases.
-              </p>
-            </div>
-            <a href={`${repositoryWebUrl}/pulls?q=is%3Apr+is%3Amerged`}>
-              View merged pull requests <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        )
-      }
+      <ShowcaseStage samples={stageSamples} categories={categories} />
     </div>
   </section>
 
-  <section class="section featured-section" aria-labelledby="featured-title">
+  <section
+    class="section paths-section"
+    id="build-paths"
+    aria-labelledby="paths-title"
+    data-scroll-reveal
+  >
     <div class="site-container">
       <div class="section-header">
-        <p class="eyebrow">Featured samples</p>
-        <h2 id="featured-title">A cross-section of the Windows platform</h2>
-        <p class="secondary-text">
-          Curated across device, data, media, input, and app experiences—not
-          ranked by recency.
-        </p>
+        <p class="eyebrow">Build by outcome</p>
+        <h2 id="paths-title">Choose the part of your app you are working on</h2>
       </div>
-      <div class="featured-mosaic">
+      <div class="path-grid">
+        {
+          outcomeLinks.map((outcome) => {
+            const category =
+              outcome.facet === "primaryCategory"
+                ? categories.get(outcome.value)
+                : undefined;
+            return (
+              <a
+                class="path-card surface"
+                data-pointer-surface
+                data-tilt
+                href={sitePath(outcomeBrowsePath(outcome))}
+              >
+                <span class="path-icon">
+                  <SampleIcon name={category?.icon ?? "AppsRegular"} />
+                </span>
+                <span>
+                  <strong>{outcome.title}</strong>
+                  <small>{outcome.description}</small>
+                </span>
+                <ArrowRightRegular aria-hidden="true" />
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="section featured-section"
+    aria-labelledby="featured-title"
+    data-scroll-reveal
+  >
+    <div class="site-container">
+      <div class="featured-heading">
+        <div class="section-header">
+          <p class="eyebrow">Featured implementations</p>
+          <h2 id="featured-title">Start from a complete, focused project</h2>
+          <p class="secondary-text">
+            These picks cover UI, storage, devices, and media with curated code
+            paths and explicit requirements.
+          </p>
+        </div>
+        <a href={sitePath("/samples/")}>
+          See every example <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="featured-grid">
         {
           featured.map((sample, index) => {
             const category = categories.get(sample.categories.primary);
+            const source = getSampleSource(sample);
             return (
-              <article class:list={["featured-card", `featured-card--${index + 1}`]}>
-                <SampleMedia
-                  sample={sample}
-                  category={category}
-                  hero={heroMedia.get(sample.id)}
-                />
-                <div class="featured-card-copy">
-                  <p>{category?.label ?? sample.categories.primary}</p>
+              <article
+                class:list={["featured-card", `featured-card--${index + 1}`]}
+                data-pointer-surface
+                data-tilt
+              >
+                <a
+                  class="featured-visual-link"
+                  href={sitePath(`/samples/${sample.id}/`)}
+                  tabindex="-1"
+                >
+                  <SampleMedia
+                    sample={sample}
+                    category={category}
+                    hero={heroMedia.get(sample.id)}
+                  />
+                </a>
+                <div class="featured-copy">
+                  <div class="featured-meta">
+                    <span>{category?.label ?? sample.categories.primary}</span>
+                    <a href={source.canonicalUrl}>{source.label}</a>
+                  </div>
                   <h3>
                     <a href={sitePath(`/samples/${sample.id}/`)}>{sample.title}</a>
                   </h3>
-                  <span>{sample.scenarios.length} focused scenarios</span>
+                  <p>{sample.summary}</p>
+                  <div class="featured-facts">
+                    <span>{sample.scenarios.length} scenarios</span>
+                    <span>
+                      {sample.requirements.supportedArchitectures.join(" / ")}
+                    </span>
+                  </div>
                 </div>
               </article>
             );
           })
         }
       </div>
-      <a class="featured-all" href={sitePath("/samples/")}>
-        Browse all 71 projects <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="section outcomes-section" aria-labelledby="outcomes-title">
-    <div class="site-container outcomes-layout">
-      <div class="section-header">
-        <p class="eyebrow">Explore by outcome</p>
-        <h2 id="outcomes-title">Start with the job, not the namespace</h2>
-        <p class="secondary-text">
-          Each link opens a shareable Browse view with the relevant catalog
-          filter already applied.
-        </p>
-      </div>
-      <div class="outcome-links">
-        {
-          outcomeLinks.map((outcome, index) => (
-            <a href={sitePath(outcomeBrowsePath(outcome))}>
-              <span class="outcome-number" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span>
-                <strong>{outcome.title}</strong>
-                <small>{outcome.description}</small>
-              </span>
-              <span aria-hidden="true">→</span>
-            </a>
-          ))
-        }
-      </div>
     </div>
   </section>
 
   <GetStarted />
-
-  <section class="contribution-close" aria-labelledby="contribute-title">
-    <div class="site-container contribution-panel">
-      <div>
-        <p class="eyebrow">Open source, built in the open</p>
-        <h2 id="contribute-title">Make one Windows path clearer for everyone</h2>
-        <p>
-          Port a sample, sharpen its metadata, or improve the code path developers
-          land on first.
-        </p>
-      </div>
-      <a class="button-link" href={`${repositoryWebUrl}/blob/main/CONTRIBUTING.md`}>
-        Read the contribution guide <span aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
 </AppShell>
 
 <style>
   .hero {
     position: relative;
     overflow: clip;
-    padding-block: clamp(5rem, 11vw, 9rem);
+    padding-block: clamp(4.5rem, 9vw, 8rem) clamp(4rem, 8vw, 7rem);
   }
 
   .hero::before {
     position: absolute;
-    width: 42rem;
-    height: 42rem;
+    width: 38rem;
+    height: 38rem;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--site-color-brand) 16%, transparent);
+    background: color-mix(in srgb, var(--site-color-brand) 12%, transparent);
     content: "";
     filter: blur(6rem);
-    inset: -24rem -12rem auto auto;
+    inset: -20rem auto auto -16rem;
     pointer-events: none;
   }
 
   .hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(23rem, 0.8fr);
+    grid-template-columns: minmax(24rem, 0.82fr) minmax(32rem, 1.18fr);
     align-items: center;
-    gap: clamp(3rem, 7vw, 7rem);
+    gap: clamp(3rem, 6vw, 6rem);
   }
 
   .hero-copy {
     display: grid;
-    max-width: 47rem;
+    max-width: 46rem;
     gap: var(--site-space-5);
   }
 
   .hero h1 {
-    max-width: 13ch;
-    font-size: clamp(3rem, 7vw, 5.7rem);
-    letter-spacing: -0.055em;
+    max-width: 11ch;
+    font-size: clamp(3.15rem, 6.6vw, 6.15rem);
+    letter-spacing: -0.062em;
   }
 
   .hero-summary {
-    max-width: 40rem;
+    max-width: 38rem;
     color: var(--site-color-text-secondary);
-    font-size: clamp(1.08rem, 2vw, 1.32rem);
+    font-size: clamp(1.08rem, 1.8vw, 1.3rem);
   }
 
   .hero-actions {
-    --cluster-space: var(--site-space-3);
+    --cluster-space: var(--site-space-5);
+  }
+
+  .hero-text-link {
+    color: var(--site-color-text);
+    font-weight: 660;
+    text-decoration-color: var(--site-color-border);
   }
 
   .hero-proof {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--site-space-5);
+    max-width: 34rem;
     padding-top: var(--site-space-4);
     border-top: 1px solid var(--site-color-border-subtle);
-  }
-
-  .hero-proof div {
-    display: grid;
-    gap: 0.15rem;
-  }
-
-  .hero-proof dt {
-    font-family: var(--site-font-display);
-    font-size: 1.65rem;
-    font-weight: 680;
-    line-height: 1;
-  }
-
-  .hero-proof dd {
-    margin: 0;
     color: var(--site-color-text-muted);
-    font-size: 0.78rem;
+    font-size: 0.86rem;
   }
 
-  .hero-composition {
-    position: relative;
-    min-height: 31rem;
-    perspective: 80rem;
+  .hero-proof strong {
+    color: var(--site-color-text);
   }
 
-  .hero-orbit {
-    position: absolute;
-    inset: 7% 0 0;
-    border: 1px solid color-mix(in srgb, var(--site-color-brand) 24%, transparent);
-    border-radius: 50%;
-    transform: rotate(-13deg);
+  .hero-proof span {
+    margin-left: 0.35em;
   }
 
-  .hero-window {
-    position: absolute;
-    display: grid;
-    overflow: hidden;
-    border: 1px solid color-mix(in srgb, white 28%, var(--site-color-border));
-    border-radius: 1rem;
-    background: color-mix(in srgb, var(--site-color-surface-solid) 76%, transparent);
-    box-shadow: 0 2.5rem 5rem rgb(0 0 0 / 20%);
-    backdrop-filter: blur(30px) saturate(130%);
-  }
-
-  .hero-window--back {
-    width: 72%;
-    height: 56%;
-    top: 4%;
-    right: 0;
-    transform: rotateY(-16deg) rotateZ(4deg);
-  }
-
-  .hero-window--front {
-    width: 84%;
-    height: 68%;
-    bottom: 3%;
-    left: 0;
-    grid-template: 2.5rem 1fr / 4.5rem 1fr;
-    transform: rotateY(8deg) rotateZ(-2deg);
-  }
-
-  .hero-window-bar {
-    grid-column: 1 / -1;
-    border-bottom: 1px solid var(--site-color-border-subtle);
-    background:
-      radial-gradient(circle at calc(100% - 1.4rem) 50%, var(--site-color-text-muted) 0 2px, transparent 3px),
-      color-mix(in srgb, var(--site-color-surface-solid) 64%, transparent);
-  }
-
-  .hero-window-nav {
-    border-right: 1px solid var(--site-color-border-subtle);
-    background:
-      linear-gradient(var(--site-color-brand) 0 0) 50% 1.2rem / 45% 0.3rem no-repeat,
-      repeating-linear-gradient(180deg, var(--site-color-border) 0 2px, transparent 2px 2.2rem);
-    opacity: 0.65;
-  }
-
-  .hero-window-lines {
-    margin: 12%;
-    background: repeating-linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--site-color-brand) 36%, transparent) 0 0.4rem,
-      transparent 0.4rem 2.1rem
+  .paths-section {
+    border-block: 1px solid var(--site-color-border-subtle);
+    background: color-mix(
+      in srgb,
+      var(--site-color-canvas-subtle) 76%,
+      transparent
     );
   }
 
-  .hero-window-cards {
-    margin: 8%;
-    border-radius: 0.7rem;
-    background:
-      linear-gradient(125deg, color-mix(in srgb, var(--site-color-brand) 64%, #8a6cff), transparent 65%),
-      repeating-linear-gradient(180deg, var(--site-color-border-subtle) 0 1px, transparent 1px 1.8rem);
-  }
-
-  .hero-chip {
-    position: absolute;
-    padding: 0.45rem 0.75rem;
-    border: 1px solid rgb(255 255 255 / 30%);
-    border-radius: 999px;
-    background: #0f6cbd;
-    box-shadow: var(--site-shadow-flyout);
-    color: white;
-    font-size: 0.76rem;
-    font-weight: 700;
-  }
-
-  .hero-chip--one {
-    top: 18%;
-    left: -3%;
-  }
-
-  .hero-chip--two {
-    right: -2%;
-    bottom: 12%;
-    background: #5b2e91;
-  }
-
-  .activity-section {
-    border-block: 1px solid var(--site-color-border-subtle);
-    background: var(--site-color-canvas-subtle);
-  }
-
-  .activity-list {
+  .path-grid {
     display: grid;
-    margin: 0;
-    padding: 0;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: var(--site-space-3);
-    list-style: none;
   }
 
-  .activity-card {
+  .path-card {
     display: grid;
-    grid-template-columns: minmax(14rem, 0.8fr) minmax(14rem, 1fr) auto;
-    align-items: center;
-    gap: var(--site-space-5);
-    padding: var(--site-space-4) var(--site-space-5);
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: var(--site-radius-large);
-    background: var(--site-color-surface);
-  }
-
-  .activity-card h3 {
-    margin-top: var(--site-space-1);
-    font-size: 1.05rem;
-  }
-
-  .activity-card h3 a {
+    min-width: 0;
+    min-height: 12rem;
+    grid-template: auto 1fr / 1fr auto;
+    align-content: space-between;
+    gap: var(--site-space-4);
+    padding: var(--site-space-5);
     color: var(--site-color-text);
     text-decoration: none;
   }
 
-  .activity-card > p {
-    color: var(--site-color-text-secondary);
-    font-size: 0.9rem;
+  .path-card:hover {
+    border-color: var(--site-color-brand);
+    box-shadow: var(--site-shadow-flyout);
+    color: var(--site-color-text);
+    transform:
+      perspective(70rem)
+      rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg))
+      translateY(-3px);
   }
 
-  .activity-kind {
-    color: var(--site-color-brand);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .activity-kind--refreshed {
-    color: var(--site-color-text-muted);
-  }
-
-  .activity-meta {
+  .path-icon {
     display: grid;
-    justify-items: end;
-    color: var(--site-color-text-muted);
-    font-size: 0.78rem;
-  }
-
-  .activity-empty {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--site-space-5);
-    padding: var(--site-space-6);
-    box-shadow: none;
-  }
-
-  .activity-empty p {
-    color: var(--site-color-text-secondary);
-  }
-
-  .activity-empty a {
-    font-weight: 650;
-    text-decoration: none;
-  }
-
-  .activity-empty-mark {
-    display: flex;
-    width: 3.5rem;
-    height: 3.5rem;
-    align-items: end;
-    justify-content: center;
-    gap: 0.25rem;
-    padding: 0.8rem;
-    border-radius: 50%;
+    width: 2.7rem;
+    height: 2.7rem;
+    place-items: center;
+    border-radius: var(--site-radius-medium);
     background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-size: 1.35rem;
   }
 
-  .activity-empty-mark span {
-    width: 0.35rem;
-    border-radius: 999px;
-    background: var(--site-color-brand);
+  .path-card > span:nth-child(2) {
+    display: grid;
+    grid-column: 1 / -1;
+    align-self: end;
+    gap: var(--site-space-2);
   }
 
-  .activity-empty-mark span:nth-child(1) { height: 35%; }
-  .activity-empty-mark span:nth-child(2) { height: 75%; }
-  .activity-empty-mark span:nth-child(3) { height: 52%; }
+  .path-card small {
+    color: var(--site-color-text-secondary);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .path-card > :global(svg) {
+    width: 1rem;
+    color: var(--site-color-text-muted);
+  }
 
   .featured-section {
     overflow: clip;
   }
 
-  .featured-mosaic {
+  .featured-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--site-space-6);
+  }
+
+  .featured-heading > a {
+    margin-bottom: var(--site-space-7);
+    font-weight: 680;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .featured-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--site-space-4);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-5);
   }
 
   .featured-card {
     position: relative;
+    display: grid;
     overflow: hidden;
-    grid-column: span 4;
+    grid-template-columns: minmax(14rem, 0.9fr) minmax(0, 1.1fr);
     border: 1px solid var(--site-color-border-subtle);
-    border-radius: 1.25rem;
+    border-radius: var(--site-radius-xlarge);
     background: var(--site-color-surface);
     box-shadow: var(--site-shadow-card);
+    backdrop-filter: blur(24px);
   }
 
-  .featured-card--1,
-  .featured-card--4 {
-    grid-column: span 7;
+  .featured-card:hover {
+    border-color: var(--site-color-brand);
+    box-shadow: var(--site-shadow-flyout);
   }
 
-  .featured-card--2,
-  .featured-card--3 {
-    grid-column: span 5;
+  .featured-visual-link {
+    display: block;
+    min-width: 0;
+  }
+
+  .featured-card :global(.detail-visual),
+  .featured-card :global(.detail-visual img),
+  .featured-card :global(.detail-visual-fallback) {
+    height: 100%;
+    aspect-ratio: auto;
   }
 
   .featured-card :global(.detail-visual) {
     border: 0;
+    border-right: 1px solid var(--site-color-border-subtle);
     border-radius: 0;
     box-shadow: none;
   }
 
-  .featured-card-copy {
-    display: grid;
-    gap: 0.25rem;
-    padding: var(--site-space-4) var(--site-space-5) var(--site-space-5);
+  .featured-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--site-space-3);
+    padding: var(--site-space-5);
   }
 
-  .featured-card-copy p,
-  .featured-card-copy span {
+  .featured-meta,
+  .featured-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-2) var(--site-space-4);
     color: var(--site-color-text-muted);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
   }
 
-  .featured-card-copy h3 a {
+  .featured-meta a {
+    position: relative;
+    color: var(--site-color-text-muted);
+  }
+
+  .featured-copy h3 {
+    font-size: 1.35rem;
+  }
+
+  .featured-copy h3 a {
     color: var(--site-color-text);
     text-decoration: none;
   }
 
-  .featured-card-copy h3 a::after {
+  .featured-copy h3 a::after {
     position: absolute;
     inset: 0;
     content: "";
   }
 
-  .featured-all {
-    display: inline-flex;
-    margin-top: var(--site-space-5);
-    font-weight: 680;
-    text-decoration: none;
+  .featured-copy h3,
+  .featured-copy > p,
+  .featured-meta,
+  .featured-facts {
+    position: relative;
   }
 
-  .outcomes-section {
-    background: var(--site-color-text);
-    color: var(--site-color-canvas);
-  }
-
-  .outcomes-layout {
-    display: grid;
-    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
-    gap: clamp(3rem, 8vw, 8rem);
-  }
-
-  .outcomes-section .eyebrow {
-    color: #69bfff;
-  }
-
-  .outcomes-section .secondary-text {
-    color: color-mix(in srgb, var(--site-color-canvas) 72%, transparent);
-  }
-
-  .outcome-links {
-    border-top: 1px solid color-mix(in srgb, var(--site-color-canvas) 24%, transparent);
-  }
-
-  .outcome-links a {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--site-space-4);
-    padding-block: var(--site-space-5);
-    border-bottom: 1px solid color-mix(in srgb, var(--site-color-canvas) 24%, transparent);
-    color: var(--site-color-canvas);
-    text-decoration: none;
-  }
-
-  .outcome-links strong,
-  .outcome-links small {
-    display: block;
-  }
-
-  .outcome-links small {
-    margin-top: var(--site-space-1);
-    color: color-mix(in srgb, var(--site-color-canvas) 70%, transparent);
-  }
-
-  .outcome-number {
-    color: #69bfff;
-    font-family: ui-monospace, "Cascadia Code", monospace;
-    font-size: 0.75rem;
-  }
-
-  .contribution-close {
-    padding-block: var(--site-space-8);
-  }
-
-  .contribution-panel {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--site-space-7);
-    padding: clamp(2rem, 5vw, 4rem);
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: 1.5rem;
-    background:
-      radial-gradient(circle at 90% 10%, var(--site-color-brand-subtle), transparent 24rem),
-      var(--site-color-surface);
-    box-shadow: var(--site-shadow-card);
-  }
-
-  .contribution-panel div {
-    display: grid;
-    max-width: 45rem;
-    gap: var(--site-space-3);
-  }
-
-  .contribution-panel p:last-child {
+  .featured-copy > p {
+    display: -webkit-box;
+    overflow: hidden;
     color: var(--site-color-text-secondary);
+    font-size: 0.9rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
 
-  @media (max-width: 60rem) {
-    .hero-layout,
-    .outcomes-layout {
+  .featured-facts {
+    margin-top: auto;
+    padding-top: var(--site-space-3);
+    border-top: 1px solid var(--site-color-border-subtle);
+  }
+
+  @media (max-width: 72rem) {
+    .hero-layout {
       grid-template-columns: 1fr;
     }
 
-    .hero-composition {
-      min-height: 27rem;
+    .hero-copy {
+      max-width: 58rem;
     }
 
-    .activity-card {
-      grid-template-columns: 1fr auto;
+    .hero h1 {
+      max-width: 14ch;
     }
 
-    .activity-card > p {
-      grid-row: 2;
-      grid-column: 1 / -1;
+    .path-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .featured-card,
-    .featured-card--1,
-    .featured-card--2,
-    .featured-card--3,
-    .featured-card--4 {
-      grid-column: span 6;
+    .featured-card {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-card :global(.detail-visual),
+    .featured-card :global(.detail-visual img),
+    .featured-card :global(.detail-visual-fallback) {
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    .featured-card :global(.detail-visual) {
+      border-right: 0;
+      border-bottom: 1px solid var(--site-color-border-subtle);
     }
   }
 
-  @media (max-width: 42rem) {
+  @media (max-width: 48rem) {
+    .path-grid,
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-card {
+      min-height: 0;
+      grid-template: auto / auto minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .path-card > span:nth-child(2) {
+      grid-column: auto;
+      align-self: center;
+    }
+
+    .featured-heading {
+      align-items: start;
+      flex-direction: column;
+      margin-bottom: var(--site-space-6);
+    }
+
+    .featured-heading .section-header,
+    .featured-heading > a {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 36rem) {
     .hero {
-      padding-block: 4rem 3rem;
+      padding-block: 3.75rem 4rem;
     }
 
-    .hero-composition {
-      min-height: 21rem;
+    .hero h1 {
+      font-size: clamp(2.75rem, 15vw, 4.1rem);
     }
 
-    .hero-proof {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--site-space-3);
-    }
-
-    .hero-proof dt {
-      font-size: 1.3rem;
+    .hero-actions {
+      align-items: flex-start;
+      flex-direction: column;
     }
 
     .hero-actions .button-link {
       width: 100%;
     }
-
-    .activity-empty,
-    .activity-card {
-      grid-template-columns: 1fr;
-    }
-
-    .activity-meta {
-      justify-items: start;
-    }
-
-    .featured-card,
-    .featured-card--1,
-    .featured-card--2,
-    .featured-card--3,
-    .featured-card--4 {
-      grid-column: 1 / -1;
-    }
-
-    .contribution-panel {
-      align-items: start;
-      flex-direction: column;
-    }
   }
 
   @media (forced-colors: active) {
-    .hero-window,
-    .hero-chip,
+    .hero::before {
+      display: none;
+    }
+
     .featured-card,
-    .contribution-panel {
-      border: 2px solid CanvasText;
+    .paths-section {
+      border-color: CanvasText;
       background: Canvas;
-      color: CanvasText;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-window {
-      animation: hero-arrive 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    .featured-card {
-      transition: transform 160ms ease, box-shadow 160ms ease;
-    }
-
-    .featured-card:hover {
-      box-shadow: var(--site-shadow-flyout);
-      transform: translateY(-3px);
-    }
-
-    @keyframes hero-arrive {
-      from {
-        opacity: 0;
-        transform: translateY(1.5rem) rotateY(0) rotateZ(0);
-      }
     }
   }
 </style>

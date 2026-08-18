@@ -34,6 +34,13 @@ const searchable = makeSample(
         url: "https://github.com/microsoft/Windows-universal-samples/tree/main/Samples/CameraStarterKit",
       },
     ],
+    documentation: [
+      {
+        title: "Ported from UWP",
+        url: "https://learn.microsoft.com/windows/apps/windows-app-sdk/migrate-to-windows-app-sdk/",
+        kind: "migration",
+      },
+    ],
     scenarios: [
       {
         id: "preview-photo",
@@ -58,7 +65,7 @@ test("indexes every authored search surface", () => {
     "capturing photo",
     "connected camera",
     "CameraCapture",
-    "Samples Camera",
+    "WinUI samples",
     "MediaCapture",
     "webcam",
     "Preview portrait",
@@ -76,6 +83,11 @@ test("indexes every authored search surface", () => {
       query,
     );
   }
+
+  const excluded = createDefaultExplorerState();
+  excluded.query = "ported UWP";
+  assert.deepEqual(filterAndSortSamples(index, excluded), []);
+  assert.doesNotMatch(JSON.stringify(index), /ported from UWP/i);
 });
 
 test("round-trips stable shareable URL state", () => {
@@ -85,11 +97,12 @@ test("round-trips stable shareable URL state", () => {
   state.facets.primaryCategory = ["files-and-data"];
   state.facets.tag = ["storage", "files"];
   state.facets.architecture = ["arm64", "x64"];
+  state.facets.source = ["winui-samples"];
 
   const serialized = serializeExplorerState(state);
   assert.equal(
     serialized.toString(),
-    "q=storage+file&sort=project&primary=files-and-data&tag=files&tag=storage&arch=arm64&arch=x64",
+    "q=storage+file&sort=project&source=winui-samples&primary=files-and-data&tag=files&tag=storage&arch=arm64&arch=x64",
   );
   assert.deepEqual(parseExplorerState(serialized), {
     ...state,
@@ -100,6 +113,12 @@ test("round-trips stable shareable URL state", () => {
     },
   });
   assert.equal(parseExplorerState("?sort=recent").sort, "recommended");
+  const legacyCaptureState = createDefaultExplorerState();
+  legacyCaptureState.facets.capture = ["automatic"];
+  assert.deepEqual(
+    parseExplorerState("?capture=automatic"),
+    legacyCaptureState,
+  );
 });
 
 test("filters with OR within a facet and AND across facets", () => {
@@ -151,10 +170,22 @@ test("filters with OR within a facet and AND across facets", () => {
     ["file-access"],
   );
 
-  const options = getFacetOptions(index, testCategories);
+  const options = getFacetOptions(index);
   assert.deepEqual(
-    options.capture.map((option) => option.value),
-    ["automatic", "none"],
+    options.source.map((option) => option.value),
+    ["winui-samples"],
+  );
+  assert.deepEqual(options.capture, [
+    { value: "automatic", label: "Automated preview" },
+    { value: "none", label: "No preview recipe" },
+  ]);
+  const legacyCaptureFilter = createDefaultExplorerState();
+  legacyCaptureFilter.facets.capture = ["automatic"];
+  assert.deepEqual(
+    filterAndSortSamples(index, legacyCaptureFilter).map(
+      (entry) => entry.sample.id,
+    ),
+    ["file-access"],
   );
   const counts = getFacetCounts(
     index,
@@ -197,7 +228,7 @@ test("merges case-only freeform facets while preserving an authored label", () =
     tags: ["bluetooth"],
   });
   const index = createExplorerIndex([first, second], testCategories);
-  const options = getFacetOptions(index, testCategories);
+  const options = getFacetOptions(index);
 
   assert.deepEqual(options.tag, [
     { value: "bluetooth", label: "Bluetooth" },
@@ -218,7 +249,7 @@ test("handles empty and one-record partial catalogs", () => {
     [],
   );
   assert.deepEqual(
-    getFacetOptions(emptyIndex, testCategories).tag,
+    getFacetOptions(emptyIndex).tag,
     [],
   );
 

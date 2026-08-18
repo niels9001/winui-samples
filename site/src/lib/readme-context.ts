@@ -16,21 +16,24 @@ import {
 const readmeSizeLimit = 256 * 1024;
 
 export interface ReadmeContext {
-  migrationNotes?: string;
   limitations?: string;
 }
 
 function cleanMarkdownText(value: string): string {
-  return value
+  const cleaned = value
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/`([^`]+)`/g, "$1")
     .replace(/[*~]/g, "")
-    .replace(/^\s*(?:[-*+]|\d+\.)\s+/gm, "")
+    .replace(/^\s*(?:[-*+]|\d+\.)\s+/gm, "\n\n")
     .replace(/^\s*>\s?/gm, "")
-    .replace(/\r/g, "")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+    .replace(/\r/g, "");
+
+  return cleaned
+    .split(/\n{2,}/)
+    .map((block) => block.replace(/\n+/g, " ").replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join("\n");
 }
 
 export function extractReadmeSection(
@@ -58,6 +61,47 @@ export function extractReadmeSection(
   }
 
   const cleaned = cleanMarkdownText(collected.join("\n"));
+  return cleaned.length > 0 ? cleaned : undefined;
+}
+
+export function removePortingOnlyProse(value: string): string | undefined {
+  function rewriteFunctionalLimitation(sentence: string): string {
+    const playback = /^(Closing the desktop app ends playback)\s+because\b/i.exec(
+      sentence,
+    );
+    if (playback?.[1] && /\bUWP\b|\bport\b/i.test(sentence)) {
+      return `${playback[1]}.`;
+    }
+    if (
+      /^The UWP display-orientation behavior is not reproduced because\b/i.test(
+        sentence,
+      )
+    ) {
+      return "Display-orientation handling is unavailable because the current-view DisplayInformation path cannot be used by the desktop app.";
+    }
+    if (
+      /^The port does not change the inherited audio-and-video initialization mode or add the missing microphone capability\b/i.test(
+        sentence,
+      )
+    ) {
+      return "Camera OCR requires the microphone capability when media capture uses audio-and-video initialization.";
+    }
+    return sentence;
+  }
+
+  const kept = value
+    .split(/\n+/)
+    .flatMap((block) => block.split(/(?<=[.!?])\s+/))
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+    .map(rewriteFunctionalLimitation)
+    .filter(
+      (sentence) =>
+        !/\b(?:UWP|migration notes?|migrat(?:ed|ing) from|port(?:ed|ing)|this port (?:keeps|uses|replaces)|recreated to match the original)\b/i.test(
+          sentence,
+        ),
+    );
+  const cleaned = kept.join(" ").replace(/\s+/g, " ").trim();
   return cleaned.length > 0 ? cleaned : undefined;
 }
 
@@ -99,11 +143,13 @@ export async function readSampleReadmeContext(
   }
 
   const markdown = await readFile(realReadme, "utf8");
+  const limitations =
+    extractReadmeSection(markdown, "Known differences / limitations") ??
+    extractReadmeSection(markdown, "Known differences and limitations") ??
+    extractReadmeSection(markdown, "Limitations");
   return {
-    migrationNotes: extractReadmeSection(markdown, "Migration notes"),
-    limitations: extractReadmeSection(
-      markdown,
-      "Known differences / limitations",
-    ),
+    limitations: limitations
+      ? removePortingOnlyProse(limitations)
+      : undefined,
   };
 }
