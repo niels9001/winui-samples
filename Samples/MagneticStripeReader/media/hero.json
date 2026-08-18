@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "magnetic-stripe-reader",
+  "screenshotId": "bank-card-data",
+  "scenario": "read-bank-cards",
+  "alt": "The MagneticStripeReader app displaying decoded bank-card fields beside controls for starting and ending reading.",
+  "sourceMetadata": "Samples/MagneticStripeReader/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "09a8a6c0d1633dab50ef271004859039d8ff443c02678430fe0705b8760719fd"
+  }
+}
