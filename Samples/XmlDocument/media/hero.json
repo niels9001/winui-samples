@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xml-document",
+  "screenshotId": "build-rss",
+  "scenario": "build-rss",
+  "alt": "The XML Document app showing the Build new RSS scenario with its input fields and Build RSS action.",
+  "sourceMetadata": "Samples/XmlDocument/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "2674ab664d400b77d2d930f11dc2f1f28d0297580be53a744f678780d56db866"
+  }
+}
