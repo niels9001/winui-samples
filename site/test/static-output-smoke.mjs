@@ -14,6 +14,7 @@ const siteRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+const repositoryRoot = path.resolve(siteRoot, "..");
 const distRoot = path.join(siteRoot, "dist");
 const catalogPath = path.join(
   siteRoot,
@@ -292,6 +293,68 @@ assert.equal(
   233,
 );
 
+const localHeroById = new Map();
+for (const sample of catalog.samples.filter((entry) => !entry.federated)) {
+  const mediaDirectory = path.join(
+    repositoryRoot,
+    ...sample.project.repositoryPath.split("/"),
+    "media",
+  );
+  const sidecarPath = path.join(mediaDirectory, "hero.json");
+  const candidates = [
+    {
+      filename: "hero.webp",
+      path: path.join(mediaDirectory, "hero.webp"),
+    },
+    {
+      filename: "hero.png",
+      path: path.join(mediaDirectory, "hero.png"),
+    },
+  ];
+  const existingImages = [];
+  for (const candidate of candidates) {
+    if (await fileExists(candidate.path)) existingImages.push(candidate);
+  }
+  const hasSidecar = await fileExists(sidecarPath);
+  assert.equal(
+    hasSidecar,
+    existingImages.length > 0,
+    `${sample.id} hero image and sidecar must be paired.`,
+  );
+  if (!hasSidecar) continue;
+
+  assert.equal(
+    existingImages.length,
+    1,
+    `${sample.id} must have one approved hero image.`,
+  );
+  const sidecar = JSON.parse(await readFile(sidecarPath, "utf8"));
+  const image = existingImages[0];
+  const bytes = await readFile(image.path);
+  assert.equal(sidecar.schemaVersion, 1);
+  assert.equal(sidecar.sampleId, sample.id);
+  assert.equal(
+    sidecar.sourceMetadata,
+    `${sample.project.repositoryPath}/sample.yml`,
+  );
+  assert.equal(sidecar.image.file, image.filename);
+  assert.equal(sidecar.image.width, 1440);
+  assert.equal(sidecar.image.height, 900);
+  assert.equal(sidecar.image.width * 10, sidecar.image.height * 16);
+  assert.ok(sidecar.alt.trim().length > 0);
+  assert.equal(
+    sidecar.image.sha256,
+    createHash("sha256").update(bytes).digest("hex"),
+    `${sample.id} hero hash mismatch.`,
+  );
+  localHeroById.set(sample.id, {
+    ...sidecar,
+    filename: image.filename,
+  });
+}
+assert.equal(localHeroById.size, 48);
+assert.equal(71 - localHeroById.size, 23);
+
 const browsePath = path.join(distRoot, "samples", "index.html");
 const browseHtml = await readFile(browsePath, "utf8");
 const landingPath = path.join(distRoot, "index.html");
@@ -330,6 +393,11 @@ assert.equal(browseIndex.searchHash, catalog.searchIndex.contentHash);
 assert.equal(browseIndex.recordCount, 233);
 assert.equal(browseIndex.records.length, 233);
 assert.deepEqual(browseIndex.records, catalog.searchIndex.records);
+assert.equal(Object.keys(browseIndex.media).length, 49);
+assert.equal(
+  browseIndex.media["file-access"].url,
+  `${basePath}sample-media/file-access/hero.png`,
+);
 assert.match(browseHtml, new RegExp(`${browseIndexHash}\\.json`));
 assert.doesNotMatch(
   browseHtml,
@@ -352,10 +420,16 @@ for (const forbidden of [
 
 assert.match(browseHtml, /<main\b[^>]*\bid="main-content"/);
 assert.match(browseHtml, /aria-live="polite"/);
-assert.match(browseHtml, /Browse Windows app code/);
+assert.match(
+  browseHtml,
+  /<title>Browse \| Windows App Samples Browser<\/title>/,
+);
 assert.match(browseHtml, /WinUI samples/);
 assert.match(browseHtml, /<noscript>/);
-assert.match(browseHtml, /Every current title remains available below/);
+assert.match(
+  browseHtml,
+  /Every sample in Windows App Samples Browser\s+remains available below/,
+);
 assert.doesNotMatch(browseHtml, /readinessSelector|screenshot-recipes|pullRequest/);
 assertDeveloperChrome(browseHtml, "Browse");
 const noScriptDirectory =
@@ -395,6 +469,18 @@ assertOrdered(
   "Landing section order",
 );
 assert.match(landingHtml, /Find working Windows code for what you want to build/);
+assert.match(
+  landingHtml,
+  /<title>Windows App Samples Browser<\/title>/,
+);
+assert.match(
+  landingHtml,
+  /property="og:site_name" content="Windows App Samples Browser"/,
+);
+assert.match(
+  landingHtml,
+  /aria-label="Windows App Samples Browser home"/,
+);
 assert.match(landingHtml, /data-showcase-stage/);
 assert.match(landingHtml, /Windows code workspace/);
 assert.match(landingHtml, /Search by outcome or API/);
@@ -546,6 +632,37 @@ for (const sample of catalog.samples) {
         )}`,
       ),
     );
+
+    const approvedHero = localHeroById.get(sample.id);
+    if (approvedHero) {
+      assert.match(
+        detailHtml,
+        new RegExp(
+          `src="${escapeRegExp(basePath)}sample-media/${escapeRegExp(
+            sample.id,
+          )}/${escapeRegExp(approvedHero.filename)}"`,
+        ),
+      );
+      const heroAlt = htmlText(approvedHero.alt).replaceAll("&#39;", "'");
+      assert.ok(
+        detailHtml.includes(`alt="${heroAlt}"`),
+        `${sample.id} is missing its sidecar alt text.`,
+      );
+      assert.match(detailHtml, /\bwidth="1440"/);
+      assert.match(detailHtml, /\bheight="900"/);
+      assert.match(
+        detailHtml,
+        /data-aspect-ratio="16:10" data-fit="contain"/,
+      );
+    } else {
+      assert.match(detailHtml, /class="detail-visual-fallback/);
+      assert.doesNotMatch(
+        detailHtml,
+        new RegExp(
+          `sample-media/${escapeRegExp(sample.id)}/hero\\.(?:webp|png)`,
+        ),
+      );
+    }
   }
 
   const limitationsStart = detailHtml.indexOf('id="limitations"');
@@ -657,6 +774,25 @@ for (const id of [
   assert.ok(detailById.has(id), `Missing representative detail page ${id}`);
 }
 assert.match(
+  detailById.get("file-access"),
+  /sample-media\/file-access\/hero\.png/,
+);
+const fileAccessHero = detailById
+  .get("file-access")
+  .slice(
+    detailById.get("file-access").indexOf('<section class="detail-hero"'),
+    detailById
+      .get("file-access")
+      .indexOf(
+        "</section>",
+        detailById.get("file-access").indexOf('<section class="detail-hero"'),
+      ),
+  );
+assert.doesNotMatch(
+  fileAccessHero,
+  /class="detail-visual-fallback/,
+);
+assert.match(
   detailById.get("winui-gallery--button--c065a8f484b9"),
   /A simple Button with text content/,
 );
@@ -681,13 +817,19 @@ const expectedMediaPaths = catalog.samples.flatMap((sample) =>
     return `sample-media/${sample.id}/${image.id}.${extension}`;
   }),
 );
+expectedMediaPaths.push(
+  ...[...localHeroById].map(
+    ([sampleId, hero]) =>
+      `sample-media/${sampleId}/${hero.filename}`,
+  ),
+);
 const mediaFiles = await collectFiles(path.join(distRoot, "sample-media"));
 assert.deepEqual(
   mediaFiles.map(relativeOutputPath).sort(),
   expectedMediaPaths.sort(),
   "Static media routes do not exactly match the normalized catalog.",
 );
-assert.equal(mediaFiles.length, 122);
+assert.equal(mediaFiles.length, 170);
 
 for (const htmlPath of htmlFiles) {
   const html = await readFile(htmlPath, "utf8");
@@ -777,6 +919,7 @@ const browseJavaScriptGzip =
   inlineScriptGzipSize(browseHtml);
 let lazyThreeGzip = 0;
 let cssGzip = 0;
+let cssText = "";
 let fallbackJavaScript = landingHtml + browseHtml;
 
 for (const assetPath of jsFiles) {
@@ -807,6 +950,7 @@ assert.match(fallbackJavaScript, /force-cache/);
 
 for (const assetPath of cssFiles) {
   const contents = await readFile(assetPath);
+  cssText += contents.toString("utf8");
   assert.doesNotMatch(
     contents.toString("utf8"),
     /url\(\s*["']?https?:/i,
@@ -814,6 +958,17 @@ for (const assetPath of cssFiles) {
   );
   cssGzip += gzipSync(contents, { level: 9 }).length;
 }
+
+assert.match(
+  cssText,
+  /font-size:\s*clamp\(2\.5rem,\s*4\.8vw,\s*4\.65rem\)/,
+);
+assert.match(cssText, /aspect-ratio:\s*16\s*\/\s*10/);
+assert.match(cssText, /object-fit:\s*contain/);
+assert.doesNotMatch(cssText, /\.detail-visual-image[^}]*object-fit:\s*cover/);
+
+const favicon = await readFile(path.join(distRoot, "favicon.svg"), "utf8");
+assert.match(favicon, /<title>Windows App Samples Browser<\/title>/);
 
 assert.ok(
   initialLandingGzip <= 70 * 1024,

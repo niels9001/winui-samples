@@ -3,6 +3,7 @@ import AppShell from "../../components/AppShell.astro";
 import { SampleExplorer } from "../../components/SampleExplorer";
 import { getBrowseIndexArtifact } from "../../lib/browse-index";
 import { catalog } from "../../lib/catalog-data";
+import { productName } from "../../lib/site-metadata";
 import { sitePath } from "../../lib/urls";
 
 if (!catalog.searchIndex) {
@@ -25,7 +26,7 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
 ---
 
 <AppShell
-  title="Browse Windows app code"
+  title="Browse"
   description="Search working WinUI and Windows App SDK examples by outcome, API, source, and requirement."
   activeNav="samples"
 >
@@ -77,8 +78,8 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
             <p class="eyebrow">Static directory</p>
             <h2 id="static-title">Open an example directly</h2>
             <p>
-              Search and filters need JavaScript. Every current title remains
-              available below.
+              Search and filters need JavaScript. Every sample in {productName}{" "}
+              remains available below.
             </p>
           </div>
           <ul>

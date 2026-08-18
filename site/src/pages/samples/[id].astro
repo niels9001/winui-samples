@@ -124,7 +124,7 @@ const architectureLabel =
 ---
 
 <AppShell
-  title={`${sample.title} | Windows app code`}
+  title={sample.title}
   description={sample.summary ?? sample.title}
   activeNav="samples"
 >
@@ -137,7 +137,12 @@ const architectureLabel =
           <li aria-current="page">{sample.project.name}</li>
         </ol>
       </nav>
-      <div class="detail-hero-grid">
+      <div
+        class:list={[
+          "detail-hero-grid",
+          { "detail-hero-grid--media": Boolean(hero) },
+        ]}
+      >
         <div class="stack detail-heading">
           <a class="source-label" href={source.canonicalUrl}>
             {source.label}
@@ -616,6 +621,11 @@ const architectureLabel =
     margin-top: clamp(2rem, 4vw, 3.5rem);
   }
 
+  .detail-hero-grid--media {
+    grid-template-columns: minmax(0, 0.9fr) minmax(28rem, 1.1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+
   .detail-heading {
     --stack-space: var(--site-space-4);
     min-width: 0;
@@ -883,7 +893,7 @@ const architectureLabel =
 
   .limitations-note {
     padding: var(--site-space-5);
-    border-left: 3px solid var(--site-color-brand);
+    border-color: var(--site-color-border);
     box-shadow: none;
   }
 
@@ -972,7 +982,8 @@ const architectureLabel =
   }
 
   @media (max-width: 52rem) {
-    .detail-hero-grid {
+    .detail-hero-grid,
+    .detail-hero-grid--media {
       grid-template-columns: 1fr;
     }
 

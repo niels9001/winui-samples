@@ -339,11 +339,12 @@
 .sample-visual-image,
 .sample-visual-fallback {
   width: 100%;
-  aspect-ratio: 16 / 8.5;
+  aspect-ratio: 16 / 10;
 }
 
 .sample-visual-image {
-  object-fit: cover;
+  background: var(--site-color-canvas-subtle);
+  object-fit: contain;
 }
 
 .sample-visual-fallback {

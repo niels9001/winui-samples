@@ -1,4 +1,4 @@
-name: Build and deploy showcase
+name: Build and deploy Windows App Samples Browser
 
 on:
   pull_request:

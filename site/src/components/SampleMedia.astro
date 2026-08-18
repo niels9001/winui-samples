@@ -19,11 +19,17 @@ const { sample, category, hero, eager = false } = Astro.props;
 const categoryLabel = category?.label ?? sample.categories.primary;
 ---
 
-<div class="detail-visual">
+<div
+  class:list={["detail-visual", { "detail-visual--media": Boolean(hero) }]}
+  data-aspect-ratio="16:10"
+  data-fit={hero ? "contain" : undefined}
+>
   {
     hero ? (
       <img
         alt={hero.alt}
+        aria-hidden={hero.decorative ? "true" : undefined}
+        class="detail-visual-image"
         decoding="async"
         fetchpriority={eager ? "high" : "auto"}
         height={hero.height ?? 720}
@@ -65,14 +71,22 @@ const categoryLabel = category?.label ?? sample.categories.primary;
   }
 
   .detail-visual,
-  .detail-visual img,
   .detail-visual-fallback {
     width: 100%;
     aspect-ratio: 16 / 10;
   }
 
-  .detail-visual img {
-    object-fit: cover;
+  .detail-visual--media {
+    background: var(--site-color-canvas-subtle);
+  }
+
+  .detail-visual-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    object-position: center;
   }
 
   .detail-visual-fallback {

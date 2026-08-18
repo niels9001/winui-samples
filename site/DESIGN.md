@@ -1,4 +1,4 @@
-# Developer portal design
+# Windows App Samples Browser design
 
 ## Production audit
 
@@ -71,7 +71,7 @@ The baseline was functionally sound but read like a repository dashboard:
   accessible copy/open controls.
 
 Migration notes are never read, indexed, linked, or rendered. The README remains
-source material in the repository, not a portal destination. A dedicated
+source material in the repository, not a Windows App Samples Browser destination. A dedicated
 limitations section may be read at build time; prose that is clearly only about
 porting is removed while current runtime, API, hardware, or behavior constraints
 remain.
@@ -84,6 +84,13 @@ PR details search content. One provider source unit remains one result;
 implementation variants stay nested. Upstream editorial badges remain distinct
 from portal recency, which comes only from reviewed sync history rather than
 upstream commit time.
+
+Approved local screenshots are the primary detail visual. Their committed
+sidecars provide alt text, dimensions, source identity, and SHA-256 validation;
+the complete 1440×900 app window is contained in a stable 16:10 frame. Generated
+category artwork is reserved for records without approved media. Gallery images
+remain title-adjacent decorative control icons rather than simulated screenshots,
+while Windows App SDK media follows provider-authored semantics and licensing.
 
 The workspace composition uses real catalog titles and categories inside
 recognizable navigation, preview, and source-code surfaces. Three.js adds
@@ -114,7 +121,7 @@ applies.
 Astro prerenders all routes under `/winui-samples/`. The browser loads Browse data
 only from one immutable same-origin JSON route and verifies its SHA-256 integrity;
 it never calls GitHub, raw-content hosts, or provider APIs. The current production
-output is 1,227 HTML routes: 233 details and 992 safe code views, plus 122 validated
+output is 1,227 HTML routes: 233 details and 992 safe code views, plus 170 validated
 media routes. Browse HTML is 74.6 KiB against a 650 KiB ceiling; initial Browse
 JavaScript is 67.1 KiB gzip against an 80 KiB ceiling. The immutable Browse index
 is 758.2 KiB raw / 94.6 KiB gzip. Initial landing JavaScript is 2.3 KiB gzip and

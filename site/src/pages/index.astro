@@ -14,6 +14,7 @@ import {
   selectFeaturedSamples,
 } from "../lib/landing";
 import { resolveAllHeroMedia } from "../lib/sample-media";
+import { productName } from "../lib/site-metadata";
 import { getSampleSource } from "../lib/source-provenance";
 import { sitePath } from "../lib/urls";
 
@@ -26,14 +27,13 @@ const heroMedia = new Map(
 ---
 
 <AppShell
-  title="Windows app code | Working WinUI examples"
-  description="Find working WinUI and Windows App SDK code by outcome, API, requirement, and implementation."
+  title={productName}
+  description="Explore working WinUI and Windows App SDK code by outcome, API, requirement, and implementation."
   activeNav="home"
 >
   <section class="hero" aria-labelledby="hero-title">
     <div class="site-container hero-layout">
       <div class="hero-copy">
-        <p class="eyebrow">WinUI + Windows App SDK</p>
         <h1 id="hero-title">
           Find working Windows code for what you want to build.
         </h1>
@@ -169,7 +169,7 @@ const heroMedia = new Map(
   .hero {
     position: relative;
     overflow: clip;
-    padding-block: clamp(4.5rem, 9vw, 8rem) clamp(4rem, 8vw, 7rem);
+    padding-block: clamp(3.75rem, 7vw, 6rem) clamp(3.5rem, 6vw, 5.5rem);
   }
 
   .hero::before {
@@ -186,9 +186,9 @@ const heroMedia = new Map(
 
   .hero-layout {
     display: grid;
-    grid-template-columns: minmax(24rem, 0.82fr) minmax(32rem, 1.18fr);
+    grid-template-columns: minmax(24rem, 0.9fr) minmax(31rem, 1.1fr);
     align-items: center;
-    gap: clamp(3rem, 6vw, 6rem);
+    gap: clamp(2.5rem, 5vw, 5rem);
   }
 
   .hero-copy {
@@ -198,9 +198,9 @@ const heroMedia = new Map(
   }
 
   .hero h1 {
-    max-width: 11ch;
-    font-size: clamp(3.15rem, 6.6vw, 6.15rem);
-    letter-spacing: -0.062em;
+    max-width: 13ch;
+    font-size: clamp(2.5rem, 4.8vw, 4.65rem);
+    letter-spacing: -0.04em;
   }
 
   .hero-summary {
@@ -221,7 +221,7 @@ const heroMedia = new Map(
 
   .hero-proof {
     max-width: 34rem;
-    padding-top: var(--site-space-4);
+    padding-top: var(--site-space-3);
     border-top: 1px solid var(--site-color-border-subtle);
     color: var(--site-color-text-muted);
     font-size: 0.86rem;
@@ -446,7 +446,7 @@ const heroMedia = new Map(
     .featured-card :global(.detail-visual img),
     .featured-card :global(.detail-visual-fallback) {
       height: auto;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 16 / 10;
     }
 
     .featured-card :global(.detail-visual) {
@@ -486,11 +486,12 @@ const heroMedia = new Map(
 
   @media (max-width: 36rem) {
     .hero {
-      padding-block: 3.75rem 4rem;
+      padding-block: 3rem 3.5rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.75rem, 15vw, 4.1rem);
+      max-width: 13ch;
+      font-size: clamp(2.4rem, 11vw, 3.2rem);
     }
 
     .hero-actions {

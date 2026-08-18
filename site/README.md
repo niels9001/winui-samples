@@ -1,4 +1,4 @@
-# Showcase website
+# Windows App Samples Browser
 
 This workspace is the static GitHub Pages foundation for
 `https://niels9001.github.io/winui-samples/`. Astro prerenders every route; the
@@ -79,8 +79,12 @@ collisions fail preparation. Normal preparation and builds never call GitHub.
 - `related-samples.ts` applies explicit relationships first, then deterministic
   weighted category, API, tag, and language matching. Provider diversity breaks
   equal scores but never imposes quotas.
-- Hero media resolves `media/hero.webp` before `media/hero.png`. When neither is
-  present, category-derived artwork is rendered without an image request.
+- Approved local hero media resolves `media/hero.webp` before `media/hero.png`
+  and requires a matching `media/hero.json` sidecar with authored alt text,
+  dimensions, source path, and SHA-256. The current 48 approved 1440×900
+  screenshots render uncropped in 16:10 containers; the other 23 local records
+  use category-derived artwork without an image request. Provider media remains
+  governed by its normalized image and license metadata.
 
 ## Featured-file safety boundary
 
@@ -104,7 +108,8 @@ copied into site output.
 ## Production output contract
 
 The current build contains 233 detail routes and 992 safe code routes (1,227 HTML
-routes total), 122 media routes backed by validated cache bytes, and one immutable
+routes total), 170 media routes (48 approved local screenshots and 122 provider
+assets), and one immutable
 Browse index. Browse HTML is 74.6 KiB; the index is 758.2 KiB raw / 94.6 KiB gzip;
 initial Browse JavaScript is 67.1 KiB gzip. The static audit enforces a 650 KiB
 Browse HTML ceiling and an 80 KiB-gzip initial Browse JavaScript ceiling, checks

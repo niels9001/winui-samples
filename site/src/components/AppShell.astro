@@ -1,5 +1,6 @@
 ---
 import ThemeSwitcher from "./ThemeSwitcher.astro";
+import { productName } from "../lib/site-metadata";
 import { repositoryWebUrl, sitePath } from "../lib/urls";
 import "../styles/global.css";
 
@@ -11,6 +12,8 @@ interface Props {
 
 const { title, description, activeNav } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const documentTitle =
+  title === productName ? productName : `${title} | ${productName}`;
 const navigation = [
   {
     label: "Home",
@@ -37,10 +40,19 @@ const navigation = [
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="application-name" content={productName} />
     <meta name="theme-color" content="#0067c0" />
+    <meta property="og:site_name" content={productName} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={documentTitle} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href={sitePath("/favicon.svg")} />
     <link rel="canonical" href={canonicalUrl} />
-    <title>{title}</title>
+    <title>{documentTitle}</title>
     <script is:inline>
       (() => {
         const stored = window.localStorage.getItem("winui-samples-theme");
@@ -62,11 +74,11 @@ const navigation = [
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <div class="site-container header-content">
-        <a class="brand" href={sitePath("/")} aria-label="Windows app code home">
+        <a class="brand" href={sitePath("/")} aria-label={`${productName} home`}>
           <span class="brand-mark" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
           </span>
-          <span>Windows app code</span>
+          <span>{productName}</span>
         </a>
         <nav class="primary-navigation" aria-label="Primary navigation">
           {
@@ -92,8 +104,11 @@ const navigation = [
     <footer class="site-footer">
       <div class="site-container footer-content">
         <div>
-          <strong>Windows app code</strong>
-          <p>Working examples for WinUI and the Windows App SDK.</p>
+          <strong>{productName}</strong>
+          <p>
+            A community-maintained guide to working WinUI and Windows App SDK
+            examples.
+          </p>
         </div>
         <nav aria-label="Footer navigation">
           <a href={sitePath("/samples/")}>Browse</a>

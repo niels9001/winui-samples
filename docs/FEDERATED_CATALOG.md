@@ -4,7 +4,7 @@ The federated catalog is an additive build-time contract for samples that remain
 their upstream repositories. It does not vendor or migrate those applications. The
 existing 71 local records remain canonical, unchanged schema-v1 documents under
 `Samples/*/sample.yml`; the build joins them with 162 external records into the
-233-record developer portal.
+233-record Windows App Samples Browser catalog.
 
 The site imports only deterministic generated output. Normal builds use committed
 locks and content-addressed cache bytes, and browser requests never depend on
