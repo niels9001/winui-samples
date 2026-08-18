@@ -36,3 +36,16 @@ pnpm catalog:generate -- --require-complete --output site/src/generated/sample-c
 Catalog CI requires every sample project to have a valid `sample.yml`. The regular
 `pnpm catalog:validate` command remains available for isolated metadata drafting,
 but run the completeness command before opening a pull request.
+
+## External catalog providers
+
+External providers use the additive, offline-only contract in
+[docs/FEDERATED_CATALOG.md](docs/FEDERATED_CATALOG.md). Do not weaken or replace
+the local `sample.yml` v1 schema. Validate shared infrastructure with:
+
+```powershell
+pnpm external:verify
+```
+
+Only `pnpm external:refresh -- --provider <id>` may call GitHub. Normal generation
+must use committed locks, reviewed history, and content-addressed cache entries.

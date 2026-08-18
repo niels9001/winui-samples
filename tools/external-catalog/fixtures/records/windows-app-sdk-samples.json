@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "id": "windows-app-sdk-samples:app-lifecycle",
+  "provider": {
+    "id": "windows-app-sdk-samples",
+    "name": "Windows App SDK samples",
+    "kind": "external"
+  },
+  "recordKey": "app-lifecycle",
+  "route": {
+    "slug": "windows-app-sdk-samples--app-lifecycle--de70302b2c9c",
+    "path": "samples/windows-app-sdk-samples--app-lifecycle--de70302b2c9c",
+    "previousPaths": []
+  },
+  "source": {
+    "repository": {
+      "owner": "microsoft",
+      "name": "WindowsAppSDK-Samples",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "ref": "main",
+    "lockedCommitSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "treeSha": "ffffffffffffffffffffffffffffffffffffffff",
+    "commitTime": "2026-08-03T12:00:00Z",
+    "path": "Samples/AppLifecycle",
+    "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/Samples/AppLifecycle"
+  },
+  "title": {
+    "display": "Manage Windows app activation and lifecycle",
+    "upstream": "App lifecycle"
+  },
+  "summary": "Explore activation and lifecycle concepts across nested implementation variants.",
+  "description": null,
+  "technicalAliases": [
+    "AppLifecycle",
+    "AppInstance"
+  ],
+  "categories": {
+    "provider": [
+      "App lifecycle"
+    ],
+    "portal": {
+      "primary": "app-fundamentals",
+      "secondary": []
+    }
+  },
+  "tags": [
+    "activation",
+    "lifecycle"
+  ],
+  "technologies": {
+    "languages": [
+      "C#",
+      "C++"
+    ],
+    "projectTypes": [
+      "WinUI 3"
+    ],
+    "packaging": [
+      "MSIX",
+      "unpackaged"
+    ]
+  },
+  "apis": [
+    {
+      "name": "Microsoft.Windows.AppLifecycle.AppInstance",
+      "description": null,
+      "url": "https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.applifecycle.appinstance"
+    }
+  ],
+  "documentation": [
+    {
+      "title": "App lifecycle",
+      "url": "https://learn.microsoft.com/windows/apps/windows-app-sdk/applifecycle/applifecycle",
+      "kind": "learn"
+    }
+  ],
+  "requirements": {
+    "minimumWindowsVersion": null,
+    "architectures": [
+      "arm64",
+      "x64",
+      "x86"
+    ],
+    "declaredPackageCapabilities": [],
+    "prerequisites": {
+      "hardware": [],
+      "accountsAndServices": [],
+      "software": [
+        "Visual Studio with Windows app development tools"
+      ],
+      "notes": [
+        "Some activation behaviors differ between packaged and unpackaged variants."
+      ]
+    }
+  },
+  "links": {
+    "provider": {
+      "label": "Windows App SDK samples",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "repository": "https://github.com/microsoft/WindowsAppSDK-Samples",
+    "source": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/Samples/AppLifecycle",
+    "commit": "https://github.com/microsoft/WindowsAppSDK-Samples/commit/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "tree": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "content": {
+    "variants": [
+      {
+        "id": "csharp-packaged",
+        "kind": "variant",
+        "position": 0,
+        "title": "C# packaged app",
+        "summary": null,
+        "description": null,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs"
+        ],
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ],
+          "packaging": [
+            "MSIX"
+          ]
+        },
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "documentation": [],
+        "children": [
+          {
+            "id": "protocol-activation",
+            "kind": "scenario",
+            "position": 0,
+            "title": "Handle protocol activation",
+            "summary": null,
+            "description": null,
+            "sourcePaths": [
+              "Samples/AppLifecycle/Activation/cs/App.xaml.cs"
+            ],
+            "technologies": {
+              "languages": [
+                "C#"
+              ],
+              "projectTypes": [
+                "WinUI 3"
+              ],
+              "packaging": [
+                "MSIX"
+              ]
+            },
+            "apis": [
+              "Microsoft.Windows.AppLifecycle.AppInstance"
+            ],
+            "documentation": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "cpp-unpackaged",
+        "kind": "variant",
+        "position": 1,
+        "title": "C++ unpackaged app",
+        "summary": null,
+        "description": null,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Instancing/cpp-win32"
+        ],
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "projectTypes": [
+            "Win32"
+          ],
+          "packaging": [
+            "unpackaged"
+          ]
+        },
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "documentation": [],
+        "children": []
+      }
+    ],
+    "scenarios": [],
+    "examples": []
+  },
+  "featuredSourceFiles": [
+    {
+      "path": "Samples/AppLifecycle/Activation/cs/App.xaml.cs",
+      "label": "Activation entry point",
+      "description": null,
+      "language": "C#",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/Samples/AppLifecycle/Activation/cs/App.xaml.cs",
+      "blobSha": "1111111111111111111111111111111111111111",
+      "sha256": null,
+      "size": null
+    }
+  ],
+  "images": [],
+  "relations": [
+    {
+      "type": "related",
+      "targetId": "local:association-launching",
+      "providerId": "local"
+    }
+  ],
+  "metadata": {
+    "completeness": "partial",
+    "missingFields": [
+      "/requirements/minimumWindowsVersion"
+    ],
+    "warnings": []
+  },
+  "attribution": {
+    "licenseRefs": [],
+    "attributionRefs": []
+  },
+  "badges": {
+    "upstreamEditorial": [],
+    "portalLifecycle": [
+      "new"
+    ]
+  },
+  "limitations": [
+    "The fixture represents only a compact subset of the conceptual family."
+  ],
+  "lifecycle": {
+    "status": "active",
+    "firstSeenSync": "wasdk-fixture-sync-1",
+    "lastReviewedSync": "wasdk-fixture-sync-1",
+    "lastChangedSync": "wasdk-fixture-sync-1",
+    "removedAtSync": null
+  },
+  "fieldProvenance": [
+    {
+      "field": "/title/display",
+      "kind": "curated",
+      "sourcePath": "external/curation/windows-app-sdk-samples/app-lifecycle.json"
+    },
+    {
+      "field": "/title/upstream",
+      "kind": "authored",
+      "sourcePath": "Samples/AppLifecycle/README.md"
+    },
+    {
+      "field": "/summary",
+      "kind": "curated",
+      "sourcePath": "external/curation/windows-app-sdk-samples/app-lifecycle.json"
+    },
+    {
+      "field": "/description",
+      "kind": "technical",
+      "sourcePath": "Samples/AppLifecycle/README.md"
+    }
+  ]
+}

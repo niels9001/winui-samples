@@ -1,0 +1,5 @@
+{
+  "$schema": "../metadata/schema/federated/v1/source-lock.schema.json",
+  "schemaVersion": 1,
+  "locks": []
+}

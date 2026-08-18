@@ -1,0 +1,5 @@
+{
+  "$schema": "../metadata/schema/federated/v1/sync-history.schema.json",
+  "schemaVersion": 1,
+  "providers": []
+}

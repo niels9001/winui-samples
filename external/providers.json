@@ -1,0 +1,58 @@
+{
+  "$schema": "../metadata/schema/federated/v1/provider-registry.schema.json",
+  "schemaVersion": 1,
+  "providers": [
+    {
+      "id": "winui-gallery",
+      "name": "WinUI Gallery",
+      "kind": "external",
+      "enabled": false,
+      "repository": {
+        "owner": "microsoft",
+        "name": "WinUI-Gallery"
+      },
+      "adapterModule": "tools/external-catalog/providers/winui-gallery/index.mjs",
+      "refreshModule": "tools/external-catalog/refresh/winui-gallery.mjs",
+      "routeNamespace": "winui-gallery",
+      "sourceUnit": {
+        "name": "ControlInfoData page",
+        "granularity": "One ControlInfoData.json UniqueId page is one portal record; examples and sample definitions stay nested."
+      },
+      "recordKey": {
+        "sourceField": "UniqueId",
+        "immutable": true
+      },
+      "allowedSourceRoots": [
+        "WinUIGallery"
+      ],
+      "completenessPolicy": "not-enforced",
+      "expectedRecordCount": null
+    },
+    {
+      "id": "windows-app-sdk-samples",
+      "name": "Windows App SDK samples",
+      "kind": "external",
+      "enabled": false,
+      "repository": {
+        "owner": "microsoft",
+        "name": "WindowsAppSDK-Samples"
+      },
+      "adapterModule": "tools/external-catalog/providers/windows-app-sdk-samples/index.mjs",
+      "refreshModule": "tools/external-catalog/refresh/windows-app-sdk-samples.mjs",
+      "routeNamespace": "windows-app-sdk-samples",
+      "sourceUnit": {
+        "name": "Curated conceptual sample family",
+        "granularity": "One reviewed conceptual family is one portal record; language, framework, packaging, solution, project, and scenario variants stay nested."
+      },
+      "recordKey": {
+        "sourceField": "curated recordKey",
+        "immutable": true
+      },
+      "allowedSourceRoots": [
+        "Samples"
+      ],
+      "completenessPolicy": "not-enforced",
+      "expectedRecordCount": null
+    }
+  ]
+}

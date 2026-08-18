@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://niels9001.github.io/winui-samples/schema/federated/v1/provider-registry.schema.json",
+  "title": "Federated catalog provider registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "providers"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "providers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/provider"
+      }
+    }
+  },
+  "$defs": {
+    "providerId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "repositoryName": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$",
+      "maxLength": 100
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 260,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.?(/|$))(?!.*%2[eEfF]|.*%5[cC])[^\\u0000]+$"
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "enabled",
+        "repository",
+        "adapterModule",
+        "refreshModule",
+        "routeNamespace",
+        "sourceUnit",
+        "recordKey",
+        "allowedSourceRoots",
+        "completenessPolicy",
+        "expectedRecordCount"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/providerId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "kind": {
+          "const": "external"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "owner",
+            "name"
+          ],
+          "properties": {
+            "owner": {
+              "$ref": "#/$defs/repositoryName"
+            },
+            "name": {
+              "$ref": "#/$defs/repositoryName"
+            }
+          }
+        },
+        "adapterModule": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "refreshModule": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "routeNamespace": {
+          "$ref": "#/$defs/providerId"
+        },
+        "sourceUnit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "granularity"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 100
+            },
+            "granularity": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 500
+            }
+          }
+        },
+        "recordKey": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceField",
+            "immutable"
+          ],
+          "properties": {
+            "sourceField": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100
+            },
+            "immutable": {
+              "const": true
+            }
+          }
+        },
+        "allowedSourceRoots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        },
+        "completenessPolicy": {
+          "enum": [
+            "not-enforced",
+            "enforced"
+          ]
+        },
+        "expectedRecordCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://niels9001.github.io/winui-samples/schema/federated/v1/cache-manifest.schema.json",
+  "title": "Federated catalog content-addressed cache manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "entries"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "providerId",
+          "repository",
+          "commitSha",
+          "treeSha",
+          "path",
+          "blobSha",
+          "sha256",
+          "size",
+          "mediaType",
+          "cachePath"
+        ],
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "repository": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "owner",
+              "name"
+            ],
+            "properties": {
+              "owner": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.-]+$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.-]+$"
+              }
+            }
+          },
+          "commitSha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "treeSha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "blobSha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10485760
+          },
+          "mediaType": {
+            "type": "string",
+            "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$",
+            "maxLength": 100
+          },
+          "cachePath": {
+            "type": "string",
+            "pattern": "^blobs/sha256/[0-9a-f]{2}/[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+* text=auto
+
+*.json text eol=lf
+*.md text eol=lf
+*.mjs text eol=lf
+*.ts text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Content-addressed upstream payloads must survive checkout byte-for-byte.
+external/cache/blobs/** -text
