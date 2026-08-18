@@ -1459,19 +1459,12 @@ export const familyManifest = Object.freeze([
     providerCategories: ["Dynamic Dependencies"],
     portalCategory: "deployment",
     tags: ["directx", "dynamic-dependencies", "msix-framework"],
-    warnings: [
-      warning(
-        "provider-source-root-handoff",
-        "The shared registry currently allows only Samples; integration must add DynamicDependenciesSample before enabling this provider.",
-        "external/providers.json",
-        "/source/path",
-      ),
-    ],
   }),
 ]);
 
 export const reviewedRenames = Object.freeze([]);
 export const reviewedTombstones = Object.freeze([]);
+export const reviewedRedirects = Object.freeze([]);
 
 if (familyManifest.length !== 42) {
   throw new Error(

@@ -9,7 +9,6 @@ import { SampleIcon } from "../components/SampleIcon";
 import { catalog } from "../lib/catalog-data";
 import { categoryById } from "../lib/catalog";
 import {
-  originalSourceSampleCount,
   outcomeBrowsePath,
   outcomeLinks,
   selectFeaturedSamples,
@@ -21,7 +20,6 @@ import { sitePath } from "../lib/urls";
 const categories = categoryById(catalog);
 const featured = selectFeaturedSamples(catalog.samples, 4);
 const stageSamples = selectFeaturedSamples(catalog.samples, 3);
-const sourceSampleCount = originalSourceSampleCount(catalog);
 const heroMedia = new Map(
   (await resolveAllHeroMedia(featured)).map((media) => [media.sampleId, media]),
 );
@@ -52,8 +50,8 @@ const heroMedia = new Map(
           </a>
         </div>
         <p class="hero-proof">
-          <strong>{catalog.coverage.totalProjects} buildable projects</strong>
-          <span>drawn from {sourceSampleCount} Windows SDK examples.</span>
+          <strong>{catalog.samples.length} focused examples</strong>
+          <span>across {catalog.providers?.length ?? 3} trusted sources.</span>
         </p>
       </div>
       <ShowcaseStage samples={stageSamples} categories={categories} />
@@ -150,12 +148,10 @@ const heroMedia = new Map(
                   <h3>
                     <a href={sitePath(`/samples/${sample.id}/`)}>{sample.title}</a>
                   </h3>
-                  <p>{sample.summary}</p>
+                  {sample.summary && <p>{sample.summary}</p>}
                   <div class="featured-facts">
-                    <span>{sample.scenarios.length} scenarios</span>
-                    <span>
-                      {sample.requirements.supportedArchitectures.join(" / ")}
-                    </span>
+                    <span>{sample.languages?.join(" / ")}</span>
+                    <span>{sample.project.name}</span>
                   </div>
                 </div>
               </article>

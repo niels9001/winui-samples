@@ -17,8 +17,10 @@ import {
 } from "../lib/generate.mjs";
 import {
   createEnabledGalleryState,
+  clone,
   loadRecordFixture,
 } from "./fixtures.mjs";
+import { recordContentHash } from "../lib/lifecycle.mjs";
 
 test("provider-less generation is compatible and makes no network calls", async () => {
   const originalFetch = globalThis.fetch;
@@ -27,6 +29,9 @@ test("provider-less generation is compatible and makes no network calls", async 
   };
   try {
     const state = await loadExternalState();
+    for (const provider of state.providers.values()) {
+      provider.enabled = false;
+    }
     const catalog = await generateExternalCatalog({ state });
     assert.deepEqual(catalog.providers, []);
     assert.deepEqual(catalog.records, []);
@@ -106,6 +111,7 @@ test("adapter context cannot mutate trusted provider or lock state", async (t) =
   const { state, output } = await createEnabledGalleryState(root, [record]);
   let lockMutationBlocked = false;
   let providerMutationBlocked = false;
+  let historyMutationBlocked = false;
 
   await generateExternalCatalog({
     state,
@@ -122,6 +128,11 @@ test("adapter context cannot mutate trusted provider or lock state", async (t) =
         } catch (error) {
           providerMutationBlocked = error instanceof TypeError;
         }
+        try {
+          context.history.records.push({});
+        } catch (error) {
+          historyMutationBlocked = error instanceof TypeError;
+        }
         return output;
       },
     }),
@@ -129,6 +140,7 @@ test("adapter context cannot mutate trusted provider or lock state", async (t) =
 
   assert.equal(lockMutationBlocked, true);
   assert.equal(providerMutationBlocked, true);
+  assert.equal(historyMutationBlocked, true);
   assert.equal(state.locks.get("winui-gallery").artifacts.length, 2);
   assert.deepEqual(
     state.providers.get("winui-gallery").allowedSourceRoots,
@@ -152,5 +164,27 @@ test("reviewed active records cannot silently disappear", async (t) => {
       }),
     }),
     /disappeared without a tombstone/,
+  );
+});
+
+test("persisted content hashes reject stale lifecycle reviews", async (t) => {
+  const root = await mkdtemp(path.join(tmpdir(), "external-content-hash-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const record = await loadRecordFixture("winui-gallery");
+  const { state, output } = await createEnabledGalleryState(root, [record]);
+  state.histories.get("winui-gallery").records[0].contentHash =
+    recordContentHash(record);
+  output.records[0] = clone(output.records[0]);
+  output.records[0].title.display = "Unreviewed title change";
+
+  await assert.rejects(
+    generateExternalCatalog({
+      state,
+      repoRoot: root,
+      adapterLoader: async () => ({
+        generate: async () => output,
+      }),
+    }),
+    /does not match reviewed history contentHash/,
   );
 });

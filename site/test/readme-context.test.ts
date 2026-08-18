@@ -79,3 +79,20 @@ test("rewrites current limitations that contain historical framing", () => {
     "Display-orientation handling is unavailable because the current-view DisplayInformation path cannot be used by the desktop app.",
   );
 });
+
+test("preserves active association-launching constraints without migration framing", () => {
+  const limitations = [
+    'The UWP "Launch with view preference" (split-screen) options, which relied on LauncherOptions.DesiredRemainingView, are dropped.',
+    "Those APIs target the UWP single-window/tablet model and have no desktop equivalent.",
+    "The UWP appUriHandler (associating an https:// domain with the app) is dropped; it requires a verified domain.",
+    "Only the custom alsdk: scheme is registered.",
+    "The Open With dialog is requested with LauncherOptions.DisplayApplicationPicker; the UWP positioning hints, which are CoreWindow-relative, are not set.",
+  ].join("\n");
+
+  const cleaned = removePortingOnlyProse(limitations);
+  assert.equal(
+    cleaned,
+    '"Launch with view preference" (split-screen) options are unavailable. The required view-management APIs have no desktop equivalent. HTTPS app URI handling requires a verified domain and is not enabled. Only the custom alsdk: scheme is registered. The Open With dialog does not set CoreWindow-relative positioning hints.',
+  );
+  assert.doesNotMatch(cleaned ?? "", /\b(?:UWP|migration|port(?:ed|ing)?)\b/i);
+});

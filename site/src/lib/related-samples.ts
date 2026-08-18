@@ -2,6 +2,7 @@ import type {
   CatalogSample,
   SampleCatalog,
 } from "./catalog";
+import { getSampleProvider } from "./source-provenance";
 
 export interface RelatedSampleResult {
   sample: CatalogSample;
@@ -24,6 +25,20 @@ function intersection(left: string[], right: string[]): string[] {
   return [...new Set(left.filter((value) => rightValues.has(value)))].sort(
     compareText,
   );
+}
+
+function caseInsensitiveIntersection(left: string[], right: string[]): string[] {
+  const rightValues = new Set(
+    right.map((value) => value.toLocaleLowerCase("en-US")),
+  );
+  const values = new Map<string, string>();
+  for (const value of left) {
+    const normalized = value.toLocaleLowerCase("en-US");
+    if (rightValues.has(normalized) && !values.has(normalized)) {
+      values.set(normalized, value);
+    }
+  }
+  return [...values.values()].sort(compareText);
 }
 
 function shortApiName(apiName: string): string {
@@ -74,7 +89,7 @@ function scoreCandidate(
     ),
   );
 
-  const sharedTags = intersection(source.tags, candidate.tags);
+  const sharedTags = caseInsensitiveIntersection(source.tags, candidate.tags);
   score += sharedTags.length * 3;
   sharedTopics.push(...sharedTags);
 
@@ -86,6 +101,13 @@ function scoreCandidate(
   sharedTopics.push(
     ...sharedApis.map((api) => `API: ${shortApiName(api)}`),
   );
+
+  const sharedLanguages = intersection(
+    source.languages ?? [],
+    candidate.languages ?? [],
+  );
+  score += sharedLanguages.length * 2;
+  sharedTopics.push(...sharedLanguages.map((language) => `Language: ${language}`));
 
   return {
     score,
@@ -144,6 +166,12 @@ export function getRelatedSamples(
     .sort(
       (left, right) =>
         right.score - left.score ||
+        Number(
+          getSampleProvider(left.sample).id === getSampleProvider(source).id,
+        ) -
+          Number(
+            getSampleProvider(right.sample).id === getSampleProvider(source).id,
+          ) ||
         compareText(left.sample.title, right.sample.title) ||
         compareText(left.sample.id, right.sample.id),
     );

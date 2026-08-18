@@ -1,4 +1,5 @@
 import { lstat, readFile, realpath, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 
 import type {
@@ -35,6 +36,8 @@ export const safeFeaturedFileExtensions = new Map([
   [".resw", { language: "xml", label: "Resource XML" }],
   [".targets", { language: "xml", label: "MSBuild targets" }],
   [".txt", { language: "text", label: "Text" }],
+  [".py", { language: "python", label: "Python" }],
+  [".vcxproj", { language: "xml", label: "Visual C++ project" }],
   [".xaml", { language: "xml", label: "XAML" }],
   [".xml", { language: "xml", label: "XML" }],
   [".yaml", { language: "yaml", label: "YAML" }],
@@ -79,7 +82,7 @@ export interface FeaturedFileDescriptor extends FeaturedFile {
   language: string;
   languageLabel: string;
   sourceUrl: string;
-  routePath: string;
+  routePath: string | null;
 }
 
 export type FeaturedFileReadResult =
@@ -116,9 +119,15 @@ function slugifyPath(filePath: string): string {
 
 export function featuredFileKey(
   file: FeaturedFile,
-  index: number,
 ): string {
-  return `${String(index + 1).padStart(2, "0")}-${slugifyPath(file.path)}`;
+  const readablePath = slugifyPath(file.path)
+    .slice(0, 72)
+    .replace(/-+$/, "");
+  const pathHash = createHash("sha256")
+    .update(file.path)
+    .digest("hex")
+    .slice(0, 12);
+  return `${readablePath}-${pathHash}`;
 }
 
 export function validateFeaturedFilePath(
@@ -192,17 +201,25 @@ export function validateFeaturedFilePath(
 export function describeFeaturedFiles(
   sample: CatalogSample,
 ): FeaturedFileDescriptor[] {
-  return sample.featuredFiles.map((file, index) => {
+  return sample.featuredFiles.map((file) => {
     const validation = validateFeaturedFilePath(file.path);
+    const hasCachedPreview =
+      !sample.federated ||
+      (typeof file.sha256 === "string" &&
+        typeof file.size === "number" &&
+        file.size <= featuredFileSizeLimit);
     return {
       ...file,
-      key: featuredFileKey(file, index),
+      key: featuredFileKey(file),
       language: validation.valid ? validation.language : "text",
       languageLabel: validation.valid
         ? validation.languageLabel
         : "Unavailable",
       sourceUrl: sampleSourceFileUrl(sample, file.path),
-      routePath: sampleCodePath(sample.id, featuredFileKey(file, index)),
+      routePath:
+        validation.valid && hasCachedPreview
+          ? sampleCodePath(sample.id, featuredFileKey(file))
+          : null,
     };
   });
 }
@@ -214,6 +231,92 @@ function unavailable(
   return { status: "unavailable", descriptor, reason };
 }
 
+async function readFederatedFeaturedFile(
+  descriptor: FeaturedFileDescriptor,
+  root: string,
+): Promise<FeaturedFileReadResult> {
+  if (
+    typeof descriptor.sha256 !== "string" ||
+    typeof descriptor.size !== "number"
+  ) {
+    return unavailable(
+      descriptor,
+      "This provider-selected file is not included in the pinned text preview cache.",
+    );
+  }
+  if (descriptor.size > featuredFileSizeLimit) {
+    return unavailable(
+      descriptor,
+      `This file is larger than the ${featuredFileSizeLimit / 1024} KiB preview limit.`,
+    );
+  }
+
+  const cacheRoot = path.resolve(root, "external", "cache");
+  const candidate = path.resolve(
+    cacheRoot,
+    "blobs",
+    "sha256",
+    descriptor.sha256.slice(0, 2),
+    descriptor.sha256,
+  );
+  if (!isPathInside(cacheRoot, candidate)) {
+    return unavailable(
+      descriptor,
+      "The cached source path resolves outside the approved cache.",
+    );
+  }
+
+  try {
+    const entry = await lstat(candidate);
+    if (
+      !entry.isFile() ||
+      entry.isSymbolicLink() ||
+      entry.size !== descriptor.size
+    ) {
+      return unavailable(
+        descriptor,
+        "The pinned source preview is unavailable or has an unexpected size.",
+      );
+    }
+    const bytes = await readFile(candidate);
+    const digest = createHash("sha256").update(bytes).digest("hex");
+    if (digest !== descriptor.sha256) {
+      return unavailable(
+        descriptor,
+        "The pinned source preview failed its SHA-256 integrity check.",
+      );
+    }
+    if (bytes.includes(0)) {
+      return unavailable(
+        descriptor,
+        "Binary content cannot be displayed in the code browser.",
+      );
+    }
+    try {
+      return {
+        status: "ready",
+        descriptor,
+        code: new TextDecoder("utf-8", { fatal: true }).decode(bytes),
+        size: bytes.byteLength,
+      };
+    } catch {
+      return unavailable(
+        descriptor,
+        "The file is not valid UTF-8 text.",
+      );
+    }
+  } catch (error) {
+    const code =
+      typeof error === "object" && error !== null && "code" in error
+        ? String(error.code)
+        : "unknown";
+    return unavailable(
+      descriptor,
+      `The pinned source preview could not be read during the static build (${code}).`,
+    );
+  }
+}
+
 export async function readFeaturedFile(
   sample: CatalogSample,
   descriptor: FeaturedFileDescriptor,
@@ -222,6 +325,10 @@ export async function readFeaturedFile(
   const validation = validateFeaturedFilePath(descriptor.path);
   if (!validation.valid) {
     return unavailable(descriptor, validation.reason);
+  }
+
+  if (sample.federated) {
+    return readFederatedFeaturedFile(descriptor, root);
   }
 
   const directory = sampleDirectory(sample, root);

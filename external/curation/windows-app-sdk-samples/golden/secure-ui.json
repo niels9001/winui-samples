@@ -112,12 +112,17 @@
   ],
   "fieldProvenance": [
     {
-      "field": "/categories/portal",
-      "kind": "derived",
+      "field": "/title/display",
+      "kind": "technical",
       "sourcePath": "Samples/SecureUI"
     },
     {
-      "field": "/categories/provider",
+      "field": "/title/upstream",
+      "kind": "technical",
+      "sourcePath": "Samples/SecureUI"
+    },
+    {
+      "field": "/summary",
       "kind": "technical",
       "sourcePath": "Samples/SecureUI"
     },
@@ -127,13 +132,13 @@
       "sourcePath": "Samples/SecureUI"
     },
     {
-      "field": "/requirements",
-      "kind": "authored",
-      "sourcePath": "README.md"
+      "field": "/categories/provider",
+      "kind": "technical",
+      "sourcePath": "Samples/SecureUI"
     },
     {
-      "field": "/summary",
-      "kind": "technical",
+      "field": "/categories/portal",
+      "kind": "derived",
       "sourcePath": "Samples/SecureUI"
     },
     {
@@ -142,14 +147,9 @@
       "sourcePath": "Samples/SecureUI"
     },
     {
-      "field": "/title/display",
-      "kind": "technical",
-      "sourcePath": "Samples/SecureUI"
-    },
-    {
-      "field": "/title/upstream",
-      "kind": "technical",
-      "sourcePath": "Samples/SecureUI"
+      "field": "/requirements",
+      "kind": "authored",
+      "sourcePath": "README.md"
     }
   ],
   "id": "windows-app-sdk-samples:secure-ui",

@@ -23,13 +23,13 @@ const categoryLabel = category?.label ?? sample.categories.primary;
   {
     hero ? (
       <img
-        alt={sample.screenshots[0]?.alt ?? ""}
+        alt={hero.alt}
         decoding="async"
         fetchpriority={eager ? "high" : "auto"}
-        height="720"
+        height={hero.height ?? 720}
         loading={eager ? "eager" : "lazy"}
         src={sitePath(hero.routePath)}
-        width="1280"
+        width={hero.width ?? 1280}
       />
     ) : (
       <div

@@ -2,17 +2,16 @@ import {
   mkdir,
   mkdtemp,
   readFile,
-  realpath,
   rename,
   rm,
   writeFile,
 } from "node:fs/promises";
-import { createServer } from "node:net";
 import path from "node:path";
 
 import {
   atomicWriteCanonicalJson,
   atomicWriteFile,
+  canonicalStringify,
   gitBlobSha,
   hashCanonicalJson,
   sha256Hex,
@@ -27,6 +26,7 @@ import {
   validateTextArtifact,
 } from "../lib/guards.mjs";
 import { createRouteSlug } from "../lib/identity.mjs";
+import { recordContentHash } from "../lib/lifecycle.mjs";
 import {
   AUXILIARY_SOURCES,
   CATALOG_PATH,
@@ -34,7 +34,9 @@ import {
   EXPECTED,
   PINNED_SNAPSHOT,
   PROVIDER_ID,
+  REVIEWED_RENAMES,
   REVIEWED_SYNC,
+  REVIEWED_TOMBSTONES,
   ROOT_LICENSE_PATH,
   UPSTREAM_SCHEMA_PATH,
   mediaTypeForPath,
@@ -52,6 +54,10 @@ import {
   parseControlExamples,
   parseSampleDefinition,
 } from "../providers/winui-gallery/parser.mjs";
+import { generate as generateGalleryCatalog } from "../providers/winui-gallery/generate.mjs";
+import { acquirePublishLock } from "./publication-lock.mjs";
+
+export { acquirePublishLock } from "./publication-lock.mjs";
 
 const refreshConcurrency = 12;
 
@@ -271,24 +277,162 @@ function replaceProvider(values, providerId, replacement, key) {
   ];
 }
 
-function buildHistory(pages) {
+export function buildReviewedHistory(
+  pages,
+  previousHistory,
+  {
+    recordContentHashes,
+    renameDeclarations = REVIEWED_RENAMES,
+    tombstoneDeclarations = REVIEWED_TOMBSTONES,
+  } = {},
+) {
+  const previousSyncs = new Map(
+    previousHistory.syncs.map((sync) => [sync.id, sync]),
+  );
+  const previousRecords = new Map(
+    previousHistory.records.map((record) => [record.id, record]),
+  );
+  const currentIds = new Set(
+    pages.map((page) => `${PROVIDER_ID}:${page.UniqueId}`),
+  );
+  const renameSources = new Map(
+    renameDeclarations.map((rename) => [rename.fromId, rename]),
+  );
+  const renameTargets = new Map(
+    renameDeclarations.map((rename) => [rename.toId, rename]),
+  );
+  const tombstones = new Map(
+    tombstoneDeclarations.map((tombstone) => [tombstone.id, tombstone]),
+  );
+
+  for (const previous of previousHistory.records) {
+    if (
+      previous.status === "active" &&
+      !currentIds.has(previous.id) &&
+      !renameSources.has(previous.id) &&
+      !tombstones.has(previous.id)
+    ) {
+      fail(
+        `${previous.id}: reviewed active record disappeared; curate a tombstone or rename before refresh`,
+      );
+    }
+    if (
+      previous.status === "tombstoned" &&
+      !renameSources.has(previous.id) &&
+      !tombstones.has(previous.id)
+    ) {
+      fail(
+        `${previous.id}: committed tombstone needs a persistent reviewed declaration`,
+      );
+    }
+  }
+  for (const rename of renameDeclarations) {
+    if (
+      !previousRecords.has(rename.fromId) ||
+      !currentIds.has(rename.toId)
+    ) {
+      fail(
+        `${rename.fromId}: reviewed rename target is not a current Gallery page`,
+      );
+    }
+  }
+
+  const existingSync = previousSyncs.get(REVIEWED_SYNC.id);
+  if (
+    existingSync &&
+    canonicalStringify(existingSync) !== canonicalStringify(REVIEWED_SYNC)
+  ) {
+    fail(`${REVIEWED_SYNC.id}: reviewed sync id conflicts with committed history`);
+  }
+  const previousLatestSync = previousSyncs.get(previousHistory.latestSyncId);
+  if (!previousLatestSync) {
+    fail("previous latest reviewed sync is missing");
+  }
+  const unchangedReview =
+    existingSync !== undefined &&
+    previousHistory.latestSyncId === REVIEWED_SYNC.id;
+  const syncs = existingSync
+    ? previousHistory.syncs.map((sync) => ({ ...sync }))
+    : [...previousHistory.syncs.map((sync) => ({ ...sync })), { ...REVIEWED_SYNC }];
+
+  const records = pages.map((page) => {
+    const id = `${PROVIDER_ID}:${page.UniqueId}`;
+    const slug = createRouteSlug(PROVIDER_ID, page.UniqueId);
+    const routePath = `samples/${slug}`;
+    const directPrevious = previousRecords.get(id);
+    const rename = renameTargets.get(id);
+    const renamedPrevious = rename
+      ? previousRecords.get(rename.fromId)
+      : undefined;
+    const previous = directPrevious ?? renamedPrevious;
+    if (directPrevious?.status === "tombstoned") {
+      fail(`${id}: tombstoned records cannot reappear without reviewed curation`);
+    }
+    if (
+      directPrevious &&
+      (directPrevious.recordKey !== page.UniqueId ||
+        directPrevious.routePath !== routePath)
+    ) {
+      fail(`${id}: immutable record identity or route drifted`);
+    }
+    const contentHash =
+      recordContentHashes?.get(id) ?? previous?.contentHash;
+    const contentChanged =
+      !previous ||
+      Boolean(rename) ||
+      typeof contentHash !== "string" ||
+      previous.contentHash !== contentHash;
+    return {
+      id,
+      recordKey: page.UniqueId,
+      routePath,
+      status: "active",
+      firstSeenSync: previous?.firstSeenSync ?? REVIEWED_SYNC.id,
+      lastReviewedSync:
+        directPrevious && unchangedReview
+          ? directPrevious.lastReviewedSync
+          : REVIEWED_SYNC.id,
+      lastChangedSync:
+        previous && !contentChanged
+          ? previous.lastChangedSync
+          : REVIEWED_SYNC.id,
+      ...(contentHash ? { contentHash } : {}),
+      removedAtSync: null,
+    };
+  });
+  for (const previous of previousHistory.records) {
+    if (currentIds.has(previous.id)) {
+      continue;
+    }
+    const declaration =
+      renameSources.get(previous.id) ?? tombstones.get(previous.id);
+    if (!declaration) {
+      continue;
+    }
+    const retainedTombstone = previous.status === "tombstoned";
+    records.push({
+      ...previous,
+      status: "tombstoned",
+      lastReviewedSync: retainedTombstone && unchangedReview
+        ? previous.lastReviewedSync
+        : REVIEWED_SYNC.id,
+      lastChangedSync: retainedTombstone
+        ? previous.lastChangedSync
+        : REVIEWED_SYNC.id,
+      removedAtSync:
+        previous.removedAtSync ??
+        declaration.removedAtSync ??
+        REVIEWED_SYNC.id,
+    });
+  }
+
   return {
     providerId: PROVIDER_ID,
     latestSyncId: REVIEWED_SYNC.id,
-    syncs: [{ ...REVIEWED_SYNC }],
-    records: pages.map((page) => {
-      const slug = createRouteSlug(PROVIDER_ID, page.UniqueId);
-      return {
-        id: `${PROVIDER_ID}:${page.UniqueId}`,
-        recordKey: page.UniqueId,
-        routePath: `samples/${slug}`,
-        status: "active",
-        firstSeenSync: REVIEWED_SYNC.id,
-        lastReviewedSync: REVIEWED_SYNC.id,
-        lastChangedSync: REVIEWED_SYNC.id,
-        removedAtSync: null,
-      };
-    }),
+    syncs,
+    records: records.sort((left, right) =>
+      left.id.localeCompare(right.id, "en-US"),
+    ),
   };
 }
 
@@ -314,7 +458,7 @@ function buildLicenseManifest() {
   };
 }
 
-function buildReviewDocument({
+export function buildReviewDocument({
   selectedSourcePaths,
   imagePaths,
   logicalCacheBytes,
@@ -393,6 +537,7 @@ function buildReviewDocument({
       role: "icon",
       screenshot: false,
       integratedAltBesideVisibleTitle: "",
+      normalizedDecorative: true,
       privateUseGroupGlyphUsed: false,
       reviewedCaseCorrections: {
         "WinUIGallery/Assets/ControlImages/CheckBox.png":
@@ -407,64 +552,6 @@ function buildReviewDocument({
       tree: `${repositoryUrl()}/tree/${PINNED_SNAPSHOT.commitSha}`,
       appDeepLinkTemplate: "winui3gallery://item/{UniqueId}",
     },
-  };
-}
-
-function publishLockEndpoint(repositoryRoot) {
-  const resolved = path.resolve(repositoryRoot);
-  const normalized =
-    process.platform === "win32" ? resolved.toLowerCase() : resolved;
-  const digest = sha256Hex(normalized).slice(0, 32);
-  if (process.platform === "win32") {
-    return `\\\\.\\pipe\\winui-samples-external-catalog-${digest}`;
-  }
-  if (process.platform === "linux") {
-    return `\0winui-samples-external-catalog-${digest}`;
-  }
-  return {
-    host: "127.0.0.1",
-    port: 49152 + (Number.parseInt(digest.slice(0, 4), 16) % 16384),
-    exclusive: true,
-  };
-}
-
-export async function acquirePublishLock(repositoryRoot) {
-  const server = createServer((socket) => socket.destroy());
-  const endpoint = publishLockEndpoint(await realpath(repositoryRoot));
-  await new Promise((resolve, reject) => {
-    function onError(error) {
-      if (error.code === "EADDRINUSE") {
-        reject(
-          new Error(
-            `${PROVIDER_ID}: another external catalog refresh is publishing state`,
-          ),
-        );
-      } else {
-        reject(error);
-      }
-    }
-    server.once("error", onError);
-    server.listen(endpoint, () => {
-      server.off("error", onError);
-      resolve();
-    });
-  });
-
-  let released = false;
-  return async () => {
-    if (released) {
-      return;
-    }
-    released = true;
-    await new Promise((resolve, reject) => {
-      server.close((error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
-    });
   };
 }
 
@@ -912,7 +999,40 @@ export async function refresh({
     "manifest.json",
   );
   const historyPath = path.join(repositoryRoot, "external", "history.json");
-  const providerHistory = buildHistory(pages);
+  const provisionalHistory = buildReviewedHistory(
+    pages,
+    state.histories.get(PROVIDER_ID),
+  );
+  const artifactBytesByPath = new Map(
+    artifactPaths.map((sourcePath, index) => [
+      sourcePath,
+      artifactBytes[index],
+    ]),
+  );
+  const candidateOutput = await generateGalleryCatalog({
+    provider,
+    lock,
+    history: provisionalHistory,
+    readArtifact: async (sourcePath) => {
+      const bytes = artifactBytesByPath.get(sourcePath);
+      if (!bytes) {
+        fail(`${sourcePath}: candidate artifact bytes are missing`);
+      }
+      return bytes;
+    },
+    createRouteSlug,
+  });
+  const recordContentHashes = new Map(
+    candidateOutput.records.map((record) => [
+      record.id,
+      recordContentHash(record),
+    ]),
+  );
+  const providerHistory = buildReviewedHistory(
+    pages,
+    state.histories.get(PROVIDER_ID),
+    { recordContentHashes },
+  );
   const reviewDocument = buildReviewDocument({
     selectedSourcePaths,
     imagePaths,

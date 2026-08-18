@@ -1,13 +1,14 @@
 # Federated sample catalog contract
 
 The federated catalog is an additive build-time contract for samples that remain in
-their upstream repositories. It does not vendor or migrate those applications, and
-it does not change the current portal data source. The existing 71 local records
-remain canonical, unchanged schema-v1 documents under `Samples/*/sample.yml`.
+their upstream repositories. It does not vendor or migrate those applications. The
+existing 71 local records remain canonical, unchanged schema-v1 documents under
+`Samples/*/sample.yml`; the build joins them with 162 external records into the
+233-record developer portal.
 
-The generated external catalog is intentionally not imported by the site yet. A
-later integration change can combine local and external records without making
-normal builds or browser requests depend on GitHub.
+The site imports only deterministic generated output. Normal builds use committed
+locks and content-addressed cache bytes, and browser requests never depend on
+GitHub or mutable upstream refs.
 
 ## Source-unit granularity
 
@@ -17,17 +18,11 @@ not promote implementation variants to independent records.
 | Provider | Immutable record key | One portal record | Nested content |
 | --- | --- | --- | --- |
 | Local | Existing `sample.yml` `id` | One current `Samples/<Project>` record | Existing scenarios |
-| WinUI Gallery | `ControlInfoData.json` page `UniqueId` | One Gallery page (120 at the researched lock; not yet enforced) | `ControlExample` and `SampleDefinition` examples/code |
-| Windows App SDK samples | Reviewed curated `recordKey` | One of 42 conceptual sample families (not yet enforced) | Language, framework, packaging, solution, project, and scenario variants |
+| WinUI Gallery | `ControlInfoData.json` page `UniqueId` | One of 120 enforced Gallery pages | 330 `ControlExample` entries and 316 `SampleDefinition` code units |
+| Windows App SDK samples | Reviewed curated `recordKey` | One of 42 enforced conceptual sample families | 216 language/framework/packaging/project/solution variants, 72 scenarios, and 20 Windows AI examples |
 
-The researched counts are planning baselines, not mutable-main assertions. Both
-external providers remain disabled with `completenessPolicy: not-enforced` until
-their adapters, locks, cache, and reviewed history land.
-
-Once a provider adapter has landed and its reviewed inventory is stable, the
-integration owner can set `completenessPolicy: enforced` and an
-`expectedRecordCount`. Generation then fails rather than accepting a partial
-provider result.
+Both external providers are enabled with `completenessPolicy: enforced` and exact
+record counts. Generation fails rather than accepting a partial or empty provider.
 
 ## Identity and routes
 
@@ -46,8 +41,8 @@ route slugs, and route paths are checked for collisions during merge.
 Do not change a record key to model an upstream rename. Add an explicit reviewed
 rename declaration, redirect, previous path, or tombstone. The lifecycle diff can
 report possible matches, but it never converts them into renames automatically.
-Legacy local routes may become explicit `previousPaths` when the portal adopts this
-contract; this contract does not change those routes today.
+All existing local ids and `/samples/<id>/` routes remain unchanged. External
+routes use the provider-prefixed digest form described above.
 
 ## Normalized record v1
 
@@ -101,6 +96,7 @@ The repository convention is:
 | `external/cache/blobs/sha256/<2>/<sha256>` | Selected files | Reviewed upstream bytes required offline |
 | `external/history.json` | Yes | Reviewed sync and record lifecycle state |
 | `external/generated/catalog.json` | No | Deterministic merged artifact |
+| `site/src/generated/sample-catalog.json` | No | Deterministic 233-record portal artifact |
 
 The generated artifact embeds exact enabled-provider locks plus SHA-256 hashes of
 the registry, lock file, cache manifest, and reviewed history. It contains no wall
@@ -154,6 +150,8 @@ Text imports require an allowlisted extension, valid UTF-8, no NUL, a size cap, 
 no secret-like filename or content. Images are limited to PNG, JPEG, or WebP with
 matching extension, MIME, signature, and byte cap. Aggregate selected assets for
 one record are capped as well. SVG and arbitrary binary output are not allowed.
+An image with `decorative: true` must have `alt: ""`; a nondecorative image must
+have meaningful non-whitespace alt text.
 
 ## License inheritance
 
@@ -168,14 +166,27 @@ license/attribution refs must resolve to manifest entry ids.
 Upstream `commitTime` is provenance, not portal recency. `external/history.json`
 records reviewed sync ids and the accepted state for each immutable id:
 `firstSeenSync`, `lastReviewedSync`, `lastChangedSync`, status, and
-`removedAtSync`. Each provider history names `latestSyncId` explicitly; array
-ordering never determines lifecycle behavior.
+`removedAtSync`. Gallery history also persists each normalized record's
+content hash so a new provider lock advances `lastChangedSync` only for records
+whose developer-facing content changed. Each provider history names
+`latestSyncId` explicitly; array ordering never determines lifecycle behavior.
 
-Provider output must match that committed state exactly. Active history records
-cannot disappear, and tombstoned records must remain represented. The lifecycle
-diff primitives classify additions, content changes, removals, explicit renames,
-tombstones, and ambiguous rename candidates. A reviewer must resolve every
-deletion or ambiguity before updating history.
+Provider adapters receive immutable copies of the committed history and derive
+record lifecycle plus `new`/`updated` portal badges from it. Provider output must
+match that state exactly, including any persisted normalized `contentHash`.
+Active history records cannot disappear, and tombstoned
+records must remain represented with persistent reviewed rename/removal
+declarations. Providers emit those tombstones plus any reviewed route redirects
+from committed curation. Refreshes merge prior syncs and first-seen/change state
+instead of recreating history. The lifecycle diff primitives classify
+additions, content changes, removals, explicit renames, tombstones, and ambiguous
+rename candidates. A reviewer must resolve every deletion or ambiguity before
+updating history.
+
+Canonical JSON sorts object keys but preserves array order. Adapters and merge
+code explicitly sort set-like inventories; authored sequences such as scenarios,
+capture actions, variants, and featured source selections retain their reviewed
+order.
 
 ## Commands
 
@@ -189,12 +200,15 @@ pnpm external:generate
 pnpm external:verify
 ```
 
-`site:prepare` runs `external:validate`, so Pages remains offline and fails early if
-an enabled provider's committed cache is cold. With no providers enabled, the
-external commands produce a valid empty artifact and the existing local catalog,
-Browse payload, and 427-page build remain unchanged.
+`site:prepare` validates local metadata and external state, generates both catalogs
+offline, joins exactly 233 unique records, and emits an explicitly offline activity
+artifact. The offline activity command ignores `GITHUB_TOKEN` and
+`GITHUB_REPOSITORY`, so Pages preparation cannot become network-dependent. Pages
+fails early if an enabled provider's committed cache is cold or any expected count,
+pin, hash, or license is wrong. The current site build contains 233 detail and 992
+code routes (1,227 HTML routes total).
 
-## Provider adapter handoff and path ownership
+## Provider adapter ownership
 
 The shared contract owner owns these paths; provider work should not redefine them:
 
@@ -232,11 +246,10 @@ Use the reviewed curated family key as `recordKey`; emit one record per conceptu
 family and keep language/framework/packaging/solution/project/scenario variants
 nested. Do not copy the upstream sample applications.
 
-The provider agents may prepare their own keyed additions to `external/locks.json`,
-`external/cache/manifest.json`, and `external/history.json`; the integration owner
-owns final conflict resolution, activation (`enabled: true`), and completeness
-policy. Neither provider should edit the other provider's keyed objects or enable a
-record-count gate before its adapter lands.
+Provider refreshes may prepare keyed updates to `external/locks.json`,
+`external/cache/manifest.json`, and `external/history.json`. They must preserve the
+other provider's objects, enforced record counts, source-root boundaries, and
+reviewed lifecycle state.
 
 The three committed JSON records under
 `tools/external-catalog/fixtures/records/` are synthetic compact contract fixtures,

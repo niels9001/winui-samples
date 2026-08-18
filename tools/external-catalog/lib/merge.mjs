@@ -14,6 +14,7 @@ import {
   validateGlobalIdentity,
   validateNormalizedRecord,
 } from "./identity.mjs";
+import { recordContentHash } from "./lifecycle.mjs";
 import { validateLicenseManifest } from "./licenses.mjs";
 import { assertContract } from "./schema.mjs";
 
@@ -121,6 +122,14 @@ function assertLifecycleMatchesHistory(record, historyRecord) {
         `${record.id}: lifecycle.${field} differs from reviewed sync history`,
       );
     }
+  }
+  if (
+    typeof historyRecord.contentHash === "string" &&
+    recordContentHash(record) !== historyRecord.contentHash
+  ) {
+    throw new Error(
+      `${record.id}: normalized content does not match reviewed history contentHash`,
+    );
   }
 }
 
@@ -350,7 +359,7 @@ function assertMergedRoutes(records, redirects, tombstones) {
 export async function mergeProviderOutputs(state, outputs) {
   const enabledProviders = [...state.providers.values()].filter(
     (provider) => provider.enabled,
-  );
+  ).sort((left, right) => left.id.localeCompare(right.id, "en-US"));
   const outputByProvider = new Map();
   for (const output of outputs) {
     if (outputByProvider.has(output.providerId)) {
@@ -374,9 +383,17 @@ export async function mergeProviderOutputs(state, outputs) {
     }
   }
 
-  const records = outputs.flatMap((output) => output.records);
-  const redirects = outputs.flatMap((output) => output.redirects);
-  const tombstones = outputs.flatMap((output) => output.tombstones);
+  const records = outputs
+    .flatMap((output) => output.records)
+    .sort((left, right) => left.id.localeCompare(right.id, "en-US"));
+  const redirects = outputs
+    .flatMap((output) => output.redirects)
+    .sort((left, right) =>
+      left.fromPath.localeCompare(right.fromPath, "en-US"),
+    );
+  const tombstones = outputs
+    .flatMap((output) => output.tombstones)
+    .sort((left, right) => left.id.localeCompare(right.id, "en-US"));
   assertMergedRoutes(records, redirects, tombstones);
 
   const core = {
@@ -405,7 +422,10 @@ export async function mergeProviderOutputs(state, outputs) {
     tombstones,
     licenses: outputs
       .map((output) => output.licenseManifest)
-      .filter(Boolean),
+      .filter(Boolean)
+      .sort((left, right) =>
+        left.providerId.localeCompare(right.providerId, "en-US"),
+      ),
   };
   const catalog = {
     ...core,

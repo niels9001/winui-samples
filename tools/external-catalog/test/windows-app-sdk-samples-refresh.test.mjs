@@ -26,6 +26,7 @@ import {
 import {
   buildReviewedStateDocuments,
   refresh,
+  reviewedHistory,
   resolveReviewedSnapshot,
   reviewFamilyLifecycle,
   validateReviewedTree,
@@ -518,9 +519,68 @@ test("reviewed state preserves historical sync and record lifecycle metadata", (
     lastChangedSync: previousSync.id,
     removedAtSync: null,
   });
+
   assert.throws(
     () => buildReviewedStateDocuments(state),
     /removed without a rename or tombstone/,
+  );
+});
+
+test("reviewed history preserves tombstones and rejects silent reactivation", () => {
+  const currentFamily = familyManifest[0];
+  const currentId = `${providerId}:${currentFamily.recordKey}`;
+  const removedId = `${providerId}:retired-family`;
+  const previous = {
+    providerId,
+    latestSyncId: reviewedSync.id,
+    syncs: [reviewedSync],
+    records: [
+      ...familyManifest.map((family) => ({
+        id: `${providerId}:${family.recordKey}`,
+        recordKey: family.recordKey,
+        routePath: `samples/${createRouteSlug(providerId, family.recordKey)}`,
+        status: "active",
+        firstSeenSync: reviewedSync.id,
+        lastReviewedSync: reviewedSync.id,
+        lastChangedSync: reviewedSync.id,
+        removedAtSync: null,
+      })),
+      {
+        id: removedId,
+        recordKey: "retired-family",
+        routePath: `samples/${createRouteSlug(providerId, "retired-family")}`,
+        status: "tombstoned",
+        firstSeenSync: "original-sync",
+        lastReviewedSync: "removal-sync",
+        lastChangedSync: "removal-sync",
+        removedAtSync: "removal-sync",
+      },
+    ],
+  };
+  const tombstoneDeclarations = [
+    {
+      id: removedId,
+      reason: "Reviewed retirement.",
+    },
+  ];
+  const retained = reviewedHistory(previous, { tombstoneDeclarations });
+  const tombstone = retained.records.find((record) => record.id === removedId);
+  assert.equal(tombstone.removedAtSync, "removal-sync");
+  assert.equal(tombstone.lastChangedSync, "removal-sync");
+
+  previous.records.find((record) => record.id === currentId).status =
+    "tombstoned";
+  previous.records.find((record) => record.id === currentId).removedAtSync =
+    "removal-sync";
+  assert.throws(
+    () =>
+      reviewedHistory(previous, {
+        tombstoneDeclarations: [
+          ...tombstoneDeclarations,
+          { id: currentId, reason: "Reviewed retirement." },
+        ],
+      }),
+    /cannot reactivate/,
   );
 });
 

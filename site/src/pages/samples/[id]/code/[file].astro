@@ -23,13 +23,15 @@ interface Props {
 
 export const getStaticPaths = (() =>
   catalog.samples.flatMap((sample) =>
-    describeFeaturedFiles(sample).map((file) => ({
-      params: {
-        id: sample.id,
-        file: file.key,
-      },
-      props: { sample, file },
-    })),
+    describeFeaturedFiles(sample)
+      .filter((file) => file.routePath !== null)
+      .map((file) => ({
+        params: {
+          id: sample.id,
+          file: file.key,
+        },
+        props: { sample, file },
+      })),
   )) satisfies GetStaticPaths;
 
 const { sample, file } = Astro.props;

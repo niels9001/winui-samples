@@ -4,10 +4,10 @@ import {
   useRef,
   useState,
 } from "react";
-import { DismissRegular } from "@fluentui/react-icons/svg/dismiss";
-import { FilterRegular } from "@fluentui/react-icons/svg/filter";
-import { SearchRegular } from "@fluentui/react-icons/svg/search";
 
+import type {
+  BrowseIndexPayload,
+} from "../lib/browse-index";
 import type {
   CatalogCategory,
 } from "../lib/catalog";
@@ -35,6 +35,50 @@ import { sampleDetailPath } from "../lib/urls";
 import { SampleVisual } from "./SampleVisual";
 import "./SampleExplorer.css";
 
+interface IconProps {
+  className?: string;
+}
+
+function SearchIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <circle cx="8.5" cy="8.5" r="5.25" stroke="currentColor" strokeWidth="1.5" />
+      <path d="m12.5 12.5 4 4" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function FilterIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path d="M3 5h14M5.5 10h9M8 15h4" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function DismissIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      viewBox="0 0 20 20"
+    >
+      <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export interface ExplorerSamplePresentation {
   entry: IndexedSample;
   heroUrl?: string;
@@ -42,13 +86,16 @@ export interface ExplorerSamplePresentation {
 }
 
 interface SampleExplorerProps {
-  samples: ExplorerSamplePresentation[];
-  categories: CatalogCategory[];
   basePath: string;
+  expectedCatalogHash: string;
+  expectedIndexHash: string;
+  expectedRecordCount: number;
+  indexIntegrity: string;
+  indexUrl: string;
 }
 
 const facetTitles: Record<ExplorerFacetKey, string> = {
-  source: "Source",
+  provider: "Source",
   primaryCategory: "Category",
   secondaryCategory: "Related categories",
   tag: "Topics",
@@ -56,6 +103,7 @@ const facetTitles: Record<ExplorerFacetKey, string> = {
   hardware: "Hardware",
   accountService: "Accounts and services",
   architecture: "Architecture",
+  language: "Language",
   capture: "Preview recipe",
 };
 
@@ -63,7 +111,7 @@ function createFacetRecord<T>(
   createValue: (key: ExplorerFacetKey) => T,
 ): Record<ExplorerFacetKey, T> {
   return {
-    source: createValue("source"),
+    provider: createValue("provider"),
     primaryCategory: createValue("primaryCategory"),
     secondaryCategory: createValue("secondaryCategory"),
     tag: createValue("tag"),
@@ -71,6 +119,7 @@ function createFacetRecord<T>(
     hardware: createValue("hardware"),
     accountService: createValue("accountService"),
     architecture: createValue("architecture"),
+    language: createValue("language"),
     capture: createValue("capture"),
   };
 }
@@ -181,7 +230,7 @@ function FilterPanel({
           <details
             className="explorer-facet"
             open={
-              key === "source" ||
+              key === "provider" ||
               key === "primaryCategory" ||
               state.facets[key].length > 0
                 ? true
@@ -281,41 +330,147 @@ function SampleCard({
             <a href={href}>{sample.title}</a>
           </h3>
           <p className="technical-name">
-            {sample.project.name} · {sample.scenarioCount}{" "}
-            {sample.scenarioCount === 1 ? "scenario" : "scenarios"}
+            {sample.project.name} · {sample.contentCount} {sample.contentLabel}
           </p>
         </div>
-        <p className="explorer-card-summary">{sample.summary}</p>
+        {sample.summary && (
+          <p className="explorer-card-summary">{sample.summary}</p>
+        )}
         <div className="explorer-card-requirements">
-          <span>{sample.supportedArchitectures.join(" / ")}</span>
-          <span>Windows {sample.minimumWindowsVersion}+</span>
+          {sample.languages.length > 0 && (
+            <span>{sample.languages.join(" / ")}</span>
+          )}
+          {sample.supportedArchitectures.length > 0 && (
+            <span>{sample.supportedArchitectures.join(" / ")}</span>
+          )}
+          {sample.minimumWindowsVersion && (
+            <span>Windows {sample.minimumWindowsVersion}</span>
+          )}
         </div>
       </div>
     </article>
   );
 }
 
+function digestToIntegrity(digest: ArrayBuffer): string {
+  const bytes = new Uint8Array(digest);
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return `sha256-${btoa(binary)}`;
+}
+
+function assertBrowseIndex(
+  value: unknown,
+  expectedCatalogHash: string,
+  expectedIndexHash: string,
+  expectedRecordCount: number,
+): asserts value is BrowseIndexPayload {
+  if (
+    !value ||
+    typeof value !== "object" ||
+    !("schemaVersion" in value) ||
+    value.schemaVersion !== 1 ||
+    !("catalogHash" in value) ||
+    value.catalogHash !== expectedCatalogHash ||
+    !("searchHash" in value) ||
+    value.searchHash !== expectedIndexHash ||
+    !("recordCount" in value) ||
+    value.recordCount !== expectedRecordCount ||
+    !("records" in value) ||
+    !Array.isArray(value.records) ||
+    value.records.length !== expectedRecordCount ||
+    !("categories" in value) ||
+    !Array.isArray(value.categories) ||
+    !("media" in value) ||
+    !value.media ||
+    typeof value.media !== "object"
+  ) {
+    throw new Error("Browse index metadata does not match the catalog.");
+  }
+}
+
 export function SampleExplorer({
-  samples,
-  categories,
   basePath,
+  expectedCatalogHash,
+  expectedIndexHash,
+  expectedRecordCount,
+  indexIntegrity,
+  indexUrl,
 }: SampleExplorerProps) {
+  const [payload, setPayload] = useState<BrowseIndexPayload>();
+  const [loadError, setLoadError] = useState(false);
   const mobile = useMobileLayout();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [state, setState] = useState(createDefaultExplorerState);
   const initializedFromUrl = useRef(false);
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadIndex() {
+      const response = await fetch(indexUrl, {
+        cache: "force-cache",
+        credentials: "same-origin",
+        signal: controller.signal,
+      });
+      if (!response.ok) {
+        throw new Error(`Browse index request failed with ${response.status}.`);
+      }
+      const bytes = await response.arrayBuffer();
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      if (digestToIntegrity(digest) !== indexIntegrity) {
+        throw new Error("Browse index integrity verification failed.");
+      }
+      const value: unknown = JSON.parse(new TextDecoder().decode(bytes));
+      assertBrowseIndex(
+        value,
+        expectedCatalogHash,
+        expectedIndexHash,
+        expectedRecordCount,
+      );
+      setPayload(value);
+    }
+
+    loadIndex().catch((error: unknown) => {
+      if (controller.signal.aborted) {
+        return;
+      }
+      console.error(error);
+      setLoadError(true);
+    });
+    return () => controller.abort();
+  }, [
+    expectedCatalogHash,
+    expectedIndexHash,
+    expectedRecordCount,
+    indexIntegrity,
+    indexUrl,
+  ]);
+
+  const categories = payload?.categories ?? [];
+  const index = (payload?.records ?? []) as IndexedSample[];
   const presentations = useMemo(
-    () => new Map(samples.map((item) => [item.entry.sample.id, item])),
-    [samples],
+    () =>
+      new Map(
+        index.map((entry) => {
+          const media = payload?.media[entry.sample.id];
+          return [
+            entry.sample.id,
+            {
+              entry,
+              heroUrl: media?.url,
+              heroAlt: media?.alt,
+            },
+          ];
+        }),
+      ),
+    [index, payload?.media],
   );
   const categoryMap = useMemo(
     () => new Map(categories.map((category) => [category.id, category])),
     [categories],
-  );
-  const index = useMemo(
-    () => samples.map((item) => item.entry),
-    [samples],
   );
   const options = useMemo(
     () => getFacetOptions(index),
@@ -323,6 +478,9 @@ export function SampleExplorer({
   );
 
   useEffect(() => {
+    if (!payload) {
+      return;
+    }
     const applyUrlState = () => {
       setState(
         sanitizeState(
@@ -336,7 +494,7 @@ export function SampleExplorer({
     initializedFromUrl.current = true;
     window.addEventListener("popstate", applyUrlState);
     return () => window.removeEventListener("popstate", applyUrlState);
-  }, [options]);
+  }, [options, payload]);
 
   useEffect(() => {
     if (!mobile) setDrawerOpen(false);
@@ -404,12 +562,30 @@ export function SampleExplorer({
       ),
   );
 
+  if (loadError) {
+    return (
+      <div className="explorer-empty surface" role="alert">
+        <h2>The sample index could not be loaded</h2>
+        <p>Reload the page to try the validated local index again.</p>
+      </div>
+    );
+  }
+
+  if (!payload) {
+    return (
+      <div className="explorer-empty surface" role="status">
+        <h2>Loading examples</h2>
+        <p>Preparing the offline sample index.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="sample-explorer">
       <div className="explorer-toolbar">
         <label className="explorer-search">
           <span className="visually-hidden">Search examples</span>
-          <SearchRegular aria-hidden="true" />
+          <SearchIcon />
           <input
             onChange={(event) =>
               updateState(
@@ -428,7 +604,7 @@ export function SampleExplorer({
           onClick={() => setDrawerOpen(true)}
           type="button"
         >
-          <FilterRegular aria-hidden="true" />
+          <FilterIcon />
           Filters
           {selectedCount > 0 && <span>{selectedCount}</span>}
         </button>
@@ -469,7 +645,7 @@ export function SampleExplorer({
                 type="button"
               >
                 “{state.query}”
-                <DismissRegular aria-hidden="true" />
+                <DismissIcon />
                 <span className="visually-hidden">Clear search</span>
               </button>
             )}
@@ -482,7 +658,7 @@ export function SampleExplorer({
                   type="button"
                 >
                   {optionLookup[key].get(value) ?? value}
-                  <DismissRegular aria-hidden="true" />
+                  <DismissIcon />
                   <span className="visually-hidden">Remove filter</span>
                 </button>
               )),
@@ -517,7 +693,7 @@ export function SampleExplorer({
               {state.query.length > 0
                 ? `For “${state.query}”`
                 : selectedCount > 0
-                  ? `${selectedCount} filters applied`
+                  ? `${selectedCount} ${selectedCount === 1 ? "filter" : "filters"} applied`
                   : "All examples"}
             </p>
           </div>
@@ -529,7 +705,7 @@ export function SampleExplorer({
             {results.length} {results.length === 1 ? "result" : "results"} shown
           </p>
 
-          {samples.length === 0 ? (
+          {index.length === 0 ? (
             <div className="explorer-empty surface">
               <h2>No examples are available right now</h2>
               <p>Check back as more Windows projects are added.</p>
@@ -584,7 +760,7 @@ export function SampleExplorer({
               onClick={() => setDrawerOpen(false)}
               type="button"
             >
-              <DismissRegular aria-hidden="true" />
+              <DismissIcon />
             </button>
           </header>
           <FilterPanel

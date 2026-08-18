@@ -56,7 +56,7 @@ const { samples, categories } = Astro.props;
                 <span class="workspace-card-copy">
                   <small>{category?.label ?? sample.categories.primary}</small>
                   <strong>{sample.title}</strong>
-                  <span>{sample.scenarios.length} scenarios</span>
+                  <span>{sample.provider?.label ?? "WinUI samples"}</span>
                 </span>
                 <span class="workspace-card-arrow" aria-hidden="true">→</span>
               </a>

@@ -6,19 +6,24 @@ import ApiList from "../../components/ApiList.astro";
 import AppShell from "../../components/AppShell.astro";
 import CodeBlock from "../../components/CodeBlock.astro";
 import CodeBrowser from "../../components/CodeBrowser.astro";
+import FederatedContent from "../../components/FederatedContent.astro";
 import RelatedSamples from "../../components/RelatedSamples.astro";
 import SampleMedia from "../../components/SampleMedia.astro";
 import ScenarioList from "../../components/ScenarioList.astro";
 import type { CatalogSample } from "../../lib/catalog";
 import { categoryById } from "../../lib/catalog";
 import { catalog } from "../../lib/catalog-data";
+import { getDetailRouteDefinitions } from "../../lib/detail-routes";
 import {
   describeFeaturedFiles,
   readFeaturedFile,
 } from "../../lib/featured-files";
 import { readSampleReadmeContext } from "../../lib/readme-context";
 import { getRelatedSamples } from "../../lib/related-samples";
-import { resolveHeroMedia } from "../../lib/sample-media";
+import {
+  resolveHeroMedia,
+  resolvePrimaryIconMedia,
+} from "../../lib/sample-media";
 import {
   developerDocumentation,
   getSampleSource,
@@ -28,29 +33,51 @@ import {
   sitePath,
 } from "../../lib/urls";
 
-interface Props {
-  sample: CatalogSample;
-}
+type Props =
+  | {
+      kind: "sample";
+      sample: CatalogSample;
+    }
+  | {
+      kind: "redirect";
+      redirectTo: string;
+    };
 
 export const getStaticPaths = (() =>
-  catalog.samples.map((sample) => ({
-    params: { id: sample.id },
-    props: { sample },
+  getDetailRouteDefinitions(catalog).map((route) => ({
+    params: { id: route.id },
+    props:
+      route.kind === "sample"
+        ? { kind: "sample", sample: route.sample }
+        : { kind: "redirect", redirectTo: route.redirectTo },
   }))) satisfies GetStaticPaths;
 
+if (Astro.props.kind === "redirect") {
+  return Astro.redirect(
+    sitePath(`/samples/${Astro.props.redirectTo}/`),
+    301,
+  );
+}
 const { sample } = Astro.props;
 const categories = categoryById(catalog);
 const primaryCategory = categories.get(sample.categories.primary);
 const hero = await resolveHeroMedia(sample);
-const readme = await readSampleReadmeContext(sample);
+const icon = await resolvePrimaryIconMedia(sample);
+const readme = sample.federated
+  ? { limitations: undefined }
+  : await readSampleReadmeContext(sample);
 const related = getRelatedSamples(sample, catalog);
 const featuredFiles = describeFeaturedFiles(sample);
-const firstFeaturedFile = featuredFiles[0];
+const firstFeaturedFile =
+  featuredFiles.find((file) => file.routePath !== null) ??
+  featuredFiles[0];
 const featuredPreview = firstFeaturedFile
   ? await readFeaturedFile(sample, firstFeaturedFile)
   : undefined;
 const source = getSampleSource(sample);
 const documentation = developerDocumentation(sample);
+const record = sample.federated?.record;
+const isExternal = Boolean(record);
 const projectPath = `${sample.project.repositoryPath}/${sample.project.name}.csproj`
   .replaceAll("/", "\\");
 const buildCommands = `dotnet build .\\${projectPath} -c Debug -p:Platform=x64
@@ -65,11 +92,40 @@ const requirementHighlights = [
 ]
   .filter((value) => value !== undefined)
   .map((value) => value.replace(/[.!?]+$/, ""));
+const contentGroups = record
+  ? [
+      ["variants", record.content.variants.length],
+      ["scenarios", record.content.scenarios.length],
+      ["examples", record.content.examples.length],
+    ].filter(([, count]) => Number(count) > 0)
+  : [["scenarios", sample.scenarios.length]];
+const contentCount = contentGroups.reduce(
+  (total, [, count]) => total + Number(count),
+  0,
+);
+const singleContentGroup =
+  contentGroups.length === 1 ? contentGroups[0] : undefined;
+const contentLabel =
+  singleContentGroup
+    ? String(singleContentGroup[0])
+    : "nested items";
+const limitations = record?.limitations ?? [];
+const localLimitation = readme.limitations;
+const showRun = !isExternal;
+const showContent = contentCount > 0;
+const showApis = sample.apis.length > 0;
+const showCode = featuredFiles.length > 0;
+const minimumWindowsVersion =
+  sample.requirements.minimumWindowsVersion ?? "Not specified upstream";
+const architectureLabel =
+  sample.requirements.supportedArchitectures.length > 0
+    ? sample.requirements.supportedArchitectures.join(" / ")
+    : "Not specified upstream";
 ---
 
 <AppShell
   title={`${sample.title} | Windows app code`}
-  description={sample.summary}
+  description={sample.summary ?? sample.title}
   activeNav="samples"
 >
   <section class="detail-hero" id="overview" aria-labelledby="detail-title">
@@ -91,22 +147,40 @@ const requirementHighlights = [
             <span aria-hidden="true">·</span>
             <code>{sample.project.name}</code>
           </div>
-          <h1 id="detail-title">{sample.title}</h1>
-          <p class="detail-summary">{sample.summary}</p>
+          <div class="detail-title-row">
+            {
+              icon && (
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  class="detail-title-icon"
+                  height={icon.height ?? 72}
+                  src={sitePath(icon.routePath)}
+                  width={icon.width ?? 72}
+                />
+              )
+            }
+            <h1 id="detail-title">{sample.title}</h1>
+          </div>
+          {sample.summary && <p class="detail-summary">{sample.summary}</p>}
+          {
+            record?.description &&
+              record.description !== sample.summary && (
+                <p class="detail-description">{record.description}</p>
+              )
+          }
           <dl class="hero-requirements">
             <div>
               <dt>Windows</dt>
-              <dd>{sample.requirements.minimumWindowsVersion}+</dd>
+              <dd>{minimumWindowsVersion}</dd>
             </div>
             <div>
               <dt>Architectures</dt>
-              <dd>
-                {sample.requirements.supportedArchitectures.join(" / ")}
-              </dd>
+              <dd>{architectureLabel}</dd>
             </div>
             <div>
-              <dt>Scenarios</dt>
-              <dd>{sample.scenarios.length}</dd>
+              <dt>{contentLabel}</dt>
+              <dd>{contentCount}</dd>
             </div>
           </dl>
           {
@@ -121,6 +195,13 @@ const requirementHighlights = [
             <a class="button-link" href={source.canonicalUrl}>
               View source <OpenRegular aria-hidden="true" />
             </a>
+            {
+              sample.federated?.appDeepLink && (
+                <a class="secondary-button-link" href={sample.federated.appDeepLink}>
+                  Open in WinUI Gallery
+                </a>
+              )
+            }
           </div>
         </div>
         <div class="detail-preview" data-pointer-surface data-tilt>
@@ -132,22 +213,26 @@ const requirementHighlights = [
           />
         </div>
       </div>
-      <p class="topic-line">
-        <strong>Topics</strong>
-        {sample.tags.join(" · ")}
-      </p>
+      {
+        sample.tags.length > 0 && (
+          <p class="topic-line">
+            <strong>Topics</strong>
+            {sample.tags.join(" · ")}
+          </p>
+        )
+      }
     </div>
   </section>
 
   <div class="site-container detail-layout">
     <aside class="page-index surface" aria-labelledby="page-index-title">
       <strong id="page-index-title">On this page</strong>
-      <nav>
+      <nav aria-labelledby="page-index-title">
         <a href="#overview">Overview</a>
-        <a href="#run">Run</a>
-        <a href="#scenarios">Scenarios</a>
-        <a href="#apis">Key APIs</a>
-        <a href="#code">Code</a>
+        {showRun && <a href="#run">Run</a>}
+        {showContent && <a href="#content">Scenarios and examples</a>}
+        {showApis && <a href="#apis">Key APIs</a>}
+        {showCode && <a href="#code">Code</a>}
         <a href="#requirements">Requirements</a>
         <a href="#limitations">Limitations</a>
         <a href="#resources">Source and docs</a>
@@ -155,58 +240,74 @@ const requirementHighlights = [
     </aside>
 
     <div class="stack detail-main" aria-label="Project documentation">
-      <section
-        class="stack detail-section run-section"
-        id="run"
-        aria-labelledby="run-title"
-        data-scroll-reveal
-      >
-        <div class="stack section-copy">
-          <p class="eyebrow">Run this project</p>
-          <h2 id="run-title">Build and launch from a local checkout</h2>
-          <p class="secondary-text">
-            Run these commands at the root of <strong>{source.label}</strong> on
-            Windows. The packaged launcher may detach after the app opens.
-          </p>
-        </div>
-        <CodeBlock
-          code={buildCommands}
-          label={`PowerShell · ${sample.project.name}`}
-          copyLabel={`Copy ${sample.project.name} build commands`}
-        />
-      </section>
+      {
+        showRun && (
+          <section
+            class="stack detail-section run-section"
+            id="run"
+            aria-labelledby="run-title"
+            data-scroll-reveal
+          >
+            <div class="stack section-copy">
+              <p class="eyebrow">Run this project</p>
+              <h2 id="run-title">Build and launch from a local checkout</h2>
+              <p class="secondary-text">
+                Run these commands at the root of <strong>{source.label}</strong>{" "}
+                on Windows. The packaged launcher may detach after the app opens.
+              </p>
+            </div>
+            <CodeBlock
+              code={buildCommands}
+              label={`PowerShell · ${sample.project.name}`}
+              copyLabel={`Copy ${sample.project.name} build commands`}
+            />
+          </section>
+        )
+      }
 
-      <section
-        class="stack detail-section"
-        id="scenarios"
-        aria-labelledby="scenarios-title"
-        data-scroll-reveal
-      >
-        <div class="stack section-copy">
-          <p class="eyebrow">What it covers</p>
-          <h2 id="scenarios-title">Scenarios</h2>
-          <p class="secondary-text">
-            Each path names the behavior, relevant APIs, and implementation
-            files.
-          </p>
-        </div>
-        <ScenarioList sample={sample} />
-      </section>
+      {
+        showContent && (
+          <section
+            class="stack detail-section"
+            id="content"
+            aria-labelledby="content-title"
+            data-scroll-reveal
+          >
+            <div class="stack section-copy">
+              <p class="eyebrow">What it covers</p>
+              <h2 id="content-title">Scenarios and examples</h2>
+              <p class="secondary-text">
+                Behaviors and implementation choices stay grouped under the
+                developer-facing sample that owns them.
+              </p>
+            </div>
+            {record ? (
+              <FederatedContent sample={sample} />
+            ) : (
+              <ScenarioList sample={sample} />
+            )}
+          </section>
+        )
+      }
 
-      <section
-        class="stack detail-section"
-        id="apis"
-        aria-labelledby="apis-title"
-        data-scroll-reveal
-      >
-        <div class="stack section-copy">
-          <p class="eyebrow">Platform surface</p>
-          <h2 id="apis-title">Key APIs</h2>
-        </div>
-        <ApiList apis={sample.apis} />
-      </section>
+      {
+        showApis && (
+          <section
+            class="stack detail-section"
+            id="apis"
+            aria-labelledby="apis-title"
+            data-scroll-reveal
+          >
+            <div class="stack section-copy">
+              <p class="eyebrow">Platform surface</p>
+              <h2 id="apis-title">Key APIs</h2>
+            </div>
+            <ApiList apis={sample.apis} />
+          </section>
+        )
+      }
 
-      <section
+      {showCode && <section
         class="stack detail-section code-section"
         id="code"
         aria-labelledby="code-section-title"
@@ -235,7 +336,7 @@ const requirementHighlights = [
             </div>
           )
         }
-      </section>
+      </section>}
 
       <section
         class="stack detail-section"
@@ -253,16 +354,20 @@ const requirementHighlights = [
             <dl>
               <div>
                 <dt>Minimum Windows version</dt>
-                <dd>{sample.requirements.minimumWindowsVersion}</dd>
+                <dd>{minimumWindowsVersion}</dd>
               </div>
               <div>
                 <dt>Architectures</dt>
                 <dd>
-                  {sample.requirements.supportedArchitectures.join(", ")}
+                  {architectureLabel}
                 </dd>
               </div>
             </dl>
-            <p>{sample.requirements.architectureNotes}</p>
+            {
+              sample.requirements.architectureNotes && (
+                <p>{sample.requirements.architectureNotes}</p>
+              )
+            }
           </article>
           <article class="surface requirement-card stack">
             <h3>Hardware and services</h3>
@@ -309,6 +414,43 @@ const requirementHighlights = [
               )
             }
           </article>
+          {
+            ((sample.requirements.software?.length ?? 0) > 0 ||
+              (sample.requirements.notes?.length ?? 0) > 0 ||
+              (record?.categories.provider.length ?? 0) > 0) && (
+              <article class="surface requirement-card stack">
+                <h3>Environment</h3>
+                {sample.requirements.software &&
+                  sample.requirements.software.length > 0 && (
+                    <>
+                      <strong>Software</strong>
+                      <ul>
+                        {sample.requirements.software.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                {sample.requirements.notes &&
+                  sample.requirements.notes.length > 0 && (
+                    <>
+                      <strong>Notes</strong>
+                      <ul>
+                        {sample.requirements.notes.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                {record && record.categories.provider.length > 0 && (
+                  <p>
+                    <strong>Source category</strong>{" "}
+                    {record.categories.provider.join(" · ")}
+                  </p>
+                )}
+              </article>
+            )
+          }
         </div>
       </section>
 
@@ -323,12 +465,18 @@ const requirementHighlights = [
           <h2 id="limitations-title">Limitations</h2>
         </div>
         <div class="surface limitations-note">
-          <p>
-            {
-              readme.limitations ??
-                "No known runtime or platform limitations are documented."
-            }
-          </p>
+          {
+            limitations.length > 0 ? (
+              <ul>
+                {limitations.map((limitation) => <li>{limitation}</li>)}
+              </ul>
+            ) : (
+              <p>
+                {localLimitation ??
+                  "No runtime or platform limitations are documented."}
+              </p>
+            )
+          }
         </div>
       </section>
 
@@ -349,15 +497,28 @@ const requirementHighlights = [
               {source.label}
             </a>
             <ul>
-              <li><a href={source.canonicalUrl}>Project source</a></li>
-              <li>
-                <a href={repositoryBlobUrl(
-                  sample.project.repositoryPath,
-                  `${sample.project.name}.csproj`,
-                )}>
-                  Project file
-                </a>
-              </li>
+              <li><a href={source.canonicalUrl}>Pinned source</a></li>
+              {
+                record ? (
+                  <>
+                    <li><a href={record.links.repository}>Repository</a></li>
+                    <li>
+                      <a href={record.links.commit}>
+                        Commit {record.source.lockedCommitSha.slice(0, 12)}
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    <a href={repositoryBlobUrl(
+                      sample.project.repositoryPath,
+                      `${sample.project.name}.csproj`,
+                    )}>
+                      Project file
+                    </a>
+                  </li>
+                )
+              }
             </ul>
           </article>
           <article class="surface resource-card stack">
@@ -377,19 +538,43 @@ const requirementHighlights = [
               )
             }
           </article>
-          <article class="surface resource-card stack">
-            <h3>Reference implementations</h3>
-            <ul>
-              {
-                sample.originalSamples.map((original) => (
-                  <li>
-                    <a href={original.url}>{original.name}</a>
-                    <span>Windows reference</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </article>
+          {
+            sample.originalSamples.length > 0 && (
+              <article class="surface resource-card stack">
+                <h3>Reference implementations</h3>
+                <ul>
+                  {sample.originalSamples.map((original) => (
+                    <li>
+                      <a href={original.url}>{original.name}</a>
+                      <span>Windows reference</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            )
+          }
+          {
+            sample.federated && (
+              <article class="surface resource-card stack">
+                <h3>License and attribution</h3>
+                <ul>
+                  {sample.federated.licenses.map((license) => (
+                    <li>
+                      <a href={license.licenseUrl}>{license.spdxId}</a>
+                      <span>
+                        {license.scopePath
+                          ? `Applies to ${license.scopePath}`
+                          : "Repository license"}
+                      </span>
+                      {license.attributionText && (
+                        <small>{license.attributionText}</small>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            )
+          }
         </div>
       </section>
 
@@ -454,10 +639,31 @@ const requirementHighlights = [
     letter-spacing: -0.055em;
   }
 
-  .detail-summary {
+  .detail-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--site-space-4);
+  }
+
+  .detail-title-icon {
+    width: clamp(3rem, 7vw, 4.5rem);
+    height: clamp(3rem, 7vw, 4.5rem);
+    flex: 0 0 auto;
+    object-fit: contain;
+  }
+
+  .detail-summary,
+  .detail-description {
     max-width: var(--site-reading-width);
     color: var(--site-color-text-secondary);
+  }
+
+  .detail-summary {
     font-size: clamp(1.04rem, 1.8vw, 1.22rem);
+  }
+
+  .detail-description {
+    font-size: 0.98rem;
   }
 
   .hero-requirements {
@@ -494,6 +700,16 @@ const requirementHighlights = [
 
   .detail-actions {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--site-space-4);
+  }
+
+  .secondary-button-link {
+    color: var(--site-color-text-secondary);
+    font-size: 0.86rem;
+    font-weight: 680;
+    text-decoration: none;
   }
 
   .detail-preview {
@@ -671,10 +887,17 @@ const requirementHighlights = [
     box-shadow: none;
   }
 
-  .limitations-note p {
+  .limitations-note p,
+  .limitations-note ul {
     max-width: var(--site-reading-width);
     color: var(--site-color-text-secondary);
     white-space: pre-line;
+  }
+
+  .limitations-note ul {
+    display: grid;
+    gap: var(--site-space-2);
+    padding-left: var(--site-space-5);
   }
 
   .resource-grid {
@@ -696,6 +919,11 @@ const requirementHighlights = [
   .resource-card > p {
     color: var(--site-color-text-secondary);
     font-size: 0.86rem;
+  }
+
+  .resource-card small {
+    display: block;
+    color: var(--site-color-text-muted);
   }
 
   .resource-card ul {

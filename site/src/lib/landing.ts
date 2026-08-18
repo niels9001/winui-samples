@@ -6,12 +6,12 @@ import {
 } from "./explorer";
 
 const featuredIds = [
-  "camera",
-  "file-access",
-  "bluetooth",
-  "xaml-drag-and-drop",
-  "media-transcoding",
-  "speech-recognition-and-synthesis",
+  "local:camera",
+  "winui-gallery:Button",
+  "windows-app-sdk-samples:photo-editor",
+  "local:file-access",
+  "local:bluetooth",
+  "windows-app-sdk-samples:app-lifecycle/activation",
 ] as const;
 
 export interface OutcomeLink {
@@ -58,7 +58,12 @@ export function selectFeaturedSamples(
   samples: CatalogSample[],
   limit = 6,
 ): CatalogSample[] {
-  const byId = new Map(samples.map((sample) => [sample.id, sample]));
+  const byId = new Map(
+    samples.map((sample) => [
+      sample.globalId ?? `local:${sample.id}`,
+      sample,
+    ]),
+  );
   const selected = featuredIds.flatMap((id) => {
     const sample = byId.get(id);
     return sample ? [sample] : [];

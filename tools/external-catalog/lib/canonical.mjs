@@ -7,29 +7,9 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 
-function compareCanonical(left, right) {
-  if (
-    left &&
-    right &&
-    typeof left === "object" &&
-    typeof right === "object" &&
-    !Array.isArray(left) &&
-    !Array.isArray(right) &&
-    Number.isInteger(left.position) &&
-    Number.isInteger(right.position) &&
-    left.position !== right.position
-  ) {
-    return left.position - right.position;
-  }
-
-  const leftValue = JSON.stringify(left);
-  const rightValue = JSON.stringify(right);
-  return leftValue === rightValue ? 0 : leftValue < rightValue ? -1 : 1;
-}
-
 export function canonicalize(value) {
   if (Array.isArray(value)) {
-    return value.map(canonicalize).sort(compareCanonical);
+    return value.map(canonicalize);
   }
 
   if (value && typeof value === "object") {

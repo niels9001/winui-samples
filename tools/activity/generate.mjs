@@ -22,13 +22,14 @@ const outputPath = path.join(
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
 const token = process.env.GITHUB_TOKEN;
 const repository = process.env.GITHUB_REPOSITORY;
+const forceOffline = process.argv.includes("--offline");
 
 let source = "offline";
 let entries = [];
-if (token && repository) {
+if (!forceOffline && token && repository) {
   source = "github";
   entries = await fetchMergedActivity({ repository, token, catalog });
-} else if (process.env.ACTIVITY_GIT_FALLBACK === "1") {
+} else if (!forceOffline && process.env.ACTIVITY_GIT_FALLBACK === "1") {
   source = "git";
   const localPullRequests = await localMergedPullRequests({ cwd: root });
   if (localPullRequests.length > 0) {
@@ -44,4 +45,3 @@ await writeFile(
   "utf8",
 );
 console.log(`Generated ${outputPath} (${entries.length} activity entries, ${source}).`);
-

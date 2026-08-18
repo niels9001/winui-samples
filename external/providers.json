@@ -6,7 +6,7 @@
       "id": "winui-gallery",
       "name": "WinUI Gallery",
       "kind": "external",
-      "enabled": false,
+      "enabled": true,
       "repository": {
         "owner": "microsoft",
         "name": "WinUI-Gallery"
@@ -25,14 +25,14 @@
       "allowedSourceRoots": [
         "WinUIGallery"
       ],
-      "completenessPolicy": "not-enforced",
-      "expectedRecordCount": null
+      "completenessPolicy": "enforced",
+      "expectedRecordCount": 120
     },
     {
       "id": "windows-app-sdk-samples",
       "name": "Windows App SDK samples",
       "kind": "external",
-      "enabled": false,
+      "enabled": true,
       "repository": {
         "owner": "microsoft",
         "name": "WindowsAppSDK-Samples"
@@ -49,10 +49,11 @@
         "immutable": true
       },
       "allowedSourceRoots": [
-        "Samples"
+        "Samples",
+        "DynamicDependenciesSample"
       ],
-      "completenessPolicy": "not-enforced",
-      "expectedRecordCount": null
+      "completenessPolicy": "enforced",
+      "expectedRecordCount": 42
     }
   ]
 }

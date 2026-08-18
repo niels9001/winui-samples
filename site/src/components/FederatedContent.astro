@@ -1,0 +1,283 @@
+---
+import type {
+  CatalogSample,
+  FederatedContentUnit,
+} from "../lib/catalog";
+import { describeFeaturedFiles } from "../lib/featured-files";
+import { sampleSourceFileUrl } from "../lib/source-provenance";
+import { sitePath } from "../lib/urls";
+
+interface Props {
+  sample: CatalogSample;
+}
+
+const { sample } = Astro.props;
+const record = sample.federated?.record;
+if (!record) {
+  throw new Error("FederatedContent requires an external catalog record.");
+}
+
+const previewByPath = new Map(
+  describeFeaturedFiles(sample).map((file) => [file.path, file]),
+);
+const groups = [
+  {
+    id: "variants",
+    title: "Variants and projects",
+    description:
+      "Language, framework, packaging, solution, and project choices remain grouped in this sample family.",
+    units: record.content.variants,
+  },
+  {
+    id: "scenarios",
+    title: "Scenarios",
+    description:
+      "Authored scenarios show the focused behaviors available within this sample family.",
+    units: record.content.scenarios,
+  },
+  {
+    id: "examples",
+    title: "Examples",
+    description:
+      "Examples and their code definitions remain nested under the upstream page that owns them.",
+    units: record.content.examples,
+  },
+].filter((group) => group.units.length > 0);
+
+function sourceHref(sourcePath: string) {
+  const preview = previewByPath.get(sourcePath);
+  return preview?.routePath
+    ? sitePath(preview.routePath)
+    : sampleSourceFileUrl(sample, sourcePath);
+}
+
+function sourceLabel(sourcePath: string) {
+  return sourcePath.split("/").at(-1) ?? sourcePath;
+}
+
+function technologies(unit: FederatedContentUnit) {
+  return [
+    ...unit.technologies.languages,
+    ...unit.technologies.projectTypes,
+    ...unit.technologies.packaging,
+  ];
+}
+---
+
+<div class="federated-groups">
+  {
+    groups.map((group) => {
+      const visible = group.units.slice(0, 6);
+      const remaining = group.units.slice(6);
+      const renderUnit = (unit: FederatedContentUnit) => (
+        <article class="nested-unit surface">
+          <div class="stack nested-unit-copy">
+            <h3>{unit.title}</h3>
+            {(unit.summary || unit.description) && (
+              <p>{unit.summary ?? unit.description}</p>
+            )}
+            {technologies(unit).length > 0 && (
+              <ul class="technology-list" aria-label="Technologies">
+                {technologies(unit).map((technology) => (
+                  <li>{technology}</li>
+                ))}
+              </ul>
+            )}
+            {unit.apis.length > 0 && (
+              <p class="nested-apis">
+                <strong>APIs</strong> {unit.apis.join(" · ")}
+              </p>
+            )}
+            {unit.sourcePaths.length > 0 && (
+              <ul class="source-paths" aria-label="Source files">
+                {unit.sourcePaths.map((sourcePath) => (
+                  <li>
+                    <a href={sourceHref(sourcePath)}>
+                      {sourceLabel(sourcePath)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {unit.documentation.length > 0 && (
+              <ul class="source-paths" aria-label="Documentation">
+                {unit.documentation.map((document) => (
+                  <li><a href={document.url}>{document.title}</a></li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {unit.children.length > 0 && (
+            <details class="nested-children">
+              <summary>
+                {unit.children.length} nested{" "}
+                {unit.children.length === 1 ? "item" : "items"}
+              </summary>
+              <ul>
+                {unit.children.map((child) => (
+                  <li>
+                    <strong>{child.title}</strong>
+                    {technologies(child).length > 0 && (
+                      <span>{technologies(child).join(" · ")}</span>
+                    )}
+                    {child.sourcePaths.map((sourcePath) => (
+                      <a href={sourceHref(sourcePath)}>
+                        {sourceLabel(sourcePath)}
+                      </a>
+                    ))}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </article>
+      );
+      return (
+        <section class="stack content-group" aria-labelledby={`${group.id}-title`}>
+          <div class="stack group-heading">
+            <h3 id={`${group.id}-title`}>{group.title}</h3>
+            <p>{group.description}</p>
+          </div>
+          <div class="nested-grid">{visible.map(renderUnit)}</div>
+          {remaining.length > 0 && (
+            <details class="group-disclosure">
+              <summary>
+                Show all {group.units.length} {group.title.toLocaleLowerCase("en-US")}
+              </summary>
+              <div class="nested-grid">{remaining.map(renderUnit)}</div>
+            </details>
+          )}
+        </section>
+      );
+    })
+  }
+</div>
+
+<style>
+  .federated-groups,
+  .content-group {
+    display: grid;
+    gap: var(--site-space-5);
+  }
+
+  .federated-groups {
+    gap: var(--site-space-7);
+  }
+
+  .group-heading {
+    --stack-space: var(--site-space-2);
+    max-width: var(--site-reading-width);
+  }
+
+  .group-heading h3 {
+    font-size: 1.35rem;
+  }
+
+  .group-heading p,
+  .nested-unit-copy > p,
+  .nested-apis {
+    color: var(--site-color-text-secondary);
+  }
+
+  .nested-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .nested-unit {
+    display: grid;
+    align-content: start;
+    gap: var(--site-space-4);
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .nested-unit-copy {
+    --stack-space: var(--site-space-3);
+  }
+
+  .nested-unit h3 {
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+  }
+
+  .technology-list,
+  .source-paths,
+  .nested-children ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .technology-list li {
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-size: 0.72rem;
+  }
+
+  .source-paths a,
+  .nested-children a {
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+  }
+
+  .nested-apis {
+    font-size: 0.8rem;
+  }
+
+  .nested-children {
+    border-top: 1px solid var(--site-color-border-subtle);
+    padding-top: var(--site-space-3);
+  }
+
+  .nested-children summary,
+  .group-disclosure > summary {
+    min-height: 2.75rem;
+    cursor: pointer;
+    font-weight: 680;
+  }
+
+  .nested-children ul {
+    display: grid;
+    margin-top: var(--site-space-3);
+  }
+
+  .nested-children li {
+    display: grid;
+    gap: var(--site-space-1);
+    min-width: 0;
+  }
+
+  .nested-children li span {
+    color: var(--site-color-text-muted);
+    font-size: 0.72rem;
+  }
+
+  .group-disclosure > summary {
+    width: fit-content;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--site-color-border);
+    border-radius: var(--site-radius-medium);
+    background: var(--site-color-surface-elevated);
+    list-style: none;
+  }
+
+  .group-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .group-disclosure > .nested-grid {
+    margin-top: var(--site-space-4);
+  }
+
+  @media (max-width: 44rem) {
+    .nested-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

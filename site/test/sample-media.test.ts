@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   mkdir,
   mkdtemp,
+  readFile,
   rm,
   writeFile,
 } from "node:fs/promises";
@@ -10,8 +11,11 @@ import path from "node:path";
 import test from "node:test";
 
 import {
+  resolveAllCatalogMedia,
   resolveHeroMedia,
+  resolvePrimaryIconMedia,
 } from "../src/lib/sample-media";
+import { parseCatalog } from "../src/lib/catalog";
 import { fallbackVisualIndex } from "../src/lib/visuals";
 import { makeSample } from "./fixtures";
 
@@ -55,4 +59,54 @@ test("produces deterministic category fallback themes", () => {
   );
   assert.ok(fallbackVisualIndex("files-and-data") >= 0);
   assert.ok(fallbackVisualIndex("files-and-data") < 6);
+});
+
+test("preserves decorative Gallery icons and informative provider media", async () => {
+  const catalogSource = await readFile(
+    new URL("../src/generated/sample-catalog.json", import.meta.url),
+    "utf8",
+  );
+  const catalog = parseCatalog(JSON.parse(catalogSource));
+  const media = await resolveAllCatalogMedia(catalog.samples);
+  const galleryMedia = media.filter((entry) =>
+    entry.sampleId.startsWith("winui-gallery--"),
+  );
+  const windowsMedia = media.filter((entry) =>
+    entry.sampleId.startsWith("windows-app-sdk-samples--"),
+  );
+
+  assert.equal(media.length, 122);
+  assert.equal(galleryMedia.length, 120);
+  assert.equal(
+    new Set(galleryMedia.map((entry) => entry.sourcePath)).size,
+    101,
+  );
+  assert.equal(
+    new Set(
+      catalog.samples
+        .filter((sample) => sample.provider?.id === "winui-gallery")
+        .flatMap((sample) =>
+          sample.federated?.record.images.map((image) => image.path) ?? [],
+        ),
+    ).size,
+    102,
+  );
+  assert.ok(
+    galleryMedia.every(
+      (entry) => entry.decorative && entry.alt === "",
+    ),
+  );
+  assert.equal(windowsMedia.length, 2);
+  assert.ok(
+    windowsMedia.every(
+      (entry) => !entry.decorative && entry.alt.trim().length > 0,
+    ),
+  );
+
+  const button = catalog.samples.find(
+    (sample) => sample.globalId === "winui-gallery:Button",
+  );
+  assert.ok(button);
+  assert.equal(await resolveHeroMedia(button), undefined);
+  assert.equal((await resolvePrimaryIconMedia(button))?.decorative, true);
 });

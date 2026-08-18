@@ -143,6 +143,7 @@ export interface NormalizedCatalogRecord {
     mediaType: "image/png" | "image/jpeg" | "image/webp";
     width: number | null;
     height: number | null;
+    decorative: boolean;
     alt: string;
     provenance: {
       kind: ProvenanceKind;
@@ -227,6 +228,7 @@ export interface ProviderRecordHistory {
   firstSeenSync: string;
   lastReviewedSync: string;
   lastChangedSync: string | null;
+  contentHash?: Sha256;
   removedAtSync: string | null;
 }
 
@@ -260,6 +262,7 @@ export interface ProviderAdapterContext {
     expectedRecordCount: number | null;
   };
   lock: ProviderSourceLock;
+  history: ProviderSyncHistory;
   readArtifact(path: string): Promise<Uint8Array>;
   createRouteSlug(providerId: ProviderId, recordKey: string): string;
 }

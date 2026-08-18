@@ -90,6 +90,28 @@ test("indexes every authored search surface", () => {
   assert.doesNotMatch(JSON.stringify(index), /ported from UWP/i);
 });
 
+test("keeps C# and C++ as distinct search languages", () => {
+  const managed = makeSample("managed", "Managed language sample", {
+    languages: ["C#"],
+  });
+  const native = makeSample("native", "Native language sample", {
+    languages: ["C++"],
+  });
+  const index = createExplorerIndex([managed, native], testCategories);
+  const csharp = createDefaultExplorerState();
+  csharp.query = "C#";
+  assert.deepEqual(
+    filterAndSortSamples(index, csharp).map((entry) => entry.sample.id),
+    ["managed"],
+  );
+  const cpp = createDefaultExplorerState();
+  cpp.query = "C++";
+  assert.deepEqual(
+    filterAndSortSamples(index, cpp).map((entry) => entry.sample.id),
+    ["native"],
+  );
+});
+
 test("round-trips stable shareable URL state", () => {
   const state = createDefaultExplorerState();
   state.query = "storage file";
@@ -97,12 +119,13 @@ test("round-trips stable shareable URL state", () => {
   state.facets.primaryCategory = ["files-and-data"];
   state.facets.tag = ["storage", "files"];
   state.facets.architecture = ["arm64", "x64"];
-  state.facets.source = ["winui-samples"];
+  state.facets.provider = ["winui-samples"];
+  state.facets.language = ["C#"];
 
   const serialized = serializeExplorerState(state);
   assert.equal(
     serialized.toString(),
-    "q=storage+file&sort=project&source=winui-samples&primary=files-and-data&tag=files&tag=storage&arch=arm64&arch=x64",
+    "q=storage+file&sort=project&provider=winui-samples&primary=files-and-data&tag=files&tag=storage&arch=arm64&arch=x64&language=C%23",
   );
   assert.deepEqual(parseExplorerState(serialized), {
     ...state,
@@ -113,6 +136,10 @@ test("round-trips stable shareable URL state", () => {
     },
   });
   assert.equal(parseExplorerState("?sort=recent").sort, "recommended");
+  assert.deepEqual(
+    parseExplorerState("?source=winui-samples").facets.provider,
+    ["winui-samples"],
+  );
   const legacyCaptureState = createDefaultExplorerState();
   legacyCaptureState.facets.capture = ["automatic"];
   assert.deepEqual(
@@ -172,7 +199,7 @@ test("filters with OR within a facet and AND across facets", () => {
 
   const options = getFacetOptions(index);
   assert.deepEqual(
-    options.source.map((option) => option.value),
+    options.provider.map((option) => option.value),
     ["winui-samples"],
   );
   assert.deepEqual(options.capture, [

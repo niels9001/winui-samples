@@ -47,20 +47,22 @@ The baseline was functionally sound but read like a repository dashboard:
    large scenario, API, and source collections expand with native HTML controls.
 6. **Make provenance quiet and durable.** Every record resolves a source
    descriptor with a human label and canonical URL. `WinUI samples` is the local
-   default; the model can accept future WinUI Gallery and Windows App SDK records
-   without changing card hierarchy.
+   default; `WinUI Gallery` and `Windows App SDK samples` use the same card
+   hierarchy and provider-namespaced stable routes.
 7. **Let Windows character support comprehension.** Segoe UI Variable,
    disciplined geometry, Mica/acrylic surfaces, reveal lighting, familiar focus
    treatment, Fluent System Icons, and app-window depth form one shared system.
    Decorative effects never replace labels, previews, or links.
-8. **Static HTML is the complete experience.** Theme switching and Browse are
-   enhancements. No-JavaScript, reduced-motion, Save-Data, low-memory, WebGL
-   failure, and forced-colors paths retain the same content and hierarchy.
+8. **Static HTML remains useful without enhancement.** Every detail and code page
+   is prerendered, and Browse includes all 233 links in its no-JavaScript
+   directory. Reduced-motion, Save-Data, low-memory, WebGL failure, and
+   forced-colors paths retain the same content and hierarchy.
 
 ## Information architecture
 
 - **Home**: developer promise, interactive Windows workspace, outcome pathways,
-  curated implementations, and a compact local-build start.
+  curated implementations across all three sources, and a compact local-build
+  start.
 - **Browse**: search, source/category/requirement facets, selected-filter summary,
   intent-first result cards, and shareable URL state.
 - **Detail**: outcome and preview first; source and requirements second; runnable
@@ -76,9 +78,9 @@ remain.
 
 ## Visual and interaction system
 
-The additive federated contract keeps provider/source labels quiet and preserves
-pinned provenance for audit without making migration or PR details search content.
-When a later UI layer consumes it, one provider source unit remains one result;
+The federated contract keeps provider/source labels quiet and preserves pinned
+provenance for audit without making migration, warnings, licenses, cache paths, or
+PR details search content. One provider source unit remains one result;
 implementation variants stay nested. Upstream editorial badges remain distinct
 from portal recency, which comes only from reviewed sync history rather than
 upstream commit time.
@@ -109,8 +111,11 @@ applies.
 
 ## Performance and route contract
 
-Astro prerenders all routes under `/winui-samples/`; the browser makes no runtime
-catalog or GitHub API requests. The 427-route baseline and safe curated-code
-boundary remain intact. The redesign must not exceed the existing 669,000-byte
-Browse ceiling, and should remain near or below the measured 115.5 KiB initial
-landing and 125.8 KiB lazy Three.js gzip payloads.
+Astro prerenders all routes under `/winui-samples/`. The browser loads Browse data
+only from one immutable same-origin JSON route and verifies its SHA-256 integrity;
+it never calls GitHub, raw-content hosts, or provider APIs. The current production
+output is 1,227 HTML routes: 233 details and 992 safe code views, plus 122 validated
+media routes. Browse HTML is 74.6 KiB against a 650 KiB ceiling; initial Browse
+JavaScript is 67.1 KiB gzip against an 80 KiB ceiling. The immutable Browse index
+is 758.2 KiB raw / 94.6 KiB gzip. Initial landing JavaScript is 2.3 KiB gzip and
+lazy Three.js is 126.2 KiB gzip.

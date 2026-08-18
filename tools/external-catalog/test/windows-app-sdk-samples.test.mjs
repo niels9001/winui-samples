@@ -14,6 +14,7 @@ import {
 import { loadExternalState } from "../lib/config.mjs";
 import { generateExternalCatalog } from "../lib/generate.mjs";
 import {
+  assertAllowedSourceRoot,
   assertSafePosixPath,
 } from "../lib/guards.mjs";
 import {
@@ -32,12 +33,9 @@ import {
 
 async function enabledState() {
   const state = await loadExternalState();
-  const provider = state.providers.get(providerId);
-  provider.enabled = true;
-  provider.allowedSourceRoots = [
-    ...provider.allowedSourceRoots,
-    "DynamicDependenciesSample",
-  ];
+  for (const provider of state.providers.values()) {
+    provider.enabled = provider.id === providerId;
+  }
   return state;
 }
 
@@ -106,6 +104,28 @@ test("reviewed snapshot and explicit family manifest match the pinned inventory"
   assert.equal(reviewedInventory.reviewedTreeSha, reviewedSnapshot.treeSha);
 });
 
+test("Dynamic Dependencies stays within its narrow approved source root", async () => {
+  const state = await loadExternalState();
+  const roots = state.providers.get(providerId).allowedSourceRoots;
+  assert.deepEqual(roots, ["Samples", "DynamicDependenciesSample"]);
+  assert.doesNotThrow(() =>
+    assertAllowedSourceRoot(
+      "DynamicDependenciesSample/DynamicDependencies/DirectX/D3D9ExSample.vcxproj",
+      roots,
+    ),
+  );
+  for (const escapedPath of [
+    "DynamicDependenciesSampleSibling/secret.txt",
+    "Templates/VSIX/ProjectTemplate.csproj",
+    "README.md",
+  ]) {
+    assert.throws(
+      () => assertAllowedSourceRoot(escapedPath, roots),
+      /outside the provider allowlist/,
+    );
+  }
+});
+
 test("all projects and solutions belong to exactly one conceptual family", () => {
   const families = Object.values(reviewedInventory.families);
   const solutions = families.flatMap((family) => family.solutions);
@@ -171,6 +191,32 @@ test("provider independently emits 42 fully validated normalized records", async
     assert.ok(record.attribution.licenseRefs.length >= 1);
     assert.equal(record.route.previousPaths.length, 0);
   }
+});
+
+test("provider lifecycle survives a second reviewed sync", async () => {
+  const state = await enabledState();
+  const history = state.histories.get(providerId);
+  const priorSync = {
+    id: "windows-app-sdk-samples@prior-reviewed",
+    reviewedAt: "2025-01-01T00:00:00Z",
+    lockCommitSha: "0".repeat(40),
+  };
+  history.syncs.unshift(priorSync);
+  history.records.forEach((record, index) => {
+    record.firstSeenSync = priorSync.id;
+    record.lastChangedSync =
+      index === 0 ? history.latestSyncId : priorSync.id;
+  });
+
+  const catalog = await generateExternalCatalog({ state });
+  assert.deepEqual(catalog.records[0].badges.portalLifecycle, ["updated"]);
+  assert.deepEqual(catalog.records[1].badges.portalLifecycle, []);
+  assert.equal(
+    catalog.records.every(
+      (record) => record.lifecycle.firstSeenSync === priorSync.id,
+    ),
+    true,
+  );
 });
 
 test("Activation, PhotoEditor, and SecureUI match normalized golden fixtures", async () => {

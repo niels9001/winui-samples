@@ -100,18 +100,27 @@ const highlighted =
         {
           files.map((file) => (
             <li>
-              <a
-                aria-current={
-                  currentRoute && file.key === descriptor.key
-                    ? "page"
-                    : undefined
-                }
-                class:list={{ active: file.key === descriptor.key }}
-                href={sitePath(file.routePath)}
-              >
-                <span>{file.label}</span>
-                <code>{file.path}</code>
-              </a>
+              {
+                file.routePath ? (
+                  <a
+                    aria-current={
+                      currentRoute && file.key === descriptor.key
+                        ? "page"
+                        : undefined
+                    }
+                    class:list={{ active: file.key === descriptor.key }}
+                    href={sitePath(file.routePath)}
+                  >
+                    <span>{file.label}</span>
+                    <code>{file.path}</code>
+                  </a>
+                ) : (
+                  <a href={file.sourceUrl}>
+                    <span>{file.label}</span>
+                    <code>{file.path} · source only</code>
+                  </a>
+                )
+              }
             </li>
           ))
         }

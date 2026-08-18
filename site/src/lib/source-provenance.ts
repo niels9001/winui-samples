@@ -18,11 +18,21 @@ export const localCatalogSource = {
   catalogUrl: repositoryWebUrl,
 } as const;
 
+export function getSampleProvider(sample: CatalogSample) {
+  return sample.provider ?? {
+    id: localCatalogSource.id,
+    label: localCatalogSource.label,
+    kind: "local" as const,
+  };
+}
+
 export function getSampleSource(sample: CatalogSample): SampleSource {
   if (sample.source) {
     return {
       ...sample.source,
-      catalogUrl: sample.source.canonicalUrl,
+      catalogUrl:
+        sample.federated?.record.links.repository ??
+        sample.source.canonicalUrl,
     };
   }
 
@@ -42,8 +52,22 @@ export function sampleSourceFileUrl(
   sample: CatalogSample,
   filePath: string,
 ): string {
+  const featured = sample.featuredFiles.find(
+    (file) => file.path === filePath,
+  );
+  if (featured?.canonicalUrl) {
+    return featured.canonicalUrl;
+  }
   if (!sample.source) {
     return repositoryBlobUrl(sample.project.repositoryPath, filePath);
+  }
+
+  if (sample.federated) {
+    const encodedFilePath = filePath
+      .split("/")
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+    return `${sample.federated.record.links.repository}/blob/${sample.federated.record.source.lockedCommitSha}/${encodedFilePath}`;
   }
 
   const canonical = new URL(sample.source.canonicalUrl);

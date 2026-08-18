@@ -1,11 +1,13 @@
 import type {
   CatalogCategory,
   CatalogSample,
+  FederatedContentUnit,
+  PortalSearchRecord,
 } from "./catalog";
-import { getSampleSource } from "./source-provenance";
+import { getSampleProvider } from "./source-provenance";
 
 export const explorerFacetKeys = [
-  "source",
+  "provider",
   "primaryCategory",
   "secondaryCategory",
   "tag",
@@ -13,6 +15,7 @@ export const explorerFacetKeys = [
   "hardware",
   "accountService",
   "architecture",
+  "language",
   "capture",
 ] as const;
 
@@ -43,37 +46,26 @@ export interface ExplorerSampleSummary {
   categories: {
     primary: string;
   };
-  scenarioCount: number;
+  contentCount: number;
+  contentLabel: string;
   minimumWindowsVersion: string;
   supportedArchitectures: string[];
+  languages: string[];
   source: {
     id: string;
     label: string;
-    canonicalUrl: string;
   };
 }
 
-export interface IndexedSample {
+export interface IndexedSample
+  extends Omit<PortalSearchRecord, "sample" | "facets" | "facetLabels"> {
   sample: ExplorerSampleSummary;
-  order: number;
-  searchGroups: {
-    title: string;
-    summary: string;
-    project: string;
-    aliases: string;
-    tags: string;
-    scenarios: string;
-    apis: string;
-    originals: string;
-    source: string;
-    category: string;
-  };
   facets: Record<ExplorerFacetKey, string[]>;
-  facetLabels: Record<ExplorerFacetKey, string[]>;
+  facetLabels: Record<ExplorerFacetKey, Record<string, string>>;
 }
 
 const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
-  source: "source",
+  provider: "provider",
   primaryCategory: "primary",
   secondaryCategory: "secondary",
   tag: "tag",
@@ -81,6 +73,7 @@ const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
   hardware: "hardware",
   accountService: "service",
   architecture: "arch",
+  language: "language",
   capture: "capture",
 };
 
@@ -105,6 +98,8 @@ export function normalizeSearchText(value: string): string {
   return value
     .normalize("NFKD")
     .replace(/\p{Diacritic}/gu, "")
+    .replace(/C\+\+/giu, " cplusplus ")
+    .replace(/C#/giu, " csharp ")
     .toLocaleLowerCase("en-US")
     .replace(/[^\p{Letter}\p{Number}]+/gu, " ")
     .trim()
@@ -115,6 +110,21 @@ function joinSearchValues(values: Array<string | undefined>): string {
   return normalizeSearchText(values.filter(Boolean).join(" "));
 }
 
+function createFacetLabelMap(
+  values: string[],
+  labels = values,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  values.forEach((value, index) => {
+    const label = labels[index] ?? value;
+    const current = result[value];
+    if (!current || compareText(label, current) < 0) {
+      result[value] = label;
+    }
+  });
+  return result;
+}
+
 function captureModes(sample: CatalogSample): string[] {
   if (sample.screenshots.length === 0) {
     return ["none"];
@@ -123,6 +133,39 @@ function captureModes(sample: CatalogSample): string[] {
   return sortedUnique(
     sample.screenshots.map((screenshot) => screenshot.capture.mode),
   );
+}
+
+function flattenUnits(units: FederatedContentUnit[]): FederatedContentUnit[] {
+  return units.flatMap((unit) => [
+    unit,
+    ...flattenUnits(unit.children),
+  ]);
+}
+
+function contentDescriptor(sample: CatalogSample) {
+  if (!sample.federated) {
+    return {
+      count: sample.scenarios.length,
+      label: sample.scenarios.length === 1 ? "scenario" : "scenarios",
+    };
+  }
+
+  const counts = {
+    examples: sample.federated.record.content.examples.length,
+    scenarios: sample.federated.record.content.scenarios.length,
+    variants: sample.federated.record.content.variants.length,
+  };
+  const groups = Object.entries(counts).filter(([, count]) => count > 0);
+  const count = groups.reduce((total, [, groupCount]) => total + groupCount, 0);
+  const label =
+    groups.length === 1 ? (groups[0]?.[0] ?? "nested items") : "nested items";
+  return {
+    count,
+    label:
+      groups.length === 1 && count === 1
+        ? label.slice(0, -1)
+        : label,
+  };
 }
 
 function canonicalFacetValue(
@@ -150,7 +193,16 @@ export function createExplorerIndex(
   );
 
   return samples.map((sample, order) => {
-    const source = getSampleSource(sample);
+    const source = getSampleProvider(sample);
+    const languages = sample.languages ?? [];
+    const units = sample.federated
+      ? flattenUnits([
+          ...sample.federated.record.content.variants,
+          ...sample.federated.record.content.scenarios,
+          ...sample.federated.record.content.examples,
+        ])
+      : [];
+    const content = contentDescriptor(sample);
     const primaryCategoryLabel =
       categoryLabels.get(sample.categories.primary) ??
       sample.categories.primary;
@@ -159,7 +211,7 @@ export function createExplorerIndex(
     );
     const searchGroups = {
       title: normalizeSearchText(sample.title),
-      summary: normalizeSearchText(sample.summary),
+      summary: normalizeSearchText(sample.summary ?? ""),
       project: joinSearchValues([
         sample.project.name,
       ]),
@@ -179,14 +231,31 @@ export function createExplorerIndex(
       originals: joinSearchValues(
         sample.originalSamples.map((original) => original.name),
       ),
-      source: normalizeSearchText(source.label),
+      provider: normalizeSearchText(source.label),
       category: joinSearchValues([
         primaryCategoryLabel,
         ...secondaryCategoryLabels,
+        ...(sample.federated?.record.categories.provider ?? []),
       ]),
+      technical: joinSearchValues([
+        sample.federated?.record.recordKey,
+        ...(sample.federated?.record.technicalAliases ?? []),
+        ...sample.featuredFiles.map((file) => file.path),
+        ...units.flatMap((unit) => [
+          unit.title,
+          unit.summary ?? undefined,
+          unit.description ?? undefined,
+          ...unit.apis,
+          ...unit.sourcePaths,
+          ...unit.technologies.languages,
+          ...unit.technologies.projectTypes,
+          ...unit.technologies.packaging,
+        ]),
+      ]),
+      languages: joinSearchValues(languages),
     };
     const facets = {
-      source: [source.id],
+      provider: [source.id],
       primaryCategory: [sample.categories.primary],
       secondaryCategory: sample.categories.secondary,
       tag: sample.tags.map((value) =>
@@ -203,6 +272,7 @@ export function createExplorerIndex(
         canonicalFacetValue("accountService", value),
       ),
       architecture: sample.requirements.supportedArchitectures,
+      language: languages,
       capture: captureModes(sample),
     };
 
@@ -210,35 +280,62 @@ export function createExplorerIndex(
       sample: {
         id: sample.id,
         title: sample.title,
-        summary: sample.summary,
+        summary: sample.summary ?? "",
         project: {
           name: sample.project.name,
         },
         categories: {
           primary: sample.categories.primary,
         },
-        scenarioCount: sample.scenarios.length,
-        minimumWindowsVersion: sample.requirements.minimumWindowsVersion,
+        contentCount: content.count,
+        contentLabel: content.label,
+        minimumWindowsVersion:
+          sample.requirements.minimumWindowsVersion ?? "",
         supportedArchitectures:
           sample.requirements.supportedArchitectures,
-        source,
+        languages,
+        source: {
+          id: source.id,
+          label: source.label,
+        },
       },
       order,
       searchGroups,
       facets,
       facetLabels: {
-        source: [source.label],
-        primaryCategory: [primaryCategoryLabel],
-        secondaryCategory: secondaryCategoryLabels,
-        tag: sample.tags,
-        capability: sample.requirements.capabilities.map(
-          (capability) => capability.name,
+        provider: createFacetLabelMap(facets.provider, [source.label]),
+        primaryCategory: createFacetLabelMap(facets.primaryCategory, [
+          primaryCategoryLabel,
+        ]),
+        secondaryCategory: createFacetLabelMap(
+          facets.secondaryCategory,
+          secondaryCategoryLabels,
         ),
-        hardware: sample.requirements.hardware,
-        accountService: sample.requirements.accountServices,
-        architecture: sample.requirements.supportedArchitectures,
-        capture: captureModes(sample).map(
-          (value) => captureLabels.get(value) ?? value,
+        tag: createFacetLabelMap(facets.tag, sample.tags),
+        capability: createFacetLabelMap(
+          facets.capability,
+          sample.requirements.capabilities.map(
+            (capability) => capability.name,
+          ),
+        ),
+        hardware: createFacetLabelMap(
+          facets.hardware,
+          sample.requirements.hardware,
+        ),
+        accountService: createFacetLabelMap(
+          facets.accountService,
+          sample.requirements.accountServices,
+        ),
+        architecture: createFacetLabelMap(
+          facets.architecture,
+          sample.requirements.supportedArchitectures,
+        ),
+        language: createFacetLabelMap(facets.language, languages),
+        capture: createFacetLabelMap(
+          facets.capture,
+          captureModes(sample).map(
+            (value) => captureLabels.get(value) ?? value,
+          ),
         ),
       },
     };
@@ -250,7 +347,7 @@ export function createDefaultExplorerState(): ExplorerState {
     query: "",
     sort: "recommended",
     facets: {
-      source: [],
+      provider: [],
       primaryCategory: [],
       secondaryCategory: [],
       tag: [],
@@ -258,6 +355,7 @@ export function createDefaultExplorerState(): ExplorerState {
       hardware: [],
       accountService: [],
       architecture: [],
+      language: [],
       capture: [],
     },
   };
@@ -290,6 +388,12 @@ export function parseExplorerState(
     state.facets[key] = sortedUnique(
       parameters.getAll(queryParameterByFacet[key]),
     );
+  }
+  if (
+    state.facets.provider.length === 0 &&
+    parameters.has("source")
+  ) {
+    state.facets.provider = sortedUnique(parameters.getAll("source"));
   }
 
   return state;
@@ -343,8 +447,9 @@ export function getFacetOptions(
 
   for (const entry of index) {
     for (const key of explorerFacetKeys) {
-      entry.facets[key].forEach((value, index) => {
-        rememberLabel(key, value, entry.facetLabels[key][index]);
+      entry.facets[key].forEach((value) => {
+        const canonical = canonicalFacetValue(key, value);
+        rememberLabel(key, value, entry.facetLabels[key][canonical]);
       });
     }
   }
@@ -412,8 +517,12 @@ function searchScore(entry: IndexedSample, normalizedQuery: string): number {
     ["tags", 22],
     ["apis", 20],
     ["scenarios", 18],
+    ["technical", 18],
+    ["languages", 14],
     ["originals", 12],
     ["summary", 8],
+    ["category", 6],
+    ["provider", 4],
   ];
 
   for (const term of terms) {

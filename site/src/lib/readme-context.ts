@@ -86,6 +86,29 @@ export function removePortingOnlyProse(value: string): string | undefined {
     ) {
       return "Camera OCR requires the microphone capability when media capture uses audio-and-video initialization.";
     }
+    if (/Launch with view preference/i.test(sentence)) {
+      return '"Launch with view preference" (split-screen) options are unavailable.';
+    }
+    if (
+      /^Those APIs target the UWP single-window\/tablet model and have no desktop equivalent/i.test(
+        sentence,
+      )
+    ) {
+      return "The required view-management APIs have no desktop equivalent.";
+    }
+    if (/\bappUriHandler\b.*\bis dropped\b/i.test(sentence)) {
+      return "HTTPS app URI handling requires a verified domain and is not enabled.";
+    }
+    if (/\bpositioning hints\b.*\bare not set\b/i.test(sentence)) {
+      return "The Open With dialog does not set CoreWindow-relative positioning hints.";
+    }
+    if (
+      /^Five of the original six scenarios are included; custom effects remain a documented migration gap/i.test(
+        sentence,
+      )
+    ) {
+      return "Five of the six scenarios are included; custom effects are unavailable.";
+    }
     return sentence;
   }
 

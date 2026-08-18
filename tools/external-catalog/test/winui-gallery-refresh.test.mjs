@@ -7,10 +7,20 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 
-import { gitBlobSha } from "../lib/canonical.mjs";
+import {
+  canonicalStringify,
+  gitBlobSha,
+} from "../lib/canonical.mjs";
+import { loadExternalState } from "../lib/config.mjs";
 import { createGitHubClient } from "../lib/network.mjs";
 import {
+  PROVIDER_ID,
+  REVIEWED_SYNC,
+} from "../providers/winui-gallery/constants.mjs";
+import {
   acquirePublishLock,
+  buildReviewDocument,
+  buildReviewedHistory,
   fetchGitBlob,
 } from "../refresh/winui-gallery.mjs";
 
@@ -153,4 +163,112 @@ test("OS publication lock rejects concurrent owners and releases cleanly", async
 
   const releaseAgain = await acquirePublishLock(root);
   await releaseAgain();
+});
+
+test("refresh merges reviewed history and rejects undeclared removals", async () => {
+  const state = await loadExternalState();
+  const committed = state.histories.get(PROVIDER_ID);
+  const pages = committed.records
+    .filter((record) => record.status === "active")
+    .map((record) => ({ UniqueId: record.recordKey }));
+  assert.equal(
+    canonicalStringify(buildReviewedHistory(pages, committed)),
+    canonicalStringify(committed),
+  );
+
+  const priorSync = {
+    id: "winui-gallery@prior-reviewed",
+    reviewedAt: "2025-01-01T00:00:00Z",
+    lockCommitSha: "0".repeat(40),
+  };
+  const tombstone = {
+    id: `${PROVIDER_ID}:RemovedPage`,
+    recordKey: "RemovedPage",
+    routePath: "samples/winui-gallery--removedpage--000000000000",
+    status: "tombstoned",
+    firstSeenSync: priorSync.id,
+    lastReviewedSync: priorSync.id,
+    lastChangedSync: priorSync.id,
+    removedAtSync: priorSync.id,
+  };
+  const previous = {
+    providerId: PROVIDER_ID,
+    latestSyncId: priorSync.id,
+    syncs: [priorSync],
+    records: [
+      ...committed.records.map((record) => ({
+        ...record,
+        firstSeenSync: priorSync.id,
+        lastReviewedSync: priorSync.id,
+        lastChangedSync: priorSync.id,
+      })),
+      tombstone,
+    ],
+  };
+  const tombstoneDeclarations = [
+    {
+      id: tombstone.id,
+      removedAtSync: priorSync.id,
+      reason: "Reviewed retirement.",
+    },
+  ];
+  const merged = buildReviewedHistory(pages, previous, {
+    tombstoneDeclarations,
+  });
+  assert.deepEqual(
+    merged.syncs.map((sync) => sync.id),
+    [priorSync.id, REVIEWED_SYNC.id],
+  );
+  assert.equal(
+    merged.records.find((record) => record.id === committed.records[0].id)
+      .firstSeenSync,
+    priorSync.id,
+  );
+  assert.equal(
+    merged.records.find((record) => record.id === committed.records[0].id)
+      .lastChangedSync,
+    priorSync.id,
+  );
+  assert.equal(
+    merged.records.find((record) => record.id === tombstone.id).removedAtSync,
+    priorSync.id,
+  );
+  assert.equal(
+    merged.records.find((record) => record.id === tombstone.id).lastChangedSync,
+    priorSync.id,
+  );
+  assert.throws(
+    () => buildReviewedHistory(pages.slice(1), committed),
+    /reviewed active record disappeared/,
+  );
+
+  const changedId = committed.records[0].id;
+  const contentHashes = new Map(
+    committed.records.map((record) => [record.id, record.contentHash]),
+  );
+  contentHashes.set(changedId, "f".repeat(64));
+  const changed = buildReviewedHistory(pages, previous, {
+    recordContentHashes: contentHashes,
+    tombstoneDeclarations,
+  });
+  assert.equal(
+    changed.records.find((record) => record.id === changedId).lastChangedSync,
+    REVIEWED_SYNC.id,
+  );
+  assert.equal(
+    changed.records.find((record) => record.id === committed.records[1].id)
+      .lastChangedSync,
+    priorSync.id,
+  );
+});
+
+test("refresh review output preserves decorative icon semantics", () => {
+  const review = buildReviewDocument({
+    selectedSourcePaths: [],
+    imagePaths: [],
+    logicalCacheBytes: 0,
+    uniqueCacheBytes: 0,
+  });
+  assert.equal(review.imagePolicy.normalizedDecorative, true);
+  assert.equal(review.imagePolicy.integratedAltBesideVisibleTitle, "");
 });

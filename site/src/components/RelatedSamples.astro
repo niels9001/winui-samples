@@ -25,6 +25,20 @@ const cards = await Promise.all(
     source: getSampleSource(result.sample),
   })),
 );
+
+function contentLabel(sample: (typeof related)[number]["sample"]) {
+  if (!sample.federated) {
+    return `${sample.scenarios.length} ${
+      sample.scenarios.length === 1 ? "scenario" : "scenarios"
+    }`;
+  }
+  const record = sample.federated.record;
+  const count =
+    record.content.variants.length +
+    record.content.scenarios.length +
+    record.content.examples.length;
+  return `${count} ${count === 1 ? "nested item" : "nested items"}`;
+}
 ---
 
 <section
@@ -73,9 +87,9 @@ const cards = await Promise.all(
                   {result.sample.title}
                 </a>
               </h3>
-              <p>{result.sample.summary}</p>
+              {result.sample.summary && <p>{result.sample.summary}</p>}
               <span class="related-count">
-                {result.sample.scenarios.length} scenarios
+                {contentLabel(result.sample)}
               </span>
             </div>
           </article>

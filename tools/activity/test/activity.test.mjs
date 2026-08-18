@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -183,4 +184,20 @@ test("local fallback only returns merge commits with real PR numbers", async () 
     }),
   });
   assert.deepEqual(entries.map((entry) => entry.number), [12]);
+});
+
+test("site preparation forces activity generation offline", async () => {
+  const packageJson = JSON.parse(await readFile("package.json", "utf8"));
+  assert.equal(
+    packageJson.scripts["activity:generate:offline"],
+    "node tools/activity/generate.mjs --offline",
+  );
+  assert.match(
+    packageJson.scripts["site:prepare"],
+    /activity:generate:offline$/,
+  );
+  assert.doesNotMatch(
+    packageJson.scripts["site:prepare"],
+    /(?:^|&&\s*)pnpm activity:generate(?:\s|$)/,
+  );
 });

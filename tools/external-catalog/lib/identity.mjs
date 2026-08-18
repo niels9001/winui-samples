@@ -155,6 +155,14 @@ export async function validateNormalizedRecord(record) {
     );
   }
 
+  const imageIds = new Set();
+  for (const image of record.images) {
+    if (imageIds.has(image.id)) {
+      throw new Error(`${record.id}: duplicate image id ${image.id}`);
+    }
+    imageIds.add(image.id);
+  }
+
   assertSafePosixPath(record.source.path);
   for (const path of [
     ...record.featuredSourceFiles.map((file) => file.path),

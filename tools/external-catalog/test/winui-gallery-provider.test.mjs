@@ -42,9 +42,9 @@ import {
   validateStateCommit,
 } from "../providers/winui-gallery/dry-run.mjs";
 
-const expectedOutputBytes = 2131019;
+const expectedOutputBytes = 2085418;
 const expectedOutputSha256 =
-  "51954b7bd418fa95d443db472eea91388f969b9b7df45ab8bb472a58a39c794e";
+  "e9e089160fb048c43617efb1dec5ca0cf1eb92bdb7e6d71589b86db690bde9a6";
 const dryRunPromise = dryRun();
 const goldenPromise = readFile(
   path.join(
@@ -226,12 +226,13 @@ test("provider emits the exact pinned 120-page catalog and nested inventory", as
     assert.equal(record.title.display, record.title.upstream);
     assert.equal(record.summary === null, false);
     assert.equal(record.images.length, 1);
-    assert.equal(record.images[0].alt, record.title.display);
+    assert.equal(record.images[0].decorative, true);
+    assert.equal(record.images[0].alt, "");
     assert.equal(
       record.metadata.warnings.some(
         (warning) => warning.code === "decorative-icon-alt-contract",
       ),
-      true,
+      false,
     );
   }
   assert.deepEqual(
@@ -305,6 +306,45 @@ test("upstream editorial badges never become portal PR activity", async () => {
   );
 });
 
+test("portal lifecycle badges derive from committed multi-sync history", async () => {
+  const state = await loadExternalState();
+  for (const provider of state.providers.values()) {
+    provider.enabled = provider.id === "winui-gallery";
+  }
+  const history = state.histories.get("winui-gallery");
+  const priorSync = {
+    id: "winui-gallery@prior-reviewed",
+    reviewedAt: "2025-01-01T00:00:00Z",
+    lockCommitSha: "0".repeat(40),
+  };
+  history.syncs.unshift(priorSync);
+  const updatedId = history.records[0].id;
+  const unchangedId = history.records[1].id;
+  history.records.forEach((record, index) => {
+    record.firstSeenSync = priorSync.id;
+    record.lastChangedSync =
+      index === 0 ? history.latestSyncId : priorSync.id;
+  });
+
+  const catalog = await generateExternalCatalog({ state });
+  assert.deepEqual(
+    catalog.records.find((record) => record.id === updatedId).badges
+      .portalLifecycle,
+    ["updated"],
+  );
+  assert.deepEqual(
+    catalog.records.find((record) => record.id === unchangedId).badges
+      .portalLifecycle,
+    [],
+  );
+  assert.equal(
+    catalog.records.every(
+      (record) => record.lifecycle.firstSeenSync === priorSync.id,
+    ),
+    true,
+  );
+});
+
 test("offline dry generation is byte-identical and makes zero network calls", async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = () => {
@@ -324,9 +364,11 @@ test("offline dry generation is byte-identical and makes zero network calls", as
   }
 });
 
-test("globally disabled provider leaves the portal external catalog empty", async () => {
+test("explicitly disabled providers leave the external catalog empty", async () => {
   const state = await loadExternalState();
-  assert.equal(state.providers.get("winui-gallery").enabled, false);
+  for (const provider of state.providers.values()) {
+    provider.enabled = false;
+  }
   const originalFetch = globalThis.fetch;
   globalThis.fetch = () => {
     throw new Error("network must not be used");
@@ -468,6 +510,7 @@ test("root MIT license is pinned and decorative integration metadata is explicit
   assert.equal(review.pin.license.spdxId, "MIT");
   assert.equal(review.pin.license.noticeFilePresent, false);
   assert.equal(review.pin.license.thirdPartyFilePresent, false);
+  assert.equal(review.imagePolicy.normalizedDecorative, true);
   assert.equal(review.imagePolicy.integratedAltBesideVisibleTitle, "");
   assert.equal(
     review.links.appDeepLinkTemplate,

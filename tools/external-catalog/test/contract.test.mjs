@@ -32,6 +32,60 @@ test("all compact provider fixtures satisfy the normalized schema", async () => 
   }
 });
 
+test("canonical JSON preserves authored array order", () => {
+  const value = {
+    actions: [
+      { kind: "click", position: 2 },
+      { kind: "wait", position: 1 },
+    ],
+  };
+  assert.deepEqual(
+    JSON.parse(canonicalStringify(value)).actions.map((action) => action.kind),
+    ["click", "wait"],
+  );
+});
+
+test("decorative images require empty alt while informative images require meaningful alt", async () => {
+  const informative = await loadRecordFixture("winui-gallery");
+  await assert.doesNotReject(validateNormalizedRecord(informative));
+
+  const decorative = clone(informative);
+  decorative.images[0].decorative = true;
+  decorative.images[0].alt = "";
+  await assert.doesNotReject(validateNormalizedRecord(decorative));
+
+  const redundant = clone(decorative);
+  redundant.images[0].alt = redundant.title.display;
+  await assert.rejects(
+    validateNormalizedRecord(redundant),
+    /must be equal to constant/,
+  );
+
+  const emptyInformative = clone(informative);
+  emptyInformative.images[0].alt = "   ";
+  await assert.rejects(
+    validateNormalizedRecord(emptyInformative),
+    /must match pattern/,
+  );
+});
+
+test("image ids are unique within each normalized record", async () => {
+  const record = await loadRecordFixture("winui-gallery");
+  record.images.push({
+    ...clone(record.images[0]),
+    path: "WinUIGallery/Assets/ControlImages/Duplicate.png",
+    url: record.images[0].url.replace("Button.png", "Duplicate.png"),
+    provenance: {
+      ...record.images[0].provenance,
+      sourcePath: "WinUIGallery/Assets/ControlImages/Duplicate.png",
+    },
+  });
+  await assert.rejects(
+    validateNormalizedRecord(record),
+    /duplicate image id/,
+  );
+});
+
 test("route identity is stable across title and source path changes", async () => {
   const record = await loadRecordFixture("winui-gallery");
   const changed = clone(record);
