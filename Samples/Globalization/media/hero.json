@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "globalization",
+  "screenshotId": "globalization-preferences",
+  "scenario": "user-preferences",
+  "alt": "The globalization app showing the current user's language, region, calendar, clock, and week preferences.",
+  "sourceMetadata": "Samples/Globalization/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "9b4be079360166a0a7bbe393f040aec2afa5c2296aa72a498cc5301612212080"
+  }
+}

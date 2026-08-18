@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "playready",
+  "screenshotId": "reactive-license",
+  "scenario": "reactive-license",
+  "alt": "The PlayReady app showing protected media controls and PlayReady status for a reactive license request.",
+  "sourceMetadata": "Samples/PlayReady/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "aa72bcb71de6eea32f3e354cd1fdd3093dc58f1dd11bae205bff7cd7f78e78f8"
+  }
+}

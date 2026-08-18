@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "simple-imaging",
+  "screenshotId": "image-properties",
+  "scenario": "inspect-image-properties",
+  "alt": "The Simple Imaging app showing editable photo metadata and a preview for a user-selected image.",
+  "sourceMetadata": "Samples/SimpleImaging/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "3c46622072178bb2a37ddc9412fa182ed391ad8613b266cd8cbbe9d6b5088452"
+  }
+}
