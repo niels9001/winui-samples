@@ -74,6 +74,11 @@ export interface CatalogSample {
     name: string;
     repositoryPath: string;
   };
+  source?: {
+    id: string;
+    label: string;
+    canonicalUrl: string;
+  };
   title: string;
   summary: string;
   aliases: string[];
@@ -184,6 +189,16 @@ function assertCatalog(value: unknown): asserts value is SampleCatalog {
         hasString(project, field),
         `samples[${index}].project.${field} must be a non-empty string`,
       );
+    }
+
+    if (sample.source !== undefined) {
+      assert(isRecord(sample.source), `samples[${index}].source must be an object`);
+      for (const field of ["id", "label", "canonicalUrl"]) {
+        assert(
+          hasString(sample.source, field),
+          `samples[${index}].source.${field} must be a non-empty string`,
+        );
+      }
     }
 
     const categories = sample.categories;

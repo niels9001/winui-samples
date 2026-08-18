@@ -34,8 +34,7 @@ namespace SDKTemplate.ViewModels
         /// <summary>
         /// A view model class for the ReactiveRequest Scenario.
         /// The ViewModel takes a UI MediaPlayerElement in the constructor to wire up commands and events to simplify the sample.
-        /// (Migration note: UWP used a MediaElement; in WinUI 3 the ProtectionManager lives on the MediaPlayer
-        /// hosted by the MediaPlayerElement.)
+        /// The ProtectionManager lives on the MediaPlayer hosted by the MediaPlayerElement.
         /// </summary>
         public ReactiveViewModel(MediaPlayerElement mediaElement)
         {

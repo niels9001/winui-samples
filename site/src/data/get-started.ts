@@ -9,41 +9,25 @@ export interface GetStartedResource {
 export const getStartedResources = [
   {
     id: "windows-app-sdk",
-    title: "Windows App SDK and WinUI 3",
+    title: "Choose your app stack",
     description:
-      "Start with the platform overview, release guidance, and recommended desktop app stack.",
+      "Review the Windows App SDK, WinUI 3, release channels, and supported Windows versions.",
     href: "https://learn.microsoft.com/windows/apps/windows-app-sdk/",
-    linkLabel: "Read the platform documentation",
+    linkLabel: "Windows App SDK overview",
   },
   {
     id: "windows-app-development",
-    title: "Windows app development",
+    title: "Design for Windows",
     description:
-      "Explore guidance for design, development, deployment, and publishing on Windows.",
+      "Use Windows guidance for layout, navigation, accessibility, packaging, and deployment.",
     href: "https://learn.microsoft.com/windows/apps/",
-    linkLabel: "Explore Windows app guidance",
-  },
-  {
-    id: "contributing",
-    title: "Contribute a migrated sample",
-    description:
-      "Follow the repository conventions for metadata, migration verification, and pull requests.",
-    href: "https://github.com/niels9001/winui-samples/blob/main/CONTRIBUTING.md",
-    linkLabel: "Read the contributing guide",
-  },
-  {
-    id: "github",
-    title: "Browse the repository",
-    description:
-      "Inspect every project, follow pull requests, and clone the complete sample collection.",
-    href: "https://github.com/niels9001/winui-samples",
-    linkLabel: "Open the GitHub repository",
+    linkLabel: "Windows app guidance",
   },
   {
     id: "winui-skills",
-    title: "WinUI agent and skills",
+    title: "Work with the WinUI plugin",
     description:
-      "Use the public WinUI plugin for focused implementation, design, review, packaging, and testing guidance.",
+      "Get focused implementation, design, packaging, review, and test guidance in your coding agent.",
     href: "https://github.com/niels9001/win-dev-skills/tree/main/plugins/winui",
     linkLabel: "Open the WinUI plugin",
   },

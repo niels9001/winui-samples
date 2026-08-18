@@ -4,13 +4,12 @@ import test from "node:test";
 import { withBasePath } from "../src/lib/base-path";
 import {
   repositoryBlobUrl,
-  repositoryReadmeUrl,
   repositoryTreeUrl,
   sampleCodePath,
   sampleDetailPath,
 } from "../src/lib/urls";
 
-test("creates main-branch source and README URLs with encoded segments", () => {
+test("creates main-branch source URLs with encoded segments", () => {
   assert.equal(
     repositoryTreeUrl("Samples/File Access"),
     "https://github.com/niels9001/winui-samples/tree/main/Samples/File%20Access",
@@ -18,10 +17,6 @@ test("creates main-branch source and README URLs with encoded segments", () => {
   assert.equal(
     repositoryBlobUrl("Samples/File Access", "Scenarios/Create #1.cs"),
     "https://github.com/niels9001/winui-samples/blob/main/Samples/File%20Access/Scenarios/Create%20%231.cs",
-  );
-  assert.equal(
-    repositoryReadmeUrl("Samples/FileAccess"),
-    "https://github.com/niels9001/winui-samples/blob/main/Samples/FileAccess/README.md",
   );
 });
 

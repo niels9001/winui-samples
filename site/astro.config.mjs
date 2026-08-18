@@ -7,13 +7,18 @@ const fluentIconModules = [
   "apps",
   "book-open",
   "cart",
+  "checkmark",
+  "chevron-down",
   "code",
+  "copy",
   "desktop",
   "dismiss",
   "document",
   "filter",
   "globe",
   "location",
+  "more-horizontal",
+  "open",
   "people-community",
   "search",
   "shield",
@@ -22,6 +27,7 @@ const fluentIconModules = [
   "weather-moon",
   "weather-sunny",
   "window",
+  "arrow-right",
 ];
 
 const fluentIconAliases = fluentIconModules.map((icon) => ({

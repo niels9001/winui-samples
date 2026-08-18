@@ -1,13 +1,20 @@
 ---
+import { CopyRegular } from "@fluentui/react-icons/svg/copy";
 import { codeToHtml } from "shiki";
 
 interface Props {
   code: string;
   language?: string;
   label: string;
+  copyLabel?: string;
 }
 
-const { code, language = "powershell", label } = Astro.props;
+const {
+  code,
+  language = "powershell",
+  label,
+  copyLabel = "Copy command",
+} = Astro.props;
 const html = await codeToHtml(code, {
   lang: language,
   themes: {
@@ -19,29 +26,51 @@ const html = await codeToHtml(code, {
 ---
 
 <div class="code-block">
-  <div class="code-block-label">{label}</div>
+  <div class="code-block-header">
+    <span>{label}</span>
+    <button
+      class="icon-button"
+      type="button"
+      aria-label={copyLabel}
+      data-copy-control
+      data-copy-idle-label={copyLabel}
+      data-copy-success-label="Command copied"
+      data-copy-text={code}
+    >
+      <CopyRegular aria-hidden="true" />
+    </button>
+  </div>
   <div set:html={html}></div>
 </div>
 
 <style>
   .code-block {
+    min-width: 0;
     overflow: hidden;
+    border: 1px solid var(--site-color-border-subtle);
     border-radius: var(--site-radius-medium);
+    background: var(--site-color-surface-solid);
     box-shadow: var(--site-shadow-card);
   }
 
-  .code-block-label {
-    padding: var(--site-space-2) var(--site-space-4);
-    border: 1px solid var(--site-color-border-subtle);
-    border-bottom: 0;
-    border-radius: var(--site-radius-medium) var(--site-radius-medium) 0 0;
+  .code-block-header {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--site-space-3);
+    padding: var(--site-space-2) var(--site-space-3) var(--site-space-2)
+      var(--site-space-4);
+    border-bottom: 1px solid var(--site-color-border-subtle);
     background: var(--site-color-canvas-subtle);
     color: var(--site-color-text-secondary);
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.76rem;
+    font-weight: 680;
   }
 
   .code-block :global(.astro-code) {
-    border-radius: 0 0 var(--site-radius-medium) var(--site-radius-medium);
+    overflow-x: auto;
+    border: 0;
+    border-radius: 0;
   }
 </style>

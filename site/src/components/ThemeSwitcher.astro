@@ -1,0 +1,131 @@
+---
+import { DesktopRegular } from "@fluentui/react-icons/svg/desktop";
+import { WeatherMoonRegular } from "@fluentui/react-icons/svg/weather-moon";
+import { WeatherSunnyRegular } from "@fluentui/react-icons/svg/weather-sunny";
+---
+
+<button
+  class="theme-switcher"
+  type="button"
+  data-theme-switcher
+  aria-label="Color theme: system. Activate to use light."
+>
+  <span class="theme-icon" data-theme-icon="system" aria-hidden="true">
+    <DesktopRegular />
+  </span>
+  <span class="theme-icon" data-theme-icon="light" aria-hidden="true">
+    <WeatherSunnyRegular />
+  </span>
+  <span class="theme-icon" data-theme-icon="dark" aria-hidden="true">
+    <WeatherMoonRegular />
+  </span>
+  <span class="theme-label" data-theme-label>System</span>
+</button>
+
+<script>
+  const storageKey = "winui-samples-theme";
+  const preferences = ["system", "light", "dark"] as const;
+  const systemColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  type ThemePreference = (typeof preferences)[number];
+
+  function isThemePreference(value: string | null): value is ThemePreference {
+    return preferences.includes(value as ThemePreference);
+  }
+
+  function systemTheme(): "light" | "dark" {
+    return systemColorScheme.matches ? "dark" : "light";
+  }
+
+  function applyTheme(preference: ThemePreference) {
+    document.documentElement.dataset.theme =
+      preference === "system" ? systemTheme() : preference;
+    document.documentElement.dataset.themePreference = preference;
+  }
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    "[data-theme-switcher]",
+  )) {
+    const label = button.querySelector<HTMLElement>("[data-theme-label]");
+    const updateButton = (preference: ThemePreference) => {
+      const index = preferences.indexOf(preference);
+      const next = preferences[(index + 1) % preferences.length] ?? "system";
+      if (label) {
+        label.textContent =
+          preference.charAt(0).toUpperCase() + preference.slice(1);
+      }
+      button.dataset.preference = preference;
+      button.setAttribute(
+        "aria-label",
+        `Color theme: ${preference}. Activate to use ${next}.`,
+      );
+    };
+
+    const stored = window.localStorage.getItem(storageKey);
+    const initial = isThemePreference(stored) ? stored : "system";
+    updateButton(initial);
+    systemColorScheme.addEventListener("change", () => {
+      if (button.dataset.preference === "system") applyTheme("system");
+    });
+
+    button.addEventListener("click", () => {
+      const storedPreference = button.dataset.preference ?? null;
+      const current = isThemePreference(storedPreference)
+        ? storedPreference
+        : "system";
+      const next =
+        preferences[(preferences.indexOf(current) + 1) % preferences.length] ??
+        "system";
+      window.localStorage.setItem(storageKey, next);
+      applyTheme(next);
+      updateButton(next);
+    });
+  }
+</script>
+
+<style>
+  .theme-switcher {
+    display: inline-flex;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: var(--site-space-2);
+    padding: 0.45rem 0.7rem;
+    border: 1px solid transparent;
+    border-radius: var(--site-radius-medium);
+    background: transparent;
+    color: var(--site-color-text-secondary);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 620;
+  }
+
+  .theme-switcher:hover {
+    border-color: var(--site-color-border-subtle);
+    background: var(--site-color-surface-hover);
+    color: var(--site-color-text);
+  }
+
+  .theme-icon {
+    display: none;
+    font-size: 1.1rem;
+  }
+
+  .theme-switcher:not([data-preference]),
+  .theme-switcher[data-preference="system"] [data-theme-icon="system"],
+  .theme-switcher[data-preference="light"] [data-theme-icon="light"],
+  .theme-switcher[data-preference="dark"] [data-theme-icon="dark"] {
+    display: inline-flex;
+  }
+
+  @media (max-width: 32rem) {
+    .theme-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+    }
+  }
+</style>

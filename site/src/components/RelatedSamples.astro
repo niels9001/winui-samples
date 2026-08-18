@@ -2,6 +2,7 @@
 import type { CatalogCategory } from "../lib/catalog";
 import type { RelatedSampleResult } from "../lib/related-samples";
 import { resolveHeroMedia } from "../lib/sample-media";
+import { getSampleSource } from "../lib/source-provenance";
 import {
   sampleDetailPath,
   sitePath,
@@ -21,17 +22,21 @@ const cards = await Promise.all(
   related.map(async (result) => ({
     ...result,
     hero: await resolveHeroMedia(result.sample),
+    source: getSampleSource(result.sample),
   })),
 );
 ---
 
-<section class="stack related-section" aria-labelledby="related-title">
+<section
+  class="stack related-section"
+  aria-labelledby="related-title"
+  data-scroll-reveal
+>
   <div class="stack section-heading">
-    <p class="eyebrow">Keep exploring</p>
-    <h2 id="related-title">Related samples</h2>
+    <p class="eyebrow">Continue building</p>
+    <h2 id="related-title">Related projects</h2>
     <p class="secondary-text">
-      Curated relationships appear first, followed by stable matches across
-      categories, topics, and APIs.
+      Move to a nearby API, category, or implementation pattern.
     </p>
   </div>
 
@@ -39,7 +44,12 @@ const cards = await Promise.all(
     cards.length > 0 ? (
       <div class="related-grid" role="list">
         {cards.map((result) => (
-          <article class="related-card surface" role="listitem">
+          <article
+            class="related-card surface"
+            data-pointer-surface
+            data-tilt
+            role="listitem"
+          >
             <a
               class="related-media-link"
               href={sitePath(sampleDetailPath(result.sample.id))}
@@ -54,31 +64,27 @@ const cards = await Promise.all(
               />
             </a>
             <div class="stack related-content">
-              <div class="cluster related-topics" aria-label="Why this is related">
-                {result.sharedTopics.map((topic) => (
-                  <span>{topic}</span>
-                ))}
-              </div>
+              <p class="related-meta">
+                <span>{result.source.label}</span>
+                <span>{result.sharedTopics.slice(0, 2).join(" · ")}</span>
+              </p>
               <h3>
                 <a href={sitePath(sampleDetailPath(result.sample.id))}>
                   {result.sample.title}
                 </a>
               </h3>
-              <p class="technical-name">
-                Project: {result.sample.project.name}
-              </p>
               <p>{result.sample.summary}</p>
+              <span class="related-count">
+                {result.sample.scenarios.length} scenarios
+              </span>
             </div>
           </article>
         ))}
       </div>
     ) : (
       <div class="related-empty surface">
-        <h3>No related samples are published yet</h3>
-        <p>
-          This catalog is designed for incremental rollout. Related samples
-          will appear automatically as compatible metadata lands.
-        </p>
+        <h3>No related projects are available</h3>
+        <p>Browse the complete directory to choose another outcome.</p>
       </div>
     )
   }
@@ -102,28 +108,44 @@ const cards = await Promise.all(
 
   .related-card {
     position: relative;
+    display: grid;
     overflow: hidden;
+    grid-template-columns: minmax(10rem, 0.8fr) minmax(0, 1.2fr);
     box-shadow: none;
+  }
+
+  .related-card:hover {
+    border-color: var(--site-color-brand);
+    box-shadow: var(--site-shadow-flyout);
+  }
+
+  .related-card :global(.detail-visual),
+  .related-card :global(.detail-visual img),
+  .related-card :global(.detail-visual-fallback) {
+    height: 100%;
+    aspect-ratio: auto;
   }
 
   .related-card :global(.detail-visual) {
     border: 0;
-    border-bottom: 1px solid var(--site-color-border-subtle);
+    border-right: 1px solid var(--site-color-border-subtle);
     border-radius: 0;
     box-shadow: none;
   }
 
   .related-media-link {
     display: block;
+    min-width: 0;
   }
 
   .related-content {
     --stack-space: var(--site-space-2);
+    min-width: 0;
     padding: var(--site-space-4);
   }
 
   .related-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.12rem;
   }
 
   .related-content h3 a {
@@ -137,29 +159,42 @@ const cards = await Promise.all(
     content: "";
   }
 
-  .related-content > p:last-child,
-  .related-topics,
+  .related-content > p:nth-of-type(2) {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--site-color-text-secondary);
+    font-size: 0.84rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .related-meta,
+  .related-count,
   .related-content h3,
-  .technical-name {
+  .related-content > p:nth-of-type(2) {
     position: relative;
   }
 
-  .related-content > p:last-child {
-    color: var(--site-color-text-secondary);
-    font-size: 0.9rem;
+  .related-meta,
+  .related-count {
+    color: var(--site-color-text-muted);
+    font-size: 0.68rem;
   }
 
-  .related-topics {
-    --cluster-space: var(--site-space-1);
+  .related-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--site-space-2);
   }
 
-  .related-topics span {
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-    background: var(--site-color-brand-subtle);
-    color: var(--site-color-brand);
-    font-size: 0.72rem;
-    font-weight: 650;
+  .related-meta span + span::before {
+    margin-right: var(--site-space-2);
+    content: "·";
+  }
+
+  .related-count {
+    margin-top: auto;
+    padding-top: var(--site-space-2);
   }
 
   .related-empty {
@@ -169,17 +204,31 @@ const cards = await Promise.all(
     box-shadow: none;
   }
 
-  .related-empty h3 {
-    font-size: 1.1rem;
-  }
-
   .related-empty p {
     color: var(--site-color-text-secondary);
   }
 
-  @media (max-width: 44rem) {
+  @media (max-width: 54rem) {
     .related-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 34rem) {
+    .related-card {
+      grid-template-columns: 1fr;
+    }
+
+    .related-card :global(.detail-visual),
+    .related-card :global(.detail-visual img),
+    .related-card :global(.detail-visual-fallback) {
+      height: auto;
+      aspect-ratio: 16 / 8;
+    }
+
+    .related-card :global(.detail-visual) {
+      border-right: 0;
+      border-bottom: 1px solid var(--site-color-border-subtle);
     }
   }
 </style>
