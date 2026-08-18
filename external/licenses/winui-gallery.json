@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "attributionText": null,
+      "id": "winui-gallery:root",
+      "licensePath": "LICENSE",
+      "licenseUrl": "https://github.com/microsoft/WinUI-Gallery/blob/8854551b0464b6ad824d6b9e1c79933888f14acc/LICENSE",
+      "scopePath": "",
+      "spdxId": "MIT"
+    }
+  ],
+  "lockedCommitSha": "8854551b0464b6ad824d6b9e1c79933888f14acc",
+  "providerId": "winui-gallery",
+  "repository": {
+    "name": "WinUI-Gallery",
+    "owner": "microsoft"
+  },
+  "schemaVersion": 1
+}

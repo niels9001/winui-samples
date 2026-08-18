@@ -1,5 +1,1219 @@
 {
   "$schema": "../metadata/schema/federated/v1/sync-history.schema.json",
-  "schemaVersion": 1,
-  "providers": []
+  "providers": [
+    {
+      "latestSyncId": "winui-gallery-8854551b0464-reviewed",
+      "providerId": "winui-gallery",
+      "records": [
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AccessibilityColorContrast",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AccessibilityColorContrast",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--accessibilitycolorcontrast--2020b21a6584",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AccessibilityKeyboard",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AccessibilityKeyboard",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--accessibilitykeyboard--a437b1c28f76",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AccessibilityScreenReader",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AccessibilityScreenReader",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--accessibilityscreenreader--2d916a382cd4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Acrylic",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Acrylic",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--acrylic--adec462db82e",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AnimatedIcon",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AnimatedIcon",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--animatedicon--1d60264e903d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AnimatedVisualPlayer",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AnimatedVisualPlayer",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--animatedvisualplayer--168c8a2f949e",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AnnotatedScrollBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AnnotatedScrollBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--annotatedscrollbar--129963e2f1c4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppBarButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppBarButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appbarbutton--3e3d24f7b4f5",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppBarSeparator",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppBarSeparator",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appbarseparator--e7cfe60cbd09",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppBarToggleButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppBarToggleButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appbartogglebutton--29e3bd296660",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppNotification",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppNotification",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appnotification--1b7ca166bf8f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppWindow",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppWindow",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appwindow--4d2e3f95e9ba",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AppWindowTitleBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AppWindowTitleBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--appwindowtitlebar--74db08599c0a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:AutoSuggestBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "AutoSuggestBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--autosuggestbox--7c0249efc3a5",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:BadgeNotificationManager",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "BadgeNotificationManager",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--badgenotificationmanager--861872682a4a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Binding",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Binding",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--binding--4010af6f06c1",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Border",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Border",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--border--7235970f26ed",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:BreadcrumbBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "BreadcrumbBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--breadcrumbbar--bd17173cb577",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Button",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Button",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--button--c065a8f484b9",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CalendarDatePicker",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CalendarDatePicker",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--calendardatepicker--36927751a7eb",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CalendarView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CalendarView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--calendarview--e49729f43349",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Canvas",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Canvas",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--canvas--2978481f0900",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CaptureElementPreview",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CaptureElementPreview",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--captureelementpreview--89dababf2c76",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CheckBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CheckBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--checkbox--46fde5a58036",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Clipboard",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Clipboard",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--clipboard--43b457f39f26",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Color",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Color",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--color--e03b2aead598",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ColorPicker",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ColorPicker",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--colorpicker--df76fb7ccde7",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ComboBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ComboBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--combobox--6e73b8314cfd",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CommandBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CommandBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--commandbar--30dd4dc89ae9",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CommandBarFlyout",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CommandBarFlyout",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--commandbarflyout--d6ac2ba3725a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CompactSizing",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CompactSizing",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--compactsizing--b8dc1a879e84",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ConnectedAnimation",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ConnectedAnimation",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--connectedanimation--28e9f3a67ffd",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ContentDialog",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ContentDialog",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--contentdialog--e055bcb272b2",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ContentIsland",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ContentIsland",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--contentisland--d3e3b6c1b5b8",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CreateMultipleWindows",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CreateMultipleWindows",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--createmultiplewindows--b572cb2efd4a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CustomUserControls",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CustomUserControls",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--customusercontrols--03a450704286",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:CustomXamlConditionals",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "CustomXamlConditionals",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--customxamlconditionals--169b34ca2552",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:DatePicker",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "DatePicker",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--datepicker--e5be8915bbbf",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:DropDownButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "DropDownButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--dropdownbutton--50259892e363",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:EasingFunction",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "EasingFunction",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--easingfunction--f3f9bcf4ace4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Expander",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Expander",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--expander--9d0820bcf4e0",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:FlipView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "FlipView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--flipview--f8e21da3edf4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Flyout",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Flyout",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--flyout--3a4cb29ffc2e",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Geometry",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Geometry",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--geometry--1334d68893da",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Grid",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Grid",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--grid--d61013852edc",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:GridView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "GridView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--gridview--8a7fb249fb06",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:HyperlinkButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "HyperlinkButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--hyperlinkbutton--928a3841aa69",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:IconElement",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "IconElement",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--iconelement--48cecc920bbf",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Iconography",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Iconography",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--iconography--591ddd3dcee4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Image",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Image",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--image--ff053e7bd16e",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ImplicitTransition",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ImplicitTransition",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--implicittransition--b1c4dc537d72",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:InfoBadge",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "InfoBadge",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--infobadge--7913303551b9",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:InfoBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "InfoBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--infobar--f8594099613a",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ItemsRepeater",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ItemsRepeater",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--itemsrepeater--6a508f94a5b8",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ItemsView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ItemsView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--itemsview--edf9a07e8328",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:JumpList",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "JumpList",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--jumplist--cd63e6aa364f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Line",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Line",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--line--a8dd63fcf3eb",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ListView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ListView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--listview--0336a04d34c6",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:MapControl",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "MapControl",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--mapcontrol--03114be2fa52",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:MediaPlayerElement",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "MediaPlayerElement",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--mediaplayerelement--69e39e4560fc",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:MenuBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "MenuBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--menubar--6dc404f0f7d7",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:MenuFlyout",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "MenuFlyout",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--menuflyout--2979203908e0",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:NavigationView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "NavigationView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--navigationview--3643252d5cfc",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:NumberBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "NumberBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--numberbox--4ddb0e8c4a36",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:PageTransition",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "PageTransition",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--pagetransition--34bf8a810fb1",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ParallaxView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ParallaxView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--parallaxview--ef7920db4062",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:PasswordBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "PasswordBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--passwordbox--fb133ea02e37",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:PersonPicture",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "PersonPicture",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--personpicture--47aa00d94a37",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:PipsPager",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "PipsPager",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--pipspager--189b00b7af45",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Pivot",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Pivot",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--pivot--081a998626bb",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Popup",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Popup",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--popup--d3c9916ba97b",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ProgressBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ProgressBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--progressbar--3905fe25de6f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ProgressRing",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ProgressRing",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--progressring--cd098d67ba7e",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:PullToRefresh",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "PullToRefresh",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--pulltorefresh--e1e1744d843f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RadialGradientBrush",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RadialGradientBrush",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--radialgradientbrush--ef294dac4f81",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RadioButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RadioButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--radiobutton--f518e4de8c06",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RatingControl",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RatingControl",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--ratingcontrol--3166102b83de",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RelativePanel",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RelativePanel",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--relativepanel--9e486d092c9d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RepeatButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RepeatButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--repeatbutton--3ff90a6a1121",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RichEditBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RichEditBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--richeditbox--d3898cbf7169",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:RichTextBlock",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "RichTextBlock",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--richtextblock--f2bc226074b8",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ScratchPad",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ScratchPad",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--scratchpad--8016adafe038",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ScrollView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ScrollView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--scrollview--2b0f1f2159e5",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ScrollViewer",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ScrollViewer",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--scrollviewer--040fe9ee1fdb",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SelectorBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SelectorBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--selectorbar--588407162509",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SemanticZoom",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SemanticZoom",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--semanticzoom--58594a008a92",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Shape",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Shape",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--shape--943ae0235f7d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Slider",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Slider",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--slider--84dd615ce34c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Sound",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Sound",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--sound--3173d7ece4c6",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Spacing",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Spacing",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--spacing--8bf861aeb70b",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SplitButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SplitButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--splitbutton--f1e5234cf6b3",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SplitView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SplitView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--splitview--2208e911533c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:StackPanel",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "StackPanel",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--stackpanel--48f8984912b8",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:StandardUICommand",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "StandardUICommand",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--standarduicommand--7c3d14f5c24f",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:StoragePickers",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "StoragePickers",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--storagepickers--a6d1f5fc0072",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SwipeControl",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SwipeControl",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--swipecontrol--da1366fd3ead",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SystemBackdropElement",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SystemBackdropElement",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--systembackdropelement--94b7d2d27dcd",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:SystemBackdrops",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "SystemBackdrops",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--systembackdrops--74a1570c426d",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TabView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TabView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--tabview--7cad4dc00a81",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TeachingTip",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TeachingTip",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--teachingtip--876994ff55b3",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Templates",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Templates",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--templates--08f10038bcdc",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TextBlock",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TextBlock",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--textblock--b1a8cd4b7d96",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TextBox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TextBox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--textbox--48a67293da88",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ThemeShadow",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ThemeShadow",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--themeshadow--2376158e8123",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ThemeTransition",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ThemeTransition",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--themetransition--3df5826101e0",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TimePicker",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TimePicker",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--timepicker--6f874939b993",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TitleBar",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TitleBar",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--titlebar--100e7cffebe1",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ToggleButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ToggleButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--togglebutton--afd3d55276ec",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ToggleSplitButton",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ToggleSplitButton",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--togglesplitbutton--61cfce01e6e6",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ToggleSwitch",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ToggleSwitch",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--toggleswitch--7d4d02eef015",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:ToolTip",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "ToolTip",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--tooltip--49da035880d5",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:TreeView",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "TreeView",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--treeview--7ee2707d9be4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Typography",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Typography",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--typography--d8d82e51e514",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:VariableSizedWrapGrid",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "VariableSizedWrapGrid",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--variablesizedwrapgrid--17192aad4d05",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:Viewbox",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "Viewbox",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--viewbox--c946b11a0a9c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:WebView2",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "WebView2",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--webview2--e46ee7300281",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:XamlCompInterop",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "XamlCompInterop",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--xamlcompinterop--4d7c83637c1c",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:XamlResources",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "XamlResources",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--xamlresources--284a40a107c4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:XamlStyles",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "XamlStyles",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--xamlstyles--91ae2a7393e4",
+          "status": "active"
+        },
+        {
+          "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
+          "id": "winui-gallery:XamlUICommand",
+          "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
+          "lastReviewedSync": "winui-gallery-8854551b0464-reviewed",
+          "recordKey": "XamlUICommand",
+          "removedAtSync": null,
+          "routePath": "samples/winui-gallery--xamluicommand--e7924b743079",
+          "status": "active"
+        }
+      ],
+      "syncs": [
+        {
+          "id": "winui-gallery-8854551b0464-reviewed",
+          "lockCommitSha": "8854551b0464b6ad824d6b9e1c79933888f14acc",
+          "reviewedAt": "2026-08-18T09:02:26Z"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1
 }

@@ -1,0 +1,85 @@
+--- header
+A MediaCapture preview displayed via a MediaPlayerElement.
+--- xaml
+<Grid RowDefinitions="Auto,*" ColumnDefinitions="*,100"  MinWidth="400" MinHeight="300" RowSpacing="10" ColumnSpacing="4">
+    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8">
+        <ComboBox x:Name="cameraSourceComboBox" Header="Camera source" DisplayMemberPath="DisplayName" SelectionChanged="CameraSourceComboBox_SelectionChanged" />
+        <TextBlock x:Name="frameSourceName" VerticalAlignment="Center"/>
+    </StackPanel>
+    <MediaPlayerElement x:Name="captureElement" Grid.Row="1" Grid.Column="0" Stretch="Uniform" AutoPlay="True" />
+    <TextBlock x:Name="capturedText" Visibility="Collapsed" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="Captured:" />
+    <Grid x:Name="captureContainer" Grid.Row="1" Grid.Column="1">
+        <ScrollViewer VerticalScrollMode="Enabled">
+            <StackPanel x:Name="snapshots" Spacing="2"/>
+        </ScrollViewer>
+    </Grid>
+</Grid>
+--- c#
+using Windows.Media.Capture.Frames;
+using Windows.Media.Capture;
+
+    private MediaFrameSourceGroup mediaFrameSourceGroup;
+    private MediaCapture mediaCapture;
+
+    async private void StartCaptureElement()
+    {
+        var groups = await MediaFrameSourceGroup.FindAllAsync();
+        if (groups.Count == 0)
+        {
+            frameSourceName.Text = "No camera devices found.";
+            return;
+        }
+        cameraSourceComboBox.ItemsSource = groups;
+        cameraSourceComboBox.SelectedIndex = 0;
+    }
+
+    async private void CameraSourceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (cameraSourceComboBox.SelectedItem is MediaFrameSourceGroup selectedGroup)
+        {
+            await StartCapture(selectedGroup);
+        }
+    }
+
+    async private Task StartCapture(MediaFrameSourceGroup sourceGroup)
+    {
+        if (mediaCapture != null)
+        {
+            captureElement.Source = null;
+            mediaCapture.Dispose();
+            mediaCapture = null;
+        }
+
+        mediaFrameSourceGroup = sourceGroup;
+        frameSourceName.Text = "Viewing: " + mediaFrameSourceGroup.DisplayName;
+        mediaCapture = new MediaCapture();
+        var mediaCaptureInitializationSettings = new MediaCaptureInitializationSettings()
+        {
+            SourceGroup = this.mediaFrameSourceGroup,
+            SharingMode = MediaCaptureSharingMode.SharedReadOnly,
+            StreamingCaptureMode = StreamingCaptureMode.Video,
+            MemoryPreference = MediaCaptureMemoryPreference.Cpu
+        };
+        await mediaCapture.InitializeAsync(mediaCaptureInitializationSettings);
+
+        // Set the MediaPlayerElement's Source property to the MediaSource for the mediaCapture.
+        var frameSource = mediaCapture.FrameSources[this.mediaFrameSourceGroup.SourceInfos[0].Id];
+        captureElement.Source = Windows.Media.Core.MediaSource.CreateFromMediaFrameSource(frameSource);
+$(MirrorPreview)    }
+
+    async private void CapturePhoto_Click(object sender, RoutedEventArgs e)
+    {
+        // Capture a photo to a stream
+        var imgFormat = ImageEncodingProperties.CreateJpeg();
+        var stream = new InMemoryRandomAccessStream();
+        await mediaCapture.CapturePhotoToStreamAsync(imgFormat, stream);
+        stream.Seek(0);
+
+        // Show the photo in an Image element
+        BitmapImage bmpImage = new BitmapImage();
+        await bmpImage.SetSourceAsync(stream);
+        var image = new Image() { Source = bmpImage };
+        snapshots.Children.Insert(0, image);
+
+        capturedText.Visibility = Visibility.Visible;
+    }
