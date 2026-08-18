@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "stream-socket",
+  "screenshotId": "listener-options",
+  "scenario": "start-listener",
+  "alt": "The StreamSocket app showing options to bind a TCP listener to any address, one address, or one network adapter.",
+  "sourceMetadata": "Samples/StreamSocket/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "fe739b092a4248984accd9b087cc879e46713926ac7033b1be78940bc9047a71"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "video-playback-synchronization",
+  "screenshotId": "five-camera-angles",
+  "scenario": "multi-camera",
+  "alt": "Five packaged camera-angle videos aligned around a shared crosshair and clock with unified playback controls.",
+  "sourceMetadata": "Samples/VideoPlaybackSynchronization/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "4f7c74a07cd0e35f94369ea34987a80fd999098ccc2e00595de5f654a7540750"
+  }
+}

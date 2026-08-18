@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "syndication",
+  "screenshotId": "feed-address",
+  "scenario": "retrieve-and-browse-feed",
+  "alt": "The Syndication app ready to retrieve the Windows Developer Blog feed, with empty item details below.",
+  "sourceMetadata": "Samples/Syndication/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "04a445949b9dbc4cf736c853a4d2f536f157f206b4eea9a07954a29911be6f72"
+  }
+}

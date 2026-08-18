@@ -424,6 +424,48 @@ try {
         Assert-True ($html -match 'lang="en"') 'Contact sheet should declare its language.'
     }
 
+    Test-Case 'groups only matching non-empty capture hashes as duplicates' {
+        $duplicateHash = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        $report = [ordered]@{
+            results = @(
+                [ordered]@{
+                    projectFolder = 'DistinctOne'
+                    screenshotId = 'hero-one'
+                    status = 'captured'
+                    sha256 = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+                },
+                [ordered]@{
+                    projectFolder = 'DistinctTwo'
+                    screenshotId = 'hero-two'
+                    status = 'captured'
+                    sha256 = 'cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+                },
+                [ordered]@{
+                    projectFolder = 'DuplicateOne'
+                    screenshotId = 'hero-three'
+                    status = 'captured'
+                    sha256 = $duplicateHash
+                },
+                [ordered]@{
+                    projectFolder = 'DuplicateTwo'
+                    screenshotId = 'hero-four'
+                    status = 'captured'
+                    sha256 = $duplicateHash
+                }
+            )
+            duplicateGroups = @()
+        }
+
+        & (Get-Module ScreenshotHarness) {
+            param($Report)
+            Add-DuplicateGroups -Report $Report
+        } $report
+
+        Assert-Equal 1 $report.duplicateGroups.Count 'Only equal hashes should form a duplicate group.'
+        Assert-Equal $duplicateHash $report.duplicateGroups[0].sha256 'The duplicate group should retain its non-empty hash.'
+        Assert-Equal 2 $report.duplicateGroups[0].captures.Count 'The duplicate group should contain both matching captures.'
+    }
+
     Test-Case 'detects blank images and validates dimensions' {
         Add-Type -AssemblyName System.Drawing.Common
         $solidPath = Join-Path $temporaryRoot 'solid.png'

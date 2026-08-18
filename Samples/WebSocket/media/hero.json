@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "web-socket",
+  "screenshotId": "utf8-client",
+  "scenario": "utf8-text-messages",
+  "alt": "The UTF-8 WebSocket page showing its loopback server address, secure option, connection controls, message input, and activity log.",
+  "sourceMetadata": "Samples/WebSocket/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "d356dc83e928ea6f018869e36c79c6a4cf84a3149ec3f7aedaa37ef2f3b3cf9c"
+  }
+}
