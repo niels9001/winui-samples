@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "custom-hid-device-access",
+  "screenshotId": "connect-empty-state",
+  "scenario": "connecting-to-device",
+  "alt": "The CustomHidDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty HID device list.",
+  "sourceMetadata": "Samples/CustomHidDeviceAccess/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "be81fd3a113190a9b69abd37389c6900ab1b17634aae830a386f4a9dfa536ab7"
+  }
+}

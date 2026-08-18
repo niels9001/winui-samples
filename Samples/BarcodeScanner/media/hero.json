@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "barcode-scanner",
+  "screenshotId": "received-barcode",
+  "scenario": "data-received",
+  "alt": "The barcode scanner page showing scan controls and fields for symbology, raw bytes, and a decoded barcode label.",
+  "sourceMetadata": "Samples/BarcodeScanner/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "79b30802c49e6615daf2d939eaa3134289609ad94c04c3e05aad79b6d71943d2"
+  }
+}
