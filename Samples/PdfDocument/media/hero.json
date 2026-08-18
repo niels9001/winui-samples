@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "pdf-document",
+  "screenshotId": "rendered-page",
+  "scenario": "render-page",
+  "alt": "The PDF Document app showing a rendered page beside page-number and rendering-option controls.",
+  "sourceMetadata": "Samples/PdfDocument/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "de5fe00100ec85a5e40e280bb863e36d24a9b770163f1443884a4213dc6c89a7"
+  }
+}
