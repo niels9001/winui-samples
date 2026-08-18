@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "power-grid",
+  "screenshotId": "best-time",
+  "scenario": "find-best-time",
+  "alt": "The Power Grid app showing a forecast search window and the lowest-severity time returned by Windows.",
+  "sourceMetadata": "Samples/PowerGrid/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "82273fffec57859e058765c1e473f27936d361ffff659f9ba1786513f9686955"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "speech-recognition-and-synthesis",
+  "screenshotId": "synthesis-workspace",
+  "scenario": "synthesize-text",
+  "alt": "The Speech Recognition and Synthesis app showing editable text, installed voice selection, and speech playback controls.",
+  "sourceMetadata": "Samples/SpeechRecognitionAndSynthesis/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "eab9a14df3abcb4e2c18f04b56b3f1706960ed9c7cc08142322a4f9d9930bf3b"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "json",
+  "screenshotId": "parsed-json",
+  "scenario": "parse-stringify-json",
+  "alt": "The JSON editor showing source text, parsed user fields, and editable school entries in the education array.",
+  "sourceMetadata": "Samples/Json/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "2345a2f14995cfa99ae1cba21ead265d1a5f320bffb3f0b86559410014bd504d"
+  }
+}

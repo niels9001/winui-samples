@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "wifi-direct",
+  "screenshotId": "advertiser-settings",
+  "scenario": "advertise-and-accept-a-peer",
+  "alt": "The Wi-Fi Direct advertiser page showing listen state, legacy settings, a custom information element, and advertisement controls.",
+  "sourceMetadata": "Samples/WiFiDirect/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "f00165fe4b239ca99cf16f565d34437979128ff5c326db5e674b6866f11805e9"
+  }
+}

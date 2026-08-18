@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "association-launching",
+  "screenshotId": "launch-file-options",
+  "scenario": "launch-file",
+  "alt": "The association launching app showing controls for opening a file with its default handler, a warning, or the app picker.",
+  "sourceMetadata": "Samples/AssociationLaunching/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "166ad495d64ef6734d0a1e519f3f567792d8385540bb6002b1c3fa83785be37f"
+  }
+}

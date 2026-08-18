@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "data-reader-writer",
+  "screenshotId": "structured-data-round-trip",
+  "scenario": "read-write-structured-data",
+  "alt": "The structured stream data app showing fixed input strings and the values copied through an in-memory stream.",
+  "sourceMetadata": "Samples/DataReaderWriter/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "001aaa6ca297f3254d7e0fdd308e183978d16911fc5eab614351bc1cccd71a7f"
+  }
+}

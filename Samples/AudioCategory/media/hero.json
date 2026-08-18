@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "audio-category",
+  "screenshotId": "audio-category-selection",
+  "scenario": "audio-categories",
+  "alt": "The audio category page showing a category selector, its mixer behavior description, file selection, and playback controls.",
+  "sourceMetadata": "Samples/AudioCategory/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "6394b85d64ab5d22e33a2f738205e6fdd8466f14cd3a9ba8aadc98d6f42f5a3f"
+  }
+}

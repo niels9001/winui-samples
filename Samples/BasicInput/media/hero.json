@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "basic-input",
+  "screenshotId": "input-event-feedback",
+  "scenario": "input-events",
+  "alt": "The input events page showing a large interaction surface and labels for pointer, tap, hold, and right-tap event feedback.",
+  "sourceMetadata": "Samples/BasicInput/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "02640ee92c2895aa611bc17c5fa7ef5cdc241c098fe67624e7c94728d78c8eff"
+  }
+}

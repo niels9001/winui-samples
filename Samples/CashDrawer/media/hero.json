@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "cash-drawer",
+  "screenshotId": "claim-and-open-drawer",
+  "scenario": "claim-and-open-drawer",
+  "alt": "The Cash Drawer app showing Initialize drawer and a disabled Open drawer action before a device is connected.",
+  "sourceMetadata": "Samples/CashDrawer/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "5af43b550427d7b45846b79076cc25a1f84ffc0c777b07cb92c66308be0a5409"
+  }
+}

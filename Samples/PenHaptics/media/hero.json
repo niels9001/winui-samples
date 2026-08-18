@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "pen-haptics",
+  "screenshotId": "inking-feedback",
+  "scenario": "inking-feedback",
+  "alt": "The Pen Haptics app showing waveform and intensity controls beside the interactive inking feedback canvas.",
+  "sourceMetadata": "Samples/PenHaptics/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "101dd8f095a44dce5b36f3f160635b0655152711c6c871080cc3097a61af8951"
+  }
+}
