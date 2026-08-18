@@ -2423,7 +2423,7 @@ function Add-DuplicateGroups {
 
     $captured = @($Report.results | Where-Object { $_.status -eq 'captured' -and $_.sha256 })
     $groups = @($captured |
-        Group-Object sha256 |
+        Group-Object { $_.sha256 } |
         Where-Object Count -gt 1 |
         ForEach-Object {
             [ordered]@{
