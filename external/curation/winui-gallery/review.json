@@ -1,0 +1,148 @@
+{
+  "granularity": {
+    "controlExamplesAreNested": true,
+    "groupsAreCategories": true,
+    "recordCount": 120,
+    "recordSource": "ControlInfoData.Groups[].Items[].UniqueId",
+    "sampleDefinitionsAreNested": true
+  },
+  "imagePolicy": {
+    "integratedAltBesideVisibleTitle": "",
+    "privateUseGroupGlyphUsed": false,
+    "reviewedCaseCorrections": {
+      "WinUIGallery/Assets/ControlImages/AnnotatedScrollbar.png": "WinUIGallery/Assets/ControlImages/AnnotatedScrollBar.png",
+      "WinUIGallery/Assets/ControlImages/CheckBox.png": "WinUIGallery/Assets/ControlImages/Checkbox.png"
+    },
+    "role": "icon",
+    "screenshot": false
+  },
+  "inventory": {
+    "cachedBytesIncludingLicense": 2218978,
+    "cachedFilesIncludingLicense": 680,
+    "controlExamples": 330,
+    "groups": 19,
+    "imageBytes": 499589,
+    "lockedArtifacts": 679,
+    "logicalCacheBytes": 2217816,
+    "nestedCodeUnits": 419,
+    "sampleDefinitions": 316,
+    "selectedSourceBytes": 1543461,
+    "selectedSourceFiles": 575,
+    "specialRecords": 15,
+    "uniqueCacheBytes": 2212122,
+    "uniqueImages": 102
+  },
+  "links": {
+    "appDeepLinkTemplate": "winui3gallery://item/{UniqueId}",
+    "commit": "https://github.com/microsoft/WinUI-Gallery/commit/8854551b0464b6ad824d6b9e1c79933888f14acc",
+    "repository": "https://github.com/microsoft/WinUI-Gallery",
+    "tree": "https://github.com/microsoft/WinUI-Gallery/tree/8854551b0464b6ad824d6b9e1c79933888f14acc"
+  },
+  "pin": {
+    "catalog": {
+      "blobSha": "681e0569fcf304ad4d9f925109f1f6797d66c092",
+      "path": "WinUIGallery/SampleSupport/Data/ControlInfoData.json",
+      "size": 168285
+    },
+    "commitSha": "8854551b0464b6ad824d6b9e1c79933888f14acc",
+    "commitTime": "2026-08-14T07:46:34Z",
+    "license": {
+      "blobSha": "21071075c24599ee98254f702bcfc504cdc275a6",
+      "cachedPath": "external/curation/winui-gallery/LICENSE",
+      "noticeFilePresent": false,
+      "path": "LICENSE",
+      "size": 1162,
+      "spdxId": "MIT",
+      "thirdPartyFilePresent": false
+    },
+    "ref": "refs/heads/main",
+    "treeSha": "79a62e7565aa23808f0f4d21e8743e563234cedb",
+    "upstreamSchema": {
+      "blobSha": "e033b88cb16c2395edc5667c3b5aecf84d3f4bdb",
+      "defaultsApplied": false,
+      "path": "WinUIGallery/SampleSupport/Data/ControlInfoDataSchema.json",
+      "size": 6481,
+      "underSpecifiedFields": [
+        "BaseClasses",
+        "SourcePath"
+      ]
+    }
+  },
+  "providerId": "winui-gallery",
+  "repository": {
+    "name": "WinUI-Gallery",
+    "owner": "microsoft"
+  },
+  "schemaVersion": 1,
+  "sourcePolicy": {
+    "auxiliarySources": [
+      "WinUIGallery/Samples/ContentDialog/ContentDialogContent.xaml",
+      "WinUIGallery/Samples/ContentDialog/ContentDialogContent.xaml.cs",
+      "WinUIGallery/Samples/ContentDialog/ContentDialogExample.xaml",
+      "WinUIGallery/Samples/ContentDialog/ContentDialogExample.xaml.cs",
+      "WinUIGallery/Samples/CustomUserControls/CounterControl.cs",
+      "WinUIGallery/Samples/CustomUserControls/CounterControl.xaml",
+      "WinUIGallery/Samples/CustomUserControls/TemperatureConverterControl.xaml",
+      "WinUIGallery/Samples/CustomUserControls/TemperatureConverterControl.xaml.cs",
+      "WinUIGallery/Samples/CustomUserControls/ValidatedPasswordBox.cs",
+      "WinUIGallery/Samples/CustomUserControls/ValidatedPasswordBox.xaml",
+      "WinUIGallery/Samples/CustomXamlConditionals/FeatureFlagCondition.cs"
+    ],
+    "dynamicLegacyOverrides": [
+      {
+        "examplePosition": 1,
+        "language": "XAML",
+        "path": "WinUIGallery/Samples/SampleCode/SystemBackdropElement/SystemBackdropElementAcrylic_xaml.txt",
+        "recordKey": "SystemBackdropElement"
+      },
+      {
+        "examplePosition": 1,
+        "language": "XAML",
+        "path": "WinUIGallery/Samples/SampleCode/SystemBackdropElement/SystemBackdropElementMicaAlt_xaml.txt",
+        "recordKey": "SystemBackdropElement"
+      },
+      {
+        "examplePosition": 1,
+        "language": "XAML",
+        "path": "WinUIGallery/Samples/SampleCode/SystemBackdropElement/SystemBackdropElementMica_xaml.txt",
+        "recordKey": "SystemBackdropElement"
+      },
+      {
+        "examplePosition": 3,
+        "language": "C#",
+        "path": "WinUIGallery/Samples/SampleCode/ScrollView/ScrollViewSample3_AccordionAnimation_cs.txt",
+        "recordKey": "ScrollView"
+      },
+      {
+        "examplePosition": 3,
+        "language": "C#",
+        "path": "WinUIGallery/Samples/SampleCode/ScrollView/ScrollViewSample3_DefaultAnimation_cs.txt",
+        "recordKey": "ScrollView"
+      },
+      {
+        "examplePosition": 3,
+        "language": "C#",
+        "path": "WinUIGallery/Samples/SampleCode/ScrollView/ScrollViewSample3_TeleportationAnimation_cs.txt",
+        "recordKey": "ScrollView"
+      },
+      {
+        "examplePosition": 3,
+        "language": "XAML",
+        "path": "WinUIGallery/Samples/SampleCode/Templates/TemplatesSample3_StackPanel_xaml.txt",
+        "recordKey": "Templates"
+      },
+      {
+        "examplePosition": 3,
+        "language": "XAML",
+        "path": "WinUIGallery/Samples/SampleCode/Templates/TemplatesSample3_WrapGrid_xaml.txt",
+        "recordKey": "Templates"
+      }
+    ],
+    "largeJsonSampleDataIncluded": false,
+    "pagePairTemplate": "WinUIGallery/Samples/{UniqueId}/{UniqueId}Page.xaml[.cs]",
+    "rawUrlTemplate": "https://raw.githubusercontent.com/microsoft/WinUI-Gallery/8854551b0464b6ad824d6b9e1c79933888f14acc/{path}",
+    "sourcePathCombinedWithGalleryPin": false,
+    "sourcePathRepository": "microsoft/microsoft-ui-xaml",
+    "unreferencedLegacySampleCodeIncluded": false
+  }
+}

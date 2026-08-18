@@ -1,0 +1,788 @@
+{
+  "apis": [
+    {
+      "description": null,
+      "name": "Microsoft.Windows.AppLifecycle.AppInstance",
+      "url": "https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.windows.applifecycle.appinstance"
+    }
+  ],
+  "attribution": {
+    "attributionRefs": [],
+    "licenseRefs": [
+      "windows-app-sdk-samples:repository-mit"
+    ]
+  },
+  "badges": {
+    "portalLifecycle": [
+      "new"
+    ],
+    "upstreamEditorial": []
+  },
+  "categories": {
+    "portal": {
+      "primary": "app-fundamentals",
+      "secondary": []
+    },
+    "provider": [
+      "App Lifecycle and System Services"
+    ]
+  },
+  "content": {
+    "examples": [],
+    "scenarios": [],
+    "variants": [
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cpp-cpp-console-unpackaged-cppwinrtconsoleactivation",
+        "kind": "variant",
+        "position": 0,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CppWinRtConsoleActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cpp-cpp-win32-packaged-cppwinmainactivationpkg",
+        "kind": "variant",
+        "position": 1,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-win32-packaged/CppWinMainActivationPkg.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CppWinMainActivationPkg.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cpp-cpp-win32-unpackaged-cppwinmainactivation",
+        "kind": "variant",
+        "position": 2,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-win32-unpackaged/CppWinMainActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CppWinMainActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cpp-cpp-winui-packaged-cppwinuidesktopactivation",
+        "kind": "variant",
+        "position": 3,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-winui-packaged/CppWinUiDesktopActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CppWinUiDesktopActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cs-cs-console-unpackaged-csconsoleactivation",
+        "kind": "variant",
+        "position": 4,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-console-unpackaged/CsConsoleActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CsConsoleActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cs-cs-winforms-unpackaged-cswinformsactivation",
+        "kind": "variant",
+        "position": 5,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-winforms-unpackaged/CsWinFormsActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CsWinFormsActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cs-cs-wpf-unpackaged-cswpfactivation",
+        "kind": "variant",
+        "position": 6,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-wpf-unpackaged/CsWpfActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CsWpfActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cs1-cs-wpf-packaged-cswpfactivationpkg",
+        "kind": "variant",
+        "position": 7,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivationPkg.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CsWpfActivationPkg.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-applifecycle-activation-cs2-cs-winui-packaged-cswinuidesktopactivation",
+        "kind": "variant",
+        "position": 8,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs2/cs-winui-packaged/CsWinUiDesktopActivation.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "CsWinUiDesktopActivation.sln solution"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cpp-cpp-console-unpackaged-cppwinrtconsoleactivation-cppwinrtconsoleactivation",
+        "kind": "variant",
+        "position": 9,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/CppWinRtConsoleActivation.vcxproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Console"
+          ]
+        },
+        "title": "CppWinRtConsoleActivation.vcxproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cpp-cpp-win32-packaged-cppwinmainactivation-cppwinmainactivation",
+        "kind": "variant",
+        "position": 10,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-win32-packaged/CppWinMainActivation/CppWinMainActivation.vcxproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Win32"
+          ]
+        },
+        "title": "CppWinMainActivation.vcxproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cpp-cpp-win32-unpackaged-cppwinmainactivation-cppwinmainactivation",
+        "kind": "variant",
+        "position": 11,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-win32-unpackaged/CppWinMainActivation/CppWinMainActivation.vcxproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Win32"
+          ]
+        },
+        "title": "CppWinMainActivation.vcxproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cpp-cpp-winui-packaged-cppwinuidesktopactivation-cppwinuidesktopactivation-cppwinuidesktopactivation",
+        "kind": "variant",
+        "position": 12,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-winui-packaged/CppWinUiDesktopActivation/CppWinUiDesktopActivation/CppWinUiDesktopActivation.vcxproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ]
+        },
+        "title": "CppWinUiDesktopActivation.vcxproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cs-cs-console-unpackaged-csconsoleactivation-csconsoleactivation",
+        "kind": "variant",
+        "position": 13,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-console-unpackaged/CsConsoleActivation/CsConsoleActivation.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Console"
+          ]
+        },
+        "title": "CsConsoleActivation.csproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cs-cs-winforms-unpackaged-cswinformsactivation-cswinformsactivation",
+        "kind": "variant",
+        "position": 14,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-winforms-unpackaged/CsWinFormsActivation/CsWinFormsActivation.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "Windows Forms"
+          ]
+        },
+        "title": "CsWinFormsActivation.csproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cs-cs-wpf-unpackaged-cswpfactivation-cswpfactivation",
+        "kind": "variant",
+        "position": 15,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs/cs-wpf-unpackaged/CsWpfActivation/CsWpfActivation.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "unpackaged"
+          ],
+          "projectTypes": [
+            "WPF"
+          ]
+        },
+        "title": "CsWpfActivation.csproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cs1-cs-wpf-packaged-cswpfactivation-cswpfactivation",
+        "kind": "variant",
+        "position": 16,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/CsWpfActivation.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "WPF"
+          ]
+        },
+        "title": "CsWpfActivation.csproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-applifecycle-activation-cs2-cs-winui-packaged-cswinuidesktopactivation-cswinuidesktopactivation-cswinuidesktopactivation",
+        "kind": "variant",
+        "position": 17,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs2/cs-winui-packaged/CsWinUiDesktopActivation/CsWinUiDesktopActivation/CsWinUiDesktopActivation.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ]
+        },
+        "title": "CsWinUiDesktopActivation.csproj source project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "packaging/samples-applifecycle-activation-cpp-cpp-win32-packaged-cppwinmainactivationpkg-cppwinmainactivationpkg",
+        "kind": "variant",
+        "position": 18,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-win32-packaged/CppWinMainActivationPkg/CppWinMainActivationPkg.wapproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "MSIX packaging project"
+          ]
+        },
+        "title": "CppWinMainActivationPkg.wapproj packaging project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "packaging/samples-applifecycle-activation-cpp-cpp-winui-packaged-cppwinuidesktopactivation-cppwinuidesktopactivation-package-cppwinuidesktopactivation-package",
+        "kind": "variant",
+        "position": 19,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cpp/cpp-winui-packaged/CppWinUiDesktopActivation/CppWinUiDesktopActivation (Package)/CppWinUiDesktopActivation (Package).wapproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "MSIX packaging project"
+          ]
+        },
+        "title": "CppWinUiDesktopActivation (Package).wapproj packaging project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "packaging/samples-applifecycle-activation-cs1-cs-wpf-packaged-cswpfactivationpkg-cswpfactivationpkg",
+        "kind": "variant",
+        "position": 20,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivationPkg/CsWpfActivationPkg.wapproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "MSIX packaging project"
+          ]
+        },
+        "title": "CsWpfActivationPkg.wapproj packaging project"
+      },
+      {
+        "apis": [
+          "Microsoft.Windows.AppLifecycle.AppInstance"
+        ],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "packaging/samples-applifecycle-activation-cs2-cs-winui-packaged-cswinuidesktopactivation-cswinuidesktopactivation-package-cswinuidesktopactivation-package",
+        "kind": "variant",
+        "position": 21,
+        "sourcePaths": [
+          "Samples/AppLifecycle/Activation/cs2/cs-winui-packaged/CsWinUiDesktopActivation/CsWinUiDesktopActivation (Package)/CsWinUiDesktopActivation (Package).wapproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "MSIX packaging project"
+          ]
+        },
+        "title": "CsWinUiDesktopActivation (Package).wapproj packaging project"
+      }
+    ]
+  },
+  "description": null,
+  "documentation": [
+    {
+      "kind": "learn",
+      "title": "Rich activation",
+      "url": "https://learn.microsoft.com/windows/apps/windows-app-sdk/applifecycle/applifecycle-rich-activation"
+    }
+  ],
+  "featuredSourceFiles": [
+    {
+      "blobSha": "7b080682c21bb98d2b7ba32a3b2a1cca3a2eaf83",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
+      "description": null,
+      "label": "main.cpp",
+      "language": "C++",
+      "path": "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
+      "sha256": "f088a6548bc723cda02c01b4f12ed3aa68e481b282f501aae8eeb28f1690cef5",
+      "size": 7847
+    },
+    {
+      "blobSha": "a9a9e36267b96092f0f9c321566752ea3d453bec",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/Program.cs",
+      "description": null,
+      "label": "Program.cs",
+      "language": "C#",
+      "path": "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/Program.cs",
+      "sha256": "49905276ef842367a41713a25dcdf8627da6feb469ae5e5d650db655936e43c5",
+      "size": 395
+    }
+  ],
+  "fieldProvenance": [
+    {
+      "field": "/categories/portal",
+      "kind": "derived",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/categories/provider",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/description",
+      "kind": "technical",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/requirements",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/summary",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/technologies",
+      "kind": "derived",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/title/display",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/title/upstream",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    }
+  ],
+  "id": "windows-app-sdk-samples:app-lifecycle/activation",
+  "images": [],
+  "lifecycle": {
+    "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "removedAtSync": null,
+    "status": "active"
+  },
+  "limitations": [],
+  "links": {
+    "commit": "https://github.com/microsoft/WindowsAppSDK-Samples/commit/18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+    "provider": {
+      "label": "Windows App SDK samples",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "repository": "https://github.com/microsoft/WindowsAppSDK-Samples",
+    "source": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation",
+    "tree": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013"
+  },
+  "metadata": {
+    "completeness": "partial",
+    "missingFields": [
+      "/description"
+    ],
+    "warnings": []
+  },
+  "provider": {
+    "id": "windows-app-sdk-samples",
+    "kind": "external",
+    "name": "Windows App SDK samples"
+  },
+  "recordKey": "app-lifecycle/activation",
+  "relations": [],
+  "requirements": {
+    "architectures": [],
+    "declaredPackageCapabilities": [
+      {
+        "description": null,
+        "kind": "general",
+        "name": "internetClient"
+      },
+      {
+        "description": null,
+        "kind": "restricted",
+        "name": "runFullTrust"
+      }
+    ],
+    "minimumWindowsVersion": "Windows 10, version 1809 (build 17763) or later",
+    "prerequisites": {
+      "accountsAndServices": [],
+      "hardware": [],
+      "notes": [],
+      "software": [
+        "Visual Studio 2022 or Visual Studio 2019 version 16.9 or later with Windows application development, .NET desktop development, and Desktop development with C++ workloads",
+        "Windows SDK version 2004 (build 19041) or later"
+      ]
+    }
+  },
+  "route": {
+    "path": "samples/windows-app-sdk-samples--app-lifecycle-activation--cb5546636ba5",
+    "previousPaths": [],
+    "slug": "windows-app-sdk-samples--app-lifecycle-activation--cb5546636ba5"
+  },
+  "schemaVersion": 1,
+  "source": {
+    "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation",
+    "commitTime": "2026-08-11T10:34:52Z",
+    "lockedCommitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+    "path": "Samples/AppLifecycle/Activation",
+    "ref": "main",
+    "repository": {
+      "name": "WindowsAppSDK-Samples",
+      "owner": "microsoft",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+  },
+  "summary": "These samples demonstrate support for rich activation kinds.",
+  "tags": [
+    "activation",
+    "app-lifecycle"
+  ],
+  "technicalAliases": [
+    "AppLifecycle Activation",
+    "CppWinMainActivationPkg",
+    "CppWinUiDesktopActivation",
+    "CsWinUiDesktopActivation",
+    "CsWpfActivationPkg",
+    "GetActivatedEventArgs"
+  ],
+  "technologies": {
+    "languages": [
+      "C#",
+      "C++"
+    ],
+    "packaging": [
+      "MSIX",
+      "unpackaged"
+    ],
+    "projectTypes": [
+      "Console",
+      "WPF",
+      "Win32",
+      "WinUI 3",
+      "Windows Forms"
+    ]
+  },
+  "title": {
+    "display": "Activation",
+    "upstream": "Activation"
+  }
+}

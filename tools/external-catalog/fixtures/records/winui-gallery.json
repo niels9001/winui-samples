@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "id": "winui-gallery:ButtonPage",
+  "provider": {
+    "id": "winui-gallery",
+    "name": "WinUI Gallery",
+    "kind": "external"
+  },
+  "recordKey": "ButtonPage",
+  "route": {
+    "slug": "winui-gallery--buttonpage--17dea603fc7a",
+    "path": "samples/winui-gallery--buttonpage--17dea603fc7a",
+    "previousPaths": []
+  },
+  "source": {
+    "repository": {
+      "owner": "microsoft",
+      "name": "WinUI-Gallery",
+      "url": "https://github.com/microsoft/WinUI-Gallery"
+    },
+    "ref": "main",
+    "lockedCommitSha": "cccccccccccccccccccccccccccccccccccccccc",
+    "treeSha": "dddddddddddddddddddddddddddddddddddddddd",
+    "commitTime": "2026-08-02T12:00:00Z",
+    "path": "WinUIGallery/ControlInfoData.json",
+    "canonicalUrl": "https://github.com/microsoft/WinUI-Gallery/blob/cccccccccccccccccccccccccccccccccccccccc/WinUIGallery/ControlInfoData.json"
+  },
+  "title": {
+    "display": "Create actions with buttons",
+    "upstream": "Button"
+  },
+  "summary": "Use button controls for common actions and command surfaces.",
+  "description": null,
+  "technicalAliases": [
+    "Button",
+    "ButtonPage"
+  ],
+  "categories": {
+    "provider": [
+      "Basic input"
+    ],
+    "portal": {
+      "primary": "ui-and-input",
+      "secondary": []
+    }
+  },
+  "tags": [
+    "button",
+    "commanding"
+  ],
+  "technologies": {
+    "languages": [
+      "C#",
+      "XAML"
+    ],
+    "projectTypes": [
+      "WinUI 3"
+    ],
+    "packaging": [
+      "MSIX"
+    ]
+  },
+  "apis": [
+    {
+      "name": "Microsoft.UI.Xaml.Controls.Button",
+      "description": null,
+      "url": "https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button"
+    }
+  ],
+  "documentation": [
+    {
+      "title": "Button control",
+      "url": "https://learn.microsoft.com/windows/apps/design/controls/buttons",
+      "kind": "learn"
+    }
+  ],
+  "requirements": {
+    "minimumWindowsVersion": null,
+    "architectures": [],
+    "declaredPackageCapabilities": [],
+    "prerequisites": {
+      "hardware": [],
+      "accountsAndServices": [],
+      "software": [
+        "Windows App SDK"
+      ],
+      "notes": []
+    }
+  },
+  "links": {
+    "provider": {
+      "label": "WinUI Gallery",
+      "url": "https://github.com/microsoft/WinUI-Gallery"
+    },
+    "repository": "https://github.com/microsoft/WinUI-Gallery",
+    "source": "https://github.com/microsoft/WinUI-Gallery/blob/cccccccccccccccccccccccccccccccccccccccc/WinUIGallery/ControlInfoData.json",
+    "commit": "https://github.com/microsoft/WinUI-Gallery/commit/cccccccccccccccccccccccccccccccccccccccc",
+    "tree": "https://github.com/microsoft/WinUI-Gallery/tree/cccccccccccccccccccccccccccccccccccccccc"
+  },
+  "content": {
+    "variants": [],
+    "scenarios": [],
+    "examples": [
+      {
+        "id": "basic-button",
+        "kind": "example",
+        "position": 0,
+        "title": "A basic button",
+        "summary": null,
+        "description": null,
+        "sourcePaths": [
+          "WinUIGallery/ControlPages/ButtonPage.xaml"
+        ],
+        "technologies": {
+          "languages": [
+            "XAML"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ],
+          "packaging": [
+            "MSIX"
+          ]
+        },
+        "apis": [
+          "Microsoft.UI.Xaml.Controls.Button"
+        ],
+        "documentation": [],
+        "children": [
+          {
+            "id": "basic-button-definition",
+            "kind": "example",
+            "position": 0,
+            "title": "Basic button markup",
+            "summary": null,
+            "description": null,
+            "sourcePaths": [
+              "WinUIGallery/ControlPages/ButtonPage.xaml"
+            ],
+            "technologies": {
+              "languages": [
+                "XAML"
+              ],
+              "projectTypes": [
+                "WinUI 3"
+              ],
+              "packaging": [
+                "MSIX"
+              ]
+            },
+            "apis": [],
+            "documentation": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "featuredSourceFiles": [
+    {
+      "path": "WinUIGallery/ControlPages/ButtonPage.xaml",
+      "label": "Button examples",
+      "description": "Compact fixture path for the nested examples on this page.",
+      "language": "XAML",
+      "canonicalUrl": "https://github.com/microsoft/WinUI-Gallery/blob/cccccccccccccccccccccccccccccccccccccccc/WinUIGallery/ControlPages/ButtonPage.xaml",
+      "blobSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "sha256": null,
+      "size": null
+    }
+  ],
+  "images": [
+    {
+      "id": "button-preview",
+      "path": "WinUIGallery/Assets/ControlImages/Button.png",
+      "url": "https://github.com/microsoft/WinUI-Gallery/blob/cccccccccccccccccccccccccccccccccccccccc/WinUIGallery/Assets/ControlImages/Button.png",
+      "mediaType": "image/png",
+      "width": 800,
+      "height": 450,
+      "alt": "A button control shown in a compact example surface.",
+      "provenance": {
+        "kind": "authored",
+        "sourcePath": "WinUIGallery/ControlInfoData.json"
+      },
+      "blobSha": "0dd1608e45a9c4d35bfc1e6f266a796364aa8754",
+      "sha256": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6",
+      "size": 8
+    }
+  ],
+  "relations": [
+    {
+      "type": "same-concept",
+      "targetId": "local:basic-input",
+      "providerId": "local"
+    }
+  ],
+  "metadata": {
+    "completeness": "partial",
+    "missingFields": [
+      "/requirements/minimumWindowsVersion"
+    ],
+    "warnings": [
+      {
+        "code": "requirements-not-declared",
+        "message": "The compact fixture does not declare a minimum Windows version.",
+        "field": "/requirements/minimumWindowsVersion",
+        "sourcePath": "WinUIGallery/ControlInfoData.json"
+      }
+    ]
+  },
+  "attribution": {
+    "licenseRefs": [],
+    "attributionRefs": []
+  },
+  "badges": {
+    "upstreamEditorial": [
+      {
+        "id": "preview",
+        "label": "Preview",
+        "sourcePath": "WinUIGallery/ControlInfoData.json"
+      }
+    ],
+    "portalLifecycle": [
+      "new"
+    ]
+  },
+  "limitations": [],
+  "lifecycle": {
+    "status": "active",
+    "firstSeenSync": "gallery-fixture-sync-1",
+    "lastReviewedSync": "gallery-fixture-sync-1",
+    "lastChangedSync": "gallery-fixture-sync-1",
+    "removedAtSync": null
+  },
+  "fieldProvenance": [
+    {
+      "field": "/title/display",
+      "kind": "curated",
+      "sourcePath": "external/curation/winui-gallery/ButtonPage.json"
+    },
+    {
+      "field": "/title/upstream",
+      "kind": "authored",
+      "sourcePath": "WinUIGallery/ControlInfoData.json"
+    },
+    {
+      "field": "/summary",
+      "kind": "curated",
+      "sourcePath": "external/curation/winui-gallery/ButtonPage.json"
+    },
+    {
+      "field": "/description",
+      "kind": "technical",
+      "sourcePath": "WinUIGallery/ControlInfoData.json"
+    }
+  ]
+}

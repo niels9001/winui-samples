@@ -38,6 +38,13 @@ recency, treats package capabilities as functional requirements, or mirrors an
 entire project tree. Unsupported or oversized featured files keep a GitHub link
 and an explicit preview fallback.
 
+The additive federated contract keeps provider/source labels quiet and preserves
+pinned provenance for audit without making migration or PR details search content.
+When a later UI layer consumes it, one provider source unit remains one result;
+implementation variants stay nested. Upstream editorial badges remain distinct
+from portal recency, which comes only from reviewed sync history rather than
+upstream commit time.
+
 ## Landing art direction
 
 The landing page is an unmistakably Windows composition: Segoe Variable,

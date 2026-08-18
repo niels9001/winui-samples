@@ -1,0 +1,350 @@
+{
+  "apis": [],
+  "attribution": {
+    "attributionRefs": [],
+    "licenseRefs": [
+      "windows-app-sdk-samples:repository-mit"
+    ]
+  },
+  "badges": {
+    "portalLifecycle": [
+      "new"
+    ],
+    "upstreamEditorial": []
+  },
+  "categories": {
+    "portal": {
+      "primary": "graphics-and-ui",
+      "secondary": []
+    },
+    "provider": []
+  },
+  "content": {
+    "examples": [],
+    "scenarios": [],
+    "variants": [
+      {
+        "apis": [],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-photoeditor-cpp-winui-photoeditor",
+        "kind": "variant",
+        "position": 0,
+        "sourcePaths": [
+          "Samples/PhotoEditor/cpp-winui/PhotoEditor.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "PhotoEditor.sln solution"
+      },
+      {
+        "apis": [],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "solution/samples-photoeditor-cs-winui-photoeditor",
+        "kind": "variant",
+        "position": 1,
+        "sourcePaths": [
+          "Samples/PhotoEditor/cs-winui/PhotoEditor.sln"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "Visual Studio solution"
+          ]
+        },
+        "title": "PhotoEditor.sln solution"
+      },
+      {
+        "apis": [],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-photoeditor-cpp-winui-photoeditor-photoeditor",
+        "kind": "variant",
+        "position": 2,
+        "sourcePaths": [
+          "Samples/PhotoEditor/cpp-winui/PhotoEditor/PhotoEditor.vcxproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C++"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ]
+        },
+        "title": "PhotoEditor.vcxproj source project"
+      },
+      {
+        "apis": [],
+        "children": [],
+        "description": null,
+        "documentation": [],
+        "id": "project/samples-photoeditor-cs-winui-photoeditor",
+        "kind": "variant",
+        "position": 3,
+        "sourcePaths": [
+          "Samples/PhotoEditor/cs-winui/PhotoEditor.csproj"
+        ],
+        "summary": null,
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "packaging": [
+            "MSIX"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ]
+        },
+        "title": "PhotoEditor.csproj source project"
+      }
+    ]
+  },
+  "description": null,
+  "documentation": [],
+  "featuredSourceFiles": [
+    {
+      "blobSha": "15bcde06b337686c254dfa19f45ac805c1ed8c50",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cs-winui/MainPage.xaml",
+      "description": null,
+      "label": "MainPage.xaml",
+      "language": null,
+      "path": "Samples/PhotoEditor/cs-winui/MainPage.xaml",
+      "sha256": "d4224d8c172dfc9e7834dd8d32a58fbc95ff59364a8015fef5012a63c552e225",
+      "size": 10019
+    },
+    {
+      "blobSha": "34ff2649f6b20ef2467f77971f35f75d3b4c8804",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml.cpp",
+      "description": null,
+      "label": "MainPage.xaml.cpp",
+      "language": "C++",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml.cpp",
+      "sha256": "56a1606c8589e1e410bff2cdd94baa3b3b75f8cd0fddede61bcadf82ed7c4f6c",
+      "size": 8749
+    },
+    {
+      "blobSha": "51b03e6ff0e7375546e35f1c60b5b445229be574",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cs-winui/DetailPage.xaml.cs",
+      "description": null,
+      "label": "DetailPage.xaml.cs",
+      "language": "C#",
+      "path": "Samples/PhotoEditor/cs-winui/DetailPage.xaml.cs",
+      "sha256": "7968eb02e75d0b8d4328513df4cdaa4c307ba097094ff185580ffe1d61c144ba",
+      "size": 11755
+    },
+    {
+      "blobSha": "628c14284cd83ecbea391780e433340c7f6ab25c",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cs-winui/MainPage.xaml.cs",
+      "description": null,
+      "label": "MainPage.xaml.cs",
+      "language": "C#",
+      "path": "Samples/PhotoEditor/cs-winui/MainPage.xaml.cs",
+      "sha256": "6e4bf2c43294a109ccc9c9e2ba2a014ffad02600db5cb22851681353132a99de",
+      "size": 8797
+    },
+    {
+      "blobSha": "e234d7c2a18ae4461c2ff07d6228d493630f2987",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml",
+      "description": null,
+      "label": "MainPage.xaml",
+      "language": null,
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml",
+      "sha256": "3cea4c377d8487d3c70f700608660b2b822affba5b3a1d0f2f969e41e03951e7",
+      "size": 6168
+    },
+    {
+      "blobSha": "ee9e5d7bbc59e1551c2738c10513b786007a0d54",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor/cpp-winui/PhotoEditor/DetailPage.xaml.cpp",
+      "description": null,
+      "label": "DetailPage.xaml.cpp",
+      "language": "C++",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/DetailPage.xaml.cpp",
+      "sha256": "a474534df01efdd99012a8226cbe7f73f506c9af0386c248b7b915b0ff4b5d84",
+      "size": 23183
+    }
+  ],
+  "fieldProvenance": [
+    {
+      "field": "/categories/portal",
+      "kind": "derived",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/categories/provider",
+      "kind": "technical",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/description",
+      "kind": "technical",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/requirements",
+      "kind": "authored",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/summary",
+      "kind": "authored",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/technologies",
+      "kind": "derived",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/title/display",
+      "kind": "authored",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    },
+    {
+      "field": "/title/upstream",
+      "kind": "authored",
+      "sourcePath": "Samples/PhotoEditor/README.md"
+    }
+  ],
+  "id": "windows-app-sdk-samples:photo-editor",
+  "images": [],
+  "lifecycle": {
+    "firstSeenSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "lastChangedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "lastReviewedSync": "windows-app-sdk-samples-2026-08-18-18431c6d",
+    "removedAtSync": null,
+    "status": "active"
+  },
+  "limitations": [],
+  "links": {
+    "commit": "https://github.com/microsoft/WindowsAppSDK-Samples/commit/18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+    "provider": {
+      "label": "Windows App SDK samples",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "repository": "https://github.com/microsoft/WindowsAppSDK-Samples",
+    "source": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor",
+    "tree": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013"
+  },
+  "metadata": {
+    "completeness": "partial",
+    "missingFields": [
+      "/description"
+    ],
+    "warnings": [
+      {
+        "code": "media-omitted-size",
+        "field": "/images",
+        "message": "Both README-linked PhotoEditor images exceed the shared media cap and are preserved only as pinned curation metadata.",
+        "sourcePath": "Samples/PhotoEditor/README.md"
+      },
+      {
+        "code": "repaired-source-links",
+        "field": "/featuredSourceFiles",
+        "message": "Sixteen legacy README link occurrences uniquely map to thirteen reviewed exact-case source files.",
+        "sourcePath": "Samples/PhotoEditor/README.md"
+      },
+      {
+        "code": "root-index-omission",
+        "field": null,
+        "message": "The sample is present in the pinned tree but omitted from the root sample list.",
+        "sourcePath": "README.md"
+      }
+    ]
+  },
+  "provider": {
+    "id": "windows-app-sdk-samples",
+    "kind": "external",
+    "name": "Windows App SDK samples"
+  },
+  "recordKey": "photo-editor",
+  "relations": [],
+  "requirements": {
+    "architectures": [],
+    "declaredPackageCapabilities": [
+      {
+        "description": null,
+        "kind": "restricted",
+        "name": "runFullTrust"
+      }
+    ],
+    "minimumWindowsVersion": "Windows 10, version 1809 (build 17763) or later",
+    "prerequisites": {
+      "accountsAndServices": [],
+      "hardware": [],
+      "notes": [
+        "The Pictures folder needs image files for the sample to display a collection."
+      ],
+      "software": [
+        "Visual Studio 2022 or Visual Studio 2019 version 16.9 or later with Windows application development, .NET desktop development, and Desktop development with C++ workloads",
+        "Windows SDK version 2004 (build 19041) or later"
+      ]
+    }
+  },
+  "route": {
+    "path": "samples/windows-app-sdk-samples--photo-editor--9974079a54c2",
+    "previousPaths": [],
+    "slug": "windows-app-sdk-samples--photo-editor--9974079a54c2"
+  },
+  "schemaVersion": 1,
+  "source": {
+    "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/tree/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/PhotoEditor",
+    "commitTime": "2026-08-11T10:34:52Z",
+    "lockedCommitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+    "path": "Samples/PhotoEditor",
+    "ref": "main",
+    "repository": {
+      "name": "WindowsAppSDK-Samples",
+      "owner": "microsoft",
+      "url": "https://github.com/microsoft/WindowsAppSDK-Samples"
+    },
+    "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+  },
+  "summary": "Shows how to retrieve photos from the Pictures library and edit a selected image with photo effects.",
+  "tags": [
+    "data-binding",
+    "photo-editing",
+    "win2d",
+    "xaml"
+  ],
+  "technicalAliases": [
+    "PhotoEditor"
+  ],
+  "technologies": {
+    "languages": [
+      "C#",
+      "C++"
+    ],
+    "packaging": [
+      "MSIX"
+    ],
+    "projectTypes": [
+      "WinUI 3"
+    ]
+  },
+  "title": {
+    "display": "Photo Editor",
+    "upstream": "Photo Editor"
+  }
+}

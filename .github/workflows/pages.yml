@@ -6,9 +6,11 @@ on:
       - ".github/workflows/pages.yml"
       - "Samples/**"
       - "metadata/**"
+      - "external/**"
       - "site/**"
       - "tools/activity/**"
       - "tools/catalog/**"
+      - "tools/external-catalog/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -19,9 +21,11 @@ on:
       - ".github/workflows/pages.yml"
       - "Samples/**"
       - "metadata/**"
+      - "external/**"
       - "site/**"
       - "tools/activity/**"
       - "tools/catalog/**"
+      - "tools/external-catalog/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "pnpm-workspace.yaml"
@@ -61,6 +65,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Test catalog tooling
         run: pnpm catalog:test
+      - name: Verify federated catalog contracts offline
+        run: pnpm external:verify
       - name: Validate complete metadata
         run: pnpm catalog:validate:complete
       - name: Generate site catalog

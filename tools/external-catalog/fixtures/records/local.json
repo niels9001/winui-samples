@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "id": "local:file-access",
+  "provider": {
+    "id": "local",
+    "name": "WinUI samples",
+    "kind": "local"
+  },
+  "recordKey": "file-access",
+  "route": {
+    "slug": "local--file-access--bb7e03b7f661",
+    "path": "samples/local--file-access--bb7e03b7f661",
+    "previousPaths": [
+      {
+        "path": "samples/file-access",
+        "declaredAtSync": "local-v1-adoption",
+        "reason": "Explicit legacy route retained for a future portal contract migration."
+      }
+    ]
+  },
+  "source": {
+    "repository": {
+      "owner": "niels9001",
+      "name": "winui-samples",
+      "url": "https://github.com/niels9001/winui-samples"
+    },
+    "ref": "main",
+    "lockedCommitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "treeSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "commitTime": "2026-08-01T12:00:00Z",
+    "path": "Samples/FileAccess/sample.yml",
+    "canonicalUrl": "https://github.com/niels9001/winui-samples/blob/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Samples/FileAccess/sample.yml"
+  },
+  "title": {
+    "display": "Read and write files in a Windows app",
+    "upstream": null
+  },
+  "summary": "A compact local fixture derived from the canonical sample.yml record.",
+  "description": null,
+  "technicalAliases": [
+    "FileAccess",
+    "Windows.Storage"
+  ],
+  "categories": {
+    "provider": [],
+    "portal": {
+      "primary": "files-and-data",
+      "secondary": [
+        "app-fundamentals"
+      ]
+    }
+  },
+  "tags": [
+    "files",
+    "storage"
+  ],
+  "technologies": {
+    "languages": [
+      "C#",
+      "XAML"
+    ],
+    "projectTypes": [
+      "WinUI 3"
+    ],
+    "packaging": [
+      "MSIX"
+    ]
+  },
+  "apis": [
+    {
+      "name": "Windows.Storage.StorageFile",
+      "description": "Represents a file used by the local fixture.",
+      "url": "https://learn.microsoft.com/uwp/api/windows.storage.storagefile"
+    }
+  ],
+  "documentation": [
+    {
+      "title": "Read and write files",
+      "url": "https://learn.microsoft.com/windows/uwp/files/quickstart-reading-and-writing-files",
+      "kind": "learn"
+    }
+  ],
+  "requirements": {
+    "minimumWindowsVersion": "10.0.17763.0",
+    "architectures": [
+      "arm64",
+      "x64",
+      "x86"
+    ],
+    "declaredPackageCapabilities": [
+      {
+        "name": "picturesLibrary",
+        "kind": "general",
+        "description": "Declared by the package manifest for Pictures library access."
+      }
+    ],
+    "prerequisites": {
+      "hardware": [],
+      "accountsAndServices": [],
+      "software": [],
+      "notes": []
+    }
+  },
+  "links": {
+    "provider": {
+      "label": "WinUI samples",
+      "url": "https://github.com/niels9001/winui-samples"
+    },
+    "repository": "https://github.com/niels9001/winui-samples",
+    "source": "https://github.com/niels9001/winui-samples/blob/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Samples/FileAccess/sample.yml",
+    "commit": "https://github.com/niels9001/winui-samples/commit/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "tree": "https://github.com/niels9001/winui-samples/tree/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "content": {
+    "variants": [],
+    "scenarios": [
+      {
+        "id": "read-write-text",
+        "kind": "scenario",
+        "position": 0,
+        "title": "Write and read text",
+        "summary": null,
+        "description": null,
+        "sourcePaths": [
+          "Samples/FileAccess/Scenarios/Scenario3_Text.xaml.cs"
+        ],
+        "technologies": {
+          "languages": [
+            "C#"
+          ],
+          "projectTypes": [
+            "WinUI 3"
+          ],
+          "packaging": [
+            "MSIX"
+          ]
+        },
+        "apis": [
+          "Windows.Storage.FileIO"
+        ],
+        "documentation": [],
+        "children": []
+      }
+    ],
+    "examples": []
+  },
+  "featuredSourceFiles": [
+    {
+      "path": "Samples/FileAccess/Scenarios/Scenario3_Text.xaml.cs",
+      "label": "Text file operations",
+      "description": null,
+      "language": "C#",
+      "canonicalUrl": "https://github.com/niels9001/winui-samples/blob/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Samples/FileAccess/Scenarios/Scenario3_Text.xaml.cs",
+      "blobSha": "cccccccccccccccccccccccccccccccccccccccc",
+      "sha256": null,
+      "size": null
+    }
+  ],
+  "images": [],
+  "relations": [],
+  "metadata": {
+    "completeness": "complete",
+    "missingFields": [],
+    "warnings": []
+  },
+  "attribution": {
+    "licenseRefs": [],
+    "attributionRefs": []
+  },
+  "badges": {
+    "upstreamEditorial": [],
+    "portalLifecycle": [
+      "new"
+    ]
+  },
+  "limitations": [],
+  "lifecycle": {
+    "status": "active",
+    "firstSeenSync": "local-v1-adoption",
+    "lastReviewedSync": "local-v1-adoption",
+    "lastChangedSync": "local-v1-adoption",
+    "removedAtSync": null
+  },
+  "fieldProvenance": [
+    {
+      "field": "/title/display",
+      "kind": "authored",
+      "sourcePath": "Samples/FileAccess/sample.yml"
+    },
+    {
+      "field": "/title/upstream",
+      "kind": "technical",
+      "sourcePath": "Samples/FileAccess/sample.yml"
+    },
+    {
+      "field": "/summary",
+      "kind": "authored",
+      "sourcePath": "Samples/FileAccess/sample.yml"
+    },
+    {
+      "field": "/description",
+      "kind": "authored",
+      "sourcePath": "Samples/FileAccess/sample.yml"
+    }
+  ]
+}

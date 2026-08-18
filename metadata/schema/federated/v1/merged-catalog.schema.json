@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://niels9001.github.io/winui-samples/schema/federated/v1/merged-catalog.schema.json",
+  "title": "Deterministic merged external catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "catalogVersion",
+    "generatedBy",
+    "generatedFrom",
+    "providers",
+    "records",
+    "redirects",
+    "tombstones",
+    "licenses",
+    "contentHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "catalogVersion": {
+      "const": 1
+    },
+    "generatedBy": {
+      "const": "tools/external-catalog"
+    },
+    "generatedFrom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registrySha256",
+        "lockFileSha256",
+        "cacheManifestSha256",
+        "historySha256",
+        "providerLocks"
+      ],
+      "properties": {
+        "registrySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "lockFileSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "cacheManifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "historySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "providerLocks": {
+          "type": "array",
+          "items": {
+            "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/source-lock.schema.json#/$defs/providerLock"
+          }
+        }
+      }
+    },
+    "providers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "repository",
+          "recordCount",
+          "reviewedSync"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 100
+          },
+          "kind": {
+            "const": "external"
+          },
+          "repository": {
+            "type": "string",
+            "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          },
+          "recordCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "reviewedSync": {
+            "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/provider-output.schema.json#/$defs/reviewedSync"
+          }
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/normalized-record.schema.json"
+      }
+    },
+    "redirects": {
+      "type": "array",
+      "items": {
+        "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/provider-output.schema.json#/$defs/redirect"
+      }
+    },
+    "tombstones": {
+      "type": "array",
+      "items": {
+        "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/provider-output.schema.json#/$defs/tombstone"
+      }
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "$ref": "https://niels9001.github.io/winui-samples/schema/federated/v1/license-manifest.schema.json"
+      }
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

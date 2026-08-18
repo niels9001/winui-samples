@@ -43,6 +43,11 @@ deterministic JSON output is generated into `src/generated/` and ignored by Git.
 `src/lib/catalog.ts` defines and checks the site-facing contract; pages import
 the checked singleton from `src/lib/catalog-data.ts`.
 
+`site:prepare` also validates the additive external-provider lock/cache/history
+contract, but the site does not import its generated artifact yet. Consequently,
+no external provider changes current routes or Browse payload, and no normal site
+command calls GitHub.
+
 Site components continue to support partial and empty generated catalogs for
 local previews and future inventory transitions. Production verification and
 deployment now require complete metadata because all 71 catalog records have

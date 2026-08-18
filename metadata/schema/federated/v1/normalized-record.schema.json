@@ -1,0 +1,1081 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://niels9001.github.io/winui-samples/schema/federated/v1/normalized-record.schema.json",
+  "title": "Normalized federated sample record",
+  "description": "Developer-facing metadata plus pinned source and reviewed-sync audit fields. Migration notes are intentionally not part of this contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "provider",
+    "recordKey",
+    "route",
+    "source",
+    "title",
+    "summary",
+    "description",
+    "technicalAliases",
+    "categories",
+    "tags",
+    "technologies",
+    "apis",
+    "documentation",
+    "requirements",
+    "links",
+    "content",
+    "featuredSourceFiles",
+    "images",
+    "relations",
+    "metadata",
+    "attribution",
+    "badges",
+    "limitations",
+    "lifecycle",
+    "fieldProvenance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*:[A-Za-z0-9][A-Za-z0-9._~/-]*$",
+      "maxLength": 320
+    },
+    "provider": {
+      "$ref": "#/$defs/provider"
+    },
+    "recordKey": {
+      "$ref": "#/$defs/recordKey"
+    },
+    "route": {
+      "$ref": "#/$defs/route"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display",
+        "upstream"
+      ],
+      "properties": {
+        "display": {
+          "$ref": "#/$defs/plainText"
+        },
+        "upstream": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/plainText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "summary": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/plainText"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/longPlainText"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "technicalAliases": {
+      "$ref": "#/$defs/stringSet"
+    },
+    "categories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "portal"
+      ],
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "portal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "secondary"
+          ],
+          "properties": {
+            "primary": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/slug"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "secondary": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/slug"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": {
+      "$ref": "#/$defs/stringSet"
+    },
+    "technologies": {
+      "$ref": "#/$defs/technologies"
+    },
+    "apis": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/api"
+      }
+    },
+    "documentation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/document"
+      }
+    },
+    "requirements": {
+      "$ref": "#/$defs/requirements"
+    },
+    "links": {
+      "$ref": "#/$defs/links"
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "variants",
+        "scenarios",
+        "examples"
+      ],
+      "properties": {
+        "variants": {
+          "$ref": "#/$defs/nestedUnits"
+        },
+        "scenarios": {
+          "$ref": "#/$defs/nestedUnits"
+        },
+        "examples": {
+          "$ref": "#/$defs/nestedUnits"
+        }
+      }
+    },
+    "featuredSourceFiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/featuredSourceFile"
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/image"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "attribution": {
+      "$ref": "#/$defs/attribution"
+    },
+    "badges": {
+      "$ref": "#/$defs/badges"
+    },
+    "limitations": {
+      "$ref": "#/$defs/stringSet"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/lifecycle"
+    },
+    "fieldProvenance": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/provenance"
+      }
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "providerId": {
+      "$ref": "#/$defs/slug"
+    },
+    "recordKey": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._~/-]*$",
+      "maxLength": 240
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dateTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,3})?Z$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$",
+      "maxLength": 1000
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.?(/|$))(?!.*%[0-9a-fA-F]{2})[^\\u0000]+$"
+    },
+    "plainText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "longPlainText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
+    },
+    "stringSet": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/providerId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "kind": {
+          "enum": [
+            "local",
+            "external"
+          ]
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slug",
+        "path",
+        "previousPaths"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*--[a-z0-9]+(?:-[a-z0-9]+)*--[0-9a-f]{12}$",
+          "maxLength": 180
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^samples/[a-z0-9-]+--[a-z0-9-]+--[0-9a-f]{12}$",
+          "maxLength": 200
+        },
+        "previousPaths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "declaredAtSync",
+              "reason"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^samples/(?!\\.\\.?$)(?!\\.\\.?/)(?!.*(?:/\\.\\.?$|/\\.\\.?/))(?!.*%[0-9a-fA-F]{2})[A-Za-z0-9._~/-]+$",
+                "maxLength": 300
+              },
+              "declaredAtSync": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "reason": {
+                "$ref": "#/$defs/plainText"
+              }
+            }
+          }
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "name",
+        "url"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$",
+          "maxLength": 100
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$",
+          "maxLength": 100
+        },
+        "url": {
+          "$ref": "#/$defs/httpsUrl"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "ref",
+        "lockedCommitSha",
+        "treeSha",
+        "commitTime",
+        "path",
+        "canonicalUrl"
+      ],
+      "properties": {
+        "repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lockedCommitSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "treeSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "commitTime": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "canonicalUrl": {
+          "$ref": "#/$defs/httpsUrl"
+        }
+      }
+    },
+    "technologies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "languages",
+        "projectTypes",
+        "packaging"
+      ],
+      "properties": {
+        "languages": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "projectTypes": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "packaging": {
+          "$ref": "#/$defs/stringSet"
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "url"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/plainText"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/plainText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "url": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/httpsUrl"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/plainText"
+        },
+        "url": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "kind": {
+          "enum": [
+            "learn",
+            "api-reference",
+            "concept",
+            "repository",
+            "other"
+          ]
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumWindowsVersion",
+        "architectures",
+        "declaredPackageCapabilities",
+        "prerequisites"
+      ],
+      "properties": {
+        "minimumWindowsVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
+        },
+        "architectures": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "declaredPackageCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "kind",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/plainText"
+              },
+              "kind": {
+                "enum": [
+                  "general",
+                  "device",
+                  "restricted",
+                  "unknown"
+                ]
+              },
+              "description": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/plainText"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "prerequisites": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "hardware",
+            "accountsAndServices",
+            "software",
+            "notes"
+          ],
+          "properties": {
+            "hardware": {
+              "$ref": "#/$defs/stringSet"
+            },
+            "accountsAndServices": {
+              "$ref": "#/$defs/stringSet"
+            },
+            "software": {
+              "$ref": "#/$defs/stringSet"
+            },
+            "notes": {
+              "$ref": "#/$defs/stringSet"
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "repository",
+        "source",
+        "commit",
+        "tree"
+      ],
+      "properties": {
+        "provider": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "url"
+          ],
+          "properties": {
+            "label": {
+              "$ref": "#/$defs/plainText"
+            },
+            "url": {
+              "$ref": "#/$defs/httpsUrl"
+            }
+          }
+        },
+        "repository": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "source": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "commit": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "tree": {
+          "$ref": "#/$defs/httpsUrl"
+        }
+      }
+    },
+    "nestedUnits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nestedUnit"
+      }
+    },
+    "nestedUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "title",
+        "summary",
+        "description",
+        "sourcePaths",
+        "technologies",
+        "apis",
+        "documentation",
+        "children"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._~/-]*$",
+          "maxLength": 240
+        },
+        "kind": {
+          "enum": [
+            "variant",
+            "scenario",
+            "example"
+          ]
+        },
+        "position": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "title": {
+          "$ref": "#/$defs/plainText"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/plainText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/longPlainText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourcePaths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        },
+        "technologies": {
+          "$ref": "#/$defs/technologies"
+        },
+        "apis": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "documentation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/document"
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nestedUnit"
+          }
+        }
+      }
+    },
+    "featuredSourceFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "label",
+        "description",
+        "language",
+        "canonicalUrl",
+        "blobSha",
+        "sha256",
+        "size"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "label": {
+          "$ref": "#/$defs/plainText"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/plainText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "language": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
+        },
+        "canonicalUrl": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "blobSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "path",
+        "url",
+        "mediaType",
+        "width",
+        "height",
+        "alt",
+        "provenance",
+        "blobSha",
+        "sha256",
+        "size"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "url": {
+          "$ref": "#/$defs/httpsUrl"
+        },
+        "mediaType": {
+          "enum": [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ]
+        },
+        "width": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "height": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "alt": {
+          "$ref": "#/$defs/plainText"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenanceValue"
+        },
+        "blobSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2097152
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "targetId",
+        "providerId"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "related",
+            "same-concept",
+            "supersedes",
+            "superseded-by",
+            "variant-of",
+            "see-also"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*:[A-Za-z0-9][A-Za-z0-9._~/-]*$"
+        },
+        "providerId": {
+          "$ref": "#/$defs/providerId"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completeness",
+        "missingFields",
+        "warnings"
+      ],
+      "properties": {
+        "completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "minimal"
+          ]
+        },
+        "missingFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^/(?:[^/~]|~[01])+(?:/(?:[^/~]|~[01])+)*$",
+            "maxLength": 300
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "message",
+              "field",
+              "sourcePath"
+            ],
+            "properties": {
+              "code": {
+                "$ref": "#/$defs/slug"
+              },
+              "message": {
+                "$ref": "#/$defs/plainText"
+              },
+              "field": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 300
+              },
+              "sourcePath": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 500
+              }
+            }
+          }
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "licenseRefs",
+        "attributionRefs"
+      ],
+      "properties": {
+        "licenseRefs": {
+          "$ref": "#/$defs/stringSet"
+        },
+        "attributionRefs": {
+          "$ref": "#/$defs/stringSet"
+        }
+      }
+    },
+    "badges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "upstreamEditorial",
+        "portalLifecycle"
+      ],
+      "properties": {
+        "upstreamEditorial": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label",
+              "sourcePath"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/slug"
+              },
+              "label": {
+                "$ref": "#/$defs/plainText"
+              },
+              "sourcePath": {
+                "$ref": "#/$defs/relativePath"
+              }
+            }
+          }
+        },
+        "portalLifecycle": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "new",
+              "updated"
+            ]
+          }
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "firstSeenSync",
+        "lastReviewedSync",
+        "lastChangedSync",
+        "removedAtSync"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "active",
+            "tombstoned"
+          ]
+        },
+        "firstSeenSync": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lastReviewedSync": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lastChangedSync": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "removedAtSync": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        }
+      }
+    },
+    "provenanceValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sourcePath"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "authored",
+            "curated",
+            "derived",
+            "technical"
+          ]
+        },
+        "sourcePath": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "kind",
+        "sourcePath"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "pattern": "^/(?:[^/~]|~[01])+(?:/(?:[^/~]|~[01])+)*$",
+          "maxLength": 300
+        },
+        "kind": {
+          "enum": [
+            "authored",
+            "curated",
+            "derived",
+            "technical"
+          ]
+        },
+        "sourcePath": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    }
+  }
+}

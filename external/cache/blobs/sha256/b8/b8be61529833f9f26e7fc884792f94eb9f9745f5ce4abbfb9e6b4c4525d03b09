@@ -1,0 +1,143 @@
+--- header
+Connected animation with ItemsRepeater
+--- xaml
+<!-- Unlike ListView/GridView, ItemsRepeater does not have built-in
+     ConnectedAnimation methods. Use ConnectedAnimationService directly. -->
+
+<!-- TabFocusNavigation="Once" makes the repeater a single tab stop, so Tab enters the group
+     once instead of stepping through every item. Arrow keys move between items via the
+     ItemsRepeater's XYFocusKeyboardNavigation="Enabled". -->
+<ScrollViewer
+    x:Name="scrollViewer"
+    TabFocusNavigation="Once">
+    <ItemsRepeater
+        x:Name="repeater"
+        ItemsSource="{x:Bind Items}"
+        XYFocusKeyboardNavigation="Enabled">
+        <ItemsRepeater.Layout>
+            <UniformGridLayout
+                MinColumnSpacing="8"
+                MinItemHeight="120"
+                MinItemWidth="150"
+                MinRowSpacing="8" />
+        </ItemsRepeater.Layout>
+        <ItemsRepeater.ItemTemplate>
+            <DataTemplate x:DataType="local:CustomDataObject">
+                <Grid AutomationProperties.Name="{x:Bind Title}"
+                      CornerRadius="4"
+                      IsTabStop="True"
+                      UseSystemFocusVisuals="True">
+                    <!-- The element named "connectedElement" will be animated -->
+                    <Image x:Name="connectedElement"
+                           Source="{x:Bind ImageLocation}"
+                           Stretch="UniformToFill" />
+                    <Border VerticalAlignment="Bottom"
+                            Background="{ThemeResource AcrylicBackgroundFillColorBaseBrush}"
+                            Padding="8,4">
+                        <TextBlock Text="{x:Bind Title}"
+                                   Style="{ThemeResource CaptionTextBlockStyle}" />
+                    </Border>
+                </Grid>
+            </DataTemplate>
+        </ItemsRepeater.ItemTemplate>
+    </ItemsRepeater>
+</ScrollViewer>
+--- c#
+// ItemsRepeater does not have PrepareConnectedAnimation() or
+// TryStartConnectedAnimationAsync() like ListView/GridView.
+// Use ConnectedAnimationService.PrepareToAnimate() directly instead.
+
+private CustomDataObject _storedItem;
+private double _persistedScrollPosition;
+
+private void Repeater_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
+{
+    args.Element.Tapped -= Item_Tapped;
+    args.Element.Tapped += Item_Tapped;
+    args.Element.KeyDown -= Item_KeyDown;
+    args.Element.KeyDown += Item_KeyDown;
+}
+
+private void Item_Tapped(object sender, TappedRoutedEventArgs e)
+{
+    NavigateToItem(sender as FrameworkElement);
+}
+
+private void Item_KeyDown(object sender, KeyRoutedEventArgs e)
+{
+    // Activate the focused item with Enter or Space, matching list-style keyboard behavior.
+    if (e.Key == VirtualKey.Enter || e.Key == VirtualKey.Space)
+    {
+        NavigateToItem(sender as FrameworkElement);
+        e.Handled = true;
+    }
+}
+
+private void NavigateToItem(FrameworkElement element)
+{
+    if (element == null) return;
+
+    _storedItem = repeater.ItemsSourceView.GetAt(
+        repeater.GetElementIndex(element)) as CustomDataObject;
+
+    // Find the named element in the DataTemplate and prepare the animation.
+    if (FindChildByName(element, "connectedElement") is UIElement source)
+    {
+        ConnectedAnimationService.GetForCurrentView()
+            .PrepareToAnimate("ForwardConnectedAnimation", source);
+    }
+
+    // Save scroll position for back navigation.
+    _persistedScrollPosition = scrollViewer.VerticalOffset;
+
+    Frame.Navigate(typeof(DetailPage), _storedItem,
+        new SuppressNavigationTransitionInfo());
+}
+
+protected override void OnNavigatedTo(NavigationEventArgs e)
+{
+    base.OnNavigatedTo(e);
+    if (_storedItem == null) return;
+
+    // Restore scroll position so the target element is visible.
+    scrollViewer.ChangeView(null, _persistedScrollPosition, null, true);
+    UpdateLayout();
+
+    int index = repeater.ItemsSourceView.IndexOf(_storedItem);
+    var container = repeater.TryGetElement(index) as FrameworkElement;
+
+    var animation = ConnectedAnimationService.GetForCurrentView()
+        .GetAnimation("BackConnectedAnimation");
+    if (animation != null)
+    {
+        animation.Configuration = new DirectConnectedAnimationConfiguration();
+
+        if (container != null
+            && FindChildByName(container, "connectedElement") is UIElement target)
+        {
+            animation.TryStart(target);
+        }
+    }
+
+    // Return keyboard focus to the activated item for keyboard/Narrator users.
+    // Focus() is available because the Grid is a UIElement with IsTabStop set.
+    if (container != null)
+        container.Focus(FocusState.Programmatic);
+    else
+        repeater.Focus(FocusState.Programmatic);
+}
+
+// Helper to find a named element within a DataTemplate.
+private static UIElement FindChildByName(DependencyObject parent, string name)
+{
+    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+    {
+        var child = VisualTreeHelper.GetChild(parent, i);
+        if (child is FrameworkElement fe && fe.Name == name)
+            return fe;
+        var result = FindChildByName(child, name);
+        if (result != null)
+            return result;
+    }
+    return null;
+}

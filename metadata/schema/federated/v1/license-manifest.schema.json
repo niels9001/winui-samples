@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://niels9001.github.io/winui-samples/schema/federated/v1/license-manifest.schema.json",
+  "title": "Federated catalog license and attribution manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "providerId",
+    "repository",
+    "lockedCommitSha",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "providerId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "name"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        }
+      }
+    },
+    "lockedCommitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "scopePath",
+          "spdxId",
+          "licensePath",
+          "licenseUrl",
+          "attributionText"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*:[A-Za-z0-9._~/-]+$"
+          },
+          "scopePath": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "spdxId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100
+          },
+          "licensePath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "licenseUrl": {
+            "type": "string",
+            "pattern": "^https://[^\\s]+$",
+            "maxLength": 1000
+          },
+          "attributionText": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 2000
+          }
+        }
+      }
+    }
+  }
+}

@@ -26,6 +26,11 @@ structured metadata in `sample.yml`. See
 intent-led taxonomy, authoring guidance, and catalog commands. Generated catalog
 JSON is deterministic and must not be edited by hand.
 
+The repository also defines an additive
+[federated catalog contract](docs/FEDERATED_CATALOG.md) for referencing external
+sample providers at exact reviewed commits without migrating or vendoring their
+applications. External records are not rendered by the portal yet.
+
 ## Migration status
 
 The original UWP repo was reviewed sample by sample. Of **266** UWP samples analyzed:
