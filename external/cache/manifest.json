@@ -1,5 +1,3576 @@
 {
   "$schema": "../../metadata/schema/federated/v1/cache-manifest.schema.json",
-  "schemaVersion": 1,
-  "entries": []
+  "entries": [
+    {
+      "blobSha": "00c162cc5f48d3f74b1abac5b207a54d26d58dbe",
+      "cachePath": "blobs/sha256/d3/d359eefb4f32bbc8808a6649f2fd9804dddadf9d8621c693fa65d0613552fb5d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Unpackaged/cs-console-unpackaged/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d359eefb4f32bbc8808a6649f2fd9804dddadf9d8621c693fa65d0613552fb5d",
+      "size": 954,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "01e12b415355ac47b2b9cc70aa52b5f18270dd53",
+      "cachePath": "blobs/sha256/8b/8b6d18bf9bb1585f76c1945ae69586ebde1b6697372b26635b65c27490413fe6",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/MaterialCreator/MaterialCreatorApp/MaterialCreatorApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8b6d18bf9bb1585f76c1945ae69586ebde1b6697372b26635b65c27490413fe6",
+      "size": 1059,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "07d2f80a6a28e05c57acad9c3a1bebf3c52bb0bd",
+      "cachePath": "blobs/sha256/d1/d102f8da0cea88b7b6b8c5c38ef4861fcf38f949021fe0103b7d4db4c6be1921",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs-winforms/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d102f8da0cea88b7b6b8c5c38ef4861fcf38f949021fe0103b7d4db4c6be1921",
+      "size": 665,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "0950683c7b8df1fe12183ba3af3e5e540bd6e0c5",
+      "cachePath": "blobs/sha256/9d/9da2335a4eaab7002c373df9f142570c743b23e7d12095d4c2f387cf3419f167",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Widgets/cpp-win32-packaged/SampleWidgetProviderAppPackage/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9da2335a4eaab7002c373df9f142570c743b23e7d12095d4c2f387cf3419f167",
+      "size": 4520,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "0a4bab6917c83c3d5998aee3f119437c6081cfd2",
+      "cachePath": "blobs/sha256/40/405c555876a1df2d74e77627451af8db087c207be3bfce98ecfb56d9ef397332",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/DeploymentManager/cs-winui/DeploymentManagerSample.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "405c555876a1df2d74e77627451af8db087c207be3bfce98ecfb56d9ef397332",
+      "size": 1791,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "0c3f2fe94b366360302afec8e75f5b2451c3c05f",
+      "cachePath": "blobs/sha256/ea/eabcf2e93a4822c572cf3fad70483dfc2ba746f7260f4395d167cd1376aba5e3",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp/CppConsoleDesktop.SelfContained/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "eabcf2e93a4822c572cf3fad70483dfc2ba746f7260f4395d167cd1376aba5e3",
+      "size": 943,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "0f558b29bcf0fb097a9afc41c552d3090f25115d",
+      "cachePath": "blobs/sha256/68/68804eb377d156e778dfb157b38240157199d2004452b968dd686c8e9cd2d23a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Insights/cpp-win32/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "68804eb377d156e778dfb157b38240157199d2004452b968dd686c8e9cd2d23a",
+      "size": 661,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1038859f4dc90c22356e5548e9562ca603c97e40",
+      "cachePath": "blobs/sha256/1d/1dac97ecc684216cce63578e4c3842b039522b0b533fa7436a9225aa0a2732a0",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cs/cs-winui/Windowing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1dac97ecc684216cce63578e4c3842b039522b0b533fa7436a9225aa0a2732a0",
+      "size": 1976,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "10b8ee2db0c3e05fc8a201daaab131bd38f56602",
+      "cachePath": "blobs/sha256/85/8581e6fe661f164966255c71bcbf511570e052c1a2b4d9b869ca66b94c6cab1a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-packaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8581e6fe661f164966255c71bcbf511570e052c1a2b4d9b869ca66b94c6cab1a",
+      "size": 1660,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "10b8ee2db0c3e05fc8a201daaab131bd38f56602",
+      "cachePath": "blobs/sha256/85/8581e6fe661f164966255c71bcbf511570e052c1a2b4d9b869ca66b94c6cab1a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-unpackaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8581e6fe661f164966255c71bcbf511570e052c1a2b4d9b869ca66b94c6cab1a",
+      "size": 1660,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "13e00f62d7e12747f5aa1b0c33fb73b561075c1c",
+      "cachePath": "blobs/sha256/9b/9b3dee84aef4b0d519622a3314d14e29b26c977c8e705ec14cdeb072b43a47f1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs-winui/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9b3dee84aef4b0d519622a3314d14e29b26c977c8e705ec14cdeb072b43a47f1",
+      "size": 3618,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1465327de7a98476b7897d66ea8bba6f8779ee6a",
+      "cachePath": "blobs/sha256/d7/d72e77c81b06bf50678b8f2e52ce9f0db0d3fb6d674494dce69538e5d18c4b11",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d72e77c81b06bf50678b8f2e52ce9f0db0d3fb6d674494dce69538e5d18c4b11",
+      "size": 1563,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1465327de7a98476b7897d66ea8bba6f8779ee6a",
+      "cachePath": "blobs/sha256/d7/d72e77c81b06bf50678b8f2e52ce9f0db0d3fb6d674494dce69538e5d18c4b11",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d72e77c81b06bf50678b8f2e52ce9f0db0d3fb6d674494dce69538e5d18c4b11",
+      "size": 1563,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "15bcde06b337686c254dfa19f45ac805c1ed8c50",
+      "cachePath": "blobs/sha256/d4/d4224d8c172dfc9e7834dd8d32a58fbc95ff59364a8015fef5012a63c552e225",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cs-winui/MainPage.xaml",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d4224d8c172dfc9e7834dd8d32a58fbc95ff59364a8015fef5012a63c552e225",
+      "size": 10019,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "15ef9377591311d1431866232fbb664e61f8c5d7",
+      "cachePath": "blobs/sha256/c0/c0bacab630296f4eb50bfcc197a13b953be3f308b0f2c882abdc11262ed43239",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Instancing/cs1/cs-wpf-packaged/CsWpfInstancing/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c0bacab630296f4eb50bfcc197a13b953be3f308b0f2c882abdc11262ed43239",
+      "size": 9085,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1781981184f834a5138a3308cd1a5e9b97492093",
+      "cachePath": "blobs/sha256/3a/3a401623c4eccf71914c76daa6d5871bf763452068cca156e794612d7f76b3a4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CsApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3a401623c4eccf71914c76daa6d5871bf763452068cca156e794612d7f76b3a4",
+      "size": 470,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "194e89a35ab28b9757f9493ea4eddfe8bcfc53e2",
+      "cachePath": "blobs/sha256/59/595609ce49ca88a88a79f7ea4d89811935c22afcffe1267ea4e45c7f9686e52d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/DeploymentManager/cpp-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "595609ce49ca88a88a79f7ea4d89811935c22afcffe1267ea4e45c7f9686e52d",
+      "size": 1718,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1b692b958b2c6e9349d50d2f9e112a2286d349b9",
+      "cachePath": "blobs/sha256/dd/dd8ad943f5490d60b4ac94942f403d528b81e8f71c576cfd24e21bd0b4eca9c6",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cs-winui/BackgroundTaskBuilder/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "dd8ad943f5490d60b4ac94942f403d528b81e8f71c576cfd24e21bd0b4eca9c6",
+      "size": 3482,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "1cc0aa47247bda50f4d50bb4f93d62af70167bd9",
+      "cachePath": "blobs/sha256/1c/1cd6ecb428169f74ac3e3ef6afc08c0c23307b1562bd47ab9f8dc279f0220c7f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/Demos/EffectEditor/EffectEditorApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1cd6ecb428169f74ac3e3ef6afc08c0c23307b1562bd47ab9f8dc279f0220c7f",
+      "size": 2461,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "25aa7df462dde1ecba09a6bc66b0760b480073fa",
+      "cachePath": "blobs/sha256/e6/e6a1169a0cc85b64182b7faa4830263bc59709a674380f800358be85616dbeb9",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivationPkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "e6a1169a0cc85b64182b7faa4830263bc59709a674380f800358be85616dbeb9",
+      "size": 2649,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "262542c6554cabc4ca05d986cc2da508f1208235",
+      "cachePath": "blobs/sha256/27/27cbd70ceac3b790991e5352c72636366f0f152259a8a6ed3563c2e5407c17ca",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/cpp-winui/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "27cbd70ceac3b790991e5352c72636366f0f152259a8a6ed3563c2e5407c17ca",
+      "size": 303,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "26cb27c95afc81f60b3a71c99e1c8952cacf9feb",
+      "cachePath": "blobs/sha256/e4/e4409f4da683b929241b0f599397d01c2998d6d10ecab44d7d915c822dcd059d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CppApp/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "e4409f4da683b929241b0f599397d01c2998d6d10ecab44d7d915c822dcd059d",
+      "size": 286,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "27b5adebb81056423d4c1669245b62cec6632fce",
+      "cachePath": "blobs/sha256/45/45b04bc867ea32f3e9c749a589a2872c7a55c7bb139ea04624e76129ddbe2c25",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cpp/cpp-win32-packaged/CppWinMainInstancingPkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "45b04bc867ea32f3e9c749a589a2872c7a55c7bb139ea04624e76129ddbe2c25",
+      "size": 1986,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "287b3af87adc09103eda99cc5f1fcb14b31b822d",
+      "cachePath": "blobs/sha256/7d/7d36114c5dbe12b341f0d0fa275f9444cf1b53aad2e34f1829c881e9c69dc26c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp/CppConsoleDesktop/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7d36114c5dbe12b341f0d0fa275f9444cf1b53aad2e34f1829c881e9c69dc26c",
+      "size": 4278,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "291003ff93ddce26b770bdea6ee5b4157d5466f0",
+      "cachePath": "blobs/sha256/d7/d7ed581b1e8f3594084c5d10bff9420a2190fdc698ce7fee91542ce1d5201efa",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/DeploymentManager/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d7ed581b1e8f3594084c5d10bff9420a2190fdc698ce7fee91542ce1d5201efa",
+      "size": 1716,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "29520923fa8df72034866fc97be1fed62132ac69",
+      "cachePath": "blobs/sha256/9d/9d101e7c3c4c0e18aae78f27843a1fb358c73fbfbe7d3daa4a6aa53b78e1500b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-winui-packaged/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9d101e7c3c4c0e18aae78f27843a1fb358c73fbfbe7d3daa4a6aa53b78e1500b",
+      "size": 303,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "29520923fa8df72034866fc97be1fed62132ac69",
+      "cachePath": "blobs/sha256/9d/9d101e7c3c4c0e18aae78f27843a1fb358c73fbfbe7d3daa4a6aa53b78e1500b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-winui-unpackaged/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9d101e7c3c4c0e18aae78f27843a1fb358c73fbfbe7d3daa4a6aa53b78e1500b",
+      "size": 303,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2b90f556617551b5bdfc4c055dca938393f499f9",
+      "cachePath": "blobs/sha256/eb/eb5b530e27f8569bd39ab172ebb1545565b717f2a9f2f37a772d2f5b8fcef8a3",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Input/cs-winui/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "eb5b530e27f8569bd39ab172ebb1545565b717f2a9f2f37a772d2f5b8fcef8a3",
+      "size": 1187,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2c20dda9d506bca1b9777171c1b3c8e33c7cff30",
+      "cachePath": "blobs/sha256/51/514d08e75c0cd44a0edc26513559c2f2bb671b81d5003e96914d81375a92e0ad",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/RestartRegistration/cs-winui-packaged/cs-winui-packaged.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "514d08e75c0cd44a0edc26513559c2f2bb671b81d5003e96914d81375a92e0ad",
+      "size": 1998,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2c26a4543204524dec294bbc7713e796748d0f52",
+      "cachePath": "blobs/sha256/76/765206ed7a779291988bbe7591b8658b331f2446d52f872425f74f24989b68ce",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/StateNotifications/cs1/cs-wpf-packaged/CsWpfState/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "765206ed7a779291988bbe7591b8658b331f2446d52f872425f74f24989b68ce",
+      "size": 390,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2d272b6407b814965a9f3aa2b223f181d6c43b46",
+      "cachePath": "blobs/sha256/1b/1b21aeabd18760cd0e90c85f404c6e6a9d35e467754e9dbe3371c905b59605e5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1b21aeabd18760cd0e90c85f404c6e6a9d35e467754e9dbe3371c905b59605e5",
+      "size": 1309,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2d3bdd2b0fc978e3a4c064b508483e2749f67b49",
+      "cachePath": "blobs/sha256/cd/cda20b4b6eec0f8724139655cb7c3b1360a6ba1ab3cf33783b25ce4fd2f76a2d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/ExpressionBuilder/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "cda20b4b6eec0f8724139655cb7c3b1360a6ba1ab3cf33783b25ce4fd2f76a2d",
+      "size": 8179,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "2f54af6652a46d6e12cd5e06df19e6f8085506fa",
+      "cachePath": "blobs/sha256/1a/1a88f58f9ed20902200738c95cc6d75526a2e73b30fe2d0a56d73a48c94ffcb9",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/SampleGalleryApp/SampleGalleryApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1a88f58f9ed20902200738c95cc6d75526a2e73b30fe2d0a56d73a48c94ffcb9",
+      "size": 14143,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "325250ff6b368cef854f2d4ef1fbcb0fda0e3ff4",
+      "cachePath": "blobs/sha256/d8/d8660bf4c1d2cdf7ba73a054aa8b5ead6eb3911491e538191022ece7c470dda7",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/Demos/MaterialCreator/MaterialCreatorApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d8660bf4c1d2cdf7ba73a054aa8b5ead6eb3911491e538191022ece7c470dda7",
+      "size": 2464,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "325e27628702622f88057a22aaf60918669acedf",
+      "cachePath": "blobs/sha256/1b/1b6add75af8c9a3bbcd59f37bed465e9169de497ea914d6251addbcbe5f2faff",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/CppUnpackagedAppNotifications/CppUnpackagedAppNotifications/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1b6add75af8c9a3bbcd59f37bed465e9169de497ea914d6251addbcbe5f2faff",
+      "size": 309,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "33d4b9fb2a92fa7ff9068fca255c5a93b61ad7ab",
+      "cachePath": "blobs/sha256/21/21fa182186db0ae16672ad22dece2dc21254673050a34c04d6d082b00a57c4bb",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/Push/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "21fa182186db0ae16672ad22dece2dc21254673050a34c04d6d082b00a57c4bb",
+      "size": 3454,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "34ff2649f6b20ef2467f77971f35f75d3b4c8804",
+      "cachePath": "blobs/sha256/56/56a1606c8589e1e410bff2cdd94baa3b3b75f8cd0fddede61bcadf82ed7c4f6c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "56a1606c8589e1e410bff2cdd94baa3b3b75f8cd0fddede61bcadf82ed7c4f6c",
+      "size": 8749,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "367c02d769bed57825d6ea442d7ada50d281b6c5",
+      "cachePath": "blobs/sha256/24/2412a177cb197b61138c924a76748e5cebb562b94f57d5fcde76987ae1709707",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Unpackaged/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "2412a177cb197b61138c924a76748e5cebb562b94f57d5fcde76987ae1709707",
+      "size": 2857,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "374778cfb548e74d37a371f194f876267bfd67e6",
+      "cachePath": "blobs/sha256/a5/a53d841372014d913988fedfacd3909fc9ede1f4e57a13e79e3861b7b886d159",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs-winforms/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a53d841372014d913988fedfacd3909fc9ede1f4e57a13e79e3861b7b886d159",
+      "size": 3580,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3859a0ad9a6511d79d127dba92148eb63917c5ae",
+      "cachePath": "blobs/sha256/6c/6c2c21932e267420912bbcd10ffd95ec889e65f1ee5a32ea4e3cb7743c28b547",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SecureUI/Package/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "6c2c21932e267420912bbcd10ffd95ec889e65f1ee5a32ea4e3cb7743c28b547",
+      "size": 1676,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "38f1b11767d0d95cde3a9f18532179ed703415d7",
+      "cachePath": "blobs/sha256/f9/f97749ddadbb612a6e065ee8df892062faa0c29473c867a2b3608ca7bcd6d9aa",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs/cs-winforms-unpackaged/CsWinFormsActivation/CsWinFormsActivation.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f97749ddadbb612a6e065ee8df892062faa0c29473c867a2b3608ca7bcd6d9aa",
+      "size": 949,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3a65ca08332752dc6d6d6da3d968a8ce6a1b6348",
+      "cachePath": "blobs/sha256/f1/f19688b4ba02cf91dd9b4664f49efb822fe617d41330d3deea8c527724fc988f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/ResourceManagement/cpp/cpp-winui/winui_desktop_packaged_app_cpp/App.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f19688b4ba02cf91dd9b4664f49efb822fe617d41330d3deea8c527724fc988f",
+      "size": 3963,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3ba05c661fd25e3bebc0bd9768fed7098c626fe9",
+      "cachePath": "blobs/sha256/25/259a374c40ec0830c39aa27439b19889a2a7dd42115cc1aeedaabf06c7ed2d8e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs/CSharpConsoleDesktop/CSharpConsoleDesktop/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "259a374c40ec0830c39aa27439b19889a2a7dd42115cc1aeedaabf06c7ed2d8e",
+      "size": 2360,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3c05edaaff7d6141daae93d02dd1fdf09e0d88ad",
+      "cachePath": "blobs/sha256/da/da726179d12ed88afc27a956451d3b12962c6f0b45b4b560b8e1d81ee59e385f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cs/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "da726179d12ed88afc27a956451d3b12962c6f0b45b4b560b8e1d81ee59e385f",
+      "size": 1618,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3c4a3a3b35b59a160c02db3bd9f0b9c1332a3d30",
+      "cachePath": "blobs/sha256/d4/d456d1e9eafbf53d9e914757b72f0277e0a43aca038154f8159f604150784a82",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Windowing/cs/cs-winui/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d456d1e9eafbf53d9e914757b72f0277e0a43aca038154f8159f604150784a82",
+      "size": 1016,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "3e1d1ba510d363d6b69706239c454ed251f061c2",
+      "cachePath": "blobs/sha256/21/21892a1baa24828420c9e3612bcf0dfb2b1b971b229ba5e21941043817088da1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/CustomControls/WinUIComponentCs/WinUIComponentCs.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "21892a1baa24828420c9e3612bcf0dfb2b1b971b229ba5e21941043817088da1",
+      "size": 848,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "42578182f24ba0dc04fe2a82636edf331ad9d55a",
+      "cachePath": "blobs/sha256/9a/9aec9258ef8afe8d2b4d58618e4de396aa6c7df4bea4b7d12dd82f86a13d37d1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/StateNotifications/cpp/cpp-console-unpackaged/CppWinRtConsoleState/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9aec9258ef8afe8d2b4d58618e4de396aa6c7df4bea4b7d12dd82f86a13d37d1",
+      "size": 10774,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4310b6de5854514a32d96fc220dd5b18e36cafb9",
+      "cachePath": "blobs/sha256/09/09bf6e9d60a10b3702c590d608cb1ecee72bfcf6da192d91f4afb74d0ae90b4f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cs-winui/BackgroundTaskBuilder/BackgroundTaskBuilder.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "09bf6e9d60a10b3702c590d608cb1ecee72bfcf6da192d91f4afb74d0ae90b4f",
+      "size": 3047,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "44d045cc04296deab34f7ea23922e88830a5c1d5",
+      "cachePath": "blobs/sha256/72/729802b95b754bf0d582adbf84bb5f71c2b774da723bf693e108d71e636f00b6",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs/cs-console-unpackaged/CsConsoleActivation/CsConsoleActivation.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "729802b95b754bf0d582adbf84bb5f71c2b774da723bf693e108d71e636f00b6",
+      "size": 525,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "452478c6d4822e3a4b0073982734af7aee9f2c3e",
+      "cachePath": "blobs/sha256/7d/7dd0d915a1b286a69749af637e811e37e94b0091a56a1b3412dbe71a6f99dc23",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs1/cs-winui-packaged-wap/SelfContainedDeployment/SelfContainedDeployment.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7dd0d915a1b286a69749af637e811e37e94b0091a56a1b3412dbe71a6f99dc23",
+      "size": 2472,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "47099f5ba6df6ab92aa3e9277f01a2ca184a2be3",
+      "cachePath": "blobs/sha256/46/46638ece80fa12bbd8edda6ef4307f8150253e1a46c5a29797f38fa69cb3264b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cpp/cpp-winui-packaged/CppWinUiDesktopActivation/CppWinUiDesktopActivation (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "46638ece80fa12bbd8edda6ef4307f8150253e1a46c5a29797f38fa69cb3264b",
+      "size": 2614,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "47e06296a7cb9f5d626d86e8b9e7b9a8db5c4701",
+      "cachePath": "blobs/sha256/ca/caa50e2cd2849a824c9ec42be849f228a718d792bfb63fcaab3f5dda048043d5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs/HelloPhi/HelloPhi.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "caa50e2cd2849a824c9ec42be849f228a718d792bfb63fcaab3f5dda048043d5",
+      "size": 1094,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "49d903704fc1f56b87d6da2a03b1e8e3939b666b",
+      "cachePath": "blobs/sha256/0e/0e15510cc46744dffaf0be13bb2f83c924f2f102dc3f2084a7d69f247ef35552",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Windowing/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "0e15510cc46744dffaf0be13bb2f83c924f2f102dc3f2084a7d69f247ef35552",
+      "size": 1989,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4a8ab003141aee638014a3da71fc998e88f56ff7",
+      "cachePath": "blobs/sha256/49/493b9fc4e56f782513b4381a41cfc3d0be3928e49567d3447424f331a077f155",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/DetailPage.xaml",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "493b9fc4e56f782513b4381a41cfc3d0be3928e49567d3447424f331a077f155",
+      "size": 49020,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4aa65fb7067473359ad65fb61ff26f765cf3f3ef",
+      "cachePath": "blobs/sha256/86/868c5008a7c078d9fc22cde2fc55eca40597c2af91adf5c971b9fbc466299644",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Installer/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "868c5008a7c078d9fc22cde2fc55eca40597c2af91adf5c971b9fbc466299644",
+      "size": 2595,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4afb4a1c706afa4780dc3cd46abe334fe344d313",
+      "cachePath": "blobs/sha256/c8/c8900eb8835deef4a968cf24280cc54089a81232d323e141e0a49afef4676fee",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/Project.idl",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c8900eb8835deef4a968cf24280cc54089a81232d323e141e0a49afef4676fee",
+      "size": 1623,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4be186ba1fce15a374d69e1a269262b99292c4f0",
+      "cachePath": "blobs/sha256/d6/d6856663f3b049878841c43e9f7920c4c3e946371fd90037f33e17c12df847fa",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/EffectEditor/EffectEditorApp/EffectEditorApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d6856663f3b049878841c43e9f7920c4c3e946371fd90037f33e17c12df847fa",
+      "size": 1822,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4caa9cc5cff28f893a0cbacd03002a3d8074bd4f",
+      "cachePath": "blobs/sha256/b2/b202c19ab638a1074645bcacdb112fb29e0de3298ff7f65808abd20c135459a2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Islands/UXFrameworksOnIslands/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b202c19ab638a1074645bcacdb112fb29e0de3298ff7f65808abd20c135459a2",
+      "size": 1877,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4d32101f826666d42e905a342f090e910ec6f040",
+      "cachePath": "blobs/sha256/4e/4efb896d70ab119af6688bc4b9b212fb36087d94f291205e6b21f2229eeecd8e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/EffectEditor/EffectEditorPackage/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4efb896d70ab119af6688bc4b9b212fb36087d94f291205e6b21f2229eeecd8e",
+      "size": 1623,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4e86325c4853bbc9954fe223b54060a945579bd9",
+      "cachePath": "blobs/sha256/f3/f3516c5e75e853416b55f1b9ac749ba45e73416b3781b902ede2860dc32389b3",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Widgets/cs-console-packaged/CsConsoleWidgetProvider/CsConsoleWidgetProvider.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f3516c5e75e853416b55f1b9ac749ba45e73416b3781b902ede2860dc32389b3",
+      "size": 2238,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4f674bcd5457f3d2b3002790b829388e568579fd",
+      "cachePath": "blobs/sha256/be/bea1ac6ca5bc61f547f02004bc2f92171eb75692e307bd6132a12aa1fbe487e1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/DetailPage.xaml.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "bea1ac6ca5bc61f547f02004bc2f92171eb75692e307bd6132a12aa1fbe487e1",
+      "size": 6804,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4f89bb4bfeacb7dd223af0a232ff54479f1ca55a",
+      "cachePath": "blobs/sha256/a2/a298d55643f8c979fefb25aa3dd729d7fafed37eb294d04d277aff62d0b17305",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs1/cs-wpf/wpf_packaged_app (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a298d55643f8c979fefb25aa3dd729d7fafed37eb294d04d277aff62d0b17305",
+      "size": 1674,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "4f89bb4bfeacb7dd223af0a232ff54479f1ca55a",
+      "cachePath": "blobs/sha256/a2/a298d55643f8c979fefb25aa3dd729d7fafed37eb294d04d277aff62d0b17305",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cs1/cs-wpf/wpf_packaged_app (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a298d55643f8c979fefb25aa3dd729d7fafed37eb294d04d277aff62d0b17305",
+      "size": 1674,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "500a1dbff90ffbc574a69092511425475dbb56cc",
+      "cachePath": "blobs/sha256/30/30f7ece94d988ef51e39bc8966a54397305b83556affe64efefafb441bbf989d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Islands/cs-winforms-unpackaged/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "30f7ece94d988ef51e39bc8966a54397305b83556affe64efefafb441bbf989d",
+      "size": 1685,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "51b03e6ff0e7375546e35f1c60b5b445229be574",
+      "cachePath": "blobs/sha256/79/7968eb02e75d0b8d4328513df4cdaa4c307ba097094ff185580ffe1d61c144ba",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cs-winui/DetailPage.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7968eb02e75d0b8d4328513df4cdaa4c307ba097094ff185580ffe1d61c144ba",
+      "size": 11755,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "525f9c455d45fdcec6cbdfef30a7bed91ed6bb2d",
+      "cachePath": "blobs/sha256/11/113731749baf2773413c3553f77aa17b0514104fd2ddf38235eecf04e400c940",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/python/SqueezeNetPython/readme.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "113731749baf2773413c3553f77aa17b0514104fd2ddf38235eecf04e400c940",
+      "size": 1188,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "533c6b02f8a84b5b8d60b49da8ecb2adf6de5e3d",
+      "cachePath": "blobs/sha256/9e/9e18906be5dd11dc3dc111701533f1ebdbc135484d36e396ddad5dcd6dd9797e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cpp/cpp-winui/winui_desktop_packaged_app_cpp (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9e18906be5dd11dc3dc111701533f1ebdbc135484d36e396ddad5dcd6dd9797e",
+      "size": 1761,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "54a0121f42b56d18446a940b409dc97378f6ad2c",
+      "cachePath": "blobs/sha256/48/48c74ec775944706ddc6c155e32dddb934589490cef484b3dabc57166843550b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/ExpressionBuilder/LICENSE.TXT",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "48c74ec775944706ddc6c155e32dddb934589490cef484b3dabc57166843550b",
+      "size": 1124,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "54bc398b5f507791127686cdea744eaa56f72325",
+      "cachePath": "blobs/sha256/b3/b3faefa2b64767878ea4c22f720b62a1bfb3b6cfcb1b501aed3befd3a9f3d41c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/ShareTarget/WinUI-CS-ShareTargetSampleApp/WinUI-CS-ShareTargetSampleApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b3faefa2b64767878ea4c22f720b62a1bfb3b6cfcb1b501aed3befd3a9f3d41c",
+      "size": 2148,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "552230ef28e7326c5d94e8228d1748f270f684e4",
+      "cachePath": "blobs/sha256/1b/1baf3b2152b36fda149076804cab8cfe76f1eae9046cda40e09e033831372c9a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "image/png",
+      "path": "Samples/Islands/img/screenshot.png",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1baf3b2152b36fda149076804cab8cfe76f1eae9046cda40e09e033831372c9a",
+      "size": 119565,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "5923ca31bd7d86ce4e10052d92679d0367825722",
+      "cachePath": "blobs/sha256/ae/aed49dccfe9928f5c45238dea43b65d927ed8b8c0e7f4ff32d67eb6e01f0a3e0",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CppApp/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "aed49dccfe9928f5c45238dea43b65d927ed8b8c0e7f4ff32d67eb6e01f0a3e0",
+      "size": 755,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "59e29f2463b40a5f7b30ac5c51fd5e793df1b309",
+      "cachePath": "blobs/sha256/c0/c0f674169dd20100c36359fed097e9d90f97312c5f8a21b6f299a9bd9a5a1702",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Windowing/cs/cs-winforms-unpackaged/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c0f674169dd20100c36359fed097e9d90f97312c5f8a21b6f299a9bd9a5a1702",
+      "size": 522,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "5ad939dba551cc340b9c708cc81607908436b2f8",
+      "cachePath": "blobs/sha256/96/964327e2e87f54cf749f5a8fe8c466e27d43d551be17747b43473d8e51af1268",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "964327e2e87f54cf749f5a8fe8c466e27d43d551be17747b43473d8e51af1268",
+      "size": 4916,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "5b3dfda4d0f42580d35e05cee71e2a7a8fccb447",
+      "cachePath": "blobs/sha256/ce/ce2f29a22895571045acd996238656b6f2b96884242ba818ead1bba505a91d85",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cs-winui/PhotoEditor.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ce2f29a22895571045acd996238656b6f2b96884242ba818ead1bba505a91d85",
+      "size": 1835,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "5d7221a91ec21ff7138056d4abef50460bc9b333",
+      "cachePath": "blobs/sha256/85/8568c8bab0cca5406c471d1433a0d5fcdbe926488279a328206737e260b98085",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs/cs-wpf-unpackaged/CsWpfActivation/CsWpfActivation.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8568c8bab0cca5406c471d1433a0d5fcdbe926488279a328206737e260b98085",
+      "size": 628,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "5e8b0770954060376ed874191ddd91943d1c31c9",
+      "cachePath": "blobs/sha256/d3/d3ec1699a6b85dae3585512984f3986fe3cf6ac39ebab7d2daa08a4adeab5e3c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/ExpressionBuilder/ExpressionBuilder/ExpressionBuilder.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d3ec1699a6b85dae3585512984f3986fe3cf6ac39ebab7d2daa08a4adeab5e3c",
+      "size": 1726,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "628c14284cd83ecbea391780e433340c7f6ab25c",
+      "cachePath": "blobs/sha256/6e/6e4bf2c43294a109ccc9c9e2ba2a014ffad02600db5cb22851681353132a99de",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cs-winui/MainPage.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "6e4bf2c43294a109ccc9c9e2ba2a014ffad02600db5cb22851681353132a99de",
+      "size": 8797,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "63af691c12ca94c04c7fd43ae4084fe58e4806fc",
+      "cachePath": "blobs/sha256/ae/ae92fc7073c13908a1e2096fa4877fd797be99bcc1bd30318eddbd8f1173fa4b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Islands/SimpleIslandApp/cpp-win32-unpackaged/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ae92fc7073c13908a1e2096fa4877fd797be99bcc1bd30318eddbd8f1173fa4b",
+      "size": 330,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6423a26f2648d3e7527186fca537b98b9cac6001",
+      "cachePath": "blobs/sha256/75/7586bd5a0115a14cc0503dc303888a0141d7255029c5d6e7879bc1bc9af64b96",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/EnvironmentVariables/cs-winforms-unpackaged/CsWinFormsEnv/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7586bd5a0115a14cc0503dc303888a0141d7255029c5d6e7879bc1bc9af64b96",
+      "size": 479,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "64c0220f0cf3078bea9a7a09c4aa833b128d5604",
+      "cachePath": "blobs/sha256/d9/d92df83a81ac7e0687c4d61f6b91e8f5d8ec71de1e8a75d5c40058d0998e581e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/CsUnpackagedAppNotifications/CsUnpackagedAppNotifications/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d92df83a81ac7e0687c4d61f6b91e8f5d8ec71de1e8a75d5c40058d0998e581e",
+      "size": 2761,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "660695189aa0e3b910d51251fd0d1f7a84816781",
+      "cachePath": "blobs/sha256/3e/3e0c50877b2ebc25d89ef325f7c5e47d28b299716f873cb72cd84eb66a56b63e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs-wpf/WindowsMLSampleForWPF.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3e0c50877b2ebc25d89ef325f7c5e47d28b299716f873cb72cd84eb66a56b63e",
+      "size": 1213,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "666e21c677022741f26bf4564eb4eb9f6119d607",
+      "cachePath": "blobs/sha256/98/98394e27844a977e95fd6835667e9291bf0d1dafc011f443068ecc9de1b63f34",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Instancing/cpp/cpp-console-unpackaged/CppWinRtConsoleInstancing/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "98394e27844a977e95fd6835667e9291bf0d1dafc011f443068ecc9de1b63f34",
+      "size": 9276,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "676089b54223c2495a0fa104a922ac41b91e9da5",
+      "cachePath": "blobs/sha256/08/0878aa0dbd4cc61f52c4bf54b89cb08ac443757e4a9f95487aa1f108c61a2a5a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CsApp/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "0878aa0dbd4cc61f52c4bf54b89cb08ac443757e4a9f95487aa1f108c61a2a5a",
+      "size": 844,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "676c9c84bcd549d4d6625f5e371154ca6b25f887",
+      "cachePath": "blobs/sha256/3a/3a59dc6da2a9e7d1e9713b56cb96154a983268be6b7378f0e14d31ebc3a4b3ca",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-winui-packaged/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3a59dc6da2a9e7d1e9713b56cb96154a983268be6b7378f0e14d31ebc3a4b3ca",
+      "size": 738,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "676c9c84bcd549d4d6625f5e371154ca6b25f887",
+      "cachePath": "blobs/sha256/3a/3a59dc6da2a9e7d1e9713b56cb96154a983268be6b7378f0e14d31ebc3a4b3ca",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-winui-unpackaged/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3a59dc6da2a9e7d1e9713b56cb96154a983268be6b7378f0e14d31ebc3a4b3ca",
+      "size": 738,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "67f43a6598d23b857e675e04426bdc8a77e58a74",
+      "cachePath": "blobs/sha256/80/80e910cadbf31e08e5de982b2a33af9ff3741b281311473ad52d038ef0789f56",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Widgets/cs-console-packaged/CsConsoleWidgetProvider/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "80e910cadbf31e08e5de982b2a33af9ff3741b281311473ad52d038ef0789f56",
+      "size": 4585,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "68dec1d3a38b87059c293e2e56f9a433ccb69afa",
+      "cachePath": "blobs/sha256/c3/c361bb6a3997d0c299b5458aa78be5461121988874059ad366da411199f7704d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Input/cs-winui/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c361bb6a3997d0c299b5458aa78be5461121988874059ad366da411199f7704d",
+      "size": 1083,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6b1aba0bb500fc716ddd086fcc44c818c8b92ba9",
+      "cachePath": "blobs/sha256/c2/c2f5afff56e954b2c0f768c73ba5a570df63f085c0de4ef8cb7417e07d4f7ecf",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cpp/cpp-win32-packaged/CppWinMainStatePkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c2f5afff56e954b2c0f768c73ba5a570df63f085c0de4ef8cb7417e07d4f7ecf",
+      "size": 1581,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6b7a92ce005d98b8172b6c68eb0ecde52049f3fd",
+      "cachePath": "blobs/sha256/ab/ab44df2c98834c3af04e28cb26d1de781e75e10cd915e35ee4e4597c36f5cfeb",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp-abi/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ab44df2c98834c3af04e28cb26d1de781e75e10cd915e35ee4e4597c36f5cfeb",
+      "size": 1007,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6bdfd83d98ec5805f5a187737b83c5e1f7bb6e2a",
+      "cachePath": "blobs/sha256/8c/8c9e89decb660b9f485a8624cfa1961c7052d7bd3253a5f707bc801001f62e43",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp/CppConsoleDesktop.FrameworkDependent/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8c9e89decb660b9f485a8624cfa1961c7052d7bd3253a5f707bc801001f62e43",
+      "size": 5294,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6c7d04cb8cf9d4624dc354f692b71d6cb72aa191",
+      "cachePath": "blobs/sha256/99/9944a2a456fb92d4592089d4981fea84d9fa4a8c1c31207a2629d7403079d2d4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Composition/DynamicRefreshRateTool/cpp-winui/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9944a2a456fb92d4592089d4981fea84d9fa4a8c1c31207a2629d7403079d2d4",
+      "size": 5369,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6da194df0eea35bd8058417b606fefa6441a7ae4",
+      "cachePath": "blobs/sha256/84/842ab032786d7de7d55d7918e21fb46fe0945d5aa51e6a130bb61df8c2c33121",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/capture-logs/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "842ab032786d7de7d55d7918e21fb46fe0945d5aa51e6a130bb61df8c2c33121",
+      "size": 728,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6e95ef0ec4a01f38b7e9b563ef067db021f35a64",
+      "cachePath": "blobs/sha256/2c/2cfe4d8c2351641c44dcf57319af64de3a552bcb1591886c707e17919110516f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp/CppConsoleDesktop.GenAI/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "2cfe4d8c2351641c44dcf57319af64de3a552bcb1591886c707e17919110516f",
+      "size": 2195,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "6e9bcb97a8197f4d7d0c234bff9545e86e0d9e6d",
+      "cachePath": "blobs/sha256/51/517a731c86a4147bd632f4a9e8b9c8c6ba16472b40fcdb9c7176fcec3be89529",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/Photo.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "517a731c86a4147bd632f4a9e8b9c8c6ba16472b40fcdb9c7176fcec3be89529",
+      "size": 5269,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7036185a9b16e4076fd726374fabefc05cf02f34",
+      "cachePath": "blobs/sha256/04/04c3b970914e5c3775cd1cb2ed04ec7ab8b3a40dbd83a1e05dd3b3bce21b81f6",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs2/cs-winui-packaged/CsWinUiDesktopActivation/CsWinUiDesktopActivation (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "04c3b970914e5c3775cd1cb2ed04ec7ab8b3a40dbd83a1e05dd3b3bce21b81f6",
+      "size": 2745,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "71c35e3c236ed495acdef9b54f1783e89ab91d7a",
+      "cachePath": "blobs/sha256/1b/1b1866a736d4a73a1943a59ce7a3e39b9dac7eabae054f150124b99c07d97408",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/ShareTarget/WinUI-CS-ShareTargetSampleApp/WinUI-CS-ShareTargetSampleApp/WinUI-CS-ShareTargetSampleApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1b1866a736d4a73a1943a59ce7a3e39b9dac7eabae054f150124b99c07d97408",
+      "size": 2427,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7260e86171c0bdb4c472e84c46333430a2de8af8",
+      "cachePath": "blobs/sha256/e7/e77101eac5d91fee3015462d188858baaf5a1bb402de0d1391f5f431c1b78f90",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Mica/cpp-WebView2/Mica-WebView2/Main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "e77101eac5d91fee3015462d188858baaf5a1bb402de0d1391f5f431c1b78f90",
+      "size": 1793,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "726dac8da46ac6f8db1a7abde7d57ce2a426ab7a",
+      "cachePath": "blobs/sha256/42/42ef50dc2a83daa6f464fdf7e681dc2fe75e16b02f95fbe26a380f70ad753b29",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsAIFoundry/cs-winui/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "42ef50dc2a83daa6f464fdf7e681dc2fe75e16b02f95fbe26a380f70ad753b29",
+      "size": 713,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "72e40ab5733ab0e184139aa1301e135d9f1c21e0",
+      "cachePath": "blobs/sha256/90/90352a7b3209a7c3db0669578fdfcf3c8d3cb4d14dfda7b81bed08e676b014ed",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/CsWpfActivation.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "90352a7b3209a7c3db0669578fdfcf3c8d3cb4d14dfda7b81bed08e676b014ed",
+      "size": 609,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "731abc617cf95ebc831fedc4de5d2a57d237a2bb",
+      "cachePath": "blobs/sha256/c8/c879f57f9449b3b6ff7eba25fbf2391b55ad3b1380f1447a92a7715911a6bb5c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/EnvironmentVariables/cpp-console-unpackaged/CppWinRtConsoleEnv/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c879f57f9449b3b6ff7eba25fbf2391b55ad3b1380f1447a92a7715911a6bb5c",
+      "size": 9295,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "73ec4da51303931d1069d8fc3dd22eb3223b3e7c",
+      "cachePath": "blobs/sha256/b2/b21a10bacb2aeb2f61badbb441e4deea2b40a01d96b175967a080813312df7dc",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs2/cs-winui-packaged/CsWinUiDesktopInstancing/CsWinUiDesktopInstancing (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b21a10bacb2aeb2f61badbb441e4deea2b40a01d96b175967a080813312df7dc",
+      "size": 2064,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "76c9ac11a42e63b9cf239e7a373295f91ce41c2b",
+      "cachePath": "blobs/sha256/fb/fb8ee97fb38f7e9d4514161fd544194649d2945ff90e0baa57d58919f1088194",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-winui-packaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "fb8ee97fb38f7e9d4514161fd544194649d2945ff90e0baa57d58919f1088194",
+      "size": 1718,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7970099bbe21cab1ce5150cb3e05f9fead9b99cc",
+      "cachePath": "blobs/sha256/58/58ecc06146a65f883ee7f68544390841053f7896685d865b685b9aec2a3a50e8",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-unpackaged/SelfContainedDeployment.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "58ecc06146a65f883ee7f68544390841053f7896685d865b685b9aec2a3a50e8",
+      "size": 1901,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "79badaac8abc9ab527ffe252ce4e514f0a1921f3",
+      "cachePath": "blobs/sha256/b0/b0ae6a0bd26f8470b36996b56832d90c7465f776fb7488b313f8014ff0e62feb",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs2/cs-winui-packaged/CsWinUiDesktopState/CsWinUiDesktopState/CsWinUiDesktopState.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b0ae6a0bd26f8470b36996b56832d90c7465f776fb7488b313f8014ff0e62feb",
+      "size": 774,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7a2d030d5788177c798008371fdc7377381ec3c8",
+      "cachePath": "blobs/sha256/5d/5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cs1/cs-winui-packaged-wap/SelfContainedDeployment/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "size": 796,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7a2d030d5788177c798008371fdc7377381ec3c8",
+      "cachePath": "blobs/sha256/5d/5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-packaged/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "size": 796,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7a2d030d5788177c798008371fdc7377381ec3c8",
+      "cachePath": "blobs/sha256/5d/5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-unpackaged/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5d7e5874355da75920d0c03102885969d121e161e89cb6c6b9ffaf1d78563c88",
+      "size": 796,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7a5032c7e8a0ff449f8fe099d4444084500a7f83",
+      "cachePath": "blobs/sha256/e9/e92cbad856b432bfc0986c86d1832422590daf8d33c1b55efef103b6b1d2baff",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "e92cbad856b432bfc0986c86d1832422590daf8d33c1b55efef103b6b1d2baff",
+      "size": 4740,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7b080682c21bb98d2b7ba32a3b2a1cca3a2eaf83",
+      "cachePath": "blobs/sha256/f0/f088a6548bc723cda02c01b4f12ed3aa68e481b282f501aae8eeb28f1690cef5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f088a6548bc723cda02c01b4f12ed3aa68e481b282f501aae8eeb28f1690cef5",
+      "size": 7847,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7b4e66829ef6632fc644302c3fd9e792e063fbca",
+      "cachePath": "blobs/sha256/34/3404e1a93d7990051bb2557d8f50874928a0289aab6515d9a87721dfd1ad1e7a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs2/cs-winui-packaged/CsWinUiDesktopState/CsWinUiDesktopState (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3404e1a93d7990051bb2557d8f50874928a0289aab6515d9a87721dfd1ad1e7a",
+      "size": 1653,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7d83a54b6c2ffaffc8695b81a6ec163e89c708a5",
+      "cachePath": "blobs/sha256/5d/5dbe2351c50dd234f12e38b98add6b30b5d3830d82c3df2bf45f545c0e903125",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5dbe2351c50dd234f12e38b98add6b30b5d3830d82c3df2bf45f545c0e903125",
+      "size": 7937,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7d913339373630f6b8f3a13d53bb2fc58d89b08d",
+      "cachePath": "blobs/sha256/11/1133445585ea165589eb7220dff62e06991bb43c927cb6b0258590a26288294d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Notifications/Push/cpp-console-packaged/cpp-console-package/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1133445585ea165589eb7220dff62e06991bb43c927cb6b0258590a26288294d",
+      "size": 2387,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7f27c3410c08423cb6ef1ae881dc260f96ad8827",
+      "cachePath": "blobs/sha256/2a/2aef82c24c573d0a4be6decaca9d2824b31adebee6dace3b2481ddf643ff17b2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs2/cs-winui-packaged/SelfContainedDeployment.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "2aef82c24c573d0a4be6decaca9d2824b31adebee6dace3b2481ddf643ff17b2",
+      "size": 2207,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "7ff767fa39bab36cc975d5f1e7d05fae9a96e756",
+      "cachePath": "blobs/sha256/05/05c7b92cebd5beed48a60b76b2b4a645a58b5535b1e6c8ce96ca76d450b97ce2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs/CSharpConsoleDesktop/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "05c7b92cebd5beed48a60b76b2b4a645a58b5535b1e6c8ce96ca76d450b97ce2",
+      "size": 4505,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "80bf7543de64c001871adb74d333f2fc2e607b23",
+      "cachePath": "blobs/sha256/15/1581ae0408a13a4d17725377cfc3ae18da0d1bf25e813e745cdaf891f3cc8d16",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs/cs-winui/winui_desktop_packaged_app (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1581ae0408a13a4d17725377cfc3ae18da0d1bf25e813e745cdaf891f3cc8d16",
+      "size": 1704,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "8248f874653e9f7234a5dca0384f2361a4e80197",
+      "cachePath": "blobs/sha256/33/3348d833aa539ca2b8a86045c645fb8120fbe8c963ca6b0e03d6054b2a32894a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs/cs-wpf-unpackaged/CsWpfState/CsWpfState.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3348d833aa539ca2b8a86045c645fb8120fbe8c963ca6b0e03d6054b2a32894a",
+      "size": 578,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "83b39cd85b20aeca2f4a0a888e5e42ea6a142e89",
+      "cachePath": "blobs/sha256/75/7519892fb5043396d5b8074223a0e4a7940392c2a382c3ab638c5a3b49911094",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cs-winui/BackgroundTaskBuilder/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7519892fb5043396d5b8074223a0e4a7940392c2a382c3ab638c5a3b49911094",
+      "size": 1412,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "843492739af8aae9701a6d943689e5397e243cfd",
+      "cachePath": "blobs/sha256/4a/4a8b374e535f70509d7e032465c3f2d289cf49c47ae1b725714ae40443304be8",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/ShareTarget/WinUI-CS-ShareTargetSampleApp/WinUI-CS-ShareTargetSampleApp/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4a8b374e535f70509d7e032465c3f2d289cf49c47ae1b725714ae40443304be8",
+      "size": 2285,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "85da003277a1292429ae9807c367127d9902932f",
+      "cachePath": "blobs/sha256/b3/b33374f3ad0d5bd216b1bf9d89a695dc3f4e15044e6d52a994feb5e740250aac",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp-cmake/WinMLEpCatalog/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b33374f3ad0d5bd216b1bf9d89a695dc3f4e15044e6d52a994feb5e740250aac",
+      "size": 2618,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "869a8fd9e775e4bf5bb876bb2371260a60f73632",
+      "cachePath": "blobs/sha256/96/963081ba065710556cf90ce204d85c115bfca99bc1b0711489e8a856bb5c4891",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CppApp/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "963081ba065710556cf90ce204d85c115bfca99bc1b0711489e8a856bb5c4891",
+      "size": 893,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "89242b00fccce39997336f4b7df6f971a8856f5b",
+      "cachePath": "blobs/sha256/db/db5108ef66b624c03256ee78a6d5155fe9b587123077e8ab351b92fac17842a7",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "db5108ef66b624c03256ee78a6d5155fe9b587123077e8ab351b92fac17842a7",
+      "size": 1798,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "89ada03330d510f9fb9f399208c688bbdb695f65",
+      "cachePath": "blobs/sha256/05/058f797784452c626f655eabe0f7915c02b496e8df8c9cc1e6b43c6a5649c961",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/cpp-winui/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "058f797784452c626f655eabe0f7915c02b496e8df8c9cc1e6b43c6a5649c961",
+      "size": 806,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "89c68cbf01fc8316475749619a51380ffc06a730",
+      "cachePath": "blobs/sha256/5b/5bf91a511333f8155b407747ab6c18b43cb3f842a8ed37edb0a6ee22cd89fd4a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Installer/cpp-console-unpackaged/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5bf91a511333f8155b407747ab6c18b43cb3f842a8ed37edb0a6ee22cd89fd4a",
+      "size": 2943,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "8b228300d5a815347d65db2e6310a05c77305cb9",
+      "cachePath": "blobs/sha256/5f/5f31df2229958608e439c790f7570601de1634f897e0aa5e90cd5413a85acc4f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/CustomControls/CppApp/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5f31df2229958608e439c790f7570601de1634f897e0aa5e90cd5413a85acc4f",
+      "size": 2251,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "8c2b432047f877e3e887147a0a4b1fd08364b1e7",
+      "cachePath": "blobs/sha256/49/4938d3bc2ec3b39f4b1743e01ec13f3031a0a092ac343de9cf7d4e8d0ed5eb84",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/RestartRegistration/cpp-winui-packaged/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4938d3bc2ec3b39f4b1743e01ec13f3031a0a092ac343de9cf7d4e8d0ed5eb84",
+      "size": 298,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "8e084742c0f3ced7b306570b51d47bb9d42dfdeb",
+      "cachePath": "blobs/sha256/d6/d6a85611ec401316b8b3dae80ccc94eac1df1a02b67b92498f885a5fa4958b85",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/ResourceManagement/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d6a85611ec401316b8b3dae80ccc94eac1df1a02b67b92498f885a5fa4958b85",
+      "size": 1646,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "901be6ce449c0dfe6c571b8a2cde1762f3ced415",
+      "cachePath": "blobs/sha256/47/479b72d77566164fee27455f2d4078fc8e370a65b9a4fe6351578ac21ea7588a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Widgets/cpp-win32-packaged/SampleWidgetProviderApp/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "479b72d77566164fee27455f2d4078fc8e370a65b9a4fe6351578ac21ea7588a",
+      "size": 2100,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "903ebc33888e5802cb675667b0c42ed239d6d3f0",
+      "cachePath": "blobs/sha256/d0/d0483b35ea7690fd64adf308646959a3c56e69913ac95a90c4885f0e82916db2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs/cs-winforms-unpackaged/CsWinFormsState/CsWinFormsState.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d0483b35ea7690fd64adf308646959a3c56e69913ac95a90c4885f0e82916db2",
+      "size": 463,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9146b31c09e5152dc1fe511f166830507428cd1f",
+      "cachePath": "blobs/sha256/cf/cf6800ff2347ad07a29ae64ad3d3d07348390506d7409da99afbb1e64e31fd91",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Islands/SampleWinUIClassLibrary/SampleWinUIClassLibrary.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "cf6800ff2347ad07a29ae64ad3d3d07348390506d7409da99afbb1e64e31fd91",
+      "size": 789,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "91f4fa6d0fcf7871d7c480ac1c0f46e700ccb990",
+      "cachePath": "blobs/sha256/85/857664fddc94f7b1c405339dec0d468d218cab05614796af6106f8dd50a2d8cb",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs/cs-wpf-unpackaged/CsWpfInstancing/CsWpfInstancing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "857664fddc94f7b1c405339dec0d468d218cab05614796af6106f8dd50a2d8cb",
+      "size": 630,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "937103a5b15f8773661076d6af0906cd383a04d2",
+      "cachePath": "blobs/sha256/28/28b1fe6db1297a0e1ac757a53693f9e35dff72e531076693f7387ac3f0681826",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cpp/cpp-win32-packaged/CppWinMainActivationPkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "28b1fe6db1297a0e1ac757a53693f9e35dff72e531076693f7387ac3f0681826",
+      "size": 2669,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "950ea5e91d3e9aa2177078c474bb347ae545fcc9",
+      "cachePath": "blobs/sha256/dc/dcf27c6ed9b4dae95c0b9d06fcc8c7be8956b59277508c63163af8930e5ef268",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cpp/cpp-winui-packaged/CppWinUiDesktopState/CppWinUiDesktopState (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "dcf27c6ed9b4dae95c0b9d06fcc8c7be8956b59277508c63163af8930e5ef268",
+      "size": 1656,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "97858b364fa8d0322499dc11202805a5f6cb7774",
+      "cachePath": "blobs/sha256/39/39806b142d5f64cca67bbc03d5080e110a59da4ed0e756b3ddede32160514629",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/cs-winui/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "39806b142d5f64cca67bbc03d5080e110a59da4ed0e756b3ddede32160514629",
+      "size": 863,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "98ab3d5b86fa400ed044482201ed315c30de834b",
+      "cachePath": "blobs/sha256/58/589bddc4a056c961043299fdc4ac8b92c52a50edb5132fb79193aba224540d22",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "589bddc4a056c961043299fdc4ac8b92c52a50edb5132fb79193aba224540d22",
+      "size": 2785,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9935e1f3075b591c47a9d524e938670f5aa4b223",
+      "cachePath": "blobs/sha256/3a/3af1b0e1b22169722aac4ca52ddab02ecb713f33680da6c975767fffe8ed1776",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs1/cs-wpf-packaged/CsWpfStatePkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3af1b0e1b22169722aac4ca52ddab02ecb713f33680da6c975767fffe8ed1776",
+      "size": 1566,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "99a5cacbace025346dec3e09b0264f8fb0a2687a",
+      "cachePath": "blobs/sha256/75/75998b1c07c86c9f6b6b25491db3810347bc8de3f7c19a2ea7398e03f79b50f5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/Demos/DepthDemo/DepthDemoApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "75998b1c07c86c9f6b6b25491db3810347bc8de3f7c19a2ea7398e03f79b50f5",
+      "size": 2458,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9a6a45cbdc1e155d90c067a0ccd068929835ca2a",
+      "cachePath": "blobs/sha256/8d/8d07149ccf88f6d95a59d3b2eb01a4cc412ca9903d96533790ed216beb74aed1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Windowing/cpp/cpp-winui/SampleApp/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8d07149ccf88f6d95a59d3b2eb01a4cc412ca9903d96533790ed216beb74aed1",
+      "size": 1502,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9c593499f579597f121566f24530f4d6cdca52f0",
+      "cachePath": "blobs/sha256/ec/ec1d094abde79ce9761469b1e50c14abd80c2dacd70b0aeb79a528606cda0542",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsAIFoundry/cs-winui/WindowsAISample.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ec1d094abde79ce9761469b1e50c14abd80c2dacd70b0aeb79a528606cda0542",
+      "size": 4523,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9dcb8b4828f85700bd92e266476ece46670e6c9b",
+      "cachePath": "blobs/sha256/40/409a46b6d61301c6042bad2f85da602cb24a31cf7aafba74a0f83f51a09ba0c1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/RestartRegistration/cpp-winui-packaged/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "409a46b6d61301c6042bad2f85da602cb24a31cf7aafba74a0f83f51a09ba0c1",
+      "size": 964,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "9e24adbaaa41acff8c47ba386ea540747dcb029c",
+      "cachePath": "blobs/sha256/4c/4c97b09af022df5038826ef6249e789b18aa649fe4b87a2f13e8443b6a4fd6e2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Composition/DynamicRefreshRateTool/cpp-winui/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4c97b09af022df5038826ef6249e789b18aa649fe4b87a2f13e8443b6a4fd6e2",
+      "size": 2495,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a05ab60056b96ff7915c44d961138a3e4b56c73f",
+      "cachePath": "blobs/sha256/66/666a1fda622c24089daabc472d92f3c04aa857bb07d7ea12ac541bcd02e57b7e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/RestartRegistration/cpp-winui-packaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "666a1fda622c24089daabc472d92f3c04aa857bb07d7ea12ac541bcd02e57b7e",
+      "size": 1703,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a0e00877d1a878c5bb1d24a65b7408f79ad430f8",
+      "cachePath": "blobs/sha256/57/570a6db671a0361e616f7d4441c2ba11eeda56a2b5261eb00307666209c042fa",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs1/cs-winui-packaged-wap/SelfContainedDeployment (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "570a6db671a0361e616f7d4441c2ba11eeda56a2b5261eb00307666209c042fa",
+      "size": 1669,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a17aba73899f071d1ac438fc29816a4f0b0d36c6",
+      "cachePath": "blobs/sha256/91/914ff77aef4e33029ff3332a0fa9e0f0c548c273ba7ee9ad0bd908d8429bf5a4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/TextRendering/cpp-win32/DWriteCoreGallery/Main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "914ff77aef4e33029ff3332a0fa9e0f0c548c273ba7ee9ad0bd908d8429bf5a4",
+      "size": 1580,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a184d1d2144b45147c76b3084f5036b94ee97069",
+      "cachePath": "blobs/sha256/bc/bc96f186be11a24c7b8de417cacdd1fecec7835042244e74472c4c54515a03dd",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs1/cs-wpf/wpf_packaged_app/wpf_packaged_app.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "bc96f186be11a24c7b8de417cacdd1fecec7835042244e74472c4c54515a03dd",
+      "size": 1192,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a201bfef412840900f3adac50b74682feef160dc",
+      "cachePath": "blobs/sha256/3f/3f954f667b8d7f71ffaf82f43630363803c24497d29b94a9ca63e5dce138fef4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3f954f667b8d7f71ffaf82f43630363803c24497d29b94a9ca63e5dce138fef4",
+      "size": 1798,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a4ddefd1ff4ff91fb6214aeaa411e17815504b65",
+      "cachePath": "blobs/sha256/14/14dea9c921157f2ceb2a09be276fd5e28523ed6816948da9b734808b706c1293",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CppAppUnpackaged/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "14dea9c921157f2ceb2a09be276fd5e28523ed6816948da9b734808b706c1293",
+      "size": 789,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a55f6eef836372246e68b4667839c95eeec7c6d2",
+      "cachePath": "blobs/sha256/6e/6e326c1c01f59c1142de3b6bd174d85d0c617fe4b8df5932a2d4bd4cfd33ef4c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cpp/cpp-winui/SampleApp (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "6e326c1c01f59c1142de3b6bd174d85d0c617fe4b8df5932a2d4bd4cfd33ef4c",
+      "size": 1653,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a81178d151e0c25fdb36ff9c9d5edfea009c2419",
+      "cachePath": "blobs/sha256/97/97d4d18a2d7bb58964feb4ffa889848a430c72aa549353f203363cfc1bc5e811",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cs/cs-console-unpackaged/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "97d4d18a2d7bb58964feb4ffa889848a430c72aa549353f203363cfc1bc5e811",
+      "size": 290,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a988cd2539227ab0044452ccd143c2755c782bc6",
+      "cachePath": "blobs/sha256/34/34db6d940057325a1fc53819b221f2267a57459364e08124240b958a1609247f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsAIFoundry/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "34db6d940057325a1fc53819b221f2267a57459364e08124240b958a1609247f",
+      "size": 1974,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "a9a9e36267b96092f0f9c321566752ea3d453bec",
+      "cachePath": "blobs/sha256/49/49905276ef842367a41713a25dcdf8627da6feb469ae5e5d650db655936e43c5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "49905276ef842367a41713a25dcdf8627da6feb469ae5e5d650db655936e43c5",
+      "size": 395,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "abddf45ae36e8882723dfdd4cd8965089eeb01c9",
+      "cachePath": "blobs/sha256/42/42a557dab133737818cfce723d3c7d3b3307d727658b629ac55c7249fdff0395",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "42a557dab133737818cfce723d3c7d3b3307d727658b629ac55c7249fdff0395",
+      "size": 1629,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "adcfaecb539082ab84f3e8b5b0e6af28c382d66b",
+      "cachePath": "blobs/sha256/f3/f3dfbb0edf28470b1028d44b5087533f50bac2b568b75819491873294e4cd3b4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs/HelloPhi/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f3dfbb0edf28470b1028d44b5087533f50bac2b568b75819491873294e4cd3b4",
+      "size": 8392,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "af4c78399437ec3c2b25eebe1d780b2cc86df1c8",
+      "cachePath": "blobs/sha256/cc/cc7d78f6b1490bbd731c525bcd3ec7d18a2a4fb9dcba556080177d5e834a0dc9",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/RestartRegistration/cpp-winui-packaged/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "cc7d78f6b1490bbd731c525bcd3ec7d18a2a4fb9dcba556080177d5e834a0dc9",
+      "size": 930,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "afbcb0e751dca934c15795040632a52d494d3931",
+      "cachePath": "blobs/sha256/f2/f290e3f60c8a16b81830adf3dcc7a62ca70b058587b9464949430f0a8f5b21b2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/DepthDemo/DepthDemoApp/DepthDemoApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f290e3f60c8a16b81830adf3dcc7a62ca70b058587b9464949430f0a8f5b21b2",
+      "size": 832,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b0f16e20b071c13b110a6367cf20a4d795e72c2f",
+      "cachePath": "blobs/sha256/bf/bfabf8c1e4f06b19478d8ce1fcf647595a069132dd47cc0ebdc1776546411d50",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/SamplesCommon/SamplesCommon/SamplesCommon.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "bfabf8c1e4f06b19478d8ce1fcf647595a069132dd47cc0ebdc1776546411d50",
+      "size": 1916,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b1508bbe88729c60ca46f178f6a739001f0fbcd8",
+      "cachePath": "blobs/sha256/ae/ae2a2009fbb987138769da017315c76d9601761bcd1372ea64158b6f15f979bc",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SceneGraph/SampleGalleryApp/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ae2a2009fbb987138769da017315c76d9601761bcd1372ea64158b6f15f979bc",
+      "size": 2473,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b172bbd52acb7c0e8a43742443fa77479345124d",
+      "cachePath": "blobs/sha256/38/38c94351f329354d4cc65011b22c87db53583b23e343e553e7dd4e858ba941ec",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Input/cs-winui/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "38c94351f329354d4cc65011b22c87db53583b23e343e553e7dd4e858ba941ec",
+      "size": 470,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b334f65627ad1e4e242e3c31d2c1e9e56d6d9665",
+      "cachePath": "blobs/sha256/f3/f33264345c57cff043aa05425ff05da14a6db3714fcee4f430737cccfed1b69b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsAIFoundry/cs-winui/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f33264345c57cff043aa05425ff05da14a6db3714fcee4f430737cccfed1b69b",
+      "size": 2512,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b4620119e4a60806e279bbe7b14cff29240cebfb",
+      "cachePath": "blobs/sha256/a7/a742f36b796bcdd52a49bd0d94ffd6d6386422b5a4862643d02f22a8f0bfdba4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a742f36b796bcdd52a49bd0d94ffd6d6386422b5a4862643d02f22a8f0bfdba4",
+      "size": 6403,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b4837c5214f144c8be7546867503a292be7a56ef",
+      "cachePath": "blobs/sha256/fb/fbd6d98f2aec32d159de01784d280287f1242441528e6ef605782e186ca08e8b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "fbd6d98f2aec32d159de01784d280287f1242441528e6ef605782e186ca08e8b",
+      "size": 2859,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b4c7c8e0d2b376bdfe093a0cfe31680cd8f6bafd",
+      "cachePath": "blobs/sha256/b1/b1838b04d6fab75528157bf3c300284697d3e17e9624d5f6c164714f0c840435",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs-wpf/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b1838b04d6fab75528157bf3c300284697d3e17e9624d5f6c164714f0c840435",
+      "size": 3449,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b6be8fd26ba7c68970f79dec7db0f3fca0436563",
+      "cachePath": "blobs/sha256/7c/7ceeb1334033b94e0ab06655dd86a426a775a4ece13d9e421606829dff2918b5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cs/cs-winforms-unpackaged/winforms_unpackaged_app.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7ceeb1334033b94e0ab06655dd86a426a775a4ece13d9e421606829dff2918b5",
+      "size": 677,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b709860c2dddfbc203aebfefd2acb11a13af34ad",
+      "cachePath": "blobs/sha256/c3/c3ead9b1bcc9f25f3fd1a4d83051a8053d6b3519187838773b1ed8e065618ed2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/CppUnpackagedAppNotifications/CppUnpackagedAppNotifications/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "c3ead9b1bcc9f25f3fd1a4d83051a8053d6b3519187838773b1ed8e065618ed2",
+      "size": 3565,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b70f60bea3a71a4a9debe34d0e29d5126f67647f",
+      "cachePath": "blobs/sha256/72/7297e7a3477a6cb05f8c798de261fa210fb48be3647d5d15920f624ded490c55",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs/cs-winui/winui_desktop_packaged_app/winui_desktop_packaged_app.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7297e7a3477a6cb05f8c798de261fa210fb48be3647d5d15920f624ded490c55",
+      "size": 2139,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b845dc91c82f1187d28b2812a4ba953e535e4ec8",
+      "cachePath": "blobs/sha256/7d/7da9fbb8667ee24797ff08eb653e5d9d2a1c59e4139096b3bad0be560a3d0846",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/ResourceManagement/cs/cs-winforms-unpackaged/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7da9fbb8667ee24797ff08eb653e5d9d2a1c59e4139096b3bad0be560a3d0846",
+      "size": 2059,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "b8a714e04e2af7d23fe2afe1662faac8a6ba78e6",
+      "cachePath": "blobs/sha256/88/88fe46b56cfab07ea8717dd9c641c58e48ed08cdbb8785b57c76c0a3015d9106",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs/cs-winforms-unpackaged/CsWinFormsInstancing/CsWinFormsInstancing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "88fe46b56cfab07ea8717dd9c641c58e48ed08cdbb8785b57c76c0a3015d9106",
+      "size": 508,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ba72d5a913d283ba536bd41ad7a7485e2401135d",
+      "cachePath": "blobs/sha256/a1/a1491949d39744e9deb4b5c9a8a635ea29299916c41b189c61cf924cf684dd6b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Activation/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a1491949d39744e9deb4b5c9a8a635ea29299916c41b189c61cf924cf684dd6b",
+      "size": 2183,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "be3b13e885d335b692bddb8f654a33919d9fe4cf",
+      "cachePath": "blobs/sha256/79/795d7476e6f8cbbb82d2f1cf9924c8357a15361acbc84c2a0a8e2d8c3a9f607b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/MaterialCreator/MaterialCreatorPackage/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "795d7476e6f8cbbb82d2f1cf9924c8357a15361acbc84c2a0a8e2d8c3a9f607b",
+      "size": 1632,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c04471de5f3747436bb19957f2ace7efcf15ce70",
+      "cachePath": "blobs/sha256/46/46af74d09bfa5d05e43aea582c06a842a3d0bb0d18a2638d11719a104d38413a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs/cs-winui/ClassLibrary/ClassLibrary.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "46af74d09bfa5d05e43aea582c06a842a3d0bb0d18a2638d11719a104d38413a",
+      "size": 758,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c4702b244d87f3688c7a31d72e1b7a6d135d9029",
+      "cachePath": "blobs/sha256/b1/b1dfa2df4d1798346c2b857941393af9229a6b0d45b885816a3badf6c872bede",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "b1dfa2df4d1798346c2b857941393af9229a6b0d45b885816a3badf6c872bede",
+      "size": 2780,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c54e8b32d6a909f7991b4fc9053543cf4543615e",
+      "cachePath": "blobs/sha256/30/303493345794c8d517fe5ed8732ad3f4944f872e6be99cf8ead3fea154a32135",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs/CSharpConsoleDesktop/CSharpConsoleDesktop/CSharpConsoleDesktop.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "303493345794c8d517fe5ed8732ad3f4944f872e6be99cf8ead3fea154a32135",
+      "size": 1583,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c64fd48e14937f3f6661b7449c7b3d956c927b33",
+      "cachePath": "blobs/sha256/45/4517c49494a3f221e292408861988a0a678574b36bd11f629147db8acddea6c8",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Notifications/App/CsUnpackagedAppNotifications/CsUnpackagedAppNotifications/CsUnpackagedAppNotifications.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4517c49494a3f221e292408861988a0a678574b36bd11f629147db8acddea6c8",
+      "size": 2142,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c6adea26a0e2e444c7e588495d6bcb51ef30b62c",
+      "cachePath": "blobs/sha256/11/11390e2ead7f39288ec600ce01bec9436c75796b6dd0a89c30deef990eb0d311",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs/cs-console-unpackaged/CsConsoleState/CsConsoleState.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "11390e2ead7f39288ec600ce01bec9436c75796b6dd0a89c30deef990eb0d311",
+      "size": 414,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c70733146ab8b359ed0509f71c967c6e22fa99e2",
+      "cachePath": "blobs/sha256/d4/d41f8092761e415fcb768d75dbf0e4895199d63ca2a88f92fe24ae1717476d41",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Notifications/App/CsUnpackagedAppNotifications/CsUnpackagedAppNotifications/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d41f8092761e415fcb768d75dbf0e4895199d63ca2a88f92fe24ae1717476d41",
+      "size": 1739,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c74f15d4c9bb96a2bb338c06417654a863071ecf",
+      "cachePath": "blobs/sha256/3a/3a897bca1edec1fa66010cad3ec9c69e4e35567cf3a12cfc95c36470dae78bb0",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/RestartRegistration/cs-winui-packaged/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3a897bca1edec1fa66010cad3ec9c69e4e35567cf3a12cfc95c36470dae78bb0",
+      "size": 482,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "c95935a8c791de5108f37a0637872565557bf55e",
+      "cachePath": "blobs/sha256/ad/ad37cd3e75ee6abf48ff225af2008ceb980d1345b36ca077780ef46cc6b9a162",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cs-winui/BackgroundTaskBuilder/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ad37cd3e75ee6abf48ff225af2008ceb980d1345b36ca077780ef46cc6b9a162",
+      "size": 2029,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ca8b5a6b3cfe34739c183e22a8fc4ecd4c851252",
+      "cachePath": "blobs/sha256/05/05fc38c74f2d6c807f534abad7a233aa2afdc02121b3664c8b0895e2fa9e027e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "05fc38c74f2d6c807f534abad7a233aa2afdc02121b3664c8b0895e2fa9e027e",
+      "size": 1632,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "cacb22189be09cc87b045084c6196827e0cabf33",
+      "cachePath": "blobs/sha256/8c/8c36d99e29582336b7e61b1cfb8ed2d88d48c9b1d157fdaa18044195c300f60d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/SampleGalleryPackage/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8c36d99e29582336b7e61b1cfb8ed2d88d48c9b1d157fdaa18044195c300f60d",
+      "size": 1704,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "cb6ef3f8d7dcf7778dd7f85fc006563adf82851b",
+      "cachePath": "blobs/sha256/eb/ebc8c179b557a5481b3c56da65b754f17c6ef3582f5d0640b2b48db17f5457f2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/StateNotifications/cs1/cs-wpf-packaged/CsWpfState/CsWpfState.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ebc8c179b557a5481b3c56da65b754f17c6ef3582f5d0640b2b48db17f5457f2",
+      "size": 604,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "cc3a86caf613d986679f61ab99679e4f10cc7d20",
+      "cachePath": "blobs/sha256/5f/5fc0221080fb4b933324f035da013bc01abdcf054567ce090d813bea071578a5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5fc0221080fb4b933324f035da013bc01abdcf054567ce090d813bea071578a5",
+      "size": 2042,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "cd11dc438061f11cec2ac994a19c45be287d292f",
+      "cachePath": "blobs/sha256/f6/f6e758b99ce9043852f78eb595dbe7bf245f680be2b2a9507319a9de46a53df2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cs/HelloPhi/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f6e758b99ce9043852f78eb595dbe7bf245f680be2b2a9507319a9de46a53df2",
+      "size": 2039,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ce11e563e1dc3f436e6c96cd8007456292f08b32",
+      "cachePath": "blobs/sha256/a1/a14a1e96f5d68ab2464880a3447d68eb4c74b762ca9943dd7c66856780f726ac",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/TextRendering/cpp-win32/DWriteCoreGallery (packaging)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a14a1e96f5d68ab2464880a3447d68eb4c74b762ca9943dd7c66856780f726ac",
+      "size": 1789,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ce6380bca88c14d0afdc05597f3f6239f640198d",
+      "cachePath": "blobs/sha256/70/701c5d8887554e0fb928b9f61bf71002afdb31b01de13b1936c92d40d65c9562",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Unpackaged/cs-console-unpackaged/Unpackaged.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "701c5d8887554e0fb928b9f61bf71002afdb31b01de13b1936c92d40d65c9562",
+      "size": 752,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "d05f81beedad23fbf6363ee8d92ae970233a9fc3",
+      "cachePath": "blobs/sha256/d0/d0ed903eaca165d59d51a1c6975c77479541a63e6b497f22f147809f614aa48a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp-abi/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "d0ed903eaca165d59d51a1c6975c77479541a63e6b497f22f147809f614aa48a",
+      "size": 5219,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "d619ac12f3213b5af948617a7e9951de2e5c9602",
+      "cachePath": "blobs/sha256/9e/9eb799df51bd649d7782cda012d5809a69f9a00fcbb64c46a0b010eb854bc609",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/CppUnpackagedAppNotifications/CppUnpackagedAppNotifications/SampleConfiguration.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9eb799df51bd649d7782cda012d5809a69f9a00fcbb64c46a0b010eb854bc609",
+      "size": 967,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "cachePath": "blobs/sha256/cf/cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/TextRendering/cpp-win32/DWriteCoreGallery/RobotoMono/LICENSE.txt",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size": 11358,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "d86e6d881fcae24a7d31ccdfbbc0f965e53f866f",
+      "cachePath": "blobs/sha256/3c/3ce978786ca72af4c4cd707098526106fc0405008d37f16157846baf85141ad2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3ce978786ca72af4c4cd707098526106fc0405008d37f16157846baf85141ad2",
+      "size": 2628,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "dcbbce6b40a0a0dd53b5eddf2d89d577d2a60c98",
+      "cachePath": "blobs/sha256/56/5697ac87e47570d21919e38185abcd692919ba3dbfe89273b1c61ac0b2250ece",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/CsUnpackagedAppNotifications/CsUnpackagedAppNotifications/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5697ac87e47570d21919e38185abcd692919ba3dbfe89273b1c61ac0b2250ece",
+      "size": 924,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "dd5b3a58aa1849f452abc9b5cd1638dc71a5e482",
+      "cachePath": "blobs/sha256/cc/cc4d4de0920b0d3912203b5d9aa76728ac4a11087f55da9ea00576db7d1e34e2",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/Resources/ResNet50/model.LICENSE.txt",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "cc4d4de0920b0d3912203b5d9aa76728ac4a11087f55da9ea00576db7d1e34e2",
+      "size": 10141,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "de2eec368a79b63c5c171d09b9d5c6f03c87e9d8",
+      "cachePath": "blobs/sha256/36/36304a248657598f16c6d3366adff672881e1c963bdc6fcfd8f6039081b29e4b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Instancing/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "36304a248657598f16c6d3366adff672881e1c963bdc6fcfd8f6039081b29e4b",
+      "size": 117,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "de2eec368a79b63c5c171d09b9d5c6f03c87e9d8",
+      "cachePath": "blobs/sha256/36/36304a248657598f16c6d3366adff672881e1c963bdc6fcfd8f6039081b29e4b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "36304a248657598f16c6d3366adff672881e1c963bdc6fcfd8f6039081b29e4b",
+      "size": 117,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "dfcf106fcf4794a9547fcab0e8f2c606296f10a8",
+      "cachePath": "blobs/sha256/f3/f3aadca861fcc23dca43406c63dc31c9915ff9f1b0bce53d6b691ad33d9df133",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/cs-winui/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f3aadca861fcc23dca43406c63dc31c9915ff9f1b0bce53d6b691ad33d9df133",
+      "size": 488,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "dfd0c9c99708564ace34993279d050ed458fdf83",
+      "cachePath": "blobs/sha256/41/4140b53e02b51aaa398c1fe6aecb26658fc96a713de67d26b3b0e755aae952ce",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Input/cs-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4140b53e02b51aaa398c1fe6aecb26658fc96a713de67d26b3b0e755aae952ce",
+      "size": 1606,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e0073aa2449c262bf948ebdcfa680fe3456adbf9",
+      "cachePath": "blobs/sha256/ee/ee02bf5dc02b964b50f95dfff31dff706a2507c85a51bda71d09d43cb8092a79",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/RestartRegistration/cs-winui-packaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "ee02bf5dc02b964b50f95dfff31dff706a2507c85a51bda71d09d43cb8092a79",
+      "size": 1642,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e0cc708522a5381ec69e56934ee04c2a05d9579f",
+      "cachePath": "blobs/sha256/97/977a835ffe5b13c4433186e54acbca8d0781db33cbead7662f613f07fc17f113",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs-winforms/WindowsMLWinFormsSample.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "977a835ffe5b13c4433186e54acbca8d0781db33cbead7662f613f07fc17f113",
+      "size": 1529,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e234d7c2a18ae4461c2ff07d6228d493630f2987",
+      "cachePath": "blobs/sha256/3c/3cea4c377d8487d3c70f700608660b2b822affba5b3a1d0f2f969e41e03951e7",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/MainPage.xaml",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3cea4c377d8487d3c70f700608660b2b822affba5b3a1d0f2f969e41e03951e7",
+      "size": 6168,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e596d4cdf598c31eb0e1cfdc6a98971a090735b9",
+      "cachePath": "blobs/sha256/81/8145c754c06bcefee7e5e9b8bc839b889253078db527d70f7be792de1731559a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/cpp-cmake/WinMLEpCatalog/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8145c754c06bcefee7e5e9b8bc839b889253078db527d70f7be792de1731559a",
+      "size": 4146,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e5a020e2f44144265d1c7c745f783f2e5cda8101",
+      "cachePath": "blobs/sha256/16/1679d0ea186c1f27a472e774e7d4e9f7697cb999a067e05495d198b50868509a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/CustomControls/CsApp/CsApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "1679d0ea186c1f27a472e774e7d4e9f7697cb999a067e05495d198b50868509a",
+      "size": 1882,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e613e7fe9b86d3a071cbce32529f36178ca4f78c",
+      "cachePath": "blobs/sha256/3f/3fcdedfa91a1f9429bdefa9caa50e4af02c7eaf08513cf15b733234715b6243b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "image/png",
+      "path": "Samples/Islands/img/designer.png",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3fcdedfa91a1f9429bdefa9caa50e4af02c7eaf08513cf15b733234715b6243b",
+      "size": 14613,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e6b152b2c47dab49238d6e6c10be5c27ca430c2b",
+      "cachePath": "blobs/sha256/31/31e9b1a8d667d45832ed41e64f764c4ada834601e475fe8ff7380ab9f98f882d",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Restart/cs-winui-packaged/cs-winui-packaged/cs-winui-packaged.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "31e9b1a8d667d45832ed41e64f764c4ada834601e475fe8ff7380ab9f98f882d",
+      "size": 1763,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e6c49597db542cb5272875fb8c868703222b5235",
+      "cachePath": "blobs/sha256/6b/6bb114dba01a74778350e65853b2d0820313b79699bf2dd4c5f1557adc67eb06",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/BackgroundTask/OutOfProc BackgroundTask/cpp-winui/BackgroundTaskBuilder/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "6bb114dba01a74778350e65853b2d0820313b79699bf2dd4c5f1557adc67eb06",
+      "size": 2368,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e77ca9692aa1c51dc9f461f22c4a72c546adfab3",
+      "cachePath": "blobs/sha256/53/531f09c8e52901d303b335c9116165a0e7e1964010a79f46198ef325ea11e148",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/DeploymentManager/cpp-winui/App.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "531f09c8e52901d303b335c9116165a0e7e1964010a79f46198ef325ea11e148",
+      "size": 910,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e7965fe13d34fffc5ef8279637dd5129ac937a9c",
+      "cachePath": "blobs/sha256/38/3861e579e7d2a78de69d7ccaca8b265274086b33b4c2f5adaaf1dd237bfc8081",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs1/cs-wpf-packaged/CsWpfInstancing/CsWpfInstancing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3861e579e7d2a78de69d7ccaca8b265274086b33b4c2f5adaaf1dd237bfc8081",
+      "size": 611,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e7f195a60fa852b23c7334e5ae5c6fde18e90dda",
+      "cachePath": "blobs/sha256/70/707a8568128ae3683a6efcc5bb9419e3beddd508f5aa7cb22a7024bca97e7ff9",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Notifications/App/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "707a8568128ae3683a6efcc5bb9419e3beddd508f5aa7cb22a7024bca97e7ff9",
+      "size": 4691,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e86d9f52dc66343727fb7bc6186eb9e682a85c2c",
+      "cachePath": "blobs/sha256/62/6265f28c869041f9e55f008b4b218433207e3190998df1e98ada70e3e0260f73",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Mica/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "6265f28c869041f9e55f008b4b218433207e3190998df1e98ada70e3e0260f73",
+      "size": 1448,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "e97cb4ca16406fda9c448205e520169d1f8bad5f",
+      "cachePath": "blobs/sha256/3e/3e900b013058498f5a538e11b9d41aacc4020f4c55e0f06508f0be0d51b22704",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cpp/cpp-winui-packaged/CppWinUiDesktopInstancing/CppWinUiDesktopInstancing (Package)/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3e900b013058498f5a538e11b9d41aacc4020f4c55e0f06508f0be0d51b22704",
+      "size": 2067,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ea17acee105418416d3b9cd0417d757bd85da308",
+      "cachePath": "blobs/sha256/f6/f62c2e3506612ba1385c22d7fe9b8b94d3bce1bb828dc240a1d7791a5b1c454f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/WindowsML/cs-winui/WindowsMLSample.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f62c2e3506612ba1385c22d7fe9b8b94d3bce1bb828dc240a1d7791a5b1c454f",
+      "size": 4693,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ea228367c4021e8a91e2ffd463fefa307dd04def",
+      "cachePath": "blobs/sha256/9a/9aca1edddd09820c8051b728adb8b9c87ad50ff169a2495625227b71e01124ba",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Restart/cs-winui-packaged/cs-winui-packaged/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9aca1edddd09820c8051b728adb8b9c87ad50ff169a2495625227b71e01124ba",
+      "size": 1617,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "eb090870d80fca728d02b766c5bee1089cfd6707",
+      "cachePath": "blobs/sha256/f1/f1d1dd04cfed5e3eae6506fd1110bd9b9e429985820e6ebafe60355d4035de50",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/SelfContainedDeployment/cpp/cpp-console-unpackaged/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f1d1dd04cfed5e3eae6506fd1110bd9b9e429985820e6ebafe60355d4035de50",
+      "size": 381,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ecb8e798fa8809fd48279e2e9eee1faa92d79a4c",
+      "cachePath": "blobs/sha256/3b/3b1d7a848d6f2cca742d65d67b65491eb07a03e35f3fd96a10bd8de1bd0d34be",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cs-winui/BackgroundTaskBuilder/BackgroundTaskBuilder.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3b1d7a848d6f2cca742d65d67b65491eb07a03e35f3fd96a10bd8de1bd0d34be",
+      "size": 2951,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "edbabf4b8f749adb3b9526176385953fa40201fb",
+      "cachePath": "blobs/sha256/8b/8bcb7c1b5d2329cad2c396cc6cf79ffdc04ebe30e6287b09e84b7a53f0c6fdae",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs2/cs-winui-packaged/CsWinUiDesktopInstancing/CsWinUiDesktopInstancing/CsWinUiDesktopInstancing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "8bcb7c1b5d2329cad2c396cc6cf79ffdc04ebe30e6287b09e84b7a53f0c6fdae",
+      "size": 1749,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "edbd9ede903752c981313dc3d15c65cf76d835ac",
+      "cachePath": "blobs/sha256/7d/7d50f58ffdfc202f699a8cc2bd01cd9038cdb3645bb52005df34b80c7c4d8a0f",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/EnvironmentVariables/cs-winforms-unpackaged/CsWinFormsEnv/CsWinFormsEnv.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "7d50f58ffdfc202f699a8cc2bd01cd9038cdb3645bb52005df34b80c7c4d8a0f",
+      "size": 498,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ee9e5d7bbc59e1551c2738c10513b786007a0d54",
+      "cachePath": "blobs/sha256/a4/a474534df01efdd99012a8226cbe7f73f506c9af0386c248b7b915b0ff4b5d84",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/DetailPage.xaml.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "a474534df01efdd99012a8226cbe7f73f506c9af0386c248b7b915b0ff4b5d84",
+      "size": 23183,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "eeab03404bd6d855afa12717817a6f16e5648e0b",
+      "cachePath": "blobs/sha256/de/dea04a3a2a4588d6c4fc7d574fa6ac66611c12bc3585d0bd42dc0fc01107fd50",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Widgets/cs-console-packaged/CsConsoleWidgetProvider/Program.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "dea04a3a2a4588d6c4fc7d574fa6ac66611c12bc3585d0bd42dc0fc01107fd50",
+      "size": 2128,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "ef56e791205ae234e0e67bf8a463e2752fcb87e7",
+      "cachePath": "blobs/sha256/25/25a324303f3d8ef3e61ff05f40d458364e7dcfe9cad06f89d2b257c52af2dcb5",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Composition/DynamicRefreshRateTool/cpp-winui/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "25a324303f3d8ef3e61ff05f40d458364e7dcfe9cad06f89d2b257c52af2dcb5",
+      "size": 1706,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f1a0450493587fcdfb07b8fc5d7a8d4d671636ed",
+      "cachePath": "blobs/sha256/90/900e176e31b720a8bb3f2db1ce735f49a2c28edccee0bb1fbed2b350c318b5d0",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/WindowsML/Resources/SqueezeNet.LICENSE.txt",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "900e176e31b720a8bb3f2db1ce735f49a2c28edccee0bb1fbed2b350c318b5d0",
+      "size": 1250,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f1c90d2e67e2f8d2d19d3b5d90559ac868ae680b",
+      "cachePath": "blobs/sha256/40/40384ec22696c9eb70f918d70a8819b4902e27ca17b17575f15a6c844755b6c9",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Islands/cs-winforms-unpackaged/WinFormsWithIslandApp.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "40384ec22696c9eb70f918d70a8819b4902e27ca17b17575f15a6c844755b6c9",
+      "size": 1538,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f1e1b37fe2c887d93efdf0b97bece67c54c38a5f",
+      "cachePath": "blobs/sha256/9b/9b187874847ab2dce57732c47cd5f2e9fedf66da0ad752f4fc715606884c6adc",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/PhotoEditor/cs-winui/DetailPage.xaml",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9b187874847ab2dce57732c47cd5f2e9fedf66da0ad752f4fc715606884c6adc",
+      "size": 40228,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f285c88fa9f2fe4a290b30551cc722c881f0043c",
+      "cachePath": "blobs/sha256/57/57e32afa7fdb91e51e04bcedc7f05e9048a32c7f1832ae2c5705f516fce1d98b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs/cs-console-unpackaged/CsConsoleInstancing/CsConsoleInstancing.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "57e32afa7fdb91e51e04bcedc7f05e9048a32c7f1832ae2c5705f516fce1d98b",
+      "size": 459,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f2be98a654a72a0715a9530bc186a5b1ce696d6b",
+      "cachePath": "blobs/sha256/71/713b36d4c79113c22f6c8e205b73601e672cd94a056a27dfbca6a5b0e932c295",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Widgets/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "713b36d4c79113c22f6c8e205b73601e672cd94a056a27dfbca6a5b0e932c295",
+      "size": 4647,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f2c662d3481d31b77c8c5ba8e8fedbe8458d474c",
+      "cachePath": "blobs/sha256/da/da8b14e16d42d06ebe2f728905f4bfd5d83fc7710e94f6ee992e08491d4382c1",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/CustomControls/CppAppUnpackaged/SampleConfiguration.h",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "da8b14e16d42d06ebe2f728905f4bfd5d83fc7710e94f6ee992e08491d4382c1",
+      "size": 296,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f58e6f11bdfa607234a786e7b1e6224864273977",
+      "cachePath": "blobs/sha256/be/bea9a606ad3b29c20772e1c546e1aea8d0ed16e4fc651e9c06953f15f87c064b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Windowing/cs1/cs-wpf/wpf_packaged_app/wpf_packaged_app.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "bea9a606ad3b29c20772e1c546e1aea8d0ed16e4fc651e9c06953f15f87c064b",
+      "size": 894,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f5afc4b5d98888f895e0947e5e6342f22c9c5362",
+      "cachePath": "blobs/sha256/2e/2e677fdf412c33d152949f4fb2b4741c161f7b7648b3ca926099d75167a6256c",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cs-winui/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "2e677fdf412c33d152949f4fb2b4741c161f7b7648b3ca926099d75167a6256c",
+      "size": 726,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f62f1ab5b7a1c66fa8440fea019ec65e4229a8f7",
+      "cachePath": "blobs/sha256/2a/2a5dba2bdeefb24b961f450c4be0d616cda2dcc52e03bb4659b85d4d0b9a252a",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Activation/cs2/cs-winui-packaged/CsWinUiDesktopActivation/CsWinUiDesktopActivation/CsWinUiDesktopActivation.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "2a5dba2bdeefb24b961f450c4be0d616cda2dcc52e03bb4659b85d4d0b9a252a",
+      "size": 779,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f65bb9fa1df6044cd7bd3200246ed99935efe592",
+      "cachePath": "blobs/sha256/97/9799b40814862017c6378703dfa65e53e8610e475d26414c7e4d5fbf862f5536",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/RestartRegistration/cs-winui-packaged/SampleConfiguration.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9799b40814862017c6378703dfa65e53e8610e475d26414c7e4d5fbf862f5536",
+      "size": 1066,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f6cc1abe950e4d5839926ab539f218aa4b4e0ee2",
+      "cachePath": "blobs/sha256/da/da26240426149cf6e0be9577d0ff50ac1ac477c8e534564abb365ca2d7dc5661",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/AppLifecycle/Instancing/cs1/cs-wpf-packaged/CsWpfInstancingPkg/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "da26240426149cf6e0be9577d0ff50ac1ac477c8e534564abb365ca2d7dc5661",
+      "size": 1971,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f72bff9c5f876d8e0f190c08ed0c59ffc176e80e",
+      "cachePath": "blobs/sha256/4b/4b7d07fb796f92e6ce2192a124967c6d685e3c794b551ba5b1cb26b52373a536",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs/cs-console-unpackaged/SelfContainedDeployment.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "4b7d07fb796f92e6ce2192a124967c6d685e3c794b551ba5b1cb26b52373a536",
+      "size": 771,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f7669dfd1ddbdb839b087d880c8cab2b62700978",
+      "cachePath": "blobs/sha256/58/586cc0ed9e84a9e67fed2cf181345ca1708c0f70941a76a6987c0e3ec30ec49e",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Islands/UXFrameworksOnIslands/main.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "586cc0ed9e84a9e67fed2cf181345ca1708c0f70941a76a6987c0e3ec30ec49e",
+      "size": 5099,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f7ac3960aac9ef5eda63a9a86e8a8ec05ceb44d3",
+      "cachePath": "blobs/sha256/52/5282a25d6575365d2554b1a38f3cbcca1092b4aac6ebdbee6c9822d4bb3914b4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/Input/cs-winui/Input.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "5282a25d6575365d2554b1a38f3cbcca1092b4aac6ebdbee6c9822d4bb3914b4",
+      "size": 2522,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f852df197cb83b7599a1cdb1bbe9ebc202711025",
+      "cachePath": "blobs/sha256/09/09040f1457d188c800b88463aef2234d20330252f35d06249f47e0aed4881b47",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/AppLifecycle/Restart/cs-winui-packaged/cs-winui-packaged/App.xaml.cs",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "09040f1457d188c800b88463aef2234d20330252f35d06249f47e0aed4881b47",
+      "size": 1750,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f8962aad8312b2ee0090f5391461bcaf8021ede0",
+      "cachePath": "blobs/sha256/64/64b0eadfee2409f22b30162effcbafd109325777dd8c111fcdf853ea1017c181",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/PhotoEditor/cpp-winui/PhotoEditor/Photo.cpp",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "64b0eadfee2409f22b30162effcbafd109325777dd8c111fcdf853ea1017c181",
+      "size": 1626,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f89e139c208bad753381b0a8f5981220b860c0fc",
+      "cachePath": "blobs/sha256/e9/e9e58858896cf35d3d1283496701af6ba67cf2cb196a96eac322c71251e9fff0",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/CustomControls/CsApp/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "e9e58858896cf35d3d1283496701af6ba67cf2cb196a96eac322c71251e9fff0",
+      "size": 1606,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f9242d48b18a1d115c4a2290d71eb7d6d610d95f",
+      "cachePath": "blobs/sha256/3e/3e7c23bc2a741f2aaaeb33805ad02f6e0b727685573ccf8e843ebe04ea1ada45",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/TextRendering/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "3e7c23bc2a741f2aaaeb33805ad02f6e0b727685573ccf8e843ebe04ea1ada45",
+      "size": 4263,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "f98b95947329de0565f7eba2c0310c1374e58947",
+      "cachePath": "blobs/sha256/f5/f59d44c8f7ebe37d001e590604cf971eafad6729365aa2aec4461bfcb2a54793",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SceneGraph/Demos/DepthDemo/DepthDemoPackage/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "f59d44c8f7ebe37d001e590604cf971eafad6729365aa2aec4461bfcb2a54793",
+      "size": 1614,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "fc2c01582546471cf88e7f785d1e3c4dee19e51a",
+      "cachePath": "blobs/sha256/10/109976ea004f00bc1ab762bac28704e09b5d3293445d056cbbbf4a66cd65d9cd",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "text/plain",
+      "path": "Samples/Islands/README.md",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "109976ea004f00bc1ab762bac28704e09b5d3293445d056cbbbf4a66cd65d9cd",
+      "size": 7505,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "fc4733884260ed5013241101374f48b030f795e9",
+      "cachePath": "blobs/sha256/9b/9b3f9521dbac92720c2066ed524e4426da914ef9b08a1a6e6e9792e45daf5d11",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/BackgroundTask/InProc BackgroundTask/cs-winui/BackgroundTaskBuilder/Package.appxmanifest",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "9b3f9521dbac92720c2066ed524e4426da914ef9b08a1a6e6e9792e45daf5d11",
+      "size": 3407,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "fe22f78b48e4682a809f9d257ccaa10cde2f28b9",
+      "cachePath": "blobs/sha256/86/86317ae9cd53e33732299cb08c16922d460efc12a4ec43f067dce60a71b3522b",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/SelfContainedDeployment/cs/cs-wpf-unpackaged/SelfContainedDeployment.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "86317ae9cd53e33732299cb08c16922d460efc12a4ec43f067dce60a71b3522b",
+      "size": 880,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    },
+    {
+      "blobSha": "fef4f7a96ef5a347b4d5e909795e8798ed84a412",
+      "cachePath": "blobs/sha256/65/650b5af668dde7cfbe7ce58f2b7a075742c60d9c60e75f330710c4c8980a70f4",
+      "commitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+      "mediaType": "application/xml",
+      "path": "Samples/ResourceManagement/cs/cs-winforms-unpackaged/winforms_unpackaged_app.csproj",
+      "providerId": "windows-app-sdk-samples",
+      "repository": {
+        "name": "WindowsAppSDK-Samples",
+        "owner": "microsoft"
+      },
+      "sha256": "650b5af668dde7cfbe7ce58f2b7a075742c60d9c60e75f330710c4c8980a70f4",
+      "size": 1108,
+      "treeSha": "748316950eaa0910aea552ba333dba614e710135"
+    }
+  ],
+  "schemaVersion": 1
 }

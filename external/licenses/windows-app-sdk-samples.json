@@ -1,0 +1,51 @@
+{
+  "entries": [
+    {
+      "attributionText": "Copyright (c) 2017 Microsoft Corporation.",
+      "id": "windows-app-sdk-samples:expression-builder-mit",
+      "licensePath": "Samples/SceneGraph/ExpressionBuilder/LICENSE.TXT",
+      "licenseUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/SceneGraph/ExpressionBuilder/LICENSE.TXT",
+      "scopePath": "Samples/SceneGraph/ExpressionBuilder",
+      "spdxId": "MIT"
+    },
+    {
+      "attributionText": "ResNet-50 model license.",
+      "id": "windows-app-sdk-samples:resnet50-apache-2.0",
+      "licensePath": "Samples/WindowsML/Resources/ResNet50/model.LICENSE.txt",
+      "licenseUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/WindowsML/Resources/ResNet50/model.LICENSE.txt",
+      "scopePath": "Samples/WindowsML/Resources/ResNet50",
+      "spdxId": "Apache-2.0"
+    },
+    {
+      "attributionText": "Roboto Mono font files are licensed under Apache-2.0.",
+      "id": "windows-app-sdk-samples:roboto-mono-apache-2.0",
+      "licensePath": "Samples/TextRendering/cpp-win32/DWriteCoreGallery/RobotoMono/LICENSE.txt",
+      "licenseUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/TextRendering/cpp-win32/DWriteCoreGallery/RobotoMono/LICENSE.txt",
+      "scopePath": "Samples/TextRendering/cpp-win32/DWriteCoreGallery/RobotoMono",
+      "spdxId": "Apache-2.0"
+    },
+    {
+      "attributionText": "SqueezeNet model license.",
+      "id": "windows-app-sdk-samples:squeezenet-bsd",
+      "licensePath": "Samples/WindowsML/Resources/SqueezeNet.LICENSE.txt",
+      "licenseUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/WindowsML/Resources/SqueezeNet.LICENSE.txt",
+      "scopePath": "Samples/WindowsML/Resources/SqueezeNet.onnx",
+      "spdxId": "BSD-2-Clause"
+    },
+    {
+      "attributionText": null,
+      "id": "windows-app-sdk-samples:repository-mit",
+      "licensePath": "LICENSE",
+      "licenseUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/LICENSE",
+      "scopePath": "",
+      "spdxId": "MIT"
+    }
+  ],
+  "lockedCommitSha": "18431c6d0111d6a4bd8d46b9c8a82add47ccb013",
+  "providerId": "windows-app-sdk-samples",
+  "repository": {
+    "name": "WindowsAppSDK-Samples",
+    "owner": "microsoft"
+  },
+  "schemaVersion": 1
+}
