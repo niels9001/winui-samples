@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "content-indexer",
+  "screenshotId": "add-item-initial-state",
+  "scenario": "add-item-with-api",
+  "alt": "The Content Indexer app showing the untouched Add item form with its six fields and Add to index action.",
+  "sourceMetadata": "Samples/ContentIndexer/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "58c8f2b662e89cccf9111286ee2be80cc3a582555d2db53ab0c4218c5ab72076"
+  }
+}

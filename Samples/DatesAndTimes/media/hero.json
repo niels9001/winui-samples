@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "dates-and-times",
+  "screenshotId": "long-short-formats",
+  "scenario": "long-short-formats",
+  "alt": "The dates and times app showing the Long and short formats scenario and its Display action.",
+  "sourceMetadata": "Samples/DatesAndTimes/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "03c5180348865ac09ad4a0ae8a2df068e6695377b60a3cc937700671214e31ce"
+  }
+}
