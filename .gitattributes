@@ -9,3 +9,4 @@
 
 # Content-addressed upstream payloads must survive checkout byte-for-byte.
 external/cache/blobs/** -text
+external/curation/**/LICENSE -text
