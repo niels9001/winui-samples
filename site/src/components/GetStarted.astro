@@ -1,8 +1,6 @@
 ---
 import { BookOpenRegular } from "@fluentui/react-icons/svg/book-open";
 import { CodeRegular } from "@fluentui/react-icons/svg/code";
-import { GlobeRegular } from "@fluentui/react-icons/svg/globe";
-import { PeopleCommunityRegular } from "@fluentui/react-icons/svg/people-community";
 import { ToolboxRegular } from "@fluentui/react-icons/svg/toolbox";
 
 import CodeBlock from "./CodeBlock.astro";
@@ -11,113 +9,149 @@ import { getStartedResources } from "../data/get-started";
 const resourceIcons = {
   "windows-app-sdk": ToolboxRegular,
   "windows-app-development": BookOpenRegular,
-  contributing: PeopleCommunityRegular,
-  github: GlobeRegular,
   "winui-skills": CodeRegular,
 } as const;
-
 const quickStart = `git clone https://github.com/niels9001/winui-samples.git
 cd winui-samples\\Samples\\FileAccess
 dotnet build -c Debug -p:Platform=x64`;
 ---
 
-<section class="section" id="get-started" aria-labelledby="get-started-title">
-  <div class="site-container">
-    <div class="section-header">
-      <p class="eyebrow">Get started</p>
-      <h2 id="get-started-title">Build on the Windows App SDK</h2>
+<section
+  class="section get-started-section"
+  id="get-started"
+  aria-labelledby="get-started-title"
+  data-scroll-reveal
+>
+  <div class="site-container get-started-layout">
+    <div class="stack get-started-copy">
+      <p class="eyebrow">Start building</p>
+      <h2 id="get-started-title">Run a project, then make it yours</h2>
       <p class="secondary-text">
-        Use the platform guidance, repository conventions, and focused WinUI
-        tooling behind these samples.
+        Use a Windows machine with the current .NET SDK, Visual Studio build
+        tools, and the Windows App SDK workload.
       </p>
+      <CodeBlock
+        code={quickStart}
+        label="Build FileAccess with PowerShell"
+        copyLabel="Copy FileAccess setup commands"
+      />
     </div>
-    <div class="get-started-layout">
-      <div class="resource-grid">
-        {
-          getStartedResources.map((resource) => {
-            const Icon = resourceIcons[resource.id];
-            return (
-              <article class="resource-card surface stack">
-                <Icon aria-hidden="true" className="resource-icon" />
-                <h3>{resource.title}</h3>
-                <p>{resource.description}</p>
-                <a href={resource.href}>
-                  {resource.linkLabel} <span aria-hidden="true">↗</span>
-                </a>
-              </article>
-            );
-          })
-        }
-      </div>
-      <div class="quick-start stack">
-        <div class="stack" style="--stack-space: var(--site-space-2)">
-          <p class="eyebrow">Build locally</p>
-          <h3>Run the FileAccess sample</h3>
-          <p class="secondary-text">
-            Clone the repository and build a packaged WinUI 3 project on Windows.
-          </p>
-        </div>
-        <CodeBlock code={quickStart} label="PowerShell" />
-      </div>
+    <div class="resource-list">
+      {
+        getStartedResources.map((resource) => {
+          const Icon = resourceIcons[resource.id];
+          return (
+            <a
+              class="resource-link surface"
+              data-pointer-surface
+              href={resource.href}
+            >
+              <span class="resource-icon">
+                <Icon aria-hidden="true" />
+              </span>
+              <span>
+                <strong>{resource.title}</strong>
+                <small>{resource.description}</small>
+                <span>{resource.linkLabel} <span aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          );
+        })
+      }
     </div>
   </div>
 </section>
 
 <style>
+  .get-started-section {
+    border-block: 1px solid var(--site-color-border-subtle);
+    background:
+      radial-gradient(circle at 12% 20%, var(--site-color-brand-subtle), transparent 30rem),
+      var(--site-color-canvas-subtle);
+  }
+
   .get-started-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
-    gap: var(--site-space-6);
+    grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 1.08fr);
     align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
   }
 
-  .resource-grid {
+  .get-started-copy {
+    --stack-space: var(--site-space-4);
+    min-width: 0;
+  }
+
+  .get-started-copy > p:last-of-type {
+    max-width: 38rem;
+  }
+
+  .get-started-copy :global(.code-block) {
+    margin-top: var(--site-space-3);
+  }
+
+  .resource-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+    gap: var(--site-space-3);
+  }
+
+  .resource-link {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
     gap: var(--site-space-4);
-  }
-
-  .resource-card {
-    --stack-space: var(--site-space-3);
     padding: var(--site-space-5);
-    box-shadow: none;
-  }
-
-  .resource-card :global(.resource-icon) {
-    color: var(--site-color-brand);
-    font-size: 1.5rem;
-  }
-
-  .resource-card p {
-    color: var(--site-color-text-secondary);
-    font-size: 0.92rem;
-  }
-
-  .resource-card a {
-    margin-top: auto;
-    font-weight: 650;
+    color: var(--site-color-text);
     text-decoration: none;
   }
 
-  .quick-start {
-    --stack-space: var(--site-space-4);
-    position: sticky;
-    top: 7rem;
+  .resource-link:hover {
+    border-color: var(--site-color-brand);
+    box-shadow: var(--site-shadow-flyout);
+    color: var(--site-color-text);
+    transform: translateY(-2px);
+  }
+
+  .resource-icon {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border-radius: var(--site-radius-medium);
+    background: var(--site-color-brand-subtle);
+    color: var(--site-color-brand);
+    font-size: 1.25rem;
+  }
+
+  .resource-link > span:last-child {
+    display: grid;
+    gap: var(--site-space-1);
+  }
+
+  .resource-link small {
+    color: var(--site-color-text-secondary);
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  .resource-link > span:last-child > span {
+    margin-top: var(--site-space-2);
+    color: var(--site-color-brand);
+    font-size: 0.82rem;
+    font-weight: 680;
   }
 
   @media (max-width: 58rem) {
     .get-started-layout {
-      grid-template-columns: 1fr;
-    }
-
-    .quick-start {
-      position: static;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--site-space-7);
     }
   }
 
-  @media (max-width: 38rem) {
-    .resource-grid {
-      grid-template-columns: 1fr;
+  @media (forced-colors: active) {
+    .get-started-section {
+      background: Canvas;
     }
   }
 </style>

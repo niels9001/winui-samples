@@ -21,12 +21,9 @@ namespace SDKTemplate.Controls
     /// <summary>
     /// A playback control that hosts a MediaPlayer and demonstrates a particular audio category.
     ///
-    /// Migration notes (UWP -> WinUI 3):
-    ///  * MediaElement -> MediaPlayerElement + MediaPlayer. The audio category lives on the
-    ///    MediaPlayer (MediaPlayerAudioCategory) instead of MediaElement.AudioCategory.
-    ///  * SystemMediaTransportControls.GetForCurrentView() is CoreWindow-bound and unavailable on
-    ///    desktop. It is replaced with SystemMediaTransportControlsInterop.GetForWindow(hwnd).
-    ///  * Window.Current.CoreWindow.Dispatcher.RunAsync(...) -> this.DispatcherQueue.TryEnqueue(...).
+    /// The MediaPlayerElement hosts a MediaPlayer, where MediaPlayerAudioCategory is configured.
+    /// Desktop media controls are retrieved for the app window through
+    /// SystemMediaTransportControlsInterop.GetForWindow(hwnd), and UI work uses DispatcherQueue.
     /// </summary>
     public sealed partial class PlaybackControl : UserControl
     {

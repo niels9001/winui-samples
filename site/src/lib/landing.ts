@@ -23,28 +23,34 @@ export interface OutcomeLink {
 
 export const outcomeLinks: readonly OutcomeLink[] = [
   {
-    title: "Connect hardware",
-    description: "Pair, discover, and communicate with nearby devices.",
+    title: "Build app foundations",
+    description: "Handle lifecycle, activation, settings, and app services.",
     facet: "primaryCategory",
-    value: "devices-and-sensors",
+    value: "app-fundamentals",
   },
   {
-    title: "Work with files and data",
-    description: "Persist, transform, index, and exchange app data.",
+    title: "Build with controls",
+    description: "Compose XAML, input, focus, layout, and interaction patterns.",
+    facet: "primaryCategory",
+    value: "ui-and-input",
+  },
+  {
+    title: "Work with files",
+    description: "Pick, persist, transform, index, and exchange app data.",
     facet: "primaryCategory",
     value: "files-and-data",
+  },
+  {
+    title: "Connect devices",
+    description: "Discover, pair, and communicate with nearby hardware.",
+    facet: "primaryCategory",
+    value: "devices-and-sensors",
   },
   {
     title: "Create media experiences",
     description: "Capture, play, cast, and process audio or video.",
     facet: "primaryCategory",
     value: "media",
-  },
-  {
-    title: "Build responsive UI",
-    description: "Explore input, focus, layout, and XAML interaction patterns.",
-    facet: "primaryCategory",
-    value: "ui-and-input",
   },
 ] as const;
 
@@ -82,4 +88,3 @@ export function outcomeBrowsePath(outcome: OutcomeLink): string {
   const query = serializeExplorerState(state).toString();
   return `/samples/${query ? `?${query}` : ""}`;
 }
-

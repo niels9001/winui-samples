@@ -33,6 +33,7 @@ const categoryIcons: Record<string, ComponentType<IconProps>> = {
 interface SampleVisualProps {
   categoryId: string;
   categoryLabel: string;
+  visualLabel: string;
   heroUrl?: string;
   heroAlt?: string;
   eager?: boolean;
@@ -41,6 +42,7 @@ interface SampleVisualProps {
 export function SampleVisual({
   categoryId,
   categoryLabel,
+  visualLabel,
   heroUrl,
   heroAlt,
   eager = false,
@@ -68,11 +70,20 @@ export function SampleVisual({
         categoryId,
       )}`}
       role="img"
-      aria-label={`${categoryLabel} sample illustration`}
+      aria-label={`${categoryLabel} example preview`}
     >
       <span className="sample-visual-grid" aria-hidden="true"></span>
-      <Icon aria-hidden="true" className="sample-visual-icon" />
-      <span className="sample-visual-label">{categoryLabel}</span>
+      <span className="sample-visual-window" aria-hidden="true">
+        <span className="sample-visual-titlebar"></span>
+        <span className="sample-visual-nav"></span>
+        <span className="sample-visual-content">
+          <span></span><span></span><span></span>
+        </span>
+      </span>
+      <span className="sample-visual-icon">
+        <Icon aria-hidden="true" />
+      </span>
+      <span className="sample-visual-label">{visualLabel}</span>
     </div>
   );
 }

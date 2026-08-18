@@ -11,9 +11,9 @@ import {
   sampleDirectory,
 } from "./repository-files";
 import {
-  repositoryBlobUrl,
   sampleCodePath,
 } from "./urls";
+import { sampleSourceFileUrl } from "./source-provenance";
 
 export const featuredFileSizeLimit = 128 * 1024;
 
@@ -78,7 +78,7 @@ export interface FeaturedFileDescriptor extends FeaturedFile {
   key: string;
   language: string;
   languageLabel: string;
-  githubUrl: string;
+  sourceUrl: string;
   routePath: string;
 }
 
@@ -201,10 +201,7 @@ export function describeFeaturedFiles(
       languageLabel: validation.valid
         ? validation.languageLabel
         : "Unavailable",
-      githubUrl: repositoryBlobUrl(
-        sample.project.repositoryPath,
-        file.path,
-      ),
+      sourceUrl: sampleSourceFileUrl(sample, file.path),
       routePath: sampleCodePath(sample.id, featuredFileKey(file, index)),
     };
   });

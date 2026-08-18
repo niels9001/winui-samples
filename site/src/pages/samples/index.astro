@@ -4,48 +4,62 @@ import CoverageNotice from "../../components/CoverageNotice.astro";
 import { SampleExplorer } from "../../components/SampleExplorer";
 import type { ExplorerSamplePresentation } from "../../components/SampleExplorer";
 import { catalog } from "../../lib/catalog-data";
+import { createExplorerIndex } from "../../lib/explorer";
 import { resolveHeroMedia } from "../../lib/sample-media";
 import { sitePath } from "../../lib/urls";
 
+const index = createExplorerIndex(catalog.samples, catalog.categories);
 const samples: ExplorerSamplePresentation[] = await Promise.all(
-  catalog.samples.map(async (sample) => {
-    const hero = await resolveHeroMedia(sample);
+  index.map(async (entry) => {
+    const source = catalog.samples.find(
+      (sample) => sample.id === entry.sample.id,
+    );
+    if (!source) {
+      throw new Error(`Missing catalog source for ${entry.sample.id}.`);
+    }
+    const hero = await resolveHeroMedia(source);
     return {
-      sample,
+      entry,
       heroUrl: hero ? sitePath(hero.routePath) : undefined,
-      heroAlt: sample.screenshots[0]?.alt,
+      heroAlt: source.screenshots[0]?.alt,
     };
   }),
+);
+const categoryById = new Map(
+  catalog.categories.map((category) => [category.id, category]),
 );
 ---
 
 <AppShell
-  title="Browse Windows app samples"
-  description="Browse metadata-backed WinUI 3 and Windows App SDK samples by the experience they help you build."
+  title="Browse Windows app code"
+  description="Search working WinUI and Windows App SDK examples by outcome, API, source, and requirement."
   activeNav="samples"
 >
   <section class="page-intro">
-    <div class="site-container stack intro-content">
-      <p class="eyebrow">Browse samples</p>
-      <h1>Find the Windows experience you want to build</h1>
-      <p>
-        Search by the outcome, API, scenario, project, or topic. Filter on
-        authored categories and real package or environment requirements
-        without turning manifest declarations into feature claims.
-      </p>
+    <div class="site-container intro-layout">
+      <div class="stack intro-content">
+        <p class="eyebrow">Browse</p>
+        <h1>Find code by outcome, API, or requirement</h1>
+        <p>
+          Search all {catalog.samples.length} projects, then narrow by source,
+          category, hardware, capability, or architecture.
+        </p>
+      </div>
+      <div class="source-summary surface">
+        <span class="source-dot" aria-hidden="true"></span>
+        <span>
+          <strong>WinUI samples</strong>
+          <small>Current source</small>
+        </span>
+        <span>{catalog.samples.length}</span>
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="catalog-title">
+  <section class="section browse-section" aria-labelledby="catalog-title">
     <div class="site-container stack catalog-layout">
       <CoverageNotice coverage={catalog.coverage} />
-      <h2 class="visually-hidden" id="catalog-title">Published samples</h2>
-      <p class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
-      <p class="visually-hidden">
-        Available facets include primary and secondary categories, topics,
-        Declared package capabilities, actual prerequisites, architectures,
-        and screenshot capture readiness.
-      </p>
+      <h2 class="visually-hidden" id="catalog-title">Windows code results</h2>
       <SampleExplorer
         basePath={import.meta.env.BASE_URL}
         categories={catalog.categories}
@@ -53,10 +67,31 @@ const samples: ExplorerSamplePresentation[] = await Promise.all(
         samples={samples}
       />
       <noscript>
-        <p class="noscript-notice">
-          Enable JavaScript to search and filter the catalog. Every published
-          sample remains available from its direct URL.
-        </p>
+        <section class="noscript-directory surface" aria-labelledby="static-title">
+          <div>
+            <p class="eyebrow">Static directory</p>
+            <h2 id="static-title">Open an example directly</h2>
+            <p>
+              Search and filters need JavaScript. Every current title remains
+              available below.
+            </p>
+          </div>
+          <ul>
+            {
+              catalog.samples.map((sample) => (
+                <li>
+                  <a href={sitePath(`/samples/${sample.id}/`)}>
+                    <strong>{sample.title}</strong>
+                    <span>
+                      {categoryById.get(sample.categories.primary)?.label ??
+                        sample.categories.primary}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
       </noscript>
     </div>
   </section>
@@ -64,36 +99,129 @@ const samples: ExplorerSamplePresentation[] = await Promise.all(
 
 <style>
   .page-intro {
-    padding-block: clamp(3.5rem, 8vw, 6.5rem);
+    padding-block: clamp(3rem, 6vw, 5rem);
     border-bottom: 1px solid var(--site-color-border-subtle);
-    background: var(--site-color-canvas-subtle);
+    background:
+      radial-gradient(circle at 88% 10%, var(--site-color-brand-subtle), transparent 28rem),
+      color-mix(in srgb, var(--site-color-canvas-subtle) 82%, transparent);
+  }
+
+  .intro-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--site-space-7);
   }
 
   .intro-content {
-    --stack-space: var(--site-space-4);
-    max-width: 58rem;
-    margin-inline: 0;
+    --stack-space: var(--site-space-3);
+    max-width: 52rem;
   }
 
   .intro-content h1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
+    max-width: 18ch;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
 
   .intro-content > p:last-child {
-    max-width: var(--site-reading-width);
+    max-width: 42rem;
     color: var(--site-color-text-secondary);
-    font-size: 1.08rem;
+    font-size: 1.02rem;
+  }
+
+  .source-summary {
+    display: grid;
+    min-width: 17rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--site-space-3);
+    padding: var(--site-space-4);
+    box-shadow: none;
+  }
+
+  .source-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--site-color-brand);
+    box-shadow: 0 0 0 0.3rem var(--site-color-brand-subtle);
+  }
+
+  .source-summary > span:nth-child(2) {
+    display: grid;
+  }
+
+  .source-summary small {
+    color: var(--site-color-text-muted);
+    font-size: 0.72rem;
+  }
+
+  .source-summary > span:last-child {
+    color: var(--site-color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .browse-section {
+    padding-top: var(--site-space-7);
   }
 
   .catalog-layout {
     --stack-space: var(--site-space-6);
   }
 
-  .noscript-notice {
-    padding: var(--site-space-4);
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: var(--site-radius-medium);
+  .noscript-directory {
+    display: grid;
+    gap: var(--site-space-6);
+    padding: var(--site-space-6);
+  }
+
+  .noscript-directory > div {
+    display: grid;
+    max-width: 42rem;
+    gap: var(--site-space-2);
+  }
+
+  .noscript-directory > div p:last-child {
     color: var(--site-color-text-secondary);
   }
 
+  .noscript-directory ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .noscript-directory a {
+    display: grid;
+    gap: var(--site-space-1);
+    padding: var(--site-space-3);
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: var(--site-radius-medium);
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  .noscript-directory a span {
+    color: var(--site-color-text-muted);
+    font-size: 0.74rem;
+  }
+
+  @media (max-width: 46rem) {
+    .intro-layout {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: var(--site-space-5);
+    }
+
+    .source-summary {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .noscript-directory ul {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
