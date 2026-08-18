@@ -112,7 +112,7 @@ const landingHtml = await readFile(landingPath, "utf8");
 
 assert.match(browseHtml, /<main\b[^>]*\bid="main-content"/);
 assert.match(browseHtml, /aria-live="polite"/);
-assert.match(browseHtml, /Browse Windows app code/);
+assert.match(browseHtml, /Browse \| Windows App Samples Browser/);
 assert.match(browseHtml, /WinUI samples/);
 assert.match(browseHtml, /<noscript>/);
 assert.match(browseHtml, /Every current title remains available below/);

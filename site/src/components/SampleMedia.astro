@@ -26,10 +26,10 @@ const categoryLabel = category?.label ?? sample.categories.primary;
         alt={sample.screenshots[0]?.alt ?? ""}
         decoding="async"
         fetchpriority={eager ? "high" : "auto"}
-        height="720"
+        height="900"
         loading={eager ? "eager" : "lazy"}
         src={sitePath(hero.routePath)}
-        width="1280"
+        width="1440"
       />
     ) : (
       <div
@@ -72,7 +72,7 @@ const categoryLabel = category?.label ?? sample.categories.primary;
   }
 
   .detail-visual img {
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .detail-visual-fallback {
