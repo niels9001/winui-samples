@@ -13,16 +13,6 @@ const browseIndex = await getBrowseIndexArtifact();
 const categoryById = new Map(
   catalog.categories.map((category) => [category.id, category]),
 );
-const providerOrder = new Map([
-  ["winui-samples", 0],
-  ["winui-gallery", 1],
-  ["windows-app-sdk-samples", 2],
-]);
-const portalProviders = [...(catalog.providers ?? [])].sort(
-  (left, right) =>
-    (providerOrder.get(left.id) ?? 99) -
-    (providerOrder.get(right.id) ?? 99),
-);
 ---
 
 <AppShell
@@ -31,7 +21,7 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
   activeNav="samples"
 >
   <section class="page-intro">
-    <div class="site-container intro-layout">
+    <div class="site-container">
       <div class="stack intro-content">
         <p class="eyebrow">Browse</p>
         <h1>Find code by outcome, API, or requirement</h1>
@@ -39,19 +29,6 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
           Search all {catalog.samples.length} examples, then narrow by source,
           category, language, hardware, capability, or architecture.
         </p>
-      </div>
-      <div class="source-summary surface">
-        <strong>Three trusted sources</strong>
-        <ul>
-          {
-            portalProviders.map((provider) => (
-              <li>
-                <span>{provider.label}</span>
-                <span>{provider.recordCount}</span>
-              </li>
-            ))
-          }
-        </ul>
       </div>
     </div>
   </section>
@@ -112,13 +89,6 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
       color-mix(in srgb, var(--site-color-canvas-subtle) 82%, transparent);
   }
 
-  .intro-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: var(--site-space-7);
-  }
-
   .intro-content {
     --stack-space: var(--site-space-3);
     max-width: 52rem;
@@ -133,34 +103,6 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
     max-width: 42rem;
     color: var(--site-color-text-secondary);
     font-size: 1.02rem;
-  }
-
-  .source-summary {
-    display: grid;
-    min-width: 17rem;
-    gap: var(--site-space-3);
-    padding: var(--site-space-4);
-    box-shadow: none;
-  }
-
-  .source-summary > strong {
-    font-size: 0.78rem;
-  }
-
-  .source-summary ul {
-    display: grid;
-    gap: var(--site-space-1);
-    padding: 0;
-    list-style: none;
-  }
-
-  .source-summary li {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--site-space-5);
-    color: var(--site-color-text-muted);
-    font-size: 0.74rem;
-    font-variant-numeric: tabular-nums;
   }
 
   .browse-section {
@@ -217,17 +159,6 @@ const portalProviders = [...(catalog.providers ?? [])].sort(
   }
 
   @media (max-width: 46rem) {
-    .intro-layout {
-      grid-template-columns: 1fr;
-      align-items: start;
-      gap: var(--site-space-5);
-    }
-
-    .source-summary {
-      width: 100%;
-      min-width: 0;
-    }
-
     .noscript-directory ul {
       grid-template-columns: 1fr;
     }

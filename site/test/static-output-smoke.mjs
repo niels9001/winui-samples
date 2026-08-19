@@ -424,8 +424,12 @@ assert.match(
   browseHtml,
   /<title>Browse \| Windows App Samples Browser<\/title>/,
 );
-assert.match(browseHtml, /WinUI samples/);
 assert.match(browseHtml, /<noscript>/);
+assert.doesNotMatch(
+  browseHtml,
+  /Three trusted sources|class="source-summary/,
+  "Browse must not render a provider summary card.",
+);
 assert.match(
   browseHtml,
   /Every sample in Windows App Samples Browser\s+remains available below/,
@@ -442,10 +446,6 @@ for (const sample of catalog.samples) {
     ),
     `No-JavaScript directory is missing ${sample.id}`,
   );
-}
-
-for (const provider of catalog.providers) {
-  assert.match(browseHtml, new RegExp(escapeRegExp(provider.label)));
 }
 
 for (const document of catalog.samples.flatMap((sample) =>
