@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "client-device-information",
+  "screenshotId": "get-device-information",
+  "scenario": "get-device-information",
+  "alt": "The Client Device Information app showing empty device ID, operating system, manufacturer, product name, and system SKU fields before retrieval.",
+  "sourceMetadata": "Samples/ClientDeviceInformation/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "5edb9aa5888f72523c85370c8a68afbe8990df7499a0a686b07a7e7a56d34028"
+  }
+}

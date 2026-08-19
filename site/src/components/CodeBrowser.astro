@@ -1,4 +1,6 @@
 ---
+import { CopyRegular } from "@fluentui/react-icons/svg/copy";
+import { OpenRegular } from "@fluentui/react-icons/svg/open";
 import { codeToHtml } from "shiki";
 
 import type { CatalogSample } from "../lib/catalog";
@@ -36,10 +38,13 @@ const highlighted =
     : undefined;
 ---
 
-<section class="code-browser surface" aria-labelledby={`code-title-${descriptor.key}`}>
+<section
+  class="code-browser surface"
+  aria-labelledby={`code-title-${descriptor.key}`}
+>
   <div class="code-browser-header">
     <div class="stack code-browser-heading">
-      <p class="eyebrow">Curated source</p>
+      <p class="code-path">{descriptor.path}</p>
       <h2 id={`code-title-${descriptor.key}`}>{descriptor.label}</h2>
       {
         descriptor.description && (
@@ -47,54 +52,75 @@ const highlighted =
         )
       }
     </div>
-    <div class="cluster code-browser-actions">
+    <div class="code-browser-actions" aria-label="Code actions">
       <span class="language-label">{descriptor.languageLabel}</span>
       <button
-        class="code-action"
+        class="icon-button"
         data-copy-control
-        data-copy-idle-label="Copy path"
+        data-copy-idle-label="Copy file path"
+        data-copy-success-label="File path copied"
         data-copy-text={descriptor.path}
         type="button"
+        aria-label="Copy file path"
       >
-        <span data-copy-feedback aria-live="polite">Copy path</span>
+        <CopyRegular aria-hidden="true" />
       </button>
       {
         activeFile.status === "ready" && (
           <button
-            class="code-action"
+            class="icon-button"
             data-copy-control
-            data-copy-idle-label="Copy code"
+            data-copy-idle-label="Copy source code"
+            data-copy-success-label="Source code copied"
             data-copy-target={`#${sourceId}`}
             type="button"
+            aria-label="Copy source code"
           >
-            <span data-copy-feedback aria-live="polite">Copy code</span>
+            <CopyRegular aria-hidden="true" />
           </button>
         )
       }
-      <a class="code-action" href={descriptor.githubUrl}>
-        View on GitHub <span aria-hidden="true">↗</span>
+      <a
+        class="icon-button"
+        href={descriptor.sourceUrl}
+        aria-label="Open file in source"
+      >
+        <OpenRegular aria-hidden="true" />
       </a>
     </div>
   </div>
 
   <div class="code-browser-layout">
-    <nav class="code-file-navigation" aria-label="Featured files">
+    <nav class="code-file-navigation" aria-label="Curated files">
+      <div class="file-navigation-heading">
+        <strong>Files</strong>
+        <span>{files.length}</span>
+      </div>
       <ul>
         {
           files.map((file) => (
             <li>
-              <a
-                aria-current={
-                  currentRoute && file.key === descriptor.key
-                    ? "page"
-                    : undefined
-                }
-                class:list={{ active: file.key === descriptor.key }}
-                href={sitePath(file.routePath)}
-              >
-                <span>{file.label}</span>
-                <code>{file.path}</code>
-              </a>
+              {
+                file.routePath ? (
+                  <a
+                    aria-current={
+                      currentRoute && file.key === descriptor.key
+                        ? "page"
+                        : undefined
+                    }
+                    class:list={{ active: file.key === descriptor.key }}
+                    href={sitePath(file.routePath)}
+                  >
+                    <span>{file.label}</span>
+                    <code>{file.path}</code>
+                  </a>
+                ) : (
+                  <a href={file.sourceUrl}>
+                    <span>{file.label}</span>
+                    <code>{file.path} · source only</code>
+                  </a>
+                )
+              }
             </li>
           ))
         }
@@ -109,7 +135,7 @@ const highlighted =
           <div class="code-unavailable" role="status">
             <h3>Preview unavailable</h3>
             <p>{activeFile.status === "unavailable" && activeFile.reason}</p>
-            <a href={descriptor.githubUrl}>Open this file on GitHub</a>
+            <a href={descriptor.sourceUrl}>Open the source file</a>
           </div>
         )
       }
@@ -119,7 +145,6 @@ const highlighted =
 
 <style>
   .code-browser {
-    --stack-space: var(--site-space-3);
     overflow: hidden;
     box-shadow: none;
   }
@@ -134,64 +159,51 @@ const highlighted =
   }
 
   .code-browser-heading {
+    --stack-space: var(--site-space-2);
     max-width: 42rem;
+    min-width: 0;
+  }
+
+  .code-path {
+    overflow: hidden;
+    color: var(--site-color-text-muted);
+    font-family: var(--site-font-mono);
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .code-browser-heading h2 {
-    font-size: 1.45rem;
+    font-size: 1.4rem;
+  }
+
+  .code-browser-heading .secondary-text {
+    font-size: 0.88rem;
   }
 
   .code-browser-actions {
-    --cluster-space: var(--site-space-2);
-    justify-content: flex-end;
-  }
-
-  .language-label,
-  .code-action {
-    display: inline-flex;
-    min-height: 2rem;
+    display: flex;
+    flex-shrink: 0;
     align-items: center;
-    justify-content: center;
-    padding: 0.3rem 0.65rem;
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: var(--site-radius-small);
-    font-size: 0.78rem;
-    font-weight: 650;
+    gap: var(--site-space-2);
   }
 
   .language-label {
+    display: inline-flex;
+    min-height: 2.25rem;
+    align-items: center;
+    padding-inline: 0.7rem;
+    border-radius: var(--site-radius-small);
     background: var(--site-color-brand-subtle);
     color: var(--site-color-brand);
-  }
-
-  .code-action {
-    background: var(--site-color-surface-solid);
-    color: var(--site-color-text);
-    cursor: pointer;
-    font-family: inherit;
-    text-decoration: none;
-  }
-
-  .code-action:hover {
-    border-color: var(--site-color-brand);
-    background: var(--site-color-surface-hover);
-    color: var(--site-color-text);
-  }
-
-  .code-action[data-copy-state="success"] {
-    border-color: #107c10;
-    color: #107c10;
-  }
-
-  .code-action[data-copy-state="error"] {
-    border-color: #c50f1f;
-    color: #c50f1f;
+    font-size: 0.72rem;
+    font-weight: 680;
   }
 
   .code-browser-layout {
     display: grid;
     min-width: 0;
-    grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr);
+    grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
   }
 
   .code-file-navigation {
@@ -199,11 +211,26 @@ const highlighted =
     overflow: auto;
     border-right: 1px solid var(--site-color-border-subtle);
     background: var(--site-color-canvas-subtle);
+    scrollbar-gutter: stable;
+  }
+
+  .file-navigation-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--site-space-3) var(--site-space-4) var(--site-space-2);
+    color: var(--site-color-text-secondary);
+    font-size: 0.72rem;
+  }
+
+  .file-navigation-heading span {
+    color: var(--site-color-text-muted);
   }
 
   .code-file-navigation ul {
     display: grid;
-    padding: var(--site-space-2);
+    gap: var(--site-space-1);
+    padding: 0 var(--site-space-2) var(--site-space-2);
     list-style: none;
   }
 
@@ -225,15 +252,15 @@ const highlighted =
     box-shadow: inset 3px 0 var(--site-color-brand);
   }
 
-  .code-file-navigation span {
-    font-size: 0.86rem;
-    font-weight: 650;
+  .code-file-navigation a > span {
+    font-size: 0.82rem;
+    font-weight: 680;
   }
 
   .code-file-navigation code {
     overflow: hidden;
     color: var(--site-color-text-muted);
-    font-size: 0.7rem;
+    font-size: 0.67rem;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -255,7 +282,7 @@ const highlighted =
     background: var(--shiki-light-bg);
     color: var(--shiki-light);
     counter-reset: source-line;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     line-height: 1.65;
     tab-size: 4;
   }
@@ -304,10 +331,6 @@ const highlighted =
     padding: var(--site-space-6);
   }
 
-  .code-unavailable h3 {
-    font-size: 1.25rem;
-  }
-
   .code-unavailable p {
     max-width: 36rem;
     color: var(--site-color-text-secondary);
@@ -332,20 +355,38 @@ const highlighted =
       overflow-x: auto;
       border-right: 0;
       border-bottom: 1px solid var(--site-color-border-subtle);
+      scroll-snap-type: x proximity;
+      scrollbar-gutter: auto;
+    }
+
+    .file-navigation-heading {
+      position: sticky;
+      left: 0;
+      width: 100%;
     }
 
     .code-file-navigation ul {
       display: flex;
       width: max-content;
       max-width: none;
+      padding-top: 0;
     }
 
     .code-file-navigation li {
-      width: min(15rem, 70vw);
+      width: min(15rem, 74vw);
+      scroll-snap-align: start;
     }
 
     .code-file-navigation a.active {
       box-shadow: inset 0 -3px var(--site-color-brand);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .code-file-navigation,
+    .code-viewer :global(.shiki) {
+      background: Canvas;
+      color: CanvasText;
     }
   }
 </style>

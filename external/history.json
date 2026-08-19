@@ -439,6 +439,7 @@
       "providerId": "winui-gallery",
       "records": [
         {
+          "contentHash": "196be4faeaee309a931ce34ee5a39acda1e943c74aba0e0345cdee68b9c2cdb4",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AccessibilityColorContrast",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -449,6 +450,7 @@
           "status": "active"
         },
         {
+          "contentHash": "134d692e75fbe3011863e917969dc22edc58ff12a4ba0e059f7c3ef28bb598b6",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AccessibilityKeyboard",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -459,6 +461,7 @@
           "status": "active"
         },
         {
+          "contentHash": "4c9d713b58f680cd1e73c806425f060897d9677f748371e1c7f581864b1e9078",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AccessibilityScreenReader",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -469,6 +472,7 @@
           "status": "active"
         },
         {
+          "contentHash": "05aad8901aa9baf9b51ae5ba45acfbdc3a8f1281ec7fbb2440eac5a685f39975",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Acrylic",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -479,6 +483,7 @@
           "status": "active"
         },
         {
+          "contentHash": "42742f69a540951531438b625b8f523a0062ae0dc01b0fa925e373d287232784",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AnimatedIcon",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -489,6 +494,7 @@
           "status": "active"
         },
         {
+          "contentHash": "249855587d98c02cbb96a34209fea4f31a04c66cfaf88b2c7d6f2dd69d4a857b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AnimatedVisualPlayer",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -499,6 +505,7 @@
           "status": "active"
         },
         {
+          "contentHash": "ce3be557331479e689986aea97948a599303cb12c5f34da00d9f847995c4725b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AnnotatedScrollBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -509,6 +516,7 @@
           "status": "active"
         },
         {
+          "contentHash": "61ff38a534370874b3fd18ec08fc9efd75619780b7a7e2daf0fdab8309747244",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppBarButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -519,6 +527,7 @@
           "status": "active"
         },
         {
+          "contentHash": "6ccdcfcdaad45f6370641138b6310f1cec8ec379fc540faab2d1e7b7b4f83df8",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppBarSeparator",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -529,6 +538,7 @@
           "status": "active"
         },
         {
+          "contentHash": "822638f5b7c43a6a06c30cc092fb1eb94b1b473f6869093748563798ca1ef287",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppBarToggleButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -539,6 +549,7 @@
           "status": "active"
         },
         {
+          "contentHash": "341a2e621011d564945e9d04ceba9eb8efc92919e8bd81a6f2ec533037981a0b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppNotification",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -549,6 +560,7 @@
           "status": "active"
         },
         {
+          "contentHash": "3918d4fb386b44a68d43d6450821ae2ec726b2666d991b3debe3c0747ebcb56f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppWindow",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -559,6 +571,7 @@
           "status": "active"
         },
         {
+          "contentHash": "2a3cdfe0369482bf6eccd2652b10845bb60f20f7b69699d25d4c888e8a1b664d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AppWindowTitleBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -569,6 +582,7 @@
           "status": "active"
         },
         {
+          "contentHash": "634173b8ad0c207504fd0bb6a9be9edbf73b25e41b4ba4a1a5ad45791327543a",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:AutoSuggestBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -579,6 +593,7 @@
           "status": "active"
         },
         {
+          "contentHash": "47ea50806d68cdf4dab2c896fb2e528f5bf52763c7ddd5e886e4896d4db25ed3",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:BadgeNotificationManager",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -589,6 +604,7 @@
           "status": "active"
         },
         {
+          "contentHash": "3f0d2373f3875d210e7e42745dcb1c55180107a34772ed6932a46a83a6b8368f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Binding",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -599,6 +615,7 @@
           "status": "active"
         },
         {
+          "contentHash": "1fa3e4a3d1c00af73662eb5e8445dee65b68ba20dbd9dde36284958e4501fca3",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Border",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -609,6 +626,7 @@
           "status": "active"
         },
         {
+          "contentHash": "6532db7fd5011c5906125a2f8ca6818c6ca0435a0b626905e271305f8b0ae15d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:BreadcrumbBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -619,6 +637,7 @@
           "status": "active"
         },
         {
+          "contentHash": "df99f9bdc7b08f5d49292bb78b331e5b2a6b5fe2bed82f9cac146e67c0b97b82",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Button",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -629,6 +648,7 @@
           "status": "active"
         },
         {
+          "contentHash": "c45365695ef10b3852f321c8b3592db3c0771d2d4202fd4302c84ac92dd30d7b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CalendarDatePicker",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -639,6 +659,7 @@
           "status": "active"
         },
         {
+          "contentHash": "ecaba7b8f25c733a18d9607a729f057b9b86e40e8b2d24039a556cd9126a721e",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CalendarView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -649,6 +670,7 @@
           "status": "active"
         },
         {
+          "contentHash": "715f77f5e27104b54b4fd74bbfb36d168a543b76abd13178647c4b6f8c7a89dc",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Canvas",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -659,6 +681,7 @@
           "status": "active"
         },
         {
+          "contentHash": "d23703901c713d2f02732d156ba9969aa880fd214a27ce3fc5bbd5caaf53face",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CaptureElementPreview",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -669,6 +692,7 @@
           "status": "active"
         },
         {
+          "contentHash": "428abc0ce5bc7e26452cf047f6d1d0cec9a1c0fb9cbd1278d879e4b3629642c2",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CheckBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -679,6 +703,7 @@
           "status": "active"
         },
         {
+          "contentHash": "db78c1c05e089d2e11e6553319295499d53c554b207f7db3c36a1589973f2fec",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Clipboard",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -689,6 +714,7 @@
           "status": "active"
         },
         {
+          "contentHash": "720df79ad49090fb0e14420d0e6809a7547b3e32d8b4c93301d9b337f6360534",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Color",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -699,6 +725,7 @@
           "status": "active"
         },
         {
+          "contentHash": "843b61a6c73dc6ae4866602b5b75d947492139c13881679b8c1fc6916f315dc0",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ColorPicker",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -709,6 +736,7 @@
           "status": "active"
         },
         {
+          "contentHash": "a892eb4506d06d71a4c3842e285f569cc9fe26c991b36fa12a828ff535f2bf90",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ComboBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -719,6 +747,7 @@
           "status": "active"
         },
         {
+          "contentHash": "6546de727353be5433cec517861c4de328dd39fa5d747bfa22daf3b6ec4de813",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CommandBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -729,6 +758,7 @@
           "status": "active"
         },
         {
+          "contentHash": "fa1b48e7d5bd184d3ed3d48093abe17ee3bbd82c637293863f42fba9a072f2ba",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CommandBarFlyout",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -739,6 +769,7 @@
           "status": "active"
         },
         {
+          "contentHash": "fb67cf4c7e67ff224b20c49578eb8c6b2b38eee5d6ec769558232057e1038788",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CompactSizing",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -749,6 +780,7 @@
           "status": "active"
         },
         {
+          "contentHash": "cd836f7770a3542993d8792de5680f2dd9f453d8554aebe9a4dc905b0e1e97d3",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ConnectedAnimation",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -759,6 +791,7 @@
           "status": "active"
         },
         {
+          "contentHash": "9fafe8b60279f0186bafdb7f8b04a1f192a49e7b675d947de9f7937584d5f8f5",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ContentDialog",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -769,6 +802,7 @@
           "status": "active"
         },
         {
+          "contentHash": "2c64fbfb8023e97086e8b27aa62c8f5b33dad7e0bad2e40b1b1d174bcae3ef09",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ContentIsland",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -779,6 +813,7 @@
           "status": "active"
         },
         {
+          "contentHash": "e09a53104ce8cc1c19b05e7f9dc1016261a82294ff409fc78524f2ad3dba98ed",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CreateMultipleWindows",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -789,6 +824,7 @@
           "status": "active"
         },
         {
+          "contentHash": "378872d2d64a3c1d9fc3cbbe046bcc90c2cd3cab7ee373f60f563b0143513091",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CustomUserControls",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -799,6 +835,7 @@
           "status": "active"
         },
         {
+          "contentHash": "bcd9186a80cc9ba133f7e73448f7db21c268c7fa8975176fd265bf1a03a9a58d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:CustomXamlConditionals",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -809,6 +846,7 @@
           "status": "active"
         },
         {
+          "contentHash": "da143d2a1f9ee2c385c59896c159c10b83f1db77e1ce58926f6628562f3cd192",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:DatePicker",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -819,6 +857,7 @@
           "status": "active"
         },
         {
+          "contentHash": "beb35ec68d6bc2621ed7b16943d179b4b2bb0de4c308de41a4d28b3852c210cd",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:DropDownButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -829,6 +868,7 @@
           "status": "active"
         },
         {
+          "contentHash": "330706c33faeef529ef66e188e1ba49cd260337d88c5610e5cb4795a37127839",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:EasingFunction",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -839,6 +879,7 @@
           "status": "active"
         },
         {
+          "contentHash": "d25c2b052b4cc96123d1f5067743affa808aaf2fdb984a29bda92ded48c89a60",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Expander",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -849,6 +890,7 @@
           "status": "active"
         },
         {
+          "contentHash": "5acf4553ab8fa91d58cc9d79fc44b28d3f063e93d325f79255856e7ec0406b3d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:FlipView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -859,6 +901,7 @@
           "status": "active"
         },
         {
+          "contentHash": "46fa6beeb79f72e4a9258cb9987885dc641e46f1603fb29a8735b965f8f84e0b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Flyout",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -869,6 +912,7 @@
           "status": "active"
         },
         {
+          "contentHash": "cc1702007f33171db4ffd3290f143d46ba790963d57a37a11670cf3d25ea493c",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Geometry",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -879,6 +923,7 @@
           "status": "active"
         },
         {
+          "contentHash": "8f8ec956720ce279c7568e0472f4581e4ffa6bb27f8de9a134388d4e564cfc23",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Grid",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -889,6 +934,7 @@
           "status": "active"
         },
         {
+          "contentHash": "9f427005f0f36b801531abbf86a72677dd2029cdd67bcdd32d15a9b0596d85f9",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:GridView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -899,6 +945,7 @@
           "status": "active"
         },
         {
+          "contentHash": "ec22e74ebef644b6112d2f12f5b20e4708aa9cc2a5bb6c3818995c9c3c122291",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:HyperlinkButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -909,6 +956,7 @@
           "status": "active"
         },
         {
+          "contentHash": "7c62d9f96f6876341a326ff548d7813205712f1145a470882bcb917f560c78a1",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:IconElement",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -919,6 +967,7 @@
           "status": "active"
         },
         {
+          "contentHash": "fcac9588cc1ea205359cd6927a251c4b76ce12a07bd591bf6c61e01ee514658e",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Iconography",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -929,6 +978,7 @@
           "status": "active"
         },
         {
+          "contentHash": "ce4772cd28558e9a4805428b91c500f12a155ddc3f8d5d48a72d9b42866e1bdf",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Image",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -939,6 +989,7 @@
           "status": "active"
         },
         {
+          "contentHash": "e765cc77cdbc36cd02728b477120247a90b784d5a8655a8fdab008bbe3381e7d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ImplicitTransition",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -949,6 +1000,7 @@
           "status": "active"
         },
         {
+          "contentHash": "e8fea8dd5be57d046b002197d500674cb28268962b156b9930ba89eee19cf4e7",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:InfoBadge",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -959,6 +1011,7 @@
           "status": "active"
         },
         {
+          "contentHash": "fb8e574ec6892dea53a4cfd957b18f855d622f896d0c7db3d6c2c8a57d9c599d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:InfoBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -969,6 +1022,7 @@
           "status": "active"
         },
         {
+          "contentHash": "daa698dee8f1890bccd7f77596927b62664e55ea4c5954c568cff9fa7b24b0a6",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ItemsRepeater",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -979,6 +1033,7 @@
           "status": "active"
         },
         {
+          "contentHash": "12e2f3b7069db2ed7db17dd0e31853682dc5f6197ed1e0ffe58a7bb232b3713b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ItemsView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -989,6 +1044,7 @@
           "status": "active"
         },
         {
+          "contentHash": "a944ad17d7c90851cf6ff36ee89b52200e70e1a78ec5e36a4659baed1c07547c",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:JumpList",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -999,6 +1055,7 @@
           "status": "active"
         },
         {
+          "contentHash": "a42614ecced52a5f512527ef292664e7e703c5ab182c0b043c43feac799d8623",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Line",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1009,6 +1066,7 @@
           "status": "active"
         },
         {
+          "contentHash": "df9878360fe3745ef1d42109991c55f01714a209d5f1bdd55f2e0ff7afa37c64",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ListView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1019,6 +1077,7 @@
           "status": "active"
         },
         {
+          "contentHash": "99abb8390afa9560365c6a108a6ea82c14d1ba164753d5c071159171df9ffe1a",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:MapControl",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1029,6 +1088,7 @@
           "status": "active"
         },
         {
+          "contentHash": "0610de7c042f79301666c5f5b04ab04c01c2d085532ddc20bf0203e80359b280",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:MediaPlayerElement",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1039,6 +1099,7 @@
           "status": "active"
         },
         {
+          "contentHash": "7d5c312f5dc2ac96a75f7ef9077b2c5eefd411c2185c92d7d6b7b4cdc21a21ca",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:MenuBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1049,6 +1110,7 @@
           "status": "active"
         },
         {
+          "contentHash": "3ebbf171df3a1822aa28226ea4f6c3739940cdc3f71629e0f17f790e338f0cfc",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:MenuFlyout",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1059,6 +1121,7 @@
           "status": "active"
         },
         {
+          "contentHash": "b9177a55633ffbec543a3b3e500a8a14193628f275995145b9a07e16fc745491",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:NavigationView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1069,6 +1132,7 @@
           "status": "active"
         },
         {
+          "contentHash": "bd944c5b90b46a337040bf7ecf5efb096085a5f8b3fa17c6291e03d4b2df3b02",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:NumberBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1079,6 +1143,7 @@
           "status": "active"
         },
         {
+          "contentHash": "66939820588ab4f802004eda4c11762e6da489cfe8d81efd906b329ab19f5b17",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:PageTransition",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1089,6 +1154,7 @@
           "status": "active"
         },
         {
+          "contentHash": "e5ca294227d416274fd0dc1ba6e400d8307f2bc6f3205e6e1a474138d4a3d4c5",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ParallaxView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1099,6 +1165,7 @@
           "status": "active"
         },
         {
+          "contentHash": "4dfe460c3ade03301a57d4e15e8b6518445d0b927040469d1b1e18dd8ad1f015",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:PasswordBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1109,6 +1176,7 @@
           "status": "active"
         },
         {
+          "contentHash": "518ac4dfb9c60f11484de56dabe14b47f5c3eeb8645795a5a028c85372a8b6ae",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:PersonPicture",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1119,6 +1187,7 @@
           "status": "active"
         },
         {
+          "contentHash": "c5ccb94263c288a31d633a8529777dd93e764061914084bd48dcb25490de076f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:PipsPager",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1129,6 +1198,7 @@
           "status": "active"
         },
         {
+          "contentHash": "800e440321d001b61bd661c001bb51653516486b132da7e86dd6f42571fc98e3",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Pivot",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1139,6 +1209,7 @@
           "status": "active"
         },
         {
+          "contentHash": "fa43a7a5afa4f9183e9ecf3331ca7f7dc9599c7a507eadb70f9579f56e5c6b76",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Popup",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1149,6 +1220,7 @@
           "status": "active"
         },
         {
+          "contentHash": "0d0b739c9fba13ffee8610e2f2d411f294ab7a4e1c26c80dc324302269b02e87",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ProgressBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1159,6 +1231,7 @@
           "status": "active"
         },
         {
+          "contentHash": "aacf80068eaf5c31cee33e9215ff53b75d804614b5710ef64a00c43d471e371e",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ProgressRing",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1169,6 +1242,7 @@
           "status": "active"
         },
         {
+          "contentHash": "6b28da193958f1e034a5a1222fd1118b5ed976e26fda95134204b6c1b5234a84",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:PullToRefresh",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1179,6 +1253,7 @@
           "status": "active"
         },
         {
+          "contentHash": "47425384d57f0e61be8a80f375884d9364e8b65e362d4b46c4317b74b9f71b27",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RadialGradientBrush",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1189,6 +1264,7 @@
           "status": "active"
         },
         {
+          "contentHash": "d215eea0c55bf06b187b2da35918b04e2eff89a659a14e3dd1d0058f4a4c9b14",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RadioButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1199,6 +1275,7 @@
           "status": "active"
         },
         {
+          "contentHash": "999d993db3df1e618aca6d1ed7eeee728739555e3e72aa2cf107c81e6dc5ebcb",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RatingControl",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1209,6 +1286,7 @@
           "status": "active"
         },
         {
+          "contentHash": "f586e08ea91690ff98d98a3e2d90310df21717499965341ff1b1e936765f15bf",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RelativePanel",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1219,6 +1297,7 @@
           "status": "active"
         },
         {
+          "contentHash": "aff9a09462da2237c4f7d8736f3173b839957a5473f122e72bb2f94e095fdfa7",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RepeatButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1229,6 +1308,7 @@
           "status": "active"
         },
         {
+          "contentHash": "6edcb92834763dd2fba159f4e396b2dbb1c3857e09d51c11da86c93bec0a633f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RichEditBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1239,6 +1319,7 @@
           "status": "active"
         },
         {
+          "contentHash": "4729d8a7d54853d97c7448244b9141c111cf4b1df0eacd8d8f85ea16c89763a9",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:RichTextBlock",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1249,6 +1330,7 @@
           "status": "active"
         },
         {
+          "contentHash": "d659f2dd1f2ad98d3d8249663da40c09b3376fd5faa1d432d7bc27d525e59fd4",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ScratchPad",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1259,6 +1341,7 @@
           "status": "active"
         },
         {
+          "contentHash": "2540d1a1c4b645a6ecdf3d04aee31240ad5d0158b01d59ebcbf0a19a31d5cb6d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ScrollView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1269,6 +1352,7 @@
           "status": "active"
         },
         {
+          "contentHash": "00e0425845e59668b5d130e02bb291dd6e2fe6e58f9840211d128299b0f41462",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ScrollViewer",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1279,6 +1363,7 @@
           "status": "active"
         },
         {
+          "contentHash": "2b0e45f4286a3518407931aa503e3ac5af295549f4942812bf8a9bbdd4850573",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SelectorBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1289,6 +1374,7 @@
           "status": "active"
         },
         {
+          "contentHash": "252de376089b1a842eea481092e22428f4b7b136a100b95a7cabadca260c0ff5",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SemanticZoom",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1299,6 +1385,7 @@
           "status": "active"
         },
         {
+          "contentHash": "4ba3ec85d78f19aaf601db0118c346f56223bc453ea64a0fa4194f5b7c33e07b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Shape",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1309,6 +1396,7 @@
           "status": "active"
         },
         {
+          "contentHash": "0c47c66a3293e3814efa9cafd47acd84fbf987aa1e21fcde7e236e740636b975",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Slider",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1319,6 +1407,7 @@
           "status": "active"
         },
         {
+          "contentHash": "01c6fc67b4bdacf98cc863b3246d3384e7e301aba82e6e74ccba8ec071af3e2f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Sound",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1329,6 +1418,7 @@
           "status": "active"
         },
         {
+          "contentHash": "003b9c8383d709fd9e12c65ab3d096ce349fda1ba1a78bb9bb01b0a7f1dd9839",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Spacing",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1339,6 +1429,7 @@
           "status": "active"
         },
         {
+          "contentHash": "4d053223bed3a5e42a893f9d4a423d03cdf16bf3d361b379ed8406a3aef53b40",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SplitButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1349,6 +1440,7 @@
           "status": "active"
         },
         {
+          "contentHash": "878119e255733d4b19566e19f6b053b3043ff98fcb781f2c68982c5ef993c70a",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SplitView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1359,6 +1451,7 @@
           "status": "active"
         },
         {
+          "contentHash": "465edc46be33917aea8bf08f44535cd35318b383a82e9037e341429193bede75",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:StackPanel",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1369,6 +1462,7 @@
           "status": "active"
         },
         {
+          "contentHash": "8706640dfdebaa53242935e2213c6e2cf26ab8e861bc5ed7a5955ecb7d723275",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:StandardUICommand",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1379,6 +1473,7 @@
           "status": "active"
         },
         {
+          "contentHash": "31346773f580d6092e8f26e525053520e61577334200ef05231fcbc10be50727",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:StoragePickers",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1389,6 +1484,7 @@
           "status": "active"
         },
         {
+          "contentHash": "d9455bb601b3bff3193b92f4886005c4fe47c0f08b7a727d666740e8e2bd353f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SwipeControl",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1399,6 +1495,7 @@
           "status": "active"
         },
         {
+          "contentHash": "18c7be2f85812f8cad4391783820b6bdc7472a66942969365ccaf12748fcb42b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SystemBackdropElement",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1409,6 +1506,7 @@
           "status": "active"
         },
         {
+          "contentHash": "f199b90b9cb81f7692a5d6bf70552a373255dae6e93325db5ab716f0e5a0f377",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:SystemBackdrops",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1419,6 +1517,7 @@
           "status": "active"
         },
         {
+          "contentHash": "abca5e4a956ad56fff3f84873e8f11010a643dd56160ffc93cd6ff79488530fc",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TabView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1429,6 +1528,7 @@
           "status": "active"
         },
         {
+          "contentHash": "0a3a959d14f4481046035f057b4626287be3cbead76477ea4fb14db39d8b4c89",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TeachingTip",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1439,6 +1539,7 @@
           "status": "active"
         },
         {
+          "contentHash": "f033677236c7bbfc26588fc6f58ed7e0007979b52538a5cda2631c7e227d23dc",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Templates",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1449,6 +1550,7 @@
           "status": "active"
         },
         {
+          "contentHash": "307743eb2feb62e51cf12dd60aa6c4d86f7c6e18961ae37e7fdc9bf9391510b5",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TextBlock",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1459,6 +1561,7 @@
           "status": "active"
         },
         {
+          "contentHash": "94ca536fe09a4e9aae97c6a54cb489075776179fc53005cb5548bce60921e611",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TextBox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1469,6 +1572,7 @@
           "status": "active"
         },
         {
+          "contentHash": "39d7aee5f539b1cb712962f0aa5ff825163997069c2256522e14ec3002ea2436",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ThemeShadow",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1479,6 +1583,7 @@
           "status": "active"
         },
         {
+          "contentHash": "c3b5ba5557e5ff6f5cb8cf4ba1dde4767e513053ce9cb6ddcb10c71b32adb48b",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ThemeTransition",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1489,6 +1594,7 @@
           "status": "active"
         },
         {
+          "contentHash": "19e62bef5be4f8ce5891a784a7944f293f92e84bb5e11aafb9c30111cca59aad",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TimePicker",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1499,6 +1605,7 @@
           "status": "active"
         },
         {
+          "contentHash": "db036e55c9692fa569bb78fccad268159fee0fcb87c38c47d131f70d71171b90",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TitleBar",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1509,6 +1616,7 @@
           "status": "active"
         },
         {
+          "contentHash": "acbd43a12c1216da57912c30517dea9f795667bfe1efaccf051aecbb6f59b57f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ToggleButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1519,6 +1627,7 @@
           "status": "active"
         },
         {
+          "contentHash": "44c60033366775db46d1d2e8d1abffedd173a868cda42c57e87f866b8b45155e",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ToggleSplitButton",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1529,6 +1638,7 @@
           "status": "active"
         },
         {
+          "contentHash": "f17b9451a70d57eb3e9e2ed771b4825738c4c708a1de1d7c6bd216e6ac1a286e",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ToggleSwitch",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1539,6 +1649,7 @@
           "status": "active"
         },
         {
+          "contentHash": "c46f0a8d9430f02676cfde52f1f81afae92607b4a3fc0c808393e3eec6392906",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:ToolTip",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1549,6 +1660,7 @@
           "status": "active"
         },
         {
+          "contentHash": "73e2897adc0cff8c9bed28140d2e72aa358e9697dc4b08ad6ff3fa3aca2de212",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:TreeView",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1559,6 +1671,7 @@
           "status": "active"
         },
         {
+          "contentHash": "cd96e73abd3bfb56663c2f49820598f92a0593e282ca56e87599a76e8ee2dd24",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Typography",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1569,6 +1682,7 @@
           "status": "active"
         },
         {
+          "contentHash": "dcefa74c36eaa7132fbce26f4783c0723221a634522e9ccc68644756385ef72a",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:VariableSizedWrapGrid",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1579,6 +1693,7 @@
           "status": "active"
         },
         {
+          "contentHash": "a22a71cdc102ea2bc7b775add7729bd7682bf5de22ca130adf63eae0b2bda539",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:Viewbox",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1589,6 +1704,7 @@
           "status": "active"
         },
         {
+          "contentHash": "b1c47578ad3dff11b4afdd2cf43f6d004e9bbb654a939fc0a58dfdf9004c862d",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:WebView2",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1599,6 +1715,7 @@
           "status": "active"
         },
         {
+          "contentHash": "951b7929e4c7e2068c9b40235e9883f39fec5e477bc024f83961ef86b3d77bfb",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:XamlCompInterop",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1609,6 +1726,7 @@
           "status": "active"
         },
         {
+          "contentHash": "f6eaa06add9ec1b5bb06dab44e732ac59a2fb8a91e0bfbc12b9f788f8e8a0a26",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:XamlResources",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1619,6 +1737,7 @@
           "status": "active"
         },
         {
+          "contentHash": "14657ab506d44c89a4a78540b6337c8595ffeb99ea8611de4e3ee791486f83a0",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:XamlStyles",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",
@@ -1629,6 +1748,7 @@
           "status": "active"
         },
         {
+          "contentHash": "c289013879888b0355b0b0eb7126f34268b47248cc3ec8e42fdecf8c0fa57d0f",
           "firstSeenSync": "winui-gallery-8854551b0464-reviewed",
           "id": "winui-gallery:XamlUICommand",
           "lastChangedSync": "winui-gallery-8854551b0464-reviewed",

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "user-interaction-mode",
+  "screenshotId": "current-mode",
+  "scenario": "adapt-to-interaction-mode",
+  "alt": "The User Interaction Mode app reporting Mouse mode and showing compact adaptive checkbox spacing.",
+  "sourceMetadata": "Samples/UserInteractionMode/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "fcb4d374baff93dbf66f3d5bc6c4712492886adefad9fead041c75cabd0e4115"
+  }
+}

@@ -779,6 +779,7 @@
         "mediaType",
         "width",
         "height",
+        "decorative",
         "alt",
         "provenance",
         "blobSha",
@@ -818,8 +819,12 @@
           "minimum": 1,
           "maximum": 10000
         },
+        "decorative": {
+          "type": "boolean"
+        },
         "alt": {
-          "$ref": "#/$defs/plainText"
+          "type": "string",
+          "maxLength": 500
         },
         "provenance": {
           "$ref": "#/$defs/provenanceValue"
@@ -835,7 +840,37 @@
           "minimum": 1,
           "maximum": 2097152
         }
-      }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "decorative": {
+              "const": true
+            },
+            "alt": {
+              "const": ""
+            }
+          }
+        },
+        {
+          "properties": {
+            "decorative": {
+              "const": false
+            },
+            "alt": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/plainText"
+                },
+                {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              ]
+            }
+          }
+        }
+      ]
     },
     "relation": {
       "type": "object",

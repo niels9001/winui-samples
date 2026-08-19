@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "http-client",
+  "screenshotId": "get-text-cache",
+  "scenario": "get-text-cache",
+  "alt": "The HTTP client app showing a local GET request with cache controls, Start and Cancel actions, and a response output area.",
+  "sourceMetadata": "Samples/HttpClient/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "a372b26b601b750d6a11b7618e30621216328f63e4838bc610206c72d8f4ac95"
+  }
+}

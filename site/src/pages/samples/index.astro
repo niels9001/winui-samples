@@ -1,62 +1,80 @@
 ---
 import AppShell from "../../components/AppShell.astro";
-import CoverageNotice from "../../components/CoverageNotice.astro";
 import { SampleExplorer } from "../../components/SampleExplorer";
-import type { ExplorerSamplePresentation } from "../../components/SampleExplorer";
+import { getBrowseIndexArtifact } from "../../lib/browse-index";
 import { catalog } from "../../lib/catalog-data";
-import { resolveHeroMedia } from "../../lib/sample-media";
+import { productName } from "../../lib/site-metadata";
 import { sitePath } from "../../lib/urls";
 
-const samples: ExplorerSamplePresentation[] = await Promise.all(
-  catalog.samples.map(async (sample) => {
-    const hero = await resolveHeroMedia(sample);
-    return {
-      sample,
-      heroUrl: hero ? sitePath(hero.routePath) : undefined,
-      heroAlt: sample.screenshots[0]?.alt,
-    };
-  }),
+if (!catalog.searchIndex) {
+  throw new Error("The generated Browse search projection is missing.");
+}
+const browseIndex = await getBrowseIndexArtifact();
+const categoryById = new Map(
+  catalog.categories.map((category) => [category.id, category]),
 );
 ---
 
 <AppShell
-  title="Browse Windows app samples"
-  description="Browse metadata-backed WinUI 3 and Windows App SDK samples by the experience they help you build."
+  title="Browse"
+  description="Search working WinUI and Windows App SDK examples by outcome, API, source, and requirement."
   activeNav="samples"
 >
   <section class="page-intro">
-    <div class="site-container stack intro-content">
-      <p class="eyebrow">Browse samples</p>
-      <h1>Find the Windows experience you want to build</h1>
-      <p>
-        Search by the outcome, API, scenario, project, or topic. Filter on
-        authored categories and real package or environment requirements
-        without turning manifest declarations into feature claims.
-      </p>
+    <div class="site-container">
+      <div class="stack intro-content">
+        <p class="eyebrow">Browse</p>
+        <h1>Find code by outcome, API, or requirement</h1>
+        <p>
+          Search all {catalog.samples.length} examples, then narrow by source,
+          category, language, hardware, capability, or architecture.
+        </p>
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="catalog-title">
+  <section class="section browse-section" aria-labelledby="catalog-title">
     <div class="site-container stack catalog-layout">
-      <CoverageNotice coverage={catalog.coverage} />
-      <h2 class="visually-hidden" id="catalog-title">Published samples</h2>
-      <p class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
-      <p class="visually-hidden">
-        Available facets include primary and secondary categories, topics,
-        Declared package capabilities, actual prerequisites, architectures,
-        and screenshot capture readiness.
-      </p>
+      <h2 class="visually-hidden" id="catalog-title">Windows code results</h2>
       <SampleExplorer
         basePath={import.meta.env.BASE_URL}
-        categories={catalog.categories}
         client:only="react"
-        samples={samples}
-      />
+        expectedCatalogHash={catalog.contentHash ?? ""}
+        expectedIndexHash={catalog.searchIndex.contentHash}
+        expectedRecordCount={catalog.samples.length}
+        indexIntegrity={browseIndex.integrity}
+        indexUrl={sitePath(`/browse-index/${browseIndex.filename}`)}
+      >
+        <div class="explorer-loading surface" slot="fallback">
+          Loading the sample index…
+        </div>
+      </SampleExplorer>
       <noscript>
-        <p class="noscript-notice">
-          Enable JavaScript to search and filter the catalog. Every published
-          sample remains available from its direct URL.
-        </p>
+        <section class="noscript-directory surface" aria-labelledby="static-title">
+          <div>
+            <p class="eyebrow">Static directory</p>
+            <h2 id="static-title">Open an example directly</h2>
+            <p>
+              Search and filters need JavaScript. Every sample in {productName}{" "}
+              remains available below.
+            </p>
+          </div>
+          <ul>
+            {
+              catalog.samples.map((sample) => (
+                <li>
+                  <a href={sitePath(`/samples/${sample.id}/`)}>
+                    <strong>{sample.title}</strong>
+                    <span>
+                      {categoryById.get(sample.categories.primary)?.label ??
+                        sample.categories.primary}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
       </noscript>
     </div>
   </section>
@@ -64,36 +82,85 @@ const samples: ExplorerSamplePresentation[] = await Promise.all(
 
 <style>
   .page-intro {
-    padding-block: clamp(3.5rem, 8vw, 6.5rem);
+    padding-block: clamp(3rem, 6vw, 5rem);
     border-bottom: 1px solid var(--site-color-border-subtle);
-    background: var(--site-color-canvas-subtle);
+    background:
+      radial-gradient(circle at 88% 10%, var(--site-color-brand-subtle), transparent 28rem),
+      color-mix(in srgb, var(--site-color-canvas-subtle) 82%, transparent);
   }
 
   .intro-content {
-    --stack-space: var(--site-space-4);
-    max-width: 58rem;
-    margin-inline: 0;
+    --stack-space: var(--site-space-3);
+    max-width: 52rem;
   }
 
   .intro-content h1 {
-    font-size: clamp(2.2rem, 5vw, 4rem);
+    max-width: 18ch;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
   }
 
   .intro-content > p:last-child {
-    max-width: var(--site-reading-width);
+    max-width: 42rem;
     color: var(--site-color-text-secondary);
-    font-size: 1.08rem;
+    font-size: 1.02rem;
+  }
+
+  .browse-section {
+    padding-top: var(--site-space-7);
   }
 
   .catalog-layout {
     --stack-space: var(--site-space-6);
   }
 
-  .noscript-notice {
-    padding: var(--site-space-4);
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: var(--site-radius-medium);
+  .explorer-loading {
+    min-height: 24rem;
+    padding: var(--site-space-6);
     color: var(--site-color-text-secondary);
   }
 
+  .noscript-directory {
+    display: grid;
+    gap: var(--site-space-6);
+    padding: var(--site-space-6);
+  }
+
+  .noscript-directory > div {
+    display: grid;
+    max-width: 42rem;
+    gap: var(--site-space-2);
+  }
+
+  .noscript-directory > div p:last-child {
+    color: var(--site-color-text-secondary);
+  }
+
+  .noscript-directory ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .noscript-directory a {
+    display: grid;
+    gap: var(--site-space-1);
+    padding: var(--site-space-3);
+    border: 1px solid var(--site-color-border-subtle);
+    border-radius: var(--site-radius-medium);
+    color: var(--site-color-text);
+    text-decoration: none;
+  }
+
+  .noscript-directory a span {
+    color: var(--site-color-text-muted);
+    font-size: 0.74rem;
+  }
+
+  @media (max-width: 46rem) {
+    .noscript-directory ul {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

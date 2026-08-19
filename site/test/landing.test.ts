@@ -34,6 +34,6 @@ test("outcome links serialize into shareable Browse filters", () => {
   assert.ok(outcome);
   assert.equal(
     outcomeBrowsePath(outcome),
-    "/samples/?primary=devices-and-sensors",
+    "/samples/?primary=app-fundamentals",
   );
 });

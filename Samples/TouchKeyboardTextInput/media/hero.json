@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "touch-keyboard-text-input",
+  "screenshotId": "spelling-and-prediction",
+  "scenario": "spelling-and-suggestions",
+  "alt": "The Touch Keyboard Text Input app comparing text boxes and rich-edit controls with spelling and prediction disabled or enabled.",
+  "sourceMetadata": "Samples/TouchKeyboardTextInput/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "916338d46719d23786d291a2624f953b9c6493d10debcd5b8df7565e9d96639f"
+  }
+}

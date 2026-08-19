@@ -1,14 +1,14 @@
 {
   "documents": {
     "providerCacheEntriesSha256": "cd06dc8c860432e33eed9db719ffe0df63fc3de27c4d53fa8f8b64c2e0e174e7",
-    "providerHistorySha256": "d0a46d79f09c8ac3da90f5898446916fe1511b9ac9145f60bb7aa1c9c2dafe0a",
+    "providerHistorySha256": "2789a7e58f71860c6cf7c421d8428eb140231c491a83777fa8a6d734d4cb2cfe",
     "providerLockSha256": "bb0d57ef77ab94f71a06823de11c76889edc3c31f38a26a80452623e337a4975"
   },
   "lockCommitSha": "8854551b0464b6ad824d6b9e1c79933888f14acc",
   "providerFiles": {
     "cachedLicenseSha256": "27ebda9d51f0a56b7e281ccd8230a27236dcb51c05f64b07869ecf6e965d68b0",
     "licenseManifestSha256": "2e4c87eee3bf2c29d01e2d07932df73d4c6a27ced4090664c3bad8a1b461c0cc",
-    "reviewSha256": "68840340a8eeb2593270c7eb0b8487ade525bcf84d16806b78f9b0a0e84822ca"
+    "reviewSha256": "2331fa6a66ec6606a2966aba6a86312b504a934731871a376e462bfe35129465"
   },
   "providerId": "winui-gallery",
   "schemaVersion": 1

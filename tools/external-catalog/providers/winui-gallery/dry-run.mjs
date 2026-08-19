@@ -84,6 +84,7 @@ export async function dryRun({ outputPath = null } = {}) {
   const output = await generate({
     provider,
     lock,
+    history: state.histories.get(PROVIDER_ID),
     readArtifact: createArtifactReader(state, lock, {
       repoRoot: repositoryRoot,
     }),

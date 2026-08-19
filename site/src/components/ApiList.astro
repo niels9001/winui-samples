@@ -1,0 +1,76 @@
+---
+import type { SampleApi } from "../lib/catalog";
+import ApiCard from "./ApiCard.astro";
+
+interface Props {
+  apis: SampleApi[];
+  visibleCount?: number;
+}
+
+const { apis, visibleCount = 8 } = Astro.props;
+const visible = apis.slice(0, visibleCount);
+const remaining = apis.slice(visibleCount);
+---
+
+<div class="api-grid">
+  {visible.map((api) => <ApiCard api={api} />)}
+</div>
+{
+  remaining.length > 0 && (
+    <details class="api-disclosure">
+      <summary>
+        Show all {apis.length} APIs <span aria-hidden="true">↓</span>
+      </summary>
+      <div class="api-grid">
+        {remaining.map((api) => <ApiCard api={api} />)}
+      </div>
+    </details>
+  )
+}
+
+<style>
+  .api-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--site-space-4);
+  }
+
+  .api-disclosure {
+    display: grid;
+    gap: var(--site-space-4);
+  }
+
+  .api-disclosure > summary {
+    display: flex;
+    width: fit-content;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: var(--site-space-3);
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--site-color-border);
+    border-radius: var(--site-radius-medium);
+    background: var(--site-color-surface-elevated);
+    color: var(--site-color-text);
+    cursor: pointer;
+    font-weight: 680;
+    list-style: none;
+  }
+
+  .api-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .api-disclosure[open] > summary span {
+    transform: rotate(180deg);
+  }
+
+  .api-disclosure[open] > .api-grid {
+    margin-top: var(--site-space-4);
+  }
+
+  @media (max-width: 44rem) {
+    .api-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

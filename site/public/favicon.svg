@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Windows App Samples Browser</title>
   <rect width="64" height="64" rx="14" fill="#0f6cbd"/>
   <path fill="#fff" d="M15 15h15v15H15zm19 0h15v15H34zM15 34h15v15H15zm19 0h15v15H34z"/>
 </svg>

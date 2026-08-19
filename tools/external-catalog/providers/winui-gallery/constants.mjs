@@ -27,6 +27,10 @@ export const REVIEWED_SYNC = Object.freeze({
   lockCommitSha: PINNED_SNAPSHOT.commitSha,
 });
 
+export const REVIEWED_RENAMES = Object.freeze([]);
+export const REVIEWED_TOMBSTONES = Object.freeze([]);
+export const REVIEWED_REDIRECTS = Object.freeze([]);
+
 export const EXPECTED = Object.freeze({
   groups: 19,
   specialGroups: 3,

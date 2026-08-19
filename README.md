@@ -29,7 +29,10 @@ JSON is deterministic and must not be edited by hand.
 The repository also defines an additive
 [federated catalog contract](docs/FEDERATED_CATALOG.md) for referencing external
 sample providers at exact reviewed commits without migrating or vendoring their
-applications. External records are not rendered by the portal yet.
+applications. The developer portal combines the 71 local projects with 120 WinUI
+Gallery pages and 42 Windows App SDK sample families into 233 stable records. All
+external content is generated offline from committed locks and a content-addressed
+cache; browser navigation never fetches upstream repositories.
 
 ## Migration status
 

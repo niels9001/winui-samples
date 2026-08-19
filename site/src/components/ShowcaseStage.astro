@@ -11,67 +11,87 @@ interface Props {
 const { samples, categories } = Astro.props;
 ---
 
-<section class="showcase-stage" aria-labelledby="stage-title" data-showcase-stage>
-  <div class="site-container">
-    <div class="stage-heading">
-      <div class="section-header">
-        <p class="eyebrow">A platform, not a pattern library</p>
-        <h2 id="stage-title">Windows capabilities, composed into real apps</h2>
-        <p class="secondary-text">
-          Move from a platform surface to the exact sample, scenarios, and source
-          that implement it.
-        </p>
-      </div>
-      <p class="stage-status" data-stage-status>Interactive depth loads when useful.</p>
+<div class="showcase-stage" data-showcase-stage data-pointer-surface data-tilt>
+  <div class="stage-canvas" data-stage-canvas aria-hidden="true"></div>
+  <div class="workspace-titlebar">
+    <span class="workspace-app-mark" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </span>
+    <span>Windows code workspace</span>
+    <span class="workspace-window-controls" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </span>
+  </div>
+  <div class="workspace-body">
+    <div class="workspace-rail" aria-hidden="true">
+      <strong>Build with</strong>
+      <span class="active">All examples</span>
+      <span>Controls</span>
+      <span>Files</span>
+      <span>Devices</span>
+      <span>Media</span>
     </div>
-
-    <div class="stage-visual" aria-hidden="true" data-stage-visual>
-      <div class="stage-glow"></div>
-      <div class="static-window static-window--back">
-        <span class="window-titlebar"></span>
-        <span class="window-content"></span>
+    <div class="workspace-content">
+      <div class="workspace-toolbar">
+        <span class="workspace-search">
+          <span aria-hidden="true">⌕</span>
+          Search by outcome or API
+        </span>
+        <span>{samples.length} starting points</span>
       </div>
-      <div class="static-window static-window--middle">
-        <span class="window-titlebar"></span>
-        <span class="window-content"></span>
+      <div class="workspace-samples">
+        {
+          samples.slice(0, 3).map((sample, index) => {
+            const category = categories.get(sample.categories.primary);
+            return (
+              <a
+                class="workspace-card"
+                data-stage-card
+                data-stage-index={index}
+                href={sitePath(`/samples/${sample.id}/`)}
+              >
+                <span class="workspace-card-icon">
+                  <SampleIcon name={sample.icon} />
+                </span>
+                <span class="workspace-card-copy">
+                  <small>{category?.label ?? sample.categories.primary}</small>
+                  <strong>{sample.title}</strong>
+                  <span>{sample.provider?.label ?? "WinUI samples"}</span>
+                </span>
+                <span class="workspace-card-arrow" aria-hidden="true">→</span>
+              </a>
+            );
+          })
+        }
       </div>
-      <div class="static-window static-window--front">
-        <span class="window-titlebar"></span>
-        <span class="window-content"></span>
+      <div class="workspace-code" aria-hidden="true">
+        <div class="workspace-code-tabs">
+          <span class="active">MainPage.xaml.cs</span>
+          <span>Package.appxmanifest</span>
+        </div>
+        <div class="workspace-code-lines">
+          <span style="--line-width: 62%"></span>
+          <span style="--line-width: 84%"></span>
+          <span style="--line-width: 46%"></span>
+          <span style="--line-width: 72%"></span>
+        </div>
       </div>
-    </div>
-
-    <div class="stage-sample-strip">
-      {
-        samples.slice(0, 3).map((sample) => {
-          const category = categories.get(sample.categories.primary);
-          return (
-            <article class="stage-card">
-              <div class="stage-card-icon">
-                <SampleIcon name={sample.icon} />
-              </div>
-              <div>
-                <p>{category?.label ?? sample.categories.primary}</p>
-                <h3>
-                  <a href={sitePath(`/samples/${sample.id}/`)}>{sample.title}</a>
-                </h3>
-              </div>
-              <span aria-hidden="true">→</span>
-            </article>
-          );
-        })
-      }
     </div>
   </div>
-</section>
+</div>
 
 <script>
-  const roots = document.querySelectorAll<HTMLElement>("[data-showcase-stage]");
-  for (const root of roots) {
-    const visual = root.querySelector<HTMLElement>("[data-stage-visual]");
-    if (!visual) continue;
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-showcase-stage]",
+  )) {
+    const canvasHost =
+      root.querySelector<HTMLElement>("[data-stage-canvas]");
+    if (!canvasHost) continue;
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const forcedColors = window.matchMedia("(forced-colors: active)");
     const connection = (
       navigator as Navigator & {
         connection?: { saveData?: boolean };
@@ -81,11 +101,15 @@ const { samples, categories } = Astro.props;
     const deviceMemory = (navigator as Navigator & { deviceMemory?: number })
       .deviceMemory;
     const capable =
-      !media.matches &&
+      !reducedMotion.matches &&
+      !forcedColors.matches &&
       !connection?.saveData &&
       (deviceMemory === undefined || deviceMemory >= 4) &&
-      window.innerWidth >= 640;
-    if (!capable) continue;
+      window.innerWidth >= 720;
+    if (!capable) {
+      root.dataset.stageFallback = "true";
+      continue;
+    }
 
     const observer = new IntersectionObserver(
       async ([entry]) => {
@@ -93,12 +117,12 @@ const { samples, categories } = Astro.props;
         observer.disconnect();
         try {
           const { initShowcaseStage } = await import("../lib/three-stage");
-          initShowcaseStage(visual);
+          initShowcaseStage(canvasHost, root);
         } catch {
           root.dataset.stageFallback = "true";
         }
       },
-      { rootMargin: "300px 0px" },
+      { rootMargin: "280px 0px" },
     );
     observer.observe(root);
   }
@@ -106,216 +130,327 @@ const { samples, categories } = Astro.props;
 
 <style>
   .showcase-stage {
-    padding-block: var(--site-space-8) 0;
-    overflow: clip;
-    background:
-      linear-gradient(180deg, transparent, color-mix(in srgb, var(--site-color-brand-subtle) 55%, transparent)),
-      var(--site-color-canvas);
-  }
-
-  .stage-heading {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--site-space-5);
-  }
-
-  .stage-heading .section-header {
-    margin-bottom: var(--site-space-5);
-  }
-
-  .stage-status {
-    margin-bottom: var(--site-space-6);
-    color: var(--site-color-text-muted);
-    font-size: 0.78rem;
-  }
-
-  .stage-visual {
     position: relative;
-    min-height: clamp(24rem, 50vw, 38rem);
+    min-height: 36rem;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--site-color-border) 72%, transparent);
-    border-bottom: 0;
-    border-radius: 2rem 2rem 0 0;
+    border: 1px solid color-mix(in srgb, var(--site-color-border) 62%, transparent);
+    border-radius: var(--site-radius-xlarge);
     background:
       linear-gradient(rgb(255 255 255 / 5%) 1px, transparent 1px),
       linear-gradient(90deg, rgb(255 255 255 / 5%) 1px, transparent 1px),
-      radial-gradient(circle at 50% 68%, #55c2ff4d, transparent 34%),
-      linear-gradient(145deg, #071426, #152d51 58%, #19385a);
-    background-size: 4rem 4rem, 4rem 4rem, auto, auto;
-    box-shadow: inset 0 1px rgb(255 255 255 / 16%);
-    perspective: 70rem;
+      radial-gradient(circle at 76% 10%, rgb(101 180 255 / 24%), transparent 32%),
+      linear-gradient(145deg, #071322, #112941 58%, #14253b);
+    background-size: 3rem 3rem, 3rem 3rem, auto, auto;
+    box-shadow: var(--site-shadow-window);
+    color: #f7fbff;
+    isolation: isolate;
   }
 
-  .stage-visual :global(canvas) {
+  .stage-canvas {
     position: absolute;
-    z-index: 2;
+    z-index: -1;
     inset: 0;
+    opacity: 0.78;
+  }
+
+  .stage-canvas :global(canvas) {
     width: 100%;
     height: 100%;
   }
 
-  .stage-glow {
-    position: absolute;
-    inset: 36% 18% -35%;
+  .workspace-titlebar {
+    display: grid;
+    min-height: 3rem;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--site-space-3);
+    padding-inline: var(--site-space-4);
+    border-bottom: 1px solid rgb(255 255 255 / 14%);
+    background: rgb(9 22 37 / 58%);
+    font-size: 0.78rem;
+    font-weight: 650;
+    backdrop-filter: blur(28px) saturate(130%);
+  }
+
+  .workspace-app-mark {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+
+  .workspace-app-mark span {
+    background: #55aaff;
+  }
+
+  .workspace-window-controls {
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .workspace-window-controls i {
+    width: 0.42rem;
+    height: 0.42rem;
+    border: 1px solid rgb(255 255 255 / 60%);
     border-radius: 50%;
-    background: #5cc8ff52;
-    filter: blur(4rem);
   }
 
-  .static-window {
-    position: absolute;
+  .workspace-body {
     display: grid;
-    grid-template-rows: 2.4rem 1fr;
-    overflow: hidden;
-    border: 1px solid rgb(255 255 255 / 32%);
-    border-radius: 0.8rem;
-    background: rgb(232 245 255 / 14%);
-    box-shadow: 0 2rem 5rem rgb(0 0 0 / 35%);
-    backdrop-filter: blur(24px) saturate(125%);
+    min-height: 33rem;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
   }
 
-  .static-window--back {
-    width: 42%;
-    height: 46%;
-    top: 16%;
-    left: 8%;
-    transform: rotateY(12deg) rotateZ(-4deg);
+  .workspace-rail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--site-space-2);
+    padding: var(--site-space-5) var(--site-space-3);
+    border-right: 1px solid rgb(255 255 255 / 12%);
+    background: rgb(7 18 31 / 44%);
+    color: rgb(232 244 255 / 65%);
+    font-size: 0.72rem;
+    backdrop-filter: blur(22px);
   }
 
-  .static-window--middle {
-    width: 40%;
-    height: 54%;
-    top: 11%;
-    right: 8%;
-    transform: rotateY(-12deg) rotateZ(4deg);
+  .workspace-rail strong {
+    padding: 0.35rem 0.55rem;
+    color: rgb(247 251 255 / 95%);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .static-window--front {
-    width: 48%;
-    height: 55%;
-    right: 26%;
-    bottom: -3%;
+  .workspace-rail span {
+    padding: 0.45rem 0.55rem;
+    border-radius: 0.35rem;
   }
 
-  .window-titlebar {
-    border-bottom: 1px solid rgb(255 255 255 / 18%);
-    background:
-      radial-gradient(circle at calc(100% - 1.25rem) 50%, #fff 0 2px, transparent 3px),
-      rgb(255 255 255 / 8%);
+  .workspace-rail .active {
+    background: rgb(85 170 255 / 18%);
+    color: #ffffff;
+    box-shadow: inset 2px 0 #55aaff;
   }
 
-  .window-content {
-    margin: 10%;
-    border-radius: 0.5rem;
-    background:
-      linear-gradient(90deg, #54bdfa 0 30%, transparent 30%),
-      repeating-linear-gradient(180deg, rgb(255 255 255 / 30%) 0 2px, transparent 2px 1.4rem);
-    opacity: 0.75;
-  }
-
-  .stage-sample-strip {
-    position: relative;
-    z-index: 3;
+  .workspace-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: -1px;
-    border: 1px solid var(--site-color-border-subtle);
-    border-radius: 0 0 1.5rem 1.5rem;
-    background: var(--site-color-surface-solid);
-    box-shadow: var(--site-shadow-flyout);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: var(--site-space-4);
+    padding: var(--site-space-4);
   }
 
-  .stage-card {
+  .workspace-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--site-space-3);
+    color: rgb(232 244 255 / 64%);
+    font-size: 0.7rem;
+  }
+
+  .workspace-search {
+    display: inline-flex;
+    min-width: min(100%, 17rem);
+    min-height: 2.25rem;
+    align-items: center;
+    gap: var(--site-space-2);
+    padding-inline: var(--site-space-3);
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: var(--site-radius-small);
+    background: rgb(255 255 255 / 8%);
+    color: rgb(247 251 255 / 78%);
+  }
+
+  .workspace-samples {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--site-space-3);
+  }
+
+  .workspace-card {
     position: relative;
     display: grid;
     min-width: 0;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
+    min-height: 10rem;
+    grid-template: auto 1fr / 1fr auto;
+    gap: var(--site-space-3);
+    padding: var(--site-space-4);
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: var(--site-radius-medium);
+    background:
+      radial-gradient(circle at 80% 0%, rgb(120 200 255 / 20%), transparent 48%),
+      rgb(225 241 255 / 9%);
+    box-shadow: 0 18px 40px rgb(0 0 0 / 18%);
+    color: #ffffff;
+    text-decoration: none;
+    backdrop-filter: blur(24px) saturate(130%);
+  }
+
+  .workspace-card:hover,
+  .workspace-card:focus-visible {
+    border-color: rgb(121 197 255 / 72%);
+    background:
+      radial-gradient(circle at 80% 0%, rgb(120 200 255 / 30%), transparent 52%),
+      rgb(225 241 255 / 14%);
+    color: #ffffff;
+    transform: translateY(-3px);
+  }
+
+  .workspace-card-icon {
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    border-radius: var(--site-radius-small);
+    background: rgb(85 170 255 / 20%);
+    color: #78c5ff;
+    font-size: 1.15rem;
+  }
+
+  .workspace-card-copy {
+    display: flex;
+    min-width: 0;
+    grid-column: 1 / -1;
+    align-self: end;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .workspace-card-copy small,
+  .workspace-card-copy > span {
+    color: rgb(232 244 255 / 62%);
+    font-size: 0.66rem;
+  }
+
+  .workspace-card-copy strong {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.82rem;
+    line-height: 1.28;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .workspace-card-arrow {
+    align-self: center;
+    color: rgb(232 244 255 / 60%);
+  }
+
+  .workspace-code {
+    min-height: 10rem;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: var(--site-radius-medium);
+    background: rgb(3 11 20 / 46%);
+    backdrop-filter: blur(24px);
+  }
+
+  .workspace-code-tabs {
+    display: flex;
+    gap: var(--site-space-4);
+    padding: var(--site-space-2) var(--site-space-4);
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+    color: rgb(232 244 255 / 52%);
+    font-family: var(--site-font-mono);
+    font-size: 0.62rem;
+  }
+
+  .workspace-code-tabs .active {
+    color: #ffffff;
+  }
+
+  .workspace-code-lines {
+    display: grid;
     gap: var(--site-space-3);
     padding: var(--site-space-5);
   }
 
-  .stage-card + .stage-card {
-    border-left: 1px solid var(--site-color-border-subtle);
+  .workspace-code-lines span {
+    width: var(--line-width);
+    height: 0.35rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #57b0ff, rgb(255 255 255 / 20%));
+    opacity: 0.66;
   }
 
-  .stage-card-icon {
-    display: grid;
-    width: 2.75rem;
-    height: 2.75rem;
-    place-items: center;
-    border-radius: var(--site-radius-medium);
-    background: var(--site-color-brand-subtle);
-    color: var(--site-color-brand);
+  @media (prefers-reduced-motion: no-preference) {
+    .workspace-card {
+      transition:
+        border-color 160ms ease,
+        background 160ms ease,
+        transform 180ms ease;
+    }
   }
 
-  .stage-card p {
-    color: var(--site-color-text-muted);
-    font-size: 0.75rem;
-  }
-
-  .stage-card h3 {
-    overflow: hidden;
-    font-size: 1rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .stage-card a {
-    color: var(--site-color-text);
-    text-decoration: none;
-  }
-
-  .stage-card a::after {
-    position: absolute;
-    inset: 0;
-    content: "";
-  }
-
-  @media (max-width: 48rem) {
-    .stage-heading {
-      display: block;
+  @media (max-width: 60rem) {
+    .showcase-stage {
+      min-height: 30rem;
     }
 
-    .stage-status {
+    .workspace-body {
+      min-height: 27rem;
+      grid-template-columns: 6.75rem minmax(0, 1fr);
+    }
+
+    .workspace-samples {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .workspace-card:nth-child(3) {
       display: none;
     }
+  }
 
-    .stage-visual {
-      min-height: 23rem;
+  @media (max-width: 38rem) {
+    .showcase-stage {
+      min-height: 26rem;
+      border-radius: var(--site-radius-large);
     }
 
-    .stage-sample-strip {
+    .workspace-body {
+      min-height: 23rem;
       grid-template-columns: 1fr;
     }
 
-    .stage-card + .stage-card {
-      border-top: 1px solid var(--site-color-border-subtle);
-      border-left: 0;
+    .workspace-rail,
+    .workspace-code,
+    .workspace-toolbar > span:last-child {
+      display: none;
+    }
+
+    .workspace-content {
+      grid-template-rows: auto 1fr;
+      padding: var(--site-space-3);
+    }
+
+    .workspace-search {
+      width: 100%;
+    }
+
+    .workspace-samples {
+      grid-template-columns: 1fr;
+    }
+
+    .workspace-card {
+      min-height: 7.25rem;
     }
   }
 
   @media (forced-colors: active) {
-    .stage-visual {
-      border: 2px solid CanvasText;
+    .showcase-stage,
+    .workspace-card,
+    .workspace-search,
+    .workspace-code {
+      border: 1px solid CanvasText;
       background: Canvas;
+      color: CanvasText;
+      box-shadow: none;
+      backdrop-filter: none;
     }
 
-    .static-window {
-      border: 2px solid CanvasText;
-      background: Canvas;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .stage-card {
-      transition: background 160ms ease;
-    }
-
-    .stage-card:hover {
-      background: var(--site-color-surface-hover);
+    .stage-canvas {
+      display: none;
     }
   }
 </style>
-

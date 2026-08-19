@@ -4,8 +4,11 @@ import {
   licenseDefinitions,
   mediaCandidates,
   providerId,
+  reviewedRedirects,
+  reviewedRenames,
   reviewedSnapshot,
   reviewedSync,
+  reviewedTombstones,
   rootRequirements,
 } from "./manifest.mjs";
 import { reviewedInventory } from "./inventory.mjs";
@@ -17,6 +20,85 @@ function unique(values) {
   return [...new Set(values.filter(Boolean))].sort((left, right) =>
     left.localeCompare(right, "en-US"),
   );
+}
+
+function applyReviewedHistory(record, history) {
+  const reviewedRecord = history.records.find(
+    (candidate) => candidate.id === record.id,
+  );
+  if (!reviewedRecord || reviewedRecord.status !== "active") {
+    throw new Error(
+      `needs-curation: ${record.id} is missing active reviewed lifecycle history`,
+    );
+  }
+
+  const portalLifecycle =
+    reviewedRecord.firstSeenSync === history.latestSyncId
+      ? ["new"]
+      : reviewedRecord.lastChangedSync === history.latestSyncId
+        ? ["updated"]
+        : [];
+  return {
+    ...record,
+    lifecycle: {
+      firstSeenSync: reviewedRecord.firstSeenSync,
+      lastChangedSync: reviewedRecord.lastChangedSync,
+      lastReviewedSync: reviewedRecord.lastReviewedSync,
+      status: reviewedRecord.status,
+      removedAtSync: reviewedRecord.removedAtSync,
+    },
+    badges: {
+      ...record.badges,
+      portalLifecycle,
+    },
+  };
+}
+
+export function buildReviewedLifecycleOutput(
+  history,
+  {
+    renameDeclarations = reviewedRenames,
+    tombstoneDeclarations = reviewedTombstones,
+    redirectDeclarations = reviewedRedirects,
+  } = {},
+) {
+  const renames = new Map(
+    renameDeclarations.map((declaration) => [
+      declaration.fromId,
+      declaration,
+    ]),
+  );
+  const removals = new Map(
+    tombstoneDeclarations.map((declaration) => [
+      declaration.id,
+      declaration,
+    ]),
+  );
+  const tombstones = history.records
+    .filter((record) => record.status === "tombstoned")
+    .map((record) => {
+      const rename = renames.get(record.id);
+      const removal = removals.get(record.id);
+      const declaration = rename ?? removal;
+      if (!declaration) {
+        throw new Error(
+          `needs-curation: ${record.id} needs a persistent reviewed tombstone or rename declaration`,
+        );
+      }
+      return {
+        id: record.id,
+        providerId,
+        recordKey: record.recordKey,
+        routePath: record.routePath,
+        removedAtSync: record.removedAtSync,
+        reason: declaration.reason,
+        redirectToId: rename?.toId ?? null,
+      };
+    });
+  return {
+    redirects: redirectDeclarations.map((redirect) => ({ ...redirect })),
+    tombstones,
+  };
 }
 
 function mergeRequirements(base, override = {}) {
@@ -402,6 +484,7 @@ async function createImages(family, lockArtifacts, readArtifact) {
       mediaType: artifact.mediaType,
       width: null,
       height: null,
+      decorative: false,
       alt: candidate.alt,
       provenance: {
         kind: candidate.provenanceKind,
@@ -481,6 +564,7 @@ function assertReviewedInventory() {
 export async function generate({
   provider,
   lock,
+  history,
   readArtifact,
   createRouteSlug,
 }) {
@@ -717,14 +801,22 @@ export async function generate({
     });
   }
 
+  const latestReviewedSync = history.syncs.find(
+    (sync) => sync.id === history.latestSyncId,
+  );
+  if (!latestReviewedSync) {
+    throw new Error("needs-curation: latest reviewed sync is missing");
+  }
+  const lifecycleOutput = buildReviewedLifecycleOutput(history);
+
   return {
     schemaVersion: 1,
     providerId,
-    reviewedSync,
+    reviewedSync: { ...latestReviewedSync },
     lock,
-    records,
-    redirects: [],
-    tombstones: [],
+    records: records.map((record) => applyReviewedHistory(record, history)),
+    redirects: lifecycleOutput.redirects,
+    tombstones: lifecycleOutput.tombstones,
     licenseManifest: createLicenseManifest(lock),
   };
 }

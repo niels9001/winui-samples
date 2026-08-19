@@ -57,6 +57,7 @@ node_modules/
 
 # Generated sample catalog
 /site/src/generated/sample-catalog.json
+/site/src/generated/local-sample-catalog.json
 /site/src/generated/sample-activity.json
 
 # Generated federated catalog (rebuild from committed provider locks/cache)

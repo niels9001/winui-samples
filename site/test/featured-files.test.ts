@@ -74,18 +74,36 @@ test("creates stable code routes and exact main-branch GitHub links", () => {
   });
   const descriptor = describeFeaturedFiles(sample)[0];
   assert.ok(descriptor);
-  assert.equal(
+  assert.match(
     descriptor.key,
-    "01-scenarios-scenario1-create-xaml-cs",
+    /^scenarios-scenario1-create-xaml-cs-[0-9a-f]{12}$/,
   );
   assert.equal(
     descriptor.routePath,
-    "/samples/file-access/code/01-scenarios-scenario1-create-xaml-cs/",
+    `/samples/file-access/code/${descriptor.key}/`,
   );
   assert.equal(
-    descriptor.githubUrl,
+    descriptor.sourceUrl,
     "https://github.com/niels9001/winui-samples/blob/main/Samples/FileAccess/Scenarios/Scenario1_Create.xaml.cs",
   );
+
+  sample.featuredFiles.unshift({
+    path: "App.xaml.cs",
+    label: "Application entry point",
+  });
+  const reordered = describeFeaturedFiles(sample).find(
+    (file) => file.path === descriptor.path,
+  );
+  assert.equal(reordered?.key, descriptor.key);
+
+  const collidingSlugs = makeSample("slug-collision", "Slug collision", {
+    featuredFiles: [
+      { path: "A/B.cs", label: "Nested" },
+      { path: "A-B.cs", label: "Flat" },
+    ],
+  });
+  const [nested, flat] = describeFeaturedFiles(collidingSlugs);
+  assert.notEqual(nested?.key, flat?.key);
 });
 
 test("reads only in-folder UTF-8 files under the size ceiling", async () => {

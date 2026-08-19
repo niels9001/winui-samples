@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "custom-usb-device-access",
+  "screenshotId": "connect-empty-state",
+  "scenario": "connect-disconnect",
+  "alt": "The CustomUsbDeviceAccess app showing Connect enabled, Disconnect disabled, and an empty USB device list.",
+  "sourceMetadata": "Samples/CustomUsbDeviceAccess/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "cc56da344d11427230b26ba09ce2d530dec11768194b1efebbbd8eb14011d685"
+  }
+}

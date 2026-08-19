@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "geotag",
+  "screenshotId": "choose-media-file",
+  "scenario": "geotag-file",
+  "alt": "The file geotagging app showing a Choose file action before location metadata operations become available.",
+  "sourceMetadata": "Samples/Geotag/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "9331de70018010966972afafff382261af3b1a7c23935a5bf5a86d855b4ef3a0"
+  }
+}

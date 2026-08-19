@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xaml-defer-load-strategy",
+  "screenshotId": "adaptive-mail-layout",
+  "scenario": "defer-adaptive-panes",
+  "alt": "The adaptive deferred-loading page showing Accounts, Mail, Reading Pane, and the Send button in a desktop-width layout.",
+  "sourceMetadata": "Samples/XamlDeferLoadStrategy/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "3ac3b2c5ff6077480116042bb55b4dc3f2deb4fc98e9c1fee4c5e1ddc1937612"
+  }
+}

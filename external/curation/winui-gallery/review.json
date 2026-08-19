@@ -8,6 +8,7 @@
   },
   "imagePolicy": {
     "integratedAltBesideVisibleTitle": "",
+    "normalizedDecorative": true,
     "privateUseGroupGlyphUsed": false,
     "reviewedCaseCorrections": {
       "WinUIGallery/Assets/ControlImages/AnnotatedScrollbar.png": "WinUIGallery/Assets/ControlImages/AnnotatedScrollBar.png",

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "basic-media-casting",
+  "screenshotId": "system-casting-picker",
+  "scenario": "system-casting-picker",
+  "alt": "The media casting page showing a selected video, local playback controls, and the action that opens the system casting picker.",
+  "sourceMetadata": "Samples/BasicMediaCasting/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "4e1ce8630fd206bcf92975e33aded81fa5bf763ff6a3c23f9e674314a762a42c"
+  }
+}

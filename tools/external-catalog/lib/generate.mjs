@@ -224,12 +224,20 @@ export async function generateExternalCatalog({
       continue;
     }
     const lock = externalState.locks.get(provider.id);
+    const history = externalState.histories.get(provider.id);
+    if (!lock || !history) {
+      throw new Error(`${provider.id}: enabled provider state is incomplete`);
+    }
     const adapter = await adapterLoader(provider, repoRoot);
     const providerContext = deepFreeze(structuredClone(provider));
     const lockContext = deepFreeze(structuredClone(lock));
+    const historyContext = deepFreeze(
+      structuredClone(history),
+    );
     const output = await adapter.generate({
       provider: providerContext,
       lock: lockContext,
+      history: historyContext,
       readArtifact: createArtifactReader(externalState, lock, { repoRoot }),
       createRouteSlug,
     });

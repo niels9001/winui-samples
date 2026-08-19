@@ -126,8 +126,8 @@ scenarios:
       - Scenarios/Gyrometer/Scenario2_GyrometerPolling.xaml
       - Scenarios/Gyrometer/Scenario2_GyrometerPolling.xaml.cs
   - id: gyrometer-porting
-    title: Compare gyrometer porting patterns
-    summary: Demonstrate a portable gyrometer-reading pattern and report angular velocity in the WinUI page.
+    title: Read gyrometer values with a reusable pattern
+    summary: Encapsulate gyrometer access and report angular velocity in the WinUI page.
     apis:
       - Windows.Devices.Sensors.Gyrometer
     sourceFiles:

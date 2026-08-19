@@ -22,6 +22,7 @@ import {
   validateCachedArtifact,
 } from "../lib/guards.mjs";
 import { createRouteSlug } from "../lib/identity.mjs";
+import { acquirePublishLock } from "./publication-lock.mjs";
 import { reviewedInventory } from "../providers/windows-app-sdk-samples/inventory.mjs";
 import {
   familyManifest,
@@ -341,7 +342,13 @@ function cacheEntries(lock) {
   }));
 }
 
-function reviewedHistory(previousHistory) {
+export function reviewedHistory(
+  previousHistory,
+  {
+    renameDeclarations = reviewedRenames,
+    tombstoneDeclarations = reviewedTombstones,
+  } = {},
+) {
   const previous =
     previousHistory ?? {
       providerId,
@@ -368,13 +375,13 @@ function reviewedHistory(previousHistory) {
     familyManifest.map((family) => `${providerId}:${family.recordKey}`),
   );
   const renameSources = new Map(
-    reviewedRenames.map((rename) => [rename.fromId, rename]),
+    renameDeclarations.map((rename) => [rename.fromId, rename]),
   );
   const renameTargets = new Map(
-    reviewedRenames.map((rename) => [rename.toId, rename]),
+    renameDeclarations.map((rename) => [rename.toId, rename]),
   );
   const tombstones = new Map(
-    reviewedTombstones.map((tombstone) => [tombstone.id, tombstone]),
+    tombstoneDeclarations.map((tombstone) => [tombstone.id, tombstone]),
   );
 
   for (const record of previous.records) {
@@ -396,7 +403,7 @@ function reviewedHistory(previousHistory) {
     }
   }
 
-  for (const rename of reviewedRenames) {
+  for (const rename of renameDeclarations) {
     if (
       !previousRecords.has(rename.fromId) ||
       !currentIds.has(rename.toId)
@@ -416,6 +423,11 @@ function reviewedHistory(previousHistory) {
       ? previousRecords.get(rename.fromId)
       : undefined;
     const prior = directPrevious ?? renamedPrevious;
+    if (directPrevious?.status === "tombstoned") {
+      needsCuration(
+        `tombstoned record cannot reactivate without an explicit reviewed decision: ${id}`,
+      );
+    }
     const unchangedReview =
       directPrevious &&
       existingSync &&
@@ -457,9 +469,14 @@ function reviewedHistory(previousHistory) {
       ...previousRecord,
       status: "tombstoned",
       lastReviewedSync: reviewedSync.id,
-      lastChangedSync: reviewedSync.id,
+      lastChangedSync:
+        previousRecord.status === "tombstoned"
+          ? previousRecord.lastChangedSync
+          : reviewedSync.id,
       removedAtSync:
-        declaration.removedAtSync ?? reviewedSync.id,
+        previousRecord.removedAtSync ??
+        declaration.removedAtSync ??
+        reviewedSync.id,
     });
   }
 
@@ -492,14 +509,20 @@ function replaceProviderItem(values, key, replacement) {
   return [
     ...values.filter((item) => item[key] !== providerId),
     replacement,
-  ];
+  ].sort((left, right) =>
+    left[key].localeCompare(right[key], "en-US"),
+  );
 }
 
 function replaceProviderCacheEntries(values, replacements) {
   return [
     ...values.filter((entry) => entry.providerId !== providerId),
     ...replacements,
-  ];
+  ].sort(
+    (left, right) =>
+      left.providerId.localeCompare(right.providerId, "en-US") ||
+      left.path.localeCompare(right.path, "en-US"),
+  );
 }
 
 export function buildReviewedStateDocuments(state) {
@@ -757,11 +780,16 @@ export async function refresh({
     await atomicWriteBytes(outputPath, bytes);
   }
 
-  await writeDocumentTransaction(
-    writes,
-    expectedVersions,
-    repositoryRoot,
-  );
+  const releasePublishLock = await acquirePublishLock(repositoryRoot);
+  try {
+    await writeDocumentTransaction(
+      writes,
+      expectedVersions,
+      repositoryRoot,
+    );
+  } finally {
+    await releasePublishLock();
+  }
 
   console.log(
     `Refreshed ${providerId} at ${snapshot.commitSha}: ${familyManifest.length} families, ${stagedBlobs.length} cached artifacts.`,

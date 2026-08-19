@@ -5,7 +5,10 @@ import {
   EXPECTED,
   PINNED_SNAPSHOT,
   PROVIDER_ID,
+  REVIEWED_REDIRECTS,
+  REVIEWED_RENAMES,
   REVIEWED_SYNC,
+  REVIEWED_TOMBSTONES,
   UPSTREAM_SCHEMA_PATH,
   mediaTypeForPath,
   pagePaths,
@@ -44,6 +47,35 @@ function cloneTechnologies(languages = baseTechnologies.languages) {
 
 function unique(values) {
   return [...new Set(values)];
+}
+
+function applyReviewedHistory(record, history) {
+  const reviewedRecord = history.records.find(
+    (candidate) => candidate.id === record.id,
+  );
+  if (!reviewedRecord || reviewedRecord.status !== "active") {
+    fail(`${record.id}: missing active reviewed lifecycle history`);
+  }
+  const portalLifecycle =
+    reviewedRecord.firstSeenSync === history.latestSyncId
+      ? ["new"]
+      : reviewedRecord.lastChangedSync === history.latestSyncId
+        ? ["updated"]
+        : [];
+  return {
+    ...record,
+    lifecycle: {
+      firstSeenSync: reviewedRecord.firstSeenSync,
+      lastChangedSync: reviewedRecord.lastChangedSync,
+      lastReviewedSync: reviewedRecord.lastReviewedSync,
+      status: reviewedRecord.status,
+      removedAtSync: reviewedRecord.removedAtSync,
+    },
+    badges: {
+      ...record.badges,
+      portalLifecycle,
+    },
+  };
 }
 
 function parseJson(bytes, sourcePath) {
@@ -336,15 +368,7 @@ function buildApis(page) {
 }
 
 function buildWarnings(page) {
-  const warnings = [
-    {
-      code: "decorative-icon-alt-contract",
-      message:
-        "The upstream image is a decorative control icon shown beside the title; the current shared contract requires a non-empty alt fallback until integration can render alt=\"\".",
-      field: "/images/0/alt",
-      sourcePath: CATALOG_PATH,
-    },
-  ];
+  const warnings = [];
   if (!Object.hasOwn(page, "Description")) {
     warnings.push({
       code: "upstream-description-absent",
@@ -541,7 +565,8 @@ function buildRecord({
         mediaType: "image/png",
         width: dimensions.width,
         height: dimensions.height,
-        alt: page.Title,
+        decorative: true,
+        alt: "",
         provenance: {
           kind: "authored",
           sourcePath: CATALOG_PATH,
@@ -643,9 +668,57 @@ function buildLicenseManifest(lock) {
   };
 }
 
+export function buildReviewedLifecycleOutput(
+  history,
+  {
+    renameDeclarations = REVIEWED_RENAMES,
+    tombstoneDeclarations = REVIEWED_TOMBSTONES,
+    redirectDeclarations = REVIEWED_REDIRECTS,
+  } = {},
+) {
+  const renames = new Map(
+    renameDeclarations.map((declaration) => [
+      declaration.fromId,
+      declaration,
+    ]),
+  );
+  const removals = new Map(
+    tombstoneDeclarations.map((declaration) => [
+      declaration.id,
+      declaration,
+    ]),
+  );
+  const tombstones = history.records
+    .filter((record) => record.status === "tombstoned")
+    .map((record) => {
+      const rename = renames.get(record.id);
+      const removal = removals.get(record.id);
+      const declaration = rename ?? removal;
+      if (!declaration) {
+        fail(
+          `${record.id}: committed tombstone needs a persistent reviewed declaration`,
+        );
+      }
+      return {
+        id: record.id,
+        providerId: PROVIDER_ID,
+        recordKey: record.recordKey,
+        routePath: record.routePath,
+        removedAtSync: record.removedAtSync,
+        reason: declaration.reason,
+        redirectToId: rename?.toId ?? null,
+      };
+    });
+  return {
+    redirects: redirectDeclarations.map((redirect) => ({ ...redirect })),
+    tombstones,
+  };
+}
+
 export async function generate({
   provider,
   lock,
+  history,
   readArtifact,
   createRouteSlug,
 }) {
@@ -772,6 +845,7 @@ export async function generate({
         definitions,
       }),
     )
+    .map((record) => applyReviewedHistory(record, history))
     .sort((left, right) => left.id.localeCompare(right.id, "en-US"));
 
   const relatedEdges = records.reduce(
@@ -794,15 +868,22 @@ export async function generate({
   ) {
     fail("normalized record or nested-content counts drifted");
   }
+  const latestReviewedSync = history.syncs.find(
+    (sync) => sync.id === history.latestSyncId,
+  );
+  if (!latestReviewedSync) {
+    fail("latest reviewed sync is missing");
+  }
+  const lifecycleOutput = buildReviewedLifecycleOutput(history);
 
   return {
     schemaVersion: 1,
     providerId: PROVIDER_ID,
-    reviewedSync: { ...REVIEWED_SYNC },
+    reviewedSync: { ...latestReviewedSync },
     lock,
     records,
-    redirects: [],
-    tombstones: [],
+    redirects: lifecycleOutput.redirects,
+    tombstones: lifecycleOutput.tombstones,
     licenseManifest: buildLicenseManifest(lock),
   };
 }

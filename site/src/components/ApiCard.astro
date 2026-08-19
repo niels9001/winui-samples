@@ -1,0 +1,50 @@
+---
+import type { SampleApi } from "../lib/catalog";
+
+interface Props {
+  api: SampleApi;
+}
+
+const { api } = Astro.props;
+---
+
+<article class="api-card surface stack" data-pointer-surface>
+  <code>{api.name}</code>
+  {api.description && <p>{api.description}</p>}
+  {
+    api.url && (
+      <a href={api.url}>
+        API reference <span aria-hidden="true">↗</span>
+      </a>
+    )
+  }
+</article>
+
+<style>
+  .api-card {
+    --stack-space: var(--site-space-3);
+    align-items: start;
+    padding: var(--site-space-5);
+    box-shadow: none;
+  }
+
+  .api-card > code {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: var(--site-color-text);
+    font-size: 0.82rem;
+    font-weight: 680;
+  }
+
+  .api-card p {
+    color: var(--site-color-text-secondary);
+    font-size: 0.86rem;
+  }
+
+  .api-card a {
+    margin-top: auto;
+    font-size: 0.78rem;
+    font-weight: 680;
+    text-decoration: none;
+  }
+</style>

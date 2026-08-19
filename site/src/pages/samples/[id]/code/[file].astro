@@ -10,8 +10,8 @@ import {
   readFeaturedFile,
 } from "../../../../lib/featured-files";
 import type { FeaturedFileDescriptor } from "../../../../lib/featured-files";
+import { getSampleSource } from "../../../../lib/source-provenance";
 import {
-  repositoryTreeUrl,
   sampleDetailPath,
   sitePath,
 } from "../../../../lib/urls";
@@ -23,23 +23,26 @@ interface Props {
 
 export const getStaticPaths = (() =>
   catalog.samples.flatMap((sample) =>
-    describeFeaturedFiles(sample).map((file) => ({
-      params: {
-        id: sample.id,
-        file: file.key,
-      },
-      props: { sample, file },
-    })),
+    describeFeaturedFiles(sample)
+      .filter((file) => file.routePath !== null)
+      .map((file) => ({
+        params: {
+          id: sample.id,
+          file: file.key,
+        },
+        props: { sample, file },
+      })),
   )) satisfies GetStaticPaths;
 
 const { sample, file } = Astro.props;
 const files = describeFeaturedFiles(sample);
 const activeFile = await readFeaturedFile(sample, file);
+const source = getSampleSource(sample);
 ---
 
 <AppShell
   title={`${file.label} | ${sample.title}`}
-  description={`Read ${file.path}, a curated source file from the ${sample.project.name} WinUI sample.`}
+  description={`Read ${file.path}, a curated source file from ${sample.project.name}.`}
   activeNav="samples"
 >
   <section class="code-page-header">
@@ -47,7 +50,7 @@ const activeFile = await readFeaturedFile(sample, file);
       <nav aria-label="Breadcrumb">
         <ol class="breadcrumb">
           <li><a href={sitePath("/")}>Home</a></li>
-          <li><a href={sitePath("/samples/")}>Samples</a></li>
+          <li><a href={sitePath("/samples/")}>Browse</a></li>
           <li>
             <a href={sitePath(sampleDetailPath(sample.id))}>
               {sample.project.name}
@@ -56,31 +59,24 @@ const activeFile = await readFeaturedFile(sample, file);
           <li aria-current="page">{file.label}</li>
         </ol>
       </nav>
-      <div class="stack code-page-heading">
-        <p class="eyebrow">Featured implementation</p>
-        <h1>{file.label}</h1>
-        <p>
-          <code>{file.path}</code> from <strong>{sample.project.name}</strong>
-        </p>
-      </div>
-      <div class="cluster">
+      <div class="code-page-layout">
+        <div class="stack code-page-heading">
+          <a class="source-label" href={source.canonicalUrl}>{source.label}</a>
+          <p class="eyebrow">Code</p>
+          <h1>{file.label}</h1>
+          <p><code>{file.path}</code></p>
+        </div>
         <a
-          class="button-link button-link--secondary"
+          class="back-link"
           href={sitePath(sampleDetailPath(sample.id))}
         >
-          Back to sample overview
-        </a>
-        <a
-          class="button-link button-link--secondary"
-          href={repositoryTreeUrl(sample.project.repositoryPath)}
-        >
-          View full source on GitHub
+          ← {sample.title}
         </a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section code-page-content">
     <div class="site-container">
       <CodeBrowser
         activeFile={activeFile}
@@ -94,21 +90,11 @@ const activeFile = await readFeaturedFile(sample, file);
 
 <style>
   .code-page-header {
-    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+    padding-block: var(--site-space-5) clamp(3rem, 6vw, 5rem);
     border-bottom: 1px solid var(--site-color-border-subtle);
-    background: var(--site-color-canvas-subtle);
-  }
-
-  .code-page-heading {
-    --stack-space: var(--site-space-2);
-  }
-
-  .code-page-heading h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-  }
-
-  .code-page-heading > p:last-child {
-    color: var(--site-color-text-secondary);
+    background:
+      radial-gradient(circle at 85% 10%, var(--site-color-brand-subtle), transparent 28rem),
+      var(--site-color-canvas-subtle);
   }
 
   .breadcrumb {
@@ -117,12 +103,54 @@ const activeFile = await readFeaturedFile(sample, file);
     gap: var(--site-space-2);
     padding: 0;
     color: var(--site-color-text-muted);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     list-style: none;
   }
 
   .breadcrumb li:not(:last-child)::after {
     margin-left: var(--site-space-2);
     content: "/";
+  }
+
+  .code-page-layout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--site-space-6);
+    margin-top: var(--site-space-7);
+  }
+
+  .code-page-heading {
+    --stack-space: var(--site-space-3);
+    min-width: 0;
+  }
+
+  .code-page-heading h1 {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+  }
+
+  .code-page-heading > p:last-child {
+    overflow-wrap: anywhere;
+    color: var(--site-color-text-secondary);
+  }
+
+  .back-link {
+    flex-shrink: 0;
+    color: var(--site-color-text-secondary);
+    font-size: 0.86rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .code-page-content {
+    padding-top: var(--site-space-7);
+  }
+
+  @media (max-width: 42rem) {
+    .code-page-layout {
+      align-items: start;
+      flex-direction: column;
+      margin-top: var(--site-space-6);
+    }
   }
 </style>

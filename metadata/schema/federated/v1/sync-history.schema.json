@@ -97,6 +97,10 @@
           ],
           "maxLength": 200
         },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
         "removedAtSync": {
           "type": [
             "string",

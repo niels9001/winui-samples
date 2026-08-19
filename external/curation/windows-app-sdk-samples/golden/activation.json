@@ -611,16 +611,6 @@
   ],
   "featuredSourceFiles": [
     {
-      "blobSha": "7b080682c21bb98d2b7ba32a3b2a1cca3a2eaf83",
-      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
-      "description": null,
-      "label": "main.cpp",
-      "language": "C++",
-      "path": "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
-      "sha256": "f088a6548bc723cda02c01b4f12ed3aa68e481b282f501aae8eeb28f1690cef5",
-      "size": 7847
-    },
-    {
       "blobSha": "a9a9e36267b96092f0f9c321566752ea3d453bec",
       "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/Program.cs",
       "description": null,
@@ -629,26 +619,26 @@
       "path": "Samples/AppLifecycle/Activation/cs1/cs-wpf-packaged/CsWpfActivation/Program.cs",
       "sha256": "49905276ef842367a41713a25dcdf8627da6feb469ae5e5d650db655936e43c5",
       "size": 395
+    },
+    {
+      "blobSha": "7b080682c21bb98d2b7ba32a3b2a1cca3a2eaf83",
+      "canonicalUrl": "https://github.com/microsoft/WindowsAppSDK-Samples/blob/18431c6d0111d6a4bd8d46b9c8a82add47ccb013/Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
+      "description": null,
+      "label": "main.cpp",
+      "language": "C++",
+      "path": "Samples/AppLifecycle/Activation/cpp/cpp-console-unpackaged/CppWinRtConsoleActivation/main.cpp",
+      "sha256": "f088a6548bc723cda02c01b4f12ed3aa68e481b282f501aae8eeb28f1690cef5",
+      "size": 7847
     }
   ],
   "fieldProvenance": [
     {
-      "field": "/categories/portal",
-      "kind": "derived",
-      "sourcePath": "README.md"
-    },
-    {
-      "field": "/categories/provider",
+      "field": "/title/display",
       "kind": "authored",
       "sourcePath": "README.md"
     },
     {
-      "field": "/description",
-      "kind": "technical",
-      "sourcePath": "README.md"
-    },
-    {
-      "field": "/requirements",
+      "field": "/title/upstream",
       "kind": "authored",
       "sourcePath": "README.md"
     },
@@ -658,17 +648,27 @@
       "sourcePath": "README.md"
     },
     {
+      "field": "/description",
+      "kind": "technical",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/categories/provider",
+      "kind": "authored",
+      "sourcePath": "README.md"
+    },
+    {
+      "field": "/categories/portal",
+      "kind": "derived",
+      "sourcePath": "README.md"
+    },
+    {
       "field": "/technologies",
       "kind": "derived",
       "sourcePath": "README.md"
     },
     {
-      "field": "/title/display",
-      "kind": "authored",
-      "sourcePath": "README.md"
-    },
-    {
-      "field": "/title/upstream",
+      "field": "/requirements",
       "kind": "authored",
       "sourcePath": "README.md"
     }
@@ -775,10 +775,10 @@
     ],
     "projectTypes": [
       "Console",
-      "WPF",
       "Win32",
+      "Windows Forms",
       "WinUI 3",
-      "Windows Forms"
+      "WPF"
     ]
   },
   "title": {

@@ -1,6 +1,7 @@
 ---
 import { SampleIcon } from "./SampleIcon";
 import type { CatalogCategory, CatalogSample } from "../lib/catalog";
+import { getSampleProvider } from "../lib/source-provenance";
 import { sitePath } from "../lib/urls";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { sample, category } = Astro.props;
+const provider = getSampleProvider(sample);
 ---
 
 <article class="sample-card surface">
@@ -18,7 +20,7 @@ const { sample, category } = Astro.props;
   <div class="stack sample-content">
     <div class="cluster sample-meta">
       {category && <span class="badge">{category.label}</span>}
-      <span>{sample.scenarios.length} scenarios</span>
+      <span>{provider.label}</span>
     </div>
     <div class="stack sample-heading">
       <h3>
@@ -26,7 +28,7 @@ const { sample, category } = Astro.props;
       </h3>
       <p class="technical-name">Project: {sample.project.name}</p>
     </div>
-    <p class="sample-summary">{sample.summary}</p>
+    {sample.summary && <p class="sample-summary">{sample.summary}</p>}
     <a class="sample-link" href={sitePath(`/samples/${sample.id}/`)}>
       View sample overview <span aria-hidden="true">→</span>
     </a>

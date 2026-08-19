@@ -78,6 +78,57 @@ test("uses stable title and id ordering for equal scores", () => {
   );
 });
 
+test("matches related tags case-insensitively", () => {
+  const source = makeSample("source", "Using Bluetooth devices", {
+    tags: ["Bluetooth"],
+  });
+  const candidate = makeSample("candidate", "Pairing nearby hardware", {
+    tags: ["bluetooth"],
+  });
+  const [related] = getRelatedSamples(
+    source,
+    makeCatalog([source, candidate]),
+  );
+  assert.equal(related?.sample.id, "candidate");
+  assert.ok((related?.score ?? 0) >= 3);
+  assert.ok(related?.sharedTopics.includes("Bluetooth"));
+});
+
+test("uses provider diversity only as an equal-score tie-breaker", () => {
+  const source = makeSample("source", "Building shared UI", {
+    provider: {
+      id: "winui-samples",
+      label: "WinUI samples",
+      kind: "local",
+    },
+    tags: ["shared"],
+  });
+  const sameProvider = makeSample("same-provider", "Alpha shared UI", {
+    provider: {
+      id: "winui-samples",
+      label: "WinUI samples",
+      kind: "local",
+    },
+    tags: ["shared"],
+  });
+  const otherProvider = makeSample("other-provider", "Zeta shared UI", {
+    provider: {
+      id: "winui-gallery",
+      label: "WinUI Gallery",
+      kind: "external",
+    },
+    tags: ["shared"],
+  });
+
+  assert.deepEqual(
+    getRelatedSamples(
+      source,
+      makeCatalog([source, sameProvider, otherProvider]),
+    ).map((entry) => entry.sample.id),
+    ["other-provider", "same-provider"],
+  );
+});
+
 test("handles a one-record catalog", () => {
   const source = makeSample("source", "Building a Windows experience");
   assert.deepEqual(

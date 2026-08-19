@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sampleId": "xaml-transform-3d-animations",
+  "screenshotId": "animated-news-hub",
+  "scenario": "animated-news-hub",
+  "alt": "The My News hub showing multiple sections of image cards arranged across the horizontally scrolling page.",
+  "sourceMetadata": "Samples/XamlTransform3DAnimations/sample.yml",
+  "image": {
+    "file": "hero.png",
+    "width": 1440,
+    "height": 900,
+    "sha256": "a8275bd49c4dd12f25a5a7d3fd8765796aa46b49176bbf1733ff577647238aef"
+  }
+}

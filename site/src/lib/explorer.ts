@@ -1,9 +1,13 @@
 import type {
   CatalogCategory,
   CatalogSample,
+  FederatedContentUnit,
+  PortalSearchRecord,
 } from "./catalog";
+import { getSampleProvider } from "./source-provenance";
 
 export const explorerFacetKeys = [
+  "provider",
   "primaryCategory",
   "secondaryCategory",
   "tag",
@@ -11,10 +15,14 @@ export const explorerFacetKeys = [
   "hardware",
   "accountService",
   "architecture",
+  "language",
   "capture",
 ] as const;
 
 export type ExplorerFacetKey = (typeof explorerFacetKeys)[number];
+export const visibleExplorerFacetKeys = explorerFacetKeys.filter(
+  (key) => key !== "capture",
+);
 export type ExplorerSort = "recommended" | "title" | "project";
 
 export interface ExplorerState {
@@ -28,24 +36,36 @@ export interface ExplorerFacetOption {
   label: string;
 }
 
-export interface IndexedSample {
-  sample: CatalogSample;
-  order: number;
-  searchText: string;
-  searchGroups: {
-    title: string;
-    summary: string;
-    project: string;
-    aliases: string;
-    tags: string;
-    scenarios: string;
-    apis: string;
-    originals: string;
+export interface ExplorerSampleSummary {
+  id: string;
+  title: string;
+  summary: string;
+  project: {
+    name: string;
   };
+  categories: {
+    primary: string;
+  };
+  contentCount: number;
+  contentLabel: string;
+  minimumWindowsVersion: string;
+  supportedArchitectures: string[];
+  languages: string[];
+  source: {
+    id: string;
+    label: string;
+  };
+}
+
+export interface IndexedSample
+  extends Omit<PortalSearchRecord, "sample" | "facets" | "facetLabels"> {
+  sample: ExplorerSampleSummary;
   facets: Record<ExplorerFacetKey, string[]>;
+  facetLabels: Record<ExplorerFacetKey, Record<string, string>>;
 }
 
 const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
+  provider: "provider",
   primaryCategory: "primary",
   secondaryCategory: "secondary",
   tag: "tag",
@@ -53,13 +73,14 @@ const queryParameterByFacet: Record<ExplorerFacetKey, string> = {
   hardware: "hardware",
   accountService: "service",
   architecture: "arch",
+  language: "language",
   capture: "capture",
 };
 
 const captureLabels = new Map([
-  ["automatic", "Automatic capture"],
-  ["manual", "Manual capture"],
-  ["none", "No capture recipe"],
+  ["automatic", "Automated preview"],
+  ["manual", "Manual preview"],
+  ["none", "No preview recipe"],
 ]);
 
 function compareText(left: string, right: string): number {
@@ -77,6 +98,8 @@ export function normalizeSearchText(value: string): string {
   return value
     .normalize("NFKD")
     .replace(/\p{Diacritic}/gu, "")
+    .replace(/C\+\+/giu, " cplusplus ")
+    .replace(/C#/giu, " csharp ")
     .toLocaleLowerCase("en-US")
     .replace(/[^\p{Letter}\p{Number}]+/gu, " ")
     .trim()
@@ -87,14 +110,62 @@ function joinSearchValues(values: Array<string | undefined>): string {
   return normalizeSearchText(values.filter(Boolean).join(" "));
 }
 
+function createFacetLabelMap(
+  values: string[],
+  labels = values,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  values.forEach((value, index) => {
+    const label = labels[index] ?? value;
+    const current = result[value];
+    if (!current || compareText(label, current) < 0) {
+      result[value] = label;
+    }
+  });
+  return result;
+}
+
 function captureModes(sample: CatalogSample): string[] {
   if (sample.screenshots.length === 0) {
     return ["none"];
   }
 
-  return [
-    ...new Set(sample.screenshots.map((screenshot) => screenshot.capture.mode)),
-  ].sort(compareText);
+  return sortedUnique(
+    sample.screenshots.map((screenshot) => screenshot.capture.mode),
+  );
+}
+
+function flattenUnits(units: FederatedContentUnit[]): FederatedContentUnit[] {
+  return units.flatMap((unit) => [
+    unit,
+    ...flattenUnits(unit.children),
+  ]);
+}
+
+function contentDescriptor(sample: CatalogSample) {
+  if (!sample.federated) {
+    return {
+      count: sample.scenarios.length,
+      label: sample.scenarios.length === 1 ? "scenario" : "scenarios",
+    };
+  }
+
+  const counts = {
+    examples: sample.federated.record.content.examples.length,
+    scenarios: sample.federated.record.content.scenarios.length,
+    variants: sample.federated.record.content.variants.length,
+  };
+  const groups = Object.entries(counts).filter(([, count]) => count > 0);
+  const count = groups.reduce((total, [, groupCount]) => total + groupCount, 0);
+  const label =
+    groups.length === 1 ? (groups[0]?.[0] ?? "nested items") : "nested items";
+  return {
+    count,
+    label:
+      groups.length === 1 && count === 1
+        ? label.slice(0, -1)
+        : label,
+  };
 }
 
 function canonicalFacetValue(
@@ -122,19 +193,32 @@ export function createExplorerIndex(
   );
 
   return samples.map((sample, order) => {
+    const source = getSampleProvider(sample);
+    const languages = sample.languages ?? [];
+    const units = sample.federated
+      ? flattenUnits([
+          ...sample.federated.record.content.variants,
+          ...sample.federated.record.content.scenarios,
+          ...sample.federated.record.content.examples,
+        ])
+      : [];
+    const content = contentDescriptor(sample);
+    const primaryCategoryLabel =
+      categoryLabels.get(sample.categories.primary) ??
+      sample.categories.primary;
+    const secondaryCategoryLabels = sample.categories.secondary.map(
+      (id) => categoryLabels.get(id) ?? id,
+    );
     const searchGroups = {
       title: normalizeSearchText(sample.title),
-      summary: normalizeSearchText(sample.summary),
+      summary: normalizeSearchText(sample.summary ?? ""),
       project: joinSearchValues([
         sample.project.name,
-        sample.project.folder,
-        sample.project.repositoryPath,
       ]),
       aliases: joinSearchValues(sample.aliases),
       tags: joinSearchValues(sample.tags),
       scenarios: joinSearchValues(
         sample.scenarios.flatMap((scenario) => [
-          scenario.id,
           scenario.title,
           scenario.summary,
           ...(scenario.apis ?? []),
@@ -147,40 +231,112 @@ export function createExplorerIndex(
       originals: joinSearchValues(
         sample.originalSamples.map((original) => original.name),
       ),
+      provider: normalizeSearchText(source.label),
+      category: joinSearchValues([
+        primaryCategoryLabel,
+        ...secondaryCategoryLabels,
+        ...(sample.federated?.record.categories.provider ?? []),
+      ]),
+      technical: joinSearchValues([
+        sample.federated?.record.recordKey,
+        ...(sample.federated?.record.technicalAliases ?? []),
+        ...sample.featuredFiles.map((file) => file.path),
+        ...units.flatMap((unit) => [
+          unit.title,
+          unit.summary ?? undefined,
+          unit.description ?? undefined,
+          ...unit.apis,
+          ...unit.sourcePaths,
+          ...unit.technologies.languages,
+          ...unit.technologies.projectTypes,
+          ...unit.technologies.packaging,
+        ]),
+      ]),
+      languages: joinSearchValues(languages),
     };
-    const categorySearch = joinSearchValues([
-      categoryLabels.get(sample.categories.primary),
-      ...sample.categories.secondary.map((id) => categoryLabels.get(id)),
-    ]);
+    const facets = {
+      provider: [source.id],
+      primaryCategory: [sample.categories.primary],
+      secondaryCategory: sample.categories.secondary,
+      tag: sample.tags.map((value) =>
+        canonicalFacetValue("tag", value),
+      ),
+      capability: sample.requirements.capabilities.map(
+        (capability) =>
+          canonicalFacetValue("capability", capability.name),
+      ),
+      hardware: sample.requirements.hardware.map((value) =>
+        canonicalFacetValue("hardware", value),
+      ),
+      accountService: sample.requirements.accountServices.map((value) =>
+        canonicalFacetValue("accountService", value),
+      ),
+      architecture: sample.requirements.supportedArchitectures,
+      language: languages,
+      capture: captureModes(sample),
+    };
 
     return {
-      sample,
+      sample: {
+        id: sample.id,
+        title: sample.title,
+        summary: sample.summary ?? "",
+        project: {
+          name: sample.project.name,
+        },
+        categories: {
+          primary: sample.categories.primary,
+        },
+        contentCount: content.count,
+        contentLabel: content.label,
+        minimumWindowsVersion:
+          sample.requirements.minimumWindowsVersion ?? "",
+        supportedArchitectures:
+          sample.requirements.supportedArchitectures,
+        languages,
+        source: {
+          id: source.id,
+          label: source.label,
+        },
+      },
       order,
       searchGroups,
-      searchText: [
-        ...Object.values(searchGroups),
-        categorySearch,
-      ]
-        .filter(Boolean)
-        .join(" "),
-      facets: {
-        primaryCategory: [sample.categories.primary],
-        secondaryCategory: sample.categories.secondary,
-        tag: sample.tags.map((value) =>
-          canonicalFacetValue("tag", value),
+      facets,
+      facetLabels: {
+        provider: createFacetLabelMap(facets.provider, [source.label]),
+        primaryCategory: createFacetLabelMap(facets.primaryCategory, [
+          primaryCategoryLabel,
+        ]),
+        secondaryCategory: createFacetLabelMap(
+          facets.secondaryCategory,
+          secondaryCategoryLabels,
         ),
-        capability: sample.requirements.capabilities.map(
-          (capability) =>
-            canonicalFacetValue("capability", capability.name),
+        tag: createFacetLabelMap(facets.tag, sample.tags),
+        capability: createFacetLabelMap(
+          facets.capability,
+          sample.requirements.capabilities.map(
+            (capability) => capability.name,
+          ),
         ),
-        hardware: sample.requirements.hardware.map((value) =>
-          canonicalFacetValue("hardware", value),
+        hardware: createFacetLabelMap(
+          facets.hardware,
+          sample.requirements.hardware,
         ),
-        accountService: sample.requirements.accountServices.map((value) =>
-          canonicalFacetValue("accountService", value),
+        accountService: createFacetLabelMap(
+          facets.accountService,
+          sample.requirements.accountServices,
         ),
-        architecture: sample.requirements.supportedArchitectures,
-        capture: captureModes(sample),
+        architecture: createFacetLabelMap(
+          facets.architecture,
+          sample.requirements.supportedArchitectures,
+        ),
+        language: createFacetLabelMap(facets.language, languages),
+        capture: createFacetLabelMap(
+          facets.capture,
+          captureModes(sample).map(
+            (value) => captureLabels.get(value) ?? value,
+          ),
+        ),
       },
     };
   });
@@ -191,6 +347,7 @@ export function createDefaultExplorerState(): ExplorerState {
     query: "",
     sort: "recommended",
     facets: {
+      provider: [],
       primaryCategory: [],
       secondaryCategory: [],
       tag: [],
@@ -198,6 +355,7 @@ export function createDefaultExplorerState(): ExplorerState {
       hardware: [],
       accountService: [],
       architecture: [],
+      language: [],
       capture: [],
     },
   };
@@ -231,6 +389,12 @@ export function parseExplorerState(
       parameters.getAll(queryParameterByFacet[key]),
     );
   }
+  if (
+    state.facets.provider.length === 0 &&
+    parameters.has("source")
+  ) {
+    state.facets.provider = sortedUnique(parameters.getAll("source"));
+  }
 
   return state;
 }
@@ -259,11 +423,7 @@ export function serializeExplorerState(
 
 export function getFacetOptions(
   index: IndexedSample[],
-  categories: CatalogCategory[],
 ): Record<ExplorerFacetKey, ExplorerFacetOption[]> {
-  const categoryById = new Map(
-    categories.map((category) => [category.id, category]),
-  );
   const authoredLabels = new Map<ExplorerFacetKey, Map<string, string>>(
     explorerFacetKeys.map((key) => [key, new Map()]),
   );
@@ -286,35 +446,11 @@ export function getFacetOptions(
   }
 
   for (const entry of index) {
-    rememberLabel(
-      "primaryCategory",
-      entry.sample.categories.primary,
-      categoryById.get(entry.sample.categories.primary)?.label,
-    );
-    for (const value of entry.sample.categories.secondary) {
-      rememberLabel(
-        "secondaryCategory",
-        value,
-        categoryById.get(value)?.label,
-      );
-    }
-    for (const value of entry.sample.tags) {
-      rememberLabel("tag", value);
-    }
-    for (const capability of entry.sample.requirements.capabilities) {
-      rememberLabel("capability", capability.name);
-    }
-    for (const value of entry.sample.requirements.hardware) {
-      rememberLabel("hardware", value);
-    }
-    for (const value of entry.sample.requirements.accountServices) {
-      rememberLabel("accountService", value);
-    }
-    for (const value of entry.sample.requirements.supportedArchitectures) {
-      rememberLabel("architecture", value);
-    }
-    for (const value of captureModes(entry.sample)) {
-      rememberLabel("capture", value, captureLabels.get(value));
+    for (const key of explorerFacetKeys) {
+      entry.facets[key].forEach((value) => {
+        const canonical = canonicalFacetValue(key, value);
+        rememberLabel(key, value, entry.facetLabels[key][canonical]);
+      });
     }
   }
 
@@ -358,7 +494,10 @@ function searchScore(entry: IndexedSample, normalizedQuery: string): number {
   }
 
   const terms = normalizedQuery.split(" ");
-  if (!terms.every((term) => entry.searchText.includes(term))) {
+  const searchText = Object.values(entry.searchGroups)
+    .filter(Boolean)
+    .join(" ");
+  if (!terms.every((term) => searchText.includes(term))) {
     return -1;
   }
 
@@ -378,8 +517,12 @@ function searchScore(entry: IndexedSample, normalizedQuery: string): number {
     ["tags", 22],
     ["apis", 20],
     ["scenarios", 18],
+    ["technical", 18],
+    ["languages", 14],
     ["originals", 12],
     ["summary", 8],
+    ["category", 6],
+    ["provider", 4],
   ];
 
   for (const term of terms) {
